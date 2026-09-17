@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distribuidora de Salgados da Leli | Ipsep, Recife</title>
+<meta name="description" content="Distribuidora de Salgados da Leli - salgados fritos, assados e congelados em Ipsep, Recife. Aqui você encontra preço e qualidade.">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Sprite de ícones dos salgados (usados no cardápio e na galeria) -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-coxinha" viewBox="0 0 100 100">
+    <path d="M50 10 C68 30 78 50 70 70 C64 86 36 86 30 70 C22 50 32 30 50 10 Z" fill="currentColor"/>
+    <ellipse cx="50" cy="78" rx="18" ry="7" fill="#00000022"/>
+  </symbol>
+  <symbol id="icon-kibe" viewBox="0 0 100 100">
+    <path d="M20 50 C20 30 35 18 50 18 C65 18 80 30 80 50 C80 70 65 82 50 82 C35 82 20 70 20 50 Z" fill="currentColor"/>
+    <path d="M20 50 C35 42 65 42 80 50" stroke="#00000022" stroke-width="3" fill="none"/>
+  </symbol>
+  <symbol id="icon-risole" viewBox="0 0 100 100">
+    <path d="M15 55 C15 30 40 15 65 20 C88 25 92 50 80 65 C65 84 30 84 15 55 Z" fill="currentColor"/>
+    <path d="M20 40 C40 30 65 32 82 48" stroke="#00000022" stroke-width="3" fill="none"/>
+  </symbol>
+  <symbol id="icon-pastel" viewBox="0 0 100 100">
+    <path d="M50 12 L88 50 L50 88 L12 50 Z" fill="currentColor"/>
+    <path d="M50 12 L88 50 L50 88 L12 50 Z" fill="none" stroke="#00000022" stroke-width="3" stroke-dasharray="4 5"/>
+  </symbol>
+  <symbol id="icon-bolinha" viewBox="0 0 100 100">
+    <circle cx="35" cy="55" r="22" fill="currentColor"/>
+    <circle cx="68" cy="45" r="27" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-enroladinho" viewBox="0 0 100 100">
+    <rect x="15" y="40" width="70" height="20" rx="10" fill="currentColor"/>
+    <path d="M20 40 L20 60 M35 38 L35 62 M50 37 L50 63 M65 38 L65 62 M80 40 L80 60" stroke="#00000022" stroke-width="3"/>
+  </symbol>
+  <symbol id="icon-empada" viewBox="0 0 100 100">
+    <path d="M22 45 C22 30 78 30 78 45 L74 78 C74 84 26 84 26 78 Z" fill="currentColor"/>
+    <ellipse cx="50" cy="45" rx="28" ry="10" fill="#00000018"/>
+  </symbol>
+  <symbol id="icon-doce" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="34" fill="currentColor"/>
+    <circle cx="40" cy="42" r="4" fill="#00000030"/>
+    <circle cx="58" cy="55" r="4" fill="#00000030"/>
+    <circle cx="52" cy="35" r="3" fill="#00000030"/>
+  </symbol>
+</svg>
+
+<header class="site-header" id="topo">
+  <div class="container header-inner">
+    <a href="#topo" class="brand">
+      <img src="assets/logo.jpg" alt="Distribuidora de Salgados da Leli" class="brand-logo">
+      <span class="brand-text">Salgados <strong>da Leli</strong></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#sobre">Sobre</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#localizacao">Localização</a>
+      <a href="https://wa.me/5581991976644?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="btn btn-whatsapp nav-cta">Pedir no WhatsApp</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <img src="assets/logo.jpg" alt="Logo Distribuidora de Salgados da Leli" class="hero-logo">
+      <h1>Salgados fritos, assados <br> e congelados</h1>
+      <p class="hero-tagline">Aqui você encontra preço e qualidade.</p>
+      <div class="hero-actions">
+        <a href="#cardapio" class="btn btn-primary">Ver Cardápio</a>
+        <a href="https://wa.me/5581991976644?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <svg viewBox="0 0 32 32" class="icon-wpp" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.2 8.8 3.2 15.8c0 2.6.7 5 2 7.1L3 29l6.3-2.1c2 .9 4.3 1.4 6.7 1.4 7 0 12.8-5.8 12.8-12.8S23 3 16 3zm0 23.4c-2.1 0-4.2-.6-6-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.1-1.8-1.8-3.9-1.8-6.1 0-6 4.9-10.9 10.9-10.9S27 9.8 27 15.8 22.1 26.4 16 26.4zm6-8.2c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2s-.9 1.1-1.1 1.3c-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.2-.7.2-.2.3-.4.5-.6.2-.2.2-.4.3-.6.1-.2 0-.5 0-.6-.1-.2-.8-1.9-1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.8 5.1.8.3 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
+          Fazer Pedido
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sobre" id="sobre">
+    <div class="container sobre-inner">
+      <div class="sobre-text">
+        <h2>Sobre a Distribuidora</h2>
+        <p>A <strong>Distribuidora de Salgados da Leli</strong> leva até você o sabor caseiro dos melhores salgados de Ipsep, Recife. Trabalhamos com salgados fritos prontos para consumo e salgados congelados, ideais para revenda em festas, eventos, lanchonetes e para o dia a dia da sua família.</p>
+        <p>Qualidade e preço justo em cada unidade, cento ou dúzia. Peça já o seu!</p>
+        <ul class="sobre-badges">
+          <li>🍢 Fritos ou congelados</li>
+          <li>💰 Qualidade e preço</li>
+          <li>📍 Ipsep, Recife</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cardapio" id="cardapio">
+    <div class="container">
+      <h2 class="section-title">Nosso Cardápio</h2>
+      <p class="section-subtitle">Preços de exemplo — confirme valores e sabores disponíveis pelo WhatsApp</p>
+
+      <div class="tabs" id="tabs" role="tablist">
+        <button class="tab active" data-target="fritos" role="tab" aria-selected="true">Fritos</button>
+        <button class="tab" data-target="assados" role="tab" aria-selected="false">Assados</button>
+        <button class="tab" data-target="congelados" role="tab" aria-selected="false">Congelados</button>
+        <button class="tab" data-target="doces" role="tab" aria-selected="false">Doces</button>
+      </div>
+
+      <div class="menu-panel active" id="fritos">
+        <div class="menu-grid">
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-coxinha"/></svg><h3>Coxinha de Frango</h3><p>Massa cremosa recheada com frango temperado</p><span class="price">Dúzia R$ 20,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-risole"/></svg><h3>Risole de Carne</h3><p>Crocante por fora, recheio suculento</p><span class="price">Dúzia R$ 18,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-bolinha"/></svg><h3>Bolinha de Queijo</h3><p>Massa leve com muito queijo derretido</p><span class="price">Dúzia R$ 18,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-pastel"/></svg><h3>Pastel Frito</h3><p>Sabores carne, queijo e frango com catupiry</p><span class="price">Dúzia R$ 22,00</span></div>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="assados">
+        <div class="menu-grid">
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-empada"/></svg><h3>Empada de Frango</h3><p>Massa amanteigada assada no ponto certo</p><span class="price">Dúzia R$ 20,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-enroladinho"/></svg><h3>Enroladinho de Salsicha</h3><p>Clássico queridinho da criançada</p><span class="price">Dúzia R$ 16,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-kibe"/></svg><h3>Esfiha Aberta</h3><p>Carne temperada com especiarias árabes</p><span class="price">Dúzia R$ 22,00</span></div>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="congelados">
+        <div class="menu-grid">
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-coxinha"/></svg><h3>Coxinha Congelada</h3><p>Prontas para fritar, ideais para revenda</p><span class="price">Cento R$ 130,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-kibe"/></svg><h3>Kibe Congelado</h3><p>Recheio temperado, sabor tradicional</p><span class="price">Cento R$ 120,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-risole"/></svg><h3>Risole Congelado</h3><p>Sabores variados para eventos e festas</p><span class="price">Cento R$ 120,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-pastel"/></svg><h3>Pastel Congelado</h3><p>Perfeito para lanchonetes e revenda</p><span class="price">Cento R$ 140,00</span></div>
+        </div>
+      </div>
+
+      <div class="menu-panel" id="doces">
+        <div class="menu-grid">
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-doce"/></svg><h3>Brigadeiro</h3><p>Doce tradicional feito com chocolate belga</p><span class="price">Dúzia R$ 15,00</span></div>
+          <div class="menu-card"><svg class="menu-icon"><use href="#icon-doce"/></svg><h3>Beijinho</h3><p>Coco fresquinho, docinho na medida certa</p><span class="price">Dúzia R$ 15,00</span></div>
+        </div>
+      </div>
+
+      <p class="menu-note">Fazemos entrega para festas e eventos sob encomenda. Consulte disponibilidade.</p>
+    </div>
+  </section>
+
+  <section class="galeria" id="galeria">
+    <div class="container">
+      <h2 class="section-title">Galeria de Salgados</h2>
+      <p class="section-subtitle">Nossos carros-chefe, prontos para você</p>
+      <div class="galeria-grid">
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-coxinha"/></svg><span>Coxinha</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-kibe"/></svg><span>Kibe</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-risole"/></svg><span>Risole</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-pastel"/></svg><span>Pastel</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-bolinha"/></svg><span>Bolinha de Queijo</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-empada"/></svg><span>Empada</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-enroladinho"/></svg><span>Enroladinho</span></div>
+        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-doce"/></svg><span>Docinhos</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="localizacao" id="localizacao">
+    <div class="container loc-inner">
+      <div class="loc-info">
+        <h2 class="section-title">Localização & Horário</h2>
+        <ul class="info-list">
+          <li><strong>Endereço:</strong> Rua Turmalina, nº 04 — Ipsep, Recife/PE</li>
+          <li><strong>Horário:</strong> Todos os dias, das 08h às 17h</li>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/5581991976644" target="_blank" rel="noopener">(81) 99197-6644</a></li>
+        </ul>
+        <a href="https://wa.me/5581991976644?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="btn btn-whatsapp">Chamar no WhatsApp</a>
+      </div>
+      <div class="loc-map">
+        <iframe
+          title="Mapa Distribuidora de Salgados da Leli"
+          src="https://www.google.com/maps?q=Rua+Turmalina,+04,+Ipsep,+Recife,+PE&output=embed"
+          width="100%" height="320" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <img src="assets/logo.jpg" alt="Distribuidora de Salgados da Leli" class="footer-logo">
+    <p>Distribuidora de Salgados da Leli — Rua Turmalina, nº 04, Ipsep, Recife/PE</p>
+    <p>© <span id="year"></span> Salgados da Leli. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/5581991976644?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Pedir no WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.2 8.8 3.2 15.8c0 2.6.7 5 2 7.1L3 29l6.3-2.1c2 .9 4.3 1.4 6.7 1.4 7 0 12.8-5.8 12.8-12.8S23 3 16 3zm0 23.4c-2.1 0-4.2-.6-6-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.1-1.8-1.8-3.9-1.8-6.1 0-6 4.9-10.9 10.9-10.9S27 9.8 27 15.8 22.1 26.4 16 26.4zm6-8.2c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2s-.9 1.1-1.1 1.3c-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.2-.7.2-.2.3-.4.5-.6.2-.2.2-.4.3-.6.1-.2 0-.5 0-.6-.1-.2-.8-1.9-1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.8 5.1.8.3 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<script src="js/script.js"></script>
+</body>
+</html>
