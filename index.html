@@ -62,6 +62,7 @@
       <a href="#cardapio">Cardápio</a>
       <a href="#galeria">Galeria</a>
       <a href="#localizacao">Localização</a>
+      <a href="#pagamento">Pagar com PIX</a>
       <a href="https://wa.me/5581991976644?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="btn btn-whatsapp nav-cta">Pedir no WhatsApp</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
@@ -185,6 +186,27 @@
           src="https://www.google.com/maps?q=Rua+Turmalina,+04,+Ipsep,+Recife,+PE&output=embed"
           width="100%" height="320" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagamento" id="pagamento">
+    <div class="container pagamento-inner">
+      <div class="pag-info">
+        <h2 class="section-title" style="text-align:left">Pague com PIX</h2>
+        <p class="pag-lead">Escaneie o QR Code ou copie o código PIX abaixo, cole no app do seu banco, confirme o valor combinado no pedido e finalize o pagamento. O dinheiro cai direto na conta do titular.</p>
+        <ul class="info-list">
+          <li><strong>Titular:</strong> Sillas Gabriel Gomes Da Silva</li>
+          <li><strong>Chave PIX (CPF):</strong> <span id="pixKeyText">711.898.364-08</span></li>
+        </ul>
+        <div class="pag-actions">
+          <button type="button" class="btn btn-primary" id="copyKeyBtn" data-copy="71189836408">Copiar chave PIX</button>
+          <button type="button" class="btn btn-whatsapp" id="copyCodeBtn" data-copy="00020126330014br.gov.bcb.pix0111711898364085204000053039865802BR5925SILLAS GABRIEL G DA SILVA6006RECIFE62070503***6304CE77">Copiar código Pix Copia e Cola</button>
+        </div>
+        <p class="pag-note">Depois de pagar, envie o comprovante pelo WhatsApp para confirmarmos seu pedido rapidinho.</p>
+      </div>
+      <div class="pag-qr">
+        <img src="assets/pix-qrcode.png" alt="QR Code para pagamento via PIX" width="260" height="260">
       </div>
     </div>
   </section>

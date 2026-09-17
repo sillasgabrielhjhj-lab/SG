@@ -31,3 +31,18 @@ tabs.forEach(tab => {
 
 // Ano no rodapé
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Copiar chave e código PIX
+document.querySelectorAll('[data-copy]').forEach(btn => {
+  const originalText = btn.textContent;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copy);
+      btn.textContent = 'Copiado!';
+      setTimeout(() => { btn.textContent = originalText; }, 2000);
+    } catch (err) {
+      btn.textContent = 'Não foi possível copiar';
+      setTimeout(() => { btn.textContent = originalText; }, 2000);
+    }
+  });
+});
