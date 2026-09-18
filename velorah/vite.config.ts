@@ -5,6 +5,8 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Served under https://<user>.github.io/SG/ on GitHub Pages.
+  base: process.env.GITHUB_PAGES === 'true' ? '/SG/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
