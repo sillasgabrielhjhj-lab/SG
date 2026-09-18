@@ -82,6 +82,33 @@ if (window.gsap) {
     y: -30, x: -20, duration: 9, ease: 'sine.inOut', repeat: -1, yoyo: true
   });
 
+  // Hero lead paragraph: words fill in with color as the page scrolls past them
+  if (!prefersReducedMotion) {
+    const heroLeadEl = document.querySelector('.hero-lead');
+    if (heroLeadEl) {
+      const words = heroLeadEl.textContent.trim().split(/\s+/);
+      heroLeadEl.innerHTML = words.map(w => `<span>${w}</span>`).join(' ');
+      const wordEls = Array.from(heroLeadEl.querySelectorAll('span'));
+
+      const paintWords = (progress) => {
+        const cursor = progress * (wordEls.length + 6) - 3;
+        wordEls.forEach((word, i) => {
+          const d = Math.max(0, Math.min(1, (cursor - i) / 3));
+          word.style.color = `rgba(242, 242, 247, ${(0.16 + d * 0.84).toFixed(3)})`;
+        });
+      };
+
+      ScrollTrigger.create({
+        trigger: heroLeadEl,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        onUpdate: (self) => paintWords(self.progress),
+        onRefreshInit: (self) => paintWords(self.progress),
+      });
+    }
+  }
+
   document.querySelectorAll('.reveal:not(.hero .reveal)').forEach(el => {
     gsap.to(el, {
       opacity: 1,
