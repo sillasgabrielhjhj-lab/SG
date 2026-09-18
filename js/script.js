@@ -27,53 +27,28 @@ window.addEventListener('scroll', updateHeader, { passive: true });
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Typewriter effect in hero code window
-const codeLines = [
-  "const cliente = 'você';",
-  "",
-  "function criarSite(ideia) {",
-  "  return site",
-  "    .comDesign('profissional')",
-  "    .comVelocidade('alta')",
-  "    .publicar();",
-  "}",
-  "",
-  "criarSite(ideia); // 🚀 no ar"
+// Rotating sales phrases next to the hero logo
+const rotatorPhrases = [
+  "Transforme visitantes em clientes.",
+  "Seu negócio merece estar na internet.",
+  "Presença profissional, sem complicação.",
+  "Enquanto seu site não existe, seu concorrente já vende.",
+  "Design que gera confiança."
 ];
-const fullCode = codeLines.join('\n');
-const typedCodeEl = document.getElementById('typedCode');
+const rotatorEl = document.getElementById('rotatorText');
+let rotatorIndex = 0;
+rotatorEl.textContent = rotatorPhrases[0];
 
-function typeLoop() {
-  if (prefersReducedMotion) {
-    typedCodeEl.textContent = fullCode;
-    return;
-  }
-  let i = 0;
-  const typeSpeed = 28;
-  const holdTime = 2200;
-  const deleteSpeed = 10;
-
-  function type() {
-    if (i <= fullCode.length) {
-      typedCodeEl.textContent = fullCode.slice(0, i);
-      i++;
-      setTimeout(type, typeSpeed);
-    } else {
-      setTimeout(erase, holdTime);
-    }
-  }
-  function erase() {
-    if (i > 0) {
-      i--;
-      typedCodeEl.textContent = fullCode.slice(0, i);
-      setTimeout(erase, deleteSpeed);
-    } else {
-      setTimeout(type, 400);
-    }
-  }
-  type();
+if (!prefersReducedMotion) {
+  setInterval(() => {
+    rotatorEl.style.opacity = '0';
+    setTimeout(() => {
+      rotatorIndex = (rotatorIndex + 1) % rotatorPhrases.length;
+      rotatorEl.textContent = rotatorPhrases[rotatorIndex];
+      rotatorEl.style.opacity = '1';
+    }, 350);
+  }, 3200);
 }
-typeLoop();
 
 // GSAP animations (progressive enhancement: content stays visible if GSAP fails to load)
 if (window.gsap) {
