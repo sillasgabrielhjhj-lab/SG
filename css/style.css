@@ -10,7 +10,7 @@
   --accent-2: #06b6d4;
   --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
   --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.25);
-  --font-heading: 'Space Grotesk', sans-serif;
+  --font-heading: 'Baloo 2', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-code: 'Fira Code', monospace;
   --container-width: 1140px;
@@ -31,6 +31,7 @@ body {
 h1, h2, h3 {
   font-family: var(--font-heading);
   line-height: 1.2;
+  letter-spacing: -0.01em;
   margin: 0 0 16px;
 }
 
