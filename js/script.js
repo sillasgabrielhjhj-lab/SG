@@ -36,9 +36,10 @@ window.addEventListener('scroll', updateScrollProgress, { passive: true });
 window.addEventListener('resize', updateScrollProgress);
 
 // Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Rotating sales phrases next to the hero logo
+// Rotating sales phrases next to the hero logo (home page only)
 const rotatorPhrases = [
   "Transforme visitantes em clientes.",
   "Seu negócio merece estar na internet.",
@@ -47,18 +48,20 @@ const rotatorPhrases = [
   "Design que gera confiança."
 ];
 const rotatorEl = document.getElementById('rotatorText');
-let rotatorIndex = 0;
-rotatorEl.textContent = rotatorPhrases[0];
+if (rotatorEl) {
+  let rotatorIndex = 0;
+  rotatorEl.textContent = rotatorPhrases[0];
 
-if (!prefersReducedMotion) {
-  setInterval(() => {
-    rotatorEl.style.opacity = '0';
-    setTimeout(() => {
-      rotatorIndex = (rotatorIndex + 1) % rotatorPhrases.length;
-      rotatorEl.textContent = rotatorPhrases[rotatorIndex];
-      rotatorEl.style.opacity = '1';
-    }, 350);
-  }, 3200);
+  if (!prefersReducedMotion) {
+    setInterval(() => {
+      rotatorEl.style.opacity = '0';
+      setTimeout(() => {
+        rotatorIndex = (rotatorIndex + 1) % rotatorPhrases.length;
+        rotatorEl.textContent = rotatorPhrases[rotatorIndex];
+        rotatorEl.style.opacity = '1';
+      }, 350);
+    }, 3200);
+  }
 }
 
 // GSAP animations (progressive enhancement: content stays visible if GSAP fails to load)
@@ -224,15 +227,17 @@ if (window.gsap) {
   }
 }
 
-// Contact form -> builds a WhatsApp message
+// Contact form -> builds a WhatsApp message (home page only)
 const contatoForm = document.getElementById('contatoForm');
-contatoForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const nome = document.getElementById('nome').value.trim();
-  const servico = document.getElementById('servico').value;
-  const mensagem = document.getElementById('mensagem').value.trim();
+if (contatoForm) {
+  contatoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const servico = document.getElementById('servico').value;
+    const mensagem = document.getElementById('mensagem').value.trim();
 
-  const texto = `Olá! Me chamo ${nome}. Tenho interesse em: ${servico}.\n\n${mensagem}`;
-  const url = `https://wa.me/5581991976644?text=${encodeURIComponent(texto)}`;
-  window.open(url, '_blank', 'noopener');
-});
+    const texto = `Olá! Me chamo ${nome}. Tenho interesse em: ${servico}.\n\n${mensagem}`;
+    const url = `https://wa.me/5581991976644?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank', 'noopener');
+  });
+}
