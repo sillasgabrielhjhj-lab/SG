@@ -24,6 +24,17 @@ const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
+// Scroll progress bar
+const scrollProgressEl = document.getElementById('scrollProgress');
+const updateScrollProgress = () => {
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+  scrollProgressEl.style.width = pct + '%';
+};
+updateScrollProgress();
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress);
+
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -94,6 +105,77 @@ if (window.gsap) {
       scrub: 0.6,
     }
   });
+
+  // Premium pointer interactions: custom cursor, magnetic buttons, 3D tilt cards,
+  // hero parallax. Fine pointers only, and only enabled once fully wired up so a
+  // failure here never leaves the visitor without a visible cursor.
+  const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (hasFinePointer && !prefersReducedMotion) {
+    try {
+      const cursorDot = document.getElementById('cursorDot');
+      const cursorRing = document.getElementById('cursorRing');
+      const moveDotX = gsap.quickTo(cursorDot, 'x', { duration: 0.01 });
+      const moveDotY = gsap.quickTo(cursorDot, 'y', { duration: 0.01 });
+      const moveRingX = gsap.quickTo(cursorRing, 'x', { duration: 0.35, ease: 'power3' });
+      const moveRingY = gsap.quickTo(cursorRing, 'y', { duration: 0.35, ease: 'power3' });
+
+      window.addEventListener('mousemove', (e) => {
+        moveDotX(e.clientX);
+        moveDotY(e.clientY);
+        moveRingX(e.clientX);
+        moveRingY(e.clientY);
+      });
+
+      document.querySelectorAll('a, button, .card, input, select, textarea').forEach(el => {
+        el.addEventListener('mouseenter', () => cursorRing.classList.add('is-active'));
+        el.addEventListener('mouseleave', () => cursorRing.classList.remove('is-active'));
+      });
+
+      document.body.classList.add('cursor-ready');
+
+      // Magnetic pull on the large call-to-action buttons
+      document.querySelectorAll('.btn-lg').forEach(btn => {
+        const moveX = gsap.quickTo(btn, 'x', { duration: 0.3, ease: 'power3' });
+        const moveY = gsap.quickTo(btn, 'y', { duration: 0.3, ease: 'power3' });
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          moveX((e.clientX - rect.left - rect.width / 2) * 0.3);
+          moveY((e.clientY - rect.top - rect.height / 2) * 0.3);
+        });
+        btn.addEventListener('mouseleave', () => { moveX(0); moveY(0); });
+      });
+
+      // 3D tilt on service cards
+      document.querySelectorAll('.card').forEach(card => {
+        const rotX = gsap.quickTo(card, 'rotationX', { duration: 0.4, ease: 'power3' });
+        const rotY = gsap.quickTo(card, 'rotationY', { duration: 0.4, ease: 'power3' });
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const relX = (e.clientX - rect.left) / rect.width - 0.5;
+          const relY = (e.clientY - rect.top) / rect.height - 0.5;
+          rotY(relX * 12);
+          rotX(relY * -12);
+        });
+        card.addEventListener('mouseleave', () => { rotX(0); rotY(0); });
+      });
+
+      // Hero background parallax (applied to the whole layer, not the ambient-floating blobs)
+      const heroBg = document.querySelector('.hero-bg');
+      const heroSection = document.querySelector('.hero');
+      if (heroBg && heroSection) {
+        const parallaxX = gsap.quickTo(heroBg, 'x', { duration: 0.6, ease: 'power2' });
+        const parallaxY = gsap.quickTo(heroBg, 'y', { duration: 0.6, ease: 'power2' });
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          parallaxX(((e.clientX - rect.left) / rect.width - 0.5) * 24);
+          parallaxY(((e.clientY - rect.top) / rect.height - 0.5) * 24);
+        });
+        heroSection.addEventListener('mouseleave', () => { parallaxX(0); parallaxY(0); });
+      }
+    } catch (err) {
+      document.body.classList.remove('cursor-ready');
+    }
+  }
 }
 
 // Contact form -> builds a WhatsApp message
