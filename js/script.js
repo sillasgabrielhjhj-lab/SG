@@ -107,6 +107,25 @@ if (window.gsap) {
         onRefreshInit: (self) => paintWords(self.progress),
       });
     }
+
+    // Diferenciais numbers count up from 00 as they enter the viewport
+    document.querySelectorAll('.diferencial-num').forEach(el => {
+      const finalValue = parseInt(el.textContent, 10);
+      const counter = { val: 0 };
+      gsap.to(counter, {
+        val: finalValue,
+        duration: 1,
+        ease: 'power1.out',
+        snap: { val: 1 },
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+        },
+        onUpdate: () => {
+          el.textContent = String(Math.round(counter.val)).padStart(2, '0');
+        }
+      });
+    });
   }
 
   document.querySelectorAll('.reveal:not(.hero .reveal)').forEach(el => {
