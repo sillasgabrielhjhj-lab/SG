@@ -173,10 +173,11 @@ img { max-width: 100%; display: block; }
 /* Hero */
 .hero {
   position: relative;
-  padding: 120px 0 90px;
+  padding: 120px 0 130px;
   text-align: center;
   overflow: hidden;
   isolation: isolate;
+  clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%);
 }
 
 .hero-bg {
@@ -373,6 +374,7 @@ img { max-width: 100%; display: block; }
 .menu-card:hover {
   transform: translateY(-6px);
   border-color: var(--orange);
+  box-shadow: 0 16px 30px rgba(240,83,15,.18);
 }
 
 .menu-card-media {
@@ -382,6 +384,22 @@ img { max-width: 100%; display: block; }
   border-radius: 12px;
   padding: 22px 10px 34px;
   margin-bottom: 18px;
+}
+
+.ribbon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, var(--orange-light), var(--orange-dark));
+  color: var(--white);
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: .7rem;
+  padding: 5px 12px;
+  border-radius: 999px;
+  transform: rotate(8deg);
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+  white-space: nowrap;
 }
 
 .menu-icon {
@@ -499,57 +517,101 @@ img { max-width: 100%; display: block; }
 }
 .loc-map iframe { display: block; }
 
-/* Pagamento PIX */
-.pagamento {
-  padding: 90px 0;
-  background: var(--black-soft);
+/* Fale Conosco / Peça Agora */
+.pedido {
+  position: relative;
+  padding: 100px 0;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.pagamento-inner {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
+.pedido-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  transform: scale(1.05);
+}
+
+.pedido-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(14,11,10,.9) 0%, rgba(14,11,10,.94) 100%),
+    radial-gradient(circle at 50% 30%, rgba(240,83,15,.3), transparent 55%);
+}
+
+.pedido-inner { max-width: 640px; margin: 0 auto; }
+
+.status-badge {
+  display: inline-flex;
   align-items: center;
-}
-
-.pag-lead {
-  color: var(--text-muted);
-  font-size: .95rem;
-}
-
-.pag-actions {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin: 8px 0 20px;
-}
-
-.pag-actions .btn {
-  border: none;
-  cursor: pointer;
+  gap: 10px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 700;
   font-size: .85rem;
-  padding: 12px 22px;
+  color: var(--cream);
+  margin-bottom: 24px;
 }
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #888;
+}
+.status-badge.is-open .status-dot { background: #25D366; box-shadow: 0 0 0 4px rgba(37,211,102,.25); }
+.status-badge.is-open { border-color: rgba(37,211,102,.4); }
+.status-badge.is-closed .status-dot { background: var(--orange-light); box-shadow: 0 0 0 4px rgba(240,83,15,.25); }
 
-.pag-note {
+.pedido-title {
+  color: var(--white);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+}
+.pedido-title span { color: var(--orange-light); }
+
+.pedido-lead {
   color: var(--text-muted);
-  font-style: italic;
-  font-size: .9rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  max-width: 480px;
+  margin: 0 auto 36px;
 }
 
-.pag-qr {
-  background: var(--white);
-  padding: 20px;
-  border-radius: var(--radius);
-  border: 2px solid var(--orange-dark);
-  box-shadow: var(--shadow);
+.pedido-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.btn-lg { padding: 17px 34px; font-size: 1rem; }
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.3);
+  color: var(--white);
+}
+.btn-outline:hover { border-color: var(--orange-light); color: var(--orange-light); }
+
+.pedido-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
-}
-.pag-qr img {
-  width: 100%;
-  max-width: 260px;
-  height: auto;
+  gap: 24px;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: .9rem;
 }
 
 /* Footer */
@@ -616,8 +678,6 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 860px) {
   .loc-inner { grid-template-columns: 1fr; }
-  .pagamento-inner { grid-template-columns: 1fr; }
-  .pagamento-inner .pag-qr { order: -1; }
   .diferenciais { grid-template-columns: 1fr; }
 }
 

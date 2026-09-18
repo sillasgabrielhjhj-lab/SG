@@ -32,17 +32,14 @@ tabs.forEach(tab => {
 // Ano no rodapé
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Copiar chave e código PIX
-document.querySelectorAll('[data-copy]').forEach(btn => {
-  const originalText = btn.textContent;
-  btn.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(btn.dataset.copy);
-      btn.textContent = 'Copiado!';
-      setTimeout(() => { btn.textContent = originalText; }, 2000);
-    } catch (err) {
-      btn.textContent = 'Não foi possível copiar';
-      setTimeout(() => { btn.textContent = originalText; }, 2000);
-    }
-  });
-});
+// Status aberto/fechado (todos os dias, 08h às 17h)
+const statusBadge = document.getElementById('statusBadge');
+const statusText = document.getElementById('statusText');
+if (statusBadge && statusText) {
+  const hour = new Date().getHours();
+  const isOpen = hour >= 8 && hour < 17;
+  statusBadge.classList.add(isOpen ? 'is-open' : 'is-closed');
+  statusText.textContent = isOpen
+    ? 'Aberto agora · até às 17h'
+    : 'Fechado no momento · abrimos às 8h';
+}
