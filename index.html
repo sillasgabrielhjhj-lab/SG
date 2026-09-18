@@ -3,17 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Distribuidora de Salgados da Leli | Ipsep, Recife</title>
-<meta name="description" content="Distribuidora de Salgados da Leli - salgados fritos, assados e congelados em Ipsep, Recife. Aqui você encontra preço e qualidade.">
+<title>Distribuidora de Salgados da Levi | Os Melhores Salgados de Recife — Ipsep</title>
+<meta name="description" content="Distribuidora de Salgados da Levi: os melhores salgados de Recife, fritos, assados e congelados, feitos com sabor caseiro. Rua Turmalina, nº 04, Ipsep. Peça pelo WhatsApp!">
+<meta name="theme-color" content="#0e0b0a">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Distribuidora de Salgados da Levi | Os Melhores Salgados de Recife">
+<meta property="og:description" content="Salgados fritos, assados e congelados com sabor caseiro em Ipsep, Recife. Preço é qualidade. Peça pelo WhatsApp!">
+<meta property="og:image" content="assets/salgados-bandeja.jpg">
+<meta property="og:locale" content="pt_BR">
+
 <link rel="icon" href="assets/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Distribuidora de Salgados da Levi",
+  "image": "assets/salgados-bandeja.jpg",
+  "servesCuisine": "Salgados brasileiros",
+  "priceRange": "$$",
+  "telephone": "+5581991976644",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Turmalina, nº 04",
+    "addressLocality": "Ipsep, Recife",
+    "addressRegion": "PE",
+    "addressCountry": "BR"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "08:00",
+    "closes": "17:00"
+  }
+}
+</script>
 </head>
 <body>
 
-<!-- Sprite de ícones dos salgados (usados no cardápio e na galeria) -->
+<!-- Sprite de ícones dos salgados (usados no cardápio) -->
 <svg style="display:none" aria-hidden="true">
   <symbol id="icon-coxinha" viewBox="0 0 100 100">
     <path d="M50 10 C68 30 78 50 70 70 C64 86 36 86 30 70 C22 50 32 30 50 10 Z" fill="currentColor"/>
@@ -51,11 +85,25 @@
   </symbol>
 </svg>
 
+<!-- Faixa avisos -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>🔥 OS MELHORES SALGADOS DE RECIFE</span>
+    <span>🧆 FRITOS · ASSADOS · CONGELADOS</span>
+    <span>📍 IPSEP, RECIFE — RUA TURMALINA, Nº 04</span>
+    <span>💬 PEÇA JÁ PELO WHATSAPP</span>
+    <span>🔥 OS MELHORES SALGADOS DE RECIFE</span>
+    <span>🧆 FRITOS · ASSADOS · CONGELADOS</span>
+    <span>📍 IPSEP, RECIFE — RUA TURMALINA, Nº 04</span>
+    <span>💬 PEÇA JÁ PELO WHATSAPP</span>
+  </div>
+</div>
+
 <header class="site-header" id="topo">
   <div class="container header-inner">
     <a href="#topo" class="brand">
-      <img src="assets/logo.jpg" alt="Distribuidora de Salgados da Leli" class="brand-logo">
-      <span class="brand-text">Salgados <strong>da Leli</strong></span>
+      <img src="assets/logo.jpg" alt="Distribuidora de Salgados da Levi" class="brand-logo">
+      <span class="brand-text">Salgados <strong>da Levi</strong></span>
     </a>
     <nav class="nav" id="nav">
       <a href="#sobre">Sobre</a>
@@ -74,10 +122,12 @@
 <main>
 
   <section class="hero">
+    <div class="hero-bg" style="background-image:url('assets/salgados-bandeja.jpg')"></div>
+    <div class="hero-overlay"></div>
     <div class="container hero-inner">
-      <img src="assets/logo.jpg" alt="Logo Distribuidora de Salgados da Leli" class="hero-logo">
-      <h1>Salgados fritos, assados <br> e congelados</h1>
-      <p class="hero-tagline">Aqui você encontra preço e qualidade.</p>
+      <span class="hero-kicker">Ipsep · Recife/PE</span>
+      <h1>Os melhores <span>salgados</span> de Recife</h1>
+      <p class="hero-tagline">Fritos, assados e congelados com sabor de casa. Aqui você encontra preço e qualidade.</p>
       <div class="hero-actions">
         <a href="#cardapio" class="btn btn-primary">Ver Cardápio</a>
         <a href="https://wa.me/5581991976644?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="btn btn-whatsapp">
@@ -85,27 +135,54 @@
           Fazer Pedido
         </a>
       </div>
+      <ul class="hero-badges">
+        <li>🧆 Fritos, assados e congelados</li>
+        <li>💰 Preço é qualidade</li>
+        <li>📍 Ipsep, Recife</li>
+      </ul>
     </div>
   </section>
 
   <section class="sobre" id="sobre">
     <div class="container sobre-inner">
+      <div class="sobre-media">
+        <img src="assets/coxinha-recheio.jpg" alt="Coxinha da Distribuidora de Salgados da Levi, recheio suculento" loading="lazy">
+      </div>
       <div class="sobre-text">
-        <h2>Sobre a Distribuidora</h2>
-        <p>A <strong>Distribuidora de Salgados da Leli</strong> leva até você o sabor caseiro dos melhores salgados de Ipsep, Recife. Trabalhamos com salgados fritos prontos para consumo e salgados congelados, ideais para revenda em festas, eventos, lanchonetes e para o dia a dia da sua família.</p>
-        <p>Qualidade e preço justo em cada unidade, cento ou dúzia. Peça já o seu!</p>
-        <ul class="sobre-badges">
-          <li>🍢 Fritos ou congelados</li>
-          <li>💰 Qualidade e preço</li>
-          <li>📍 Ipsep, Recife</li>
-        </ul>
+        <span class="eyebrow">Sobre a distribuidora</span>
+        <h2>Sabor caseiro, feito pra quem entende de salgado bom</h2>
+        <p>A <strong>Distribuidora de Salgados da Levi</strong> leva até você os melhores salgados de Recife, direto de Ipsep. Trabalhamos com salgados fritos prontos para consumo e salgados congelados, ideais para revenda em festas, eventos, lanchonetes e para o dia a dia da sua família.</p>
+        <p>Cada coxinha, risole e pastel é feito com ingredientes selecionados e muito cuidado — qualidade e preço justo em cada unidade, cento ou dúzia.</p>
+        <div class="diferenciais">
+          <div class="dif-card">
+            <span class="dif-icon">🧡</span>
+            <h3>Sabor caseiro</h3>
+            <p>Receitas tradicionais, feitas com carinho todos os dias</p>
+          </div>
+          <div class="dif-card">
+            <span class="dif-icon">✅</span>
+            <h3>Ingredientes selecionados</h3>
+            <p>Qualidade em cada recheio e em cada massa</p>
+          </div>
+          <div class="dif-card">
+            <span class="dif-icon">💸</span>
+            <h3>Preço justo</h3>
+            <p>Preço é qualidade — o melhor custo-benefício de Ipsep</p>
+          </div>
+          <div class="dif-card">
+            <span class="dif-icon">🚴</span>
+            <h3>Pronto pra revenda</h3>
+            <p>Congelados ideais para festas, eventos e lanchonetes</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="cardapio" id="cardapio">
     <div class="container">
-      <h2 class="section-title">Nosso Cardápio</h2>
+      <span class="eyebrow eyebrow-center">Cardápio</span>
+      <h2 class="section-title">O que você vai pedir hoje?</h2>
       <p class="section-subtitle">Preços de exemplo — confirme valores e sabores disponíveis pelo WhatsApp</p>
 
       <div class="tabs" id="tabs" role="tablist">
@@ -154,17 +231,22 @@
 
   <section class="galeria" id="galeria">
     <div class="container">
-      <h2 class="section-title">Galeria de Salgados</h2>
-      <p class="section-subtitle">Nossos carros-chefe, prontos para você</p>
+      <span class="eyebrow eyebrow-center">Galeria</span>
+      <h2 class="section-title">Direto da nossa cozinha</h2>
+      <p class="section-subtitle">Um pouco do que a gente prepara todos os dias pra você</p>
       <div class="galeria-grid">
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-coxinha"/></svg><span>Coxinha</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-kibe"/></svg><span>Kibe</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-risole"/></svg><span>Risole</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-pastel"/></svg><span>Pastel</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-bolinha"/></svg><span>Bolinha de Queijo</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-empada"/></svg><span>Empada</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-enroladinho"/></svg><span>Enroladinho</span></div>
-        <div class="galeria-item"><svg class="galeria-icon"><use href="#icon-doce"/></svg><span>Docinhos</span></div>
+        <figure class="galeria-photo galeria-photo-big">
+          <img src="assets/salgados-bandeja.jpg" alt="Bandejas variadas de salgados da Distribuidora da Levi: enroladinho, pastel e coxinha" loading="lazy">
+          <figcaption>Sortido de salgados fritos e assados</figcaption>
+        </figure>
+        <figure class="galeria-photo">
+          <img src="assets/salgados-variados.jpg" alt="Coxinhas e docinhos da Distribuidora de Salgados da Levi" loading="lazy">
+          <figcaption>Coxinhas e docinhos fresquinhos</figcaption>
+        </figure>
+        <figure class="galeria-photo">
+          <img src="assets/coxinha-recheio.jpg" alt="Coxinha aberta mostrando o recheio cremoso de frango" loading="lazy">
+          <figcaption>Recheio generoso em cada unidade</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -172,7 +254,8 @@
   <section class="localizacao" id="localizacao">
     <div class="container loc-inner">
       <div class="loc-info">
-        <h2 class="section-title">Localização & Horário</h2>
+        <span class="eyebrow">Localização &amp; horário</span>
+        <h2 class="section-title" style="text-align:left">Venha nos visitar em Ipsep</h2>
         <ul class="info-list">
           <li><strong>Endereço:</strong> Rua Turmalina, nº 04 — Ipsep, Recife/PE</li>
           <li><strong>Horário:</strong> Todos os dias, das 08h às 17h</li>
@@ -182,7 +265,7 @@
       </div>
       <div class="loc-map">
         <iframe
-          title="Mapa Distribuidora de Salgados da Leli"
+          title="Mapa Distribuidora de Salgados da Levi"
           src="https://www.google.com/maps?q=Rua+Turmalina,+04,+Ipsep,+Recife,+PE&output=embed"
           width="100%" height="320" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
@@ -193,6 +276,7 @@
   <section class="pagamento" id="pagamento">
     <div class="container pagamento-inner">
       <div class="pag-info">
+        <span class="eyebrow">Pagamento</span>
         <h2 class="section-title" style="text-align:left">Pague com PIX</h2>
         <p class="pag-lead">Escaneie o QR Code ou copie o código PIX abaixo, cole no app do seu banco, confirme o valor combinado no pedido e finalize o pagamento. O dinheiro cai direto na conta do titular.</p>
         <ul class="info-list">
@@ -215,9 +299,11 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <img src="assets/logo.jpg" alt="Distribuidora de Salgados da Leli" class="footer-logo">
-    <p>Distribuidora de Salgados da Leli — Rua Turmalina, nº 04, Ipsep, Recife/PE</p>
-    <p>© <span id="year"></span> Salgados da Leli. Todos os direitos reservados.</p>
+    <img src="assets/logo.jpg" alt="Distribuidora de Salgados da Levi" class="footer-logo">
+    <p class="footer-brand">Distribuidora de Salgados <strong>da Levi</strong></p>
+    <p>Rua Turmalina, nº 04, Ipsep, Recife/PE · Todos os dias, das 08h às 17h</p>
+    <a href="https://wa.me/5581991976644" target="_blank" rel="noopener">(81) 99197-6644</a>
+    <p class="footer-copy">© <span id="year"></span> Salgados da Levi. Todos os direitos reservados.</p>
   </div>
 </footer>
 
