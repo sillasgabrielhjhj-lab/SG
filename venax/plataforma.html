@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Plataforma Demo | Venax</title>
+<meta name="description" content="Painel de negociação simulado da Venax — projeto acadêmico, sem dinheiro real.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#06080a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/platform.css">
+</head>
+<body class="platform-body">
+
+<!-- ============ TOP BAR ============ -->
+<div class="plat-topbar">
+  <a href="index.html" class="plat-logo">
+    <img src="assets/favicon.svg" alt="Venax">
+    <span>Venax</span>
+  </a>
+
+  <div class="plat-tabs" id="platTabs"></div>
+
+  <div class="plat-account">
+    <span class="demo-tag plat-demo-tag">MODO DEMO</span>
+    <button class="btn btn-primary btn-sm" id="depositBtn">Depositar</button>
+    <div style="position:relative">
+      <button class="plat-balance" id="balanceBtn">
+        <span class="lbl">Saldo Demo</span>
+        <span class="val" id="balanceVal">R$ 0,00</span>
+      </button>
+      <div class="account-menu" id="accountMenu">
+        <button type="button" id="resetBalanceBtn">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 10a6 6 0 1 1 1.8 4.3M4 10V6M4 10h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Reiniciar saldo demo
+        </button>
+        <a href="index.html">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M8 4H4v12h4M13 14l4-4-4-4M6.5 10H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Sair (voltar ao site)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BODY ============ -->
+<div class="plat-body">
+
+  <aside class="plat-sidebar">
+    <button class="side-btn active" data-drawer="portfolio" title="Portfólio">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.5V12l6 3.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Portfólio
+    </button>
+    <button class="side-btn" data-drawer="history" title="Histórico">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Histórico
+    </button>
+    <button class="side-btn" data-drawer="analysis" title="Análise de mercado">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Análise
+    </button>
+    <span class="side-spacer"></span>
+    <button class="side-btn" data-drawer="help" title="Ajuda">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .8-1 1.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="16.7" r="1" fill="currentColor"/></svg>
+      Ajuda
+    </button>
+  </aside>
+
+  <div class="plat-main">
+    <div class="chart-col">
+      <div class="symbol-bar">
+        <span class="sym-title" id="symTitle">EUR/USD <span class="otc-pill">OTC</span></span>
+        <span class="sym-price mono" id="symPrice">1,0842</span>
+        <span class="badge badge-up" id="symChange">+0.00%</span>
+        <div class="tf-group">
+          <button class="tf-btn active" data-tf="1m">1m</button>
+          <button class="tf-btn" data-tf="5m">5m</button>
+          <button class="tf-btn" data-tf="15m">15m</button>
+        </div>
+      </div>
+
+      <div class="chart-stage">
+        <svg class="chart-watermark" viewBox="0 0 200 100" fill="none" aria-hidden="true">
+          <path d="M5 60 Q30 20 55 55 T105 50 T155 35 T195 60" stroke="#00e39a" stroke-width="1.2"/>
+          <circle cx="20" cy="42" r="1.4" fill="#00e39a"/><circle cx="70" cy="30" r="1.4" fill="#00e39a"/>
+          <circle cx="120" cy="58" r="1.4" fill="#00e39a"/><circle cx="170" cy="25" r="1.4" fill="#00e39a"/>
+          <path d="M15 80 Q60 95 100 78 T190 82" stroke="#00e39a" stroke-width="1" opacity=".6"/>
+        </svg>
+        <div id="priceChart"></div>
+
+        <div class="chart-side-indicator">
+          <span class="prob-pill higher" id="probHigher">ALTA · 50%</span>
+          <span class="prob-pill lower" id="probLower">BAIXA · 50%</span>
+        </div>
+
+        <div class="purchase-timer" id="purchaseTimer">
+          <span class="dir higher" id="timerDir">ALTA</span>
+          <span class="lbl">encerra em</span>
+          <span class="time" id="timerTime">00:30</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="trade-panel">
+      <div class="trade-field">
+        <div class="tf-label"><span>Valor da operação</span><span>Saldo demo</span></div>
+        <div class="stepper">
+          <button type="button" id="amountMinus" aria-label="Diminuir valor">−</button>
+          <input type="text" id="amountInput" value="100" inputmode="numeric" aria-label="Valor em reais">
+          <button type="button" id="amountPlus" aria-label="Aumentar valor">+</button>
+        </div>
+        <div class="amount-presets">
+          <button type="button" data-amt="50">R$ 50</button>
+          <button type="button" data-amt="100">R$ 100</button>
+          <button type="button" data-amt="500">R$ 500</button>
+        </div>
+      </div>
+
+      <div class="trade-field">
+        <div class="tf-label"><span>Expiração</span><span id="expLabel">30s</span></div>
+        <div class="stepper">
+          <button type="button" id="expMinus" aria-label="Diminuir tempo">−</button>
+          <input type="text" id="expInput" value="30" readonly aria-label="Tempo em segundos">
+          <button type="button" id="expPlus" aria-label="Aumentar tempo">+</button>
+        </div>
+      </div>
+
+      <div class="profit-box">
+        <div>
+          <div class="lbl">Retorno estimado</div>
+          <div class="payout" id="payoutVal">Ganho de R$ 87,00</div>
+        </div>
+        <div class="val" id="profitPct">+87%</div>
+      </div>
+
+      <div class="trade-buttons">
+        <button class="trade-btn higher" id="btnHigher">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 13l6-6 4 4 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 5h6v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          ALTA
+        </button>
+        <button class="trade-btn lower" id="btnLower">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 7l6 6 4-4 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15h6V9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          BAIXA
+        </button>
+      </div>
+      <p class="trade-hint">Operação 100% simulada — o resultado depende apenas do preço demo ao final do tempo.</p>
+    </aside>
+
+    <!-- ---------- Drawers ---------- -->
+    <div class="drawer" id="drawerPortfolio">
+      <div class="drawer-head"><h3>Portfólio demo</h3><button class="icon-btn drawer-close"><svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <div class="drawer-body">
+        <div class="profit-box" style="margin-bottom:18px">
+          <div><div class="lbl">Saldo total</div><div class="payout" id="portfolioBalance">R$ 0,00</div></div>
+          <div class="val" id="portfolioPct" style="font-size:15px">+0,0%</div>
+        </div>
+        <div class="analysis-gauge">
+          <div class="g-lbl"><span>Operações vencidas</span><span id="statWins">0</span></div>
+          <div class="gauge-bar"><div class="gauge-fill" id="statWinsBar" style="width:0%"></div></div>
+        </div>
+        <div class="analysis-gauge">
+          <div class="g-lbl"><span>Operações perdidas</span><span id="statLosses">0</span></div>
+          <div class="gauge-bar"><div class="gauge-fill" id="statLossesBar" style="width:0%"></div></div>
+        </div>
+        <div class="analysis-gauge">
+          <div class="g-lbl"><span>Total de operações</span><span id="statTotal">0</span></div>
+        </div>
+        <p class="trade-hint" style="margin-top:20px">Todos os valores deste painel são fictícios e existem apenas neste navegador (localStorage).</p>
+      </div>
+    </div>
+
+    <div class="drawer" id="drawerHistory">
+      <div class="drawer-head"><h3>Histórico de operações</h3><button class="icon-btn drawer-close"><svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <div class="drawer-body" id="historyList">
+        <p class="history-empty">Nenhuma operação demo ainda. Escolha ALTA ou BAIXA para começar.</p>
+      </div>
+    </div>
+
+    <div class="drawer" id="drawerAnalysis">
+      <div class="drawer-head"><h3>Análise de mercado</h3><button class="icon-btn drawer-close"><svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <div class="drawer-body">
+        <p class="trade-hint" style="text-align:left;margin-bottom:18px">Indicadores ilustrativos gerados pelo simulador — não correspondem a uma análise técnica real.</p>
+        <div class="analysis-gauge"><div class="g-lbl"><span>Momentum simulado</span><span id="gMomentum">—</span></div><div class="gauge-bar"><div class="gauge-fill" id="gMomentumBar" style="width:50%"></div></div></div>
+        <div class="analysis-gauge"><div class="g-lbl"><span>Volatilidade simulada</span><span id="gVol">—</span></div><div class="gauge-bar"><div class="gauge-fill" id="gVolBar" style="width:50%"></div></div></div>
+        <div class="analysis-gauge"><div class="g-lbl"><span>Sentimento simulado</span><span id="gSent">—</span></div><div class="gauge-bar"><div class="gauge-fill" id="gSentBar" style="width:50%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="drawer" id="drawerHelp">
+      <div class="drawer-head"><h3>Ajuda</h3><button class="icon-btn drawer-close"><svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <div class="drawer-body">
+        <div class="help-qa"><h4>Isso é dinheiro real?</h4><p>Não. Tudo aqui — saldo, preços e resultados — é simulado, feito para um projeto acadêmico.</p></div>
+        <div class="help-qa"><h4>Como funciona uma operação?</h4><p>Escolha um valor demo, um tempo de expiração e clique em ALTA ou BAIXA. Ao final do tempo, o resultado é comparado com o preço simulado de entrada.</p></div>
+        <div class="help-qa"><h4>Posso zerar meu saldo demo?</h4><p>Sim, use "Reiniciar saldo demo" no menu da conta, no topo da tela.</p></div>
+        <div class="help-qa"><h4>Os dados ficam salvos?</h4><p>Sim, localmente no seu navegador (localStorage), apenas neste dispositivo.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ STATUS BAR ============ -->
+<div class="plat-statusbar">
+  <div class="status-ticker">
+    <div class="status-ticker-track" id="statusTicker">TODOS OS DIAS, A QUALQUER HORA · AMBIENTE 100% SIMULADO · PROJETO ACADÊMICO · SEM DINHEIRO REAL · TODOS OS DIAS, A QUALQUER HORA · AMBIENTE 100% SIMULADO · PROJETO ACADÊMICO · SEM DINHEIRO REAL</div>
+  </div>
+  <span class="status-clock" id="statusClock">--:--:--</span>
+  <div class="status-icons">
+    <button class="icon-btn active" id="soundBtn" title="Som">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M3 8v4h3l4 3V5L6 8H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 7a4 4 0 010 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <button class="icon-btn" id="fullscreenBtn" title="Tela cheia">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M4 8V4h4M12 4h4v4M16 12v4h-4M8 16H4v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="demo-banner" id="demoBanner">
+  <span>⚠ Ambiente 100% demonstrativo — projeto acadêmico, nenhum valor é real.</span>
+  <button type="button" id="demoBannerClose" aria-label="Fechar aviso">✕</button>
+</div>
+
+<!-- ============ DEPOSIT MODAL ============ -->
+<div class="modal-overlay" id="depositModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Depósito demo</h3>
+      <button class="modal-close" id="depositClose">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Nenhum pagamento real é processado. Escolha um valor para adicionar ao seu saldo fictício.</p>
+    <div class="deposit-presets">
+      <button type="button" data-dep="500">R$ 500</button>
+      <button type="button" data-dep="1000">R$ 1.000</button>
+      <button type="button" data-dep="5000">R$ 5.000</button>
+    </div>
+    <div class="field">
+      <label for="depositCustom">Ou outro valor demo</label>
+      <input type="number" id="depositCustom" min="1" placeholder="Ex: 2500">
+    </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block" id="depositConfirm">Adicionar Saldo Demo</button>
+    <p class="field-note">Este saldo existe apenas neste navegador e não representa dinheiro real.</p>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="js/vendor/lightweight-charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/market-sim.js"></script>
+<script src="js/platform.js"></script>
+</body>
+</html>

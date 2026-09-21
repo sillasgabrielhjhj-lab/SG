@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venax | Simulador de Negociação — Projeto Acadêmico</title>
+<meta name="description" content="Venax é um simulador educacional de plataforma de negociação: gráficos em tempo real, execução instantânea e conta demo gratuita. Projeto acadêmico, sem dinheiro real.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Venax | Simulador de Negociação — Projeto Acadêmico">
+<meta property="og:description" content="Plataforma de negociação simulada para fins educacionais. Sem dinheiro real, sem risco financeiro.">
+<meta name="theme-color" content="#06080a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <img src="assets/favicon.svg" alt="" class="brand-mark">
+      <span class="brand-name">Vena<span class="x">x</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <div class="nav-links">
+        <a href="#ecossistema" class="nav-link">Ecossistema</a>
+        <a href="#mercados" class="nav-link">Mercados</a>
+        <a href="#plataforma" class="nav-link">Plataforma</a>
+        <a href="#avaliacoes" class="nav-link">Avaliações</a>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-login" id="loginBtn">Login</button>
+        <a href="plataforma.html" class="btn btn-primary nav-cta">Criar Conta Demo</a>
+      </div>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="hero-glow"></span>
+      <span class="hero-grid"></span>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow reveal"><span class="dot"></span> Simulador de Negociação · Projeto Acadêmico</p>
+        <h1 class="reveal">Opere o mercado com <span class="text-grad">confiança total</span><span class="caret">|</span></h1>
+        <p class="hero-lead reveal">Venax é uma simulação educacional de plataforma de negociação. Gráficos ao vivo, execução instantânea e uma interface de nível profissional — tudo em modo demonstração, sem dinheiro real.</p>
+        <div class="hero-actions reveal">
+          <a href="plataforma.html" class="btn btn-primary btn-lg">
+            Criar Conta Demo
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#plataforma" class="btn btn-ghost btn-lg">Ver Plataforma</a>
+        </div>
+        <ul class="hero-highlights reveal">
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Execução simulada em milissegundos</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Saldo demo gratuito</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Sem risco financeiro real</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="device device-laptop">
+          <div class="device-screen">
+            <div class="mini-topbar">
+              <span class="mini-sym">GBP/JPY · OTC</span>
+              <span class="mini-dep">Demo</span>
+            </div>
+            <div class="mini-chart-wrap">
+              <canvas id="heroChartLaptop"></canvas>
+              <span class="mini-price-tag" id="heroPriceLaptop">207.710</span>
+            </div>
+          </div>
+        </div>
+        <div class="device device-phone">
+          <div class="device-screen">
+            <div class="mini-topbar">
+              <span class="mini-sym">BTC/USD</span>
+              <span class="mini-dep">Demo</span>
+            </div>
+            <div class="mini-chart-wrap">
+              <canvas id="heroChartPhone"></canvas>
+              <span class="mini-price-tag" id="heroPricePhone">68.420</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-showcase-badge">
+          <span class="badge-ic">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M3 13l4-5 3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>
+            <strong>Simulação ao vivo</strong>
+            <span>dados fictícios</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-set">
+        <span class="marquee-item">SIMULAÇÃO EDUCACIONAL</span>
+        <span class="marquee-item">SEM DINHEIRO REAL</span>
+        <span class="marquee-item">GRÁFICOS EM TEMPO REAL</span>
+        <span class="marquee-item">PROJETO ACADÊMICO</span>
+        <span class="marquee-item">DADOS FICTÍCIOS</span>
+        <span class="marquee-item">USO DEMONSTRATIVO</span>
+      </div>
+      <div class="marquee-set">
+        <span class="marquee-item">SIMULAÇÃO EDUCACIONAL</span>
+        <span class="marquee-item">SEM DINHEIRO REAL</span>
+        <span class="marquee-item">GRÁFICOS EM TEMPO REAL</span>
+        <span class="marquee-item">PROJETO ACADÊMICO</span>
+        <span class="marquee-item">DADOS FICTÍCIOS</span>
+        <span class="marquee-item">USO DEMONSTRATIVO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <p class="stat-num" data-count="12400">0</p>
+          <p class="stat-label">Contas demo criadas</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat-num" data-count="99.9" data-decimals="1">0</p>
+          <p class="stat-label">Uptime da simulação (%)</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat-num" data-count="8">0</p>
+          <p class="stat-label">Mercados simulados</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat-num" data-count="24">0</p>
+          <p class="stat-label">Suporte demo (h/dia)</p>
+        </div>
+      </div>
+      <p class="avaliacoes-note">*Números ilustrativos, gerados para fins deste projeto acadêmico.</p>
+    </div>
+  </section>
+
+  <!-- ============ ECOSSISTEMA ============ -->
+  <section class="ecossistema" id="ecossistema">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow reveal">Ecossistema</p>
+        <h2 class="section-title reveal">Tudo que uma plataforma de negociação precisa — em modo demonstração</h2>
+        <p class="section-subtitle reveal">Uma simulação completa de front-end, construída para fins educacionais.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Execução em Milissegundos</h3>
+          <p>Motor simulado processa cada operação instantaneamente, reproduzindo a sensação de uma corretora real.</p>
+        </div>
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="12" width="3" height="8" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="10.5" y="6" width="3" height="14" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="17" y="9" width="3" height="11" rx="1" stroke="currentColor" stroke-width="1.8"/></svg></div>
+          <h3>Gráficos Profissionais</h3>
+          <p>Candles, timeframes e indicadores renderizados com a mesma biblioteca usada por corretoras reais.</p>
+        </div>
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M7 15h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3>Conta Demo Gratuita</h3>
+          <p>Comece com saldo fictício e pratique estratégias de interface sem nenhum risco financeiro real.</p>
+        </div>
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="17" y="15" width="4" height="6" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M6 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3>Multiplataforma</h3>
+          <p>Interface responsiva, pensada para funcionar bem em desktop, tablet e celular.</p>
+        </div>
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <h3>Ambiente Isolado</h3>
+          <p>Nenhum dado financeiro real é coletado ou processado. Toda a simulação roda no seu navegador.</p>
+        </div>
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3>Análise de Mercado</h3>
+          <p>Painel com indicadores simulados para explorar como esses recursos aparecem em uma corretora real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MERCADOS ============ -->
+  <section class="mercados" id="mercados">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow reveal">Mercados</p>
+        <h2 class="section-title reveal">Acompanhe cotações simuladas em tempo real</h2>
+        <p class="section-subtitle reveal">Preços gerados por um simulador de passeio aleatório — não refletem o mercado real.</p>
+      </div>
+      <div class="mercados-tabs reveal">
+        <button class="mkt-tab active" data-filter="all">Todos</button>
+        <button class="mkt-tab" data-filter="forex">Forex</button>
+        <button class="mkt-tab" data-filter="cripto">Criptomoedas</button>
+        <button class="mkt-tab" data-filter="indices">Índices</button>
+        <button class="mkt-tab" data-filter="commodities">Commodities</button>
+      </div>
+      <div class="mkt-table glass reveal">
+        <div class="mkt-row head">
+          <span>Ativo</span>
+          <span>Preço</span>
+          <span>Variação</span>
+          <span>Últimas 24</span>
+          <span></span>
+        </div>
+        <div id="mktRows"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLATAFORMA ============ -->
+  <section class="plataforma-sec" id="plataforma">
+    <div class="container plataforma-inner">
+      <div>
+        <p class="section-eyebrow reveal">Plataforma</p>
+        <h2 class="section-title reveal">O painel de negociação, direto no seu navegador</h2>
+        <p class="section-subtitle reveal">Uma réplica funcional da experiência de uma mesa de operações — 100% simulada.</p>
+        <div class="plat-points">
+          <div class="plat-point reveal">
+            <span class="plat-point-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18V10M11 18V4M18 18v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <div><h4>Gráfico de candles em tempo real</h4><p>Preços simulados atualizados a cada instante, com múltiplos timeframes.</p></div>
+          </div>
+          <div class="plat-point reveal">
+            <span class="plat-point-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <div><h4>Operações com temporizador</h4><p>Escolha alta ou baixa, defina o valor demo e acompanhe o resultado simulado.</p></div>
+          </div>
+          <div class="plat-point reveal">
+            <span class="plat-point-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <div><h4>Histórico completo</h4><p>Todas as operações demo ficam registradas para consulta durante os testes.</p></div>
+          </div>
+        </div>
+        <a href="plataforma.html" class="btn btn-primary btn-lg reveal">Abrir Plataforma Demo</a>
+      </div>
+      <div class="plat-frame glass reveal">
+        <div class="device-screen">
+          <div class="mini-topbar">
+            <span class="mini-sym">EUR/USD · OTC · Demo</span>
+            <span class="mini-dep">R$ 10.000,00</span>
+          </div>
+          <div class="mini-chart-wrap">
+            <canvas id="heroChartShowcase"></canvas>
+            <span class="mini-price-tag" id="heroPriceShowcase">1.0842</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AVALIAÇÕES ============ -->
+  <section class="avaliacoes" id="avaliacoes">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow reveal">Avaliações</p>
+        <h2 class="section-title reveal">O que dizem sobre a experiência Venax</h2>
+        <p class="section-subtitle reveal">Depoimentos fictícios, escritos para ilustrar a proposta deste projeto.</p>
+      </div>
+      <div class="avaliacoes-grid">
+        <article class="testi-card glass reveal">
+          <div class="testi-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+          </div>
+          <p class="testi-quote">"A interface é extremamente fluida — parece mesmo uma corretora profissional. Ótimo exemplo de front-end para o meu trabalho de referência."</p>
+          <div class="testi-user">
+            <span class="testi-avatar">M</span>
+            <div><strong>Marina T.</strong><span>Testadora da demo</span></div>
+          </div>
+        </article>
+        <article class="testi-card glass reveal">
+          <div class="testi-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+          </div>
+          <p class="testi-quote">"Gostei de ver como o saldo demo e o histórico se atualizam em tempo real. Dá pra entender bem a arquitetura da simulação."</p>
+          <div class="testi-user">
+            <span class="testi-avatar">L</span>
+            <div><strong>Lucas P.</strong><span>Testador da demo</span></div>
+          </div>
+        </article>
+        <article class="testi-card glass reveal">
+          <div class="testi-stars">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9L19 7.6l-4.7 4.1L15.8 18 10 14.6 4.2 18l1.5-6.3L1 7.6l6.4-.7L10 1z"/></svg>
+          </div>
+          <p class="testi-quote">"Curti muito o cuidado com os avisos de que tudo é simulado. Deixa o projeto sério e transparente do início ao fim."</p>
+          <div class="testi-user">
+            <span class="testi-avatar">A</span>
+            <div><strong>Ana R.</strong><span>Testadora da demo</span></div>
+          </div>
+        </article>
+      </div>
+      <p class="avaliacoes-note">*Depoimentos fictícios, criados exclusivamente para fins deste projeto acadêmico.</p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow reveal">Perguntas frequentes</p>
+        <h2 class="section-title reveal">Antes de começar, leia com atenção</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item glass reveal">
+          <button class="faq-q">A Venax opera com dinheiro real? <svg viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Não. A Venax é um projeto acadêmico com fins educacionais. Todo o saldo, os preços e os resultados exibidos são simulados — não há nenhuma movimentação financeira real em nenhuma etapa.</p></div>
+        </div>
+        <div class="faq-item glass reveal">
+          <button class="faq-q">Os dados de mercado são reais? <svg viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Não. Os preços são gerados por um simulador de passeio aleatório no seu navegador e não refletem cotações reais de nenhum mercado financeiro.</p></div>
+        </div>
+        <div class="faq-item glass reveal">
+          <button class="faq-q">A plataforma pede dados de cartão ou pagamento? <svg viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Não. A Venax nunca coleta dados de pagamento nem processa transações reais — o "depósito" é apenas um saldo fictício adicionado localmente para fins de demonstração.</p></div>
+        </div>
+        <div class="faq-item glass reveal">
+          <button class="faq-q">Qual é o objetivo do projeto? <svg viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Demonstrar, para fins acadêmicos, o desenvolvimento front-end de uma interface complexa de negociação — incluindo gráficos em tempo real, simulação de dados e experiência do usuário — sem qualquer componente financeiro real.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="cta-final">
+    <div class="container">
+      <div class="cta-final-box reveal">
+        <h2>Pronto para explorar a simulação?</h2>
+        <p>Crie sua conta demo gratuita e veja a plataforma completa em ação — sem nenhum risco financeiro.</p>
+        <div class="cta-final-actions">
+          <a href="plataforma.html" class="btn btn-primary btn-lg">Criar Conta Demo</a>
+          <a href="#faq" class="btn btn-ghost btn-lg">Ler o Aviso Legal</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <img src="assets/favicon.svg" alt="" class="brand-mark">
+          <span class="brand-name">Vena<span class="x">x</span></span>
+        </a>
+        <p>Simulador educacional de plataforma de negociação, desenvolvido como projeto acadêmico.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produto</h4>
+        <ul>
+          <li><a href="#ecossistema">Ecossistema</a></li>
+          <li><a href="#mercados">Mercados</a></li>
+          <li><a href="#plataforma">Plataforma</a></li>
+          <li><a href="#avaliacoes">Avaliações</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Projeto</h4>
+        <ul>
+          <li><a href="#faq">Sobre o projeto</a></li>
+          <li><a href="#faq">Aviso legal</a></li>
+          <li><a href="plataforma.html">Plataforma demo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="#faq">Central de ajuda</a></li>
+          <li><a href="#faq">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <strong>Aviso:</strong> a Venax é um projeto desenvolvido exclusivamente para fins acadêmicos e educacionais. Não é uma corretora, instituição financeira ou plataforma de investimentos real. Nenhum valor, saldo, preço ou resultado exibido neste site representa dinheiro ou operações reais, e este site não capta recursos do público nem presta serviços financeiros.
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Venax. Projeto acadêmico — todos os dados são simulados.</span>
+      <span>Feito para fins educacionais.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ LOGIN MODAL ============ -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Entrar (demo)</h3>
+      <button class="modal-close" id="loginClose">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Ambiente 100% demonstrativo — nenhum dado é enviado a um servidor.</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">E-mail</label>
+        <input type="email" id="loginEmail" placeholder="voce@exemplo.com" required>
+      </div>
+      <div class="field">
+        <label for="loginPass">Senha</label>
+        <input type="password" id="loginPass" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar na Conta Demo</button>
+    </form>
+    <p class="field-note">Ao continuar, você acessa a plataforma em modo demonstração.</p>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="js/ui.js"></script>
+<script src="js/market-sim.js"></script>
+<script src="js/landing.js"></script>
+</body>
+</html>

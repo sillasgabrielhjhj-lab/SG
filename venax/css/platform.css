@@ -1,0 +1,312 @@
+/* ============================================================
+   Venax — Platform (trading demo) styles
+   ============================================================ */
+
+html, body.platform-body{ height: 100%; overflow: hidden; }
+body.platform-body{ display: flex; flex-direction: column; }
+
+/* ---------- Top bar ---------- */
+.plat-topbar{
+  display: flex; align-items: center; gap: 16px;
+  height: 58px; padding: 0 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  z-index: 50;
+}
+.plat-logo{ display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.plat-logo img{ width: 26px; height: 26px; border-radius: 7px; }
+.plat-logo span{ font-family: var(--font-display); font-weight: 800; font-size: 16px; }
+
+.plat-tabs{ display: flex; align-items: center; gap: 6px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+.plat-tabs::-webkit-scrollbar{ display: none; }
+.plat-tab{
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; white-space: nowrap; flex-shrink: 0;
+  transition: border-color .2s ease, background .2s ease;
+}
+.plat-tab.active{ border-color: rgba(0,227,154,.4); background: var(--brand-soft); color: var(--brand-2); }
+.plat-tab .flag{ font-size: 14px; }
+.plat-tab .otc-pill{
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 5px; color: var(--text-dim);
+}
+.plat-tab-add{
+  width: 34px; height: 34px; border-radius: var(--radius-sm);
+  border: 1px dashed var(--border-strong); color: var(--text-dim);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.plat-tab-add:hover{ color: var(--brand-2); border-color: var(--brand); }
+
+.plat-account{ display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.plat-demo-tag{ display: none; }
+@media (min-width: 640px){ .plat-demo-tag{ display: inline-flex; } }
+
+.plat-balance{
+  display: flex; flex-direction: column; align-items: flex-end;
+  position: relative; padding: 6px 12px; border-radius: var(--radius-sm);
+  cursor: pointer; transition: background .2s ease;
+}
+.plat-balance:hover{ background: rgba(255,255,255,.05); }
+.plat-balance .lbl{ font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .05em; }
+.plat-balance .val{ font-family: var(--font-mono); font-weight: 700; font-size: 14.5px; color: var(--brand-2); }
+
+.account-menu{
+  position: absolute; top: 48px; right: 0; width: 200px;
+  background: var(--surface-2); border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+  padding: 8px; opacity: 0; pointer-events: none; transform: translateY(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.account-menu.open{ opacity: 1; pointer-events: auto; transform: translateY(0); }
+.account-menu a, .account-menu button{
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border-radius: var(--radius-sm); font-size: 13.5px; text-align: left;
+  color: var(--text-dim);
+}
+.account-menu a:hover, .account-menu button:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+.account-menu svg{ width: 16px; height: 16px; }
+
+/* ---------- Body layout ---------- */
+.plat-body{ flex: 1; display: flex; min-height: 0; }
+
+.plat-sidebar{
+  width: 68px; flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 18px 0; gap: 6px;
+}
+.side-btn{
+  width: 52px; height: 52px; border-radius: var(--radius-sm);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  color: var(--text-faint); font-size: 9.5px; font-weight: 600; text-align: center;
+  transition: color .2s ease, background .2s ease;
+}
+.side-btn svg{ width: 19px; height: 19px; }
+.side-btn:hover{ color: var(--text); background: rgba(255,255,255,.04); }
+.side-btn.active{ color: var(--brand-2); background: var(--brand-soft); }
+.side-spacer{ flex: 1; }
+
+/* ---------- Chart area ---------- */
+.plat-main{ flex: 1; display: flex; min-width: 0; }
+.chart-col{ flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
+
+.symbol-bar{
+  display: flex; align-items: center; gap: 16px;
+  padding: 10px 18px; border-bottom: 1px solid var(--border);
+  flex-shrink: 0; flex-wrap: wrap;
+}
+.symbol-bar .sym-title{ font-weight: 700; font-size: 15px; }
+.symbol-bar .sym-price{ font-family: var(--font-mono); font-weight: 700; color: var(--brand-2); font-size: 15px; }
+.tf-group{ display: flex; gap: 4px; margin-left: auto; }
+.tf-btn{ padding: 6px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; color: var(--text-faint); font-family: var(--font-mono); }
+.tf-btn:hover{ color: var(--text); background: rgba(255,255,255,.05); }
+.tf-btn.active{ color: var(--brand-2); background: var(--brand-soft); }
+
+.chart-stage{ position: relative; flex: 1; min-height: 0; }
+.chart-watermark{
+  position: absolute; inset: 0; margin: auto; opacity: .05;
+  width: 80%; max-width: 720px; pointer-events: none;
+}
+#priceChart{ position: absolute; inset: 0; }
+
+.chart-side-indicator{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 8px; z-index: 5; pointer-events: none;
+}
+.prob-pill{
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  padding: 6px 10px; border-radius: var(--radius-sm);
+  backdrop-filter: blur(4px);
+}
+.prob-pill.higher{ color: var(--brand-2); background: rgba(0,227,154,.12); border: 1px solid rgba(0,227,154,.3); }
+.prob-pill.lower{ color: #ff8590; background: rgba(255,77,94,.12); border: 1px solid rgba(255,77,94,.3); }
+
+.purchase-timer{
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(15,20,25,.8); border: 1px solid var(--border-strong);
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  font-family: var(--font-mono); font-size: 12.5px;
+  backdrop-filter: blur(8px); z-index: 6;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease;
+}
+.purchase-timer.show{ opacity: 1; }
+.purchase-timer .lbl{ color: var(--text-faint); }
+.purchase-timer .time{ color: var(--brand-2); font-weight: 700; }
+.purchase-timer .dir{ font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+.purchase-timer .dir.higher{ background: rgba(0,227,154,.15); color: var(--brand-2); }
+.purchase-timer .dir.lower{ background: rgba(255,77,94,.15); color: #ff8590; }
+
+/* ---------- Bottom status bar ---------- */
+.plat-statusbar{
+  display: flex; align-items: center; gap: 18px;
+  height: 34px; padding: 0 16px;
+  background: var(--surface); border-top: 1px solid var(--border);
+  flex-shrink: 0; overflow: hidden;
+}
+.status-ticker{ flex: 1; overflow: hidden; white-space: nowrap; position: relative; height: 100%; }
+.status-ticker-track{
+  display: inline-flex; align-items: center; gap: 10px;
+  position: absolute; white-space: nowrap;
+  animation: ticker-scroll 18s linear infinite;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em;
+  color: var(--text-faint); height: 100%; top: 0;
+}
+@keyframes ticker-scroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+.status-clock{ font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+.status-icons{ display: flex; gap: 6px; }
+.status-icons .icon-btn{ width: 26px; height: 26px; }
+.status-icons .icon-btn svg{ width: 14px; height: 14px; }
+
+/* ---------- Trade panel ---------- */
+.trade-panel{
+  width: 300px; flex-shrink: 0;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: 20px; display: flex; flex-direction: column; gap: 18px;
+  overflow-y: auto;
+}
+.trade-field{ display: flex; flex-direction: column; gap: 8px; }
+.trade-field .tf-label{ display: flex; justify-content: space-between; font-size: 12px; color: var(--text-faint); }
+.stepper{
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface-3); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 4px;
+}
+.stepper button{
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-dim); font-size: 18px; font-weight: 700;
+}
+.stepper button:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+.stepper input{
+  flex: 1; min-width: 0; background: none; border: none; text-align: center;
+  font-family: var(--font-mono); font-weight: 700; font-size: 15px; color: var(--text);
+}
+.stepper input:focus{ outline: none; }
+.amount-presets{ display: flex; gap: 6px; }
+.amount-presets button{
+  flex: 1; padding: 7px 0; border-radius: var(--radius-sm); font-size: 11.5px; font-weight: 600;
+  background: var(--surface-3); border: 1px solid var(--border); color: var(--text-dim);
+}
+.amount-presets button:hover{ color: var(--text); border-color: var(--border-strong); }
+
+.profit-box{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-radius: var(--radius-md);
+  background: var(--brand-soft); border: 1px solid rgba(0,227,154,.25);
+}
+.profit-box .lbl{ font-size: 12px; color: var(--text-dim); }
+.profit-box .val{ font-family: var(--font-mono); font-weight: 800; font-size: 20px; color: var(--brand-2); }
+.profit-box .payout{ font-size: 11px; color: var(--text-faint); margin-top: 2px; }
+
+.trade-buttons{ display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+.trade-btn{
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px; border-radius: var(--radius-md);
+  font-family: var(--font-display); font-weight: 800; font-size: 16px;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .2s ease;
+}
+.trade-btn svg{ width: 20px; height: 20px; }
+.trade-btn.higher{ background: linear-gradient(135deg, var(--brand-2), var(--brand)); color: #042015; box-shadow: 0 14px 34px -14px rgba(0,227,154,.6); }
+.trade-btn.lower{ background: linear-gradient(135deg, #ff6b78, var(--danger)); color: #2a0509; box-shadow: 0 14px 34px -14px rgba(255,77,94,.6); }
+.trade-btn:hover:not(:disabled){ transform: translateY(-3px); filter: brightness(1.06); }
+.trade-btn:active:not(:disabled){ transform: translateY(0); }
+.trade-btn:disabled{ opacity: .4; cursor: not-allowed; transform: none; }
+
+.trade-hint{ text-align: center; font-size: 11.5px; color: var(--text-faint); }
+
+/* ---------- Side drawers (history / analysis / help) ---------- */
+.drawer{
+  position: absolute; top: 0; right: 0; bottom: 0; width: 340px;
+  background: var(--surface); border-left: 1px solid var(--border-strong);
+  transform: translateX(100%); transition: transform .35s var(--ease);
+  z-index: 40; display: flex; flex-direction: column;
+  box-shadow: -20px 0 50px -20px rgba(0,0,0,.6);
+}
+.drawer.open{ transform: translateX(0); }
+.drawer-head{ display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.drawer-head h3{ font-size: 15.5px; }
+.drawer-body{ flex: 1; overflow-y: auto; padding: 16px 20px; }
+
+.history-item{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+}
+.history-item:last-child{ border-bottom: none; }
+.history-dir{ display: flex; align-items: center; gap: 8px; }
+.history-dir svg{ width: 15px; height: 15px; }
+.history-dir.higher{ color: var(--brand-2); }
+.history-dir.lower{ color: #ff8590; }
+.history-meta{ color: var(--text-faint); font-size: 11px; }
+.history-result{ font-family: var(--font-mono); font-weight: 700; font-size: 13px; }
+.history-empty{ text-align: center; color: var(--text-faint); font-size: 13px; padding: 40px 0; }
+
+.analysis-gauge{ margin-bottom: 22px; }
+.analysis-gauge .g-lbl{ display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 8px; color: var(--text-dim); }
+.gauge-bar{ height: 8px; border-radius: 999px; background: var(--surface-3); overflow: hidden; }
+.gauge-fill{ height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--danger), var(--warn), var(--brand-2)); }
+
+.help-qa{ margin-bottom: 18px; }
+.help-qa h4{ font-size: 13.5px; margin-bottom: 6px; }
+.help-qa p{ font-size: 13px; color: var(--text-dim); }
+
+/* ---------- Deposit modal extras ---------- */
+.deposit-presets{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+.deposit-presets button{
+  padding: 12px 0; border-radius: var(--radius-sm); font-weight: 700; font-family: var(--font-mono);
+  background: var(--surface-3); border: 1px solid var(--border); color: var(--text);
+}
+.deposit-presets button:hover{ border-color: var(--brand); color: var(--brand-2); }
+
+/* ---------- Onboarding banner ---------- */
+.demo-banner{
+  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+  z-index: 850; display: flex; align-items: center; gap: 12px;
+  background: var(--surface-2); border: 1px solid rgba(255,176,32,.35);
+  padding: 12px 18px; border-radius: var(--radius-pill); box-shadow: var(--shadow-card);
+  font-size: 12.5px; max-width: 92vw;
+}
+.demo-banner button{ color: var(--text-faint); flex-shrink: 0; }
+.demo-banner button:hover{ color: var(--text); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px){
+  .trade-panel{ width: 260px; }
+  .drawer{ width: 100%; }
+}
+@media (max-width: 720px){
+  .plat-body{ flex-direction: column; }
+  .plat-main{ flex-direction: column; }
+  .chart-col{ flex: 1 1 auto; min-height: 300px; }
+  .trade-panel{
+    width: 100%; flex: 0 0 auto; flex-direction: row; flex-wrap: wrap;
+    border-left: none; border-top: 1px solid var(--border);
+    gap: 10px; padding: 12px 14px; max-height: 42vh; overflow-y: auto;
+  }
+  .trade-field{ flex: 1 1 45%; gap: 6px; }
+  .amount-presets{ display: none; }
+  .profit-box{ flex: 1 1 100%; padding: 10px 14px; }
+  .trade-buttons{ flex: 1 1 100%; flex-direction: row; margin-top: 0; gap: 8px; }
+  .trade-btn{ padding: 13px; font-size: 14px; }
+  .trade-hint{ flex: 1 1 100%; font-size: 10.5px; }
+  .plat-sidebar{ flex-direction: row; width: 100%; padding: 6px 8px; overflow-x: auto; gap: 4px; }
+  .side-btn{ flex-shrink: 0; }
+  .side-spacer{ display: none; }
+  .status-clock{ display: none; }
+}
+@media (max-width: 460px){
+  .plat-logo span{ display: none; }
+  .plat-demo-tag{ display: none; }
+  .deposit-presets{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px){
+  .demo-banner{
+    top: 66px; bottom: auto; left: 8px; right: 8px; transform: none;
+    max-width: none; width: auto; font-size: 11px; padding: 9px 12px;
+  }
+}
