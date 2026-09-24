@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Curso Como Vender Sites e Lucrar de R$500 a R$1.000 por Dia - metodo pratico da Gabrieldev.sites">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<title>Curso Vender Sites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080f;
+    --bg-alt: #0d0d18;
+    --surface: #13131f;
+    --surface-2: #1a1a2b;
+    --border: rgba(255,255,255,0.09);
+    --text: #f2f2f7;
+    --text-muted: #9797ad;
+    --accent: #8b5cf6;
+    --accent-2: #06b6d4;
+    --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
+    --font-display: 'Baloo 2', 'Liberation Sans', sans-serif;
+    --font-body: 'Inter', 'Liberation Sans', sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    padding-bottom: 76px;
+  }
+  h1, h2, h3, .nav-logo span, .price-badge .new, .final-cta .new, .cta-btn, .nav-cta, .tl-num, .mod-num, .for-card .ic, .stat-card .num {
+    font-family: var(--font-display);
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+  img { max-width: 100%; }
+  a { color: inherit; }
+  section { padding-block: 64px; }
+
+  /* reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.in { transition-delay: calc(var(--i, 0) * 90ms); }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(8,8,15,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s, background .3s;
+  }
+  .nav.scrolled { background: rgba(8,8,15,0.92); border-color: var(--border); }
+  .nav-inner { max-width: 1040px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+  .nav-logo img { width: 26px; height: 26px; }
+  .nav-logo span { font-weight: bold; font-size: 14px; white-space: nowrap; }
+  .nav-logo span b { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: bold; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gradient); color: #fff !important; text-decoration: none;
+    font-weight: bold; font-size: 12.5px; padding: 10px 18px; border-radius: 999px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+  @media (max-width: 480px) { .nav-logo span { display: none; } }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding-block: 80px 70px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: -40px -100px;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(139,92,246,0.24), transparent 45%),
+      radial-gradient(circle at 85% 25%, rgba(6,182,212,0.2), transparent 45%);
+    pointer-events: none;
+    animation: driftbg 9s ease-in-out infinite alternate;
+  }
+  @keyframes driftbg { 0% { transform: translate(0,0); } 100% { transform: translate(-20px, 14px); } }
+  .hero > * { position: relative; z-index: 2; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: bold; letter-spacing: 0.13em;
+    color: var(--accent-2);
+    background: rgba(6,182,212,0.1);
+    border: 1px solid rgba(6,182,212,0.3);
+    padding: 7px 18px; border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: clamp(28px, 5.4vw, 46px);
+    line-height: 1.16; font-weight: 800;
+    max-width: 760px; margin: 0 auto 20px;
+    text-wrap: balance;
+  }
+  h1 .accent {
+    background: var(--gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(15px, 2.2vw, 17px); color: var(--text-muted); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;
+  }
+  .price-badge {
+    display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 15px 24px; margin-bottom: 28px;
+  }
+  .price-badge .old { color: var(--text-muted); text-decoration: line-through; font-size: 14px; }
+  .price-badge .new { font-size: clamp(22px, 4vw, 28px); font-weight: 800; color: #fff; }
+  .price-badge .new span { font-size: 14px; color: var(--text-muted); font-weight: normal; }
+  .cta-btn {
+    display: inline-block; cursor: pointer; text-decoration: none;
+    background: var(--gradient);
+    color: #fff !important; font-weight: bold; font-size: clamp(15px, 3vw, 16.5px);
+    padding: 17px 42px; border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(139,92,246,0.35);
+    transition: transform .2s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); }
+  .hero-trust {
+    margin-top: 22px; font-size: 12.5px; color: var(--text-muted);
+    display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+  }
+  .hero-trust span { display: flex; align-items: center; gap: 6px; }
+  .dot-t { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); flex-shrink: 0; }
+
+  /* TRUST BADGE */
+  .trust-badge {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    font-size: 12px; color: var(--text-muted); margin-top: 14px;
+  }
+  .trust-badge svg { color: var(--accent-2); flex-shrink: 0; }
+  .final-cta .trust-badge { margin-top: 18px; }
+
+  /* HERO ENTRANCE */
+  @keyframes heroFadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-anim { opacity: 0; animation: heroFadeUp .85s cubic-bezier(.2,.7,.2,1) forwards; }
+  .hero-anim.d1 { animation-delay: .05s; }
+  .hero-anim.d2 { animation-delay: .18s; }
+  .hero-anim.d3 { animation-delay: .34s; }
+  .hero-anim.d4 { animation-delay: .48s; }
+  .hero-anim.d5 { animation-delay: .62s; }
+  .hero-anim.d6 { animation-delay: .76s; }
+
+  /* CTA SHINE */
+  .cta-btn { position: relative; overflow: hidden; }
+  .cta-btn::after {
+    content: ''; position: absolute; top: 0; left: -60%; width: 45%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-20deg);
+    animation: ctaShine 3.2s ease-in-out .9s infinite;
+  }
+  @keyframes ctaShine { 0% { left: -60%; } 40%, 100% { left: 130%; } }
+
+  /* HERO FLOATING MOCKUPS */
+  .hero-floats { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  @media (max-width: 900px) { .hero-floats { display: none; } }
+  .float-card {
+    position: absolute; width: 152px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; box-shadow: 0 22px 50px rgba(0,0,0,0.5);
+    opacity: 0;
+    animation: floatIn .9s cubic-bezier(.2,.7,.2,1) var(--fd,0s) forwards,
+               floatBob 6s ease-in-out calc(var(--fd,0s) + .9s) infinite;
+  }
+  @keyframes floatIn { from { opacity: 0; transform: translateY(30px) rotate(var(--rot,0deg)) scale(.9); } to { opacity: .9; transform: translateY(0) rotate(var(--rot,0deg)) scale(1); } }
+  @keyframes floatBob { 0%, 100% { transform: translateY(0) rotate(var(--rot,0deg)); } 50% { transform: translateY(-16px) rotate(var(--rot,0deg)); } }
+  .fc-bar { display: flex; gap: 4px; padding: 7px 9px; background: var(--bg-alt); }
+  .fc-bar span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+  .fc-bar span:nth-child(1) { background: #ef6a6a; }
+  .fc-bar span:nth-child(2) { background: #f5c76a; }
+  .fc-bar span:nth-child(3) { background: #6adf95; }
+  .fc-body { padding: 11px; }
+  .fc-line { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.14); margin-bottom: 6px; }
+  .fc-line.w1 { width: 78%; }
+  .fc-line.w2 { width: 52%; margin-bottom: 10px; }
+  .fc-swatch { height: 40px; border-radius: 8px; background: var(--gradient); opacity: .85; }
+
+  .section-alt { background: var(--bg-alt); }
+  .kicker {
+    display: inline-flex; font-size: 11px; font-weight: bold; letter-spacing: 0.14em;
+    color: var(--accent-2); background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+    padding: 5px 14px; border-radius: 999px; margin-bottom: 14px;
+  }
+  .section-title { font-size: clamp(24px, 4vw, 32px); font-weight: 800; margin-bottom: 12px; text-wrap: balance; }
+  .section-sub { color: var(--text-muted); font-size: 14.5px; max-width: 560px; margin-bottom: 40px; }
+  .center { text-align: center; }
+  .center .section-sub { margin-inline: auto; }
+
+  /* MOMENTO */
+  .momento-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  @media (max-width: 760px) { .momento-grid { grid-template-columns: 1fr; } }
+  .stat-row { display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; flex: 1; min-width: 140px; }
+  .stat-card .num { font-size: 26px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat-card .lbl { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .momento-visual {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .mv-row { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+  .mv-check { width: 22px; height: 22px; border-radius: 50%; background: rgba(6,182,212,0.15); color: var(--accent-2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+
+  /* TIMELINE */
+  .timeline { position: relative; max-width: 720px; margin: 0 auto; }
+  .tl-item { position: relative; padding-left: 62px; padding-bottom: 40px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: ''; position: absolute; left: 19px; top: 44px; bottom: -4px; width: 2px;
+    background: linear-gradient(var(--accent), var(--accent-2));
+    opacity: .35;
+  }
+  .tl-item:last-child::before { display: none; }
+  .tl-num {
+    position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 12px;
+    background: var(--gradient); display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #fff; font-size: 16px;
+  }
+  .tl-item h3 { font-size: 18px; margin: 4px 0 8px; }
+  .tl-item p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+  /* FOR GRID */
+  .for-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media (max-width: 640px) { .for-grid { grid-template-columns: 1fr; } }
+  .for-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px 24px; text-align: center; transition: border-color .25s, transform .25s;
+  }
+  .for-card:hover { border-color: rgba(139,92,246,0.4); transform: translateY(-3px); }
+  .for-card .ic {
+    width: 46px; height: 46px; border-radius: 12px; margin: 0 auto 16px;
+    background: var(--gradient); display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: bold; color: #fff;
+  }
+  .for-card p { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+  .for-card strong { display: block; color: var(--text); font-size: 16px; margin-bottom: 8px; }
+
+  /* MODULES */
+  .mod-list { display: flex; flex-direction: column; gap: 18px; }
+  .mod-card {
+    display: flex; gap: 24px; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 30px 32px;
+    transition: border-color .25s;
+  }
+  .mod-card:hover { border-color: rgba(6,182,212,0.35); }
+  @media (max-width: 560px) { .mod-card { flex-direction: column; gap: 14px; padding: 22px; } }
+  .mod-num {
+    flex-shrink: 0;
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--gradient);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; color: #fff;
+  }
+  .mod-card h3 { font-size: 20px; margin-bottom: 8px; }
+  .mod-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+  /* EXPERIENCE COUNTER */
+  .stat-counter { margin-top: 28px; }
+  .stat-counter-num {
+    font-family: var(--font-display); font-size: clamp(64px, 13vw, 128px); font-weight: 800; line-height: 1;
+    background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-counter-plus {
+    font-family: var(--font-display); font-size: clamp(38px, 7vw, 72px); font-weight: 800;
+    background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat-counter-lbl { margin-top: 10px; font-size: 14.5px; color: var(--text-muted); }
+
+  /* CHECKLIST */
+  .check-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 40px; display: grid; grid-template-columns: repeat(2,1fr); gap: 18px 32px;
+  }
+  @media (max-width: 560px) { .check-box { grid-template-columns: 1fr; padding: 26px 22px; } }
+  .check-item { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; }
+  .check-item .ck {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(6,182,212,0.15); color: var(--accent-2);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold;
+    margin-top: 1px;
+  }
+
+  /* CALCULATOR */
+  .calc-box {
+    display: grid; grid-template-columns: 1fr 1.15fr;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
+    overflow: hidden;
+  }
+  @media (max-width: 760px) { .calc-box { grid-template-columns: 1fr; } }
+  .calc-left { padding: 36px 34px; border-right: 1px solid var(--border); }
+  @media (max-width: 760px) { .calc-left { border-right: none; border-bottom: 1px solid var(--border); } }
+  .calc-right { padding: 36px 34px; background: var(--bg-alt); }
+  .calc-row-label { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-muted); font-weight: bold; margin-bottom: 14px; }
+  .calc-value { font-family: var(--font-display); color: var(--text); font-size: 17px; }
+  .calc-slider {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+    background: var(--border); outline: none; cursor: pointer; margin-bottom: 8px; display: block;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gradient); border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--accent-2);
+    cursor: pointer;
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--gradient); border: 3px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--accent-2); cursor: pointer;
+  }
+  .calc-minmax { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-muted); margin-bottom: 6px; }
+  .calc-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .calc-chip {
+    font-family: inherit; font-size: 12.5px; font-weight: bold; color: var(--text-muted);
+    background: var(--bg-alt); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 16px; cursor: pointer; transition: all .2s;
+  }
+  .calc-chip:hover { border-color: rgba(139,92,246,0.4); color: var(--text); }
+  .calc-chip.active { background: var(--gradient); color: #fff !important; border-color: transparent; }
+  .calc-kicker { font-size: 11px; font-weight: bold; letter-spacing: .14em; color: var(--accent-2); }
+  .calc-big { font-family: var(--font-display); font-size: clamp(36px, 6vw, 54px); font-weight: 800; margin: 8px 0 22px; font-variant-numeric: tabular-nums; }
+  .calc-divider { height: 1px; background: var(--border); margin-bottom: 18px; }
+  .calc-year-row { display: flex; align-items: baseline; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 26px; }
+  .calc-year-row strong { font-family: var(--font-display); color: var(--text); font-size: 18px; font-variant-numeric: tabular-nums; }
+  .calc-bars { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+  .calc-bar-row { display: grid; grid-template-columns: 54px 1fr 76px; align-items: center; gap: 12px; font-size: 12.5px; color: var(--text-muted); transition: color .25s; }
+  .calc-bar-track { height: 7px; border-radius: 999px; background: var(--border); overflow: hidden; }
+  .calc-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: var(--border); transition: width .35s ease, background .35s ease; }
+  .calc-bar-row.active { color: var(--text); font-weight: bold; }
+  .calc-bar-row.active .calc-bar-fill { background: var(--gradient); }
+  .calc-bar-val { text-align: right; font-variant-numeric: tabular-nums; }
+  .calc-disclaimer { font-size: 11.5px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+  /* FINAL CTA */
+  .final-cta {
+    text-align: center;
+    background: linear-gradient(160deg, var(--surface), var(--bg-alt));
+    border: 1px solid var(--border); border-radius: 24px;
+    padding: clamp(36px, 6vw, 56px) clamp(20px, 5vw, 40px);
+  }
+  .final-cta .new { font-size: clamp(32px, 6vw, 44px); font-weight: 800; margin: 8px 0 6px; }
+  .final-cta .new span { font-size: 16px; color: var(--text-muted); font-weight: normal; }
+  .final-cta p.tag { color: var(--text-muted); margin-bottom: 26px; font-size: 15px; }
+
+  /* FAQ ACCORDION */
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 22px; cursor: pointer; background: none; border: none; width: 100%;
+    text-align: left; color: var(--text); font-size: 15.5px; font-weight: bold; font-family: inherit;
+  }
+  .faq-q .plus { font-size: 20px; color: var(--accent-2); flex-shrink: 0; transition: transform .25s; font-weight: normal; }
+  .faq-item.open .faq-q .plus { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease;
+    font-size: 14px; color: var(--text-muted); line-height: 1.6;
+  }
+  .faq-item.open .faq-a { max-height: 240px; padding-bottom: 22px; }
+
+  footer { text-align: center; padding-block: 40px 60px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 20px; }
+
+  /* SOBRE */
+  .sobre-card {
+    display: flex; align-items: center; gap: 28px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px;
+  }
+  @media (max-width: 640px) { .sobre-card { flex-direction: column; text-align: center; } }
+  .sobre-avatar {
+    width: 84px; height: 84px; border-radius: 20px; flex-shrink: 0;
+    background: var(--gradient); display: flex; align-items: center; justify-content: center;
+    padding: 18px;
+  }
+  .sobre-avatar img { width: 100%; }
+  .sobre-card h3 { font-size: 19px; margin: 0 0 8px; }
+  .sobre-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+  /* ANTES/DEPOIS */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card { border-radius: 18px; padding: 28px; border: 1px solid var(--border); }
+  .compare-card.bad { background: rgba(255,255,255,0.02); }
+  .compare-card.good { background: linear-gradient(160deg, rgba(139,92,246,0.1), rgba(6,182,212,0.06)); border-color: rgba(139,92,246,0.3); }
+  .compare-tag { font-size: 11px; font-weight: bold; letter-spacing: 0.1em; margin-bottom: 14px; display: block; }
+  .compare-card.bad .compare-tag { color: #ef6a6a; }
+  .compare-card.good .compare-tag { color: var(--accent-2); }
+  .compare-card ul { margin: 0; padding-left: 20px; }
+  .compare-card li { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; }
+  .compare-card.good li { color: var(--text); }
+
+  /* MOBILE STICKY CTA */
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: none;
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    background: rgba(8,8,15,0.92); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .sticky-cta .price { font-size: 13px; }
+  .sticky-cta .price b { font-family: var(--font-display); font-size: 17px; display: block; }
+  .sticky-cta .cta-btn { padding: 12px 22px; font-size: 14px; }
+  @media (max-width: 640px) { .sticky-cta { display: flex; } }
+</style>
+</head>
+<body>
+
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><img src="assets/logo-icon.png" alt="Gabrieldev.sites"><span>Gabriel<b>dev</b>.sites</span></div>
+    <ul class="nav-links">
+      <li><a href="#metodo">Método</a></li>
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#calculadora">Simulador</a></li>
+      <li><a href="#investimento">Investimento</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
+    </ul>
+    <a class="nav-cta" href="#investimento">Quero Começar Agora →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-floats" aria-hidden="true">
+    <div class="float-card" style="top:9%; left:2%; --rot:-7deg; --fd:.9s;">
+      <div class="fc-bar"><span></span><span></span><span></span></div>
+      <div class="fc-body"><div class="fc-line w1"></div><div class="fc-line w2"></div><div class="fc-swatch"></div></div>
+    </div>
+    <div class="float-card" style="top:56%; left:0%; --rot:6deg; --fd:1.15s;">
+      <div class="fc-bar"><span></span><span></span><span></span></div>
+      <div class="fc-body"><div class="fc-line w1"></div><div class="fc-line w2"></div><div class="fc-swatch"></div></div>
+    </div>
+    <div class="float-card" style="top:13%; right:1%; --rot:8deg; --fd:1.4s;">
+      <div class="fc-bar"><span></span><span></span><span></span></div>
+      <div class="fc-body"><div class="fc-line w1"></div><div class="fc-line w2"></div><div class="fc-swatch"></div></div>
+    </div>
+    <div class="float-card" style="top:60%; right:2%; --rot:-5deg; --fd:1.65s;">
+      <div class="fc-bar"><span></span><span></span><span></span></div>
+      <div class="fc-body"><div class="fc-line w1"></div><div class="fc-line w2"></div><div class="fc-swatch"></div></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow hero-anim d1">MÉTODO PRÁTICO PASSO A PASSO</span>
+    <h1 class="hero-anim d2">Como vender sites e transformar isso numa <span class="accent">renda extra real</span></h1>
+    <p class="hero-sub hero-anim d3">O passo a passo que uso pra encontrar cliente, criar uma prévia que já convence e fechar a venda — mesmo sem saber programar.</p>
+    <div class="price-badge hero-anim d4">
+      <span class="old">R$ 97,00</span>
+      <span class="new">R$ 19,90 <span>à vista</span></span>
+    </div>
+    <br>
+    <a class="cta-btn hero-anim d5" href="https://pay.kiwify.com.br/ZknZbxu" target="_blank" rel="noopener">Quero Aprender Agora</a>
+    <div class="trust-badge hero-anim d6">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <span>Compra 100% segura · pagamento processado pela Kiwify</span>
+    </div>
+    <div class="hero-trust hero-anim d6">
+      <span><span class="dot-t"></span>Acesso imediato</span>
+      <span><span class="dot-t"></span>Sem precisar saber programar</span>
+      <span><span class="dot-t"></span>Acesso vitalício</span>
+    </div>
+  </div>
+</div>
+
+<section id="metodo">
+  <div class="wrap">
+    <div class="momento-grid">
+      <div>
+        <span class="kicker reveal">O MOMENTO</span>
+        <h2 class="section-title reveal">A maioria dos negócios locais ainda não tem site</h2>
+        <p class="section-sub reveal" style="margin-bottom:0;">Confeitaria, salão, academia, clínica — a maioria só tem Instagram e WhatsApp. Isso é oportunidade: pouca concorrência, decisão rápida, e um problema visível que você resolve em poucos dias.</p>
+        <div class="stat-row">
+          <div class="stat-card reveal"><div class="num">+70%</div><div class="lbl">de pequenos negócios locais sem site próprio</div></div>
+          <div class="stat-card reveal"><div class="num">1-3</div><div class="lbl">dias pra entregar um site simples publicado</div></div>
+        </div>
+      </div>
+      <div class="momento-visual reveal">
+        <div class="mv-row"><span class="mv-check">✓</span>Sem precisar programar</div>
+        <div class="mv-row"><span class="mv-check">✓</span>Sem precisar de equipe</div>
+        <div class="mv-row"><span class="mv-check">✓</span>Sem dominar dezenas de ferramentas</div>
+        <div class="mv-row"><span class="mv-check">✓</span>Só celular, IA e o método certo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap center">
+    <span class="kicker reveal">O PERCURSO</span>
+    <h2 class="section-title reveal">Como funciona, do zero ao primeiro cliente</h2>
+    <p class="section-sub reveal">Quatro passos, sempre na mesma ordem.</p>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-num">1</div>
+        <h3>Escolha o nicho</h3>
+        <p>Você define um segmento local pra focar — confeitaria, salão, academia — e aprende a levantar leads sem site em minutos.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">2</div>
+        <h3>Aborde com a prévia pronta</h3>
+        <p>Em vez de só prometer, você já manda uma prévia visual profissional do site do cliente, montada com a logo e fotos reais dele.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">3</div>
+        <h3>Feche e publique</h3>
+        <p>Você aprende a precificar, fechar o pagamento e colocar o site no ar em poucos minutos, com domínio próprio se o cliente quiser.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">4</div>
+        <h3>Repita e escale</h3>
+        <p>Cada cliente satisfeito vira indicação. Você repete o processo em outros nichos e cidades, aumentando o ritmo aos poucos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <span class="kicker reveal">A DIFERENÇA</span>
+    <h2 class="section-title reveal">O que muda quando você aplica o método</h2>
+    <p class="section-sub reveal">&nbsp;</p>
+    <div class="compare-grid">
+      <div class="compare-card bad reveal">
+        <span class="compare-tag">SEM O MÉTODO</span>
+        <ul>
+          <li>Depende só do que sobra do salário no fim do mês</li>
+          <li>Fica esperando cliente aparecer por sorte</li>
+          <li>Não sabe quanto cobrar nem o que dizer na abordagem</li>
+          <li>Acha que precisaria aprender a programar do zero</li>
+          <li>Tenta vender "no escuro", sem nada visual pra mostrar</li>
+        </ul>
+      </div>
+      <div class="compare-card good reveal">
+        <span class="compare-tag">COM O MÉTODO</span>
+        <ul>
+          <li>Constrói uma renda extra que você mesmo controla</li>
+          <li>Sabe exatamente onde achar cliente todo dia</li>
+          <li>Tem uma tabela de preço clara pra cada tipo de site</li>
+          <li>Não precisa escrever uma linha de código</li>
+          <li>Manda uma prévia pronta que já convence antes da resposta</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap center">
+    <span class="kicker reveal">PRA QUEM É</span>
+    <h2 class="section-title reveal">Esse método é pra você se...</h2>
+    <p class="section-sub reveal">&nbsp;</p>
+    <div class="for-grid">
+      <div class="for-card reveal">
+        <div class="ic">1</div>
+        <strong>Quer uma renda extra</strong>
+        <p>Sem precisar largar o que já faz — dá pra começar no tempo livre.</p>
+      </div>
+      <div class="for-card reveal">
+        <div class="ic">2</div>
+        <strong>Não sabe programar</strong>
+        <p>O método é sobre encontrar cliente e vender — a parte técnica é simplificada passo a passo.</p>
+      </div>
+      <div class="for-card reveal">
+        <div class="ic">3</div>
+        <strong>Tem só um celular</strong>
+        <p>Todo o processo de abordagem e prévia pode começar direto do WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modulos">
+  <div class="wrap center">
+    <span class="kicker reveal">O CONTEÚDO</span>
+    <h2 class="section-title reveal">O que você vai aprender</h2>
+    <p class="section-sub reveal">3 módulos, direto ao ponto.</p>
+  </div>
+  <div class="wrap">
+    <div class="mod-list">
+      <div class="mod-card reveal">
+        <div class="mod-num">1</div>
+        <div>
+          <h3>Como Achar Cliente</h3>
+          <p>Onde encontrar negócios que ainda não têm site, como escolher o nicho certo pra começar e o script de abordagem que gera resposta de verdade.</p>
+        </div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">2</div>
+        <div>
+          <h3>A Prévia Que Vende Sozinha</h3>
+          <p>Como montar uma prévia visual profissional do site — com a logo e fotos do próprio cliente — antes mesmo dele responder sua mensagem.</p>
+        </div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">3</div>
+        <div>
+          <h3>Fechamento e Entrega</h3>
+          <p>Como precificar sem medo, publicar o site em poucos minutos e transformar cada cliente satisfeito em novas indicações.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="experiencia">
+  <div class="wrap center">
+    <span class="kicker reveal">EXPERIÊNCIA</span>
+    <h2 class="section-title reveal">Mais de 500 sites entregues para pequenos negócios</h2>
+    <p class="section-sub reveal">De confeitarias a clínicas — o mesmo método por trás desse número é o que você vai aprender dentro do curso.</p>
+    <div class="stat-counter reveal">
+      <span><span class="stat-counter-num" id="statCounter" data-target="500">0</span><span class="stat-counter-plus">+</span></span>
+      <div class="stat-counter-lbl">sites publicados pra pequenas lojas e negócios locais</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var el = document.getElementById('statCounter');
+    if (!el) return;
+    var target = parseInt(el.dataset.target, 10);
+    var done = false;
+    function animateCount() {
+      if (done) return;
+      done = true;
+      var start = null;
+      var duration = 1800;
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { animateCount(); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(el);
+    } else {
+      el.textContent = target;
+    }
+  })();
+</script>
+
+<section>
+  <div class="wrap">
+    <div class="sobre-card reveal">
+      <div class="sobre-avatar"><img src="assets/logo-icon.png" alt="Gabrieldev.sites"></div>
+      <div>
+        <h3>Quem te ensina</h3>
+        <p>Sou o Gabriel, criador da Gabrieldev.sites. Já entreguei mais de 500 sites pra pequenos negócios locais — de confeitarias e salões a portais como o GameCentral e delivery como o American Burger Delivery. Esse curso é o mesmo processo que uso no dia a dia, sem enrolação: o que funciona pra achar cliente, montar a prévia e fechar a venda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap center">
+    <h2 class="section-title reveal">O que está incluso</h2>
+    <div class="check-box reveal" style="text-align:left; margin-top: 20px;">
+      <div class="check-item"><span class="ck">✓</span>3 módulos completos, em texto direto ao ponto</div>
+      <div class="check-item"><span class="ck">✓</span>Scripts de abordagem prontos pra copiar e colar</div>
+      <div class="check-item"><span class="ck">✓</span>Passo a passo da prévia visual persuasiva</div>
+      <div class="check-item"><span class="ck">✓</span>Guia de precificação e publicação do site</div>
+      <div class="check-item"><span class="ck">✓</span>Acesso vitalício ao conteúdo</div>
+      <div class="check-item"><span class="ck">✓</span>Atualizações futuras inclusas</div>
+    </div>
+  </div>
+</section>
+
+<section id="calculadora">
+  <div class="wrap center">
+    <span class="kicker reveal">SIMULE VOCÊ MESMO</span>
+    <h2 class="section-title reveal">Quanto dá pra faturar vendendo sites</h2>
+    <p class="section-sub reveal">Mexa no controle e veja uma estimativa com base no seu próprio ritmo de vendas.</p>
+  </div>
+  <div class="wrap">
+    <div class="calc-box reveal">
+      <div class="calc-left">
+        <div class="calc-row-label"><span>Sites vendidos por mês</span><span class="calc-value" id="calcSitesVal">2</span></div>
+        <input type="range" min="1" max="10" step="1" value="2" class="calc-slider" id="calcSites" aria-label="Sites vendidos por mês">
+        <div class="calc-minmax"><span>1</span><span>10</span></div>
+        <div class="calc-presets">
+          <button type="button" class="calc-chip" data-sites="1">1 site</button>
+          <button type="button" class="calc-chip active" data-sites="2">2 sites</button>
+          <button type="button" class="calc-chip" data-sites="5">5 sites</button>
+          <button type="button" class="calc-chip" data-sites="10">10 sites</button>
+        </div>
+        <div class="calc-row-label" style="margin-top:30px;"><span>Valor médio cobrado por site</span><span class="calc-value" id="calcTicketVal">R$ 600</span></div>
+        <input type="range" min="300" max="2000" step="50" value="600" class="calc-slider" id="calcTicket" aria-label="Valor médio por site">
+        <div class="calc-minmax"><span>R$ 300</span><span>R$ 2.000</span></div>
+      </div>
+      <div class="calc-right">
+        <span class="calc-kicker">FATURAMENTO MENSAL ESTIMADO</span>
+        <div class="calc-big" id="calcMonthly">R$ 1.200</div>
+        <div class="calc-divider"></div>
+        <div class="calc-year-row"><span>Em 12 meses</span><strong id="calcYearly">R$ 14.400</strong></div>
+        <div class="calc-bars" id="calcBars">
+          <div class="calc-bar-row" data-n="1"><span class="calc-bar-lbl">1 site</span><div class="calc-bar-track"><div class="calc-bar-fill"></div></div><span class="calc-bar-val"></span></div>
+          <div class="calc-bar-row" data-n="2"><span class="calc-bar-lbl">2 sites</span><div class="calc-bar-track"><div class="calc-bar-fill"></div></div><span class="calc-bar-val"></span></div>
+          <div class="calc-bar-row" data-n="5"><span class="calc-bar-lbl">5 sites</span><div class="calc-bar-track"><div class="calc-bar-fill"></div></div><span class="calc-bar-val"></span></div>
+          <div class="calc-bar-row" data-n="10"><span class="calc-bar-lbl">10 sites</span><div class="calc-bar-track"><div class="calc-bar-fill"></div></div><span class="calc-bar-val"></span></div>
+        </div>
+        <p class="calc-disclaimer">Estimativa ilustrativa com base no valor por site que você mesmo define acima. Não é garantia de faturamento — depende do seu ritmo de vendas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sitesEl = document.getElementById('calcSites');
+    var ticketEl = document.getElementById('calcTicket');
+    var sitesVal = document.getElementById('calcSitesVal');
+    var ticketVal = document.getElementById('calcTicketVal');
+    var monthlyEl = document.getElementById('calcMonthly');
+    var yearlyEl = document.getElementById('calcYearly');
+    var chips = document.querySelectorAll('.calc-chip');
+    var barRows = document.querySelectorAll('.calc-bar-row');
+    var maxForBars = 10;
+
+    function brl(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
+
+    function render() {
+      var sites = parseInt(sitesEl.value, 10);
+      var ticket = parseInt(ticketEl.value, 10);
+      sitesVal.textContent = sites;
+      ticketVal.textContent = brl(ticket);
+      var monthly = sites * ticket;
+      monthlyEl.textContent = brl(monthly);
+      yearlyEl.textContent = brl(monthly * 12);
+
+      chips.forEach(function (c) {
+        c.classList.toggle('active', parseInt(c.dataset.sites, 10) === sites);
+      });
+
+      var maxVal = maxForBars * ticket;
+      barRows.forEach(function (row) {
+        var n = parseInt(row.dataset.n, 10);
+        var val = n * ticket;
+        row.querySelector('.calc-bar-fill').style.width = (val / maxVal * 100) + '%';
+        row.querySelector('.calc-bar-val').textContent = brl(val);
+        row.classList.toggle('active', n === sites);
+      });
+    }
+
+    sitesEl.addEventListener('input', render);
+    ticketEl.addEventListener('input', render);
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        sitesEl.value = c.dataset.sites;
+        render();
+      });
+    });
+
+    render();
+  })();
+</script>
+
+<section id="investimento">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <span class="eyebrow">OFERTA DE LANÇAMENTO</span>
+      <p class="new">R$ 19,90 <span>pagamento único</span></p>
+      <p class="tag">Menos que um lanche, pra aprender uma habilidade que você usa a vida inteira.</p>
+      <a class="cta-btn" href="https://pay.kiwify.com.br/ZknZbxu" target="_blank" rel="noopener">Garantir Meu Acesso Agora</a>
+      <div class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Compra 100% segura · pagamento processado pela Kiwify</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="duvidas">
+  <div class="wrap" style="max-width: 760px;">
+    <div class="center">
+      <span class="kicker reveal">DÚVIDAS</span>
+      <h2 class="section-title reveal">Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal open">
+        <button class="faq-q">Preciso saber programar? <span class="plus">+</span></button>
+        <div class="faq-a">Não. O método ensina a encontrar cliente, criar a prévia e vender — a parte técnica é simplificada em passo a passo, sem precisar escrever código.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Quanto tempo por dia eu preciso dedicar? <span class="plus">+</span></button>
+        <div class="faq-a">Depende do seu ritmo. Dá pra começar dedicando 30-60 minutos por dia entre levantar leads e mandar abordagens, encaixando no tempo livre.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Preciso pagar outras ferramentas além do curso? <span class="plus">+</span></button>
+        <div class="faq-a">Não é obrigatório. O método funciona com ferramentas gratuitas (Google Maps, WhatsApp, Canva). Ferramentas de IA pagas aceleram o processo, mas não são exigidas.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Funciona em qualquer cidade? <span class="plus">+</span></button>
+        <div class="faq-a">Sim. O método é sobre abordagem e vendas, então funciona em qualquer lugar do Brasil, em qualquer nicho de negócio local.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Como recebo o acesso? <span class="plus">+</span></button>
+        <div class="faq-a">Assim que o pagamento é aprovado, o acesso é liberado automaticamente e enviado pro seu e-mail.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Gabrieldev.sites — Como Vender Sites e Lucrar de R$500 a R$1.000 por Dia
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="price">Oferta de lançamento<b>R$ 19,90</b></div>
+  <a class="cta-btn" href="https://pay.kiwify.com.br/ZknZbxu" target="_blank" rel="noopener">Garantir Agora</a>
+</div>
+
+<script>
+  (function () {
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 12);
+    });
+
+    var items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      items.forEach(function (el, i) {
+        el.style.setProperty('--i', i % 6);
+        io.observe(el);
+      });
+    } else {
+      items.forEach(function (el) { el.classList.add('in'); });
+    }
+
+    document.querySelectorAll('.faq-q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.closest('.faq-item').classList.toggle('open');
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        var id = a.getAttribute('href').slice(1);
+        var target = document.getElementById(id);
+        if (target) {
+          ev.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
