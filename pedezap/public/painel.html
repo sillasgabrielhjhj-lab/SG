@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Painel | {{APP_NAME}}</title>
+<meta name="theme-color" content="#12a150">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/painel.css">
+</head>
+<body class="app">
+
+<header class="app-top">
+  <div class="container app-top-inner">
+    <a href="/painel" class="logo"><img src="/static/favicon.svg" alt="">{{APP_NAME}}</a>
+    <div class="app-top-actions">
+      <a id="adminLink" href="/admin" class="btn btn-sm btn-ghost" hidden>Admin</a>
+      <a id="viewStore" class="btn btn-sm" target="_blank" rel="noopener">Ver minha loja</a>
+      <button id="logout" class="btn btn-sm btn-ghost" type="button">Sair</button>
+    </div>
+  </div>
+</header>
+
+<div class="spinner" id="loading"></div>
+
+<main class="container app-main" id="app" hidden>
+  <div id="planBanner"></div>
+
+  <section class="store-bar card">
+    <div class="store-bar-info">
+      <h1 id="storeName"></h1>
+      <a id="storeLink" target="_blank" rel="noopener" class="small"></a>
+    </div>
+    <label class="switch open-switch">
+      <span><span id="openLabel"></span><small id="openHint"></small></span>
+      <input type="checkbox" id="openToggle">
+    </label>
+  </section>
+
+  <section id="onboarding" class="card onboarding" hidden>
+    <div class="card-title">
+      <h2>Primeiros passos</h2>
+      <span class="badge badge-green" id="onboardingProgress"></span>
+    </div>
+    <ol class="checklist" id="checklist"></ol>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Seções do painel">
+    <button role="tab" data-tab="pedidos"><span class="tab-ico">🔔</span>Pedidos<span class="tab-count" id="newCount" hidden></span></button>
+    <button role="tab" data-tab="cardapio"><span class="tab-ico">📋</span>Cardápio</button>
+    <button role="tab" data-tab="loja"><span class="tab-ico">🏪</span>Minha loja</button>
+    <button role="tab" data-tab="divulgar"><span class="tab-ico">📣</span>Divulgar</button>
+    <button role="tab" data-tab="assinatura"><span class="tab-ico">💳</span>Assinatura</button>
+  </nav>
+
+  <!-- PEDIDOS -->
+  <section class="tab-panel" id="tab-pedidos" role="tabpanel">
+    <div class="stats">
+      <div class="stat"><small>Pedidos hoje</small><strong id="statOrdersToday">0</strong></div>
+      <div class="stat"><small>Vendido hoje</small><strong id="statSalesToday">R$ 0,00</strong></div>
+      <div class="stat"><small>Últimos 7 dias</small><strong id="statSalesWeek">R$ 0,00</strong></div>
+    </div>
+    <div class="seg order-filter" role="radiogroup" aria-label="Filtrar pedidos">
+      <label><input type="radio" name="orderFilter" value="abertos" checked><span>Em aberto</span></label>
+      <label><input type="radio" name="orderFilter" value="finalizados"><span>Finalizados</span></label>
+      <label><input type="radio" name="orderFilter" value="todos"><span>Todos</span></label>
+    </div>
+    <div id="orderList" class="order-list"></div>
+    <p class="small muted center-text">A lista atualiza sozinha. Deixe esta tela aberta para ouvir o aviso de novo pedido.</p>
+  </section>
+
+  <!-- CARDÁPIO -->
+  <section class="tab-panel" id="tab-cardapio" role="tabpanel" hidden>
+    <div class="panel-head">
+      <div>
+        <h2>Cardápio</h2>
+        <p class="muted small" id="productCount"></p>
+      </div>
+      <button class="btn btn-primary" id="addProduct" type="button"></button>
+    </div>
+    <div id="productList"></div>
+  </section>
+
+  <!-- MINHA LOJA -->
+  <section class="tab-panel" id="tab-loja" role="tabpanel" hidden>
+    <form id="storeForm" novalidate>
+      <div class="card">
+        <h2 class="form-title">Identidade</h2>
+        <div class="field">
+          <label for="f-name">Nome da loja</label>
+          <input id="f-name" name="name" type="text" maxlength="60" required>
+        </div>
+        <div class="field">
+          <label for="f-slug">Link da loja</label>
+          <div class="input-prefix"><span id="slugPrefix"></span><input id="f-slug" name="slug" type="text" maxlength="40" autocapitalize="off" spellcheck="false"></div>
+          <span class="hint">Só letras minúsculas, números e hífen. Se mudar, o link antigo para de funcionar.</span>
+        </div>
+        <div class="field">
+          <label for="f-description">Descrição curta</label>
+          <textarea id="f-description" name="description" maxlength="300" placeholder="Ex: Hambúrguer artesanal feito na hora. Entregamos em todo o bairro."></textarea>
+        </div>
+        <div class="field">
+          <span class="label">Logo</span>
+          <div class="upload-row">
+            <div class="logo-preview" id="logoPreview"></div>
+            <div class="upload-actions">
+              <label class="btn btn-sm">Escolher imagem<input type="file" accept="image/*" id="logoInput" hidden></label>
+              <button type="button" class="btn btn-sm btn-ghost btn-danger" id="logoRemove">Remover</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <span class="label">Cor da loja</span>
+          <div class="colors" id="colorSwatches"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="form-title">Contato e horário</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="f-whatsapp">WhatsApp que recebe os pedidos</label>
+            <input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" maxlength="20">
+          </div>
+          <div class="field">
+            <label for="f-hours">Horário de funcionamento</label>
+            <input id="f-hours" name="hours" type="text" maxlength="120" placeholder="Ex: Ter a Dom, 18h às 23h">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-address">Endereço (para retirada)</label>
+          <input id="f-address" name="address" type="text" maxlength="200" placeholder="Rua, número, bairro, cidade">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="form-title">Entrega e retirada</h2>
+        <label class="switch"><span>Faço entregas<small>O cliente informa o endereço no pedido.</small></span><input type="checkbox" name="accepts_delivery"></label>
+        <div class="field indent" id="deliveryFeeField">
+          <label for="f-fee">Taxa de entrega</label>
+          <div class="input-prefix"><span>R$</span><input id="f-fee" name="delivery_fee" type="text" inputmode="decimal" placeholder="0,00 (grátis)"></div>
+        </div>
+        <label class="switch"><span>Cliente pode retirar no local</span><input type="checkbox" name="accepts_pickup"></label>
+        <div class="field">
+          <label for="f-min">Pedido mínimo</label>
+          <div class="input-prefix"><span>R$</span><input id="f-min" name="min_order" type="text" inputmode="decimal" placeholder="0,00 (sem mínimo)"></div>
+        </div>
+      </div>
+
+      <div class="card" id="pix">
+        <h2 class="form-title">Pagamento</h2>
+        <p class="muted small">Com a chave PIX, o cliente recebe um QR Code com o valor exato do pedido. O dinheiro cai direto na sua conta.</p>
+        <div class="grid-2">
+          <div class="field">
+            <label for="f-pixtype">Tipo de chave PIX</label>
+            <select id="f-pixtype" name="pix_key_type">
+              <option value="telefone">Telefone</option>
+              <option value="cpf">CPF</option>
+              <option value="cnpj">CNPJ</option>
+              <option value="email">E-mail</option>
+              <option value="aleatoria">Chave aleatória</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-pixkey">Chave PIX</label>
+            <input id="f-pixkey" name="pix_key" type="text" maxlength="80" autocapitalize="off" spellcheck="false" placeholder="Deixe vazio para não aceitar PIX">
+          </div>
+          <div class="field">
+            <label for="f-pixname">Nome do recebedor</label>
+            <input id="f-pixname" name="pix_name" type="text" maxlength="60" placeholder="Como aparece no banco">
+          </div>
+          <div class="field">
+            <label for="f-pixcity">Cidade</label>
+            <input id="f-pixcity" name="pix_city" type="text" maxlength="40" placeholder="Ex: Recife">
+          </div>
+        </div>
+        <label class="switch"><span>Aceito dinheiro<small>O cliente pode pedir troco.</small></span><input type="checkbox" name="accepts_cash"></label>
+        <label class="switch"><span>Aceito cartão na entrega/retirada<small>Você leva a maquininha.</small></span><input type="checkbox" name="accepts_card"></label>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="saveStore">Salvar alterações</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- DIVULGAR -->
+  <section class="tab-panel" id="tab-divulgar" role="tabpanel" hidden>
+    <div class="card">
+      <h2 class="form-title">Link do seu cardápio</h2>
+      <div class="copy-box">
+        <input type="text" readonly id="shareUrl" aria-label="Link da loja">
+        <button class="btn" type="button" id="copyLink">Copiar</button>
+      </div>
+      <div class="share-actions">
+        <a class="btn btn-wa" id="shareWa" target="_blank" rel="noopener"></a>
+        <a class="btn" id="openStore" target="_blank" rel="noopener">Abrir cardápio</a>
+      </div>
+    </div>
+    <div class="card qr-card">
+      <div>
+        <h2 class="form-title">QR Code para o balcão</h2>
+        <p class="muted">Imprima e cole no balcão, nas mesas, no cardápio de papel e na embalagem. O cliente aponta a câmera e cai direto na sua loja.</p>
+        <div class="share-actions">
+          <button class="btn btn-dark" type="button" id="printPoster">Imprimir cartaz</button>
+          <a class="btn" id="downloadQr">Baixar QR Code</a>
+        </div>
+      </div>
+      <img class="qr-img" id="qrImg" alt="QR Code da loja">
+    </div>
+    <div class="card">
+      <h2 class="form-title">Onde divulgar para vender mais</h2>
+      <ul class="tips">
+        <li><b>Bio do Instagram:</b> coloque o link e escreva "Peça pelo link".</li>
+        <li><b>Status do WhatsApp:</b> poste o link todo dia no horário de pico, com foto do produto.</li>
+        <li><b>Mensagem de ausência / saudação:</b> no WhatsApp Business, responda automaticamente com o link do cardápio.</li>
+        <li><b>Grupos do bairro e do condomínio:</b> mande o link com uma promoção de estreia.</li>
+        <li><b>Embalagem e sacola:</b> cole o QR Code para o cliente pedir de novo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ASSINATURA -->
+  <section class="tab-panel" id="tab-assinatura" role="tabpanel" hidden>
+    <div class="card" id="planCard"></div>
+    <div class="card" id="payCard"></div>
+  </section>
+</main>
+
+<!-- Cartaz para impressão -->
+<div class="poster" id="poster" aria-hidden="true">
+  <p class="poster-kicker">Faça seu pedido pelo celular</p>
+  <h1 id="posterName"></h1>
+  <img id="posterQr" alt="">
+  <p class="poster-step">Aponte a câmera do celular para o QR Code</p>
+  <p class="poster-url" id="posterUrl"></p>
+</div>
+
+<!-- Produto -->
+<dialog class="sheet" id="productDialog" aria-labelledby="productDialogTitle">
+  <form id="productForm" method="dialog" novalidate>
+    <div class="sheet-head">
+      <h2 id="productDialogTitle">Produto</h2>
+      <button class="close-btn" type="button" data-close aria-label="Fechar">×</button>
+    </div>
+    <div class="sheet-body">
+      <div class="field">
+        <span class="label">Foto</span>
+        <div class="upload-row">
+          <div class="photo-preview" id="photoPreview"></div>
+          <div class="upload-actions">
+            <label class="btn btn-sm">Escolher foto<input type="file" accept="image/*" id="photoInput" hidden></label>
+            <button type="button" class="btn btn-sm btn-ghost btn-danger" id="photoRemove">Remover</button>
+            <span class="hint">Foto boa vende mais: luz natural e o produto de perto.</span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="p-name">Nome</label>
+        <input id="p-name" name="name" type="text" maxlength="80" placeholder="Ex: X-Bacon">
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="p-price">Preço</label>
+          <div class="input-prefix"><span>R$</span><input id="p-price" name="price" type="text" inputmode="decimal" placeholder="0,00"></div>
+        </div>
+        <div class="field">
+          <label for="p-category">Categoria</label>
+          <input id="p-category" name="category" type="text" maxlength="40" list="categoryList" placeholder="Ex: Lanches">
+          <datalist id="categoryList"></datalist>
+        </div>
+      </div>
+      <div class="field">
+        <label for="p-description">Descrição</label>
+        <textarea id="p-description" name="description" maxlength="300" placeholder="Ingredientes, tamanho, sabores..."></textarea>
+      </div>
+      <label class="switch"><span>Disponível<small>Desligue quando acabar. O produto aparece como esgotado.</small></span><input type="checkbox" name="available" checked></label>
+    </div>
+    <div class="sheet-foot sheet-foot-row">
+      <button class="btn btn-ghost btn-danger" type="button" id="deleteProduct">Excluir</button>
+      <button class="btn btn-primary btn-lg" type="submit" id="saveProduct">Salvar produto</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/static/common.js"></script>
+<script src="/static/painel.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{STORE_NAME}} | Cardápio e pedidos online</title>
+<meta name="description" content="{{STORE_DESCRIPTION}}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{STORE_NAME}}: peça pelo cardápio online">
+<meta property="og:description" content="{{STORE_DESCRIPTION}}">
+<meta property="og:url" content="{{STORE_URL}}">
+{{RAW_OG_IMAGE}}
+<meta name="theme-color" content="{{STORE_COLOR}}">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/loja.css">
+</head>
+<body class="shop">
+
+<div class="spinner" id="loading"></div>
+
+<div id="shop" hidden>
+  <header class="shop-cover" aria-hidden="true"></header>
+  <section class="container shop-head">
+    <div class="shop-logo" id="shopLogo"></div>
+    <h1 id="shopName"></h1>
+    <p class="muted" id="shopDesc"></p>
+    <ul class="shop-chips" id="shopChips"></ul>
+  </section>
+
+  <div class="container">
+    <div class="alert alert-red" id="closedBanner" hidden>Estamos fechados agora. Você pode olhar o cardápio, mas os pedidos estão pausados.</div>
+  </div>
+
+  <nav class="cat-nav" id="catNav" aria-label="Categorias"><div class="container cat-nav-inner" id="catNavInner"></div></nav>
+
+  <div class="container">
+    <input type="search" id="search" class="shop-search" placeholder="Buscar no cardápio" aria-label="Buscar no cardápio">
+  </div>
+
+  <main class="container" id="menu"></main>
+
+  <footer class="shop-footer">
+    <a id="poweredBy" target="_blank" rel="noopener"></a>
+  </footer>
+</div>
+
+<div class="container unavailable" id="unavailable" hidden>
+  <div class="card empty">
+    <strong id="unavailableTitle">Cardápio indisponível</strong>
+    <span id="unavailableText">Este cardápio está temporariamente fora do ar. Tente mais tarde.</span>
+  </div>
+</div>
+
+<div class="cart-bar" id="cartBar" hidden>
+  <button class="cart-btn" type="button" id="openCart">
+    <span class="cart-count" id="cartCount"></span>
+    <span>Ver carrinho</span>
+    <strong id="cartTotal"></strong>
+  </button>
+</div>
+
+<!-- Produto -->
+<dialog class="sheet" id="itemDialog" aria-labelledby="itemName">
+  <button class="close-btn item-close" type="button" data-close aria-label="Fechar">×</button>
+  <div class="item-media" id="itemMedia"></div>
+  <div class="sheet-body">
+    <h2 id="itemName"></h2>
+    <p class="muted" id="itemDesc"></p>
+    <p class="item-price" id="itemPrice"></p>
+    <div class="field">
+      <label for="itemNote">Alguma observação?</label>
+      <textarea id="itemNote" maxlength="140" placeholder="Ex: sem cebola, ponto da carne, sabor..."></textarea>
+    </div>
+  </div>
+  <div class="sheet-foot item-foot">
+    <div class="stepper">
+      <button type="button" id="itemMinus" aria-label="Diminuir"></button>
+      <span id="itemQty">1</span>
+      <button type="button" id="itemPlus" aria-label="Aumentar"></button>
+    </div>
+    <button class="btn btn-primary btn-lg" type="button" id="itemAdd"></button>
+  </div>
+</dialog>
+
+<!-- Carrinho + finalizar -->
+<dialog class="sheet" id="cartDialog" aria-labelledby="cartTitle">
+  <form id="checkout" novalidate>
+    <div class="sheet-head">
+      <h2 id="cartTitle">Seu pedido</h2>
+      <button class="close-btn" type="button" data-close aria-label="Fechar">×</button>
+    </div>
+    <div class="sheet-body">
+      <ul class="cart-lines" id="cartLines"></ul>
+      <button class="btn btn-sm btn-ghost add-more" type="button" data-close>+ Adicionar mais itens</button>
+
+      <h3 class="checkout-title">Seus dados</h3>
+      <div class="field">
+        <label for="c-name">Seu nome</label>
+        <input id="c-name" name="customer_name" type="text" autocomplete="name" maxlength="80">
+      </div>
+      <div class="field">
+        <label for="c-phone">Seu WhatsApp</label>
+        <input id="c-phone" name="customer_phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(81) 99999-9999">
+      </div>
+
+      <div class="field" id="fulfillmentField">
+        <span class="label">Como quer receber?</span>
+        <div class="seg" id="fulfillmentSeg"></div>
+      </div>
+      <div class="field" id="addressField">
+        <label for="c-address">Endereço de entrega</label>
+        <textarea id="c-address" name="address" autocomplete="street-address" maxlength="300" placeholder="Rua, número, bairro e ponto de referência"></textarea>
+      </div>
+      <p class="small muted" id="pickupInfo" hidden></p>
+
+      <div class="field">
+        <span class="label">Forma de pagamento</span>
+        <div class="pay-options" id="paySeg"></div>
+      </div>
+      <div class="field" id="changeField" hidden>
+        <label for="c-change">Troco para quanto?</label>
+        <div class="input-prefix"><span>R$</span><input id="c-change" name="change_for" type="text" inputmode="decimal" placeholder="Deixe vazio se não precisar"></div>
+      </div>
+
+      <div class="field">
+        <label for="c-notes">Observações do pedido</label>
+        <textarea id="c-notes" name="notes" maxlength="500" placeholder="Opcional"></textarea>
+      </div>
+
+      <dl class="totals" id="totals"></dl>
+      <div class="alert alert-red" id="checkoutError" role="alert" hidden></div>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn btn-primary btn-lg btn-block" type="submit" id="placeOrder"></button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Pedido feito -->
+<dialog class="sheet" id="doneDialog" aria-labelledby="doneTitle">
+  <div class="sheet-body done">
+    <div class="done-icon">✓</div>
+    <h2 id="doneTitle"></h2>
+    <p class="done-lead"><b>Último passo:</b> envie o pedido para a loja pelo WhatsApp para confirmar.</p>
+    <a class="btn btn-wa btn-lg btn-block" id="doneWa" target="_blank" rel="noopener"></a>
+    <div class="done-pix" id="donePix" hidden>
+      <h3 id="donePixTitle"></h3>
+      <img class="qr-img" id="donePixQr" alt="QR Code PIX">
+      <div class="copy-box">
+        <input type="text" readonly id="donePixCode" aria-label="PIX Copia e Cola">
+        <button class="btn" type="button" id="donePixCopy">Copiar</button>
+      </div>
+      <p class="small muted">No app do banco, escolha PIX Copia e Cola ou escaneie o QR Code. Depois, mande o comprovante na conversa.</p>
+    </div>
+    <button class="btn btn-ghost btn-block" type="button" data-close>Voltar ao cardápio</button>
+  </div>
+</dialog>
+
+<script src="/static/common.js"></script>
+<script src="/static/loja.js"></script>
+</body>
+</html>

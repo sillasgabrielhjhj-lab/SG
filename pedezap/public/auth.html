@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} | {{APP_NAME}}</title>
+<meta name="theme-color" content="#12a150">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/painel.css">
+</head>
+<body class="auth-page" data-mode="{{MODE}}">
+<main class="auth-wrap">
+  <a href="/" class="logo auth-logo"><img src="/static/favicon.svg" alt="">{{APP_NAME}}</a>
+
+  <form class="card auth-card" id="authForm" novalidate>
+    <div data-show="cadastro">
+      <h1>Crie sua loja grátis</h1>
+      <p class="muted">{{TRIAL_DAYS}} dias grátis, sem cartão. Depois, {{PRICE}}/mês sem comissão.</p>
+    </div>
+    <div data-show="entrar">
+      <h1>Entrar</h1>
+      <p class="muted">Acesse o painel da sua loja.</p>
+    </div>
+
+    <div class="alert alert-red" id="authError" role="alert" hidden></div>
+
+    <div data-show="cadastro">
+      <div class="field">
+        <label for="store_name">Nome da loja</label>
+        <input id="store_name" name="store_name" type="text" autocomplete="organization" placeholder="Ex: Açaí da Praia" maxlength="60">
+      </div>
+      <div class="field">
+        <label for="whatsapp">WhatsApp que recebe os pedidos</label>
+        <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(81) 99999-9999" maxlength="20">
+      </div>
+      <div class="field">
+        <label for="name">Seu nome</label>
+        <input id="name" name="name" type="text" autocomplete="name" maxlength="80">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120">
+    </div>
+    <div class="field">
+      <label for="password">Senha</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="200">
+      <span class="hint" data-show="cadastro">Mínimo de 8 caracteres.</span>
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block" type="submit" id="authSubmit">
+      <span data-show="cadastro">Criar minha loja</span>
+      <span data-show="entrar">Entrar</span>
+    </button>
+
+    <p class="auth-switch small" data-show="cadastro">Já tem conta? <a href="/entrar">Entrar</a></p>
+    <p class="auth-switch small" data-show="entrar">Ainda não tem loja? <a href="/cadastro">Criar grátis</a></p>
+    <p class="auth-switch small muted" data-show="entrar">Esqueceu a senha? <a href="{{SUPPORT_URL}}" target="_blank" rel="noopener">Fale com o suporte</a></p>
+  </form>
+</main>
+<script src="/static/common.js"></script>
+<script src="/static/auth.js"></script>
+</body>
+</html>

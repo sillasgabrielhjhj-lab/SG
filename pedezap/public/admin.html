@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | {{APP_NAME}}</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/painel.css">
+</head>
+<body class="app">
+<header class="app-top">
+  <div class="container app-top-inner">
+    <a href="/admin" class="logo"><img src="/static/favicon.svg" alt="">{{APP_NAME}} <small class="badge">admin</small></a>
+    <div class="app-top-actions">
+      <a href="/painel" class="btn btn-sm btn-ghost">Minha loja</a>
+      <button id="logout" class="btn btn-sm btn-ghost" type="button">Sair</button>
+    </div>
+  </div>
+</header>
+
+<div class="spinner" id="loading"></div>
+
+<main class="container app-main admin-main" id="app" hidden>
+  <section class="card goal">
+    <div class="goal-top">
+      <div>
+        <small class="muted">Receita recorrente mensal (MRR)</small><br>
+        <strong id="mrr"></strong>
+      </div>
+      <span class="muted" id="goalText"></span>
+    </div>
+    <div class="bar" role="progressbar" aria-label="Progresso até a meta" id="goalBar"><span></span></div>
+    <p class="small muted" id="goalHint"></p>
+  </section>
+
+  <section class="kpis">
+    <div class="stat"><small>Pagantes ativos</small><strong id="kPaying"></strong></div>
+    <div class="stat"><small>Em teste grátis</small><strong id="kTrials"></strong></div>
+    <div class="stat"><small>Vencidas</small><strong id="kExpired"></strong></div>
+    <div class="stat"><small>Recebido em 30 dias</small><strong id="kRevenue"></strong></div>
+    <div class="stat"><small>Cadastros (7 dias)</small><strong id="kSignups"></strong></div>
+    <div class="stat"><small>Pedidos nas lojas (7 dias)</small><strong id="kOrders"></strong></div>
+    <div class="stat"><small>Total de lojas</small><strong id="kTotal"></strong></div>
+    <div class="stat"><small>Conversão teste → pago</small><strong id="kConversion"></strong></div>
+  </section>
+
+  <div class="panel-head">
+    <h2>Lojas</h2>
+    <input type="search" id="search" class="admin-search" placeholder="Buscar por nome, link ou e-mail" aria-label="Buscar lojas">
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Loja</th>
+          <th>Situação</th>
+          <th class="num">Produtos</th>
+          <th class="num">Pedidos</th>
+          <th class="num">Pagamentos</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="/static/common.js"></script>
+<script src="/static/admin.js"></script>
+</body>
+</html>

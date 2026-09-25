@@ -1,0 +1,16 @@
+{
+  "name": "pedezap",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cardápio digital com pedidos pelo WhatsApp e PIX, sem comissão.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning server.js",
+    "dev": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning --watch server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "license": "UNLICENSED"
+}

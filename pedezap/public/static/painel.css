@@ -1,0 +1,856 @@
+/* Painel do lojista, login/cadastro e admin */
+
+/* ------------------------------------------------------------------ auth */
+
+.auth-page {
+  background: radial-gradient(circle at 15% 0%, var(--brand-soft), transparent 45%),
+    radial-gradient(circle at 100% 100%, var(--accent-soft), transparent 40%), var(--bg);
+  min-height: 100vh;
+}
+
+.auth-wrap {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  padding: 40px 16px 60px;
+}
+
+.auth-logo {
+  font-size: 1.35rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card h1 {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.auth-card .alert {
+  margin-bottom: 16px;
+}
+
+.auth-switch {
+  margin: 16px 0 0;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ app shell */
+
+.app {
+  padding-bottom: 96px;
+}
+
+.app-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.app-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 60px;
+}
+
+.app-top .logo {
+  font-size: 1.05rem;
+}
+
+.app-top .logo img {
+  width: 30px;
+  height: 30px;
+}
+
+.app-top-actions {
+  display: flex;
+  gap: 6px;
+}
+
+@media (max-width: 420px) {
+  .app-top .logo {
+    font-size: 0;
+    gap: 0;
+  }
+}
+
+.app-main {
+  max-width: 860px;
+  padding-top: 20px;
+}
+
+#planBanner .alert {
+  margin-bottom: 16px;
+}
+
+.store-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-bottom: 16px;
+  padding: 16px 20px;
+}
+
+.store-bar h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.store-bar-info {
+  min-width: 0;
+}
+
+.store-bar-info a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.open-switch {
+  padding: 0;
+  gap: 14px;
+}
+
+.open-switch #openLabel {
+  display: block;
+}
+
+.open-switch.is-open #openLabel {
+  color: var(--brand-ink);
+}
+
+.open-switch:not(.is-open) #openLabel {
+  color: var(--danger);
+}
+
+/* onboarding */
+.onboarding {
+  margin-bottom: 16px;
+  border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+}
+
+.checklist {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.checklist .tick {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.checklist .done .tick {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+.checklist .done .task {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.checklist .task {
+  flex: 1;
+  font-weight: 600;
+}
+
+/* tabs: barra inferior no celular, abas no desktop */
+.tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+
+.tabs button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.tabs button[aria-selected='true'] {
+  color: var(--brand-ink);
+  background: var(--brand-soft);
+}
+
+.tab-ico {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.tab-count {
+  position: absolute;
+  top: 2px;
+  right: calc(50% - 22px);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 18px;
+}
+
+@media (min-width: 720px) {
+  .app {
+    padding-bottom: 40px;
+  }
+  .tabs {
+    position: static;
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .tabs button {
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 8px;
+    font-size: 0.92rem;
+  }
+  .tab-ico {
+    font-size: 1rem;
+  }
+  .tab-count {
+    position: static;
+  }
+}
+
+.tab-panel {
+  animation: fade 0.2s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 8px 0 16px;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.panel-head p {
+  margin: 0;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* -------------------------------------------------------------- pedidos */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  min-width: 0;
+}
+
+.stat small {
+  display: block;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.stat strong {
+  display: block;
+  font-size: clamp(1.05rem, 4vw, 1.45rem);
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-filter {
+  margin-bottom: 16px;
+}
+
+.order-list {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.order {
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.order.is-new {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+.order-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.order-head strong {
+  font-size: 1.1rem;
+}
+
+.order-total {
+  font-size: 1.15rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.order-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: center;
+}
+
+.order-customer {
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+
+.order-items {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.order-items li + li {
+  margin-top: 4px;
+}
+
+.order-items em {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.order-info {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.order-actions .btn-primary {
+  flex: 1 1 180px;
+}
+
+/* ------------------------------------------------------------- cardápio */
+
+.category-block + .category-block {
+  margin-top: 22px;
+}
+
+.category-block h3 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.product-rows {
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+}
+
+.product-row + .product-row {
+  border-top: 1px solid var(--line-2);
+}
+
+.product-row.is-off .product-main {
+  opacity: 0.55;
+}
+
+.thumb {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  font-weight: 800;
+  font-size: 1.3rem;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-main {
+  min-width: 0;
+  cursor: pointer;
+}
+
+.product-main b {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-main .price {
+  font-weight: 700;
+  color: var(--brand-ink);
+  margin-right: 8px;
+}
+
+.product-tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.product-tools .switch {
+  padding: 0 6px 0 0;
+}
+
+.product-tools .btn-icon {
+  width: 34px;
+  min-height: 34px;
+}
+
+@media (max-width: 480px) {
+  .product-tools .move {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------ minha loja */
+
+.form-title {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+#storeForm .card + .card {
+  margin-top: 16px;
+}
+
+.indent {
+  padding-left: 12px;
+  border-left: 3px solid var(--line-2);
+}
+
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.upload-actions .hint {
+  flex-basis: 100%;
+}
+
+.logo-preview,
+.photo-preview {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: 18px;
+  background: var(--line-2) center / cover no-repeat;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.logo-preview img,
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-preview {
+  width: 110px;
+  height: 110px;
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.swatch {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  cursor: pointer;
+}
+
+.swatch[aria-pressed='true'] {
+  box-shadow: 0 0 0 3px var(--ink);
+}
+
+.colors input[type='color'] {
+  width: 44px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+}
+
+.save-bar {
+  position: sticky;
+  bottom: 76px;
+  z-index: 30;
+  margin-top: 16px;
+  padding: 12px 0;
+  background: linear-gradient(transparent, var(--bg) 30%);
+}
+
+@media (min-width: 720px) {
+  .save-bar {
+    bottom: 0;
+  }
+}
+
+/* -------------------------------------------------------------- divulgar */
+
+.share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.qr-card {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .qr-card {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.tips {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------ assinatura */
+
+.plan-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.plan-status h2 {
+  margin: 0 0 4px;
+}
+
+.plan-status p {
+  margin: 0;
+}
+
+.plan-price {
+  font-size: 1.6rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+}
+
+.plan-price small {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.pay-grid {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .pay-grid {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.pay-steps {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+/* ----------------------------------------------------------- dialog form */
+
+.sheet-foot-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sheet-foot-row .btn-primary {
+  flex: 1;
+  max-width: 280px;
+  margin-left: auto;
+}
+
+/* ------------------------------------------------------ cartaz (impressão) */
+
+.poster {
+  display: none;
+}
+
+@media print {
+  body.printing > *:not(.poster) {
+    display: none !important;
+  }
+  body.printing {
+    background: #fff;
+    padding: 0;
+  }
+  body.printing .poster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    text-align: center;
+    font-family: var(--font);
+  }
+  .poster-kicker {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8pt;
+  }
+  .poster h1 {
+    font-size: 40pt;
+    margin: 0 0 24pt;
+  }
+  .poster img {
+    width: 11cm;
+    height: 11cm;
+  }
+  .poster-step {
+    font-size: 18pt;
+    margin: 20pt 0 6pt;
+  }
+  .poster-url {
+    font-size: 14pt;
+    color: #555;
+  }
+}
+
+/* ------------------------------------------------------------------ admin */
+
+.admin-main {
+  max-width: 1120px;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 800px) {
+  .kpis {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.goal {
+  margin-bottom: 16px;
+}
+
+.goal-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.goal-top strong {
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+}
+
+.bar {
+  height: 14px;
+  margin: 12px 0 8px;
+  border-radius: 999px;
+  background: var(--line-2);
+  overflow: hidden;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  min-width: 6px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand), #3fd07f);
+}
+
+.admin-search {
+  margin-bottom: 12px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line-2);
+  vertical-align: top;
+}
+
+th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: var(--bg);
+  white-space: nowrap;
+}
+
+td .btn {
+  margin: 0 4px 4px 0;
+}
+
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
