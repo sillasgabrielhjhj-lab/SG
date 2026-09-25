@@ -47,9 +47,11 @@ const VenaxSim = (() => {
       const close = last;
       const high = Math.max(...path);
       const low = Math.min(...path);
+      const range = (high - low) / symbol.vol;
+      const volume = Math.round(rand(40, 90) + range * rand(8, 16));
       candles.push({
         time: startTime + i * stepSeconds,
-        open, high, low, close,
+        open, high, low, close, volume,
       });
     }
     return candles;

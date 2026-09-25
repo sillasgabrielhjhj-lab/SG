@@ -28,19 +28,55 @@
   <div class="plat-account">
     <span class="demo-tag plat-demo-tag">MODO DEMO</span>
     <button class="btn btn-primary btn-sm" id="depositBtn">Depositar</button>
+    <div class="plat-balance-display">
+      <span class="lbl">Saldo Demo</span>
+      <span class="val" id="balanceVal">R$ 0,00</span>
+    </div>
     <div style="position:relative">
-      <button class="plat-balance" id="balanceBtn">
-        <span class="lbl">Saldo Demo</span>
-        <span class="val" id="balanceVal">R$ 0,00</span>
+      <button class="account-avatar-btn" id="balanceBtn" aria-label="Conta">
+        <span class="avatar-circle" id="avatarCircle">V</span>
       </button>
       <div class="account-menu" id="accountMenu">
-        <button type="button" id="resetBalanceBtn">
-          <svg viewBox="0 0 20 20" fill="none"><path d="M4 10a6 6 0 1 1 1.8 4.3M4 10V6M4 10h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Reiniciar saldo demo
+        <div class="account-menu-head">
+          <span class="avatar-circle avatar-circle-lg" id="avatarCircleLg">V</span>
+          <div class="account-menu-id">
+            <strong id="accountName">Conta Demo</strong>
+            <span id="accountEmail">demo@venax.app</span>
+          </div>
+        </div>
+        <label class="account-menu-item" for="avatarUpload">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10.5" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M7 5l.8-1.5h4.4L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Foto de Perfil
+        </label>
+        <input type="file" id="avatarUpload" accept="image/*" hidden>
+        <button type="button" class="account-menu-item" id="openPersonalData">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6.5" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Dados Pessoais
         </button>
-        <a href="index.html">
-          <svg viewBox="0 0 20 20" fill="none"><path d="M8 4H4v12h4M13 14l4-4-4-4M6.5 10H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Sair (voltar ao site)
+        <button type="button" class="account-menu-item" id="openDepositFromMenu">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6.5v7M7 8.5l3-2 3 2M7 11.5l3 2 3-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Depositar
+        </button>
+        <button type="button" class="account-menu-item" id="openWithdraw">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 13.5v-7M7 11.5l3 2 3-2M7 8.5l3-2 3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Sacar
+        </button>
+        <button type="button" class="account-menu-item" id="openBalanceHistory">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 15l3.5-5 3 2.5L15 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Histórico de Saldo
+        </button>
+        <button type="button" class="account-menu-item" id="openTradeHistoryFromMenu">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Histórico de Operações
+        </button>
+        <button type="button" class="account-menu-item" id="openSettings">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2M5.3 5.3l1.4 1.4M13.3 13.3l1.4 1.4M5.3 14.7l1.4-1.4M13.3 6.7l1.4-1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Configurações
+        </button>
+        <div class="account-menu-divider"></div>
+        <a href="index.html" class="account-menu-item">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M8 4H4v12h4M13 14l4-4-4-4M6.5 10H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Sair
         </a>
       </div>
     </div>
@@ -91,6 +127,7 @@
           <path d="M15 80 Q60 95 100 78 T190 82" stroke="#00e39a" stroke-width="1" opacity=".6"/>
         </svg>
         <div id="priceChart"></div>
+        <div class="chart-legend" id="chartLegend"></div>
 
         <div class="chart-side-indicator">
           <span class="prob-pill higher" id="probHigher">ALTA · 50%</span>
@@ -199,6 +236,14 @@
         <div class="help-qa"><h4>Os dados ficam salvos?</h4><p>Sim, localmente no seu navegador (localStorage), apenas neste dispositivo.</p></div>
       </div>
     </div>
+
+    <div class="drawer" id="drawerBalanceHistory">
+      <div class="drawer-head"><h3>Histórico de Saldo</h3><button class="icon-btn drawer-close"><svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <div class="drawer-body">
+        <svg class="balance-spark" id="balanceSpark" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
+        <div id="balanceLedgerList"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -237,6 +282,96 @@
     </div>
     <button type="button" class="btn btn-primary btn-lg btn-block" id="depositConfirm">Adicionar Saldo Demo</button>
     <p class="field-note">Este saldo existe apenas neste navegador e não representa dinheiro real.</p>
+  </div>
+</div>
+
+<!-- ============ WITHDRAW MODAL ============ -->
+<div class="modal-overlay" id="withdrawModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Saque demo</h3>
+      <button class="modal-close" id="withdrawClose">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Nenhum pagamento real é processado. O valor é apenas descontado do seu saldo fictício.</p>
+    <div class="deposit-presets">
+      <button type="button" data-wd="100">R$ 100</button>
+      <button type="button" data-wd="500">R$ 500</button>
+      <button type="button" data-wd="1000">R$ 1.000</button>
+    </div>
+    <div class="field">
+      <label for="withdrawCustom">Ou outro valor demo</label>
+      <input type="number" id="withdrawCustom" min="1" placeholder="Ex: 300">
+    </div>
+    <button type="button" class="btn btn-danger btn-lg btn-block" id="withdrawConfirm">Sacar</button>
+    <p class="field-note">Este saque afeta apenas o saldo fictício deste navegador.</p>
+  </div>
+</div>
+
+<!-- ============ PERSONAL DATA MODAL ============ -->
+<div class="modal-overlay" id="personalDataModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Dados Pessoais</h3>
+      <button class="modal-close" id="personalDataClose">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Usados apenas para personalizar sua conta demo neste navegador.</p>
+    <form id="personalDataForm">
+      <div class="field">
+        <label for="pdName">Nome</label>
+        <input type="text" id="pdName" placeholder="Seu nome">
+      </div>
+      <div class="field">
+        <label for="pdEmail">E-mail</label>
+        <input type="email" id="pdEmail" placeholder="voce@exemplo.com">
+      </div>
+      <div class="field">
+        <label for="pdCountry">País</label>
+        <select id="pdCountry">
+          <option value="Brasil">Brasil</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Salvar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ SETTINGS MODAL ============ -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Configurações</h3>
+      <button class="modal-close" id="settingsClose">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="settings-row">
+      <div>
+        <strong>Som</strong>
+        <p>Toca um aviso sonoro ao final de cada operação.</p>
+      </div>
+      <button type="button" class="switch active" id="settingsSoundToggle" role="switch" aria-checked="true"><span></span></button>
+    </div>
+    <div class="settings-row">
+      <div>
+        <strong>Média móvel no gráfico</strong>
+        <p>Exibe a linha de média móvel de 20 períodos.</p>
+      </div>
+      <button type="button" class="switch active" id="settingsMaToggle" role="switch" aria-checked="true"><span></span></button>
+    </div>
+    <div class="settings-row">
+      <div>
+        <strong>Volume no gráfico</strong>
+        <p>Exibe o histograma de volume simulado.</p>
+      </div>
+      <button type="button" class="switch active" id="settingsVolToggle" role="switch" aria-checked="true"><span></span></button>
+    </div>
+    <button type="button" class="btn btn-ghost btn-lg btn-block" id="settingsResetBtn" style="margin-top:8px">Reiniciar conta demo</button>
   </div>
 </div>
 

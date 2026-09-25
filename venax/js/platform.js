@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const LS_BALANCE = 'venax_balance';
   const LS_HISTORY = 'venax_history';
+  const LS_LEDGER = 'venax_ledger';
+  const LS_PROFILE = 'venax_profile';
+  const LS_AVATAR = 'venax_avatar';
+  const LS_PREFS = 'venax_prefs';
   const START_BALANCE = 10000;
 
   const EXP_STEPS = [15, 30, 60, 120, 300];
@@ -20,18 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ================= State ================= */
   let balance = Number(localStorage.getItem(LS_BALANCE)) || START_BALANCE;
   let history = JSON.parse(localStorage.getItem(LS_HISTORY) || '[]');
+  let ledger = JSON.parse(localStorage.getItem(LS_LEDGER) || '[]');
+  let profile = JSON.parse(localStorage.getItem(LS_PROFILE) || 'null') || { name: '', email: '', country: 'Brasil' };
+  let prefs = Object.assign({ sound: true, ma: true, volume: true }, JSON.parse(localStorage.getItem(LS_PREFS) || '{}'));
   let openTabs = [...DEFAULT_TABS];
   let activeId = openTabs[0];
   let amount = 100;
   let expIdx = 1; // 30s
   let pending = null; // { direction, amount, entryPrice, endsAt, priceLine }
-  let soundOn = true;
   let chart, candleSeries;
   const symbolState = {}; // id -> { sym, candles, tickCount }
 
   /* ================= Persistence ================= */
   function saveBalance(){ localStorage.setItem(LS_BALANCE, String(balance)); }
   function saveHistory(){ localStorage.setItem(LS_HISTORY, JSON.stringify(history.slice(-60))); }
+  function saveLedger(){ localStorage.setItem(LS_LEDGER, JSON.stringify(ledger.slice(-80))); }
+  function saveProfile(){ localStorage.setItem(LS_PROFILE, JSON.stringify(profile)); }
+
+  function addLedgerEntry(type, delta){
+    ledger.push({ type, delta, balance, time: Date.now() });
+    saveLedger();
+  }
 
   function setBalance(v){
     balance = Math.max(0, Math.round(v * 100) / 100);
@@ -66,13 +79,34 @@ document.addEventListener('DOMContentLoaded', () => {
     return symbolState[id];
   }
 
+  const MA_PERIOD = 20;
+  let maSeries, volumeSeries;
+
+  function smaAt(candles, idx, period){
+    if (idx < period - 1) return null;
+    let sum = 0;
+    for (let i = idx - period + 1; i <= idx; i++) sum += candles[i].close;
+    return sum / period;
+  }
+
+  function computeMaSeries(candles, period){
+    const out = [];
+    for (let i = 0; i < candles.length; i++){
+      const v = smaAt(candles, i, period);
+      if (v !== null) out.push({ time: candles[i].time, value: v });
+    }
+    return out;
+  }
+
+  function volumeColor(candle){ return candle.close >= candle.open ? 'rgba(0,227,154,.45)' : 'rgba(255,77,94,.45)'; }
+
   function initChart(){
     const container = document.getElementById('priceChart');
     chart = LightweightCharts.createChart(container, {
       layout: { background: { type: 'solid', color: 'transparent' }, textColor: '#9aa8b1', fontFamily: 'JetBrains Mono, monospace', fontSize: 11 },
       grid: { vertLines: { color: 'rgba(255,255,255,0.045)' }, horzLines: { color: 'rgba(255,255,255,0.045)' } },
       crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
-      rightPriceScale: { borderColor: 'rgba(255,255,255,0.08)' },
+      rightPriceScale: { borderColor: 'rgba(255,255,255,0.08)', scaleMargins: { top: 0.08, bottom: 0.22 } },
       timeScale: { borderColor: 'rgba(255,255,255,0.08)', timeVisible: true, secondsVisible: false },
       autoSize: false,
     });
@@ -80,12 +114,53 @@ document.addEventListener('DOMContentLoaded', () => {
       upColor: '#00e39a', downColor: '#ff4d5e', borderVisible: false,
       wickUpColor: '#00e39a', wickDownColor: '#ff4d5e',
     });
+    maSeries = chart.addLineSeries({
+      color: '#ffb020', lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false,
+    });
+    volumeSeries = chart.addHistogramSeries({
+      priceFormat: { type: 'volume' }, priceScaleId: 'volume', lastValueVisible: false, priceLineVisible: false,
+    });
+    chart.priceScale('volume').applyOptions({ scaleMargins: { top: 0.84, bottom: 0 } });
+
+    chart.subscribeCrosshairMove(updateLegend);
 
     const stage = container.parentElement;
     const resize = () => chart.applyOptions({ width: stage.clientWidth, height: stage.clientHeight });
     new ResizeObserver(resize).observe(stage);
     resize();
   }
+
+  function updateLegend(param){
+    const legend = document.getElementById('chartLegend');
+    const st = symbolState[activeId];
+    if (!st) return;
+    let candle = st.candles[st.candles.length - 1];
+    if (param && param.time){
+      const found = st.candles.find(c => c.time === param.time);
+      if (found) candle = found;
+    }
+    const d = st.sym.decimals;
+    const rows = [`<div class="lg-row">
+      <span class="lg-o">O <b>${VenaxSim.formatPrice(candle.open, d)}</b></span>
+      <span class="lg-h">A <b>${VenaxSim.formatPrice(candle.high, d)}</b></span>
+      <span class="lg-l">B <b>${VenaxSim.formatPrice(candle.low, d)}</b></span>
+      <span class="lg-c">F <b>${VenaxSim.formatPrice(candle.close, d)}</b></span>
+    </div>`];
+    if (prefs.ma || prefs.volume){
+      const parts = [];
+      if (prefs.ma){
+        const i = st.candles.indexOf(candle);
+        const v = smaAt(st.candles, i, MA_PERIOD);
+        parts.push(`<span class="lg-ma">MA20 <b>${v ? VenaxSim.formatPrice(v, d) : '—'}</b></span>`);
+      }
+      if (prefs.volume) parts.push(`<span class="lg-vol">Vol <b>${Math.round(candle.volume || 0)}</b></span>`);
+      rows.push(`<div class="lg-row">${parts.join('')}</div>`);
+    }
+    legend.innerHTML = rows.join('');
+  }
+
+  function setMaVisible(v){ maSeries?.applyOptions({ visible: v }); }
+  function setVolumeVisible(v){ volumeSeries?.applyOptions({ visible: v }); }
 
   function renderTabs(){
     const wrap = document.getElementById('platTabs');
@@ -118,9 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadActiveSymbol(){
     const st = ensureSymbolState(activeId);
     candleSeries.setData(st.candles);
+    maSeries.setData(computeMaSeries(st.candles, MA_PERIOD));
+    volumeSeries.setData(st.candles.map(c => ({ time: c.time, value: c.volume || 0, color: volumeColor(c) })));
+    setMaVisible(prefs.ma);
+    setVolumeVisible(prefs.volume);
     chart.timeScale().fitContent();
     updateSymbolHeader();
     randomizeProbabilities();
+    updateLegend();
   }
 
   function updateSymbolHeader(){
@@ -150,16 +230,24 @@ document.addEventListener('DOMContentLoaded', () => {
     last.close = np;
     last.high = Math.max(last.high, np);
     last.low = Math.min(last.low, np);
+    last.volume = (last.volume || 0) + VenaxSim.rand(1, 4);
     candleSeries.update(last);
+    volumeSeries.update({ time: last.time, value: last.volume, color: volumeColor(last) });
+    const lastMa = smaAt(st.candles, st.candles.length - 1, MA_PERIOD);
+    if (lastMa !== null) maSeries.update({ time: last.time, value: lastMa });
     st.tickCount++;
 
     if (st.tickCount % 5 === 0){
-      const newCandle = { time: last.time + st.stepSeconds, open: np, high: np, low: np, close: np };
+      const newCandle = { time: last.time + st.stepSeconds, open: np, high: np, low: np, close: np, volume: VenaxSim.rand(20, 50) };
       st.candles.push(newCandle);
       if (st.candles.length > 220) st.candles.shift();
       candleSeries.update(newCandle);
+      volumeSeries.update({ time: newCandle.time, value: newCandle.volume, color: volumeColor(newCandle) });
+      const newMa = smaAt(st.candles, st.candles.length - 1, MA_PERIOD);
+      if (newMa !== null) maSeries.update({ time: newCandle.time, value: newMa });
     }
     updateSymbolHeader();
+    updateLegend();
 
     // background ticking keeps all open symbols alive so switching tabs feels continuous
     openTabs.forEach(id => {
@@ -213,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const endsAt = Date.now() + secs * 1000;
 
     setBalance(balance - amount);
+    addLedgerEntry(direction === 'higher' ? 'trade_open_higher' : 'trade_open_lower', -amount);
 
     const priceLine = candleSeries.createPriceLine({
       price: entryPrice,
@@ -272,7 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (result === 'win') delta = amt + amt * (pct / 100);
     else if (result === 'draw') delta = amt;
 
-    if (delta > 0) setBalance(balance + delta);
+    if (delta > 0){
+      setBalance(balance + delta);
+      addLedgerEntry(result === 'win' ? 'trade_win' : 'trade_draw', delta);
+    }
 
     candleSeries.removePriceLine(priceLine);
     document.getElementById('purchaseTimer').classList.remove('show');
@@ -361,8 +453,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ================= Drawers ================= */
+  let openDrawerByKey = () => {};
+
   function initDrawers(){
-    const drawers = { portfolio: document.getElementById('drawerPortfolio'), history: document.getElementById('drawerHistory'), analysis: document.getElementById('drawerAnalysis'), help: document.getElementById('drawerHelp') };
+    const drawers = {
+      portfolio: document.getElementById('drawerPortfolio'),
+      history: document.getElementById('drawerHistory'),
+      analysis: document.getElementById('drawerAnalysis'),
+      help: document.getElementById('drawerHelp'),
+      balanceHistory: document.getElementById('drawerBalanceHistory'),
+    };
     const sideBtns = document.querySelectorAll('.side-btn');
 
     function closeAll(){
@@ -374,17 +474,22 @@ document.addEventListener('DOMContentLoaded', () => {
       closeAll();
       if (!isOpen){
         drawers[key].classList.add('open');
-        btn.classList.add('active');
+        if (btn) btn.classList.add('active');
         if (key === 'analysis') renderAnalysis();
         if (key === 'portfolio') renderPortfolio();
         if (key === 'history') renderHistory();
+        if (key === 'balanceHistory') renderBalanceHistory();
       }
     }
     sideBtns.forEach(btn => btn.addEventListener('click', () => open(btn.dataset.drawer, btn)));
     document.querySelectorAll('.drawer-close').forEach(btn => btn.addEventListener('click', closeAll));
+    openDrawerByKey = (key) => open(key, null);
   }
 
-  /* ================= Deposit modal ================= */
+  /* ================= Deposit / withdraw modals ================= */
+  let openDepositModal = () => {};
+  let openWithdrawModal = () => {};
+
   function initDeposit(){
     const modal = document.getElementById('depositModal');
     const open = () => modal.classList.add('open');
@@ -393,23 +498,205 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('depositClose').addEventListener('click', close);
     modal.addEventListener('click', e => { if (e.target === modal) close(); });
 
-    document.querySelectorAll('.deposit-presets button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const v = Number(btn.dataset.dep);
-        setBalance(balance + v);
-        toast('win', 'Saldo demo adicionado', `+${VenaxUI.formatBRL(v)} adicionados à sua conta demo.`);
-        close();
-      });
+    function doDeposit(v){
+      setBalance(balance + v);
+      addLedgerEntry('deposit', v);
+      toast('win', 'Saldo demo adicionado', `+${VenaxUI.formatBRL(v)} adicionados à sua conta demo.`);
+      close();
+    }
+    document.querySelectorAll('.deposit-presets button[data-dep]').forEach(btn => {
+      btn.addEventListener('click', () => doDeposit(Number(btn.dataset.dep)));
     });
     document.getElementById('depositConfirm').addEventListener('click', () => {
       const input = document.getElementById('depositCustom');
       const v = Number(input.value);
       if (!v || v <= 0) return toast('warn', 'Valor inválido', 'Informe um valor demo maior que zero.');
-      setBalance(balance + v);
-      toast('win', 'Saldo demo adicionado', `+${VenaxUI.formatBRL(v)} adicionados à sua conta demo.`);
+      doDeposit(v);
       input.value = '';
+    });
+    openDepositModal = open;
+  }
+
+  function initWithdraw(){
+    const modal = document.getElementById('withdrawModal');
+    const open = () => modal.classList.add('open');
+    const close = () => modal.classList.remove('open');
+    document.getElementById('openWithdraw').addEventListener('click', () => { document.getElementById('accountMenu').classList.remove('open'); open(); });
+    document.getElementById('withdrawClose').addEventListener('click', close);
+    modal.addEventListener('click', e => { if (e.target === modal) close(); });
+
+    function doWithdraw(v){
+      if (v > balance) return toast('warn', 'Saldo insuficiente', 'O valor do saque não pode ser maior que o saldo demo.');
+      setBalance(balance - v);
+      addLedgerEntry('withdraw', -v);
+      toast('win', 'Saque realizado', `-${VenaxUI.formatBRL(v)} descontados do seu saldo demo.`);
+      close();
+    }
+    document.querySelectorAll('.deposit-presets button[data-wd]').forEach(btn => {
+      btn.addEventListener('click', () => doWithdraw(Number(btn.dataset.wd)));
+    });
+    document.getElementById('withdrawConfirm').addEventListener('click', () => {
+      const input = document.getElementById('withdrawCustom');
+      const v = Number(input.value);
+      if (!v || v <= 0) return toast('warn', 'Valor inválido', 'Informe um valor demo maior que zero.');
+      doWithdraw(v);
+      input.value = '';
+    });
+    openWithdrawModal = open;
+  }
+
+  /* ================= Personal data ================= */
+  function applyAvatar(dataUrl){
+    document.querySelectorAll('.avatar-circle').forEach(el => {
+      el.innerHTML = dataUrl ? `<img src="${dataUrl}" alt="">` : (profile.name ? profile.name[0].toUpperCase() : 'V');
+    });
+  }
+
+  function renderProfile(){
+    document.getElementById('accountName').textContent = profile.name || 'Conta Demo';
+    document.getElementById('accountEmail').textContent = profile.email || 'demo@venax.app';
+    const avatar = localStorage.getItem(LS_AVATAR);
+    applyAvatar(avatar);
+  }
+
+  function initPersonalData(){
+    const modal = document.getElementById('personalDataModal');
+    const open = () => {
+      document.getElementById('pdName').value = profile.name;
+      document.getElementById('pdEmail').value = profile.email;
+      document.getElementById('pdCountry').value = profile.country;
+      modal.classList.add('open');
+    };
+    const close = () => modal.classList.remove('open');
+    document.getElementById('openPersonalData').addEventListener('click', () => { document.getElementById('accountMenu').classList.remove('open'); open(); });
+    document.getElementById('personalDataClose').addEventListener('click', close);
+    modal.addEventListener('click', e => { if (e.target === modal) close(); });
+    document.getElementById('personalDataForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      profile = {
+        name: document.getElementById('pdName').value.trim(),
+        email: document.getElementById('pdEmail').value.trim(),
+        country: document.getElementById('pdCountry').value,
+      };
+      saveProfile();
+      renderProfile();
+      toast('win', 'Dados salvos', 'Suas informações foram atualizadas nesta conta demo.');
       close();
     });
+
+    document.getElementById('avatarUpload').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        localStorage.setItem(LS_AVATAR, reader.result);
+        applyAvatar(reader.result);
+        toast('win', 'Foto atualizada', 'Sua foto de perfil foi salva neste navegador.');
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ================= Settings ================= */
+  function initSettings(){
+    const modal = document.getElementById('settingsModal');
+    const open = () => modal.classList.add('open');
+    const close = () => modal.classList.remove('open');
+    document.getElementById('openSettings').addEventListener('click', () => { document.getElementById('accountMenu').classList.remove('open'); open(); });
+    document.getElementById('settingsClose').addEventListener('click', close);
+    modal.addEventListener('click', e => { if (e.target === modal) close(); });
+
+    const maToggle = document.getElementById('settingsMaToggle');
+    const volToggle = document.getElementById('settingsVolToggle');
+    document.getElementById('settingsSoundToggle').classList.toggle('active', prefs.sound);
+    maToggle.classList.toggle('active', prefs.ma);
+    volToggle.classList.toggle('active', prefs.volume);
+
+    document.getElementById('settingsSoundToggle').addEventListener('click', () => setSoundPref(!prefs.sound));
+    maToggle.addEventListener('click', () => {
+      prefs.ma = !prefs.ma;
+      savePrefs();
+      maToggle.classList.toggle('active', prefs.ma);
+      setMaVisible(prefs.ma);
+    });
+    volToggle.addEventListener('click', () => {
+      prefs.volume = !prefs.volume;
+      savePrefs();
+      volToggle.classList.toggle('active', prefs.volume);
+      setVolumeVisible(prefs.volume);
+    });
+
+    document.getElementById('settingsResetBtn').addEventListener('click', () => {
+      close();
+      resetAccount();
+    });
+  }
+
+  function resetAccount(){
+    if (pending) return toast('warn', 'Operação em andamento', 'Aguarde o fim da operação atual.');
+    if (!confirm('Reiniciar o saldo demo para R$ 10.000,00 e apagar o histórico local?')) return;
+    setBalance(START_BALANCE);
+    history = [];
+    ledger = [];
+    saveHistory();
+    saveLedger();
+    addLedgerEntry('deposit', START_BALANCE);
+    renderHistory();
+    renderPortfolio();
+    toast('win', 'Conta reiniciada', 'Sua conta demo voltou para R$ 10.000,00.');
+  }
+
+  /* ================= Balance history ================= */
+  const LEDGER_LABELS = {
+    deposit: { label: 'Depósito', dir: 'up' },
+    withdraw: { label: 'Saque', dir: 'down' },
+    trade_open_higher: { label: 'Operação Alta', dir: 'down' },
+    trade_open_lower: { label: 'Operação Baixa', dir: 'down' },
+    trade_win: { label: 'Operação vencedora', dir: 'up' },
+    trade_draw: { label: 'Empate devolvido', dir: 'up' },
+  };
+
+  function renderBalanceHistory(){
+    const list = document.getElementById('balanceLedgerList');
+    const spark = document.getElementById('balanceSpark');
+    const entries = ledger.slice(-40);
+    if (!entries.length){
+      list.innerHTML = '<p class="history-empty">Nenhuma movimentação ainda.</p>';
+      spark.innerHTML = '';
+      return;
+    }
+    const vals = entries.map(e => e.balance);
+    const max = Math.max(...vals, 1), min = Math.min(...vals, 0);
+    const range = (max - min) || 1;
+    const w = 300, h = 70;
+    const points = vals.map((v, i) => {
+      const x = (i / Math.max(vals.length - 1, 1)) * w;
+      const y = h - ((v - min) / range) * (h - 10) - 5;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    });
+    const path = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p}`).join(' ');
+    const area = `${path} L${w},${h} L0,${h} Z`;
+    spark.innerHTML = `
+      <path d="${area}" fill="rgba(0,227,154,.12)" stroke="none"></path>
+      <path d="${path}" fill="none" stroke="#00e39a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>`;
+
+    list.innerHTML = [...entries].reverse().map(e => {
+      const meta = LEDGER_LABELS[e.type] || { label: e.type, dir: e.delta >= 0 ? 'up' : 'down' };
+      const time = new Date(e.time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      const sign = e.delta >= 0 ? '+' : '-';
+      return `<div class="ledger-item">
+        <div class="ledger-type">
+          <span class="ledger-ic ${meta.dir}">
+            <svg viewBox="0 0 20 20" fill="none">${meta.dir === 'up' ? '<path d="M4 14l5-6 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' : '<path d="M4 6l5 6 4-4 7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'}</svg>
+          </span>
+          <div><div>${meta.label}</div><div class="history-meta">${time}</div></div>
+        </div>
+        <span class="ledger-amount ${meta.dir === 'up' ? 'up' : 'down'}">
+          ${sign}${VenaxUI.formatBRL(Math.abs(e.delta))}
+          <span class="ledger-balance">saldo: ${VenaxUI.formatBRL(e.balance)}</span>
+        </span>
+      </div>`;
+    }).join('');
   }
 
   /* ================= Account menu ================= */
@@ -418,17 +705,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('balanceBtn');
     btn.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('open'); });
     document.addEventListener('click', () => menu.classList.remove('open'));
-    document.getElementById('resetBalanceBtn').addEventListener('click', () => {
-      if (pending) return toast('warn', 'Operação em andamento', 'Aguarde o fim da operação atual.');
-      if (!confirm('Reiniciar o saldo demo para R$ 10.000,00 e apagar o histórico local?')) return;
-      setBalance(START_BALANCE);
-      history = [];
-      saveHistory();
-      renderHistory();
-      renderPortfolio();
-      toast('win', 'Saldo reiniciado', 'Sua conta demo voltou para R$ 10.000,00.');
-      menu.classList.remove('open');
-    });
+
+    document.getElementById('openDepositFromMenu').addEventListener('click', () => { menu.classList.remove('open'); openDepositModal(); });
+    document.getElementById('openBalanceHistory').addEventListener('click', () => { menu.classList.remove('open'); openDrawerByKey('balanceHistory'); });
+    document.getElementById('openTradeHistoryFromMenu').addEventListener('click', () => { menu.classList.remove('open'); openDrawerByKey('history'); });
+
+    renderProfile();
   }
 
   /* ================= Status bar ================= */
@@ -439,10 +721,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
 
     const soundBtn = document.getElementById('soundBtn');
-    soundBtn.addEventListener('click', () => {
-      soundOn = !soundOn;
-      soundBtn.classList.toggle('active', soundOn);
-    });
+    soundBtn.classList.toggle('active', prefs.sound);
+    soundBtn.addEventListener('click', () => setSoundPref(!prefs.sound));
 
     document.getElementById('fullscreenBtn').addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
@@ -450,9 +730,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function savePrefs(){ localStorage.setItem(LS_PREFS, JSON.stringify(prefs)); }
+  function setSoundPref(v){
+    prefs.sound = v;
+    savePrefs();
+    document.getElementById('soundBtn')?.classList.toggle('active', v);
+    document.getElementById('settingsSoundToggle')?.classList.toggle('active', v);
+  }
+
   let audioCtx;
   function playBeep(win){
-    if (!soundOn) return;
+    if (!prefs.sound) return;
     try {
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
       const osc = audioCtx.createOscillator();
@@ -513,6 +801,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initControls();
   initDrawers();
   initDeposit();
+  initWithdraw();
+  initPersonalData();
+  initSettings();
   initAccountMenu();
   initStatusBar();
   renderAmount();
