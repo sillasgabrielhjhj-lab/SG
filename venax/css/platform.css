@@ -148,15 +148,7 @@ body.platform-body{ display: flex; flex-direction: column; }
   background: var(--surface); border-top: 1px solid var(--border);
   flex-shrink: 0; overflow: hidden;
 }
-.status-ticker{ flex: 1; overflow: hidden; white-space: nowrap; position: relative; height: 100%; }
-.status-ticker-track{
-  display: inline-flex; align-items: center; gap: 10px;
-  position: absolute; white-space: nowrap;
-  animation: ticker-scroll 18s linear infinite;
-  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em;
-  color: var(--text-faint); height: 100%; top: 0;
-}
-@keyframes ticker-scroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+.status-spacer{ flex: 1; }
 .status-clock{ font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); white-space: nowrap; }
 .status-icons{ display: flex; gap: 6px; }
 .status-icons .icon-btn{ width: 26px; height: 26px; }
