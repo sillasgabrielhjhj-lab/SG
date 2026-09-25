@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const LS_BALANCE = 'venax_balance';
   const LS_HISTORY = 'venax_history';
-  const LS_BANNER = 'venax_banner_dismissed';
   const START_BALANCE = 10000;
 
   const EXP_STEPS = [15, 30, 60, 120, 300];
@@ -489,16 +488,6 @@ document.addEventListener('DOMContentLoaded', () => {
     VenaxUI.toast(toastStack, { type: type === 'warn' ? 'lose' : type, title, text });
   }
 
-  /* ================= Demo banner ================= */
-  function initBanner(){
-    const banner = document.getElementById('demoBanner');
-    if (localStorage.getItem(LS_BANNER) === '1'){ banner.style.display = 'none'; return; }
-    document.getElementById('demoBannerClose').addEventListener('click', () => {
-      banner.style.display = 'none';
-      localStorage.setItem(LS_BANNER, '1');
-    });
-  }
-
   /* ================= Wire up controls ================= */
   function initControls(){
     document.getElementById('amountMinus').addEventListener('click', () => setAmount(amount - 10));
@@ -526,7 +515,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initDeposit();
   initAccountMenu();
   initStatusBar();
-  initBanner();
   renderAmount();
   renderExp();
   renderBalance();

@@ -263,17 +263,6 @@ body.platform-body{ display: flex; flex-direction: column; }
 }
 .deposit-presets button:hover{ border-color: var(--brand); color: var(--brand-2); }
 
-/* ---------- Onboarding banner ---------- */
-.demo-banner{
-  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
-  z-index: 850; display: flex; align-items: center; gap: 12px;
-  background: var(--surface-2); border: 1px solid rgba(255,176,32,.35);
-  padding: 12px 18px; border-radius: var(--radius-pill); box-shadow: var(--shadow-card);
-  font-size: 12.5px; max-width: 92vw;
-}
-.demo-banner button{ color: var(--text-faint); flex-shrink: 0; }
-.demo-banner button:hover{ color: var(--text); }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 900px){
   .trade-panel{ width: 260px; }
@@ -303,10 +292,4 @@ body.platform-body{ display: flex; flex-direction: column; }
   .plat-logo span{ display: none; }
   .plat-demo-tag{ display: none; }
   .deposit-presets{ grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 720px){
-  .demo-banner{
-    top: 66px; bottom: auto; left: 8px; right: 8px; transform: none;
-    max-width: none; width: auto; font-size: 11px; padding: 9px 12px;
-  }
 }
