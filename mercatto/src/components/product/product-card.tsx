@@ -1,0 +1,80 @@
+import Link from "next/link";
+import { Star, Truck } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { cn, formatCurrencyBRL, formatInstallments } from "@/lib/utils";
+import type { MockProduct } from "@/lib/mock-data";
+
+export function ProductCard({
+  product,
+  className,
+}: {
+  product: MockProduct;
+  className?: string;
+}) {
+  const hasDiscount =
+    product.compareAtPriceCents && product.compareAtPriceCents > product.priceCents;
+  const discountPct = hasDiscount
+    ? Math.round(
+        (1 - product.priceCents / product.compareAtPriceCents!) * 100,
+      )
+    : 0;
+
+  return (
+    <Link
+      href={`/produto/${product.slug}`}
+      className={cn(
+        "group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md",
+        className,
+      )}
+    >
+      <div className="relative aspect-square overflow-hidden bg-muted">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          loading="lazy"
+          className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+        />
+        {hasDiscount && (
+          <Badge variant="accent" className="absolute top-2 left-2">
+            -{discountPct}%
+          </Badge>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-1.5 p-3">
+        <p className="line-clamp-2 min-h-10 text-sm text-foreground">
+          {product.name}
+        </p>
+
+        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+          <Star className="size-3.5 fill-warning text-warning" />
+          <span>{product.ratingAvg.toFixed(1)}</span>
+          <span>({product.ratingCount})</span>
+        </div>
+
+        <div className="mt-auto flex flex-col">
+          {hasDiscount && (
+            <span className="text-xs text-muted-foreground line-through">
+              {formatCurrencyBRL(product.compareAtPriceCents!)}
+            </span>
+          )}
+          <span className="font-display text-lg font-bold text-foreground">
+            {formatCurrencyBRL(product.priceCents)}
+          </span>
+          <span className="text-xs text-muted-foreground">
+            {formatInstallments(product.priceCents)}
+          </span>
+        </div>
+
+        {product.freeShipping && (
+          <div className="flex items-center gap-1 text-xs font-medium text-success">
+            <Truck className="size-3.5" />
+            Frete grátis
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+}
