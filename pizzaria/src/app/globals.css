@@ -1,0 +1,268 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+ * Design tokens
+ * Cores extraídas da logo (vermelho e verde) + uma base creme/tinta
+ * para dar o tom artesanal e sofisticado.
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, 'Times New Roman', serif;
+
+  --color-cream-50: #fdfbf7;
+  --color-cream-100: #f8f3ea;
+  --color-cream-200: #efe6d6;
+  --color-cream-300: #e2d4bc;
+
+  --color-ink-950: #110e0c;
+  --color-ink-900: #1a1613;
+  --color-ink-800: #26211d;
+  --color-ink-700: #3a332d;
+  --color-ink-600: #554c44;
+  --color-ink-500: #6f655c;
+  --color-ink-400: #958a80;
+  --color-ink-300: #bcb2a7;
+
+  --color-tomato-50: #fdf2f2;
+  --color-tomato-100: #fbe1e2;
+  --color-tomato-200: #f6c2c5;
+  --color-tomato-300: #f0959b;
+  --color-tomato-400: #ec5d66;
+  --color-tomato-500: #e31b2c;
+  --color-tomato-600: #c8152a;
+  --color-tomato-700: #a51224;
+
+  --color-basil-50: #eef7f1;
+  --color-basil-100: #d5ecde;
+  --color-basil-200: #a9d8bb;
+  --color-basil-400: #3fae73;
+  --color-basil-500: #00824a;
+  --color-basil-600: #006c3e;
+  --color-basil-700: #055533;
+
+  --color-gold-300: #ecc98a;
+  --color-gold-400: #dcae5c;
+  --color-gold-500: #c49340;
+
+  --shadow-soft: 0 1px 2px rgb(26 22 19 / 0.04), 0 8px 24px -10px rgb(26 22 19 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(26 22 19 / 0.05), 0 22px 44px -18px rgb(26 22 19 / 0.3);
+  --shadow-ring: 0 0 0 1px rgb(26 22 19 / 0.06);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-rise: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: rotate-slow 40s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 1.25rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  /* Só movimento (sem opacidade): não atrasa a pintura do título principal (LCP). */
+  @keyframes rise {
+    from {
+      transform: translate3d(0, 0.75rem, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -0.6rem, 0);
+    }
+  }
+
+  @keyframes rotate-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    --header-height: 4rem;
+    color-scheme: light;
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --header-height: 4.75rem;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  html.scroll-locked {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-cream-100 font-sans text-ink-900 antialiased;
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    @apply bg-tomato-500 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-tomato-500;
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply text-base;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Remove o "x" nativo do input de busca (usamos um botão próprio) */
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Utilitários
+ * ------------------------------------------------------------------ */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: 'SOFT' 50;
+  letter-spacing: -0.02em;
+}
+
+@utility grain {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility skeleton {
+  background-color: var(--color-cream-200);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 255 255 / 0.55) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
