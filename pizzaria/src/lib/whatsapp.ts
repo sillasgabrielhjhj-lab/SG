@@ -5,9 +5,9 @@ import type { CartTotals, ResolvedCartItem } from './pricing';
 
 export const paymentLabels: Record<PaymentMethod, string> = {
   pix: 'Pix',
-  credito: 'Cartão de crédito',
-  debito: 'Cartão de débito',
-  dinheiro: 'Dinheiro',
+  credito: 'Credit card',
+  debito: 'Debit card',
+  dinheiro: 'Cash',
 };
 
 /** Link para conversar com a pizzaria (com mensagem opcional). */
@@ -37,7 +37,7 @@ interface OrderMessageInput {
  * (*negrito*, _itálico_ e quebras de linha).
  */
 export function buildOrderMessage({ code, lines, totals, checkout, date = new Date() }: OrderMessageInput): string {
-  const when = new Intl.DateTimeFormat('pt-BR', {
+  const when = new Intl.DateTimeFormat(siteConfig.locale, {
     timeZone: siteConfig.timeZone,
     day: '2-digit',
     month: '2-digit',
@@ -46,66 +46,66 @@ export function buildOrderMessage({ code, lines, totals, checkout, date = new Da
   }).format(date);
 
   const out: string[] = [];
-  out.push(`*NOVO PEDIDO #${code}*`);
+  out.push(`*NEW ORDER #${code}*`);
   out.push(`${siteConfig.name} · ${when}`);
   out.push('');
 
-  out.push('*ITENS*');
+  out.push('*ITEMS*');
   for (const line of lines) {
     const size = line.sizeLabel ? ` (${line.sizeLabel.split(' · ')[0]})` : '';
     const name = line.halfProduct
-      ? `Pizza meio a meio${size}`
+      ? `Half & half pizza${size}`
       : `${line.product.name}${size}`;
     out.push(`${line.item.quantity}x ${name} — ${formatCents(line.totalCents)}`);
     if (line.halfProduct) {
       out.push(`   • ½ ${line.product.name} + ½ ${line.halfProduct.name}`);
     }
     for (const detail of line.details) out.push(`   • ${detail}`);
-    if (line.item.notes?.trim()) out.push(`   • Obs.: ${line.item.notes.trim()}`);
-    if (line.item.quantity > 1) out.push(`   _${formatCents(line.unitCents)} cada_`);
+    if (line.item.notes?.trim()) out.push(`   • Note: ${line.item.notes.trim()}`);
+    if (line.item.quantity > 1) out.push(`   _${formatCents(line.unitCents)} each_`);
   }
   out.push('');
 
-  out.push('*RESUMO*');
+  out.push('*SUMMARY*');
   out.push(`Subtotal: ${formatCents(totals.subtotalCents)}`);
   if (checkout.mode === 'delivery') {
-    out.push(`Entrega: ${totals.deliveryFeeCents === 0 ? 'Grátis' : formatCents(totals.deliveryFeeCents)}`);
+    out.push(`Delivery: ${totals.deliveryFeeCents === 0 ? 'Free' : formatCents(totals.deliveryFeeCents)}`);
   }
   out.push(`*Total: ${formatCents(totals.totalCents)}*`);
   out.push('');
 
-  out.push('*CLIENTE*');
-  out.push(`Nome: ${checkout.name.trim()}`);
-  out.push(`Telefone: ${checkout.phone.trim()}`);
+  out.push('*CUSTOMER*');
+  out.push(`Name: ${checkout.name.trim()}`);
+  out.push(`Phone: ${checkout.phone.trim()}`);
   out.push('');
 
   if (checkout.mode === 'delivery') {
     const a = checkout.address;
-    out.push('*ENTREGA*');
+    out.push('*DELIVERY*');
     out.push(`${a.street.trim()}, ${a.number.trim()}${a.complement.trim() ? ` — ${a.complement.trim()}` : ''}`);
     out.push(`${a.neighborhood.trim()}${a.city.trim() ? ` · ${a.city.trim()}` : ''}`);
-    if (a.cep.trim()) out.push(`CEP: ${a.cep.trim()}`);
-    if (a.reference.trim()) out.push(`Referência: ${a.reference.trim()}`);
+    if (a.cep.trim()) out.push(`Postal code: ${a.cep.trim()}`);
+    if (a.reference.trim()) out.push(`Landmark: ${a.reference.trim()}`);
   } else {
-    out.push('*RETIRADA NO LOCAL*');
+    out.push('*PICKUP*');
     out.push(`${siteConfig.address.street} — ${siteConfig.address.neighborhood}`);
   }
   out.push('');
 
-  out.push('*PAGAMENTO*');
+  out.push('*PAYMENT*');
   let payment = paymentLabels[checkout.payment];
   if (checkout.payment === 'dinheiro') {
     const change = parseMoneyInput(checkout.changeFor);
-    payment += change && toCents(change) > totals.totalCents ? ` — troco para ${formatCents(toCents(change))}` : ' — sem troco';
+    payment += change && toCents(change) > totals.totalCents ? ` — change for ${formatCents(toCents(change))}` : ' — no change needed';
   }
   if (checkout.payment === 'credito' || checkout.payment === 'debito') {
-    payment += checkout.mode === 'delivery' ? ' (maquininha na entrega)' : ' (na retirada)';
+    payment += checkout.mode === 'delivery' ? ' (card machine on delivery)' : ' (at pickup)';
   }
   out.push(payment);
 
   if (checkout.notes.trim()) {
     out.push('');
-    out.push('*OBSERVAÇÕES*');
+    out.push('*NOTES*');
     out.push(checkout.notes.trim());
   }
 

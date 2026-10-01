@@ -59,17 +59,17 @@ export function MenuSection() {
   };
 
   return (
-    <section id="cardapio" aria-labelledby="cardapio-title" className="bg-cream-50 pt-20 pb-24 lg:pt-28 lg:pb-32">
+    <section id="menu" aria-labelledby="menu-title" className="bg-cream-50 pt-20 pb-24 lg:pt-28 lg:pb-32">
       <div className="container-page">
         <SectionHeading
-          id="cardapio-title"
-          eyebrow="Cardápio"
+          id="menu-title"
+          eyebrow="Menu"
           title={
             <>
-              Escolha, personalize <Accent>e peça.</Accent>
+              Choose, customize <Accent>and order.</Accent>
             </>
           }
-          description="Pizzas em três tamanhos, meio a meio, bordas recheadas e adicionais. Tudo em poucos toques."
+          description="Pizzas in three sizes, half & half, stuffed crusts and extra toppings. All in a few taps."
         />
       </div>
 
@@ -78,7 +78,7 @@ export function MenuSection() {
         <div className="container-page flex flex-col gap-3 py-3 lg:flex-row lg:items-center lg:gap-6">
           <div className="relative lg:w-80 lg:shrink-0">
             <label htmlFor="menu-search" className="sr-only">
-              Buscar no cardápio
+              Search the menu
             </label>
             <Search className="pointer-events-none absolute top-1/2 left-4 size-[1.125rem] -translate-y-1/2 text-ink-400" aria-hidden />
             <input
@@ -87,7 +87,7 @@ export function MenuSection() {
               inputMode="search"
               autoComplete="off"
               enterKeyHint="search"
-              placeholder="Buscar sabor ou ingrediente"
+              placeholder="Search a flavor or ingredient"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="h-12 w-full rounded-full border border-ink-900/10 bg-white pr-11 pl-11 text-[0.9375rem] text-ink-900 shadow-[var(--shadow-soft)] transition-colors outline-none placeholder:text-ink-400 focus:border-tomato-500 focus:ring-4 focus:ring-tomato-500/15"
@@ -96,7 +96,7 @@ export function MenuSection() {
               <button
                 type="button"
                 onClick={() => setQuery('')}
-                aria-label="Limpar busca"
+                aria-label="Clear search"
                 className="absolute top-1/2 right-2 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-ink-500 hover:bg-ink-900/[0.06]"
               >
                 <X className="size-4" aria-hidden />
@@ -104,9 +104,9 @@ export function MenuSection() {
             )}
           </div>
 
-          <nav aria-label="Categorias do cardápio" className="-mx-4 min-w-0 lg:mx-0 lg:flex-1">
+          <nav aria-label="Menu categories" className="-mx-4 min-w-0 lg:mx-0 lg:flex-1">
             <ul className="scrollbar-none flex gap-2 overflow-x-auto px-4 lg:px-0">
-              {[{ id: 'todos' as const, name: 'Todos' }, ...categories].map((c) => {
+              {[{ id: 'todos' as const, name: 'All' }, ...categories].map((c) => {
                 const active = category === c.id;
                 return (
                   <li key={c.id} className="shrink-0">
@@ -133,7 +133,7 @@ export function MenuSection() {
 
       <div ref={resultsRef} className="container-page scroll-mt-[calc(var(--header-height)+8.5rem)] pt-8 lg:scroll-mt-[calc(var(--header-height)+5rem)]">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div role="group" aria-label="Filtros" className="flex flex-wrap gap-2">
+          <div role="group" aria-label="Filters" className="flex flex-wrap gap-2">
             {filterTags.map((tag) => {
               const active = tags.includes(tag);
               return (
@@ -156,10 +156,10 @@ export function MenuSection() {
             })}
           </div>
           <p aria-live="polite" className="text-sm text-ink-500">
-            {total} {total === 1 ? 'item' : 'itens'}
+            {total} {total === 1 ? 'item' : 'items'}
             {hasFilters && (
               <button type="button" onClick={clearAll} className="ml-3 font-semibold text-tomato-600 hover:underline">
-                Limpar filtros
+                Clear filters
               </button>
             )}
           </p>
@@ -176,12 +176,12 @@ export function MenuSection() {
               <span className="inline-flex size-16 items-center justify-center rounded-full bg-cream-200 text-ink-400">
                 <SearchX className="size-7" aria-hidden />
               </span>
-              <h3 className="text-display mt-5 text-2xl">Nada encontrado</h3>
+              <h3 className="text-display mt-5 text-2xl">Nothing found</h3>
               <p className="mt-2 text-ink-500">
-                Não achamos itens{query ? ` para “${query}”` : ''} com esses filtros. Tente outro sabor ou ingrediente.
+                We couldn’t find items{query ? ` for “${query}”` : ''} with these filters. Try another flavor or ingredient.
               </p>
               <Button variant="dark" className="mt-6" onClick={clearAll}>
-                Ver cardápio completo
+                See the full menu
               </Button>
             </div>
           ) : (

@@ -20,7 +20,7 @@ export function FeaturedCard({ product }: { product: Product }) {
       <div className="relative">
         <SmartImage
           src={product.image}
-          alt={`Pizza ${product.name}`}
+          alt={`${product.name} pizza`}
           sizes="(min-width: 1024px) 26rem, (min-width: 640px) 45vw, 82vw"
           className="aspect-[4/3]"
           imgClassName="transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.05]"
@@ -37,14 +37,14 @@ export function FeaturedCard({ product }: { product: Product }) {
             className="text-left after:absolute after:inset-0 after:rounded-[1.75rem] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-tomato-500"
           >
             {product.name}
-            <span className="sr-only">, ver opções e adicionar</span>
+            <span className="sr-only">, see options and add</span>
           </button>
         </h3>
         <p className="mt-2 line-clamp-2 text-[0.9375rem] leading-relaxed text-ink-500">{product.description}</p>
 
         <div className="mt-auto flex items-end justify-between gap-4 pt-6">
           <p className="leading-tight">
-            {hasMultiplePrices(product) && <span className="block text-xs text-ink-400">a partir de</span>}
+            {hasMultiplePrices(product) && <span className="block text-xs text-ink-400">from</span>}
             <span className="text-xl font-bold tracking-tight text-ink-900">{price}</span>
           </p>
           <span
@@ -52,7 +52,7 @@ export function FeaturedCard({ product }: { product: Product }) {
             className="inline-flex h-12 items-center gap-2 rounded-full bg-ink-900 pr-5 pl-4 text-sm font-semibold text-cream-50 transition-colors duration-300 group-hover:bg-tomato-500"
           >
             <Plus className="size-4 transition-transform duration-300 group-hover:rotate-90" />
-            Adicionar
+            Add
           </span>
         </div>
       </div>

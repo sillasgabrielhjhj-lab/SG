@@ -14,7 +14,7 @@ const tagStyles: Record<ProductTag, { icon: typeof Flame; className: string }> =
 export function ProductTags({ tags, className, size = 'sm' }: { tags?: ProductTag[]; className?: string; size?: 'xs' | 'sm' }) {
   if (!tags?.length) return null;
   return (
-    <ul className={cn('flex flex-wrap gap-1.5', className)} aria-label="Selos">
+    <ul className={cn('flex flex-wrap gap-1.5', className)} aria-label="Labels">
       {tags.map((tag) => {
         const { icon: Icon, className: tone } = tagStyles[tag];
         return (

@@ -23,7 +23,7 @@ export function useProductActions() {
         return;
       }
       addItem({ productId: product.id, options: {} }, 1);
-      showToast(`${product.name} adicionado à sacola`, 'open-cart');
+      showToast(`${product.name} added to cart`, 'open-cart');
     },
     [addItem, openProduct, showToast],
   );

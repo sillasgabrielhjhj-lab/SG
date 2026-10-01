@@ -1,6 +1,8 @@
-const currencyFormatter = new Intl.NumberFormat('pt-BR', {
+import { siteConfig } from '@/config/site';
+
+const currencyFormatter = new Intl.NumberFormat(siteConfig.locale, {
   style: 'currency',
-  currency: 'BRL',
+  currency: siteConfig.currency,
 });
 
 /** Converte reais (ex.: 54.9) para centavos inteiros (5490), evitando erros de ponto flutuante. */
@@ -46,7 +48,7 @@ export function parseMoneyInput(value: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-/** "item" / "itens" */
+/** "item" / "items" */
 export function plural(count: number, singular: string, pluralForm: string): string {
   return `${count} ${count === 1 ? singular : pluralForm}`;
 }

@@ -9,7 +9,7 @@ const icons = { wheat: Wheat, leaf: Leaf, flame: Flame, timer: Timer, chef: Chef
 export function About() {
   return (
     <>
-      <section id="sobre" aria-labelledby="sobre-title" className="overflow-hidden bg-cream-100 py-20 lg:py-32">
+      <section id="about" aria-labelledby="about-title" className="overflow-hidden bg-cream-100 py-20 lg:py-32">
         <div className="container-page grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
           <Reveal className="relative lg:col-span-6">
             <div className="relative mx-auto max-w-lg pb-[12%] lg:max-w-none">
@@ -33,7 +33,7 @@ export function About() {
 
           <div className="lg:col-span-6 lg:pl-6">
             <SectionHeading
-              id="sobre-title"
+              id="about-title"
               eyebrow={about.eyebrow}
               title={
                 <>
@@ -66,10 +66,10 @@ export function About() {
         </div>
       </section>
 
-      <section aria-labelledby="processo-title" className="grain bg-ink-900 py-20 text-cream-50 lg:py-28">
+      <section aria-labelledby="process-title" className="grain bg-ink-900 py-20 text-cream-50 lg:py-28">
         <div className="container-page">
           <SectionHeading
-            id="processo-title"
+            id="process-title"
             tone="dark"
             align="center"
             eyebrow={process.eyebrow}
@@ -90,7 +90,7 @@ export function About() {
                     </span>
                   </div>
                   <h3 className="text-display mt-7 text-2xl font-medium">
-                    <span className="sr-only">Passo {i + 1}: </span>
+                    <span className="sr-only">Step {i + 1}: </span>
                     {step.title}
                   </h3>
                   <p className="mt-2 leading-relaxed text-cream-100/65">{step.text}</p>
@@ -104,7 +104,7 @@ export function About() {
   );
 }
 
-/** Selo circular girando lentamente ("Feita à mão · Massa artesanal"). */
+/** Selo circular girando lentamente ("Handmade · Artisan dough"). */
 function BadgeSeal() {
   return (
     <div aria-hidden className="absolute top-[6%] right-[6%] size-28 sm:size-32">
@@ -114,7 +114,9 @@ function BadgeSeal() {
         </defs>
         <circle cx="60" cy="60" r="59" className="fill-cream-50" />
         <text className="fill-current text-[10.5px] font-bold tracking-[0.2em] uppercase">
-          <textPath href="#seal-circle">Feita à mão • Massa artesanal • </textPath>
+          <textPath href="#seal-circle" textLength="286" lengthAdjust="spacing">
+            Handmade • Artisan dough •
+          </textPath>
         </text>
       </svg>
       <span className="absolute inset-0 flex items-center justify-center">

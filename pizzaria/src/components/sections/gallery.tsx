@@ -20,17 +20,17 @@ export function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
 
   return (
-    <section id="galeria" aria-labelledby="galeria-title" className="bg-cream-100 py-20 lg:py-28">
+    <section id="gallery" aria-labelledby="gallery-title" className="bg-cream-100 py-20 lg:py-28">
       <div className="container-page">
         <SectionHeading
-          id="galeria-title"
-          eyebrow="Galeria"
+          id="gallery-title"
+          eyebrow="Gallery"
           title={
             <>
-              Um pouco do nosso <Accent>dia a dia.</Accent>
+              A taste of our <Accent>everyday.</Accent>
             </>
           }
-          description="Pizzas saindo do forno, a cozinha em ação e o nosso cantinho."
+          description="Pizzas fresh from the oven, the kitchen at work and our little corner."
         />
 
         <ul className="mt-12 grid auto-rows-[9.5rem] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[12rem] md:grid-cols-4 md:gap-4 lg:auto-rows-[14rem]">
@@ -40,7 +40,7 @@ export function Gallery() {
                 type="button"
                 onClick={() => setIndex(i)}
                 className="group relative block size-full overflow-hidden rounded-2xl md:rounded-[1.5rem]"
-                aria-label={`Ampliar foto: ${item.caption}`}
+                aria-label={`Enlarge photo: ${item.caption}`}
               >
                 <SmartImage
                   src={item.src}
@@ -88,7 +88,7 @@ function Lightbox({ index, onChange }: { index: number | null; onChange: (i: num
   }, [index, count, onChange]);
 
   return (
-    <Dialog open={index !== null} onClose={() => onChange(null)} variant="fullscreen" label="Galeria de fotos">
+    <Dialog open={index !== null} onClose={() => onChange(null)} variant="fullscreen" label="Photo gallery">
       {item && (
         <div
           className="flex h-full flex-col text-cream-50"
@@ -104,7 +104,7 @@ function Lightbox({ index, onChange }: { index: number | null; onChange: (i: num
             <p className="text-sm text-cream-50/70" aria-live="polite">
               {(shown ?? 0) + 1} / {count}
             </p>
-            <IconButton label="Fechar galeria" tone="glass" onClick={() => onChange(null)} data-autofocus>
+            <IconButton label="Close gallery" tone="glass" onClick={() => onChange(null)} data-autofocus>
               <X className="size-5" aria-hidden />
             </IconButton>
           </div>
@@ -121,7 +121,7 @@ function Lightbox({ index, onChange }: { index: number | null; onChange: (i: num
               tone="dark"
             />
             <IconButton
-              label="Foto anterior"
+              label="Previous photo"
               tone="glass"
               size="lg"
               onClick={() => go(-1)}
@@ -130,7 +130,7 @@ function Lightbox({ index, onChange }: { index: number | null; onChange: (i: num
               <ChevronLeft className="size-6" aria-hidden />
             </IconButton>
             <IconButton
-              label="Próxima foto"
+              label="Next photo"
               tone="glass"
               size="lg"
               onClick={() => go(1)}
@@ -140,11 +140,11 @@ function Lightbox({ index, onChange }: { index: number | null; onChange: (i: num
             </IconButton>
           </div>
           <div className="flex shrink-0 items-center justify-between gap-4 px-4 py-5 pb-safe">
-            <IconButton label="Foto anterior" tone="glass" onClick={() => go(-1)} className="sm:hidden">
+            <IconButton label="Previous photo" tone="glass" onClick={() => go(-1)} className="sm:hidden">
               <ChevronLeft className="size-5" aria-hidden />
             </IconButton>
             <p className="text-display flex-1 text-center text-xl">{item.caption}</p>
-            <IconButton label="Próxima foto" tone="glass" onClick={() => go(1)} className={cn('sm:hidden')}>
+            <IconButton label="Next photo" tone="glass" onClick={() => go(1)} className={cn('sm:hidden')}>
               <ChevronRight className="size-5" aria-hidden />
             </IconButton>
           </div>

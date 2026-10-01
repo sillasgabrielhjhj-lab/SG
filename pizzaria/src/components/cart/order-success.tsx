@@ -37,28 +37,28 @@ export function OrderSuccess({ onClose }: { onClose: () => void }) {
       >
         <Check className="size-10" strokeWidth={2.5} aria-hidden />
       </m.span>
-      <h3 className="text-display mt-7 text-3xl font-medium">Pedido gerado!</h3>
+      <h3 className="text-display mt-7 text-3xl font-medium">Order ready!</h3>
       {order && (
         <p className="mt-2 text-sm font-semibold tracking-wide text-ink-500">
-          Código do pedido <span className="text-ink-900">#{order.code}</span>
+          Order code <span className="text-ink-900">#{order.code}</span>
         </p>
       )}
       <p className="mx-auto mt-4 max-w-xs leading-relaxed text-ink-500">
-        Abrimos o WhatsApp com o seu pedido pronto. <strong className="text-ink-900">Toque em enviar</strong> para
-        confirmar com a pizzaria.
+        We opened WhatsApp with your order ready to go. <strong className="text-ink-900">Tap send</strong> to
+        confirm it with the pizzeria.
       </p>
 
       {order && (
         <div className="mx-auto mt-8 w-full max-w-xs space-y-3">
           <LinkButton href={order.url} target="_blank" rel="noopener noreferrer" variant="whatsapp" size="lg" className="w-full">
-            <WhatsAppIcon className="size-5" /> Abrir WhatsApp novamente
+            <WhatsAppIcon className="size-5" /> Open WhatsApp again
           </LinkButton>
           <Button variant="outline" className="w-full" onClick={copy}>
             {copied === 'ok' ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}
-            {copied === 'ok' ? 'Pedido copiado' : 'Copiar resumo do pedido'}
+            {copied === 'ok' ? 'Order copied' : 'Copy order summary'}
           </Button>
           <p aria-live="polite" className="text-xs text-ink-500">
-            {copied === 'error' && 'Não foi possível copiar. Use o botão do WhatsApp acima.'}
+            {copied === 'error' && "Couldn't copy. Use the WhatsApp button above."}
           </p>
         </div>
       )}
@@ -68,7 +68,7 @@ export function OrderSuccess({ onClose }: { onClose: () => void }) {
         onClick={newOrder}
         className="mx-auto mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-ink-600 hover:text-ink-900"
       >
-        <RotateCcw className="size-4" aria-hidden /> Fazer um novo pedido
+        <RotateCcw className="size-4" aria-hidden /> Start a new order
       </button>
     </div>
   );

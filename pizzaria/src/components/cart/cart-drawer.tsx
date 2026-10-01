@@ -22,7 +22,7 @@ import { CheckoutForm } from './checkout-form';
 import { OrderSuccess } from './order-success';
 import { Summary } from './summary';
 
-const titles = { cart: 'Sua sacola', checkout: 'Finalizar pedido', success: 'Pedido enviado' } as const;
+const titles = { cart: 'Your cart', checkout: 'Checkout', success: 'Order sent' } as const;
 
 export function CartDrawer() {
   const open = useUI((s) => s.cartOpen);
@@ -35,7 +35,7 @@ export function CartDrawer() {
     <Dialog open={open} onClose={close} labelledBy="cart-title" variant="drawer">
       <div className="flex h-16 shrink-0 items-center gap-2 border-b border-ink-900/[0.07] px-3 sm:px-4">
         {step === 'checkout' ? (
-          <IconButton label="Voltar para a sacola" tone="light" onClick={() => setStep('cart')}>
+          <IconButton label="Back to cart" tone="light" onClick={() => setStep('cart')}>
             <ArrowLeft className="size-5" aria-hidden />
           </IconButton>
         ) : (
@@ -46,10 +46,10 @@ export function CartDrawer() {
         <h2 id="cart-title" className="text-display flex-1 text-xl font-medium">
           {titles[step]}
           {step === 'cart' && totals.itemCount > 0 && (
-            <span className="ml-2 font-sans text-sm font-medium text-ink-400">{plural(totals.itemCount, 'item', 'itens')}</span>
+            <span className="ml-2 font-sans text-sm font-medium text-ink-400">{plural(totals.itemCount, 'item', 'items')}</span>
           )}
         </h2>
-        <IconButton label="Fechar sacola" tone="light" onClick={close} data-autofocus>
+        <IconButton label="Close cart" tone="light" onClick={close} data-autofocus>
           <X className="size-5" aria-hidden />
         </IconButton>
       </div>
@@ -81,9 +81,9 @@ export function CartDrawer() {
 }
 
 function CheckoutSteps({ current }: { current: 1 | 2 }) {
-  const steps = ['Sacola', 'Dados', 'WhatsApp'];
+  const steps = ['Cart', 'Details', 'WhatsApp'];
   return (
-    <ol className="flex shrink-0 items-center gap-2 border-b border-ink-900/[0.05] px-5 py-2.5 text-xs font-semibold" aria-label="Etapas do pedido">
+    <ol className="flex shrink-0 items-center gap-2 border-b border-ink-900/[0.05] px-5 py-2.5 text-xs font-semibold" aria-label="Order steps">
       {steps.map((label, i) => (
         <li key={label} className="flex items-center gap-2" aria-current={i + 1 === current ? 'step' : undefined}>
           <span
@@ -108,14 +108,14 @@ function EmptyCart({ onClose }: { onClose: () => void }) {
       <span className="inline-flex size-20 items-center justify-center rounded-full bg-cream-200 text-ink-400">
         <ShoppingBag className="size-9 stroke-[1.25]" aria-hidden />
       </span>
-      <p className="text-display mt-6 text-2xl">Sua sacola está vazia</p>
-      <p className="mt-2 max-w-xs text-ink-500">Que tal começar por uma das pizzas favoritas da casa?</p>
+      <p className="text-display mt-6 text-2xl">Your cart is empty</p>
+      <p className="mt-2 max-w-xs text-ink-500">Why not start with one of our house favorites?</p>
       <a
-        href="#cardapio"
+        href="#menu"
         onClick={onClose}
         className="mt-8 inline-flex h-12 items-center rounded-full bg-tomato-500 px-7 font-semibold text-white transition-colors hover:bg-tomato-600"
       >
-        Ver cardápio
+        See the menu
       </a>
     </div>
   );
@@ -185,9 +185,9 @@ function CartView({ lines, totals, mode, onContinue }: CartViewProps) {
                         type="button"
                         onClick={() => openProduct(line.product.id, line.item.lineId)}
                         className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.8125rem] font-semibold text-ink-600 transition-colors hover:bg-ink-900/[0.05] hover:text-ink-900"
-                        aria-label={`Editar ${line.product.name}`}
+                        aria-label={`Edit ${line.product.name}`}
                       >
-                        <Pencil className="size-3.5" aria-hidden /> Editar
+                        <Pencil className="size-3.5" aria-hidden /> Edit
                       </button>
                     </div>
                   </div>
@@ -201,11 +201,11 @@ function CartView({ lines, totals, mode, onContinue }: CartViewProps) {
       </div>
 
       <div className="shrink-0 border-t border-ink-900/[0.07] bg-white px-5 pt-4 pb-safe">
-        <div role="radiogroup" aria-label="Como você quer receber?" className="grid grid-cols-2 gap-1 rounded-full bg-cream-200 p-1">
+        <div role="radiogroup" aria-label="How would you like to get it?" className="grid grid-cols-2 gap-1 rounded-full bg-cream-200 p-1">
           {(
             [
-              { id: 'delivery', label: 'Entrega', icon: Bike },
-              { id: 'pickup', label: 'Retirada', icon: Store },
+              { id: 'delivery', label: 'Delivery', icon: Bike },
+              { id: 'pickup', label: 'Pickup', icon: Store },
             ] as const
           ).map(({ id, label, icon: Icon }) => (
             <button
@@ -228,13 +228,13 @@ function CartView({ lines, totals, mode, onContinue }: CartViewProps) {
 
         {blockedByMinimum && (
           <p className="mt-3 rounded-xl bg-gold-300/25 px-3.5 py-2.5 text-[0.8125rem] font-medium text-[#6b4a0e]">
-            Pedido mínimo de {formatPrice(siteConfig.delivery.minimumOrder)}. Faltam{' '}
-            {formatCents(totals.missingForMinimumCents)}.
+            Minimum order is {formatPrice(siteConfig.delivery.minimumOrder)}. Add{' '}
+            {formatCents(totals.missingForMinimumCents)} more.
           </p>
         )}
 
         <Button size="lg" className="mt-4 w-full justify-between" onClick={onContinue} disabled={blockedByMinimum}>
-          <span>Continuar</span>
+          <span>Continue</span>
           <span className="tabular-nums">{formatCents(totals.totalCents)}</span>
         </Button>
       </div>
@@ -252,17 +252,17 @@ function FreeDeliveryProgress({ totals }: { totals: CartTotals }) {
     <div className="mx-5 mt-4 rounded-2xl bg-basil-50 px-4 py-3.5">
       <p className="text-[0.8125rem] font-medium text-basil-700">
         {done ? (
-          <strong>Oba! Sua entrega é grátis.</strong>
+          <strong>Nice! Your delivery is free.</strong>
         ) : (
           <>
-            Faltam <strong>{formatCents(totals.missingForFreeDeliveryCents)}</strong> para a entrega grátis
+            Add <strong>{formatCents(totals.missingForFreeDeliveryCents)}</strong> more for free delivery
           </>
         )}
       </p>
       <div
         className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-basil-100"
         role="progressbar"
-        aria-label="Progresso para entrega grátis"
+        aria-label="Progress toward free delivery"
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(progress * 100)}
@@ -288,7 +288,7 @@ function Upsell({ lines }: { lines: ResolvedCartItem[] }) {
 
   return (
     <div className="mt-2 mb-6 px-5">
-      <p className="text-sm font-semibold text-ink-900">Combina com seu pedido</p>
+      <p className="text-sm font-semibold text-ink-900">Goes great with your order</p>
       <ul className="scrollbar-none -mx-5 mt-3 flex gap-3 overflow-x-auto px-5 pb-1">
         {suggestions.map((p) => (
           <li key={p.id} className="w-36 shrink-0">
@@ -296,7 +296,7 @@ function Upsell({ lines }: { lines: ResolvedCartItem[] }) {
               type="button"
               onClick={() => add(p)}
               className="group flex w-full flex-col rounded-2xl bg-white p-2 text-left ring-1 ring-ink-900/[0.06] transition-shadow hover:shadow-[var(--shadow-soft)]"
-              aria-label={`Adicionar ${p.name}, ${formatPrice(getStartingPrice(p))}`}
+              aria-label={`Add ${p.name}, ${formatPrice(getStartingPrice(p))}`}
             >
               <SmartImage src={p.image} alt="" sizes="144px" className="aspect-[4/3] w-full rounded-xl" {...productFallback(p)} />
               <span className="mt-2 line-clamp-1 px-1 text-sm font-semibold">{p.name}</span>

@@ -7,15 +7,15 @@ import { hero } from '@/data/content';
 import { HeroFeaturedCard } from './hero-featured-card';
 
 const perks = [
-  { icon: Clock, title: siteConfig.delivery.estimate, text: 'tempo médio' },
-  { icon: Bike, title: 'Delivery', text: 'e retirada' },
-  { icon: Wheat, title: 'Massa', text: 'artesanal' },
+  { icon: Clock, title: siteConfig.delivery.estimate, text: 'avg. delivery' },
+  { icon: Bike, title: 'Delivery', text: '& pickup' },
+  { icon: Wheat, title: 'Artisan', text: 'dough' },
 ];
 
 export function Hero() {
   return (
     <section
-      id="inicio"
+      id="home"
       aria-labelledby="hero-title"
       className="grain relative overflow-hidden bg-ink-950 text-cream-50"
     >
@@ -52,12 +52,12 @@ export function Hero() {
           </p>
 
           <div className="animate-fade-up mt-9 flex flex-col gap-3 sm:flex-row" style={{ animationDelay: '220ms' }}>
-            <a href="#cardapio" className={buttonStyles({ size: 'lg', className: 'group' })}>
-              Pedir agora
+            <a href="#menu" className={buttonStyles({ size: 'lg', className: 'group' })}>
+              Order now
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </a>
-            <a href="#cardapio" className={buttonStyles({ size: 'lg', variant: 'outline-light' })}>
-              Ver cardápio
+            <a href="#menu" className={buttonStyles({ size: 'lg', variant: 'outline-light' })}>
+              See the menu
             </a>
           </div>
 
@@ -105,8 +105,8 @@ export function Hero() {
               style={{ animationDelay: '-2s' }}
             >
               <div className="rounded-2xl bg-cream-50/10 px-4 py-3 text-sm shadow-xl ring-1 ring-cream-50/15 backdrop-blur-md">
-                <p className="font-semibold">Meio a meio</p>
-                <p className="text-xs text-cream-100/70">2 sabores na mesma pizza</p>
+                <p className="font-semibold">Half & half</p>
+                <p className="text-xs text-cream-100/70">2 flavors, 1 pizza</p>
               </div>
             </div>
             <div className="animate-float absolute bottom-[2%] -left-1 sm:bottom-[6%] sm:left-0">

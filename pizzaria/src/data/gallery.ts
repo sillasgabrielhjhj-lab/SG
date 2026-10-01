@@ -16,12 +16,12 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  { id: 'g1', src: photos.hero, alt: 'Pizza artesanal vista de cima', caption: 'Saindo do forno', layout: 'tall' },
-  { id: 'g2', src: photos.salao, alt: 'Ambiente da pizzaria', caption: 'Nosso salão', layout: 'wide' },
-  { id: 'g3', src: photos.parmaRucula, alt: 'Pizza de parma com rúcula', caption: 'Parma & Rúcula', layout: 'square' },
-  { id: 'g4', src: photos.forno, alt: 'Pizza assando no forno', caption: 'Forno bem quente', layout: 'square' },
-  { id: 'g5', src: photos.cozinha, alt: 'Cozinha da pizzaria em preparo', caption: 'Na cozinha', layout: 'tall' },
-  { id: 'g6', src: photos.pepperoni, alt: 'Pizza de pepperoni', caption: 'Pepperoni', layout: 'square' },
-  { id: 'g7', src: photos.mesa, alt: 'Mesa posta para o jantar', caption: 'Mesa posta', layout: 'wide' },
-  { id: 'g8', src: photos.restaurante, alt: 'Salão iluminado à noite', caption: 'À noite', layout: 'square' },
+  { id: 'g1', src: photos.hero, alt: 'Artisan pizza seen from above', caption: 'Fresh from the oven', layout: 'tall' },
+  { id: 'g2', src: photos.salao, alt: 'Inside the pizzeria', caption: 'Our dining room', layout: 'wide' },
+  { id: 'g3', src: photos.parmaRucula, alt: 'Parma ham and arugula pizza', caption: 'Parma & Arugula', layout: 'square' },
+  { id: 'g4', src: photos.forno, alt: 'Pizza baking in the oven', caption: 'A very hot oven', layout: 'square' },
+  { id: 'g5', src: photos.cozinha, alt: 'The pizzeria kitchen at work', caption: 'In the kitchen', layout: 'tall' },
+  { id: 'g6', src: photos.pepperoni, alt: 'Pepperoni pizza', caption: 'Pepperoni', layout: 'square' },
+  { id: 'g7', src: photos.mesa, alt: 'Table set for dinner', caption: 'Table for two', layout: 'wide' },
+  { id: 'g8', src: photos.restaurante, alt: 'Dining room lit up at night', caption: 'By night', layout: 'square' },
 ];

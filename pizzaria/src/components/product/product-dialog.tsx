@@ -109,7 +109,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
 
   const submit = () => {
     if (halfOn && !effectiveHalfId) {
-      setError('Escolha o segundo sabor ou desative o meio a meio.');
+      setError('Pick the second flavor or turn off half & half.');
       focusSection('half');
       return;
     }
@@ -122,10 +122,10 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
     }
     if (editLineId) {
       replaceItem(editLineId, selection, quantity);
-      showToast('Item atualizado');
+      showToast('Item updated');
     } else {
       addItem(selection, quantity);
-      showToast(`${quantity > 1 ? `${quantity}x ` : ''}${product.name} na sacola`, 'open-cart');
+      showToast(`${quantity > 1 ? `${quantity}x ` : ''}${product.name} added to cart`, 'open-cart');
     }
     onDone();
   };
@@ -144,7 +144,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
   return (
     <div className="flex min-h-0 flex-1 flex-col md:flex-row">
       <IconButton
-        label="Fechar"
+        label="Close"
         tone="glass"
         onClick={onDone}
         className="absolute top-3 right-3 z-20 md:top-4 md:right-4"
@@ -164,19 +164,19 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
           <div className="px-5 pt-6 pb-8 md:px-8 md:pt-9">
             <ProductTags tags={product.tags} className="mb-3" />
             <h2 id="product-title" className="text-display pr-10 text-[1.85rem] leading-tight font-medium md:text-4xl">
-              {editLineId ? `Editar · ${product.name}` : product.name}
+              {editLineId ? `Edit · ${product.name}` : product.name}
             </h2>
             <p className="mt-2.5 leading-relaxed text-ink-500">{product.description}</p>
             {product.serves && <p className="mt-2 text-sm font-semibold text-ink-700">{product.serves}</p>}
             {!available && (
               <p className="mt-4 rounded-xl bg-tomato-50 px-4 py-3 text-sm font-semibold text-tomato-700">
-                Este item está esgotado no momento.
+                This item is sold out right now.
               </p>
             )}
 
             {product.sizes && product.sizes.length > 0 && (
               <fieldset className="mt-8" data-section="size">
-                <GroupLegend title="Tamanho" required />
+                <GroupLegend title="Size" required />
                 <div className={cn('mt-3 grid gap-2.5', product.sizes.length >= 3 ? 'grid-cols-3' : 'grid-cols-2')}>
                   {product.sizes.map((size) => {
                     const checked = sizeId === size.id;
@@ -227,8 +227,8 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
                   className="flex w-full items-center justify-between gap-4 rounded-2xl border border-ink-900/10 bg-white px-4 py-3.5 text-left transition-colors hover:border-ink-900/25"
                 >
                   <span>
-                    <span className="block font-semibold text-ink-900">Pizza meio a meio</span>
-                    <span className="text-sm text-ink-500">Escolha um 2º sabor · vale o preço do mais caro</span>
+                    <span className="block font-semibold text-ink-900">Half & half pizza</span>
+                    <span className="text-sm text-ink-500">Pick a 2nd flavor · priced as the more expensive one</span>
                   </span>
                   <span
                     aria-hidden
@@ -255,7 +255,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <legend className="sr-only">Segundo sabor</legend>
+                      <legend className="sr-only">Second flavor</legend>
                       <ul className="mt-3 divide-y divide-ink-900/[0.06] rounded-2xl border border-ink-900/10 bg-white">
                         {halfCandidates.map((candidate) => {
                           const price = candidate.sizes?.find((s) => s.id === sizeId)?.price;
@@ -293,7 +293,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
                   <GroupLegend
                     title={group.title}
                     required={group.required}
-                    hint={group.type === 'multiple' && group.max ? `até ${group.max}` : undefined}
+                    hint={group.type === 'multiple' && group.max ? `up to ${group.max}` : undefined}
                   />
                   <ul className="mt-3 divide-y divide-ink-900/[0.06] rounded-2xl border border-ink-900/10 bg-white">
                     {items.map((option) => {
@@ -320,7 +320,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
             <div className="mt-8">
               <div className="flex items-baseline justify-between">
                 <label htmlFor={notesId} className="font-semibold text-ink-900">
-                  Alguma observação?
+                  Any special requests?
                 </label>
                 <span className="text-xs text-ink-400 tabular-nums">
                   {notes.length}/{NOTES_MAX}
@@ -332,7 +332,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
                 maxLength={NOTES_MAX}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={2}
-                placeholder="Ex.: sem cebola, bem assada…"
+                placeholder="E.g. no onions, well done…"
                 className="mt-2.5 w-full resize-none rounded-2xl border border-ink-900/10 bg-white px-4 py-3 text-[0.9375rem] outline-none placeholder:text-ink-400 focus:border-tomato-500 focus:ring-4 focus:ring-tomato-500/15"
               />
             </div>
@@ -361,7 +361,7 @@ function ProductForm({ product, editLineId, onDone }: { product: Product; editLi
               itemName={product.name}
             />
             <Button size="lg" className="flex-1 justify-between px-5 sm:px-6" onClick={submit} disabled={!available}>
-              <span>{!available ? 'Indisponível' : editLineId ? 'Salvar' : 'Adicionar'}</span>
+              <span>{!available ? 'Unavailable' : editLineId ? 'Save' : 'Add'}</span>
               {available && (
                 <m.span key={totalCents} initial={{ opacity: 0.4, y: -4 }} animate={{ opacity: 1, y: 0 }} className="tabular-nums">
                   {formatCents(totalCents)}
@@ -385,7 +385,7 @@ function GroupLegend({ title, required, hint }: { title: string; required?: bool
           required ? 'bg-ink-900 text-cream-50' : 'bg-cream-200 text-ink-600',
         )}
       >
-        {required ? 'Obrigatório' : `Opcional${hint ? ` · ${hint}` : ''}`}
+        {required ? 'Required' : `Optional${hint ? ` · ${hint}` : ''}`}
       </span>
     </legend>
   );

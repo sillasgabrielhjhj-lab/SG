@@ -54,19 +54,19 @@ function loadSaved(): CheckoutData {
 
 function validate(data: CheckoutData, totals: CartTotals): Errors {
   const errors: Errors = {};
-  if (data.name.trim().length < 2) errors.name = 'Informe seu nome.';
+  if (data.name.trim().length < 2) errors.name = 'Please enter your name.';
   const phone = onlyDigits(data.phone);
-  if (phone.length < 10 || phone.length > 11) errors.phone = 'Informe um telefone com DDD.';
+  if (phone.length < 10 || phone.length > 11) errors.phone = 'Please enter a phone number with area code.';
   if (data.mode === 'delivery') {
-    if (data.address.cep && onlyDigits(data.address.cep).length !== 8) errors.cep = 'CEP incompleto.';
-    if (!data.address.street.trim()) errors.street = 'Informe a rua.';
-    if (!data.address.number.trim()) errors.number = 'Informe o número (ou “s/n”).';
-    if (!data.address.neighborhood.trim()) errors.neighborhood = 'Informe o bairro.';
+    if (data.address.cep && onlyDigits(data.address.cep).length !== 8) errors.cep = 'Incomplete postal code.';
+    if (!data.address.street.trim()) errors.street = 'Please enter the street.';
+    if (!data.address.number.trim()) errors.number = 'Please enter the number (or “n/a”).';
+    if (!data.address.neighborhood.trim()) errors.neighborhood = 'Please enter the neighborhood.';
   }
   if (data.payment === 'dinheiro' && data.changeFor.trim()) {
     const value = parseMoneyInput(data.changeFor);
     if (value === null || toCents(value) < totals.totalCents) {
-      errors.changeFor = `O troco deve ser para um valor acima de ${formatCents(totals.totalCents)}.`;
+      errors.changeFor = `Change must be for an amount above ${formatCents(totals.totalCents)}.`;
     }
   }
   return errors;
@@ -184,29 +184,29 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
           <div className="flex gap-3 rounded-2xl bg-gold-300/25 px-4 py-3 text-sm text-[#6b4a0e]">
             <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
             <p>
-              <strong>Estamos fechados agora.</strong> {status.detail}.{' '}
+              <strong>We’re closed right now.</strong> {status.detail}.{' '}
               {siteConfig.ordering.allowWhenClosed
-                ? 'Você pode enviar o pedido e responderemos assim que abrirmos.'
-                : 'Volte no nosso horário de funcionamento.'}
+                ? "You can still send your order and we'll reply as soon as we open."
+                : 'Please come back during our opening hours.'}
             </p>
           </div>
         )}
 
-        <FormSection title="Seus dados">
-          <Field label="Nome" error={errors.name} htmlFor="name">
+        <FormSection title="Your details">
+          <Field label="Name" error={errors.name} htmlFor="name">
             <input
               id="name"
               name="name"
               autoComplete="name"
               value={data.name}
               onChange={(e) => update('name', e.target.value)}
-              placeholder="Como podemos te chamar?"
+              placeholder="What should we call you?"
               aria-invalid={Boolean(errors.name)}
               aria-describedby={errors.name ? 'name-error' : undefined}
               className={inputClass(errors.name)}
             />
           </Field>
-          <Field label="Telefone / WhatsApp" error={errors.phone} htmlFor="phone">
+          <Field label="Phone / WhatsApp" error={errors.phone} htmlFor="phone">
             <input
               id="phone"
               name="phone"
@@ -223,12 +223,12 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
           </Field>
         </FormSection>
 
-        <FormSection title="Como você quer receber?">
-          <div role="radiogroup" aria-label="Forma de recebimento" className="grid grid-cols-2 gap-2.5">
+        <FormSection title="How would you like to get it?">
+          <div role="radiogroup" aria-label="Delivery method" className="grid grid-cols-2 gap-2.5">
             {(
               [
-                { id: 'delivery', label: 'Entrega', hint: siteConfig.delivery.estimate, icon: Bike },
-                { id: 'pickup', label: 'Retirada', hint: siteConfig.delivery.pickupEstimate, icon: Store },
+                { id: 'delivery', label: 'Delivery', hint: siteConfig.delivery.estimate, icon: Bike },
+                { id: 'pickup', label: 'Pickup', hint: siteConfig.delivery.pickupEstimate, icon: Store },
               ] as const
             ).map(({ id, label, hint, icon: Icon }) => (
               <ChoiceCard key={id} name="mode" checked={mode === id} onChange={() => setMode(id)}>
@@ -242,19 +242,19 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
           {mode === 'delivery' ? (
             <div className="grid grid-cols-6 gap-3">
               <Field
-                label="CEP (opcional)"
+                label="Postal code (optional)"
                 error={errors.cep}
                 htmlFor="cep"
                 className="col-span-6 sm:col-span-3"
                 hint={
                   cepState === 'loading' ? (
                     <span className="inline-flex items-center gap-1.5">
-                      <LoaderCircle className="size-3.5 animate-spin" aria-hidden /> Buscando endereço…
+                      <LoaderCircle className="size-3.5 animate-spin" aria-hidden /> Looking up address…
                     </span>
                   ) : cepState === 'found' ? (
-                    'Endereço preenchido. Confira os dados.'
+                    'Address filled in. Please double-check it.'
                   ) : cepState === 'error' ? (
-                    'Não encontramos o CEP. Preencha o endereço manualmente.'
+                    "We couldn't find that postal code. Please fill in the address manually."
                   ) : undefined
                 }
               >
@@ -271,7 +271,7 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
                   className={inputClass(errors.cep)}
                 />
               </Field>
-              <Field label="Rua" error={errors.street} htmlFor="street" className="col-span-6">
+              <Field label="Street" error={errors.street} htmlFor="street" className="col-span-6">
                 <input
                   id="street"
                   name="street"
@@ -283,7 +283,7 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
                   className={inputClass(errors.street)}
                 />
               </Field>
-              <Field label="Número" error={errors.number} htmlFor="number" className="col-span-2">
+              <Field label="Number" error={errors.number} htmlFor="number" className="col-span-2">
                 <input
                   id="number"
                   name="number"
@@ -295,18 +295,18 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
                   className={inputClass(errors.number)}
                 />
               </Field>
-              <Field label="Complemento" htmlFor="complement" className="col-span-4">
+              <Field label="Apt / unit" htmlFor="complement" className="col-span-4">
                 <input
                   id="complement"
                   name="complement"
                   autoComplete="address-line2"
                   value={data.address.complement}
                   onChange={(e) => updateAddress('complement', e.target.value)}
-                  placeholder="Apto, bloco…"
+                  placeholder="Apt, building…"
                   className={inputClass()}
                 />
               </Field>
-              <Field label="Bairro" error={errors.neighborhood} htmlFor="neighborhood" className="col-span-6 sm:col-span-3">
+              <Field label="Neighborhood" error={errors.neighborhood} htmlFor="neighborhood" className="col-span-6 sm:col-span-3">
                 <input
                   id="neighborhood"
                   name="neighborhood"
@@ -317,7 +317,7 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
                   className={inputClass(errors.neighborhood)}
                 />
               </Field>
-              <Field label="Cidade" htmlFor="city" className="col-span-6 sm:col-span-3">
+              <Field label="City" htmlFor="city" className="col-span-6 sm:col-span-3">
                 <input
                   id="city"
                   name="city"
@@ -327,28 +327,28 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
                   className={inputClass()}
                 />
               </Field>
-              <Field label="Ponto de referência" htmlFor="reference" className="col-span-6">
+              <Field label="Landmark" htmlFor="reference" className="col-span-6">
                 <input
                   id="reference"
                   name="reference"
                   value={data.address.reference}
                   onChange={(e) => updateAddress('reference', e.target.value)}
-                  placeholder="Opcional"
+                  placeholder="Optional"
                   className={inputClass()}
                 />
               </Field>
             </div>
           ) : (
             <p className="rounded-2xl bg-cream-200/70 px-4 py-3 text-sm text-ink-600">
-              Retire em: <strong className="text-ink-900">{siteConfig.address.street}</strong> — {siteConfig.address.neighborhood},{' '}
-              {siteConfig.address.city}/{siteConfig.address.state}
+              Pick up at: <strong className="text-ink-900">{siteConfig.address.street}</strong> — {siteConfig.address.neighborhood},{' '}
+              {siteConfig.address.city}, {siteConfig.address.state}
             </p>
           )}
         </FormSection>
 
-        <FormSection title="Pagamento">
-          <p className="-mt-1 text-xs text-ink-500">O pagamento é feito na entrega ou retirada.</p>
-          <div role="radiogroup" aria-label="Forma de pagamento" className="grid grid-cols-2 gap-2.5">
+        <FormSection title="Payment">
+          <p className="-mt-1 text-xs text-ink-500">You pay on delivery or at pickup.</p>
+          <div role="radiogroup" aria-label="Payment method" className="grid grid-cols-2 gap-2.5">
             {(Object.keys(paymentLabels) as PaymentMethod[]).map((method) => {
               const Icon = paymentIcons[method];
               return (
@@ -362,17 +362,17 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
             })}
           </div>
           {data.payment === 'pix' && (
-            <p className="text-xs text-ink-500">Enviamos a chave Pix pelo WhatsApp junto com a confirmação.</p>
+            <p className="text-xs text-ink-500">We’ll send our Pix key over WhatsApp with your confirmation.</p>
           )}
           {data.payment === 'dinheiro' && (
-            <Field label="Troco para quanto?" error={errors.changeFor} htmlFor="changeFor" hint="Deixe em branco se não precisar de troco.">
+            <Field label="Change for how much?" error={errors.changeFor} htmlFor="changeFor" hint="Leave blank if you don’t need change.">
               <input
                 id="changeFor"
                 name="changeFor"
                 inputMode="decimal"
                 value={data.changeFor}
                 onChange={(e) => update('changeFor', e.target.value.replace(/[^\d,.]/g, ''))}
-                placeholder="Ex.: 200"
+                placeholder="E.g. 200"
                 aria-invalid={Boolean(errors.changeFor)}
                 aria-describedby={errors.changeFor ? 'changeFor-error' : 'changeFor-hint'}
                 className={inputClass(errors.changeFor)}
@@ -381,9 +381,9 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
           )}
         </FormSection>
 
-        <FormSection title="Observações do pedido">
+        <FormSection title="Order notes">
           <label htmlFor="notes" className="sr-only">
-            Observações do pedido
+            Order notes
           </label>
           <textarea
             id="notes"
@@ -392,7 +392,7 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
             maxLength={300}
             value={data.notes}
             onChange={(e) => update('notes', e.target.value)}
-            placeholder="Ex.: interfone com defeito, ligar ao chegar…"
+            placeholder="E.g. buzzer is broken, please call on arrival…"
             className={cn(inputClass(), 'h-auto resize-none py-3')}
           />
         </FormSection>
@@ -404,7 +404,7 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
             onChange={(e) => setRemember(e.target.checked)}
             className="mt-0.5 size-4 accent-tomato-500"
           />
-          Lembrar meus dados neste aparelho para o próximo pedido.
+          Remember my details on this device for next time.
         </label>
       </div>
 
@@ -412,10 +412,10 @@ export function CheckoutForm({ lines, totals: cartTotals }: { lines: ResolvedCar
         <Summary totals={totals} mode={mode} />
         <Button type="submit" variant="whatsapp" size="lg" className="mt-4 w-full" disabled={submitting || Boolean(closedBlock)}>
           {submitting ? <LoaderCircle className="size-5 animate-spin" aria-hidden /> : <WhatsAppIcon className="size-5" />}
-          Enviar pedido pelo WhatsApp
+          Send order via WhatsApp
         </Button>
         <p className="mt-2.5 text-center text-xs text-ink-400">
-          Você revisa a mensagem no WhatsApp antes de enviar.
+          You can review the message in WhatsApp before sending.
         </p>
       </div>
     </form>

@@ -9,7 +9,7 @@ interface OpenStatusProps {
   className?: string;
 }
 
-/** Selo "Aberto agora · Fecha às 23:00", calculado no fuso da pizzaria. */
+/** Selo "Open now · Closes at 23:00", calculado no fuso da pizzaria. */
 export function OpenStatusBadge({ tone = 'light', showDetail = true, className }: OpenStatusProps) {
   const status = useOpenStatus();
 

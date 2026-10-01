@@ -8,95 +8,95 @@ import { photos } from './images';
  */
 
 export const navigation = [
-  { label: 'Início', href: '#inicio' },
-  { label: 'Cardápio', href: '#cardapio' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Avaliações', href: '#avaliacoes' },
-  { label: 'Contato', href: '#contato' },
+  { label: 'Home', href: '#home' },
+  { label: 'Menu', href: '#menu' },
+  { label: 'About', href: '#about' },
+  { label: 'Reviews', href: '#reviews' },
+  { label: 'Contact', href: '#contact' },
 ] as const;
 
 export const hero = {
-  eyebrow: 'Pizzaria artesanal · Delivery e retirada',
-  titleStart: 'A pizza que vale',
-  titleAccent: 'cada fatia.',
+  eyebrow: 'Artisan pizzeria · Delivery & pickup',
+  titleStart: 'Pizza worth',
+  titleAccent: 'every slice.',
   description:
-    'Massa de longa fermentação, molho de tomate da casa e ingredientes escolhidos a dedo. Monte seu pedido em poucos toques e receba quentinho em casa.',
+    'Slow-fermented dough, house-made tomato sauce and hand-picked ingredients. Build your order in a few taps and get it hot at your door.',
   image: photos.hero,
-  imageAlt: 'Pizza artesanal recém-saída do forno, vista de cima',
+  imageAlt: 'Artisan pizza fresh out of the oven, seen from above',
 };
 
 export const marqueeItems = [
   'Margherita',
   'Calabresa',
-  'Quatro Queijos',
-  'Parma & Rúcula',
+  'Four Cheese',
+  'Parma & Arugula',
   'Pepperoni',
   'Burrata',
-  'Funghi Trufado',
-  'Frango com Catupiry',
+  'Truffle Funghi',
+  'Chicken & Catupiry',
 ];
 
 export const about = {
-  eyebrow: 'Nossa história',
-  titleStart: 'Feita à mão,',
-  titleAccent: 'do jeito certo.',
+  eyebrow: 'Our story',
+  titleStart: 'Handmade,',
+  titleAccent: 'the right way.',
   paragraphs: [
-    'Tudo começou com uma ideia simples: fazer a pizza que a gente gostaria de comer em casa. Sem atalhos, sem pressa e com o mesmo cuidado de quem cozinha para a própria família.',
-    'Hoje cada pizza ainda nasce assim — massa preparada todos os dias, molho feito na casa e ingredientes escolhidos com critério. O resultado chega à sua mesa: borda leve e aerada, recheio na medida e aquele sabor que faz pedir de novo.',
+    'It all started with a simple idea: make the kind of pizza we would want to eat at home. No shortcuts, no rush, and the same care you would put into cooking for your own family.',
+    'Every pizza is still made that way — dough prepared daily, sauce made in house and ingredients chosen with care. What reaches your table is a light, airy crust, perfectly balanced toppings and the kind of flavor that makes you order again.',
   ],
   images: [
-    { src: photos.cozinha, alt: 'Preparo das pizzas na cozinha' },
-    { src: photos.margherita, alt: 'Pizza margherita com manjericão fresco' },
+    { src: photos.cozinha, alt: 'Pizzas being prepared in the kitchen' },
+    { src: photos.margherita, alt: 'Margherita pizza with fresh basil' },
   ],
   pillars: [
     {
       icon: 'wheat',
-      title: 'Massa artesanal',
-      text: 'Fermentação lenta para uma massa leve, aerada e fácil de digerir, com borda crocante por fora e macia por dentro.',
+      title: 'Artisan dough',
+      text: 'Slow fermentation for a light, airy and easy-to-digest dough, with a crust that is crisp outside and tender inside.',
     },
     {
       icon: 'leaf',
-      title: 'Ingredientes selecionados',
-      text: 'Tomates maduros, queijos de qualidade, ervas frescas e embutidos escolhidos para cada receita.',
+      title: 'Hand-picked ingredients',
+      text: 'Ripe tomatoes, quality cheeses, fresh herbs and cured meats chosen for each recipe.',
     },
     {
       icon: 'flame',
-      title: 'Forno bem quente',
-      text: 'Assamos em alta temperatura por poucos minutos — o segredo da borda dourada e do recheio suculento.',
+      title: 'A very hot oven',
+      text: 'Baked at high heat for just a few minutes — the secret to a golden crust and juicy toppings.',
     },
   ],
 } as const;
 
 export const process = {
-  eyebrow: 'Processo de produção',
-  title: 'Do preparo da massa à sua porta',
+  eyebrow: 'How we make it',
+  title: 'From the dough to your door',
   steps: [
     {
       icon: 'wheat',
-      title: 'A massa',
-      text: 'Farinha selecionada, água, sal e fermento. Sovada todos os dias, em pequenos lotes.',
+      title: 'The dough',
+      text: 'Select flour, water, salt and yeast. Kneaded every day, in small batches.',
     },
     {
       icon: 'timer',
-      title: 'O descanso',
-      text: 'A massa descansa por horas para desenvolver sabor, leveza e textura.',
+      title: 'The rest',
+      text: 'The dough rests for hours to develop flavor, lightness and texture.',
     },
     {
       icon: 'chef',
-      title: 'A montagem',
-      text: 'Aberta à mão e montada na hora do pedido, com recheio distribuído até a borda.',
+      title: 'The build',
+      text: 'Hand-stretched and topped to order, with toppings spread all the way to the edge.',
     },
     {
       icon: 'flame',
-      title: 'O forno',
-      text: 'Assada em alta temperatura e embalada para chegar quente e crocante.',
+      title: 'The oven',
+      text: 'Baked at high heat and packed to arrive hot and crispy.',
     },
   ],
 } as const;
 
 export const finalCta = {
-  title: 'Bateu a fome?',
-  text: 'Seu pedido sai em poucos toques. Escolha, personalize e finalize pelo WhatsApp.',
+  title: 'Getting hungry?',
+  text: 'Your order is just a few taps away. Choose, customize and send it over WhatsApp.',
   image: photos.pepperoni,
-  imageAlt: 'Pizza de pepperoni saindo do forno',
+  imageAlt: 'Pepperoni pizza fresh out of the oven',
 };

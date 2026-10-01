@@ -18,21 +18,21 @@ export interface OpeningHours {
 export const siteConfig = {
   name: 'Hunt Brothers Pizza',
   shortName: 'Hunt Brothers',
-  tagline: 'Pizzaria artesanal',
+  tagline: 'Artisan pizzeria',
   description:
-    'Pizzas artesanais com massa de longa fermentação, ingredientes selecionados e entrega rápida. Monte seu pedido em poucos toques e finalize pelo WhatsApp.',
+    'Artisan pizza made with slow-fermented dough, hand-picked ingredients and fast delivery. Build your order in a few taps and send it over WhatsApp.',
   keywords: [
-    'pizzaria',
-    'pizza artesanal',
-    'delivery de pizza',
+    'pizzeria',
+    'artisan pizza',
     'pizza delivery',
-    'pizza meio a meio',
-    'pizzaria perto de mim',
+    'pizza takeout',
+    'half and half pizza',
+    'pizza near me',
   ],
 
   /** URL pública do site (defina NEXT_PUBLIC_SITE_URL no ambiente de produção). */
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.suapizzaria.com.br',
-  locale: 'pt-BR',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.yourpizzeria.com',
+  locale: 'en-US',
   currency: 'BRL',
   /** Fuso usado para calcular "Aberto agora". */
   timeZone: 'America/Sao_Paulo',
@@ -42,18 +42,18 @@ export const siteConfig = {
     whatsapp: '5500000000000',
     /** Telefone como aparece no site. */
     phoneDisplay: '(00) 00000-0000',
-    email: 'contato@suapizzaria.com.br',
+    email: 'hello@yourpizzeria.com',
   },
 
   address: {
-    street: 'Rua Exemplo, 123',
-    neighborhood: 'Centro',
-    city: 'Sua Cidade',
-    state: 'UF',
+    street: '123 Example Street',
+    neighborhood: 'Downtown',
+    city: 'Your City',
+    state: 'ST',
     zip: '00000-000',
     country: 'BR',
     /** Texto usado para buscar o local no Google Maps (mapa e "Como chegar"). */
-    mapsQuery: 'Rua Exemplo, 123 - Centro, Sua Cidade - UF',
+    mapsQuery: '123 Example Street, Downtown, Your City',
     /** Opcional: cole aqui o link "Incorporar mapa" do Google Maps para precisão total. */
     mapsEmbedUrl: '',
     /** Coordenadas opcionais (melhoram o SEO local). */
@@ -61,11 +61,11 @@ export const siteConfig = {
   },
 
   social: {
-    instagram: 'https://www.instagram.com/suapizzaria',
-    instagramHandle: '@suapizzaria',
-    facebook: 'https://www.facebook.com/suapizzaria',
+    instagram: 'https://www.instagram.com/yourpizzeria',
+    instagramHandle: '@yourpizzeria',
+    facebook: 'https://www.facebook.com/yourpizzeria',
     /** Link para avaliar a pizzaria no Google (Perfil da Empresa). */
-    googleReviews: 'https://www.google.com/maps/search/?api=1&query=Sua+Pizzaria',
+    googleReviews: 'https://www.google.com/maps/search/?api=1&query=Your+Pizzeria',
   },
 
   delivery: {
@@ -79,7 +79,7 @@ export const siteConfig = {
     estimate: '40–60 min',
     pickupEstimate: '20–30 min',
     /** Cidade sugerida no formulário de endereço. */
-    defaultCity: 'Sua Cidade',
+    defaultCity: 'Your City',
   },
 
   ordering: {

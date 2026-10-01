@@ -19,7 +19,7 @@ const manrope = Manrope({
   display: 'swap',
 });
 
-const title = `${siteConfig.name} · ${siteConfig.tagline} com delivery`;
+const title = `${siteConfig.name} · ${siteConfig.tagline} with delivery`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    locale: 'pt_BR',
+    locale: 'en_US',
     url: '/',
     siteName: siteConfig.name,
     title,
@@ -56,7 +56,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
@@ -64,10 +64,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AppProviders>
           <div id="app-shell">
             <a
-              href="#cardapio"
+              href="#menu"
               className="fixed top-3 left-3 z-[100] -translate-y-24 rounded-full bg-ink-900 px-5 py-3 text-sm font-semibold text-cream-50 transition-transform focus:translate-y-0"
             >
-              Pular para o cardápio
+              Skip to menu
             </a>
             {children}
           </div>

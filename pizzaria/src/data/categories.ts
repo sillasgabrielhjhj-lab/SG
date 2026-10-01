@@ -5,31 +5,31 @@ export const categories: Category[] = [
   {
     id: 'pizzas',
     name: 'Pizzas',
-    description: 'As clássicas, feitas do jeito certo.',
+    description: 'The classics, done right.',
   },
   {
     id: 'especiais',
-    name: 'Especiais',
-    description: 'Criações da casa com ingredientes selecionados.',
+    name: 'Signature',
+    description: 'House creations with hand-picked ingredients.',
   },
   {
     id: 'doces',
-    name: 'Pizzas doces',
-    description: 'Para terminar a noite com algo doce.',
+    name: 'Sweet pizzas',
+    description: 'End the night on a sweet note.',
   },
   {
     id: 'combos',
     name: 'Combos',
-    description: 'Mais sabor por menos. Ideais para dividir.',
+    description: 'More flavor for less. Made for sharing.',
   },
   {
     id: 'bebidas',
-    name: 'Bebidas',
-    description: 'Geladas, do jeito que a pizza pede.',
+    name: 'Drinks',
+    description: 'Ice-cold, just the way pizza likes it.',
   },
   {
     id: 'sobremesas',
-    name: 'Sobremesas',
-    description: 'O final perfeito.',
+    name: 'Desserts',
+    description: 'The perfect ending.',
   },
 ];

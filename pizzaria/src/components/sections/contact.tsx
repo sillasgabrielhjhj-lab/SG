@@ -15,39 +15,39 @@ export function Contact() {
   const items = [
     {
       icon: MapPin,
-      title: 'Endereço',
-      lines: [address.street, `${address.neighborhood} · ${address.city}/${address.state}`, `CEP ${address.zip}`],
-      link: { href: directionsUrl, label: 'Como chegar' },
+      title: 'Address',
+      lines: [address.street, `${address.neighborhood} · ${address.city}, ${address.state}`, address.zip],
+      link: { href: directionsUrl, label: 'Get directions' },
     },
     {
       icon: Phone,
-      title: 'Telefone e WhatsApp',
+      title: 'Phone & WhatsApp',
       lines: [contact.phoneDisplay],
-      link: { href: whatsappLink('Olá! Vim pelo site.'), label: 'Chamar no WhatsApp' },
+      link: { href: whatsappLink('Hi! I found you through your website.'), label: 'Message on WhatsApp' },
     },
     {
       icon: InstagramIcon,
       title: 'Instagram',
       lines: [social.instagramHandle],
-      link: { href: social.instagram, label: 'Seguir' },
+      link: { href: social.instagram, label: 'Follow us' },
     },
     {
       icon: Mail,
-      title: 'E-mail',
+      title: 'Email',
       lines: [contact.email],
-      link: { href: `mailto:${contact.email}`, label: 'Enviar e-mail' },
+      link: { href: `mailto:${contact.email}`, label: 'Send an email' },
     },
   ];
 
   return (
-    <section id="contato" aria-labelledby="contato-title" className="bg-cream-50 py-20 lg:py-28">
+    <section id="contact" aria-labelledby="contact-title" className="bg-cream-50 py-20 lg:py-28">
       <div className="container-page">
         <SectionHeading
-          id="contato-title"
-          eyebrow="Contato"
+          id="contact-title"
+          eyebrow="Contact"
           title={
             <>
-              Venha até nós, <Accent>ou a gente vai até você.</Accent>
+              Come see us, <Accent>or we’ll come to you.</Accent>
             </>
           }
         />
@@ -83,19 +83,19 @@ export function Contact() {
 
             <div className="rounded-[1.5rem] bg-white p-6 shadow-[var(--shadow-soft)] ring-1 ring-ink-900/[0.05]">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-                <h3 className="text-display text-xl font-medium">Horários</h3>
+                <h3 className="text-display text-xl font-medium">Opening hours</h3>
                 <OpenStatusBadge showDetail={false} />
               </div>
               <HoursTable />
             </div>
 
             <a
-              href={whatsappLink('Olá! Gostaria de fazer um pedido.')}
+              href={whatsappLink("Hi! I'd like to place an order.")}
               target="_blank"
               rel="noopener noreferrer"
               className={buttonStyles({ variant: 'whatsapp', size: 'lg', className: 'w-full' })}
             >
-              <WhatsAppIcon className="size-5" /> Falar no WhatsApp
+              <WhatsAppIcon className="size-5" /> Chat on WhatsApp
             </a>
           </div>
 

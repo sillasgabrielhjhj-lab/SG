@@ -16,12 +16,12 @@ export function FinalCta() {
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-cream-50/85">{finalCta.text}</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <a href="#cardapio" className={buttonStyles({ variant: 'light', size: 'lg', className: 'group' })}>
-                Montar meu pedido
+              <a href="#menu" className={buttonStyles({ variant: 'light', size: 'lg', className: 'group' })}>
+                Start my order
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
               </a>
               <a
-                href={whatsappLink('Olá! Gostaria de fazer um pedido.')}
+                href={whatsappLink("Hi! I'd like to place an order.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonStyles({ variant: 'outline-light', size: 'lg' })}

@@ -7,7 +7,7 @@ import { useScrolled } from '@/hooks/use-scrolled';
 import { formatCents } from '@/lib/format';
 import { useUI } from '@/store/ui';
 
-/** Barra fixa no celular: "Pedir agora" ou, com itens, atalho para a sacola. */
+/** Barra fixa no celular: "Order now" ou, com itens, atalho para a sacola. */
 export function MobileOrderBar() {
   const { totals } = useCartSummary();
   const openCart = useUI((s) => s.openCart);
@@ -37,17 +37,17 @@ export function MobileOrderBar() {
                   {totals.itemCount}
                 </span>
               </span>
-              <span className="flex-1 text-left font-semibold">Ver sacola</span>
+              <span className="flex-1 text-left font-semibold">View cart</span>
               <span className="rounded-full bg-tomato-500 px-4 py-2.5 text-sm font-bold tabular-nums">
                 {formatCents(totals.totalCents)}
               </span>
             </button>
           ) : (
             <a
-              href="#cardapio"
+              href="#menu"
               className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-tomato-500 text-base font-bold text-white shadow-[0_16px_40px_-12px_rgb(227_27_44/0.8)] active:scale-[0.98]"
             >
-              <span aria-hidden>🍕</span> Pedir agora
+              <span aria-hidden>🍕</span> Order now
             </a>
           )}
         </m.div>

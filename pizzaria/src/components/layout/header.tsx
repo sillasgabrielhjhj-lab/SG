@@ -36,14 +36,14 @@ export function Header() {
     >
       <div className="container-page flex h-[var(--header-height)] items-center gap-4">
         <a
-          href="#inicio"
+          href="#home"
           className="-ml-1 shrink-0 rounded-lg p-1 transition-transform duration-300 hover:scale-[1.03]"
-          aria-label={`${siteConfig.name} — voltar ao início`}
+          aria-label={`${siteConfig.name} — back to top`}
         >
           <Logo priority className="h-10 lg:h-12" />
         </a>
 
-        <nav aria-label="Principal" className="ml-6 hidden lg:block">
+        <nav aria-label="Main" className="ml-6 hidden lg:block">
           <ul className="flex items-center gap-1">
             {navigation.map((item) => {
               const isActive = active === item.href.slice(1);
@@ -76,13 +76,13 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
           <OpenStatusBadge tone={solid ? 'light' : 'dark'} className="max-xl:hidden" />
           <CartButton solid={solid} />
-          <a href="#cardapio" className={buttonStyles({ size: 'md', className: 'max-md:hidden' })}>
-            Pedir agora
+          <a href="#menu" className={buttonStyles({ size: 'md', className: 'max-md:hidden' })}>
+            Order now
           </a>
           <button
             type="button"
             onClick={() => setMobileNav(true)}
-            aria-label="Abrir menu"
+            aria-label="Open menu"
             aria-expanded={mobileNavOpen}
             aria-controls="mobile-nav"
             className={cn(
@@ -109,7 +109,7 @@ function CartButton({ solid }: { solid: boolean }) {
     <button
       type="button"
       onClick={() => openCart()}
-      aria-label={count ? `Abrir sacola, ${count} ${count === 1 ? 'item' : 'itens'}` : 'Abrir sacola (vazia)'}
+      aria-label={count ? `Open cart, ${count} ${count === 1 ? 'item' : 'items'}` : 'Open cart (empty)'}
       className={cn(
         'relative inline-flex size-11 items-center justify-center rounded-full transition-colors',
         solid ? 'bg-white text-ink-900 shadow-[var(--shadow-ring)] hover:bg-cream-100' : 'bg-cream-50/10 text-cream-50 hover:bg-cream-50/20',
@@ -144,7 +144,7 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
           <button
             type="button"
             onClick={onClose}
-            aria-label="Fechar menu"
+            aria-label="Close menu"
             data-autofocus
             className="inline-flex size-11 items-center justify-center rounded-full hover:bg-cream-50/10"
           >
@@ -152,7 +152,7 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
           </button>
         </div>
 
-        <nav aria-label="Menu móvel" className="flex-1 overflow-y-auto px-6 pt-6">
+        <nav aria-label="Mobile menu" className="flex-1 overflow-y-auto px-6 pt-6">
           <ul className="space-y-1">
             {navigation.map((item, i) => (
               <m.li
@@ -179,12 +179,12 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
         </nav>
 
         <div className="space-y-3 px-6 pt-4 pb-safe">
-          <a href="#cardapio" onClick={onClose} className={buttonStyles({ size: 'lg', className: 'w-full' })}>
-            Pedir agora
+          <a href="#menu" onClick={onClose} className={buttonStyles({ size: 'lg', className: 'w-full' })}>
+            Order now
           </a>
           <div className="flex gap-3">
             <a
-              href={whatsappLink('Olá! Gostaria de fazer um pedido.')}
+              href={whatsappLink("Hi! I'd like to place an order.")}
               target="_blank"
               rel="noopener noreferrer"
               className={buttonStyles({ variant: 'outline-light', className: 'flex-1' })}

@@ -20,7 +20,7 @@ export function restaurantJsonLd() {
     telephone: `+${contact.whatsapp}`,
     email: contact.email,
     priceRange: siteConfig.priceRange,
-    servesCuisine: ['Pizza', 'Italiana'],
+    servesCuisine: ['Pizza', 'Italian'],
     acceptsReservations: false,
     address: {
       '@type': 'PostalAddress',
@@ -35,8 +35,8 @@ export function restaurantJsonLd() {
     openingHoursSpecification: getSchemaOpeningHours(),
     hasMenu: {
       '@type': 'Menu',
-      name: 'Cardápio',
-      url: `${siteConfig.url}/#cardapio`,
+      name: 'Menu',
+      url: `${siteConfig.url}/#menu`,
       hasMenuSection: categories.map((category) => ({
         '@type': 'MenuSection',
         name: category.name,

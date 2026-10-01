@@ -48,16 +48,16 @@ export function getUnitPriceCents(selection: ItemSelection): number | null {
 /** Valida uma seleção contra o cardápio atual. Retorna a primeira mensagem de erro, se houver. */
 export function validateSelection(selection: ItemSelection): string | null {
   const product = getProduct(selection.productId);
-  if (!product) return 'Produto indisponível.';
-  if (!isAvailable(product)) return `${product.name} está esgotado no momento.`;
+  if (!product) return 'This item is unavailable.';
+  if (!isAvailable(product)) return `${product.name} is sold out right now.`;
   if (product.sizes?.length && !product.sizes.some((s) => s.id === selection.sizeId)) {
-    return 'Escolha um tamanho.';
+    return 'Choose a size.';
   }
   for (const group of getOptionGroups(product)) {
     const chosen = selection.options[group.id] ?? [];
-    if (group.required && chosen.length === 0) return `Escolha: ${group.title.toLowerCase()}.`;
-    if (group.type === 'single' && chosen.length > 1) return `Escolha apenas 1 em ${group.title.toLowerCase()}.`;
-    if (group.max && chosen.length > group.max) return `Máximo de ${group.max} em ${group.title.toLowerCase()}.`;
+    if (group.required && chosen.length === 0) return `Choose: ${group.title.toLowerCase()}.`;
+    if (group.type === 'single' && chosen.length > 1) return `Choose only 1 for ${group.title.toLowerCase()}.`;
+    if (group.max && chosen.length > group.max) return `Up to ${group.max} for ${group.title.toLowerCase()}.`;
   }
   return null;
 }

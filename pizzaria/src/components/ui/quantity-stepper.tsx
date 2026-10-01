@@ -35,7 +35,7 @@ export function QuantityStepper({
   return (
     <div
       role="group"
-      aria-label={`Quantidade de ${itemName}`}
+      aria-label={`Quantity of ${itemName}`}
       className={cn(
         'inline-flex items-center rounded-full border border-ink-900/10 bg-white',
         size === 'sm' ? 'p-0.5' : 'p-1',
@@ -47,13 +47,13 @@ export function QuantityStepper({
         className={btn}
         onClick={() => onChange(value - 1)}
         disabled={!allowRemove && value <= min}
-        aria-label={showTrash ? `Remover ${itemName}` : `Diminuir quantidade de ${itemName}`}
+        aria-label={showTrash ? `Remove ${itemName}` : `Decrease quantity of ${itemName}`}
       >
         {showTrash ? <Trash className="size-4 text-tomato-600" aria-hidden /> : <Minus className="size-4" aria-hidden />}
       </button>
       <output
         aria-live="polite"
-        aria-label={`${value} ${value === 1 ? 'unidade' : 'unidades'}`}
+        aria-label={`${value} ${value === 1 ? 'unit' : 'units'}`}
         className={cn('min-w-7 text-center font-semibold tabular-nums', size === 'sm' ? 'text-sm' : 'text-base')}
       >
         {value}
@@ -63,7 +63,7 @@ export function QuantityStepper({
         className={btn}
         onClick={() => onChange(value + 1)}
         disabled={value >= max}
-        aria-label={`Aumentar quantidade de ${itemName}`}
+        aria-label={`Increase quantity of ${itemName}`}
       >
         <Plus className="size-4" aria-hidden />
       </button>

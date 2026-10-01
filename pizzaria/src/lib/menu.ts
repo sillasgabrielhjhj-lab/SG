@@ -21,11 +21,11 @@ export function isAvailable(product: Product): boolean {
 export const featuredProducts = products.filter((p) => p.featured);
 
 export const tagLabels: Record<ProductTag, string> = {
-  'mais-pedido': 'Mais pedido',
-  vegetariano: 'Vegetariano',
-  picante: 'Picante',
-  novidade: 'Novidade',
-  chef: 'Sugestão do chef',
+  'mais-pedido': 'Best seller',
+  vegetariano: 'Vegetarian',
+  picante: 'Spicy',
+  novidade: 'New',
+  chef: "Chef's pick",
 };
 
 /** Menor preço do produto (para exibir "a partir de"). */

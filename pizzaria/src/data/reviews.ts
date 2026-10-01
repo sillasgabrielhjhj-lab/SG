@@ -9,7 +9,7 @@
 export interface Review {
   id: string;
   name: string;
-  /** Ex.: "Cliente desde 2024 · via Google" */
+  /** Ex.: "Customer since 2024 · on Google" */
   source: string;
   rating: 1 | 2 | 3 | 4 | 5;
   text: string;
@@ -20,50 +20,50 @@ export interface Review {
 export const reviews: Review[] = [
   {
     id: 'r1',
-    name: 'Nome do cliente',
-    source: 'Avaliação via Google',
+    name: 'Customer name',
+    source: 'Review on Google',
     rating: 5,
-    text: 'Espaço reservado para um depoimento real sobre o sabor e a massa das pizzas. Copie aqui uma avaliação verdadeira de um cliente.',
+    text: 'Placeholder for a real testimonial about the flavor and the dough. Paste a genuine customer review here.',
     placeholder: true,
   },
   {
     id: 'r2',
-    name: 'Nome do cliente',
-    source: 'Avaliação via iFood',
+    name: 'Customer name',
+    source: 'Review on iFood',
     rating: 5,
-    text: 'Espaço reservado para um depoimento real sobre a entrega: tempo, temperatura da pizza e cuidado com a embalagem.',
+    text: 'Placeholder for a real testimonial about delivery: timing, how hot the pizza arrived and the packaging.',
     placeholder: true,
   },
   {
     id: 'r3',
-    name: 'Nome do cliente',
-    source: 'Avaliação via Instagram',
+    name: 'Customer name',
+    source: 'Review on Instagram',
     rating: 5,
-    text: 'Espaço reservado para um depoimento real sobre o atendimento e a experiência de pedir pelo WhatsApp.',
+    text: 'Placeholder for a real testimonial about the service and ordering through WhatsApp.',
     placeholder: true,
   },
   {
     id: 'r4',
-    name: 'Nome do cliente',
-    source: 'Avaliação via Google',
+    name: 'Customer name',
+    source: 'Review on Google',
     rating: 5,
-    text: 'Espaço reservado para um depoimento real sobre uma pizza especial ou um sabor favorito do cardápio.',
+    text: 'Placeholder for a real testimonial about a signature pizza or a favorite flavor.',
     placeholder: true,
   },
   {
     id: 'r5',
-    name: 'Nome do cliente',
-    source: 'Avaliação via Google',
+    name: 'Customer name',
+    source: 'Review on Google',
     rating: 5,
-    text: 'Espaço reservado para um depoimento real sobre o custo-benefício dos combos e o tamanho das pizzas.',
+    text: 'Placeholder for a real testimonial about combo value and pizza sizes.',
     placeholder: true,
   },
   {
     id: 'r6',
-    name: 'Nome do cliente',
-    source: 'Avaliação via iFood',
+    name: 'Customer name',
+    source: 'Review on iFood',
     rating: 5,
-    text: 'Espaço reservado para um depoimento real sobre as sobremesas ou as pizzas doces.',
+    text: 'Placeholder for a real testimonial about the desserts or sweet pizzas.',
     placeholder: true,
   },
 ];

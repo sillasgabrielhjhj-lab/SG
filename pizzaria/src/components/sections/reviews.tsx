@@ -8,18 +8,18 @@ import { cn } from '@/lib/utils';
 
 export function Reviews() {
   return (
-    <section id="avaliacoes" aria-labelledby="avaliacoes-title" className="bg-cream-50 py-20 lg:py-28">
+    <section id="reviews" aria-labelledby="reviews-title" className="bg-cream-50 py-20 lg:py-28">
       <div className="container-page">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
-            id="avaliacoes-title"
-            eyebrow="Avaliações"
+            id="reviews-title"
+            eyebrow="Reviews"
             title={
               <>
-                Quem prova, <Accent>volta.</Accent>
+                One bite and <Accent>you’re back.</Accent>
               </>
             }
-            description="A opinião de quem já pediu é o que mais importa para a gente."
+            description="What our customers say is what matters most to us."
           />
           <a
             href={siteConfig.social.googleReviews}
@@ -28,7 +28,7 @@ export function Reviews() {
             className={buttonStyles({ variant: 'outline', className: 'shrink-0 self-start md:self-auto' })}
           >
             <Star className="size-4 fill-gold-400 text-gold-400" aria-hidden />
-            Avaliar no Google
+            Review us on Google
           </a>
         </div>
 
@@ -42,7 +42,7 @@ export function Reviews() {
             >
               <figure className="relative flex h-full flex-col rounded-[1.75rem] bg-white p-7 shadow-[var(--shadow-soft)] ring-1 ring-ink-900/[0.05]">
                 <div className="flex items-center justify-between">
-                  <div className="flex gap-0.5" role="img" aria-label={`${review.rating} de 5 estrelas`}>
+                  <div className="flex gap-0.5" role="img" aria-label={`${review.rating} out of 5 stars`}>
                     {Array.from({ length: 5 }, (_, s) => (
                       <Star
                         key={s}
@@ -53,7 +53,7 @@ export function Reviews() {
                   </div>
                   {review.placeholder && (
                     <span className="rounded-full bg-cream-200 px-2.5 py-0.5 text-[0.6875rem] font-bold tracking-wide text-ink-500 uppercase">
-                      Exemplo
+                      Sample
                     </span>
                   )}
                 </div>

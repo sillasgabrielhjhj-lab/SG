@@ -40,13 +40,13 @@ export function MapEmbed({ directionsUrl }: { directionsUrl: string }) {
           <span className="skeleton absolute inset-0" aria-hidden />
           <MapPin className="relative size-8 text-tomato-500" aria-hidden />
           <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="relative text-sm font-semibold underline">
-            Abrir no Google Maps
+            Open in Google Maps
           </a>
         </div>
       )}
       {visible && (
         <iframe
-          title={`Mapa: localização da ${siteConfig.name}`}
+          title={`Map: ${siteConfig.name} location`}
           src={src}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

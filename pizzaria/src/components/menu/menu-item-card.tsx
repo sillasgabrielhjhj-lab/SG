@@ -31,7 +31,7 @@ export function MenuItemCard({ product }: { product: Product }) {
             className="text-left after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-tomato-500"
           >
             {product.name}
-            <span className="sr-only">, ver detalhes</span>
+            <span className="sr-only">, see details</span>
           </button>
         </h4>
         <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-ink-500">{product.description}</p>
@@ -39,10 +39,10 @@ export function MenuItemCard({ product }: { product: Product }) {
         <ProductTags tags={product.tags} size="xs" className="mt-2.5" />
         <p className="mt-auto pt-3 text-[0.9375rem] font-bold text-ink-900">
           {!available ? (
-            <span className="text-tomato-700">Esgotado</span>
+            <span className="text-tomato-700">Sold out</span>
           ) : (
             <>
-              {hasMultiplePrices(product) && <span className="mr-1 text-xs font-medium text-ink-400">a partir de</span>}
+              {hasMultiplePrices(product) && <span className="mr-1 text-xs font-medium text-ink-400">from</span>}
               {formatPrice(getStartingPrice(product))}
             </>
           )}
@@ -63,7 +63,7 @@ export function MenuItemCard({ product }: { product: Product }) {
             <button
               type="button"
               onClick={() => add(product)}
-              aria-label={`Adicionar ${product.name} à sacola`}
+              aria-label={`Add ${product.name} to cart`}
               className="absolute -right-1.5 -bottom-1.5 z-10 inline-flex size-10 items-center justify-center rounded-full bg-tomato-500 text-white shadow-lg ring-4 ring-white transition-transform hover:scale-105 active:scale-95"
             >
               <Plus className="size-5" aria-hidden />

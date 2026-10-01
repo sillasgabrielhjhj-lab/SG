@@ -40,8 +40,8 @@ export function Footer() {
           </ul>
         </div>
 
-        <nav aria-label="Rodapé" className="lg:col-span-2">
-          <h2 className="text-sm font-bold tracking-[0.16em] text-cream-50 uppercase">Navegação</h2>
+        <nav aria-label="Footer" className="lg:col-span-2">
+          <h2 className="text-sm font-bold tracking-[0.16em] text-cream-50 uppercase">Navigate</h2>
           <ul className="mt-5 space-y-3">
             {navigation.map((item) => (
               <li key={item.href}>
@@ -54,7 +54,7 @@ export function Footer() {
         </nav>
 
         <div className="lg:col-span-3">
-          <h2 className="text-sm font-bold tracking-[0.16em] text-cream-50 uppercase">Contato</h2>
+          <h2 className="text-sm font-bold tracking-[0.16em] text-cream-50 uppercase">Contact</h2>
           <address className="mt-5 space-y-3 not-italic">
             <p>
               {address.street}
@@ -75,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-3">
-          <h2 className="text-sm font-bold tracking-[0.16em] text-cream-50 uppercase">Horários</h2>
+          <h2 className="text-sm font-bold tracking-[0.16em] text-cream-50 uppercase">Hours</h2>
           <ul className="mt-5 space-y-2 text-[0.9375rem]">
             {openDays.map((d) => (
               <li key={d.day} className="flex justify-between gap-4">
@@ -90,17 +90,17 @@ export function Footer() {
       <div className="border-t border-cream-50/[0.08]">
         <div className="container-page flex flex-col gap-4 py-6 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {siteConfig.name}. Todos os direitos reservados.
+            © {year} {siteConfig.name}. All rights reserved.
           </p>
           <ul className="flex gap-6">
             <li>
-              <Link href="/privacidade" className="hover:text-cream-50">
-                Política de privacidade
+              <Link href="/privacy" className="hover:text-cream-50">
+                Privacy policy
               </Link>
             </li>
             <li>
-              <Link href="/termos" className="hover:text-cream-50">
-                Termos de uso
+              <Link href="/terms" className="hover:text-cream-50">
+                Terms of use
               </Link>
             </li>
           </ul>

@@ -6,24 +6,24 @@ import { featuredProducts } from '@/lib/menu';
 
 export function Highlights() {
   return (
-    <section id="destaques" aria-labelledby="destaques-title" className="bg-cream-100 py-20 lg:py-28">
+    <section id="featured" aria-labelledby="featured-title" className="bg-cream-100 py-20 lg:py-28">
       <div className="container-page">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
-            id="destaques-title"
-            eyebrow="Os mais pedidos"
+            id="featured-title"
+            eyebrow="Best sellers"
             title={
               <>
-                Os favoritos <Accent>da casa.</Accent>
+                House <Accent>favorites.</Accent>
               </>
             }
-            description="As pizzas que nossos clientes pedem de novo e de novo. Todas podem ser meio a meio."
+            description="The pizzas our customers order again and again. Every one can be made half & half."
           />
           <a
-            href="#cardapio"
+            href="#menu"
             className="group inline-flex shrink-0 items-center gap-2 text-[0.9375rem] font-semibold text-ink-900 underline-offset-4 hover:underline"
           >
-            Ver cardápio completo
+            See the full menu
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
           </a>
         </div>

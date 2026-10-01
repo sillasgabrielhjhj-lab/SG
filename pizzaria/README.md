@@ -1,6 +1,6 @@
 # Pizzaria — site de pedidos (Next.js)
 
-Site da **Hunt Brothers Pizza** focado em gerar pedidos: o cliente escolhe a pizza, personaliza (tamanho, meio a meio, borda, adicionais, observações), revisa a sacola e finaliza pelo **WhatsApp** com a mensagem do pedido montada automaticamente.
+Site da **Hunt Brothers Pizza** (em **inglês**) focado em gerar pedidos: o cliente escolhe a pizza, personaliza (tamanho, meio a meio, borda, adicionais, observações), revisa a sacola e finaliza pelo **WhatsApp** com a mensagem do pedido montada automaticamente.
 
 **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Framer Motion · Lucide · Zustand
 
@@ -27,6 +27,8 @@ npm run lint && npm run typecheck
 | Textos (hero, história, processo, chamada final) | `src/data/content.ts` |
 | Logo | `public/brand/logo.png` (gerada por `node scripts/prepare-brand.mjs` a partir de `scripts/logo-original.png`) |
 
+> Idioma: todos os textos visíveis estão em inglês; os comentários do código continuam em português para facilitar a manutenção. A moeda é definida em `currency` (hoje `BRL`) e o formato em `locale` (hoje `en-US`), ambos em `src/config/site.ts`.
+>
 > Todas as informações de contato, endereço, horários e preços são **placeholders**. Em desenvolvimento, o console avisa enquanto o número de WhatsApp não for configurado.
 
 ## Funcionalidades
@@ -37,8 +39,8 @@ npm run lint && npm run typecheck
 - Sacola: editar item, quantidades, progresso para **entrega grátis**, pedido mínimo, sugestões de bebidas/sobremesas, entrega ou retirada
 - Checkout com validação, máscara de telefone, **busca de endereço por CEP** (ViaCEP), troco, e “lembrar meus dados”
 - Mensagem completa do pedido enviada ao WhatsApp + tela de confirmação (reabrir WhatsApp / copiar pedido)
-- Barra fixa no celular **“🍕 Pedir agora”** (vira “Ver sacola” quando há itens)
-- Sobre, processo de produção, avaliações, galeria com lightbox (teclado e swipe), contato com mapa sob demanda, rodapé e páginas de privacidade/termos
+- Barra fixa no celular **“🍕 Order now”** (vira “View cart” quando há itens)
+- Sobre, processo de produção, avaliações, galeria com lightbox (teclado e swipe), contato com mapa sob demanda, rodapé e páginas de privacidade/termos (`/privacy` e `/terms`)
 - SEO: metadados, Open Graph, JSON-LD `Restaurant` com cardápio, sitemap, robots, manifest
 - Acessibilidade: foco visível, modais com foco preso e Esc, rótulos, `prefers-reduced-motion`
 - Performance: páginas estáticas, imagens responsivas (AVIF/WebP via CDN), lazy loading, modais carregados sob demanda

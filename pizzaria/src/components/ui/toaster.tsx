@@ -44,13 +44,13 @@ export function Toaster() {
                 onClick={() => openCart()}
                 className="shrink-0 rounded-full bg-cream-50/10 px-3 py-1.5 text-xs font-bold text-cream-50 transition-colors hover:bg-cream-50/20"
               >
-                Ver sacola
+                View cart
               </button>
             )}
             <button
               type="button"
               onClick={dismiss}
-              aria-label="Fechar aviso"
+              aria-label="Dismiss notification"
               className="shrink-0 rounded-full p-1.5 text-cream-50/60 transition-colors hover:bg-cream-50/10 hover:text-cream-50"
             >
               <X className="size-4" aria-hidden />
