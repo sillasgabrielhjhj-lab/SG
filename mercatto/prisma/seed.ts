@@ -229,6 +229,17 @@ async function main() {
   // deploys futuros.
   const existingProductCount = await prisma.product.count();
   if (existingProductCount > 0) {
+    // Ação administrativa pontual: desativa todo o catálogo de demonstração
+    // de uma vez (não apaga — produtos com pedido vinculado não podem ser
+    // apagados, e desativado já é suficiente pra sumir da loja). Disparado
+    // só quando a variável de ambiente está explicitamente "true"; nunca
+    // roda sozinho.
+    if (process.env.DEACTIVATE_DEMO_PRODUCTS === "true") {
+      const result = await prisma.product.updateMany({ where: { isActive: true }, data: { isActive: false } });
+      console.log(`Seed: ${result.count} produto(s) de demonstração desativados (DEACTIVATE_DEMO_PRODUCTS=true).`);
+      return;
+    }
+
     console.log(
       `Seed: ${existingProductCount} produto(s) já existem no banco — pulando (nada foi alterado).`,
     );
