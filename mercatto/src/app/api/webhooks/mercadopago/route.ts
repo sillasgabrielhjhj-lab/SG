@@ -4,6 +4,7 @@ import { MercadoPagoConfig, Payment as MPPayment } from "mercadopago";
 
 import { prisma } from "@/lib/prisma";
 import { logAudit } from "@/lib/audit";
+import { notifyUser } from "@/lib/notifications";
 
 /**
  * Notificação do Mercado Pago (Checkout Pro). O corpo do POST nunca é
@@ -78,6 +79,16 @@ export async function POST(request: NextRequest) {
       await tx.order.update({ where: { id: order.id }, data: { status: "PAYMENT_APPROVED" } });
     }
   });
+
+  if (paymentStatus === "APPROVED" && order.status === "AWAITING_PAYMENT") {
+    await notifyUser({
+      userId: order.userId,
+      type: "ORDER_UPDATE",
+      title: "Pagamento aprovado!",
+      message: `O pagamento do pedido ${order.orderNumber} foi aprovado.`,
+      linkUrl: `/minha-conta/pedidos/${order.orderNumber}`,
+    });
+  }
 
   await logAudit({
     userId: null,

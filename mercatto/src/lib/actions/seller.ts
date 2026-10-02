@@ -7,9 +7,16 @@ import { prisma } from "@/lib/prisma";
 import { requireUser, requireRole } from "@/lib/auth/guards";
 import { slugify } from "@/lib/slugify";
 import { logAudit } from "@/lib/audit";
+import { notifyUser } from "@/lib/notifications";
 import { becomeSellerSchema } from "@/lib/validation/seller";
 import { productSchema } from "@/lib/validation/product";
 import type { ActionState } from "@/lib/actions/auth";
+
+const STATUS_NOTIFICATION: Partial<Record<string, { title: string; message: string }>> = {
+  SHIPPED: { title: "Pedido enviado!", message: "Seu pedido foi enviado e está a caminho." },
+  IN_TRANSIT: { title: "Pedido em trânsito", message: "Seu pedido está em trânsito até você." },
+  DELIVERED: { title: "Pedido entregue!", message: "Seu pedido foi entregue. Aproveite a compra!" },
+};
 
 export async function becomeSellerAction(
   _prev: ActionState,
@@ -304,6 +311,17 @@ export async function advanceOrderStatusAction(
     entityId: order.id,
     metadata: { from: order.status, to: nextStatus },
   });
+
+  const notification = STATUS_NOTIFICATION[nextStatus];
+  if (notification) {
+    await notifyUser({
+      userId: order.userId,
+      type: "ORDER_UPDATE",
+      title: notification.title,
+      message: notification.message,
+      linkUrl: `/minha-conta/pedidos/${orderNumber}`,
+    });
+  }
 
   revalidatePath(`/vendedor/pedidos/${orderNumber}`);
   revalidatePath("/vendedor/pedidos");

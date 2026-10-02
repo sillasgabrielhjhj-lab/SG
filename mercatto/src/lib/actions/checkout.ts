@@ -10,6 +10,7 @@ import { getShippingOptions } from "@/lib/shipping";
 import { getPaymentProvider } from "@/lib/payments/provider";
 import { placeOrderSchema } from "@/lib/validation/checkout";
 import { logAudit } from "@/lib/audit";
+import { notifyUser } from "@/lib/notifications";
 import type { ActionState } from "@/lib/actions/auth";
 
 function generateOrderNumber() {
@@ -298,6 +299,16 @@ export async function placeOrderAction(
     entityId: orderNumber,
     metadata: { totalCents: summary.totalCents, paymentMethod },
   });
+
+  if (orderStatus === "PAYMENT_APPROVED") {
+    await notifyUser({
+      userId: user.id,
+      type: "ORDER_UPDATE",
+      title: "Pagamento aprovado!",
+      message: `O pagamento do pedido ${orderNumber} foi aprovado.`,
+      linkUrl: `/minha-conta/pedidos/${orderNumber}`,
+    });
+  }
 
   // Redireciona (em vez de devolver o estado de sucesso) para uma página
   // de confirmação com URL própria — assim um refresh do carrinho/header
