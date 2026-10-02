@@ -17,13 +17,27 @@ import { Badge } from "@/components/ui/badge";
 
 type Props = { params: Promise<{ slug: string }> };
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return {};
+
+  const description = product.description.slice(0, 160);
+  const imageUrl = product.images[0] ? `${APP_URL}${product.images[0].url}` : undefined;
+
   return {
     title: product.name,
-    description: product.description.slice(0, 160),
+    description,
+    alternates: { canonical: `${APP_URL}/produto/${product.slug}` },
+    openGraph: {
+      title: product.name,
+      description,
+      url: `${APP_URL}/produto/${product.slug}`,
+      type: "website",
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+    },
   };
 }
 
@@ -35,8 +49,75 @@ export default async function ProductPage({ params }: Props) {
 
   const related = await getRelatedProducts(product.categoryId, product.id);
 
+  const baseAvailable = product.inventory
+    ? product.inventory.quantity - product.inventory.reserved > 0
+    : product.variants.some((v) => v.inventory && v.inventory.quantity - v.inventory.reserved > 0);
+
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    sku: product.sku,
+    image: product.images.map((img) => `${APP_URL}${img.url}`),
+    ...(product.brand ? { brand: { "@type": "Brand", name: product.brand.name } } : {}),
+    offers: {
+      "@type": "Offer",
+      url: `${APP_URL}/produto/${product.slug}`,
+      priceCurrency: "BRL",
+      price: (product.priceCents / 100).toFixed(2),
+      availability: baseAvailable
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      seller: { "@type": "Organization", name: product.seller.storeName },
+    },
+    ...(product.ratingCount > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: product.ratingAvg.toFixed(1),
+            reviewCount: product.ratingCount,
+          },
+        }
+      : {}),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Mercatto", item: APP_URL },
+      ...(product.category.parent
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: product.category.parent.name,
+              item: `${APP_URL}/categoria/${product.category.parent.slug}`,
+            },
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: product.category.parent ? 3 : 2,
+        name: product.category.name,
+        item: `${APP_URL}/categoria/${product.category.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <main className="flex-1">
         <div className="container-page py-6">

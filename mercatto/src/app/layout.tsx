@@ -16,13 +16,30 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+const DESCRIPTION =
+  "Mercatto é o marketplace onde você encontra milhares de produtos de vendedores verificados, com entrega rápida e compra protegida.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
   title: {
     default: "Mercatto — Compre e venda com confiança",
     template: "%s | Mercatto",
   },
-  description:
-    "Mercatto é o marketplace onde você encontra milhares de produtos de vendedores verificados, com entrega rápida e compra protegida.",
+  description: DESCRIPTION,
+  openGraph: {
+    siteName: "Mercatto",
+    locale: "pt_BR",
+    type: "website",
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Mercatto",
+  url: APP_URL,
+  description: DESCRIPTION,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -34,6 +51,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         {children}
         <Toaster position="top-center" richColors closeButton />
       </body>

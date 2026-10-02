@@ -20,11 +20,25 @@ type Props = {
   searchParams: Promise<RawSearchParams>;
 };
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const category = await getCategoryBySlug(slug);
   if (!category) return {};
-  return { title: category.name };
+
+  const description = category.description?.slice(0, 160) ?? `Compre ${category.name} no Mercatto com entrega rápida e compra protegida.`;
+  const canonical = `${APP_URL}/categoria/${slug}`;
+
+  return {
+    title: category.name,
+    description,
+    // Páginas de categoria têm muitas variações de query string (filtro,
+    // ordenação, página) — o canonical aponta sempre pra URL base, pra não
+    // espalhar o sinal de ranking entre dezenas de combinações.
+    alternates: { canonical },
+    openGraph: { title: category.name, description, url: canonical, type: "website" },
+  };
 }
 
 export default async function CategoryPage({ params, searchParams }: Props) {
@@ -43,8 +57,37 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
   const basePath = `/categoria/${slug}`;
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Mercatto", item: APP_URL },
+      ...(category.parent
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: category.parent.name,
+              item: `${APP_URL}/categoria/${category.parent.slug}`,
+            },
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: category.parent ? 3 : 2,
+        name: category.name,
+        item: `${APP_URL}${basePath}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <main className="flex-1">
         <div className="container-page py-6">
