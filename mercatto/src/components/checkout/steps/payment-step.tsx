@@ -23,6 +23,7 @@ export function PaymentStep({
   card,
   onCardChange,
   totalCents,
+  usesExternalCheckout = false,
   onBack,
   onContinue,
 }: {
@@ -33,12 +34,38 @@ export function PaymentStep({
   card: CardDetails;
   onCardChange: (c: CardDetails) => void;
   totalCents: number;
+  usesExternalCheckout?: boolean;
   onBack: () => void;
   onContinue: () => void;
 }) {
   const cardComplete =
+    usesExternalCheckout ||
     method !== "CREDIT_CARD" ||
     (card.number.replace(/\D/g, "").length >= 13 && card.name.trim().length > 2 && card.expiry.length >= 4 && card.cvv.length >= 3);
+
+  if (usesExternalCheckout) {
+    return (
+      <div className="flex flex-col gap-4 rounded-xl border border-border p-5">
+        <h2 className="font-display text-lg font-semibold text-foreground">Pagamento</h2>
+        <div className="flex items-center gap-1.5 rounded-md bg-secondary/60 px-3 py-2 text-xs text-muted-foreground">
+          <Info className="size-3.5 shrink-0" />
+          Na próxima etapa você será levado a uma página segura do Mercado Pago para escolher entre
+          cartão, Pix ou boleto e concluir o pagamento.
+        </div>
+        <p className="text-sm text-muted-foreground">
+          Total: <span className="font-medium text-foreground">{formatCurrencyBRL(totalCents)}</span>
+        </p>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={onBack}>
+            <ArrowLeft className="size-4" /> Voltar
+          </Button>
+          <Button onClick={onContinue}>
+            Continuar <ArrowRight className="size-4" />
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-4 rounded-xl border border-border p-5">

@@ -1,4 +1,4 @@
-import { ArrowLeft, Loader2, Lock } from "lucide-react";
+import { ArrowLeft, ExternalLink, Loader2, Lock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { formatCurrencyBRL } from "@/lib/utils";
@@ -23,6 +23,7 @@ export function ReviewStep({
   isPending,
   errorMessage,
   hiddenFields,
+  usesExternalCheckout = false,
   onBack,
 }: {
   address: CheckoutAddress;
@@ -35,6 +36,7 @@ export function ReviewStep({
   isPending: boolean;
   errorMessage?: string;
   hiddenFields: Record<string, string>;
+  usesExternalCheckout?: boolean;
   onBack: () => void;
 }) {
   return (
@@ -81,8 +83,9 @@ export function ReviewStep({
             </p>
             <p className="text-xs font-semibold text-muted-foreground uppercase mt-3">Pagamento</p>
             <p className="mt-1 text-sm text-foreground">
-              {PAYMENT_LABELS[paymentMethod]}
-              {paymentMethod === "CREDIT_CARD" && installments > 1 ? ` em ${installments}x` : ""}
+              {usesExternalCheckout
+                ? "Escolha na próxima tela (Mercado Pago)"
+                : `${PAYMENT_LABELS[paymentMethod]}${paymentMethod === "CREDIT_CARD" && installments > 1 ? ` em ${installments}x` : ""}`}
             </p>
           </div>
         </div>
@@ -122,8 +125,14 @@ export function ReviewStep({
           <ArrowLeft className="size-4" /> Voltar
         </Button>
         <Button type="submit" size="lg" disabled={isPending} className="flex-1 sm:flex-none">
-          {isPending ? <Loader2 className="size-4 animate-spin" /> : <Lock className="size-4" />}
-          Confirmar pedido
+          {isPending ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : usesExternalCheckout ? (
+            <ExternalLink className="size-4" />
+          ) : (
+            <Lock className="size-4" />
+          )}
+          {usesExternalCheckout ? "Ir para o Mercado Pago" : "Confirmar pedido"}
         </Button>
       </div>
     </form>

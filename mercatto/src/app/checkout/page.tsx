@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { requireUser } from "@/lib/auth/guards";
 import { getCartForUser } from "@/lib/data/cart";
 import { prisma } from "@/lib/prisma";
+import { getPaymentProvider } from "@/lib/payments/provider";
 import { CheckoutWizard } from "@/components/checkout/checkout-wizard";
 
 export const metadata: Metadata = { title: "Checkout" };
@@ -39,7 +40,12 @@ export default async function CheckoutPage() {
           <h1 className="mb-6 font-display text-2xl font-bold text-foreground sm:text-3xl">
             Finalizar compra
           </h1>
-          <CheckoutWizard addresses={addresses} items={items} coupon={cart.coupon} />
+          <CheckoutWizard
+            addresses={addresses}
+            items={items}
+            coupon={cart.coupon}
+            usesExternalCheckout={getPaymentProvider().isRedirectBased}
+          />
         </div>
       </main>
       <Footer />

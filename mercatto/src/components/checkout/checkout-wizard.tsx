@@ -42,10 +42,15 @@ export function CheckoutWizard({
   addresses,
   items,
   coupon,
+  usesExternalCheckout = false,
 }: {
   addresses: CheckoutAddress[];
   items: CheckoutItem[];
   coupon: { code: string; type: "PERCENTAGE" | "FIXED"; value: number; minOrderCents: number } | null;
+  /** true quando o gateway ativo redireciona para uma página externa (ex:
+   * Mercado Pago Checkout Pro) — aí o método de pagamento é escolhido lá,
+   * não neste formulário. */
+  usesExternalCheckout?: boolean;
 }) {
   const router = useRouter();
   const [step, setStep] = useState<CheckoutStep>("endereco");
@@ -108,6 +113,7 @@ export function CheckoutWizard({
           card={card}
           onCardChange={setCard}
           totalCents={summary.totalCents}
+          usesExternalCheckout={usesExternalCheckout}
           onBack={() => setStep("entrega")}
           onContinue={() => setStep("revisao")}
         />
@@ -124,6 +130,7 @@ export function CheckoutWizard({
           formAction={formAction}
           isPending={isPending}
           errorMessage={actionState.status === "error" ? actionState.message : undefined}
+          usesExternalCheckout={usesExternalCheckout}
           hiddenFields={{
             addressId: selectedAddress.id,
             shippingOptionId,

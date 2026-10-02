@@ -23,7 +23,11 @@ export default async function OrderConfirmedPage({ params }: Props) {
       <Header />
       <main className="flex-1">
         <div className="container-page max-w-3xl py-6">
-          <ConfirmationStep orderNumber={order.orderNumber} totalCents={order.totalCents} />
+          <ConfirmationStep
+            orderNumber={order.orderNumber}
+            totalCents={order.totalCents}
+            isPaymentPending={order.status === "AWAITING_PAYMENT"}
+          />
         </div>
       </main>
       <Footer />

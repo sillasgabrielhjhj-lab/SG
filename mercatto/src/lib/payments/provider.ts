@@ -16,9 +16,34 @@ export type ChargeResult = {
   externalReference: string;
 };
 
+export type CheckoutRedirectInput = {
+  orderNumber: string;
+  amountCents: number;
+  payerEmail: string;
+  items: { title: string; quantity: number; unitPriceCents: number }[];
+};
+
+export type CheckoutRedirectResult = {
+  /** id da preferência/sessão no gateway — guardado em Payment.externalReference
+   * até o webhook confirmar o pagamento e substituir pelo id real do pagamento. */
+  referenceId: string;
+  redirectUrl: string;
+};
+
+/**
+ * Duas formas de gateway de pagamento:
+ * - síncrono (`charge`): decide aprovado/recusado na hora, sem sair do site
+ *   (é o que o MockPaymentProvider faz).
+ * - por redirecionamento (`createCheckout`): o comprador sai do site, paga
+ *   numa página hospedada pelo gateway, e volta — a confirmação real chega
+ *   depois, por webhook (é o caso do Mercado Pago Checkout Pro).
+ * Cada provider implementa só o método correspondente ao seu modelo.
+ */
 export interface PaymentProvider {
   readonly name: string;
-  charge(input: ChargeInput): Promise<ChargeResult>;
+  readonly isRedirectBased: boolean;
+  charge?(input: ChargeInput): Promise<ChargeResult>;
+  createCheckout?(input: CheckoutRedirectInput): Promise<CheckoutRedirectResult>;
 }
 
 /**
@@ -31,6 +56,7 @@ export interface PaymentProvider {
  */
 class MockPaymentProvider implements PaymentProvider {
   readonly name = "mock";
+  readonly isRedirectBased = false;
 
   async charge(input: ChargeInput): Promise<ChargeResult> {
     const externalReference = `MOCK-${input.orderNumber}-${Date.now()}`;
@@ -45,6 +71,20 @@ class MockPaymentProvider implements PaymentProvider {
   }
 }
 
+let cachedProvider: PaymentProvider | null = null;
+
 export function getPaymentProvider(): PaymentProvider {
-  return new MockPaymentProvider();
+  if (cachedProvider) return cachedProvider;
+
+  if (process.env.PAYMENT_PROVIDER === "mercadopago") {
+    // import tardio: evita carregar o SDK do Mercado Pago (e exigir as
+    // variáveis de ambiente dele) em ambientes que usam o mock, como os
+    // testes automatizados.
+    const { MercadoPagoProvider } = require("./mercadopago") as typeof import("./mercadopago");
+    cachedProvider = new MercadoPagoProvider();
+  } else {
+    cachedProvider = new MockPaymentProvider();
+  }
+
+  return cachedProvider;
 }
