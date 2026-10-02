@@ -30,6 +30,9 @@ export async function getAdminUsers(query?: string) {
     where: query ? { OR: [{ name: { contains: query, mode: "insensitive" } }, { email: { contains: query, mode: "insensitive" } }] } : undefined,
     orderBy: { createdAt: "desc" },
     take: 100,
+    // Nunca buscar passwordHash aqui — esta lista é renderizada numa
+    // tabela admin, não precisa (e não deve) tocar no hash da senha.
+    select: { id: true, name: true, email: true, role: true, emailVerified: true, createdAt: true },
   });
 }
 

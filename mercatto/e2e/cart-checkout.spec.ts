@@ -89,7 +89,7 @@ test.describe("Carrinho e checkout", () => {
     await page.click('button:has-text("Confirmar pedido")');
     await page.waitForURL(/\/pedido-confirmado\//);
 
-    await expect(page.getByText("Pedido confirmado!")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Pedido confirmado!" })).toBeVisible();
     await expect(page.getByText(/MKT-\d{4}-[A-F0-9]+/)).toBeVisible();
   });
 

@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth/guards";
 import { addToCartSchema, couponSchema } from "@/lib/validation/cart";
+import { rateLimit } from "@/lib/rate-limit";
 import type { ActionState } from "@/lib/actions/auth";
 
 async function getOrCreateCart(userId: string) {
@@ -109,6 +110,13 @@ export async function applyCouponAction(
   formData: FormData,
 ): Promise<ActionState> {
   const user = await requireUser();
+
+  // Sem isso, dava pra tentar adivinhar códigos de cupom válidos por
+  // força bruta (poucas combinações curtas, tipo "PROMO10").
+  const { allowed } = await rateLimit(`coupon:${user.id}`, 20, 10 * 60);
+  if (!allowed) {
+    return { status: "error", message: "Muitas tentativas. Aguarde alguns minutos." };
+  }
 
   const parsed = couponSchema.safeParse({ code: formData.get("code") });
   if (!parsed.success) {
