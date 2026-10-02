@@ -35,7 +35,10 @@ export async function registerAction(
   formData: FormData,
 ): Promise<ActionState> {
   const ip = await clientIp();
-  const { allowed } = await rateLimit(`register:ip:${ip}`, 10, 60 * 60);
+  // Limite generoso de propósito: IPs compartilhados (escritório, wifi
+  // público, CGNAT) podem ter várias pessoas se cadastrando da mesma
+  // rede em pouco tempo — isso não deveria bloquear gente de verdade.
+  const { allowed } = await rateLimit(`register:ip:${ip}`, 30, 60 * 60);
   if (!allowed) {
     return { status: "error", message: "Muitas tentativas. Tente novamente mais tarde." };
   }

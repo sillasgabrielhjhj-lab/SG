@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useState } from "react";
+import { useActionState, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { placeOrderAction } from "@/lib/actions/checkout";
@@ -12,7 +12,6 @@ import { AddressStep } from "@/components/checkout/steps/address-step";
 import { ShippingStep } from "@/components/checkout/steps/shipping-step";
 import { PaymentStep, type CardDetails } from "@/components/checkout/steps/payment-step";
 import { ReviewStep } from "@/components/checkout/steps/review-step";
-import { ConfirmationStep } from "@/components/checkout/steps/confirmation-step";
 
 export type CheckoutAddress = {
   id: string;
@@ -58,6 +57,9 @@ export function CheckoutWizard({
   const [installments, setInstallments] = useState(1);
   const [card, setCard] = useState<CardDetails>({ number: "", name: "", expiry: "", cvv: "" });
 
+  // Em caso de sucesso, placeOrderAction redireciona direto para
+  // /pedido-confirmado/[orderNumber] (ver src/lib/actions/checkout.ts) —
+  // este componente nunca chega a renderizar um estado de sucesso.
   const [actionState, formAction, isPending] = useActionState(placeOrderAction, initialState);
 
   const selectedAddress = addresses.find((a) => a.id === addressId) ?? null;
@@ -72,18 +74,6 @@ export function CheckoutWizard({
     coupon,
     selectedShipping?.costCents ?? 0,
   );
-
-  const isConfirmed = actionState.status === "success" && Boolean(actionState.orderNumber);
-
-  // Pedido confirmado: carrinho foi esvaziado no servidor, então atualiza
-  // o header (contador do carrinho) sem precisar de uma navegação real.
-  useEffect(() => {
-    if (isConfirmed) router.refresh();
-  }, [isConfirmed, router]);
-
-  if (isConfirmed && actionState.orderNumber) {
-    return <ConfirmationStep orderNumber={actionState.orderNumber} totalCents={summary.totalCents} />;
-  }
 
   return (
     <div className="flex flex-col gap-6">

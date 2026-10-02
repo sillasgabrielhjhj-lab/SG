@@ -1,6 +1,7 @@
 "use server";
 
 import { randomBytes } from "node:crypto";
+import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth/guards";
@@ -186,5 +187,8 @@ export async function placeOrderAction(
     metadata: { totalCents: summary.totalCents, paymentMethod },
   });
 
-  return { status: "success", orderNumber };
+  // Redireciona (em vez de devolver o estado de sucesso) para uma página
+  // de confirmação com URL própria — assim um refresh do carrinho/header
+  // depois do pedido não esbarra no guard de "carrinho vazio" de /checkout.
+  redirect(`/pedido-confirmado/${orderNumber}`);
 }
