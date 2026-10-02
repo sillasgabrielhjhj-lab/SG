@@ -73,7 +73,7 @@ export function Footer() {
 
         <p className="text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} Mercatto Comércio Digital. Todos os
-          direitos reservados. CNPJ fictício para fins de demonstração.
+          direitos reservados.
         </p>
 
         <div className="flex items-center gap-3 text-muted-foreground">
