@@ -15,6 +15,7 @@ import {
   RETURNABLE_STATUSES,
 } from "@/lib/order-status";
 import { OrderActionDialog } from "@/components/orders/order-action-dialog";
+import { OrderTimeline } from "@/components/orders/order-timeline";
 
 type Props = { params: Promise<{ orderNumber: string }> };
 
@@ -66,6 +67,21 @@ export default async function OrderDetailPage({ params }: Props) {
           Devolução solicitada em {order.returnRequestedAt.toLocaleDateString("pt-BR")}: {order.returnReason}
         </p>
       )}
+
+      <div className="rounded-xl border border-border p-5">
+        <h2 className="font-display text-lg font-semibold text-foreground">Status do pedido</h2>
+        <div className="mt-4">
+          <OrderTimeline
+            status={order.status}
+            createdAt={order.createdAt}
+            paidAt={order.payment?.paidAt}
+            shippedAt={order.shipment?.shippedAt}
+            deliveredAt={order.shipment?.deliveredAt}
+            cancelledAt={order.cancelledAt}
+            cancelReason={order.cancelReason}
+          />
+        </div>
+      </div>
 
       <div className="rounded-xl border border-border p-5">
         <h2 className="font-display text-lg font-semibold text-foreground">Itens</h2>
