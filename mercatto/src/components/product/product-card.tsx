@@ -3,22 +3,24 @@ import { Star, Truck } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { cn, formatCurrencyBRL, formatInstallments } from "@/lib/utils";
-import type { MockProduct } from "@/lib/mock-data";
+import type { ProductCardData } from "@/lib/data/catalog";
+
+const FREE_SHIPPING_THRESHOLD_CENTS = 9900;
 
 export function ProductCard({
   product,
   className,
 }: {
-  product: MockProduct;
+  product: ProductCardData;
   className?: string;
 }) {
   const hasDiscount =
     product.compareAtPriceCents && product.compareAtPriceCents > product.priceCents;
   const discountPct = hasDiscount
-    ? Math.round(
-        (1 - product.priceCents / product.compareAtPriceCents!) * 100,
-      )
+    ? Math.round((1 - product.priceCents / product.compareAtPriceCents!) * 100)
     : 0;
+  const imageUrl = product.images[0]?.url ?? "/placeholders/ph-0.svg";
+  const freeShipping = product.priceCents >= FREE_SHIPPING_THRESHOLD_CENTS;
 
   return (
     <Link
@@ -31,7 +33,7 @@ export function ProductCard({
       <div className="relative aspect-square overflow-hidden bg-muted">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={product.imageUrl}
+          src={imageUrl}
           alt={product.name}
           loading="lazy"
           className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
@@ -68,7 +70,7 @@ export function ProductCard({
           </span>
         </div>
 
-        {product.freeShipping && (
+        {freeShipping && (
           <div className="flex items-center gap-1 text-xs font-medium text-success">
             <Truck className="size-3.5" />
             Frete grátis

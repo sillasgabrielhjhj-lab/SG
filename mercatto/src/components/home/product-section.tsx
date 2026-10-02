@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 import { ProductCarousel } from "@/components/product/product-carousel";
-import type { MockProduct } from "@/lib/mock-data";
+import type { ProductCardData } from "@/lib/data/catalog";
 
 export function ProductSection({
   title,
@@ -11,7 +11,7 @@ export function ProductSection({
 }: {
   title: string;
   seeAllHref: string;
-  products: MockProduct[];
+  products: ProductCardData[];
 }) {
   return (
     <section className="container-page mt-10">

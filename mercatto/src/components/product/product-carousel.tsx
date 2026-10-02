@@ -6,9 +6,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/product/product-card";
-import type { MockProduct } from "@/lib/mock-data";
+import type { ProductCardData } from "@/lib/data/catalog";
 
-export function ProductCarousel({ products }: { products: MockProduct[] }) {
+export function ProductCarousel({ products }: { products: ProductCardData[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     dragFree: true,

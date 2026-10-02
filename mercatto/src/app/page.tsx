@@ -4,9 +4,11 @@ import { HeroBanner } from "@/components/home/hero-banner";
 import { PopularCategories } from "@/components/home/popular-categories";
 import { ProductSection } from "@/components/home/product-section";
 import { BenefitsSection } from "@/components/home/benefits-section";
-import { deals, bestSellers, recommended } from "@/lib/mock-data";
+import { getHomeSections } from "@/lib/data/catalog";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { deals, bestSellers, recommended } = await getHomeSections();
+
   return (
     <>
       <Header />
