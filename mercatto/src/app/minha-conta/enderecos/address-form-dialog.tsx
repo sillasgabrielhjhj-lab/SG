@@ -20,12 +20,15 @@ import { FieldError } from "@/components/auth/field-error";
 
 const initialState: ActionState = { status: "idle" };
 
-export function AddressFormDialog() {
+export function AddressFormDialog({ onCreated }: { onCreated?: () => void }) {
   const [open, setOpen] = useState(false);
   const [state, formAction, isPending] = useActionState(
     async (prevState: ActionState, formData: FormData) => {
       const result = await createAddressAction(prevState, formData);
-      if (result.status === "success") setOpen(false);
+      if (result.status === "success") {
+        setOpen(false);
+        onCreated?.();
+      }
       return result;
     },
     initialState,

@@ -123,10 +123,13 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="flex flex-col gap-4">
               <PurchaseBox
+                productId={product.id}
+                productSlug={product.slug}
                 basePriceCents={product.priceCents}
                 compareAtPriceCents={product.compareAtPriceCents}
                 baseInventory={product.inventory}
                 variants={product.variants}
+                isAuthenticated={Boolean(user)}
               />
 
               <div className="lg:hidden">

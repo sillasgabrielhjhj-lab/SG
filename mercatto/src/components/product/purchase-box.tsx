@@ -1,12 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Minus, Plus, ShoppingCart, Zap } from "lucide-react";
+import { useMemo, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { Minus, Plus, ShoppingCart, Zap, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrencyBRL, formatInstallments } from "@/lib/utils";
+import { addToCartAction } from "@/lib/actions/cart";
+import type { ActionState } from "@/lib/actions/auth";
 
 type Variant = {
   id: string;
@@ -17,16 +20,24 @@ type Variant = {
 };
 
 export function PurchaseBox({
+  productId,
+  productSlug,
   basePriceCents,
   compareAtPriceCents,
   baseInventory,
   variants,
+  isAuthenticated,
 }: {
+  productId: string;
+  productSlug: string;
   basePriceCents: number;
   compareAtPriceCents: number | null;
   baseInventory: { quantity: number; reserved: number } | null;
   variants: Variant[];
+  isAuthenticated: boolean;
 }) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     variants[0]?.id ?? null,
   );
@@ -44,13 +55,50 @@ export function PurchaseBox({
   const inStock = availableStock > 0;
   const maxQuantity = Math.min(availableStock, 10);
 
+  function submitToCart(): Promise<ActionState> {
+    const formData = new FormData();
+    formData.set("productId", productId);
+    if (selectedVariant) formData.set("variantId", selectedVariant.id);
+    formData.set("quantity", String(quantity));
+    return addToCartAction({ status: "idle" }, formData);
+  }
+
   function handleAddToCart() {
+    if (!isAuthenticated) {
+      router.push(`/entrar?next=${encodeURIComponent(`/produto/${productSlug}`)}`);
+      return;
+    }
     if (variants.length > 0 && !selectedVariant) {
       toast.error("Selecione uma opção antes de continuar");
       return;
     }
-    toast.message("Carrinho chega na próxima fase do projeto", {
-      description: "Por enquanto esta é só uma prévia da página de produto.",
+    startTransition(async () => {
+      const result = await submitToCart();
+      if (result.status === "error") {
+        toast.error(result.message ?? "Não foi possível adicionar ao carrinho.");
+      } else {
+        toast.success("Produto adicionado ao carrinho.");
+        router.refresh();
+      }
+    });
+  }
+
+  function handleBuyNow() {
+    if (!isAuthenticated) {
+      router.push(`/entrar?next=${encodeURIComponent(`/produto/${productSlug}`)}`);
+      return;
+    }
+    if (variants.length > 0 && !selectedVariant) {
+      toast.error("Selecione uma opção antes de continuar");
+      return;
+    }
+    startTransition(async () => {
+      const result = await submitToCart();
+      if (result.status === "error") {
+        toast.error(result.message ?? "Não foi possível continuar a compra.");
+        return;
+      }
+      router.push("/checkout");
     });
   }
 
@@ -133,10 +181,11 @@ export function PurchaseBox({
       )}
 
       <div className="flex flex-col gap-2">
-        <Button size="lg" disabled={!inStock} onClick={handleAddToCart}>
-          <Zap className="size-4" /> Comprar agora
+        <Button size="lg" disabled={!inStock || isPending} onClick={handleBuyNow}>
+          {isPending ? <Loader2 className="size-4 animate-spin" /> : <Zap className="size-4" />}
+          Comprar agora
         </Button>
-        <Button size="lg" variant="outline" disabled={!inStock} onClick={handleAddToCart}>
+        <Button size="lg" variant="outline" disabled={!inStock || isPending} onClick={handleAddToCart}>
           <ShoppingCart className="size-4" /> Adicionar ao carrinho
         </Button>
       </div>

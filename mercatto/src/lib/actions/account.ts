@@ -128,6 +128,7 @@ export async function createAddressAction(
   await logAudit({ userId: user.id, action: "ADDRESS_CREATED", entityType: "Address", entityId: user.id });
 
   revalidatePath("/minha-conta/enderecos");
+  revalidatePath("/checkout");
   return { status: "success", message: "Endereço adicionado." };
 }
 

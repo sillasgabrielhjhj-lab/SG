@@ -8,10 +8,12 @@ import { CartButton } from "@/components/layout/cart-button";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { CategoryBar } from "@/components/layout/category-bar";
 import { getCurrentUser } from "@/lib/auth/guards";
+import { getCartItemCount } from "@/lib/data/cart";
 
 export async function Header() {
   const user = await getCurrentUser();
   const sessionUser = user ? { id: user.id, name: user.name, role: user.role } : null;
+  const cartItemCount = await getCartItemCount(user?.id ?? null);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
@@ -37,7 +39,7 @@ export async function Header() {
 
         <div className="ml-auto flex items-center gap-1">
           <AccountMenu user={sessionUser} />
-          <CartButton itemCount={0} />
+          <CartButton itemCount={cartItemCount} />
         </div>
       </div>
 
