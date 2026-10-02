@@ -49,8 +49,7 @@ test.describe("Busca e catálogo", () => {
     const pageTwoLink = page.locator('nav[aria-label="Paginação"] a', { hasText: "2" });
     if (await pageTwoLink.isVisible().catch(() => false)) {
       await pageTwoLink.click();
-      await page.waitForLoadState("networkidle");
-      expect(page.url()).toContain("page=2");
+      await page.waitForURL(/page=2/);
     }
   });
 });
