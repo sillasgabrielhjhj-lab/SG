@@ -223,7 +223,19 @@ const ATTRIBUTE_POOL = [
 ] as const;
 
 async function main() {
-  console.log("Seed: limpando dados antigos (idempotente)...");
+  // Guarda de segurança: se já existe produto no banco (seed anterior ou
+  // uso real da loja), não mexe em nada. Isso permite deixar `db:seed` no
+  // comando de build de produção sem risco de apagar dados reais em
+  // deploys futuros.
+  const existingProductCount = await prisma.product.count();
+  if (existingProductCount > 0) {
+    console.log(
+      `Seed: ${existingProductCount} produto(s) já existem no banco — pulando (nada foi alterado).`,
+    );
+    return;
+  }
+
+  console.log("Seed: banco vazio, populando dados de demonstração...");
 
   // ---- Categorias --------------------------------------------------------
   const categoryBySlug = new Map<string, string>(); // name -> id
