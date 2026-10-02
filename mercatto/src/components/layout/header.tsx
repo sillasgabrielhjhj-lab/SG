@@ -7,12 +7,16 @@ import { AccountMenu } from "@/components/layout/account-menu";
 import { CartButton } from "@/components/layout/cart-button";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { CategoryBar } from "@/components/layout/category-bar";
+import { getCurrentUser } from "@/lib/auth/guards";
 
-export function Header() {
+export async function Header() {
+  const user = await getCurrentUser();
+  const sessionUser = user ? { id: user.id, name: user.name, role: user.role } : null;
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
       <div className="container-page flex h-16 items-center gap-3 sm:gap-6">
-        <MobileMenu />
+        <MobileMenu user={sessionUser} />
 
         <Link href="/" aria-label="Página inicial da Mercatto" className="shrink-0">
           <Logo />
@@ -32,7 +36,7 @@ export function Header() {
         </button>
 
         <div className="ml-auto flex items-center gap-1">
-          <AccountMenu />
+          <AccountMenu user={sessionUser} />
           <CartButton itemCount={0} />
         </div>
       </div>

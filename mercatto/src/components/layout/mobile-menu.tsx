@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, LogIn, Package, MapPin, Heart, Store } from "lucide-react";
+import { Menu, LogIn, Package, MapPin, Heart, Store, LogOut } from "lucide-react";
 
 import {
   Sheet,
@@ -14,8 +14,10 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/layout/logo";
 import { categories } from "@/lib/mock-data";
+import { logoutAction } from "@/lib/actions/auth";
+import type { SessionUser } from "@/components/layout/account-menu";
 
-export function MobileMenu() {
+export function MobileMenu({ user }: { user: SessionUser }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -31,9 +33,15 @@ export function MobileMenu() {
         </SheetHeader>
 
         <div className="flex flex-col gap-1">
-          <Link href="/entrar" className="flex items-center gap-3 rounded-md px-2 py-2.5 text-sm font-medium hover:bg-muted">
-            <LogIn className="size-4" /> Entrar ou criar conta
-          </Link>
+          {user ? (
+            <p className="truncate px-2 py-1 text-sm font-medium text-foreground">
+              Olá, {user.name}
+            </p>
+          ) : (
+            <Link href="/entrar" className="flex items-center gap-3 rounded-md px-2 py-2.5 text-sm font-medium hover:bg-muted">
+              <LogIn className="size-4" /> Entrar ou criar conta
+            </Link>
+          )}
           <Link href="/minha-conta/pedidos" className="flex items-center gap-3 rounded-md px-2 py-2.5 text-sm hover:bg-muted">
             <Package className="size-4" /> Meus pedidos
           </Link>
@@ -46,6 +54,16 @@ export function MobileMenu() {
           <Link href="/vendedor" className="flex items-center gap-3 rounded-md px-2 py-2.5 text-sm hover:bg-muted">
             <Store className="size-4" /> Vender no Mercatto
           </Link>
+          {user && (
+            <form action={logoutAction}>
+              <button
+                type="submit"
+                className="flex w-full items-center gap-3 rounded-md px-2 py-2.5 text-left text-sm text-destructive hover:bg-destructive/10"
+              >
+                <LogOut className="size-4" /> Sair
+              </button>
+            </form>
+          )}
         </div>
 
         <Separator />
