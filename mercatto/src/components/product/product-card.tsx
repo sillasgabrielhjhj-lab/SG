@@ -7,6 +7,9 @@ import { pixPriceCents, isPromotionActive } from "@/lib/pricing";
 import type { ProductCardData } from "@/lib/data/catalog";
 
 const FREE_SHIPPING_THRESHOLD_CENTS = 9900;
+// Baseado em vendas reais (salesCount), nunca marcado manualmente — um
+// produto só ganha o selo se realmente vendeu essa quantidade de unidades.
+const BEST_SELLER_THRESHOLD = 30;
 
 export function ProductCard({
   product,
@@ -21,6 +24,7 @@ export function ProductCard({
     : 0;
   const imageUrl = product.images[0]?.url ?? "/placeholders/ph-0.svg";
   const freeShipping = product.priceCents >= FREE_SHIPPING_THRESHOLD_CENTS;
+  const isBestSeller = product.salesCount >= BEST_SELLER_THRESHOLD;
 
   return (
     <Link
@@ -38,11 +42,10 @@ export function ProductCard({
           loading="lazy"
           className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
         />
-        {hasDiscount && (
-          <Badge variant="accent" className="absolute top-2 left-2">
-            -{discountPct}%
-          </Badge>
-        )}
+        <div className="absolute top-2 left-2 flex flex-col gap-1">
+          {hasDiscount && <Badge variant="accent">-{discountPct}%</Badge>}
+          {isBestSeller && <Badge variant="warning">Mais vendido</Badge>}
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col gap-1.5 p-3">

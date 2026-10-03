@@ -44,6 +44,29 @@ test.describe("Permissões (RBAC)", () => {
     await expect(page.getByRole("heading", { name: "Visão geral" })).toBeVisible();
   });
 
+  test("vendedor (sem ser admin) não acessa Produtos do Mercatto, mesmo sabendo a URL", async ({ page }) => {
+    const email = uniqueEmail("rbacmercattoproducts");
+    await registerUser(page, { name: "Vendedor Curioso", email, password: DEFAULT_PASSWORD });
+
+    await page.goto("/vendedor", { waitUntil: "networkidle" });
+    await page.fill("#storeName", "Loja Curiosa RBAC");
+    await Promise.all([
+      page.waitForResponse((res) => res.request().method() === "POST"),
+      page.click('button:has-text("Criar minha loja")'),
+    ]);
+    await page.waitForTimeout(500);
+
+    await page.goto("/admin/produtos-mercatto");
+    await page.waitForLoadState("networkidle");
+    expect(page.url()).not.toContain("/admin/produtos-mercatto");
+  });
+
+  test("admin acessa e cadastra um produto em Produtos do Mercatto", async ({ page }) => {
+    await login(page, "admin@mercatto.dev", "Senha123!");
+    await page.goto("/admin/produtos-mercatto", { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { name: "Produtos do Mercatto" })).toBeVisible();
+  });
+
   test("não autenticado é bloqueado em todas as áreas restritas", async ({ page }) => {
     for (const path of ["/minha-conta", "/vendedor", "/admin", "/checkout"]) {
       await page.goto(path);

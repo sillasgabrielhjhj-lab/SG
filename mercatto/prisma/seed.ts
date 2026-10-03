@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { fakerPT_BR as faker } from "@faker-js/faker";
 import bcrypt from "bcryptjs";
@@ -222,7 +223,52 @@ const ATTRIBUTE_POOL = [
   ["Voltagem", ["Bivolt", "110V", "220V"]],
 ] as const;
 
+// E-mail "dono" do vendedor oficial — não é uma conta pra ninguém logar:
+// a senha é aleatória e descartada, só existe porque Seller.userId exige
+// um User. A gestão dos produtos do Mercatto acontece via /admin, que
+// resolve o vendedor oficial por isOfficialStore, nunca por este login.
+const OFFICIAL_STORE_EMAIL = "oficial@mercatto.com.br";
+
+/** Garante a existência do vendedor oficial "Mercatto" (marketplace
+ * híbrido). Roda sempre — inclusive em bancos de produção que já têm
+ * produtos — porque ao contrário do catálogo de demonstração, isso não é
+ * dado fictício: é infraestrutura que precisa existir uma vez só. */
+async function ensureOfficialStore() {
+  let owner = await prisma.user.findUnique({ where: { email: OFFICIAL_STORE_EMAIL } });
+  if (!owner) {
+    owner = await prisma.user.create({
+      data: {
+        name: "Mercatto",
+        email: OFFICIAL_STORE_EMAIL,
+        passwordHash: await hashPassword(randomBytes(32).toString("hex")),
+        role: Role.ADMIN,
+        emailVerified: new Date(),
+      },
+    });
+  }
+
+  const existing = await prisma.seller.findUnique({ where: { userId: owner.id } });
+  if (!existing) {
+    await prisma.seller.create({
+      data: {
+        userId: owner.id,
+        storeName: "Mercatto",
+        slug: "mercatto",
+        description: "Vendedor oficial da Mercatto — produtos selecionados e enviados diretamente pela plataforma.",
+        isVerified: true,
+        isOfficialStore: true,
+      },
+    });
+    console.log("Seed: vendedor oficial 'Mercatto' criado.");
+  } else if (!existing.isOfficialStore) {
+    await prisma.seller.update({ where: { id: existing.id }, data: { isOfficialStore: true } });
+    console.log("Seed: vendedor oficial 'Mercatto' marcado como loja oficial.");
+  }
+}
+
 async function main() {
+  await ensureOfficialStore();
+
   // Guarda de segurança: se já existe produto no banco (seed anterior ou
   // uso real da loja), não mexe em nada. Isso permite deixar `db:seed` no
   // comando de build de produção sem risco de apagar dados reais em

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getBrandsForFilter, queryProducts } from "@/lib/data/catalog";
+import { prisma } from "@/lib/prisma";
 import { parseCatalogSearchParams, type RawSearchParams } from "@/lib/data/parse-filters";
 import { CatalogToolbar, CatalogFiltersSidebar } from "@/components/catalog/catalog-filters";
 import { ProductGrid } from "@/components/catalog/product-grid";
@@ -23,10 +24,14 @@ export default async function SearchPage({ searchParams }: Props) {
   const resolvedSearchParams = await searchParams;
   const filters = parseCatalogSearchParams(resolvedSearchParams);
 
-  const [brands, result] = await Promise.all([
+  const [brands, result, sellerFilter] = await Promise.all([
     getBrandsForFilter(),
     queryProducts(filters),
+    filters.sellerSlug
+      ? prisma.seller.findUnique({ where: { slug: filters.sellerSlug }, select: { storeName: true } })
+      : null,
   ]);
+  const sellerName = sellerFilter?.storeName;
 
   return (
     <>
@@ -49,10 +54,10 @@ export default async function SearchPage({ searchParams }: Props) {
           </p>
 
           <div className="mt-6 flex gap-8">
-            <CatalogFiltersSidebar basePath="/search" brands={brands} />
+            <CatalogFiltersSidebar basePath="/search" brands={brands} sellerName={sellerName} />
 
             <div className="flex-1">
-              <CatalogToolbar basePath="/search" brands={brands} />
+              <CatalogToolbar basePath="/search" brands={brands} sellerName={sellerName} />
               <div className="mt-5">
                 <ProductGrid products={result.items} />
               </div>

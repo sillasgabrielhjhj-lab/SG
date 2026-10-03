@@ -25,9 +25,25 @@ export type CatalogFilters = {
   maxPriceCents?: number;
   brandSlugs?: string[];
   minRating?: number;
+  sellerSlug?: string;
+  onSale?: boolean;
   sort?: SortOption;
   page?: number;
 };
+
+/** Só conta como "em oferta" quem tem preço riscado E, se tiver prazo
+ * definido, está dentro da janela — evita mostrar promoção já vencida.
+ * Compartilhado entre queryProducts (filtro "só promoções") e
+ * getHomeSections (seções de ofertas da home). */
+function activePromotionWhere(now: Date) {
+  return {
+    compareAtPriceCents: { not: null },
+    OR: [
+      { promotionStartsAt: null, promotionEndsAt: null },
+      { promotionStartsAt: { lte: now }, promotionEndsAt: { gte: now } },
+    ],
+  };
+}
 
 const productCardSelect = {
   id: true,
@@ -89,6 +105,8 @@ export async function queryProducts(filters: CatalogFilters) {
       : {}),
     ...(filters.brandSlugs?.length ? { brand: { slug: { in: filters.brandSlugs } } } : {}),
     ...(filters.minRating !== undefined ? { ratingAvg: { gte: filters.minRating } } : {}),
+    ...(filters.sellerSlug ? { seller: { slug: filters.sellerSlug } } : {}),
+    ...(filters.onSale ? activePromotionWhere(new Date()) : {}),
   };
 
   const [items, total] = await Promise.all([
@@ -171,6 +189,25 @@ export async function getProductBySlug(slug: string) {
   });
 }
 
+/** Distribuição real de notas (1 a 5 estrelas) pra um produto — calculada
+ * sobre TODAS as avaliações, não só a página de 10 mais recentes exibida
+ * na tela. Usar só as 10 carregadas pra calcular porcentagem sub-representa
+ * sistematicamente qualquer produto com mais de 10 avaliações. */
+export async function getReviewBreakdown(productId: string) {
+  const grouped = await prisma.review.groupBy({
+    by: ["rating"],
+    where: { productId },
+    _count: true,
+  });
+  const countByStar = new Map(grouped.map((g) => [g.rating, g._count]));
+  const total = grouped.reduce((sum, g) => sum + g._count, 0);
+
+  return [5, 4, 3, 2, 1].map((star) => {
+    const count = countByStar.get(star) ?? 0;
+    return { star, count, pct: total > 0 ? Math.round((count / total) * 100) : 0 };
+  });
+}
+
 export async function getRelatedProducts(categoryId: string, excludeProductId: string) {
   return prisma.product.findMany({
     where: { categoryId, isActive: true, id: { not: excludeProductId } },
@@ -182,19 +219,19 @@ export async function getRelatedProducts(categoryId: string, excludeProductId: s
 
 export async function getHomeSections() {
   const now = new Date();
-  // Só conta como "oferta" quem tem preço riscado E, se tiver prazo
-  // definido, está dentro da janela — evita mostrar promoção já vencida.
-  const activePromotionFilter = {
-    compareAtPriceCents: { not: null },
-    OR: [
-      { promotionStartsAt: null, promotionEndsAt: null },
-      { promotionStartsAt: { lte: now }, promotionEndsAt: { gte: now } },
-    ],
-  };
+  const officialSeller = await prisma.seller.findFirst({ where: { isOfficialStore: true }, select: { id: true } });
 
-  const [deals, bestSellers, recommended, under50, under100, under200] = await Promise.all([
+  const [deals, mercattoDeals, bestSellers, recommended, under50, under100, under200] = await Promise.all([
     prisma.product.findMany({
-      where: { isActive: true, ...activePromotionFilter },
+      where: { isActive: true, ...activePromotionWhere(now) },
+      select: productCardSelect,
+      orderBy: { salesCount: "desc" },
+      take: 10,
+    }),
+    prisma.product.findMany({
+      // Sentinela "no-official-seller" garante zero resultados (em vez de
+      // ignorar o filtro) se o seed do vendedor oficial ainda não rodou.
+      where: { isActive: true, sellerId: officialSeller?.id ?? "no-official-seller", ...activePromotionWhere(now) },
       select: productCardSelect,
       orderBy: { salesCount: "desc" },
       take: 10,
@@ -231,7 +268,7 @@ export async function getHomeSections() {
     }),
   ]);
 
-  return { deals, bestSellers, recommended, under50, under100, under200 };
+  return { deals, mercattoDeals, bestSellers, recommended, under50, under100, under200 };
 }
 
 export async function getSearchSuggestions(q: string) {

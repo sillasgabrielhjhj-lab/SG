@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatCurrencyBRL, formatInstallments } from "@/lib/utils";
 import { pixPriceCents, isPromotionActive } from "@/lib/pricing";
 import { addToCartAction } from "@/lib/actions/cart";
+import { PromotionCountdown } from "@/components/product/promotion-countdown";
 import type { ActionState } from "@/lib/actions/auth";
 
 type Variant = {
@@ -123,6 +124,11 @@ export function PurchaseBox({
           {formatCurrencyBRL(pixPriceCents(priceCents))} no Pix
         </p>
         <p className="text-sm text-muted-foreground">{formatInstallments(priceCents)}</p>
+        {showDiscount && promotionEndsAt && (
+          <div className="mt-2">
+            <PromotionCountdown endsAt={promotionEndsAt} />
+          </div>
+        )}
       </div>
 
       {variants.length > 0 && (

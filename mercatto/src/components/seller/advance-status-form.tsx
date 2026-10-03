@@ -3,7 +3,6 @@
 import { useActionState } from "react";
 import { Loader2, Truck } from "lucide-react";
 
-import { advanceOrderStatusAction } from "@/lib/actions/seller";
 import type { ActionState } from "@/lib/actions/auth";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,8 +17,16 @@ const NEXT_LABEL: Record<string, string> = {
   IN_TRANSIT: "Marcar como entregue",
 };
 
-export function AdvanceStatusForm({ orderNumber, currentStatus }: { orderNumber: string; currentStatus: string }) {
-  const [state, formAction, isPending] = useActionState(advanceOrderStatusAction, initialState);
+export function AdvanceStatusForm({
+  orderNumber,
+  currentStatus,
+  action,
+}: {
+  orderNumber: string;
+  currentStatus: string;
+  action: (prev: ActionState, formData: FormData) => Promise<ActionState>;
+}) {
+  const [state, formAction, isPending] = useActionState(action, initialState);
   const label = NEXT_LABEL[currentStatus];
 
   if (!label) return null;

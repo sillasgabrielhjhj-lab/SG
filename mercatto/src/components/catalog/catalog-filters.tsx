@@ -49,6 +49,8 @@ function useCatalogFilterState(basePath: string) {
     maxPrice: searchParams.get("max") ?? "",
     selectedBrands: searchParams.getAll("marca"),
     selectedRating: searchParams.get("avaliacao") ?? "",
+    onSale: searchParams.get("promo") === "1",
+    sellerSlug: searchParams.get("vendedor") ?? "",
   };
 }
 
@@ -56,12 +58,14 @@ function FilterFields({
   basePath,
   brands,
   radioGroupName,
+  sellerName,
 }: {
   basePath: string;
   brands: Brand[];
   radioGroupName: string;
+  sellerName?: string;
 }) {
-  const { pushParams, minPrice, maxPrice, selectedBrands, selectedRating } =
+  const { pushParams, minPrice, maxPrice, selectedBrands, selectedRating, onSale, sellerSlug } =
     useCatalogFilterState(basePath);
 
   function handlePriceSubmit(formData: FormData) {
@@ -93,6 +97,17 @@ function FilterFields({
     });
   }
 
+  function toggleOnSale() {
+    pushParams((params) => {
+      if (onSale) params.delete("promo");
+      else params.set("promo", "1");
+    });
+  }
+
+  function clearSeller() {
+    pushParams((params) => params.delete("vendedor"));
+  }
+
   function clearAll() {
     pushParams((params) => {
       const q = params.get("q");
@@ -103,6 +118,31 @@ function FilterFields({
 
   return (
     <div className="flex flex-col gap-6">
+      {sellerSlug && (
+        <div>
+          <p className="mb-2 text-sm font-semibold text-foreground">Vendedor</p>
+          <button
+            type="button"
+            onClick={clearSeller}
+            className="inline-flex items-center gap-1.5 rounded-full border border-primary bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+          >
+            {sellerName ?? sellerSlug} ×
+          </button>
+        </div>
+      )}
+
+      <div>
+        <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
+          <input
+            type="checkbox"
+            checked={onSale}
+            onChange={toggleOnSale}
+            className="size-4 rounded border-input"
+          />
+          Só promoções
+        </label>
+      </div>
+
       <div>
         <p className="mb-2 text-sm font-semibold text-foreground">Preço</p>
         <form action={handlePriceSubmit} className="flex items-center gap-2">
@@ -186,7 +226,15 @@ function SortSelect({ basePath }: { basePath: string }) {
 
 /** Barra superior: botão "Filtros" (abre Sheet no mobile) + ordenação.
  * Usada junto com <CatalogFiltersSidebar> (que só aparece em telas largas). */
-export function CatalogToolbar({ basePath, brands }: { basePath: string; brands: Brand[] }) {
+export function CatalogToolbar({
+  basePath,
+  brands,
+  sellerName,
+}: {
+  basePath: string;
+  brands: Brand[];
+  sellerName?: string;
+}) {
   return (
     <div className="flex items-center justify-between gap-3">
       <Sheet>
@@ -199,7 +247,7 @@ export function CatalogToolbar({ basePath, brands }: { basePath: string; brands:
           <SheetHeader>
             <SheetTitle>Filtros</SheetTitle>
           </SheetHeader>
-          <FilterFields basePath={basePath} brands={brands} radioGroupName="avaliacao-mobile" />
+          <FilterFields basePath={basePath} brands={brands} radioGroupName="avaliacao-mobile" sellerName={sellerName} />
         </SheetContent>
       </Sheet>
 
@@ -210,10 +258,18 @@ export function CatalogToolbar({ basePath, brands }: { basePath: string; brands:
   );
 }
 
-export function CatalogFiltersSidebar({ basePath, brands }: { basePath: string; brands: Brand[] }) {
+export function CatalogFiltersSidebar({
+  basePath,
+  brands,
+  sellerName,
+}: {
+  basePath: string;
+  brands: Brand[];
+  sellerName?: string;
+}) {
   return (
     <aside className="hidden w-56 shrink-0 lg:block">
-      <FilterFields basePath={basePath} brands={brands} radioGroupName="avaliacao-desktop" />
+      <FilterFields basePath={basePath} brands={brands} radioGroupName="avaliacao-desktop" sellerName={sellerName} />
     </aside>
   );
 }

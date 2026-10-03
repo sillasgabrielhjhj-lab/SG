@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Store, ShieldCheck } from "lucide-react";
+import { Store, ShieldCheck, BadgeCheck } from "lucide-react";
 
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { getProductBySlug, getRelatedProducts } from "@/lib/data/catalog";
+import { getProductBySlug, getRelatedProducts, getReviewBreakdown } from "@/lib/data/catalog";
 import { getCurrentUser } from "@/lib/auth/guards";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { PurchaseBox } from "@/components/product/purchase-box";
@@ -47,7 +47,10 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) notFound();
 
-  const related = await getRelatedProducts(product.categoryId, product.id);
+  const [related, reviewBreakdown] = await Promise.all([
+    getRelatedProducts(product.categoryId, product.id),
+    getReviewBreakdown(product.id),
+  ]);
 
   const baseAvailable = product.inventory
     ? product.inventory.quantity - product.inventory.reserved > 0
@@ -198,6 +201,7 @@ export default async function ProductPage({ params }: Props) {
                   reviews={product.reviews}
                   ratingAvg={product.ratingAvg}
                   ratingCount={product.ratingCount}
+                  breakdown={reviewBreakdown}
                 />
               </div>
             </div>
@@ -229,10 +233,16 @@ export default async function ProductPage({ params }: Props) {
                     {product.seller.ratingAvg.toFixed(1)} ★ · {product.seller.ratingCount} avaliações
                   </p>
                 </div>
-                {product.seller.isVerified && (
-                  <Badge variant="success">
-                    <ShieldCheck className="size-3" /> Verificado
+                {product.seller.isOfficialStore ? (
+                  <Badge variant="default">
+                    <BadgeCheck className="size-3" /> Loja oficial
                   </Badge>
+                ) : (
+                  product.seller.isVerified && (
+                    <Badge variant="success">
+                      <ShieldCheck className="size-3" /> Verificado
+                    </Badge>
+                  )
                 )}
               </div>
 

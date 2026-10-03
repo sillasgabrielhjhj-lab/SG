@@ -36,6 +36,8 @@ export function parseCatalogSearchParams(
     maxPriceCents: maxRaw ? Math.round(Number(maxRaw) * 100) : undefined,
     brandSlugs: getAll("marca"),
     minRating: ratingRaw ? Number(ratingRaw) : undefined,
+    sellerSlug: get("vendedor")?.trim() || undefined,
+    onSale: get("promo") === "1",
     sort: VALID_SORTS.includes(sortRaw as SortOption) ? (sortRaw as SortOption) : "relevance",
     page: pageRaw ? Math.max(1, Number(pageRaw)) : 1,
   };

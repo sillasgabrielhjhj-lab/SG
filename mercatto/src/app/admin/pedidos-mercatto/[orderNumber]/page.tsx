@@ -3,9 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MapPin } from "lucide-react";
 
-import { requireUser } from "@/lib/auth/guards";
-import { getSellerByUserId, getSellerOrderDetail } from "@/lib/data/seller";
-import { advanceOrderStatusAction } from "@/lib/actions/seller";
+import { getOfficialSeller, getSellerOrderDetail } from "@/lib/data/seller";
+import { advanceMercattoOrderStatusAction } from "@/lib/actions/admin-orders";
 import { formatCurrencyBRL } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ORDER_STATUS_LABELS, ORDER_STATUS_BADGE_VARIANT } from "@/lib/order-status";
@@ -18,22 +17,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: `Pedido ${orderNumber}` };
 }
 
-export default async function SellerOrderDetailPage({ params }: Props) {
+export default async function AdminMercattoOrderDetailPage({ params }: Props) {
   const { orderNumber } = await params;
-  const user = await requireUser();
-  const seller = await getSellerByUserId(user.id);
+  const seller = await getOfficialSeller();
   if (!seller) notFound();
 
   const order = await getSellerOrderDetail(seller.id, orderNumber);
   if (!order) notFound();
 
-  const sellerTotal = order.items.reduce((sum, item) => sum + item.totalCents, 0);
+  const mercattoTotal = order.items.reduce((sum, item) => sum + item.totalCents, 0);
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <Link href="/vendedor/pedidos" className="text-sm text-muted-foreground hover:text-primary">
-          ← Pedidos
+        <Link href="/admin/pedidos-mercatto" className="text-sm text-muted-foreground hover:text-primary">
+          ← Pedidos do Mercatto
         </Link>
         <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
           <h1 className="font-display text-2xl font-bold text-foreground">{order.orderNumber}</h1>
@@ -60,8 +58,8 @@ export default async function SellerOrderDetailPage({ params }: Props) {
           ))}
         </div>
         <div className="mt-4 flex justify-between border-t border-border pt-3 font-display font-semibold text-foreground">
-          <span>Total (seus itens)</span>
-          <span>{formatCurrencyBRL(sellerTotal)}</span>
+          <span>Total (itens Mercatto)</span>
+          <span>{formatCurrencyBRL(mercattoTotal)}</span>
         </div>
       </div>
 
@@ -78,7 +76,7 @@ export default async function SellerOrderDetailPage({ params }: Props) {
         </p>
       </div>
 
-      <AdvanceStatusForm orderNumber={order.orderNumber} currentStatus={order.status} action={advanceOrderStatusAction} />
+      <AdvanceStatusForm orderNumber={order.orderNumber} currentStatus={order.status} action={advanceMercattoOrderStatusAction} />
     </div>
   );
 }

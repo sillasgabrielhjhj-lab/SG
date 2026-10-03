@@ -4,63 +4,35 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
-import { requireUser, requireRole } from "@/lib/auth/guards";
+import { requireRole } from "@/lib/auth/guards";
 import { slugify } from "@/lib/slugify";
 import { logAudit } from "@/lib/audit";
-import { notifyUser } from "@/lib/notifications";
-import { becomeSellerSchema } from "@/lib/validation/seller";
+import { getOfficialSeller } from "@/lib/data/seller";
 import { parseProductFormData } from "@/lib/actions/product-form-parser";
-import { SELLER_NEXT_STATUS, STATUS_ADVANCE_NOTIFICATION } from "@/lib/order-status";
 import type { ActionState } from "@/lib/actions/auth";
 
-export async function becomeSellerAction(
-  _prev: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
-  const user = await requireUser();
-
-  const existing = await prisma.seller.findUnique({ where: { userId: user.id } });
-  if (existing) {
-    return { status: "error", message: "Você já tem uma loja cadastrada." };
+/**
+ * CRUD de produtos do vendedor oficial "Mercatto" — mesma validação e
+ * mesmo <ProductForm /> da área do vendedor (src/lib/actions/seller.ts),
+ * mas gated por ADMIN e resolvendo o seller por isOfficialStore, nunca
+ * pelo usuário logado. Isso impede por construção que um vendedor externo
+ * chegue nessas actions: elas nem aceitam um sellerId vindo do formulário,
+ * sempre usam o vendedor oficial fixo do banco.
+ */
+async function requireOfficialSeller() {
+  const seller = await getOfficialSeller();
+  if (!seller) {
+    throw new Error("Vendedor oficial 'Mercatto' não encontrado — rode o seed antes de usar este painel.");
   }
-
-  const parsed = becomeSellerSchema.safeParse({
-    storeName: formData.get("storeName"),
-    description: formData.get("description"),
-  });
-  if (!parsed.success) {
-    return { status: "error", fieldErrors: parsed.error.flatten().fieldErrors };
-  }
-
-  let slug = slugify(parsed.data.storeName);
-  const slugTaken = await prisma.seller.findUnique({ where: { slug } });
-  if (slugTaken) slug = `${slug}-${user.id.slice(0, 6)}`;
-
-  await prisma.$transaction([
-    prisma.seller.create({
-      data: {
-        userId: user.id,
-        storeName: parsed.data.storeName,
-        slug,
-        description: parsed.data.description || null,
-      },
-    }),
-    prisma.user.update({ where: { id: user.id }, data: { role: "SELLER" } }),
-  ]);
-
-  await logAudit({ userId: user.id, action: "SELLER_CREATED", entityType: "Seller", entityId: user.id });
-
-  revalidatePath("/vendedor");
-  redirect("/vendedor");
+  return seller;
 }
 
-export async function createProductAction(
+export async function createMercattoProductAction(
   _prev: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const user = await requireRole(["SELLER", "ADMIN"]);
-  const seller = await prisma.seller.findUnique({ where: { userId: user.id } });
-  if (!seller) return { status: "error", message: "Loja não encontrada." };
+  const admin = await requireRole(["ADMIN"]);
+  const seller = await requireOfficialSeller();
 
   const parsed = parseProductFormData(formData);
   if (!parsed.success) {
@@ -73,7 +45,7 @@ export async function createProductAction(
     return { status: "error", fieldErrors: { sku: ["Já existe um produto com este SKU"] } };
   }
 
-  let slug = `${slugify(data.name)}`;
+  let slug = slugify(data.name);
   const slugTaken = await prisma.product.findUnique({ where: { slug } });
   if (slugTaken) slug = `${slug}-${data.sku.toLowerCase()}`;
 
@@ -123,19 +95,18 @@ export async function createProductAction(
     return created;
   });
 
-  await logAudit({ userId: user.id, action: "PRODUCT_CREATED", entityType: "Product", entityId: product.id });
+  await logAudit({ userId: admin.id, action: "MERCATTO_PRODUCT_CREATED", entityType: "Product", entityId: product.id });
 
-  revalidatePath("/vendedor/produtos");
-  redirect("/vendedor/produtos");
+  revalidatePath("/admin/produtos-mercatto");
+  redirect("/admin/produtos-mercatto");
 }
 
-export async function updateProductAction(
+export async function updateMercattoProductAction(
   _prev: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const user = await requireRole(["SELLER", "ADMIN"]);
-  const seller = await prisma.seller.findUnique({ where: { userId: user.id } });
-  if (!seller) return { status: "error", message: "Loja não encontrada." };
+  const admin = await requireRole(["ADMIN"]);
+  const seller = await requireOfficialSeller();
 
   const productId = formData.get("productId") as string;
   const existing = await prisma.product.findFirst({ where: { id: productId, sellerId: seller.id } });
@@ -201,17 +172,16 @@ export async function updateProductAction(
     }
   });
 
-  await logAudit({ userId: user.id, action: "PRODUCT_UPDATED", entityType: "Product", entityId: productId });
+  await logAudit({ userId: admin.id, action: "MERCATTO_PRODUCT_UPDATED", entityType: "Product", entityId: productId });
 
-  revalidatePath("/vendedor/produtos");
+  revalidatePath("/admin/produtos-mercatto");
   revalidatePath(`/produto/${existing.slug}`);
   return { status: "success", message: "Produto atualizado." };
 }
 
-export async function deleteProductAction(productId: string) {
-  const user = await requireRole(["SELLER", "ADMIN"]);
-  const seller = await prisma.seller.findUnique({ where: { userId: user.id } });
-  if (!seller) return;
+export async function deleteMercattoProductAction(productId: string) {
+  const admin = await requireRole(["ADMIN"]);
+  const seller = await requireOfficialSeller();
 
   const product = await prisma.product.findFirst({ where: { id: productId, sellerId: seller.id } });
   if (!product) return;
@@ -224,77 +194,30 @@ export async function deleteProductAction(productId: string) {
     await prisma.product.delete({ where: { id: productId } });
   }
 
-  await logAudit({ userId: user.id, action: "PRODUCT_DELETED", entityType: "Product", entityId: productId });
-  revalidatePath("/vendedor/produtos");
+  await logAudit({ userId: admin.id, action: "MERCATTO_PRODUCT_DELETED", entityType: "Product", entityId: productId });
+  revalidatePath("/admin/produtos-mercatto");
 }
 
-export async function toggleProductActiveAction(productId: string) {
-  const user = await requireRole(["SELLER", "ADMIN"]);
-  const seller = await prisma.seller.findUnique({ where: { userId: user.id } });
-  if (!seller) return;
+export async function toggleMercattoProductActiveAction(productId: string) {
+  const admin = await requireRole(["ADMIN"]);
+  const seller = await requireOfficialSeller();
 
   const product = await prisma.product.findFirst({ where: { id: productId, sellerId: seller.id } });
   if (!product) return;
 
   await prisma.product.update({ where: { id: productId }, data: { isActive: !product.isActive } });
-  revalidatePath("/vendedor/produtos");
+  await logAudit({ userId: admin.id, action: "MERCATTO_PRODUCT_ACTIVE_TOGGLED", entityType: "Product", entityId: productId });
+  revalidatePath("/admin/produtos-mercatto");
 }
 
-export async function advanceOrderStatusAction(
-  _prev: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
-  const user = await requireRole(["SELLER", "ADMIN"]);
-  const seller = await prisma.seller.findUnique({ where: { userId: user.id } });
-  if (!seller) return { status: "error", message: "Loja não encontrada." };
+export async function toggleMercattoProductFeaturedAction(productId: string) {
+  const admin = await requireRole(["ADMIN"]);
+  const seller = await requireOfficialSeller();
 
-  const orderNumber = formData.get("orderNumber") as string;
-  const trackingCode = (formData.get("trackingCode") as string | null)?.trim() || undefined;
+  const product = await prisma.product.findFirst({ where: { id: productId, sellerId: seller.id } });
+  if (!product) return;
 
-  const order = await prisma.order.findFirst({
-    where: { orderNumber, items: { some: { sellerId: seller.id } } },
-  });
-  if (!order) return { status: "error", message: "Pedido não encontrado." };
-
-  const nextStatus = SELLER_NEXT_STATUS[order.status];
-  if (!nextStatus) {
-    return { status: "error", message: "Este pedido não pode avançar de status." };
-  }
-
-  await prisma.$transaction(async (tx) => {
-    await tx.order.update({ where: { id: order.id }, data: { status: nextStatus as never } });
-
-    if (nextStatus === "SHIPPED") {
-      await tx.shipment.update({
-        where: { orderId: order.id },
-        data: { shippedAt: new Date(), trackingCode },
-      });
-    }
-    if (nextStatus === "DELIVERED") {
-      await tx.shipment.update({ where: { orderId: order.id }, data: { deliveredAt: new Date() } });
-    }
-  });
-
-  await logAudit({
-    userId: user.id,
-    action: "ORDER_STATUS_ADVANCED",
-    entityType: "Order",
-    entityId: order.id,
-    metadata: { from: order.status, to: nextStatus },
-  });
-
-  const notification = STATUS_ADVANCE_NOTIFICATION[nextStatus];
-  if (notification) {
-    await notifyUser({
-      userId: order.userId,
-      type: "ORDER_UPDATE",
-      title: notification.title,
-      message: notification.message,
-      linkUrl: `/minha-conta/pedidos/${orderNumber}`,
-    });
-  }
-
-  revalidatePath(`/vendedor/pedidos/${orderNumber}`);
-  revalidatePath("/vendedor/pedidos");
-  return { status: "success", message: "Status do pedido atualizado." };
+  await prisma.product.update({ where: { id: productId }, data: { isFeatured: !product.isFeatured } });
+  await logAudit({ userId: admin.id, action: "MERCATTO_PRODUCT_FEATURED_TOGGLED", entityType: "Product", entityId: productId });
+  revalidatePath("/admin/produtos-mercatto");
 }

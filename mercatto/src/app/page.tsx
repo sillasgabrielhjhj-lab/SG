@@ -7,7 +7,7 @@ import { BenefitsSection } from "@/components/home/benefits-section";
 import { getHomeSections } from "@/lib/data/catalog";
 
 export default async function HomePage() {
-  const { deals, bestSellers, recommended, under50, under100, under200 } = await getHomeSections();
+  const { deals, mercattoDeals, bestSellers, recommended, under50, under100, under200 } = await getHomeSections();
 
   return (
     <>
@@ -16,9 +16,16 @@ export default async function HomePage() {
       <main id="main" className="flex-1 pb-16">
         <HeroBanner />
         <PopularCategories />
+        {mercattoDeals.length > 0 && (
+          <ProductSection
+            title="Ofertas do Mercatto"
+            seeAllHref="/search?vendedor=mercatto"
+            products={mercattoDeals}
+          />
+        )}
         {deals.length > 0 && (
           <ProductSection
-            title="Ofertas de lançamento Mercatto"
+            title="Ofertas de lançamento"
             seeAllHref="/search?q=ofertas"
             products={deals}
           />

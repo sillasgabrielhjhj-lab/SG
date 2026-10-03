@@ -16,17 +16,13 @@ export function ReviewSection({
   reviews,
   ratingAvg,
   ratingCount,
+  breakdown,
 }: {
   reviews: Review[];
   ratingAvg: number;
   ratingCount: number;
+  breakdown: { star: number; count: number; pct: number }[];
 }) {
-  const breakdown = [5, 4, 3, 2, 1].map((star) => {
-    const count = reviews.filter((r) => r.rating === star).length;
-    const pct = reviews.length > 0 ? Math.round((count / reviews.length) * 100) : 0;
-    return { star, count, pct };
-  });
-
   return (
     <div id="avaliacoes" className="scroll-mt-20">
       <h2 className="font-display text-xl font-semibold text-foreground">Avaliações</h2>

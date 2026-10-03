@@ -6,6 +6,13 @@ export async function getSellerByUserId(userId: string) {
   return prisma.seller.findUnique({ where: { userId } });
 }
 
+/** O vendedor oficial "Mercatto" (bootstrap em prisma/seed.ts) — único em
+ * todo o banco. Usado tanto pelo admin (/admin/produtos-mercatto) quanto
+ * pela vitrine pública (seção "Ofertas do Mercatto" na home). */
+export async function getOfficialSeller() {
+  return prisma.seller.findFirst({ where: { isOfficialStore: true } });
+}
+
 export async function getSellerOverview(sellerId: string) {
   const [productCount, activeProductCount, pendingOrderItems, approvedItems, reviewCount] = await Promise.all([
     prisma.product.count({ where: { sellerId } }),

@@ -4,10 +4,12 @@ import {
   Users,
   Store,
   Package,
+  PackageCheck,
   ShoppingBag,
   FolderTree,
   Ticket,
   Star,
+  Truck,
 } from "lucide-react";
 
 import { Header } from "@/components/layout/header";
@@ -19,7 +21,9 @@ const navItems = [
   { href: "/admin/usuarios", label: "Usuários", icon: Users },
   { href: "/admin/vendedores", label: "Vendedores", icon: Store },
   { href: "/admin/produtos", label: "Produtos", icon: Package },
+  { href: "/admin/produtos-mercatto", label: "Produtos do Mercatto", icon: PackageCheck },
   { href: "/admin/pedidos", label: "Pedidos", icon: ShoppingBag },
+  { href: "/admin/pedidos-mercatto", label: "Pedidos do Mercatto", icon: Truck },
   { href: "/admin/categorias", label: "Categorias", icon: FolderTree },
   { href: "/admin/cupons", label: "Cupons", icon: Ticket },
   { href: "/admin/avaliacoes", label: "Avaliações", icon: Star },

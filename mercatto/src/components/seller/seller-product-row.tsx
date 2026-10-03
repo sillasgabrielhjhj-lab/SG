@@ -3,9 +3,8 @@
 import { useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Pencil, Trash2, Eye, EyeOff } from "lucide-react";
+import { Pencil, Trash2, Eye, EyeOff, Star } from "lucide-react";
 
-import { deleteProductAction, toggleProductActiveAction } from "@/lib/actions/seller";
 import { formatCurrencyBRL } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,26 +16,51 @@ type Row = {
   sku: string;
   priceCents: number;
   isActive: boolean;
+  isFeatured?: boolean;
   imageUrl: string;
   stock: number;
   categoryName: string;
 };
 
-export function SellerProductRow({ product }: { product: Row }) {
+/** Linha de produto reaproveitada entre /vendedor/produtos (vendedor
+ * externo, sempre dono dos próprios produtos) e /admin/produtos-mercatto
+ * (admin, produtos do vendedor oficial) — só as actions e o link de edição
+ * mudam entre os dois contextos. */
+export function SellerProductRow({
+  product,
+  editHref,
+  deleteAction,
+  toggleActiveAction,
+  toggleFeaturedAction,
+}: {
+  product: Row;
+  editHref: string;
+  deleteAction: (productId: string) => Promise<void>;
+  toggleActiveAction: (productId: string) => Promise<void>;
+  toggleFeaturedAction?: (productId: string) => Promise<void>;
+}) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   function handleDelete() {
     if (!confirm(`Remover "${product.name}"? Essa ação não pode ser desfeita.`)) return;
     startTransition(async () => {
-      await deleteProductAction(product.id);
+      await deleteAction(product.id);
       router.refresh();
     });
   }
 
   function handleToggle() {
     startTransition(async () => {
-      await toggleProductActiveAction(product.id);
+      await toggleActiveAction(product.id);
+      router.refresh();
+    });
+  }
+
+  function handleToggleFeatured() {
+    if (!toggleFeaturedAction) return;
+    startTransition(async () => {
+      await toggleFeaturedAction(product.id);
       router.refresh();
     });
   }
@@ -62,11 +86,23 @@ export function SellerProductRow({ product }: { product: Row }) {
       </td>
       <td className="py-3 text-right">
         <div className="flex justify-end gap-1">
+          {toggleFeaturedAction && (
+            <Button
+              variant="ghost"
+              size="icon"
+              disabled={isPending}
+              onClick={handleToggleFeatured}
+              aria-label="Destacar na home"
+              className={product.isFeatured ? "text-warning" : undefined}
+            >
+              <Star className={`size-4 ${product.isFeatured ? "fill-warning" : ""}`} />
+            </Button>
+          )}
           <Button variant="ghost" size="icon" disabled={isPending} onClick={handleToggle} aria-label="Ativar/desativar">
             {product.isActive ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href={`/vendedor/produtos/${product.id}`} aria-label="Editar">
+            <Link href={editHref} aria-label="Editar">
               <Pencil className="size-4" />
             </Link>
           </Button>

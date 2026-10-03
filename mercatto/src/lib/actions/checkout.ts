@@ -11,6 +11,7 @@ import { getPaymentProvider } from "@/lib/payments/provider";
 import { placeOrderSchema } from "@/lib/validation/checkout";
 import { logAudit } from "@/lib/audit";
 import { notifyUser } from "@/lib/notifications";
+import { decrementInventoryOrThrow, InsufficientStockError } from "@/lib/inventory";
 import type { ActionState } from "@/lib/actions/auth";
 
 function generateOrderNumber() {
@@ -106,83 +107,85 @@ export async function placeOrderAction(
       return { status: "error", message: "Não foi possível iniciar o pagamento. Tente novamente." };
     }
 
-    await prisma.$transaction(async (tx) => {
-      const order = await tx.order.create({
-        data: {
-          orderNumber,
-          userId: user.id,
-          status: "AWAITING_PAYMENT",
-          shippingAddressId: address.id,
-          subtotalCents: summary.subtotalCents,
-          shippingCents: summary.shippingCents,
-          discountCents: summary.discountCents,
-          totalCents: summary.totalCents,
-          couponId: cart.coupon?.id ?? null,
-        },
-      });
-
-      for (const item of cart.items) {
-        const unitPriceCents = item.variant?.priceCents ?? item.product.priceCents;
-        await tx.orderItem.create({
+    try {
+      await prisma.$transaction(async (tx) => {
+        const order = await tx.order.create({
           data: {
-            orderId: order.id,
-            productId: item.productId,
-            variantId: item.variantId,
-            sellerId: item.product.sellerId,
-            productNameSnapshot: item.variant ? `${item.product.name} (${item.variant.name})` : item.product.name,
-            unitPriceCents,
-            quantity: item.quantity,
-            totalCents: unitPriceCents * item.quantity,
+            orderNumber,
+            userId: user.id,
+            status: "AWAITING_PAYMENT",
+            shippingAddressId: address.id,
+            subtotalCents: summary.subtotalCents,
+            shippingCents: summary.shippingCents,
+            discountCents: summary.discountCents,
+            totalCents: summary.totalCents,
+            couponId: cart.coupon?.id ?? null,
           },
         });
 
-        if (item.variantId) {
-          await tx.inventory.updateMany({
-            where: { variantId: item.variantId },
-            data: { quantity: { decrement: item.quantity } },
+        for (const item of cart.items) {
+          const unitPriceCents = item.variant?.priceCents ?? item.product.priceCents;
+          await tx.orderItem.create({
+            data: {
+              orderId: order.id,
+              productId: item.productId,
+              variantId: item.variantId,
+              sellerId: item.product.sellerId,
+              productNameSnapshot: item.variant ? `${item.product.name} (${item.variant.name})` : item.product.name,
+              unitPriceCents,
+              quantity: item.quantity,
+              totalCents: unitPriceCents * item.quantity,
+            },
           });
-        } else {
-          await tx.inventory.updateMany({
-            where: { productId: item.productId },
-            data: { quantity: { decrement: item.quantity } },
+
+          await decrementInventoryOrThrow(tx, {
+            productId: item.productId,
+            variantId: item.variantId,
+            quantity: item.quantity,
+            productName: item.product.name,
+          });
+
+          await tx.product.update({
+            where: { id: item.productId },
+            data: { salesCount: { increment: item.quantity } },
           });
         }
 
-        await tx.product.update({
-          where: { id: item.productId },
-          data: { salesCount: { increment: item.quantity } },
+        await tx.payment.create({
+          data: {
+            orderId: order.id,
+            provider: provider.name,
+            method: paymentMethod,
+            status: "PENDING",
+            amountCents: summary.totalCents,
+            installments: paymentMethod === "CREDIT_CARD" ? installments : 1,
+            externalReference: checkout.referenceId,
+          },
         });
-      }
 
-      await tx.payment.create({
-        data: {
-          orderId: order.id,
-          provider: provider.name,
-          method: paymentMethod,
-          status: "PENDING",
-          amountCents: summary.totalCents,
-          installments: paymentMethod === "CREDIT_CARD" ? installments : 1,
-          externalReference: checkout.referenceId,
-        },
+        await tx.shipment.create({
+          data: {
+            orderId: order.id,
+            carrier: "Mercatto Entregas",
+            estimatedDelivery: new Date(Date.now() + shippingOption.days * 24 * 60 * 60 * 1000),
+          },
+        });
+
+        if (cart.coupon) {
+          await tx.coupon.update({ where: { id: cart.coupon.id }, data: { usedCount: { increment: 1 } } });
+        }
+
+        if (cart.id) {
+          await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
+          await tx.cart.update({ where: { id: cart.id }, data: { couponId: null } });
+        }
       });
-
-      await tx.shipment.create({
-        data: {
-          orderId: order.id,
-          carrier: "Mercatto Entregas",
-          estimatedDelivery: new Date(Date.now() + shippingOption.days * 24 * 60 * 60 * 1000),
-        },
-      });
-
-      if (cart.coupon) {
-        await tx.coupon.update({ where: { id: cart.coupon.id }, data: { usedCount: { increment: 1 } } });
+    } catch (error) {
+      if (error instanceof InsufficientStockError) {
+        return { status: "error", message: `${error.message} Ajuste a quantidade no carrinho.` };
       }
-
-      if (cart.id) {
-        await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
-        await tx.cart.update({ where: { id: cart.id }, data: { couponId: null } });
-      }
-    });
+      throw error;
+    }
 
     await logAudit({
       userId: user.id,
@@ -213,84 +216,86 @@ export async function placeOrderAction(
   const orderStatus = chargeResult.status === "APPROVED" ? "PAYMENT_APPROVED" : "AWAITING_PAYMENT";
   const paymentStatus = chargeResult.status === "APPROVED" ? "APPROVED" : "PENDING";
 
-  await prisma.$transaction(async (tx) => {
-    const order = await tx.order.create({
-      data: {
-        orderNumber,
-        userId: user.id,
-        status: orderStatus,
-        shippingAddressId: address.id,
-        subtotalCents: summary.subtotalCents,
-        shippingCents: summary.shippingCents,
-        discountCents: summary.discountCents,
-        totalCents: summary.totalCents,
-        couponId: cart.coupon?.id ?? null,
-      },
-    });
-
-    for (const item of cart.items) {
-      const unitPriceCents = item.variant?.priceCents ?? item.product.priceCents;
-      await tx.orderItem.create({
+  try {
+    await prisma.$transaction(async (tx) => {
+      const order = await tx.order.create({
         data: {
-          orderId: order.id,
-          productId: item.productId,
-          variantId: item.variantId,
-          sellerId: item.product.sellerId,
-          productNameSnapshot: item.variant ? `${item.product.name} (${item.variant.name})` : item.product.name,
-          unitPriceCents,
-          quantity: item.quantity,
-          totalCents: unitPriceCents * item.quantity,
+          orderNumber,
+          userId: user.id,
+          status: orderStatus,
+          shippingAddressId: address.id,
+          subtotalCents: summary.subtotalCents,
+          shippingCents: summary.shippingCents,
+          discountCents: summary.discountCents,
+          totalCents: summary.totalCents,
+          couponId: cart.coupon?.id ?? null,
         },
       });
 
-      if (item.variantId) {
-        await tx.inventory.updateMany({
-          where: { variantId: item.variantId },
-          data: { quantity: { decrement: item.quantity } },
+      for (const item of cart.items) {
+        const unitPriceCents = item.variant?.priceCents ?? item.product.priceCents;
+        await tx.orderItem.create({
+          data: {
+            orderId: order.id,
+            productId: item.productId,
+            variantId: item.variantId,
+            sellerId: item.product.sellerId,
+            productNameSnapshot: item.variant ? `${item.product.name} (${item.variant.name})` : item.product.name,
+            unitPriceCents,
+            quantity: item.quantity,
+            totalCents: unitPriceCents * item.quantity,
+          },
         });
-      } else {
-        await tx.inventory.updateMany({
-          where: { productId: item.productId },
-          data: { quantity: { decrement: item.quantity } },
+
+        await decrementInventoryOrThrow(tx, {
+          productId: item.productId,
+          variantId: item.variantId,
+          quantity: item.quantity,
+          productName: item.product.name,
+        });
+
+        await tx.product.update({
+          where: { id: item.productId },
+          data: { salesCount: { increment: item.quantity } },
         });
       }
 
-      await tx.product.update({
-        where: { id: item.productId },
-        data: { salesCount: { increment: item.quantity } },
+      await tx.payment.create({
+        data: {
+          orderId: order.id,
+          provider: provider.name,
+          method: paymentMethod,
+          status: paymentStatus,
+          amountCents: summary.totalCents,
+          installments: paymentMethod === "CREDIT_CARD" ? installments : 1,
+          externalReference: chargeResult.externalReference,
+          paidAt: paymentStatus === "APPROVED" ? new Date() : null,
+        },
       });
-    }
 
-    await tx.payment.create({
-      data: {
-        orderId: order.id,
-        provider: provider.name,
-        method: paymentMethod,
-        status: paymentStatus,
-        amountCents: summary.totalCents,
-        installments: paymentMethod === "CREDIT_CARD" ? installments : 1,
-        externalReference: chargeResult.externalReference,
-        paidAt: paymentStatus === "APPROVED" ? new Date() : null,
-      },
+      await tx.shipment.create({
+        data: {
+          orderId: order.id,
+          carrier: "Mercatto Entregas",
+          estimatedDelivery: new Date(Date.now() + shippingOption.days * 24 * 60 * 60 * 1000),
+        },
+      });
+
+      if (cart.coupon) {
+        await tx.coupon.update({ where: { id: cart.coupon.id }, data: { usedCount: { increment: 1 } } });
+      }
+
+      if (cart.id) {
+        await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
+        await tx.cart.update({ where: { id: cart.id }, data: { couponId: null } });
+      }
     });
-
-    await tx.shipment.create({
-      data: {
-        orderId: order.id,
-        carrier: "Mercatto Entregas",
-        estimatedDelivery: new Date(Date.now() + shippingOption.days * 24 * 60 * 60 * 1000),
-      },
-    });
-
-    if (cart.coupon) {
-      await tx.coupon.update({ where: { id: cart.coupon.id }, data: { usedCount: { increment: 1 } } });
+  } catch (error) {
+    if (error instanceof InsufficientStockError) {
+      return { status: "error", message: `${error.message} Ajuste a quantidade no carrinho.` };
     }
-
-    if (cart.id) {
-      await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
-      await tx.cart.update({ where: { id: cart.id }, data: { couponId: null } });
-    }
-  });
+    throw error;
+  }
 
   await logAudit({
     userId: user.id,

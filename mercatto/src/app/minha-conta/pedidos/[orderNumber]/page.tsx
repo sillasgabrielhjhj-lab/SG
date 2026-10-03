@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Truck, MapPin, CreditCard } from "lucide-react";
+import { Truck, MapPin, CreditCard, Star } from "lucide-react";
 
 import { requireUser } from "@/lib/auth/guards";
 import { getOrderDetail } from "@/lib/data/orders";
@@ -16,6 +16,7 @@ import {
 } from "@/lib/order-status";
 import { OrderActionDialog } from "@/components/orders/order-action-dialog";
 import { OrderTimeline } from "@/components/orders/order-timeline";
+import { ReviewFormDialog } from "@/components/orders/review-form-dialog";
 
 type Props = { params: Promise<{ orderNumber: string }> };
 
@@ -87,12 +88,12 @@ export default async function OrderDetailPage({ params }: Props) {
         <h2 className="font-display text-lg font-semibold text-foreground">Itens</h2>
         <div className="mt-4 flex flex-col gap-4">
           {order.items.map((item) => (
-            <div key={item.id} className="flex items-center gap-3">
+            <div key={item.id} className="flex flex-col gap-3 sm:flex-row sm:items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.product.images[0]?.url ?? "/placeholders/ph-0.svg"}
                 alt=""
-                className="size-16 rounded-md object-cover"
+                className="size-16 shrink-0 rounded-md object-cover"
               />
               <div className="flex-1">
                 <Link href={`/produto/${item.product.slug}`} className="text-sm font-medium text-foreground hover:text-primary">
@@ -101,8 +102,27 @@ export default async function OrderDetailPage({ params }: Props) {
                 <p className="text-xs text-muted-foreground">
                   Vendido por {item.seller.storeName} · Qtd: {item.quantity}
                 </p>
+                {order.status === "DELIVERED" && (
+                  <div className="mt-2">
+                    {item.review ? (
+                      <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <span className="flex gap-0.5">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`size-3.5 ${i < item.review!.rating ? "fill-warning text-warning" : "text-muted"}`}
+                            />
+                          ))}
+                        </span>
+                        Você avaliou este produto
+                      </p>
+                    ) : (
+                      <ReviewFormDialog orderItemId={item.id} productName={item.productNameSnapshot} />
+                    )}
+                  </div>
+                )}
               </div>
-              <p className="font-medium text-foreground">{formatCurrencyBRL(item.totalCents)}</p>
+              <p className="font-medium text-foreground sm:self-start">{formatCurrencyBRL(item.totalCents)}</p>
             </div>
           ))}
         </div>

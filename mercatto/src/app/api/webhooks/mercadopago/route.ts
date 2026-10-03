@@ -5,6 +5,7 @@ import { MercadoPagoConfig, Payment as MPPayment } from "mercadopago";
 import { prisma } from "@/lib/prisma";
 import { logAudit } from "@/lib/audit";
 import { notifyUser } from "@/lib/notifications";
+import { restoreInventory } from "@/lib/inventory";
 
 /**
  * Notificação do Mercado Pago (Checkout Pro). O corpo do POST nunca é
@@ -50,7 +51,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ received: true });
   }
 
-  const order = await prisma.order.findUnique({ where: { orderNumber } });
+  const order = await prisma.order.findUnique({ where: { orderNumber }, include: { items: true } });
   if (!order) {
     return NextResponse.json({ received: true });
   }
@@ -65,6 +66,14 @@ export async function POST(request: NextRequest) {
           ? "DECLINED"
           : "PENDING";
 
+  // Pedido ainda não pago e o pagamento foi recusado/cancelado no gateway:
+  // o estoque já tinha sido reservado (decrementado) na criação do pedido
+  // — sem isso aqui, ele fica perdido pra sempre a cada pagamento que falha.
+  // Uma reprovação em pedido já aprovado (reembolso/chargeback após o fato)
+  // não entra nesse caso: o produto pode já ter saído pra entrega, então
+  // isso fica pra revisão manual em vez de estorno automático de estoque.
+  const shouldReleaseStock = paymentStatus === "DECLINED" && order.status === "AWAITING_PAYMENT";
+
   await prisma.$transaction(async (tx) => {
     await tx.payment.updateMany({
       where: { orderId: order.id },
@@ -77,6 +86,24 @@ export async function POST(request: NextRequest) {
 
     if (paymentStatus === "APPROVED" && order.status === "AWAITING_PAYMENT") {
       await tx.order.update({ where: { id: order.id }, data: { status: "PAYMENT_APPROVED" } });
+    }
+
+    if (shouldReleaseStock) {
+      await tx.order.update({
+        where: { id: order.id },
+        data: {
+          status: "CANCELLED",
+          cancelledAt: new Date(),
+          cancelReason: "Pagamento não aprovado pelo Mercado Pago.",
+        },
+      });
+      for (const item of order.items) {
+        await restoreInventory(tx, {
+          productId: item.productId,
+          variantId: item.variantId,
+          quantity: item.quantity,
+        });
+      }
     }
   });
 

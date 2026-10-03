@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth/guards";
 import { logAudit } from "@/lib/audit";
 import { CANCELLABLE_STATUSES, RETURNABLE_STATUSES } from "@/lib/order-status";
+import { restoreInventory } from "@/lib/inventory";
 import type { ActionState } from "@/lib/actions/auth";
 
 const cancelSchema = z.object({
@@ -46,17 +47,11 @@ export async function cancelOrderAction(
     });
 
     for (const item of order.items) {
-      if (item.variantId) {
-        await tx.inventory.updateMany({
-          where: { variantId: item.variantId },
-          data: { quantity: { increment: item.quantity } },
-        });
-      } else {
-        await tx.inventory.updateMany({
-          where: { productId: item.productId },
-          data: { quantity: { increment: item.quantity } },
-        });
-      }
+      await restoreInventory(tx, {
+        productId: item.productId,
+        variantId: item.variantId,
+        quantity: item.quantity,
+      });
     }
   });
 
