@@ -3,6 +3,7 @@ import { Star, Truck } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { cn, formatCurrencyBRL, formatInstallments } from "@/lib/utils";
+import { pixPriceCents, isPromotionActive } from "@/lib/pricing";
 import type { ProductCardData } from "@/lib/data/catalog";
 
 const FREE_SHIPPING_THRESHOLD_CENTS = 9900;
@@ -14,8 +15,7 @@ export function ProductCard({
   product: ProductCardData;
   className?: string;
 }) {
-  const hasDiscount =
-    product.compareAtPriceCents && product.compareAtPriceCents > product.priceCents;
+  const hasDiscount = isPromotionActive(product);
   const discountPct = hasDiscount
     ? Math.round((1 - product.priceCents / product.compareAtPriceCents!) * 100)
     : 0;
@@ -64,6 +64,9 @@ export function ProductCard({
           )}
           <span className="font-display text-lg font-bold text-foreground">
             {formatCurrencyBRL(product.priceCents)}
+          </span>
+          <span className="text-xs font-medium text-success">
+            {formatCurrencyBRL(pixPriceCents(product.priceCents))} no Pix
           </span>
           <span className="text-xs text-muted-foreground">
             {formatInstallments(product.priceCents)}

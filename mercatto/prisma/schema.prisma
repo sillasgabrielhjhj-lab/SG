@@ -220,6 +220,14 @@ model Product {
   sku                 String   @unique
   priceCents          Int
   compareAtPriceCents Int?
+  /// Custo do produto pro vendedor — nunca exposto publicamente, só serve
+  /// pra calcular margem no formulário de cadastro/edição.
+  costCents           Int?
+  /// Janela de validade do preço promocional (compareAtPriceCents). Quando
+  /// nula, o desconto (se houver) vale sempre — mantém compatibilidade com
+  /// produtos cadastrados antes dessa funcionalidade existir.
+  promotionStartsAt   DateTime?
+  promotionEndsAt     DateTime?
   weightGrams         Int?
   heightCm            Float?
   widthCm             Float?

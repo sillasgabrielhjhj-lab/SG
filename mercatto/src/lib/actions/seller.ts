@@ -70,6 +70,16 @@ function parseProductFormData(formData: FormData) {
     compareAtPriceCents: formData.get("compareAtPrice")
       ? Math.round(Number(formData.get("compareAtPrice")) * 100)
       : null,
+    costCents: formData.get("costPrice") ? Math.round(Number(formData.get("costPrice")) * 100) : null,
+    // O <input type="datetime-local"> manda "AAAA-MM-DDTHH:mm" sem timezone;
+    // tratamos como horário de Brasília (UTC-3, fixo), simétrico ao que
+    // toDatetimeLocal() mostra em src/app/vendedor/produtos/[id]/page.tsx.
+    promotionStartsAt: formData.get("promotionStartsAt")
+      ? new Date(`${formData.get("promotionStartsAt")}:00-03:00`)
+      : null,
+    promotionEndsAt: formData.get("promotionEndsAt")
+      ? new Date(`${formData.get("promotionEndsAt")}:00-03:00`)
+      : null,
     weightGrams: formData.get("weightGrams") ? Number(formData.get("weightGrams")) : null,
     heightCm: formData.get("heightCm") ? Number(formData.get("heightCm")) : null,
     widthCm: formData.get("widthCm") ? Number(formData.get("widthCm")) : null,
@@ -117,6 +127,9 @@ export async function createProductAction(
         sku: data.sku,
         priceCents: data.priceCents,
         compareAtPriceCents: data.compareAtPriceCents,
+        costCents: data.costCents,
+        promotionStartsAt: data.promotionStartsAt,
+        promotionEndsAt: data.promotionEndsAt,
         weightGrams: data.weightGrams,
         heightCm: data.heightCm,
         widthCm: data.widthCm,
@@ -188,6 +201,9 @@ export async function updateProductAction(
         sku: data.sku,
         priceCents: data.priceCents,
         compareAtPriceCents: data.compareAtPriceCents,
+        costCents: data.costCents,
+        promotionStartsAt: data.promotionStartsAt,
+        promotionEndsAt: data.promotionEndsAt,
         weightGrams: data.weightGrams,
         heightCm: data.heightCm,
         widthCm: data.widthCm,

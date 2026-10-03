@@ -208,6 +208,8 @@ export default async function ProductPage({ params }: Props) {
                 productSlug={product.slug}
                 basePriceCents={product.priceCents}
                 compareAtPriceCents={product.compareAtPriceCents}
+                promotionStartsAt={product.promotionStartsAt}
+                promotionEndsAt={product.promotionEndsAt}
                 baseInventory={product.inventory}
                 variants={product.variants}
                 isAuthenticated={Boolean(user)}

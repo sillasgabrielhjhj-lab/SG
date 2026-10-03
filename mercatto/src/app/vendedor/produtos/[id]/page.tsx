@@ -23,6 +23,15 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
   if (!product) notFound();
 
+  // datetime-local espera "AAAA-MM-DDTHH:mm" sem timezone — mostramos no
+  // horário de Brasília (UTC-3, fixo) independente do fuso do servidor,
+  // já que a loja opera só no Brasil. O valor volta com o mesmo offset
+  // explícito em parseProductFormData (src/lib/actions/seller.ts).
+  function toDatetimeLocal(date: Date | null) {
+    if (!date) return "";
+    return new Date(date.getTime() - 3 * 60 * 60 * 1000).toISOString().slice(0, 16);
+  }
+
   const categoryOptions = categories.map((c) => ({
     id: c.id,
     name: c.parent ? `${c.parent.name} / ${c.name}` : c.name,
@@ -37,6 +46,9 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     sku: product.sku,
     price: (product.priceCents / 100).toString(),
     compareAtPrice: product.compareAtPriceCents ? (product.compareAtPriceCents / 100).toString() : "",
+    costPrice: product.costCents ? (product.costCents / 100).toString() : "",
+    promotionStartsAt: toDatetimeLocal(product.promotionStartsAt),
+    promotionEndsAt: toDatetimeLocal(product.promotionEndsAt),
     stock: (product.inventory?.quantity ?? 0).toString(),
     weightGrams: product.weightGrams?.toString() ?? "",
     heightCm: product.heightCm?.toString() ?? "",

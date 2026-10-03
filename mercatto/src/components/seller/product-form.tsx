@@ -25,6 +25,9 @@ export type ProductFormDefaults = {
   sku: string;
   price: string;
   compareAtPrice: string;
+  costPrice: string;
+  promotionStartsAt: string;
+  promotionEndsAt: string;
   stock: string;
   weightGrams: string;
   heightCm: string;
@@ -53,6 +56,16 @@ export function ProductForm({
   const [attributes, setAttributes] = useState<Attribute[]>(defaults.attributes);
   const [variants, setVariants] = useState<VariantRow[]>(defaults.variants);
   const [sku, setSku] = useState(defaults.sku);
+  const [price, setPrice] = useState(defaults.price);
+  const [costPrice, setCostPrice] = useState(defaults.costPrice);
+  const [hasPromotionWindow, setHasPromotionWindow] = useState(
+    Boolean(defaults.promotionStartsAt || defaults.promotionEndsAt),
+  );
+
+  const priceNum = Number(price);
+  const costNum = Number(costPrice);
+  const margin =
+    costPrice && priceNum > 0 && costNum >= 0 ? ((priceNum - costNum) / priceNum) * 100 : null;
 
   return (
     <form action={formAction} className="flex flex-col gap-6">
@@ -151,14 +164,15 @@ export function ProductForm({
         <CardContent className="flex flex-col gap-4 pb-5">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
-              <Label htmlFor="price">Preço (R$)</Label>
+              <Label htmlFor="price">Preço de venda (R$)</Label>
               <Input
                 id="price"
                 name="price"
                 type="number"
                 step="0.01"
                 min="0.01"
-                defaultValue={defaults.price}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
                 required
                 className="mt-1.5"
               />
@@ -173,6 +187,7 @@ export function ProductForm({
                 defaultValue={defaults.compareAtPrice}
                 className="mt-1.5"
               />
+              <FieldError errors={state.fieldErrors?.compareAtPriceCents} />
             </div>
             <div>
               <Label htmlFor="stock">Estoque</Label>
@@ -187,6 +202,76 @@ export function ProductForm({
                 className="mt-1.5"
               />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <Label htmlFor="costPrice">Preço de custo (R$, opcional — só você vê)</Label>
+              <Input
+                id="costPrice"
+                name="costPrice"
+                type="number"
+                step="0.01"
+                min="0"
+                value={costPrice}
+                onChange={(e) => setCostPrice(e.target.value)}
+                className="mt-1.5"
+              />
+              {margin !== null && (
+                <p className={`mt-1.5 text-xs ${margin < 0 ? "text-destructive" : "text-muted-foreground"}`}>
+                  {margin < 0
+                    ? `Atenção: vendendo abaixo do custo (margem ${margin.toFixed(0)}%)`
+                    : `Margem: ${margin.toFixed(0)}%`}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <Label className="mb-0">Período da promoção (opcional)</Label>
+              <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={hasPromotionWindow}
+                  onChange={(e) => setHasPromotionWindow(e.target.checked)}
+                />
+                Definir prazo
+              </label>
+            </div>
+            {hasPromotionWindow ? (
+              <div className="mt-1.5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <Label htmlFor="promotionStartsAt" className="text-xs text-muted-foreground">
+                    Início
+                  </Label>
+                  <Input
+                    id="promotionStartsAt"
+                    name="promotionStartsAt"
+                    type="datetime-local"
+                    defaultValue={defaults.promotionStartsAt}
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="promotionEndsAt" className="text-xs text-muted-foreground">
+                    Fim
+                  </Label>
+                  <Input
+                    id="promotionEndsAt"
+                    name="promotionEndsAt"
+                    type="datetime-local"
+                    defaultValue={defaults.promotionEndsAt}
+                    className="mt-1"
+                  />
+                  <FieldError errors={state.fieldErrors?.promotionEndsAt} />
+                </div>
+              </div>
+            ) : (
+              <p className="mt-1.5 text-xs text-muted-foreground">
+                Sem prazo definido, o preço riscado vale por tempo indeterminado.
+              </p>
+            )}
           </div>
 
           <div>

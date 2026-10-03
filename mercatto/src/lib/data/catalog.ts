@@ -35,6 +35,8 @@ const productCardSelect = {
   name: true,
   priceCents: true,
   compareAtPriceCents: true,
+  promotionStartsAt: true,
+  promotionEndsAt: true,
   ratingAvg: true,
   ratingCount: true,
   salesCount: true,
@@ -179,9 +181,20 @@ export async function getRelatedProducts(categoryId: string, excludeProductId: s
 }
 
 export async function getHomeSections() {
-  const [deals, bestSellers, recommended] = await Promise.all([
+  const now = new Date();
+  // Só conta como "oferta" quem tem preço riscado E, se tiver prazo
+  // definido, está dentro da janela — evita mostrar promoção já vencida.
+  const activePromotionFilter = {
+    compareAtPriceCents: { not: null },
+    OR: [
+      { promotionStartsAt: null, promotionEndsAt: null },
+      { promotionStartsAt: { lte: now }, promotionEndsAt: { gte: now } },
+    ],
+  };
+
+  const [deals, bestSellers, recommended, under50, under100, under200] = await Promise.all([
     prisma.product.findMany({
-      where: { isActive: true, compareAtPriceCents: { not: null } },
+      where: { isActive: true, ...activePromotionFilter },
       select: productCardSelect,
       orderBy: { salesCount: "desc" },
       take: 10,
@@ -198,9 +211,27 @@ export async function getHomeSections() {
       orderBy: { ratingAvg: "desc" },
       take: 10,
     }),
+    prisma.product.findMany({
+      where: { isActive: true, priceCents: { lte: 5000 } },
+      select: productCardSelect,
+      orderBy: { priceCents: "asc" },
+      take: 10,
+    }),
+    prisma.product.findMany({
+      where: { isActive: true, priceCents: { gt: 5000, lte: 10000 } },
+      select: productCardSelect,
+      orderBy: { priceCents: "asc" },
+      take: 10,
+    }),
+    prisma.product.findMany({
+      where: { isActive: true, priceCents: { gt: 10000, lte: 20000 } },
+      select: productCardSelect,
+      orderBy: { priceCents: "asc" },
+      take: 10,
+    }),
   ]);
 
-  return { deals, bestSellers, recommended };
+  return { deals, bestSellers, recommended, under50, under100, under200 };
 }
 
 export async function getSearchSuggestions(q: string) {

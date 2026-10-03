@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrencyBRL, formatInstallments } from "@/lib/utils";
+import { pixPriceCents, isPromotionActive } from "@/lib/pricing";
 import { addToCartAction } from "@/lib/actions/cart";
 import type { ActionState } from "@/lib/actions/auth";
 
@@ -24,6 +25,8 @@ export function PurchaseBox({
   productSlug,
   basePriceCents,
   compareAtPriceCents,
+  promotionStartsAt,
+  promotionEndsAt,
   baseInventory,
   variants,
   isAuthenticated,
@@ -32,6 +35,8 @@ export function PurchaseBox({
   productSlug: string;
   basePriceCents: number;
   compareAtPriceCents: number | null;
+  promotionStartsAt: Date | null;
+  promotionEndsAt: Date | null;
   baseInventory: { quantity: number; reserved: number } | null;
   variants: Variant[];
   isAuthenticated: boolean;
@@ -46,6 +51,7 @@ export function PurchaseBox({
   const selectedVariant = variants.find((v) => v.id === selectedVariantId) ?? null;
 
   const priceCents = selectedVariant?.priceCents ?? basePriceCents;
+  const showDiscount = isPromotionActive({ compareAtPriceCents, promotionStartsAt, promotionEndsAt });
   const availableStock = useMemo(() => {
     const inv = selectedVariant ? selectedVariant.inventory : baseInventory;
     if (!inv) return 0;
@@ -105,13 +111,16 @@ export function PurchaseBox({
   return (
     <div className="flex flex-col gap-4 rounded-xl border border-border p-5">
       <div>
-        {compareAtPriceCents && compareAtPriceCents > priceCents && (
+        {showDiscount && compareAtPriceCents && compareAtPriceCents > priceCents && (
           <span className="text-sm text-muted-foreground line-through">
             {formatCurrencyBRL(compareAtPriceCents)}
           </span>
         )}
         <p className="font-display text-3xl font-bold text-foreground">
           {formatCurrencyBRL(priceCents)}
+        </p>
+        <p className="text-sm font-medium text-success">
+          {formatCurrencyBRL(pixPriceCents(priceCents))} no Pix
         </p>
         <p className="text-sm text-muted-foreground">{formatInstallments(priceCents)}</p>
       </div>

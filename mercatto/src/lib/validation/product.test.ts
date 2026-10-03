@@ -10,6 +10,9 @@ const validProduct = {
   sku: "SKU-123",
   priceCents: 5000,
   compareAtPriceCents: null,
+  costCents: null,
+  promotionStartsAt: null,
+  promotionEndsAt: null,
   weightGrams: null,
   heightCm: null,
   widthCm: null,
@@ -58,5 +61,66 @@ describe("productSchema", () => {
 
   it("rejeita descrição muito curta", () => {
     expect(productSchema.safeParse({ ...validProduct, description: "curta" }).success).toBe(false);
+  });
+
+  it("rejeita custo negativo", () => {
+    expect(productSchema.safeParse({ ...validProduct, costCents: -100 }).success).toBe(false);
+  });
+
+  it("rejeita preço riscado menor ou igual ao preço de venda", () => {
+    expect(
+      productSchema.safeParse({ ...validProduct, priceCents: 5000, compareAtPriceCents: 5000 }).success,
+    ).toBe(false);
+    expect(
+      productSchema.safeParse({ ...validProduct, priceCents: 5000, compareAtPriceCents: 4000 }).success,
+    ).toBe(false);
+  });
+
+  it("aceita preço riscado maior que o preço de venda", () => {
+    expect(
+      productSchema.safeParse({ ...validProduct, priceCents: 5000, compareAtPriceCents: 8000 }).success,
+    ).toBe(true);
+  });
+
+  it("rejeita fim de promoção antes ou igual ao início", () => {
+    const start = new Date("2026-01-10T00:00:00Z");
+    const beforeStart = new Date("2026-01-05T00:00:00Z");
+    expect(
+      productSchema.safeParse({
+        ...validProduct,
+        compareAtPriceCents: 8000,
+        promotionStartsAt: start,
+        promotionEndsAt: beforeStart,
+      }).success,
+    ).toBe(false);
+    expect(
+      productSchema.safeParse({
+        ...validProduct,
+        compareAtPriceCents: 8000,
+        promotionStartsAt: start,
+        promotionEndsAt: start,
+      }).success,
+    ).toBe(false);
+  });
+
+  it("rejeita só início ou só fim de promoção definido", () => {
+    expect(
+      productSchema.safeParse({
+        ...validProduct,
+        compareAtPriceCents: 8000,
+        promotionStartsAt: new Date("2026-01-10T00:00:00Z"),
+      }).success,
+    ).toBe(false);
+  });
+
+  it("aceita início e fim de promoção válidos", () => {
+    expect(
+      productSchema.safeParse({
+        ...validProduct,
+        compareAtPriceCents: 8000,
+        promotionStartsAt: new Date("2026-01-10T00:00:00Z"),
+        promotionEndsAt: new Date("2026-01-20T00:00:00Z"),
+      }).success,
+    ).toBe(true);
   });
 });
