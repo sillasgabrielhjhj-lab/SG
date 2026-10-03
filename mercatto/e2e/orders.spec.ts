@@ -72,7 +72,7 @@ test.describe("Pedidos", () => {
     await page.fill("#reason", "Teste automatizado — comprei por engano");
     await submitAndWait(page, 'button:has-text("Confirmar")');
 
-    await expect(page.getByText("Cancelado", { exact: true })).toBeVisible();
+    await expect(page.locator('[data-slot="badge"]', { hasText: "Cancelado" })).toBeVisible();
   });
 
   test("pedido de outro usuário não é acessível (404)", async ({ page, context }) => {
