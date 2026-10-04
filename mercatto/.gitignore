@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# prisma generated client
+src/generated/
+
+# env (nunca versionar segredos)
+.env
+.env.*
+!.env.example
+
+# uploads locais (modo desenvolvimento)
+public/uploads/
+
+# testes
+coverage/
+playwright-report/
+test-results/
+blob-report/
+
+# vercel
+.vercel
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+*.log
