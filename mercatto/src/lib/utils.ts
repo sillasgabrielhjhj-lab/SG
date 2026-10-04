@@ -20,7 +20,7 @@ export function plural(count: number, singular: string, pluralForm?: string) {
 export function normalizeText(input: string) {
   return input
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/\s+/g, " ")
     .trim();

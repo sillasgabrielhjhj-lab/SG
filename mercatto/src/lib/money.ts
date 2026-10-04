@@ -19,7 +19,7 @@ export function assertCents(value: number, label = "valor"): number {
 
 /** 129990 -> "R$ 1.299,90" */
 export function formatBRL(cents: number): string {
-  return brl.format(cents / 100).replace(/ /g, " ");
+  return brl.format(cents / 100).replace(/\u00a0/g, " ");
 }
 
 /** Divide em partes inteiras e centavos para exibição tipográfica de preço. */
