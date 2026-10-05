@@ -205,6 +205,27 @@ export function occlusion(a: Art, dd: string, opacity = 0.35, x1 = 0, y1 = 1, x2
 /** Contorno sutil para acabamentos claros não sumirem no fundo claro. */
 export const edge = (t: Tone, opacity = 0.35) => ({ stroke: t.deep, "stroke-opacity": opacity, "stroke-width": 1.5 });
 
+/**
+ * Bloco 3/4 (eletrodomésticos): face frontal (x,y,w,h) + lateral direita e
+ * topo deslocados por (dx, -dy). Retorna só as faces lateral e superior; a
+ * frontal fica a cargo do chamador (para detalhes específicos).
+ */
+export function cuboidBack(a: Art, t: Tone, x: number, y: number, w: number, h: number, dx: number, dy: number, r = 10): string {
+  const top = d`M${x + r} ${y}L${x + r + dx} ${y - dy}H${x + w + dx - r * 0.6}Q${x + w + dx} ${y - dy} ${x + w + dx} ${y - dy + r * 0.6}L${x + w} ${y + r}V${y}Z`;
+  const side = d`M${x + w} ${y + r}L${x + w + dx} ${y - dy + r * 0.6}V${y + h - dy - r * 0.6}L${x + w} ${y + h - r}Z`;
+  return (
+    path(top, a.lin([
+      [0, t.hi],
+      [1, mix(t.hi, t.base, 0.6)],
+    ], 0, 1, 1, 0)) +
+    path(side, a.lin([
+      [0, t.shade],
+      [1, t.deep],
+    ], 0, 0, 1, 0)) +
+    path(d`M${x + r} ${y}L${x + r + dx} ${y - dy}`, "none", { stroke: "#ffffff", "stroke-opacity": 0.5, "stroke-width": 1.5 })
+  );
+}
+
 // -----------------------------------------------------------------------------
 // Telas com interface abstrata
 // -----------------------------------------------------------------------------

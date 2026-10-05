@@ -125,6 +125,14 @@ export class Art {
     return `url(#${id})`;
   }
 
+  /** Padrão repetido (tecido, grade de alto-falante...) em coordenadas absolutas. */
+  pattern(w: number, h: number, content: string, transform?: string): string {
+    const id = this.uid();
+    const tf = transform ? ` patternTransform="${transform}"` : "";
+    this.defs.push(`<pattern id="${id}" width="${fmt(w)}" height="${fmt(h)}" patternUnits="userSpaceOnUse"${tf}>${content}</pattern>`);
+    return `url(#${id})`;
+  }
+
   /** Desfoque gaussiano (para sombras/brilhos suaves). */
   blur(std: number): string {
     const id = this.uid();
@@ -144,7 +152,16 @@ export class Art {
   }
 }
 
-export function use(id: string, x: number, y: number, extra: Attrs = {}): string {
+/** Gerador pseudoaleatório determinístico (LCG) — mesma semente ⇒ mesmo desenho. */
+export function rng(seed: number): () => number {
+  let s = seed >>> 0 || 1;
+  return () => {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+}
+
+export function reuse(id: string, x: number, y: number, extra: Attrs = {}): string {
   return el("use", { href: `#${id}`, x, y, ...extra });
 }
 
