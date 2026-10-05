@@ -9,10 +9,10 @@ Este guia publica o Mercatto na Vercel com PostgreSQL gerenciado, Vercel Blob pa
 Para só navegar pelo site com os dados DEMO, sem instalar nada no computador:
 
 1. Vercel → **Add New… → Project** → importe o repositório → **Root Directory: `mercatto`**.
-2. **Storage → Create Database → Neon (Postgres)** e conecte ao projeto. Em *Settings → Environment Variables*, crie `DIRECT_URL` com o mesmo valor de `DATABASE_URL_UNPOOLED` (criada pela integração).
-3. Adicione as variáveis: `AUTH_SECRET` (texto aleatório com 32+ caracteres), `PAYMENT_PROVIDER=dev`, `PAYMENT_WEBHOOK_SECRET` (16+ caracteres), `CRON_SECRET` (16+ caracteres) e **`SEED_ON_BUILD=demo`** (o próprio build cria as tabelas e os dados DEMO; é idempotente).
-4. **Deployments → Create Deployment** → Git reference: o branch do app (ex.: `claude/cool-hamilton-kcm4xc`). Ao terminar, a Vercel mostra o link da prévia.
-5. Entre com `admin@mercatto.dev` / `Mercatto@2026`.
+2. **Storage → Create Database → Neon (Postgres)** e conecte ao projeto (as variáveis do banco são criadas automaticamente; a conexão direta para migrations é detectada sozinha).
+3. Adicione as variáveis: `AUTH_SECRET` (texto aleatório com 32+ caracteres), `PAYMENT_PROVIDER=dev`, `PAYMENT_WEBHOOK_SECRET` (16+ caracteres), `CRON_SECRET` (16+ caracteres) **`SEED_ON_BUILD=demo`** (o próprio build cria as tabelas e os dados DEMO; é idempotente) e **`DEMO_PASSWORD`** (senha só sua, 10+ caracteres, usada por todas as contas DEMO — obrigatória em produção).
+4. Clique em **Deploy** (ou **Redeploy**). Ao terminar, a Vercel mostra o link.
+5. Entre com `admin@mercatto.dev` e a senha definida em `DEMO_PASSWORD`.
 
 Upload de imagens exige o Vercel Blob (passo 4 abaixo); a navegação, o carrinho e o checkout simulado funcionam sem ele. Para a operação real, **remova `SEED_ON_BUILD`** e siga o guia completo.
 

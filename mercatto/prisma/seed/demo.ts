@@ -3,7 +3,18 @@ import { hashPassword } from "../../src/server/auth/password";
 import { DEMO_PRODUCTS, type DemoProduct } from "./catalog-data";
 import { cpfFromSeed, daysAgo, demoBanner, demoImg, ean13, hoursFromNow, rng } from "./util";
 
-export const DEMO_PASSWORD = "Mercatto@2026";
+const DEFAULT_DEMO_PASSWORD = "Mercatto@2026";
+/**
+ * Senha das contas DEMO. Em produção (site público) é OBRIGATÓRIO definir
+ * DEMO_PASSWORD: a senha padrão é pública (README) e daria acesso de admin a qualquer um.
+ */
+export const DEMO_PASSWORD = process.env.DEMO_PASSWORD?.trim() || DEFAULT_DEMO_PASSWORD;
+export function assertSafeDemoPassword(production: boolean) {
+  if (!production) return;
+  if (DEMO_PASSWORD === DEFAULT_DEMO_PASSWORD || DEMO_PASSWORD.length < 10) {
+    throw new Error("Seed DEMO em produção exige DEMO_PASSWORD (mín. 10 caracteres, diferente da senha padrão pública).");
+  }
+}
 
 const STORES = {
   mercatto: { name: "Mercatto", email: "admin@mercatto.dev", ownerName: "Administrador Mercatto", cep: "06455000", city: "Barueri", state: "SP", official: true, description: "Loja oficial Mercatto: estoque próprio, entrega rápida e garantia de procedência." },

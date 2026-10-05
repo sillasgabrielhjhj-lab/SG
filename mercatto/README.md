@@ -128,7 +128,7 @@ Todas estão documentadas em [`.env.example`](.env.example). Resumo:
 
 ## Contas de demonstração e acesso ao admin
 
-Criadas pelo seed `demo` — senha de todas: **`Mercatto@2026`** (troque ou não use em produção real).
+Criadas pelo seed `demo` — senha de todas: **`Mercatto@2026`** em desenvolvimento. Em produção o seed DEMO exige `DEMO_PASSWORD` (senha privada), pois a senha padrão é pública.
 
 | E-mail | Papel |
 |---|---|

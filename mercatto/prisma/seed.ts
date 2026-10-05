@@ -14,7 +14,7 @@ import { recomputeProductAggregates } from "../src/features/catalog/aggregates";
 import { recomputeStoreRating } from "../src/features/reviews/service";
 import { syncPromotionStatuses } from "../src/features/promotions/sync.server";
 import { seedReference } from "./seed/reference";
-import { DEMO_PASSWORD, seedDemo } from "./seed/demo";
+import { DEMO_PASSWORD, assertSafeDemoPassword, seedDemo } from "./seed/demo";
 
 async function ensureAdminAndOfficialStore() {
   const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
@@ -38,6 +38,7 @@ async function main() {
   if (mode === "demo" && production && process.env.SEED_ALLOW_DEMO_IN_PRODUCTION !== "true") {
     throw new Error("Seed DEMO bloqueado em produção. Use SEED_MODE=minimal.");
   }
+  if (mode === "demo") assertSafeDemoPassword(production);
   console.info(`▶ Seed Mercatto (modo: ${mode})`);
   const ref = await seedReference(db);
 
@@ -65,7 +66,7 @@ async function main() {
   };
   console.info("✔ Seed concluído", counts, summary.products ? "" : "");
   if (mode === "demo") {
-    console.info(`\nContas DEMO (senha: ${DEMO_PASSWORD})\n  admin@mercatto.dev (ADMIN — loja oficial)\n  suporte@mercatto.dev (SUPPORT)\n  technova@mercatto.dev (SELLER)\n  cliente@mercatto.dev (CUSTOMER)\n`);
+    console.info(`\nContas DEMO (senha: ${process.env.DEMO_PASSWORD ? "definida em DEMO_PASSWORD" : DEMO_PASSWORD})\n  admin@mercatto.dev (ADMIN — loja oficial)\n  suporte@mercatto.dev (SUPPORT)\n  technova@mercatto.dev (SELLER)\n  cliente@mercatto.dev (CUSTOMER)\n`);
   }
 }
 

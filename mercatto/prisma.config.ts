@@ -10,6 +10,8 @@ export default defineConfig({
   datasource: {
     // CLI (migrate/seed) usa a conexão DIRETA quando existir (Neon/Supabase:
     // a URL com pooling não é adequada para migrations). O app usa DATABASE_URL.
-    url: process.env.DIRECT_URL || env("DATABASE_URL"),
+    // Fallbacks automáticos para as variáveis criadas pelas integrações da Vercel
+    // (Neon: DATABASE_URL_UNPOOLED; Postgres/Supabase: POSTGRES_URL_NON_POOLING).
+    url: process.env.DIRECT_URL || process.env.DATABASE_URL_UNPOOLED || process.env.POSTGRES_URL_NON_POOLING || env("DATABASE_URL"),
   },
 });
