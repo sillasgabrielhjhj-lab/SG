@@ -13,6 +13,7 @@ export default function setup() {
   if (!/test/i.test(url)) throw new Error("TEST_DATABASE_URL deve apontar para um banco de testes (nome contendo 'test').");
   execSync("npx prisma migrate deploy", {
     stdio: "inherit",
-    env: { ...process.env, DATABASE_URL: url, PRISMA_HIDE_UPDATE_MESSAGE: "1" },
+    // DIRECT_URL também aponta para o banco de teste (prisma.config.ts a prefere).
+    env: { ...process.env, DATABASE_URL: url, DIRECT_URL: url, PRISMA_HIDE_UPDATE_MESSAGE: "1" },
   });
 }

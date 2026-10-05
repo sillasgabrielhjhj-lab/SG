@@ -1,5 +1,6 @@
 import "server-only";
 import { z } from "zod";
+import { resolveAppUrl } from "@/lib/app-url";
 
 /**
  * Variáveis de ambiente validadas na inicialização.
@@ -36,7 +37,7 @@ const schema = z.object({
 export type Env = z.infer<typeof schema>;
 
 function load(): Env {
-  const parsed = schema.safeParse(process.env);
+  const parsed = schema.safeParse({ ...process.env, APP_URL: resolveAppUrl() });
   if (!parsed.success) {
     const issues = parsed.error.issues.map((i) => `  - ${i.path.join(".")}: ${i.message}`).join("\n");
     throw new Error(`Variáveis de ambiente inválidas:\n${issues}`);

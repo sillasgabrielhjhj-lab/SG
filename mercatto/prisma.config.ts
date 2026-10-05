@@ -8,6 +8,8 @@ export default defineConfig({
     seed: "tsx --conditions=react-server prisma/seed.ts",
   },
   datasource: {
-    url: env("DATABASE_URL"),
+    // CLI (migrate/seed) usa a conexão DIRETA quando existir (Neon/Supabase:
+    // a URL com pooling não é adequada para migrations). O app usa DATABASE_URL.
+    url: process.env.DIRECT_URL || env("DATABASE_URL"),
   },
 });

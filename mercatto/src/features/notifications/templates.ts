@@ -1,4 +1,5 @@
 import { formatBRL } from "@/lib/money";
+import { resolveAppUrl } from "@/lib/app-url";
 
 /**
  * Templates de e-mail transacional com identidade Mercatto. Todo dado
@@ -12,7 +13,7 @@ export function escapeHtml(value: string): string {
 }
 
 const BRAND = "#0b5c4d";
-const appUrl = () => (process.env.APP_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+const appUrl = () => resolveAppUrl();
 
 function layout(opts: { preheader: string; title: string; bodyHtml: string; cta?: { label: string; url: string } }) {
   const cta = opts.cta
