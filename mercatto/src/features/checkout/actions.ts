@@ -9,6 +9,7 @@ import { db } from "@/server/db";
 import { notFound } from "@/server/errors";
 import { checkoutIdSchema, checkoutInputSchema } from "@/features/checkout/schemas";
 import { buildCheckoutQuote, cancelPendingCheckout, createCheckout, retryPayment } from "@/features/checkout/service";
+import { reconcilePayment } from "@/features/payments/service";
 import { quoteForLines } from "@/features/shipping/service";
 import { priceLines } from "@/features/cart/pricing.server";
 
@@ -88,10 +89,21 @@ export const getCheckoutStatusAction = createAction(checkoutIdSchema, async ({ c
   const user = await requireUser();
   const checkout = await db.checkout.findFirst({
     where: { id: checkoutId, userId: user.id },
-    select: { status: true, expiresAt: true, payments: { orderBy: { createdAt: "desc" }, take: 1, select: { status: true, failureReason: true } } },
+    select: { status: true, expiresAt: true, payments: { orderBy: { createdAt: "desc" }, take: 1, select: { status: true, failureReason: true, provider: true, providerPaymentId: true } } },
   });
   if (!checkout) throw notFound("Compra não encontrada.");
-  return ok({ status: checkout.status, paymentStatus: checkout.payments[0]?.status ?? null, failureReason: checkout.payments[0]?.failureReason ?? null, expiresAt: checkout.expiresAt.toISOString() });
+  let latest = checkout.payments[0];
+  let status = checkout.status;
+  // Enquanto o cliente aguarda, confirma direto no gateway (cobre webhook atrasado/perdido).
+  if (status === "PENDING_PAYMENT" && latest?.status === "PENDING") {
+    const reconciled = await reconcilePayment(latest);
+    if (reconciled && reconciled !== "PENDING") {
+      const fresh = await db.checkout.findUniqueOrThrow({ where: { id: checkoutId }, select: { status: true, payments: { orderBy: { createdAt: "desc" }, take: 1, select: { status: true, failureReason: true, provider: true, providerPaymentId: true } } } });
+      status = fresh.status;
+      latest = fresh.payments[0];
+    }
+  }
+  return ok({ status, paymentStatus: latest?.status ?? null, failureReason: latest?.failureReason ?? null, expiresAt: checkout.expiresAt.toISOString() });
 }, "checkout.status");
 
 export const cancelPendingCheckoutAction = createAction(checkoutIdSchema, async ({ checkoutId }) => {

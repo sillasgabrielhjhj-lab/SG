@@ -5,6 +5,7 @@ import { env } from "@/server/env";
 import { AppError, conflict, notFound } from "@/server/errors";
 import { logger } from "@/server/observability/logger";
 import { getPaymentGateway } from "@/server/providers/payments";
+import { MERCADOPAGO_PROVIDER } from "@/server/providers/payments/mercadopago";
 import { isProviderError } from "@/server/providers/errors";
 import { allocateProportionally, installmentOptions, formatBRL } from "@/lib/money";
 import { computeTotals } from "@/features/pricing/engine";
@@ -14,7 +15,7 @@ import { removePurchasedItems } from "@/features/cart/service";
 import { validateCouponForLines } from "@/features/coupons/service";
 import { quoteForLines } from "@/features/shipping/service";
 import { generateOrderNumber } from "@/features/checkout/order-number";
-import { applyPaymentStatus, releaseCheckout } from "@/features/payments/service";
+import { applyPaymentStatus, reconcilePayment, releaseCheckout } from "@/features/payments/service";
 import { recomputeProductAggregates } from "@/features/catalog/aggregates";
 import type { CheckoutInput } from "@/features/checkout/schemas";
 
@@ -344,7 +345,10 @@ export async function startPayment(
   if (method === "CREDIT_CARD") {
     const opt = installmentOptions(checkout.totalCents, installmentConfigFrom(settings)).find((o) => o.count === installments);
     if (!opt) throw new AppError("VALIDATION", "Parcelamento indisponível.");
-    amount = opt.totalCents;
+    // No Mercado Pago os juros do parcelamento são calculados e cobrados pelo
+    // próprio MP (conforme a configuração da conta). Enviar o valor base evita
+    // juros em dobro; nos demais gateways o app aplica a Tabela Price.
+    amount = getPaymentGateway().name === MERCADOPAGO_PROVIDER ? checkout.totalCents : opt.totalCents;
   }
   const attempt = checkout._count.payments + 1;
   const customer = checkout.customerSnapshot as { name: string; email: string; cpf: string; phone?: string };
@@ -429,12 +433,17 @@ export async function cancelPendingCheckout(userId: string, checkoutId: string) 
 export async function expireStaleCheckouts(limit = 100) {
   const stale = await db.checkout.findMany({
     where: { status: "PENDING_PAYMENT", expiresAt: { lt: new Date() } },
-    select: { id: true, payments: { where: { status: { in: ["PENDING", "AUTHORIZED"] } }, select: { providerPaymentId: true } } },
+    select: { id: true, payments: { where: { status: { in: ["PENDING", "AUTHORIZED"] } }, select: { provider: true, providerPaymentId: true } } },
     take: limit,
     orderBy: { expiresAt: "asc" },
   });
   let expired = 0;
   for (const c of stale) {
+    // Antes de expirar, confirma no gateway: um pagamento aprovado (webhook
+    // perdido) nunca deve virar pedido cancelado.
+    let paid = false;
+    for (const p of c.payments) if ((await reconcilePayment(p, { force: true })) === "PAID") paid = true;
+    if (paid) continue;
     for (const p of c.payments) {
       if (p.providerPaymentId) await getPaymentGateway().cancelPayment(p.providerPaymentId).catch(() => undefined);
     }

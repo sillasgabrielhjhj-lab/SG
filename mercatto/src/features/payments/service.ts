@@ -5,6 +5,8 @@ import { AppError, notFound } from "@/server/errors";
 import { logger } from "@/server/observability/logger";
 import { audit } from "@/server/observability/audit";
 import { getPaymentGateway } from "@/server/providers/payments";
+import { DEV_PAYMENT_PROVIDER } from "@/server/providers/payments/dev";
+import { rateLimit } from "@/server/security/rate-limit";
 import type { GatewayPaymentStatus } from "@/server/providers/payments/types";
 import { notify } from "@/features/notifications/service";
 import {
@@ -318,4 +320,24 @@ export async function refundOrder(orderId: string, actorId: string | null, opts:
   });
   if (productIds.size) await recomputeProductAggregates([...productIds]);
   return { amountCents: amount, status: result.status };
+}
+
+/**
+ * Conciliação com o gateway (fallback de webhook perdido ou atrasado): consulta
+ * o status na API do provedor — fonte da verdade — e aplica pelo mesmo caminho
+ * idempotente do webhook. Limitado a 1 consulta a cada 15 s por pagamento.
+ * Nunca lança: falhas apenas são registradas (o webhook continua valendo).
+ */
+export async function reconcilePayment(payment: { provider: string; providerPaymentId: string | null }, opts: { force?: boolean } = {}) {
+  const gateway = getPaymentGateway();
+  if (!payment.providerPaymentId || payment.provider !== gateway.name || gateway.name === DEV_PAYMENT_PROVIDER) return null;
+  try {
+    if (!opts.force && !(await rateLimit(`reconcile:${payment.providerPaymentId}`, 1, 15)).allowed) return null;
+    const status = await gateway.getPaymentStatus(payment.providerPaymentId);
+    if (status !== "PENDING") await applyPaymentStatus({ provider: gateway.name, providerPaymentId: payment.providerPaymentId, status });
+    return status;
+  } catch (error) {
+    logger.warn("payments.reconcile_failed", { providerPaymentId: payment.providerPaymentId, error });
+    return null;
+  }
 }

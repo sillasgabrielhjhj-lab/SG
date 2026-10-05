@@ -80,7 +80,7 @@ export const settingsSchema = z.object({
   minOrderCents: cents.default(0),
   freeShippingThresholdCents: z.preprocess((v) => (v === "" || v === null ? undefined : v), cents.optional()),
   lowStockThreshold: z.coerce.number().int().min(0).max(10_000).default(5),
-  orderReservationMinutes: z.coerce.number().int().min(10).max(24 * 60).default(30),
+  orderReservationMinutes: z.coerce.number().int().min(30, "Mínimo de 30 minutos (exigência do PIX)").max(24 * 60).default(30),
   pixDiscountPercent: z.coerce.number().int().min(0).max(20).default(0),
   maxInstallments: z.coerce.number().int().min(1).max(24).default(12),
   interestFreeInstallments: z.coerce.number().int().min(1).max(24).default(10),

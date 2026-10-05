@@ -121,7 +121,7 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
           <Input type="number" min={0} max={20} value={v.pixDiscountPercent} onChange={set("pixDiscountPercent")} />
         </Field>
         <Field label="Validade da reserva / PIX (minutos)" error={e("orderReservationMinutes")} hint="Tempo em que o estoque fica reservado aguardando pagamento">
-          <Input type="number" min={10} max={1440} value={v.orderReservationMinutes} onChange={set("orderReservationMinutes")} />
+          <Input type="number" min={30} max={1440} value={v.orderReservationMinutes} onChange={set("orderReservationMinutes")} />
         </Field>
         <Field label="Alerta de estoque baixo (unidades)" error={e("lowStockThreshold")}>
           <Input type="number" min={0} value={v.lowStockThreshold} onChange={set("lowStockThreshold")} />

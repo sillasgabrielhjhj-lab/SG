@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, CreditCard, FlaskConical, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { centsToInput } from "@/lib/money";
 import { Alert } from "@/components/ui/alert";
 
 export type CardTokenResult = { token: string; paymentMethodId?: string; issuerId?: string; label: string };
@@ -73,8 +72,9 @@ function MercadoPagoBrick({ amountCents, onToken }: { amountCents: number; onTok
       if (cancelled || !window.MercadoPago) return;
       const mp = new window.MercadoPago(publicKey, { locale: "pt-BR" });
       ref.current = await mp.bricks().create("cardPayment", "mp-card-brick", {
-        initialization: { amount: Number(centsToInput(amountCents).replace(",", ".")) },
-        customization: { visual: { hidePaymentButton: false } },
+        initialization: { amount: amountCents / 100 },
+        // Parcelas são escolhidas no checkout da Mercatto (evita dois seletores).
+        customization: { visual: { hidePaymentButton: false }, paymentMethods: { maxInstallments: 1 } },
         callbacks: {
           onReady: () => undefined,
           onError: () => setError("Não foi possível carregar o formulário do cartão."),
