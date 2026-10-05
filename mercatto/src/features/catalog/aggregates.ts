@@ -3,7 +3,7 @@ import { db, type Tx } from "@/server/db";
 import { normalizeText } from "@/lib/utils";
 import { computeEffectivePrice } from "@/features/pricing/engine";
 import { loadActivePromotionsFor } from "@/features/pricing/promotions.server";
-import { getCategoryAncestorsMap } from "@/features/catalog/categories.server";
+import { getAllCategories, getCategoryAncestorsMap } from "@/features/catalog/categories.server";
 
 /**
  * Recalcula os campos desnormalizados do produto usados em listagem, busca
@@ -44,6 +44,7 @@ export async function recomputeProductAggregates(productIds: string[], tx?: Tx) 
   });
 
   const ancestors = await getCategoryAncestorsMap();
+  const categoryNames = new Map((await getAllCategories()).map((c) => [c.id, c.name]));
   const promotions = await loadActivePromotionsFor(products, ancestors, now, tx);
 
   const ratings = await client.review.groupBy({
@@ -71,6 +72,8 @@ export async function recomputeProductAggregates(productIds: string[], tx?: Tx) 
         p.name,
         p.brand?.name,
         p.category.name,
+        // Categorias ancestrais ("Celulares" para um produto em "Smartphones").
+        ...(ancestors.get(p.categoryId) ?? []).map((id) => categoryNames.get(id)),
         p.store.name,
         p.sku,
         p.gtin,

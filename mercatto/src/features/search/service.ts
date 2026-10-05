@@ -42,6 +42,13 @@ export type SearchResult = {
 export async function matchText(q: string): Promise<{ id: string; rank: number }[]> {
   const normalized = normalizeText(q).replace(/[^a-z0-9\s-]/g, " ").replace(/\s+/g, " ").trim();
   if (!normalized) return [];
+  // Consulta com cara de SKU/código (ex.: "MRC-0001-01"): correspondência literal apenas.
+  if (/^[a-z0-9]+(?:[-_.][a-z0-9]+)+$/.test(normalized) && /\d/.test(normalized)) {
+    return db.$queryRaw<{ id: string; rank: number }[]>`
+      SELECT p."id", 1::float AS rank FROM "Product" p
+      WHERE p."status" = 'ACTIVE' AND p."searchText" LIKE ${`%${normalized}%`}
+      ORDER BY p."salesCount" DESC LIMIT ${MAX_TEXT_MATCHES}`;
+  }
   const tokens = normalized.split(" ").filter((t) => t.length >= 2).slice(0, 8);
   const likeAll = tokens.length
     ? Prisma.join(tokens.map((t) => Prisma.sql`p."searchText" LIKE ${`%${t}%`}`), " AND ")
@@ -51,6 +58,9 @@ export async function matchText(q: string): Promise<{ id: string; rank: number }
            (ts_rank(p."searchVector", websearch_to_tsquery('portuguese', ${normalized})) * 4
             + word_similarity(${normalized}, p."searchText")
             + CASE WHEN p."searchText" LIKE ${`${normalized}%`} THEN 1 ELSE 0 END
+            -- Nome, marca e categorias ficam no início do texto de busca: pesam mais.
+            + CASE WHEN position(${normalized} in left(p."searchText", 160)) > 0 THEN 1.5 ELSE 0 END
+            + CASE WHEN position(left(${normalized}, greatest(length(${normalized}) - 2, 3)) in left(p."searchText", 160)) > 0 THEN 0.8 ELSE 0 END
             + ln(1 + p."salesCount") / 20)::float AS rank
     FROM "Product" p
     WHERE p."status" = 'ACTIVE'
