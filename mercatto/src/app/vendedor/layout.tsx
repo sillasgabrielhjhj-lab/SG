@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BarChart3, Boxes, MessageCircleQuestion, Package, Percent, ShoppingBag, Star, Store, Ticket } from "lucide-react";
 import { requireSellerPage } from "@/server/auth/guards";
 import { db } from "@/server/db";
-import { env } from "@/server/env";
+import { isSandboxPayments } from "@/server/providers/payments";
 import { DashboardShell } from "@/components/layout/dashboard-shell";
 import type { PanelNavGroup } from "@/components/layout/panel-nav";
 
@@ -47,7 +47,7 @@ export default async function SellerLayout({ children }: { children: React.React
       subtitle={store.name}
       groups={groups}
       user={{ name: user.name, email: user.email }}
-      sandbox={env.PAYMENT_PROVIDER === "dev"}
+      sandbox={isSandboxPayments()}
       publicLink={store.status === "ACTIVE" ? { href: store.isOfficial ? "/oficial" : `/loja/${store.slug}`, label: "Ver minha loja" } : undefined}
     >
       {store.status !== "ACTIVE" ? (

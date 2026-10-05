@@ -1,5 +1,5 @@
 import { db } from "@/server/db";
-import { env } from "@/server/env";
+import { isSandboxPayments } from "@/server/providers/payments";
 import { getCurrentUser } from "@/server/auth/guards";
 import { getCategoryTree } from "@/features/catalog/categories.server";
 import { getCartItemCount } from "@/features/cart/count.server";
@@ -13,7 +13,7 @@ import { MiniCart } from "@/features/cart/components/mini-cart";
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
   const [categories, user, cartCount, settings] = await Promise.all([getCategoryTree(), getCurrentUser(), getCartItemCount(), getStoreSettings()]);
   const unreadNotifications = user ? await db.notification.count({ where: { userId: user.id, readAt: null } }) : 0;
-  const sandbox = env.PAYMENT_PROVIDER === "dev";
+  const sandbox = isSandboxPayments();
   return (
     <AppProviders cartCount={cartCount}>
       <a href="#conteudo" className="sr-only z-[60] rounded-md bg-surface px-4 py-2 font-semibold text-brand-800 focus:not-sr-only focus:fixed focus:top-2 focus:left-2">

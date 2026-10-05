@@ -3,7 +3,7 @@ import { BadgePercent, Boxes, ClipboardList, CreditCard, FolderTree, Image as Im
 import { requirePermissionPage } from "@/server/auth/guards";
 import { hasPermission, type Permission } from "@/server/auth/rbac";
 import { db } from "@/server/db";
-import { env } from "@/server/env";
+import { isSandboxPayments } from "@/server/providers/payments";
 import { DashboardShell } from "@/components/layout/dashboard-shell";
 import type { PanelNavGroup, PanelNavItem } from "@/components/layout/panel-nav";
 
@@ -79,7 +79,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       }
       groups={visible}
       user={{ name: user.name, email: user.email }}
-      sandbox={env.PAYMENT_PROVIDER === "dev"}
+      sandbox={isSandboxPayments()}
       publicLink={{ href: "/", label: "Ver loja" }}
     >
       {children}

@@ -14,7 +14,19 @@ Para só navegar pelo site com os dados DEMO, sem instalar nada no computador:
 4. Clique em **Deploy** (ou **Redeploy**). Ao terminar, a Vercel mostra o link.
 5. Entre com `admin@mercatto.dev` e a senha definida em `DEMO_PASSWORD`.
 
-Upload de imagens exige o Vercel Blob (passo 4 abaixo); a navegação, o carrinho e o checkout simulado funcionam sem ele. Para a operação real, **remova `SEED_ON_BUILD`** e siga o guia completo.
+Upload de imagens exige o Vercel Blob (passo 4 abaixo); a navegação, o carrinho e o checkout simulado funcionam sem ele. Para a operação real, **remova `SEED_ON_BUILD`** e siga a seção abaixo.
+
+## Da prévia DEMO para a operação real
+
+1. **Mercado Pago** → [Suas integrações](https://www.mercadopago.com.br/developers/panel/app) → *Criar aplicação* (pagamentos online / Checkout Transparente). Em *Credenciais de teste* copie a **Public Key** e o **Access Token** (começam com `TEST-`). Em *Webhooks → Configurar notificações*: URL `https://SEU-DOMINIO/api/webhooks/payments/mercadopago`, evento **Pagamentos**; salve e copie a **assinatura secreta**.
+2. Vercel → *Settings → Environment Variables*:
+   - `PAYMENT_PROVIDER=mercadopago`, `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_PUBLIC_KEY`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` (mesmo valor da Public Key), `MERCADOPAGO_WEBHOOK_SECRET`.
+   - `PURGE_DEMO_DATA=true`, `ADMIN_EMAIL` (e-mail real, ainda não cadastrado no site) e `ADMIN_PASSWORD` (10+ caracteres com letras e números).
+   - **Apague** `SEED_ON_BUILD`.
+3. *Deployments → Redeploy*. O build cria o administrador real, transfere a loja oficial para ele e remove pedidos, produtos, lojas, usuários, cupons e campanhas DEMO (categorias, marcas e regras de frete ficam). A limpeza é idempotente.
+4. Teste uma compra com os [cartões de teste](https://www.mercadopago.com.br/developers/pt/docs/checkout-api/integration-test/test-cards) (titular `APRO` = aprovado, `OTHE` = recusado) e um PIX. Enquanto as credenciais forem `TEST-`, o site exibe a faixa "Ambiente de demonstração".
+5. Para vender de verdade: troque as duas chaves pelas **credenciais de produção** (`APP_USR-…`), configure o webhook no modo *Produção* (nova assinatura secreta) e reimplante. Depois remova `PURGE_DEMO_DATA`.
+6. Em `/admin/configuracoes` preencha contatos e redes sociais reais e alinhe o parcelamento sem juros ao configurado na conta do Mercado Pago. Cadastre os produtos oficiais em `/admin/produtos/novo` (fotos exigem o Vercel Blob — passo 4 do guia completo).
 
 ## 1. Pré-requisitos
 
@@ -69,10 +81,10 @@ Com Mercado Pago (opcional): `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_PUBLIC_KEY
 Clique em **Deploy** (ou *Redeploy*). O build executa:
 
 ```
-prisma generate && prisma migrate deploy && next build
+prisma generate && prisma migrate deploy && node scripts/seed-on-build.mjs && next build
 ```
 
-As migrations são aplicadas automaticamente a cada deploy (operação não destrutiva).
+As migrations são aplicadas automaticamente a cada deploy (operação não destrutiva). O passo de seed só age quando `SEED_ON_BUILD` ou `PURGE_DEMO_DATA` estão definidas.
 
 ## 7. Popular o banco (uma vez)
 
@@ -95,7 +107,7 @@ O seed é idempotente (pode ser executado novamente sem duplicar dados).
 2. Em `/admin/configuracoes`, ajuste nome, contatos, parcelamento, desconto PIX e frete grátis.
 3. Cadastre categorias/marcas (se usou `minimal`) e os produtos oficiais em `/admin/produtos`.
 4. **Cron**: `vercel.json` agenda `/api/cron/maintenance` diariamente às 06:00 UTC (compatível com o plano Hobby). Ele expira reservas de checkout, sincroniza promoções e limpa sessões. No plano Pro, aumente a frequência (ex.: `*/15 * * * *`) para liberar estoque reservado mais rápido — reservas também são liberadas sob demanda.
-5. **Webhook do Mercado Pago** (se usado): painel do Mercado Pago → *Webhooks* → URL `https://SEU-DOMINIO/api/webhooks/payments/mercadopago`, eventos de pagamento; copie a assinatura secreta para `MERCADOPAGO_WEBHOOK_SECRET`. Inclua `https://*.mercadopago.com` e `https://*.mlstatic.com` nas diretivas `script-src`, `connect-src` e `frame-src` da CSP em `next.config.ts` antes de ativar o Brick de cartão.
+5. **Webhook do Mercado Pago** (se usado): painel do Mercado Pago → *Webhooks* → URL `https://SEU-DOMINIO/api/webhooks/payments/mercadopago`, eventos de pagamento; copie a assinatura secreta para `MERCADOPAGO_WEBHOOK_SECRET`. A CSP libera os domínios do Mercado Pago automaticamente quando `PAYMENT_PROVIDER=mercadopago`. Se um webhook se perder, o status é conciliado consultando a API ao abrir o pedido e antes de expirar a reserva.
 6. **Domínio**: *Settings → Domains*; depois defina `APP_URL` com o domínio final e reimplante.
 
 ## 9. Checklist de produção
