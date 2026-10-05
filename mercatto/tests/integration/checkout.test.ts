@@ -71,10 +71,11 @@ describe("checkout", () => {
     const { variant } = await createProduct({ storeId: store.id, stock: 10 });
     const buyer = await prepareBuyer(variant.id, 1);
     const input = pix(buyer);
-    const [first, second] = await Promise.all([createCheckout(buyer.user.id, input), createCheckout(buyer.user.id, input).catch(() => null)]);
+    // Duplo clique: os dois envios simultâneos devem resolver para a MESMA compra.
+    const [first, second] = await Promise.all([createCheckout(buyer.user.id, input), createCheckout(buyer.user.id, input)]);
     const third = await createCheckout(buyer.user.id, input);
+    expect(second.checkoutId).toBe(first.checkoutId);
     expect(third.checkoutId).toBe(first.checkoutId);
-    if (second) expect(second.checkoutId).toBe(first.checkoutId);
     expect(await db.checkout.count({ where: { idempotencyKey: input.idempotencyKey } })).toBe(1);
     expect((await db.productVariant.findUniqueOrThrow({ where: { id: variant.id } })).stock).toBe(9);
   });

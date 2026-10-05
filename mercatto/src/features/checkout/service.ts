@@ -1,6 +1,5 @@
 import "server-only";
 import { createHash } from "node:crypto";
-import { Prisma } from "@/generated/prisma/client";
 import { db } from "@/server/db";
 import { env } from "@/server/env";
 import { AppError, conflict, notFound } from "@/server/errors";
@@ -308,10 +307,12 @@ export async function createCheckout(userId: string, input: CheckoutInput) {
       { timeout: 20_000, maxWait: 10_000 },
     );
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002" && String(error.meta?.target ?? "").includes("idempotencyKey")) {
-      const again = await db.checkout.findUnique({ where: { idempotencyKey: input.idempotencyKey }, select: { id: true, userId: true } });
-      if (again && again.userId === userId) return { checkoutId: again.id, reused: true };
-    }
+    // Envio duplicado concorrente (duplo clique): o perdedor da corrida falha na
+    // chave única ou na reserva. Se a compra com esta chave já existe para o
+    // mesmo usuário, devolve-a — mesma chave, mesmo resultado. (Não depende do
+    // formato de meta.target, que varia com o driver adapter do Prisma.)
+    const again = await db.checkout.findUnique({ where: { idempotencyKey: input.idempotencyKey }, select: { id: true, userId: true } });
+    if (again && again.userId === userId) return { checkoutId: again.id, reused: true };
     throw error;
   }
 
