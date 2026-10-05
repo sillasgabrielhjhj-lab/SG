@@ -37,11 +37,11 @@ export function DropdownMenu({ trigger, items, align = "end", label, className, 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const els = [...(menuRef.current?.querySelectorAll<HTMLElement>("[role=menuitem]") ?? [])];
     const index = els.indexOf(document.activeElement as HTMLElement);
-    if (e.key === "ArrowDown") (e.preventDefault(), focusItem(index + 1));
-    else if (e.key === "ArrowUp") (e.preventDefault(), focusItem(index - 1));
-    else if (e.key === "Home") (e.preventDefault(), focusItem(0));
-    else if (e.key === "End") (e.preventDefault(), focusItem(els.length - 1));
-    else if (e.key === "Escape") {
+    const target = e.key === "ArrowDown" ? index + 1 : e.key === "ArrowUp" ? index - 1 : e.key === "Home" ? 0 : e.key === "End" ? els.length - 1 : null;
+    if (target !== null) {
+      e.preventDefault();
+      focusItem(target);
+    } else if (e.key === "Escape") {
       setOpen(false);
       buttonRef.current?.focus();
     } else if (e.key === "Tab") setOpen(false);

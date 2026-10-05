@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 export type HeroSlide = { id: string; title: string; subtitle: string | null; eyebrow: string | null; ctaLabel: string | null; link: string; imageUrl: string | null; theme: string };
@@ -20,15 +21,12 @@ const THEMES: Record<string, { bg: string; text: string; sub: string; cta: strin
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reduced, setReduced] = useState(false);
+  const reduced = usePrefersReducedMotion();
   const [failed, setFailed] = useState<Record<string, boolean>>({});
   const touch = useRef<number | null>(null);
   const count = slides.length;
   const go = useCallback((i: number) => setIndex((i + count) % count), [count]);
 
-  useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
   useEffect(() => {
     if (paused || reduced || count < 2) return;
     const t = window.setInterval(() => setIndex((i) => (i + 1) % count), 6000);

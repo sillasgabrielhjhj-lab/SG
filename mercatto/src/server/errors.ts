@@ -1,5 +1,5 @@
 import "server-only";
-import { z } from "zod";
+import type { z } from "zod";
 
 /**
  * Erros de domínio com mensagem segura para o usuário final.

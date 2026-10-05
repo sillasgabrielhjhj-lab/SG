@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useNowSecond } from "@/hooks/use-now";
 import { cn } from "@/lib/utils";
 
 function parts(ms: number) {
@@ -17,21 +18,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
  */
 export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className, variant = "blocks", label = "Termina em" }: { endsAt: string; onExpire?: () => void; refreshOnExpire?: boolean; className?: string; variant?: "blocks" | "inline"; label?: string }) {
   const router = useRouter();
-  const [now, setNow] = useState<number | null>(null);
+  const now = useNowSecond();
   const fired = useRef(false);
   const end = new Date(endsAt).getTime();
-
-  useEffect(() => {
-    setNow(Date.now());
-    let timer: number;
-    const tick = () => {
-      const t = Date.now();
-      setNow(t);
-      timer = window.setTimeout(tick, 1000 - (t % 1000));
-    };
-    timer = window.setTimeout(tick, 1000 - (Date.now() % 1000));
-    return () => window.clearTimeout(timer);
-  }, []);
 
   const p = parts(now === null ? end - Date.parse(endsAt) + 1 : end - now);
   useEffect(() => {

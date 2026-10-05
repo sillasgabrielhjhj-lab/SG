@@ -18,11 +18,12 @@ export function ProductGallery({ images, activeImageId, name }: { images: Galler
   const dialog = useRef<HTMLDialogElement>(null);
   const count = images.length;
 
-  useEffect(() => {
-    if (!activeImageId) return;
-    const i = images.findIndex((img) => img.id === activeImageId);
+  const [prevActiveImageId, setPrevActiveImageId] = useState(activeImageId);
+  if (prevActiveImageId !== activeImageId) {
+    setPrevActiveImageId(activeImageId);
+    const i = activeImageId ? images.findIndex((img) => img.id === activeImageId) : -1;
     if (i >= 0) setIndex(i);
-  }, [activeImageId, images]);
+  }
 
   useEffect(() => {
     const d = dialog.current;

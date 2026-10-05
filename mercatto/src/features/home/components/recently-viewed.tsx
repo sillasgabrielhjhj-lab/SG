@@ -10,20 +10,19 @@ import { SectionHeader } from "@/components/commerce/product-grid";
 /** "Vistos recentemente" (somente neste navegador). Some quando vazio. */
 export function RecentlyViewed({ excludeId, title = "Vistos recentemente" }: { excludeId?: string; title?: string }) {
   const { ids, clear } = useRecentlyViewed();
-  const [items, setItems] = useState<ProductCardData[]>([]);
+  const [result, setResult] = useState<{ key: string; items: ProductCardData[] } | null>(null);
   const key = ids.filter((id) => id !== excludeId).slice(0, 12).join(",");
   useEffect(() => {
-    if (!key) {
-      setItems([]);
-      return;
-    }
+    if (!key) return;
     const controller = new AbortController();
     fetch(`/api/products/by-ids?ids=${key}`, { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : { items: [] }))
-      .then((d: { items: ProductCardData[] }) => setItems(d.items))
+      .then((d: { items: ProductCardData[] }) => setResult({ key, items: d.items }))
       .catch(() => undefined);
     return () => controller.abort();
   }, [key]);
+  // Mantém a última lista até a nova chegar; sem chave, nada a exibir.
+  const items = key ? (result?.items ?? []) : [];
   if (!items.length) return null;
   return (
     <section aria-labelledby="recent-title" className="animate-fade-in">

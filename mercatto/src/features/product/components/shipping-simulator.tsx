@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Store, Truck } from "lucide-react";
 import { formatBRL } from "@/lib/money";
 import { formatCep, formatShortDay } from "@/lib/format";
 import { isValidCep } from "@/lib/validators/br";
 import { Button } from "@/components/ui/button";
 import { MaskedInput } from "@/components/ui/masked-input";
-import { readSavedCep } from "@/components/layout/cep-selector";
+import { useStorageValue } from "@/hooks/use-local-storage";
 
 type Option = { id: string; service: string; carrier: string | null; priceCents: number; originalPriceCents: number; minDays: number; maxDays: number; isPickup: boolean };
 
@@ -23,39 +23,54 @@ const addBusinessDays = (days: number) => {
 
 /** Simulação de frete por CEP para a variante/quantidade selecionadas. */
 export function ShippingSimulator({ variantId, quantity }: { variantId: string | null; quantity: number }) {
-  const [cep, setCep] = useState("");
-  const [options, setOptions] = useState<Option[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  const quote = async (value = cep) => {
-    const digits = value.replace(/\D/g, "");
-    if (!isValidCep(digits)) return setError("Informe um CEP válido.");
-    if (!variantId) return setError("Escolha as opções do produto para calcular o frete.");
-    setLoading(true);
-    setError(null);
+  // CEP salvo no seletor do cabeçalho (localStorage "mrc_cep") pré-preenche e cota automaticamente.
+  const savedRaw = useStorageValue("mrc_cep");
+  const savedCep = useMemo(() => {
     try {
-      const res = await fetch("/api/shipping/quote", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ cep: digits, variantId, quantity }) });
-      const data = (await res.json()) as { options?: Option[]; error?: string | null };
-      if (!res.ok || data.error) {
-        setOptions([]);
-        setError(data.error ?? "Não foi possível calcular o frete.");
-      } else setOptions(data.options ?? []);
+      return savedRaw ? ((JSON.parse(savedRaw) as { cep?: string }).cep ?? null) : null;
     } catch {
-      setError("Falha de conexão. Tente novamente.");
-    } finally {
-      setLoading(false);
+      return null;
     }
-  };
+  }, [savedRaw]);
+  const [typedCep, setCep] = useState<string | null>(null);
+  const cep = typedCep ?? (savedCep ? formatCep(savedCep) : "");
+  // CEP efetivamente cotado: o enviado pelo usuário ou, até lá, o salvo no cabeçalho.
+  const [submittedCep, setSubmittedCep] = useState<string | null>(null);
+  const [inputError, setInputError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0); // novo envio do mesmo CEP refaz a cotação
+  const [response, setResponse] = useState<{ key: string; options: Option[]; error: string | null } | null>(null);
 
+  const activeCep = submittedCep ?? savedCep;
+  const requestKey = activeCep && variantId ? `${activeCep}|${variantId}|${quantity}|${attempt}` : null;
+  const current = response && response.key === requestKey ? response : null;
+  const loading = requestKey !== null && current === null;
+  const options = current?.options ?? null;
+  const error = inputError ?? current?.error ?? null;
+
+  // Busca a cotação sempre que o CEP, a variação ou a quantidade mudam (estado só é gravado na resposta).
   useEffect(() => {
-    const saved = readSavedCep();
-    if (saved?.cep && variantId) {
-      setCep(formatCep(saved.cep));
-      void quote(saved.cep);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- recalcula ao trocar variante/quantidade
-  }, [variantId, quantity]);
+    if (!requestKey || !activeCep || !variantId) return;
+    const controller = new AbortController();
+    fetch("/api/shipping/quote", { method: "POST", signal: controller.signal, headers: { "content-type": "application/json" }, body: JSON.stringify({ cep: activeCep, variantId, quantity }) })
+      .then(async (res) => {
+        const data = (await res.json()) as { options?: Option[]; error?: string | null };
+        if (!res.ok || data.error) setResponse({ key: requestKey, options: [], error: data.error ?? "Não foi possível calcular o frete." });
+        else setResponse({ key: requestKey, options: data.options ?? [], error: null });
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setResponse({ key: requestKey, options: [], error: "Falha de conexão. Tente novamente." });
+      });
+    return () => controller.abort();
+  }, [requestKey, activeCep, variantId, quantity]);
+
+  const quote = () => {
+    const digits = cep.replace(/\D/g, "");
+    if (!isValidCep(digits)) return setInputError("Informe um CEP válido.");
+    if (!variantId) return setInputError("Escolha as opções do produto para calcular o frete.");
+    setInputError(null);
+    setSubmittedCep(digits);
+    setAttempt((n) => n + 1);
+  };
 
   return (
     <div className="rounded-card border border-line p-3.5">

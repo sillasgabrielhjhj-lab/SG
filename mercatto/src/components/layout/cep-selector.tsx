@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatCep } from "@/lib/format";
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { MaskedInput } from "@/components/ui/masked-input";
 import { Modal } from "@/components/ui/modal";
+import { useStorageValue } from "@/hooks/use-local-storage";
 
 type SavedCep = { cep: string; city?: string; state?: string };
 const KEY = "mrc_cep";
@@ -24,18 +25,19 @@ export function readSavedCep(): SavedCep | null {
 
 /** Seletor de CEP de entrega (persistido no navegador e em cookie para o cálculo de frete). */
 export function CepSelector({ className, tone = "inverse" }: { className?: string; tone?: "inverse" | "default" }) {
-  const [saved, setSaved] = useState<SavedCep | null>(null);
+  const savedRaw = useStorageValue(KEY);
+  const saved = useMemo<SavedCep | null>(() => {
+    if (!savedRaw) return null;
+    try {
+      return JSON.parse(savedRaw) as SavedCep;
+    } catch {
+      return null;
+    }
+  }, [savedRaw]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setSaved(readSavedCep());
-    const onChange = () => setSaved(readSavedCep());
-    window.addEventListener("mrc:cep", onChange);
-    return () => window.removeEventListener("mrc:cep", onChange);
-  }, []);
 
   const save = async () => {
     const digits = value.replace(/\D/g, "");

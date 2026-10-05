@@ -79,7 +79,11 @@ export function CheckoutFlow({
   const [pending, start] = useTransition();
 
   // Endereços recarregados do servidor (router.refresh) após cadastrar um novo.
-  useEffect(() => setAddresses(initialAddresses), [initialAddresses]);
+  const [prevInitialAddresses, setPrevInitialAddresses] = useState(initialAddresses);
+  if (prevInitialAddresses !== initialAddresses) {
+    setPrevInitialAddresses(initialAddresses);
+    setAddresses(initialAddresses);
+  }
   const address = addresses.find((a) => a.id === addressId);
   const estimatedTotal = review?.totals.totalCents ?? cart.totals.totalCents;
   const installmentList = useMemo(() => installmentOptions(estimatedTotal, installmentConfig), [estimatedTotal, installmentConfig]);

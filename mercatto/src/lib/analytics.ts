@@ -30,7 +30,7 @@ export function trackEvent(event: AnalyticsEvent, params: Params = {}) {
   try {
     window.dataLayer = window.dataLayer ?? [];
     window.dataLayer.push({ event, ecommerce: { currency: "BRL", ...params } });
-    if (process.env.NODE_ENV === "development") console.debug("[analytics]", event, params);
+    if (process.env.NODE_ENV === "development") console.info("[analytics]", event, params);
   } catch {
     /* analytics nunca quebra a experiência */
   }

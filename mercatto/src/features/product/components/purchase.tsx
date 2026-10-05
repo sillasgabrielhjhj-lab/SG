@@ -28,7 +28,7 @@ const CONDITION = { NEW: "Novo", USED: "Usado", REFURBISHED: "Recondicionado" } 
 export function ProductPurchase({ product, favorited, installmentConfig, pixDiscountPercent }: { product: ProductPageData; favorited: boolean; installmentConfig: InstallmentConfig; pixDiscountPercent: number }) {
   const initial = product.variants.find((v) => v.stock > 0) ?? product.variants[0];
   const [selection, setSelection] = useState<Record<string, string>>(initial?.optionValues ?? {});
-  const [quantity, setQuantity] = useState(1);
+  const [requestedQuantity, setQuantity] = useState(1);
 
   const variant = useMemo(() => {
     if (!product.options.length) return product.variants[0] ?? null;
@@ -40,15 +40,14 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
     // eslint-disable-next-line react-hooks/exhaustive-deps -- uma vez por produto
   }, [product.id]);
 
-  useEffect(() => {
-    if (variant && quantity > Math.max(1, variant.stock)) setQuantity(Math.max(1, Math.min(variant.stock, 99)));
-  }, [variant, quantity]);
 
   /** Valor da opção está disponível dado o restante da seleção? */
   const optionAvailable = (name: string, value: string) =>
     product.variants.some((v) => v.optionValues[name] === value && v.stock > 0 && product.options.every((o) => o.name === name || !selection[o.name] || v.optionValues[o.name] === selection[o.name]));
 
   const stock = variant?.stock ?? 0;
+  // Quantidade efetiva limitada ao estoque da variação escolhida (derivada, sem efeito).
+  const quantity = Math.max(1, Math.min(requestedQuantity, stock || 1, 99));
   const purchasable = product.isAvailable && Boolean(variant) && stock > 0 && product.status === "ACTIVE";
   const images = product.images.map((i) => ({ id: i.id, url: i.url, alt: i.alt }));
 
