@@ -39,7 +39,7 @@ export const moderateReviewAction = createAction(
   async (input) => {
     const user = await requirePermission("admin:moderation");
     await moderateReview(user.id, input);
-    revalidatePath("/admin/avaliacoes");
+    revalidatePath("/admin/moderacao");
     return ok(undefined, "Moderação registrada.");
   },
   "reviews.moderate",

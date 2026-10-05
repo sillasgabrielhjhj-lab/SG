@@ -44,7 +44,7 @@ export const moderateQuestionAction = createAction(
   async (input) => {
     const user = await requirePermission("admin:moderation");
     await moderateQuestion(user.id, input);
-    revalidatePath("/admin/perguntas");
+    revalidatePath("/admin/moderacao");
     return ok(undefined, "Moderação registrada.");
   },
   "questions.moderate",

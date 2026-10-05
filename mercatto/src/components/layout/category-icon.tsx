@@ -10,6 +10,8 @@ const ICONS: Record<string, LucideIcon> = {
   Volleyball, WashingMachine, Watch, Wind, Wrench,
 };
 
+export const CATEGORY_ICON_NAMES = Object.keys(ICONS).sort();
+
 /** Ícone de categoria pelo nome salvo no banco (fallback seguro). */
 export function CategoryIcon({ name, className }: { name: string | null | undefined; className?: string }) {
   const Icon = (name && ICONS[name]) || LayoutGrid;
