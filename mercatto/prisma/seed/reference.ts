@@ -162,10 +162,12 @@ export async function seedReference(db: PrismaClient) {
       id: "default",
       storeName: "Mercatto",
       tagline: "Compre com confiança. Receba com rapidez.",
-      contactEmail: "atendimento@mercatto.com.br",
-      contactPhone: "4000-0000",
-      whatsapp: "11900000000",
-      socialLinks: { instagram: "https://instagram.com/", facebook: "https://facebook.com/", tiktok: "https://tiktok.com/", youtube: "https://youtube.com/", x: null },
+      // Contatos e redes ficam vazios: preencha os reais em /admin/configuracoes
+      // (nunca exibir canais de atendimento inventados).
+      contactEmail: null,
+      contactPhone: null,
+      whatsapp: null,
+      socialLinks: { instagram: null, facebook: null, tiktok: null, youtube: null, x: null },
       seoTitle: "Mercatto — compre com confiança",
       seoDescription: "Marketplace brasileiro com ofertas oficiais Mercatto e lojas parceiras verificadas. PIX, parcelamento e entrega para todo o Brasil.",
       minOrderCents: 0,

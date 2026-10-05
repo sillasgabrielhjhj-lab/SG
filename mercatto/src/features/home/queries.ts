@@ -55,12 +55,12 @@ export async function getHomePageData() {
     getProductCards({ orderBy: [{ publishedAt: "desc" }], take: SECTION }),
     getProductCards({ where: { ratingCount: { gte: 3 } }, orderBy: [{ ratingAvg: "desc" }, { ratingCount: "desc" }], take: SECTION }),
     db.store.findMany({
-      where: { status: "ACTIVE" },
+      where: { status: "ACTIVE", products: { some: { status: "ACTIVE" } } },
       orderBy: [{ isOfficial: "desc" }, { ratingAvg: "desc" }, { salesCount: "desc" }],
       take: 8,
       select: { id: true, name: true, slug: true, logoUrl: true, isOfficial: true, ratingAvg: true, ratingCount: true, salesCount: true, _count: { select: { products: { where: { status: "ACTIVE" } } } } },
     }),
-    db.brand.findMany({ where: { isFeatured: true }, orderBy: { name: "asc" }, take: 16, select: { id: true, name: true, slug: true, logoUrl: true } }),
+    db.brand.findMany({ where: { isFeatured: true, products: { some: { status: "ACTIVE", store: { status: "ACTIVE" } } } }, orderBy: { name: "asc" }, take: 16, select: { id: true, name: true, slug: true, logoUrl: true } }),
     db.campaign.findFirst({ where: { isActive: true, startsAt: { lte: now }, endsAt: { gt: now } }, orderBy: { endsAt: "asc" } }),
   ]);
   const featuredCategories = categories.filter((c) => c.isFeatured).length ? categories.filter((c) => c.isFeatured) : categories;
