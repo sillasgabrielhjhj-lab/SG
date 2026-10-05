@@ -39,7 +39,7 @@ export default async function OffersPage({ searchParams }: Props) {
           <div className="p-3 sm:p-4">
             <ProductRail products={data.flash.products} label="Ofertas relâmpago" favorites={favorites ? [...favorites] : []} />
           </div>
-          {data.flash.next ? <p className="border-t border-sun-200 px-4 py-2 text-xs font-semibold text-sun-800">Próxima relâmpago: {data.flash.next.name.replace("[DEMO] ", "")} — começa {formatDateTime(data.flash.next.startsAt)}</p> : null}
+          {data.flash.next ? <p className="border-t border-sun-200 px-4 py-2 text-xs font-semibold text-sun-800">Próxima oferta relâmpago começa em {formatDateTime(data.flash.next.startsAt)}</p> : null}
         </section>
       ) : null}
       <Listing basePath="/ofertas" filters={filters} result={data.results} favorites={favorites} />
