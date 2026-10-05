@@ -4,8 +4,8 @@ export const DEMO_PASSWORD = "Mercatto@2026";
 
 export async function login(page: Page, email: string, redirect = "/") {
   await page.goto(`/entrar?redirect=${encodeURIComponent(redirect)}`);
-  await page.getByLabel("E-mail").fill(email);
-  await page.getByLabel("Senha", { exact: true }).fill(DEMO_PASSWORD);
+  await page.locator('input[type="email"]').fill(email);
+  await page.locator('input[autocomplete="current-password"]').fill(DEMO_PASSWORD);
   await page.getByRole("button", { name: "Entrar" }).click();
   await expect(page).not.toHaveURL(/\/entrar/);
 }
