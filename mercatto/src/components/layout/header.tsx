@@ -6,7 +6,7 @@ import { CartLink, FavoritesLink, NotificationsLink } from "@/components/layout/
 import { CategoriesMenu } from "@/components/layout/categories-menu";
 import { CepSelector } from "@/components/layout/cep-selector";
 import { MobileMenu } from "@/components/layout/mobile-menu";
-import { SearchBar } from "@/components/layout/search-bar";
+import { HeaderSearchBar } from "@/components/layout/search-bar";
 import { StickyHeader } from "@/components/layout/sticky-header";
 import type { HeaderData } from "@/components/layout/types";
 
@@ -33,7 +33,7 @@ export function Header({ data }: { data: HeaderData }) {
             <Logo tone="inverse" size="md" className="max-sm:[&>span:last-child]:text-[1.35rem]" />
           </Link>
           <div className="hidden min-w-0 flex-1 md:block lg:max-w-2xl xl:max-w-3xl">
-            <SearchBar />
+            <HeaderSearchBar />
           </div>
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
             <AccountMenu user={data.user} />
@@ -43,7 +43,7 @@ export function Header({ data }: { data: HeaderData }) {
           </div>
         </div>
         <div className="container-page pb-2.5 md:hidden">
-          <SearchBar />
+          <HeaderSearchBar />
         </div>
         <div className="hidden border-t border-white/10 lg:block">
           <nav aria-label="Navegação da loja" className="container-page flex h-11 items-center gap-1">

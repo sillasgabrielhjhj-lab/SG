@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useId, useMemo, useRef, useState } from "react";
 import { ArrowUpLeft, History, Search, TrendingUp, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatBRL } from "@/lib/money";
@@ -26,27 +26,34 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
   const [value, setValue] = useState(defaultValue);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
-  const [data, setData] = useState<Suggestions | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<{ q: string; data: Suggestions | null } | null>(null);
+  const [prevDefault, setPrevDefault] = useState(defaultValue);
   const query = useDebounce(value.trim(), 180);
   const { history, add, remove, clear } = useSearchHistory();
   const listId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => setValue(defaultValue), [defaultValue]);
+  // Sincroniza com o termo da URL (ex.: navegação entre buscas) sem efeito.
+  if (prevDefault !== defaultValue) {
+    setPrevDefault(defaultValue);
+    setValue(defaultValue);
+  }
 
   useEffect(() => {
     if (!open) return;
     const controller = new AbortController();
-    setLoading(true);
     fetch(`/api/search/suggest?q=${encodeURIComponent(query)}`, { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : null))
-      .then((d: Suggestions | null) => setData(d))
-      .catch(() => undefined)
-      .finally(() => setLoading(false));
+      .then((d: Suggestions | null) => setResult({ q: query, data: d }))
+      .catch(() => {
+        if (!controller.signal.aborted) setResult({ q: query, data: null });
+      });
     return () => controller.abort();
   }, [query, open]);
+
+  const data = result?.data ?? null;
+  const loading = open && result?.q !== query;
 
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
@@ -217,5 +224,21 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
         </div>
       ) : null}
     </div>
+  );
+}
+
+function SearchBarFromUrl(props: Omit<React.ComponentProps<typeof SearchBar>, "defaultValue">) {
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const q = pathname === "/buscar" ? (params.get("q") ?? "") : "";
+  return <SearchBar {...props} defaultValue={q} />;
+}
+
+/** Busca do cabeçalho: na página de resultados exibe o termo pesquisado. */
+export function HeaderSearchBar(props: Omit<React.ComponentProps<typeof SearchBar>, "defaultValue">) {
+  return (
+    <Suspense fallback={<SearchBar {...props} />}>
+      <SearchBarFromUrl {...props} />
+    </Suspense>
   );
 }
