@@ -25,6 +25,12 @@ export type CreatePaymentInput = {
   /** Bandeira/últimos dígitos informados pelo SDK (opcional, apenas exibição). */
   cardBrand?: string | null;
   cardLast4?: string | null;
+  /**
+   * Somente cartão: identificadores devolvidos pelo SDK do gateway no navegador
+   * (Mercado Pago: `payment_method_id`, ex. "visa"/"master", e `issuer_id`).
+   */
+  paymentMethodId?: string | null;
+  issuerId?: string | null;
   expiresAt: Date;
   notificationUrl: string;
 };
@@ -50,9 +56,19 @@ export type WebhookVerification =
       /** Status consultado/confirmado no provedor (não confiar só no corpo). */
       status: GatewayPaymentStatus;
       paidAmountCents?: number;
+      /** Referência externa registrada no gateway (= id interno do Payment), quando disponível. */
+      externalReference?: string | null;
       raw: unknown;
     }
-  | { ok: false; reason: string };
+  | {
+      ok: false;
+      reason: string;
+      /**
+       * true quando o evento é autêntico mas irrelevante (ex.: tipo de evento não
+       * tratado): responda 2xx para o provedor não reenviar, sem processar nada.
+       */
+      ignorable?: boolean;
+    };
 
 export type RefundResult = { providerRefundId: string; status: "PENDING" | "SUCCEEDED" | "FAILED" };
 
