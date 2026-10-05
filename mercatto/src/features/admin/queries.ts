@@ -82,7 +82,7 @@ export async function listPaymentsAdmin(filters: { status?: string; method?: "PI
       orderBy: { createdAt: "desc" },
       skip: (page - 1) * PAGE,
       take: PAGE,
-      select: { id: true, provider: true, providerPaymentId: true, method: true, status: true, amountCents: true, refundedCents: true, installments: true, isSandbox: true, failureReason: true, createdAt: true, paidAt: true, checkout: { select: { user: { select: { name: true, email: true } }, orders: { select: { id: true, number: true } } } } },
+      select: { id: true, provider: true, providerPaymentId: true, method: true, status: true, amountCents: true, refundedCents: true, installments: true, cardBrand: true, cardLast4: true, isSandbox: true, failureReason: true, createdAt: true, paidAt: true, checkout: { select: { user: { select: { name: true, email: true } }, orders: { select: { id: true, number: true } } } } },
     }),
     db.payment.count({ where }),
     db.payment.groupBy({ by: ["status"], _count: { _all: true }, _sum: { amountCents: true } }),
