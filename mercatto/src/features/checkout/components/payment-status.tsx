@@ -2,16 +2,17 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
-import { AlertTriangle, CheckCircle2, Clock, FlaskConical, QrCode, RefreshCw, XCircle } from "lucide-react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { AlertTriangle, CheckCircle2, Clock, ExternalLink, FlaskConical, QrCode, RefreshCw, ShieldCheck, XCircle } from "lucide-react";
 import { formatBRL } from "@/lib/money";
 import { Alert } from "@/components/ui/alert";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Countdown } from "@/components/ui/countdown";
 import { useToast } from "@/components/ui/toast";
-import { cancelPendingCheckoutAction, getCheckoutStatusAction, retryPaymentAction } from "@/features/checkout/actions";
+import { cancelPendingCheckoutAction, getCheckoutStatusAction, getPaymentClientActionAction, retryPaymentAction } from "@/features/checkout/actions";
 import { CardTokenizer, type CardTokenResult } from "@/features/checkout/components/card-tokenizer";
+import { getStripe } from "@/features/checkout/components/stripe-client";
 
 type Payment = { id: string; status: string; method: "PIX" | "CREDIT_CARD"; amountCents: number; installments: number; pixQrCode: string | null; pixQrCodeImage: string | null; pixExpiresAt: string | null; cardBrand: string | null; cardLast4: string | null; failureReason: string | null; isSandbox: boolean };
 
@@ -20,7 +21,7 @@ type Payment = { id: string; status: string; method: "PIX" | "CREDIT_CARD"; amou
  * (somente do próprio usuário) e, no gateway dev, botões que disparam o MESMO
  * webhook assinado usado em produção.
  */
-export function PaymentStatus({ checkoutId, status: initialStatus, payment, expiresAt, totalCents, gateway }: { checkoutId: string; status: string; payment: Payment | null; expiresAt: string; totalCents: number; gateway: { name: string; isSandbox: boolean } }) {
+export function PaymentStatus({ checkoutId, status: initialStatus, payment, expiresAt, totalCents, gateway }: { checkoutId: string; status: string; payment: Payment | null; expiresAt: string; totalCents: number; gateway: { name: string; isSandbox: boolean; publicKey: string | null } }) {
   const router = useRouter();
   const toast = useToast();
   const [status, setStatus] = useState(initialStatus);
@@ -40,6 +41,14 @@ export function PaymentStatus({ checkoutId, status: initialStatus, payment, expi
     }, 4000);
     return () => window.clearInterval(t);
   }, [status, checkoutId, router]);
+
+  const refreshStatus = useCallback(async () => {
+    const res = await getCheckoutStatusAction({ checkoutId });
+    if (!res.ok) return;
+    setStatus(res.data.status);
+    setPaymentStatus(res.data.paymentStatus ?? "PENDING");
+    router.refresh();
+  }, [checkoutId, router]);
 
   useEffect(() => {
     if (status === "PAID") router.replace(`/checkout/confirmacao/${checkoutId}`);
@@ -110,9 +119,17 @@ export function PaymentStatus({ checkoutId, status: initialStatus, payment, expi
       ) : null}
 
       {payment?.method === "CREDIT_CARD" && !failed && paymentStatus !== "PAID" ? (
-        <Alert tone="info" title="Processando pagamento com cartão">
-          Estamos aguardando a confirmação da operadora.
-        </Alert>
+        gateway.name === "stripe" && paymentStatus === "PENDING" ? (
+          <StripePaymentAction key={payment.id} checkoutId={checkoutId} publicKey={gateway.publicKey} onDone={refreshStatus} />
+        ) : (
+          <Alert tone="info" title="Processando pagamento com cartão">
+            Estamos aguardando a confirmação da operadora.
+          </Alert>
+        )
+      ) : null}
+
+      {payment?.method === "PIX" && !failed && gateway.name === "stripe" && gateway.isSandbox && paymentStatus === "PENDING" ? (
+        <StripePaymentAction key={payment.id} checkoutId={checkoutId} publicKey={gateway.publicKey} onDone={refreshStatus} />
       ) : null}
 
       {failed ? (
@@ -129,7 +146,7 @@ export function PaymentStatus({ checkoutId, status: initialStatus, payment, expi
               Outro cartão
             </Button>
           </div>
-          {retryMethod === "CREDIT_CARD" ? <CardTokenizer gateway={gateway.name} amountCents={totalCents} onToken={setCard} /> : null}
+          {retryMethod === "CREDIT_CARD" ? <CardTokenizer gateway={gateway.name} publicKey={gateway.publicKey} amountCents={totalCents} onToken={setCard} /> : null}
           <Button
             loading={pending}
             className="self-start"
@@ -185,6 +202,100 @@ export function PaymentStatus({ checkoutId, status: initialStatus, payment, expi
           Cancelar compra
         </Button>
       </div>
+    </div>
+  );
+}
+
+/**
+ * Stripe: conclui no navegador o que o pagamento ainda exige. Cartão => abre a
+ * confirmação 3D Secure do banco (stripe.handleNextAction). PIX em modo de
+ * teste => link para a página da Stripe que simula o pagamento.
+ * Executa uma vez ao abrir; o botão permite tentar de novo.
+ */
+function StripePaymentAction({ checkoutId, publicKey, onDone }: { checkoutId: string; publicKey: string | null; onDone: () => Promise<void> }) {
+  const [state, setState] = useState<"working" | "waiting" | "error">("working");
+  const [message, setMessage] = useState<string | null>(null);
+  const [testUrl, setTestUrl] = useState<string | null>(null);
+  const started = useRef(false);
+
+  const run = useCallback(async () => {
+    const res = await getPaymentClientActionAction({ checkoutId });
+    if (!res.ok) {
+      setState("error");
+      setMessage(res.error);
+      return;
+    }
+    const action = res.data;
+    if (!action) {
+      setState("waiting");
+      return onDone();
+    }
+    if (action.type === "pix_test_page") {
+      setTestUrl(action.url);
+      setState("waiting");
+      return;
+    }
+    const stripe = publicKey ? await getStripe(publicKey).catch(() => null) : null;
+    if (!stripe) {
+      setState("error");
+      setMessage("Não foi possível abrir a confirmação do banco. Recarregue a página e tente novamente.");
+      return;
+    }
+    const result = await stripe.handleNextAction({ clientSecret: action.clientSecret });
+    if (result.error) {
+      setState("error");
+      setMessage(result.error.message ?? "A confirmação no banco não foi concluída.");
+    } else {
+      setState("waiting");
+    }
+    await onDone();
+  }, [checkoutId, publicKey, onDone]);
+
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    void run();
+  }, [run]);
+
+  if (testUrl) {
+    return (
+      <div className="rounded-panel border border-dashed border-warning-600/40 bg-warning-50 p-4">
+        <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-warning-700">
+          <FlaskConical className="size-4" aria-hidden /> Modo de teste da Stripe
+        </p>
+        <p className="mb-3 text-xs text-fg-muted">O QR Code de teste não é pago por bancos reais. Use a página da Stripe para simular o pagamento.</p>
+        <a href={testUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 underline">
+          Abrir página de teste do PIX <ExternalLink className="size-4" aria-hidden />
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-3 rounded-panel border border-line bg-surface p-5">
+      <p className="flex items-center gap-2 text-base font-bold">
+        <ShieldCheck className="size-5 text-brand-700" aria-hidden /> Confirmação do pagamento com cartão
+      </p>
+      {state === "error" ? (
+        <>
+          <Alert tone="warning">{message}</Alert>
+          <Button
+            className="self-start"
+            onClick={() => {
+              setState("working");
+              setMessage(null);
+              void run();
+            }}
+          >
+            Confirmar com o banco
+          </Button>
+        </>
+      ) : (
+        <p className="flex items-center gap-2 text-sm text-fg-muted" aria-live="polite">
+          <RefreshCw className="size-4 animate-spin" aria-hidden />
+          {state === "working" ? "Se o seu banco pedir, confirme a compra na janela que vai abrir…" : "Aguardando a confirmação da operadora…"}
+        </p>
+      )}
     </div>
   );
 }

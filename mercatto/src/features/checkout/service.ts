@@ -4,12 +4,12 @@ import { db } from "@/server/db";
 import { env } from "@/server/env";
 import { AppError, conflict, notFound } from "@/server/errors";
 import { logger } from "@/server/observability/logger";
-import { getPaymentGateway } from "@/server/providers/payments";
-import { MERCADOPAGO_PROVIDER } from "@/server/providers/payments/mercadopago";
+import { getPaymentGateway, installmentInterestPolicy } from "@/server/providers/payments";
 import { isProviderError } from "@/server/providers/errors";
 import { allocateProportionally, installmentOptions, formatBRL } from "@/lib/money";
 import { computeTotals } from "@/features/pricing/engine";
-import { getStoreSettings, installmentConfigFrom } from "@/features/settings/queries";
+import { getStoreSettings } from "@/features/settings/queries";
+import { effectiveInstallmentConfig } from "@/features/checkout/installments";
 import { groupByStore, priceLines, toCouponLines, type PricedLine } from "@/features/cart/pricing.server";
 import { removePurchasedItems } from "@/features/cart/service";
 import { validateCouponForLines } from "@/features/coupons/service";
@@ -144,7 +144,7 @@ export async function buildCheckoutQuote(userId: string, input: Pick<CheckoutInp
   }
 
   // Parcelamento: só cartão; juros (se houver) entram no valor cobrado pelo gateway.
-  const options = installmentOptions(totals.totalCents, installmentConfigFrom(settings));
+  const options = installmentOptions(totals.totalCents, effectiveInstallmentConfig(settings));
   const count = input.paymentMethod === "CREDIT_CARD" ? input.installments : 1;
   const installment = input.paymentMethod === "PIX" ? { count: 1, installmentCents: totals.totalCents, totalCents: totals.totalCents, interestFree: true } : options.find((o) => o.count === count);
   if (!installment) throw new AppError("VALIDATION", "Parcelamento indisponível para este valor.", { fieldErrors: { installments: ["Escolha outra opção de parcelamento"] } });
@@ -343,12 +343,12 @@ export async function startPayment(
   const settings = await getStoreSettings();
   let amount = checkout.totalCents;
   if (method === "CREDIT_CARD") {
-    const opt = installmentOptions(checkout.totalCents, installmentConfigFrom(settings)).find((o) => o.count === installments);
+    const opt = installmentOptions(checkout.totalCents, effectiveInstallmentConfig(settings)).find((o) => o.count === installments);
     if (!opt) throw new AppError("VALIDATION", "Parcelamento indisponível.");
-    // No Mercado Pago os juros do parcelamento são calculados e cobrados pelo
-    // próprio MP (conforme a configuração da conta). Enviar o valor base evita
-    // juros em dobro; nos demais gateways o app aplica a Tabela Price.
-    amount = getPaymentGateway().name === MERCADOPAGO_PROVIDER ? checkout.totalCents : opt.totalCents;
+    // Mercado Pago: os juros são calculados e cobrados pelo próprio MP (conforme
+    // a conta) — enviar o valor base evita juros em dobro. Stripe: parcelado sem
+    // juros para o comprador. Só o gateway dev aplica a Tabela Price do app.
+    amount = installmentInterestPolicy() === "app" ? opt.totalCents : checkout.totalCents;
   }
   const attempt = checkout._count.payments + 1;
   const customer = checkout.customerSnapshot as { name: string; email: string; cpf: string; phone?: string };

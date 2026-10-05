@@ -107,10 +107,12 @@ Todas estão documentadas em [`.env.example`](.env.example). Resumo:
 | `DIRECT_URL` | produção | Conexão direta usada pelo Prisma CLI (migrations/seed) |
 | `AUTH_SECRET` | sim | ≥ 32 caracteres aleatórios |
 | `APP_URL` | recomendado | URL pública; na Vercel cai automaticamente para o domínio do projeto |
-| `PAYMENT_PROVIDER` | sim | `dev` (sandbox) ou `mercadopago` |
+| `PAYMENT_PROVIDER` | sim | `dev` (sandbox), `stripe` ou `mercadopago` |
 | `PAYMENT_WEBHOOK_SECRET` | com `dev` | Segredo HMAC do gateway de desenvolvimento |
 | `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_PUBLIC_KEY`, `MERCADOPAGO_WEBHOOK_SECRET` | com `mercadopago` | Credenciais do Mercado Pago |
 | `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` | com `mercadopago` | Chave pública para o formulário de cartão (Brick) |
+| `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` | com `stripe` | Chaves da Stripe (secreta, publicável e segredo do webhook) — mesmo modo (teste ou produção) |
+| `STRIPE_PIX_ENABLED` | não | `false` esconde o PIX quando a conta Stripe não tem PIX habilitado |
 | `STORAGE_PROVIDER`, `BLOB_READ_WRITE_TOKEN` | produção | `vercel-blob` + token do Vercel Blob |
 | `EMAIL_PROVIDER`, `RESEND_API_KEY`, `EMAIL_FROM` | produção | E-mails transacionais via Resend |
 | `SHIPPING_PROVIDER`, `MELHORENVIO_TOKEN` | não | Tabela própria funciona sem terceiros |
@@ -150,6 +152,7 @@ No editor: nome, categoria, marca, condição, SKU, descrição; fotos (até 12,
 ## Pagamentos
 
 - `PAYMENT_PROVIDER=dev`: gateway de desenvolvimento **claramente identificado**. PIX gera um código não pagável; cartões de teste aprovam/recusam; a aprovação passa pelo **mesmo fluxo de webhook assinado** usado em produção.
+- `PAYMENT_PROVIDER=stripe`: integração real via API REST (PaymentIntents, versão da API fixada). PIX com QR gerado no servidor; cartão pelo Payment Element (o servidor recebe só o `pm_...`), parcelamento brasileiro sem juros para o comprador e confirmação 3D Secure na página de pagamento. Webhook em `https://SEU-DOMINIO/api/webhooks/payments/stripe` (assinatura `Stripe-Signature`); o status é sempre consultado na API. A CSP libera a Stripe automaticamente.
 - `PAYMENT_PROVIDER=mercadopago`: integração real via API REST (PIX e cartão tokenizado pelo Card Payment Brick — o servidor nunca recebe o número do cartão). Configure o webhook no painel do Mercado Pago para `https://SEU-DOMINIO/api/webhooks/payments/mercadopago` e defina `MERCADOPAGO_WEBHOOK_SECRET`. **Valide em sandbox antes de operar** (adapter implementado, ainda não homologado com credenciais reais). Ao ativar, inclua os domínios do Mercado Pago na CSP (`next.config.ts`).
 
 ## Testes e qualidade
@@ -213,6 +216,7 @@ mercatto/
 | Upload falha em produção | Configure `STORAGE_PROVIDER=vercel-blob` e conecte o Vercel Blob. |
 | Migrations travam com Neon/Supabase | Defina `DIRECT_URL` com a conexão direta (sem pooling). |
 | Links de e-mail apontando para localhost | Defina `APP_URL` com o domínio público. |
+| Pagamento fica pendente com a Stripe | Confira o endpoint de webhook (eventos `payment_intent.*` e `charge.refunded`) e `STRIPE_WEBHOOK_SECRET`; a página de pagamento também concilia consultando a API. |
 | Pagamento fica pendente com Mercado Pago | Confira a URL do webhook e `MERCADOPAGO_WEBHOOK_SECRET`; veja os logs do deployment. |
 
 ---

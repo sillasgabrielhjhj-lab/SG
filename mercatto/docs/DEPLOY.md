@@ -16,17 +16,22 @@ Para só navegar pelo site com os dados DEMO, sem instalar nada no computador:
 
 Upload de imagens exige o Vercel Blob (passo 4 abaixo); a navegação, o carrinho e o checkout simulado funcionam sem ele. Para a operação real, **remova `SEED_ON_BUILD`** e siga a seção abaixo.
 
-## Da prévia DEMO para a operação real
+## Da prévia DEMO para a operação real (Stripe)
 
-1. **Mercado Pago** → [Suas integrações](https://www.mercadopago.com.br/developers/panel/app) → *Criar aplicação* (pagamentos online / Checkout Transparente). Em *Credenciais de teste* copie a **Public Key** e o **Access Token** (começam com `TEST-`). Em *Webhooks → Configurar notificações*: URL `https://SEU-DOMINIO/api/webhooks/payments/mercadopago`, evento **Pagamentos**; salve e copie a **assinatura secreta**.
+1. **Stripe — modo de teste.** Entre no [painel da Stripe](https://dashboard.stripe.com) (conta do Brasil) e ligue o **modo de teste**.
+   - Chaves: [Desenvolvedores → Chaves de API](https://dashboard.stripe.com/test/apikeys) → copie a **chave publicável** (`pk_test_…`) e a **chave secreta** (`sk_test_…`).
+   - PIX: [Configurações → Formas de pagamento](https://dashboard.stripe.com/test/settings/payment_methods) → ative **Pix**. Se a conta não oferecer Pix, defina `STRIPE_PIX_ENABLED=false` (o site oferece só cartão).
+   - Webhook: [Desenvolvedores → Webhooks](https://dashboard.stripe.com/test/webhooks) → adicionar endpoint `https://SEU-DOMINIO/api/webhooks/payments/stripe` com os eventos `payment_intent.succeeded`, `payment_intent.payment_failed`, `payment_intent.canceled`, `payment_intent.processing`, `payment_intent.requires_action` e `charge.refunded` → copie o **segredo de assinatura** (`whsec_…`).
 2. Vercel → *Settings → Environment Variables*:
-   - `PAYMENT_PROVIDER=mercadopago`, `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_PUBLIC_KEY`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` (mesmo valor da Public Key), `MERCADOPAGO_WEBHOOK_SECRET`.
+   - `PAYMENT_PROVIDER=stripe`, `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` (as três do **mesmo modo**: teste ou produção).
    - `PURGE_DEMO_DATA=true`, `ADMIN_EMAIL` (e-mail real, ainda não cadastrado no site) e `ADMIN_PASSWORD` (10+ caracteres com letras e números).
    - **Apague** `SEED_ON_BUILD`.
 3. *Deployments → Redeploy*. O build cria o administrador real, transfere a loja oficial para ele e remove pedidos, produtos, lojas, usuários, cupons e campanhas DEMO (categorias, marcas e regras de frete ficam). A limpeza é idempotente.
-4. Teste uma compra com os [cartões de teste](https://www.mercadopago.com.br/developers/pt/docs/checkout-api/integration-test/test-cards) (titular `APRO` = aprovado, `OTHE` = recusado) e um PIX. Enquanto as credenciais forem `TEST-`, o site exibe a faixa "Ambiente de demonstração".
-5. Para vender de verdade: troque as duas chaves pelas **credenciais de produção** (`APP_USR-…`), configure o webhook no modo *Produção* (nova assinatura secreta) e reimplante. Depois remova `PURGE_DEMO_DATA`.
-6. Em `/admin/configuracoes` preencha contatos e redes sociais reais e alinhe o parcelamento sem juros ao configurado na conta do Mercado Pago. Cadastre os produtos oficiais em `/admin/produtos/novo` (fotos exigem o Vercel Blob — passo 4 do guia completo).
+4. Teste uma compra. Cartão aprovado: `4242 4242 4242 4242`, validade futura, CVC qualquer; recusado: `4000 0000 0000 0002`; com confirmação do banco (3D Secure): `4000 0027 6000 3184`. PIX: a página de pagamento mostra o link **"Abrir página de teste do PIX"**, que simula o pagamento. Enquanto as chaves forem de teste, o site exibe a faixa "Ambiente de demonstração".
+5. Para vender de verdade: conclua a ativação da conta na Stripe (dados da empresa e conta bancária), troque as três variáveis pelas chaves de **produção** ([chaves](https://dashboard.stripe.com/apikeys) `pk_live_…`/`sk_live_…` e um [webhook de produção](https://dashboard.stripe.com/webhooks) com o mesmo endereço e eventos — novo `whsec_…`) e reimplante. Depois remova `PURGE_DEMO_DATA`.
+6. Em `/admin/configuracoes` preencha contatos e redes sociais reais. Com a Stripe, todas as parcelas são **sem juros para o comprador** (a tarifa do parcelamento fica com a loja) — ajuste o máximo de parcelas e a parcela mínima. Cadastre os produtos oficiais em `/admin/produtos/novo` (fotos exigem o Vercel Blob — passo 4 do guia completo).
+
+O Mercado Pago continua disponível como alternativa (`PAYMENT_PROVIDER=mercadopago` + `MERCADOPAGO_*`, webhook em `/api/webhooks/payments/mercadopago`).
 
 ## 1. Pré-requisitos
 
@@ -67,14 +72,14 @@ Alternativas: Supabase (`DATABASE_URL` = *transaction pooler*, porta 6543; `DIRE
 | `AUTH_SECRET` | `openssl rand -base64 48` |
 | `CRON_SECRET` | `openssl rand -base64 32` |
 | `APP_URL` | `https://seu-dominio.com.br` (opcional até ter domínio — a Vercel fornece o domínio do projeto automaticamente) |
-| `PAYMENT_PROVIDER` | `dev` (demonstração) ou `mercadopago` |
+| `PAYMENT_PROVIDER` | `dev` (demonstração), `stripe` ou `mercadopago` |
 | `PAYMENT_WEBHOOK_SECRET` | `openssl rand -base64 32` (necessário com `dev`) |
 | `STORAGE_PROVIDER` | `vercel-blob` |
 | `EMAIL_PROVIDER` | `console` (sem envio) ou `resend` |
 | `SHIPPING_PROVIDER` | `table` |
 | `LOG_LEVEL` | `info` |
 
-Com Mercado Pago (opcional): `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_PUBLIC_KEY`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` (mesmo valor da pública), `MERCADOPAGO_WEBHOOK_SECRET`. Com Resend: `RESEND_API_KEY`, `EMAIL_FROM` (domínio verificado no Resend).
+Com Stripe: `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` (e `STRIPE_PIX_ENABLED=false` se a conta não tiver Pix). Com Mercado Pago (alternativa): `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_PUBLIC_KEY`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` (mesmo valor da pública), `MERCADOPAGO_WEBHOOK_SECRET`. Com Resend: `RESEND_API_KEY`, `EMAIL_FROM` (domínio verificado no Resend).
 
 ## 6. Deploy
 
@@ -112,7 +117,7 @@ O seed é idempotente (pode ser executado novamente sem duplicar dados).
 
 ## 9. Checklist de produção
 
-- [ ] `PAYMENT_PROVIDER=mercadopago` validado em sandbox (PIX, cartão aprovado/recusado, webhook, reembolso).
+- [ ] `PAYMENT_PROVIDER=stripe` validado no modo de teste (PIX, cartão aprovado/recusado/3D Secure, parcelado, webhook, reembolso).
 - [ ] `EMAIL_PROVIDER=resend` com domínio verificado (confirmação de e-mail, recuperação de senha, pedidos).
 - [ ] Textos legais revisados por profissional (`/termos`, `/privacidade`, `/trocas-e-devolucoes`, `/cookies`) com razão social, CNPJ e endereço reais.
 - [ ] Contas demo removidas ou senhas trocadas (se o banco começou com `SEED_MODE=demo`).

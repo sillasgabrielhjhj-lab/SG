@@ -7,6 +7,7 @@
  *    demonstração (inválido para pagamento) e permite simular aprovação/recusa
  *    disparando o MESMO fluxo de webhook assinado usado em produção.
  *  - "mercadopago": integração real via API REST (requer credenciais).
+ *  - "stripe": integração real via API REST (PaymentIntents: PIX e cartão).
  */
 export type PaymentMethodCode = "PIX" | "CREDIT_CARD";
 
@@ -72,11 +73,24 @@ export type WebhookVerification =
 
 export type RefundResult = { providerRefundId: string; status: "PENDING" | "SUCCEEDED" | "FAILED" };
 
+/**
+ * Ação que o navegador do comprador precisa executar para concluir um
+ * pagamento pendente (ex.: autenticação 3D Secure do banco na Stripe).
+ */
+export type ClientPaymentAction =
+  | { type: "stripe_sdk"; clientSecret: string }
+  /** Somente em modo de teste: página do gateway que simula o pagamento do PIX. */
+  | { type: "pix_test_page"; url: string };
+
 export interface PaymentGateway {
   readonly name: string;
   /** true quando nenhuma cobrança real é realizada. */
   readonly isSandbox: boolean;
   readonly supportsMethods: PaymentMethodCode[];
+  /** Chave pública usada pelo formulário de cartão no navegador (quando aplicável). */
+  readonly publicKey?: string | null;
+  /** Ação pendente no navegador para um pagamento (somente gateways que exigem). */
+  getClientAction?(providerPaymentId: string): Promise<ClientPaymentAction | null>;
   createPayment(input: CreatePaymentInput): Promise<CreatePaymentResult>;
   /** Consulta status atual no provedor (fonte da verdade). */
   getPaymentStatus(providerPaymentId: string): Promise<GatewayPaymentStatus>;

@@ -65,7 +65,7 @@ Deploy na Vercel (ver `docs/DEPLOY.md`) e itens de "PENDENTE / PRÓXIMOS PASSOS"
 | Integração | Variáveis | Estado |
 |---|---|---|
 | PostgreSQL de produção (Neon/Supabase/Prisma Postgres) | `DATABASE_URL` | necessário para deploy |
-| Gateway de pagamento (Mercado Pago sugerido) | `PAYMENT_PROVIDER`, `MERCADOPAGO_*` | adapter implementado; validar em sandbox |
+| Gateway de pagamento (Stripe escolhido; Mercado Pago disponível) | `PAYMENT_PROVIDER=stripe`, `STRIPE_*` | adapter implementado e testado (unitário + build); validar no modo de teste da Stripe antes de ativar as chaves de produção |
 | E-mail transacional (Resend) | `EMAIL_PROVIDER`, `RESEND_API_KEY`, `EMAIL_FROM` | adapter implementado |
 | Armazenamento de imagens (Vercel Blob) | `STORAGE_PROVIDER`, `BLOB_READ_WRITE_TOKEN` | adapter implementado |
 | Frete (Melhor Envio) — opcional | `SHIPPING_PROVIDER`, `MELHORENVIO_TOKEN` | tabela própria funciona sem terceiros |

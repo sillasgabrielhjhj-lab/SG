@@ -57,7 +57,7 @@ export function CheckoutFlow({
   installmentConfig: InstallmentConfig;
   pixDiscountPercent: number;
   reservationMinutes: number;
-  gateway: { name: string; isSandbox: boolean; supportsMethods: ("PIX" | "CREDIT_CARD")[] };
+  gateway: { name: string; isSandbox: boolean; supportsMethods: ("PIX" | "CREDIT_CARD")[]; publicKey: string | null };
 }) {
   const router = useRouter();
   const toast = useToast();
@@ -186,7 +186,7 @@ export function CheckoutFlow({
         </div>
         {gateway.isSandbox ? (
           <Alert tone="warning" title="Ambiente de demonstração">
-            Pagamentos são simulados pelo gateway de desenvolvimento — nenhuma cobrança real será feita.
+            Modo de teste: os pagamentos são simulados e nenhuma cobrança real será feita.
           </Alert>
         ) : null}
         {error ? <Alert tone="danger" title="Revise antes de continuar">{error}</Alert> : null}
@@ -318,7 +318,7 @@ export function CheckoutFlow({
               ) : null}
               {method === "CREDIT_CARD" ? (
                 <div className="flex flex-col gap-3 rounded-card border border-line bg-surface-muted p-4">
-                  <CardTokenizer gateway={gateway.name} amountCents={estimatedTotal} onToken={setCard} />
+                  <CardTokenizer gateway={gateway.name} publicKey={gateway.publicKey} amountCents={estimatedTotal} onToken={setCard} />
                   <Field label="Parcelamento">
                     <Select value={installments} onChange={(e) => setInstallments(Number(e.target.value))}>
                       {installmentList.map((o) => (
@@ -453,7 +453,7 @@ export function CheckoutFlow({
           </p>
           {gateway.isSandbox ? (
             <p className="flex items-center gap-1.5 text-xs text-warning-700">
-              <FlaskConical className="size-4" aria-hidden /> Pagamento simulado (desenvolvimento).
+              <FlaskConical className="size-4" aria-hidden /> Pagamento de teste (nenhuma cobrança real).
             </p>
           ) : null}
         </div>

@@ -6,7 +6,8 @@ import { BadgeCheck, Package, ShieldCheck, Star, Store } from "lucide-react";
 import { getCurrentUser } from "@/server/auth/guards";
 import { getFrequentlyBoughtTogether, getProductPageData, getProductQuestions, getProductReviews, getRelatedProducts, getSimilarProducts, recordProductView, resolveProductSlug } from "@/features/product/queries";
 import { getWishlistProductIds } from "@/features/wishlist/queries";
-import { getStoreSettings, installmentConfigFrom } from "@/features/settings/queries";
+import { getStoreSettings } from "@/features/settings/queries";
+import { effectiveInstallmentConfig } from "@/features/checkout/installments";
 import { maybeSyncPromotions } from "@/features/promotions/sync.server";
 import { buildMetadata } from "@/features/seo/metadata";
 import { breadcrumbJsonLd, JsonLd, productJsonLd } from "@/features/seo/jsonld";
@@ -100,7 +101,7 @@ export default async function ProductPage({ params }: Props) {
       <TrackRecentlyViewed productId={product.id} />
       <Breadcrumbs items={crumbs} />
 
-      <ProductPurchase product={product} favorited={favorites.has(product.id)} installmentConfig={installmentConfigFrom(settings)} pixDiscountPercent={settings.pixDiscountPercent} />
+      <ProductPurchase product={product} favorited={favorites.has(product.id)} installmentConfig={effectiveInstallmentConfig(settings)} pixDiscountPercent={settings.pixDiscountPercent} />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="flex min-w-0 flex-col gap-6">

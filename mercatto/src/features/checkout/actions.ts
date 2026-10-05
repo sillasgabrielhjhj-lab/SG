@@ -7,6 +7,7 @@ import { requireUser } from "@/server/auth/guards";
 import { enforceRateLimit } from "@/server/security/rate-limit";
 import { db } from "@/server/db";
 import { notFound } from "@/server/errors";
+import { getPaymentGateway } from "@/server/providers/payments";
 import { checkoutIdSchema, checkoutInputSchema } from "@/features/checkout/schemas";
 import { buildCheckoutQuote, cancelPendingCheckout, createCheckout, retryPayment } from "@/features/checkout/service";
 import { reconcilePayment } from "@/features/payments/service";
@@ -105,6 +106,25 @@ export const getCheckoutStatusAction = createAction(checkoutIdSchema, async ({ c
   }
   return ok({ status, paymentStatus: latest?.status ?? null, failureReason: latest?.failureReason ?? null, expiresAt: checkout.expiresAt.toISOString() });
 }, "checkout.status");
+
+/**
+ * Ação pendente no navegador para o último pagamento da compra do próprio
+ * usuário (ex.: confirmação 3D Secure no app do banco). O client_secret só é
+ * entregue ao dono da compra e enquanto o pagamento aguarda essa ação.
+ */
+export const getPaymentClientActionAction = createAction(checkoutIdSchema, async ({ checkoutId }) => {
+  const user = await requireUser();
+  await enforceRateLimit(`pay-action:${user.id}`, 30, 60);
+  const checkout = await db.checkout.findFirst({
+    where: { id: checkoutId, userId: user.id },
+    select: { status: true, payments: { orderBy: { createdAt: "desc" }, take: 1, select: { status: true, provider: true, providerPaymentId: true } } },
+  });
+  if (!checkout) throw notFound("Compra não encontrada.");
+  const latest = checkout.payments[0];
+  const gateway = getPaymentGateway();
+  if (checkout.status !== "PENDING_PAYMENT" || latest?.status !== "PENDING" || !latest.providerPaymentId || latest.provider !== gateway.name || !gateway.getClientAction) return ok(null);
+  return ok(await gateway.getClientAction(latest.providerPaymentId));
+}, "checkout.payment_action");
 
 export const cancelPendingCheckoutAction = createAction(checkoutIdSchema, async ({ checkoutId }) => {
   const user = await requireUser();

@@ -19,6 +19,8 @@ export type ProviderRequest = {
   headers?: Record<string, string>;
   /** Serializado como JSON quando informado. */
   json?: unknown;
+  /** Corpo `application/x-www-form-urlencoded` já codificado (ex.: Stripe). */
+  form?: string;
   timeoutMs: number;
   /** Mensagem exibível ao usuário caso a chamada falhe. */
   userMessage: string;
@@ -43,8 +45,10 @@ export function describeUrl(url: string): string {
 /** Extrai uma mensagem curta do corpo de erro do provedor (sem dados do payload). */
 function summarizeErrorBody(body: unknown): string | undefined {
   if (!body || typeof body !== "object") return undefined;
-  const record = body as Record<string, unknown>;
-  const parts = [record.error, record.message, record.name, record.code]
+  let record = body as Record<string, unknown>;
+  // Formato { error: { type, code, message } } (ex.: Stripe).
+  if (record.error && typeof record.error === "object") record = record.error as Record<string, unknown>;
+  const parts = [record.error, record.message, record.name, record.code, record.type]
     .filter((v): v is string | number => typeof v === "string" || typeof v === "number")
     .map(String);
   return parts.length ? parts.join(" | ").slice(0, 300) : undefined;
@@ -55,17 +59,18 @@ function isAbortError(error: unknown): boolean {
 }
 
 export async function providerRequest<T = unknown>(req: ProviderRequest): Promise<ProviderResponse<T>> {
-  const method = req.method ?? (req.json === undefined ? "GET" : "POST");
+  const method = req.method ?? (req.json === undefined && req.form === undefined ? "GET" : "POST");
   const target = describeUrl(req.url);
   const headers: Record<string, string> = { Accept: "application/json", ...req.headers };
   if (req.json !== undefined) headers["Content-Type"] = "application/json";
+  if (req.form !== undefined) headers["Content-Type"] = "application/x-www-form-urlencoded";
 
   let response: Response;
   try {
     response = await fetch(req.url, {
       method,
       headers,
-      body: req.json === undefined ? undefined : JSON.stringify(req.json),
+      body: req.json !== undefined ? JSON.stringify(req.json) : req.form,
       signal: AbortSignal.timeout(req.timeoutMs),
       cache: "no-store",
     });

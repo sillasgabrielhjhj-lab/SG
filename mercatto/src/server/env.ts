@@ -12,11 +12,19 @@ const schema = z.object({
   APP_URL: z.string().url().default("http://localhost:3000"),
   AUTH_SECRET: z.string().min(32, "AUTH_SECRET deve ter pelo menos 32 caracteres"),
 
-  PAYMENT_PROVIDER: z.enum(["dev", "mercadopago"]).default("dev"),
+  PAYMENT_PROVIDER: z.enum(["dev", "mercadopago", "stripe"]).default("dev"),
   PAYMENT_WEBHOOK_SECRET: z.string().min(16).optional(),
   MERCADOPAGO_ACCESS_TOKEN: z.string().optional(),
   MERCADOPAGO_PUBLIC_KEY: z.string().optional(),
   MERCADOPAGO_WEBHOOK_SECRET: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string().optional(),
+  STRIPE_PUBLISHABLE_KEY: z.string().optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  /** "false" esconde o PIX (conta Stripe sem PIX habilitado). */
+  STRIPE_PIX_ENABLED: z
+    .string()
+    .optional()
+    .transform((v) => !/^(false|0|no|nao|não)$/i.test((v ?? "").trim())),
 
   SHIPPING_PROVIDER: z.enum(["table", "melhorenvio"]).default("table"),
   MELHORENVIO_TOKEN: z.string().optional(),

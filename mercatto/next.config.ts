@@ -8,6 +8,12 @@ const mpScript = mercadoPago ? " https://sdk.mercadopago.com https://http2.mlsta
 const mpConnect = mercadoPago ? " https://api.mercadopago.com https://api.mercadolibre.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mlstatic.com" : "";
 const mpFrame = mercadoPago ? " https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com" : "";
 
+// Stripe (Payment Element e autenticação 3D Secure): Stripe.js, API e iframes seguros.
+const stripe = process.env.PAYMENT_PROVIDER === "stripe";
+const stripeScript = stripe ? " https://js.stripe.com https://*.js.stripe.com" : "";
+const stripeConnect = stripe ? " https://api.stripe.com https://*.stripe.com" : "";
+const stripeFrame = stripe ? " https://js.stripe.com https://*.js.stripe.com https://hooks.stripe.com" : "";
+
 /**
  * Content-Security-Policy. 'unsafe-inline' em scripts é necessário para a
  * hidratação do Next.js sem nonce (páginas estáticas/ISR). XSS é mitigado
@@ -16,12 +22,12 @@ const mpFrame = mercadoPago ? " https://*.mercadopago.com https://*.mercadolibre
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${mpScript}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${mpScript}${stripeScript}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://viacep.com.br" + mpConnect + (isDev ? " ws: wss:" : ""),
-  `frame-src 'self'${mpFrame}`,
+  "connect-src 'self' https://viacep.com.br" + mpConnect + stripeConnect + (isDev ? " ws: wss:" : ""),
+  `frame-src 'self'${mpFrame}${stripeFrame}`,
   "worker-src 'self'",
   "manifest-src 'self'",
   "frame-ancestors 'none'",

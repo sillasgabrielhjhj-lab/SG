@@ -2,7 +2,8 @@ import "server-only";
 import { db } from "@/server/db";
 import { notFound } from "@/server/errors";
 import { getPaymentGateway } from "@/server/providers/payments";
-import { getStoreSettings, installmentConfigFrom } from "@/features/settings/queries";
+import { getStoreSettings } from "@/features/settings/queries";
+import { effectiveInstallmentConfig } from "@/features/checkout/installments";
 import { releaseCheckout } from "@/features/payments/service";
 
 /** Dados iniciais da página de checkout (o carrinho e totais vêm de getCartView). */
@@ -16,10 +17,10 @@ export async function getCheckoutPageData(userId: string) {
   return {
     user,
     addresses,
-    installmentConfig: installmentConfigFrom(settings),
+    installmentConfig: effectiveInstallmentConfig(settings),
     pixDiscountPercent: settings.pixDiscountPercent,
     reservationMinutes: settings.orderReservationMinutes,
-    gateway: { name: gateway.name, isSandbox: gateway.isSandbox, supportsMethods: gateway.supportsMethods },
+    gateway: { name: gateway.name, isSandbox: gateway.isSandbox, supportsMethods: gateway.supportsMethods, publicKey: gateway.publicKey ?? null },
   };
 }
 
@@ -67,7 +68,7 @@ export async function getCheckoutForPayment(userId: string, checkoutId: string) 
     checkout = (await getCheckoutForPayment(userId, checkoutId)) as typeof checkout;
   }
   const gateway = getPaymentGateway();
-  return { ...checkout, currentPayment: checkout.payments[0] ?? null, gateway: { name: gateway.name, isSandbox: gateway.isSandbox } };
+  return { ...checkout, currentPayment: checkout.payments[0] ?? null, gateway: { name: gateway.name, isSandbox: gateway.isSandbox, publicKey: gateway.publicKey ?? null } };
 }
 
 export type CheckoutPaymentData = Awaited<ReturnType<typeof getCheckoutForPayment>>;

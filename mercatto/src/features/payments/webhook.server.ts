@@ -29,7 +29,8 @@ export async function processPaymentWebhook(providerFromUrl: string, request: { 
   let eventRowId: string;
   try {
     const row = await db.webhookEvent.create({
-      data: { provider: gateway.name, eventId: verification.eventId, type: verification.type, payload: JSON.parse(request.rawBody || "{}") as Prisma.InputJsonValue },
+      // Guarda o resumo do gateway (sem dados do pagador), não o corpo bruto.
+      data: { provider: gateway.name, eventId: verification.eventId, type: verification.type, payload: (verification.raw ?? {}) as Prisma.InputJsonValue },
       select: { id: true },
     });
     eventRowId = row.id;
