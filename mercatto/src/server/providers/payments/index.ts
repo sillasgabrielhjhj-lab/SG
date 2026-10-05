@@ -1,5 +1,7 @@
 import "server-only";
 import { env } from "@/server/env";
+import { logger } from "@/server/observability/logger";
+import { ProviderConfigurationError } from "@/server/providers/errors";
 import { DevPaymentGateway } from "@/server/providers/payments/dev";
 import { MercadoPagoGateway } from "@/server/providers/payments/mercadopago";
 import { StripeGateway } from "@/server/providers/payments/stripe";
@@ -29,6 +31,21 @@ export function getPaymentGateway(): PaymentGateway {
 }
 
 export type { PaymentGateway } from "@/server/providers/payments/types";
+
+/**
+ * Como getPaymentGateway, mas sem derrubar a página quando a configuração do
+ * gateway está incompleta/inválida (ex.: chave secreta ausente ou trocada):
+ * devolve a mensagem para a página explicar o problema ao administrador.
+ */
+export function tryGetPaymentGateway(): { gateway: PaymentGateway; configError: null } | { gateway: null; configError: string } {
+  try {
+    return { gateway: getPaymentGateway(), configError: null };
+  } catch (error) {
+    if (!(error instanceof ProviderConfigurationError)) throw error;
+    logger.error("payments.gateway_misconfigured", { provider: error.provider, message: error.message });
+    return { gateway: null, configError: error.message };
+  }
+}
 
 /**
  * Pagamentos em modo de teste (gateway de desenvolvimento ou credenciais de

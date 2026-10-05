@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "@/server/db";
 import { notFound } from "@/server/errors";
-import { getPaymentGateway } from "@/server/providers/payments";
+import { tryGetPaymentGateway } from "@/server/providers/payments";
 import { getStoreSettings } from "@/features/settings/queries";
 import { effectiveInstallmentConfig } from "@/features/checkout/installments";
 import { releaseCheckout } from "@/features/payments/service";
@@ -13,14 +13,15 @@ export async function getCheckoutPageData(userId: string) {
     db.address.findMany({ where: { userId }, orderBy: [{ isDefault: "desc" }, { createdAt: "asc" }] }),
     getStoreSettings(),
   ]);
-  const gateway = getPaymentGateway();
+  const { gateway, configError } = tryGetPaymentGateway();
   return {
+    configError,
     user,
     addresses,
     installmentConfig: effectiveInstallmentConfig(settings),
     pixDiscountPercent: settings.pixDiscountPercent,
     reservationMinutes: settings.orderReservationMinutes,
-    gateway: { name: gateway.name, isSandbox: gateway.isSandbox, supportsMethods: gateway.supportsMethods, publicKey: gateway.publicKey ?? null },
+    gateway: gateway ? { name: gateway.name, isSandbox: gateway.isSandbox, supportsMethods: gateway.supportsMethods, publicKey: gateway.publicKey ?? null } : null,
   };
 }
 
@@ -67,8 +68,8 @@ export async function getCheckoutForPayment(userId: string, checkoutId: string) 
     await releaseCheckout(checkout.id, { reason: "Pagamento não realizado no prazo", finalStatus: "EXPIRED" });
     checkout = (await getCheckoutForPayment(userId, checkoutId)) as typeof checkout;
   }
-  const gateway = getPaymentGateway();
-  return { ...checkout, currentPayment: checkout.payments[0] ?? null, gateway: { name: gateway.name, isSandbox: gateway.isSandbox, publicKey: gateway.publicKey ?? null } };
+  const { gateway, configError } = tryGetPaymentGateway();
+  return { ...checkout, currentPayment: checkout.payments[0] ?? null, configError, gateway: gateway ? { name: gateway.name, isSandbox: gateway.isSandbox, publicKey: gateway.publicKey ?? null } : null };
 }
 
 export type CheckoutPaymentData = Awaited<ReturnType<typeof getCheckoutForPayment>>;

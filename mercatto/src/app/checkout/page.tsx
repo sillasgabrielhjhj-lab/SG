@@ -5,6 +5,7 @@ import { getCartView } from "@/features/cart/queries";
 import { getCheckoutPageData } from "@/features/checkout/queries";
 import { privateMetadata } from "@/features/seo/metadata";
 import { CheckoutFlow } from "@/features/checkout/components/checkout-flow";
+import { PaymentsUnavailable } from "@/features/checkout/components/payments-unavailable";
 
 export const metadata: Metadata = privateMetadata("Finalizar compra");
 
@@ -12,6 +13,14 @@ export default async function CheckoutPage() {
   const user = await requireUserPage("/checkout");
   const [cart, data] = await Promise.all([getCartView({ userId: user.id }), getCheckoutPageData(user.id)]);
   if (!cart.canCheckout) redirect("/carrinho");
+  if (!data.gateway) {
+    return (
+      <>
+        <h1 className="mb-4 text-xl font-bold tracking-tight sm:text-2xl">Finalizar compra</h1>
+        <PaymentsUnavailable isAdmin={user.role === "ADMIN"} reason={data.configError ?? ""} />
+      </>
+    );
+  }
   return (
     <>
       <h1 className="mb-4 text-xl font-bold tracking-tight sm:text-2xl">Finalizar compra</h1>

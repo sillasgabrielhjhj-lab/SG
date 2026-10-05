@@ -28,7 +28,7 @@ export default async function ConfirmationPage({ params }: Props) {
         <CheckCircle2 className="size-14 animate-pop text-sun-300" aria-hidden />
         <h1 className="text-2xl font-extrabold tracking-tight">Pagamento aprovado!</h1>
         <p className="max-w-md text-sm text-white/85">Enviamos a confirmação para o seu e-mail. Você pode acompanhar cada pedido em “Meus pedidos”.</p>
-        {checkout.gateway.isSandbox ? <p className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Pagamento simulado — ambiente de demonstração</p> : null}
+        {(checkout.currentPayment?.isSandbox ?? checkout.gateway?.isSandbox) ? <p className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Pagamento simulado — ambiente de demonstração</p> : null}
       </section>
       {checkout.orders.map((o) => (
         <section key={o.id} className="rounded-panel border border-line bg-surface">
