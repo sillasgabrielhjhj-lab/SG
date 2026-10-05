@@ -13,18 +13,19 @@
 - **Carrinho e checkout** (endereço → frete → pagamento → revisão → pagamento PIX/cartão com acompanhamento) e confirmação.
 - **Autenticação**: entrar, cadastro, recuperar/redefinir senha, verificar e-mail.
 - **Área do cliente** `/minha-conta`: resumo, pedidos (timeline, cancelar/devolver), favoritos, endereços, cupons, avaliações (com fotos), perguntas, notificações, dados, segurança (senha + sessões).
-- **Painel do vendedor** (parcial): `/vender` (onboarding), `/vendedor` (dashboard), produtos (lista/novo/editar), estoque (saldos/histórico/movimentar), pedidos (lista/detalhe/ações).
-- **Admin**: layout `/admin` com menu filtrado por permissão (páginas em construção).
-- **Testes**: unitários (dinheiro, validadores BR, preços, schemas, datas, ilustrações) e integração do checkout (concorrência estoque=1, idempotência, corrida de cupom, webhook duplicado/inválido, expiração, cartão dev).
+- **Painel do vendedor** completo: `/vender` (onboarding com análise), `/vendedor` (dashboard), produtos (lista/novo/editar com variações, fotos, ficha técnica e SEO), estoque (saldos, histórico, movimentações), pedidos (ações da máquina de estados, rastreio, devoluções), promoções e ofertas relâmpago, cupons, perguntas, avaliações, dados da loja e tabela de frete.
+- **Admin** completo (menu filtrado por permissão; SUPPORT vê apenas filas operacionais): dashboard executivo, produtos (oficiais e moderação de anúncios), estoque, pedidos (+reembolso manual), pagamentos, categorias e atributos, marcas, promoções, cupons, campanhas, banners, clientes, vendedores (aprovação/suspensão), usuários e papéis, moderação (avaliações/perguntas), auditoria e configurações (parcelamento, PIX, frete grátis, SEO).
+- **Institucionais**: sobre, contato, ajuda (FAQ), termos, privacidade (LGPD), cookies, segurança, trocas e devoluções — textos legais marcados como modelo para revisão jurídica; `/acesso-negado`; 404/erro/erro global sem detalhes internos.
+- **SEO/PWA**: metadata + canonical + Open Graph (imagem gerada), JSON-LD (sem notas DEMO), robots.txt, sitemap.xml, manifest, ícones PNG/maskable, página offline e service worker que nunca armazena páginas privadas; 404/301 reais nas páginas de detalhe.
+- **Prontidão Vercel**: `APP_URL` com fallback automático, `DIRECT_URL` para migrations, CSP com domínios do Mercado Pago quando ativado, `npm run build` validado; guia em `docs/DEPLOY.md`.
+- **Testes**: unitários (86), integração do checkout (8, incluindo corrida de clique duplo) e E2E Playwright (compra PIX completa, controle de acesso, mobile). Lint e typecheck sem erros.
 
-## EM ANDAMENTO / PENDENTE
+## PENDENTE / PRÓXIMOS PASSOS
 
-- Vendedor: promoções, cupons, perguntas, avaliações, loja (dados + tabela de frete).
-- Admin: dashboard, produtos, estoque, pedidos (+reembolso), pagamentos, categorias/atributos, marcas, promoções, cupons, campanhas, banners, clientes, vendedores (aprovação), usuários/papéis, moderação, auditoria, configurações.
-- Institucionais (`/sobre`, `/contato`, `/ajuda`, `/termos`, `/privacidade`, `/cookies`, `/seguranca`, `/trocas-e-devolucoes`), `/acesso-negado`, páginas de erro.
-- SEO técnico (sitemap, robots, OG) e PWA (manifest, ícones, offline).
-- Testes de integração adicionais e E2E (Playwright).
-- Auditoria final, README completo, guia de deploy na Vercel.
+- Homologar o Mercado Pago em sandbox com credenciais reais (adapter pronto, não testado contra a API real).
+- Testes de integração adicionais (busca, carrinho, estoque, pedidos/IDOR, autenticação, marketing) e E2E do fluxo admin (criar produto → publicar → aparece na loja).
+- Revisão jurídica dos textos legais e preenchimento de razão social/CNPJ/endereço/encarregado.
+- Observabilidade externa (ex.: Sentry/Logtail) e cron mais frequente no plano Pro da Vercel.
 
 ## BLOCOS DE UI REUTILIZÁVEIS (use antes de criar novos)
 
@@ -45,7 +46,7 @@ Convenções de páginas: Server Components buscam dados com o guard da área (`
 
 ## PRÓXIMA ETAPA
 
-Concluir vendedor + admin, institucionais/SEO/PWA/erros, testes E2E, auditoria e documentação de deploy.
+Deploy na Vercel (ver `docs/DEPLOY.md`) e itens de "PENDENTE / PRÓXIMOS PASSOS".
 
 ## DECISÕES TÉCNICAS
 
