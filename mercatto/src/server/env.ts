@@ -35,6 +35,8 @@ const schema = z.object({
 
   STORAGE_PROVIDER: z.enum(["local", "vercel-blob"]).default("local"),
   BLOB_READ_WRITE_TOKEN: z.string().optional(),
+  /** Criado pela Vercel ao conectar um Blob Store (autenticação OIDC, sem token). */
+  BLOB_STORE_ID: z.string().optional(),
 
   CEP_PROVIDER: z.enum(["viacep", "none"]).default("viacep"),
 
@@ -44,8 +46,18 @@ const schema = z.object({
 
 export type Env = z.infer<typeof schema>;
 
+/**
+ * STORAGE_PROVIDER explícito (sem diferenciar maiúsculas/espaços) ou, se ausente,
+ * "vercel-blob" quando a Vercel já conectou um Blob Store ao projeto.
+ */
+function resolveStorageProvider(): string | undefined {
+  const explicit = process.env.STORAGE_PROVIDER?.trim().toLowerCase();
+  if (explicit) return explicit;
+  return process.env.BLOB_READ_WRITE_TOKEN?.trim() || process.env.BLOB_STORE_ID?.trim() ? "vercel-blob" : undefined;
+}
+
 function load(): Env {
-  const parsed = schema.safeParse({ ...process.env, APP_URL: resolveAppUrl() });
+  const parsed = schema.safeParse({ ...process.env, APP_URL: resolveAppUrl(), STORAGE_PROVIDER: resolveStorageProvider() });
   if (!parsed.success) {
     const issues = parsed.error.issues.map((i) => `  - ${i.path.join(".")}: ${i.message}`).join("\n");
     throw new Error(`Variáveis de ambiente inválidas:\n${issues}`);

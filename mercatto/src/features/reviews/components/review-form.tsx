@@ -12,7 +12,7 @@ import { Input, Textarea } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
 import { ProductImage } from "@/components/commerce/product-image";
 import { createReviewAction } from "@/features/reviews/actions";
-import { uploadImagesAction } from "@/features/media/actions";
+import { uploadImages } from "@/features/media/client-upload";
 
 export type PendingReviewItem = { id: string; productName: string; variantName: string | null; imageUrl: string | null; productSlug: string; orderNumber: string; deliveredAt: string | null };
 
@@ -54,13 +54,8 @@ function ReviewForm({ item, onDone }: { item: PendingReviewItem; onDone: () => v
   const upload = async (files: FileList | null) => {
     if (!files?.length) return;
     const slots = 5 - photos.length;
-    const form = new FormData();
-    form.set("folder", "reviews");
-    Array.from(files)
-      .slice(0, slots)
-      .forEach((f) => form.append("files", f));
     setUploading(true);
-    const res = await uploadImagesAction(form);
+    const res = await uploadImages(Array.from(files).slice(0, slots), "reviews");
     setUploading(false);
     if (fileRef.current) fileRef.current.value = "";
     if (!res.ok) return toast.error(res.error);

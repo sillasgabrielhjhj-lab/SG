@@ -1,5 +1,7 @@
 import "server-only";
 import { AppError, forbidden } from "@/server/errors";
+import { logger } from "@/server/observability/logger";
+import { ProviderConfigurationError } from "@/server/providers/errors";
 import { hasPermission, type Permission } from "@/server/auth/rbac";
 import type { SessionUser } from "@/server/auth/session";
 import { enforceRateLimit } from "@/server/security/rate-limit";
@@ -35,7 +37,14 @@ export async function handleUploadForm(user: SessionUser, form: FormData) {
       const image = await processImageUpload(buffer, { originalName: file.name, declaredType: file.type, folder });
       results.push({ ok: true as const, name: file.name, ...image });
     } catch (error) {
-      results.push({ ok: false as const, name: file.name, error: error instanceof AppError ? error.message : "Falha ao processar a imagem." });
+      if (error instanceof AppError) {
+        results.push({ ok: false as const, name: file.name, error: error.message });
+        continue;
+      }
+      // Falha de infraestrutura (armazenamento): detalhe só no log do servidor.
+      logger.error("media.upload_failed", { folder, size: file.size, type: file.type, error });
+      const message = error instanceof ProviderConfigurationError ? "O armazenamento de imagens não está configurado. Avise o administrador da loja." : "Não foi possível salvar a imagem agora. Tente novamente em instantes.";
+      results.push({ ok: false as const, name: file.name, error: message });
     }
   }
   return results;

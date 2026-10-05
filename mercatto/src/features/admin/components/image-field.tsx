@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { ImagePlus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
-import { uploadImagesAction } from "@/features/media/actions";
+import { uploadImages } from "@/features/media/client-upload";
 
 /** Campo de imagem única com upload validado no servidor (re-encode WebP, sem EXIF). */
 export function ImageField({ value, onChange, folder, label, hint }: { value: string; onChange: (url: string) => void; folder: "categories" | "brands" | "banners" | "stores"; label: string; hint?: string }) {
@@ -13,11 +13,8 @@ export function ImageField({ value, onChange, folder, label, hint }: { value: st
   const toast = useToast();
   const upload = async (file: File | undefined) => {
     if (!file) return;
-    const form = new FormData();
-    form.set("folder", folder);
-    form.append("files", file);
     setUploading(true);
-    const res = await uploadImagesAction(form);
+    const res = await uploadImages([file], folder);
     setUploading(false);
     if (ref.current) ref.current.value = "";
     if (!res.ok) return toast.error(res.error);

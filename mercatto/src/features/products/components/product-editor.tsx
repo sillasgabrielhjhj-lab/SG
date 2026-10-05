@@ -14,7 +14,7 @@ import { PriceInput } from "@/components/ui/masked-input";
 import { Checkbox, Switch } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/toast";
-import { uploadImagesAction } from "@/features/media/actions";
+import { uploadImages } from "@/features/media/client-upload";
 import { adminCreateProductAction, adminUpdateProductAction, sellerCreateProductAction, sellerUpdateProductAction } from "@/features/products/actions";
 import type { ProductInput } from "@/features/products/schemas";
 
@@ -228,13 +228,9 @@ export function ProductEditor({ mode, options, productId, initial, storeName, ba
     if (!files?.length) return;
     const slots = 12 - images.length;
     if (slots <= 0) return toast.error("Limite de 12 fotos atingido.");
-    const form = new FormData();
-    form.set("folder", "products");
-    Array.from(files)
-      .slice(0, slots)
-      .forEach((f) => form.append("files", f));
+    const selected = Array.from(files).slice(0, slots);
     setUploading(true);
-    const res = await uploadImagesAction(form);
+    const res = await uploadImages(selected, "products");
     setUploading(false);
     if (fileRef.current) fileRef.current.value = "";
     if (!res.ok) return toast.error(res.error);

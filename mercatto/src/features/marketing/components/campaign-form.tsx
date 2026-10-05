@@ -12,7 +12,7 @@ import { Field } from "@/components/ui/field";
 import { Input, Textarea } from "@/components/ui/input";
 import { Switch } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/toast";
-import { uploadImagesAction } from "@/features/media/actions";
+import { uploadImages } from "@/features/media/client-upload";
 import { adminCreateCampaignAction, adminUpdateCampaignAction } from "@/features/marketing/actions";
 import { CAMPAIGN_STATE, FormErrorBox, FormSection, StateBadge, normalizeFieldErrors, type CampaignState } from "@/features/marketing/components/marketing-ui";
 
@@ -49,11 +49,8 @@ export function CampaignForm({ basePath, campaignId, initial, state, promotionsC
   const upload = async (files: FileList | null) => {
     const file = files?.[0];
     if (!file) return;
-    const form = new FormData();
-    form.set("folder", "banners");
-    form.append("files", file);
     setUploading(true);
-    const res = await uploadImagesAction(form);
+    const res = await uploadImages([file], "banners");
     setUploading(false);
     if (fileRef.current) fileRef.current.value = "";
     if (!res.ok) return toast.error(res.error);
