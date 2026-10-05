@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
+import { resolveAppUrl } from "@/lib/app-url";
+import { RegisterServiceWorker } from "@/components/pwa/register-sw";
 
 const jakarta = localFont({
   src: [
@@ -13,10 +15,12 @@ const jakarta = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.APP_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(resolveAppUrl()),
   title: { default: "Mercatto — compre com confiança", template: "%s | Mercatto" },
   description: "Marketplace brasileiro com ofertas oficiais Mercatto e lojas parceiras verificadas. PIX, parcelamento e entrega para todo o Brasil.",
   applicationName: "Mercatto",
+  appleWebApp: { capable: true, title: "Mercatto", statusBarStyle: "default" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
@@ -29,7 +33,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={jakarta.variable}>
-      <body className="min-h-dvh antialiased">{children}</body>
+      <body className="min-h-dvh antialiased">
+        {children}
+        <RegisterServiceWorker />
+      </body>
     </html>
   );
 }

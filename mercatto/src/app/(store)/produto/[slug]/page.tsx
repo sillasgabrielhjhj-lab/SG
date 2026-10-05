@@ -27,7 +27,12 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductPageData(slug);
-  if (!product) return { title: "Produto não encontrado", robots: { index: false } };
+  if (!product) {
+    // Decidido aqui (antes do streaming para robôs): 301 para slugs antigos e 404 real.
+    const redirect = await resolveProductSlug(slug);
+    if (redirect) permanentRedirect(`/produto/${redirect.redirectTo}`);
+    notFound();
+  }
   return buildMetadata({
     title: product.seoTitle ?? product.name,
     description: product.seoDescription ?? truncate(product.shortDescription ?? product.description, 160),

@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
 
+// Mercado Pago (Card Payment Brick): SDK, APIs de tokenização e iframes seguros.
+const mercadoPago = process.env.PAYMENT_PROVIDER === "mercadopago";
+const mpScript = mercadoPago ? " https://sdk.mercadopago.com https://http2.mlstatic.com" : "";
+const mpConnect = mercadoPago ? " https://api.mercadopago.com https://api.mercadolibre.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mlstatic.com" : "";
+const mpFrame = mercadoPago ? " https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com" : "";
+
 /**
  * Content-Security-Policy. 'unsafe-inline' em scripts é necessário para a
  * hidratação do Next.js sem nonce (páginas estáticas/ISR). XSS é mitigado
@@ -10,12 +16,14 @@ const isDev = process.env.NODE_ENV !== "production";
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${mpScript}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://viacep.com.br" + (isDev ? " ws: wss:" : ""),
-  "frame-src 'self'",
+  "connect-src 'self' https://viacep.com.br" + mpConnect + (isDev ? " ws: wss:" : ""),
+  `frame-src 'self'${mpFrame}`,
+  "worker-src 'self'",
+  "manifest-src 'self'",
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",
