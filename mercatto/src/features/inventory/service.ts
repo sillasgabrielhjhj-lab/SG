@@ -89,7 +89,7 @@ export async function listMovements(scope: StockScope, filters: { variantId?: st
 }
 
 /** Lista de variantes para a tela de estoque (busca + filtro de estoque baixo). */
-export async function listStockVariants(scope: StockScope, filters: { q?: string; lowOnly?: boolean; page?: number } = {}) {
+export async function listStockVariants(scope: StockScope, filters: { q?: string; lowOnly?: boolean; lowThreshold?: number; page?: number } = {}) {
   const page = Math.max(1, filters.page ?? 1);
   const where: Prisma.ProductVariantWhereInput = {
     product: { status: { not: "ARCHIVED" }, ...(scope.kind === "store" ? { storeId: scope.storeId } : {}) },
@@ -102,7 +102,7 @@ export async function listStockVariants(scope: StockScope, filters: { q?: string
     take: filters.lowOnly ? 500 : PAGE,
     skip: filters.lowOnly ? 0 : (page - 1) * PAGE,
   });
-  const items = filters.lowOnly ? rows.filter((r) => r.stock <= r.minStock) : rows;
+  const items = filters.lowOnly ? rows.filter((r) => r.stock <= Math.max(r.minStock, filters.lowThreshold ?? 0)) : rows;
   const total = filters.lowOnly ? items.length : await db.productVariant.count({ where });
   return { items, total, page, totalPages: Math.max(1, Math.ceil(total / PAGE)) };
 }
