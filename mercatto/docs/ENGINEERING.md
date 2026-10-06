@@ -69,7 +69,7 @@ src/
 13. **pt-BR em toda a UI**, BRL, datas com `src/lib/format.ts`. Código/identificadores em inglês; textos ao usuário em português.
 14. **Acessibilidade**: HTML semântico, `label` em todos os campos, `aria-*` quando necessário, foco visível, alvos de toque ≥ 44px no mobile, `alt` em imagens, modais com foco preso e ESC.
 15. **Responsivo mobile-first** (320px → 1920px). Zero overflow horizontal. Use `container-page` para a largura máxima (1280px).
-16. **Animações** com CSS/transições (tokens `animate-*` do tema). Sem bibliotecas de animação. `prefers-reduced-motion` já é respeitado globalmente.
+16. **Animações** com CSS/transições (presets `animate-*` e utilitários de movimento do tema — ver "Design system"). Sem bibliotecas de animação. `prefers-reduced-motion` já é respeitado globalmente.
 17. **Sem TODO crítico, sem código morto, sem segredos.** Imports com alias `@/`.
 
 ## Design system — tokens (Tailwind 4)
@@ -80,21 +80,30 @@ src/
 - Neutros semânticos: `bg-canvas` (fundo da página), `bg-surface` (cards), `bg-surface-muted`, `border-line`, `border-line-strong`, `text-fg`, `text-fg-muted`, `text-fg-subtle`, `text-fg-inverse`.
 - Estados: `success-*`, `warning-*`, `danger-*`, `info-*` (50/600/700).
 - Raios: `rounded-field` (inputs/botões, 10px), `rounded-card` (12px), `rounded-panel` (16px), `rounded-banner` (20px).
-- Sombras: `shadow-card`, `shadow-raised` (hover), `shadow-popover`, `shadow-sheet`.
-- Animações: `animate-fade-in`, `animate-slide-up`, `animate-scale-in`, `animate-drawer-right`, `animate-drawer-left`, `animate-sheet-up`, `animate-pop`, `animate-toast-in`, `animate-bump`, `animate-pulse-soft`; utilitário `skeleton`.
+- Sombras: `shadow-card`, `shadow-raised` (hover), `shadow-lift` (hover de cards), `shadow-glow` (modais promocionais), `shadow-popover`, `shadow-sheet`.
+- Camadas (z-index): use `z-(--z-header)`, `z-(--z-floating)` (aba de cupom), `z-(--z-overlay)`, `z-(--z-modal)`, `z-(--z-toast)` — nunca números soltos em componentes novos.
+- Animações: `animate-fade-in`, `animate-slide-up`, `animate-scale-in`, `animate-drawer-right`, `animate-drawer-left`, `animate-sheet-up`, `animate-pop`, `animate-toast-in`, `animate-toast-out`, `animate-bump`, `animate-pulse-soft`; utilitário `skeleton`.
+- **Movimento (presets)** — só `transform`/`opacity`, 250–600ms, curva `ease-out-soft`:
+  - `animate-fade-up` (opacity 0→1, translateY 15px→0); `animate-enter` com `[--enter-delay:120ms]` para a entrada progressiva da página; `animate-enter-scale` (sem opacidade — seguro para o elemento de LCP); `animate-modal-in` (scale .88→1); `animate-heart`, `animate-check`, `animate-float-in`, `animate-nudge` (2x e para), `animate-confetti` (1x).
+  - Entradas usam fill-mode `backwards`: nunca deixe `transform` residual (cria contexto de empilhamento e prende dropdowns).
+  - Utilitários: `hover-lift` (cards), `press` (botões/alvos de toque), `shine-once` (selo de oferta, 1x), `fav-reveal` (favorito que aparece no hover do card).
+  - **Revelação ao rolar**: marque a seção com `data-reveal` (e a lista com `data-stagger` + `style={{"--i": i}}` nos itens) e renderize `<RevealObserver />` como ÚLTIMO filho da página. Só esconde o que está abaixo da dobra e só depois de hidratar.
+  - JS (Web Animations): `src/lib/motion.ts` (`DURATION`, `EASE_*`, `prefersReducedMotion`) e `src/lib/fly-to-cart.ts`.
+  - Nada em loop infinito chamando atenção (sem piscar/pular). `prefers-reduced-motion` desliga tudo.
 - Utilitários: `container-page`, `scrollbar-none`, `tabular`, `focus-ring`.
+- **Honestidade na vitrine**: selos, contadores, "Top N", "frete grátis", benefícios e campanhas só aparecem quando vêm de dado real/configurado (ver `features/home/*.server.ts` e `features/coupons/campaign.server.ts`). Nunca escreva promessa comercial fixa em componente.
 - Tipografia: Plus Jakarta Sans (variável). Preços com `tabular`. Densidade de marketplace: textos base `text-sm`, títulos de seção `text-lg/xl font-bold`, sem textos gigantes.
 
 ## Rotas (pt-BR)
 
-Vitrine: `/`, `/buscar?q=`, `/categoria/[slug]`, `/produto/[slug]`, `/loja/[slug]`, `/marca/[slug]`, `/ofertas`, `/oficial`, `/campanha/[slug]`, `/carrinho`.
+Vitrine: `/`, `/buscar?q=`, `/categoria/[slug]`, `/produto/[slug]`, `/loja/[slug]`, `/marca/[slug]`, `/ofertas`, `/oficial`, `/campanha/[slug]`, `/cupom/[code]`, `/carrinho`.
 Checkout: `/checkout`, `/checkout/pagamento/[checkoutId]`, `/checkout/confirmacao/[checkoutId]`.
 Auth: `/entrar`, `/cadastro`, `/recuperar-senha`, `/redefinir-senha?token=`, `/verificar-email?token=`.
 Cliente: `/minha-conta` (+ `/pedidos`, `/pedidos/[number]`, `/favoritos`, `/enderecos`, `/cupons`, `/avaliacoes`, `/perguntas`, `/dados`, `/seguranca`, `/notificacoes`).
 Vendedor: `/vender` (onboarding), `/vendedor` (+ `/produtos`, `/produtos/novo`, `/produtos/[id]`, `/estoque`, `/pedidos`, `/pedidos/[id]`, `/promocoes`, `/cupons`, `/perguntas`, `/avaliacoes`, `/loja`).
 Admin: `/admin` (+ `/produtos`, `/produtos/novo`, `/produtos/[id]`, `/estoque`, `/categorias`, `/marcas`, `/pedidos`, `/pedidos/[id]`, `/pagamentos`, `/clientes`, `/vendedores`, `/usuarios`, `/cupons`, `/promocoes`, `/campanhas`, `/banners`, `/avaliacoes`, `/perguntas`, `/configuracoes`, `/auditoria`).
 Institucional: `/sobre`, `/contato`, `/ajuda`, `/termos`, `/privacidade`, `/cookies`, `/seguranca`, `/trocas-e-devolucoes`, `/acesso-negado`.
-APIs: `/api/search/suggest`, `/api/products/by-ids`, `/api/cep/[cep]`, `/api/shipping/quote`, `/api/uploads`, `/api/webhooks/payments/[provider]`, `/api/cron/maintenance`, `/api/dev/payments/simulate` (somente gateway dev).
+APIs: `/api/search/suggest`, `/api/products/by-ids`, `/api/recommendations`, `/api/cep/[cep]`, `/api/shipping/quote`, `/api/uploads`, `/api/webhooks/payments/[provider]`, `/api/cron/maintenance`, `/api/dev/payments/simulate` (somente gateway dev).
 
 ## Contratos entre módulos (nomes exatos)
 

@@ -1,7 +1,7 @@
 # MERCATTO — Status do projeto
 
 > Leia este arquivo primeiro em qualquer nova sessão e continue de onde parou.
-> Última atualização: 2026-10-05
+> Última atualização: 2026-10-07
 
 ## CONCLUÍDO
 
@@ -18,6 +18,7 @@
 - **Institucionais**: sobre, contato, ajuda (FAQ), termos, privacidade (LGPD), cookies, segurança, trocas e devoluções — textos legais marcados como modelo para revisão jurídica; `/acesso-negado`; 404/erro/erro global sem detalhes internos.
 - **SEO/PWA**: metadata + canonical + Open Graph (imagem gerada), JSON-LD (sem notas DEMO), robots.txt, sitemap.xml, manifest, ícones PNG/maskable, página offline e service worker que nunca armazena páginas privadas; 404/301 reais nas páginas de detalhe.
 - **Prontidão Vercel**: `APP_URL` com fallback automático, `DIRECT_URL` para migrations, CSP com domínios do Mercado Pago quando ativado, `npm run build` validado; guia em `docs/DEPLOY.md`.
+- **Evolução da interface (2026-10-07)**: home reorganizada (hero com campanhas reais, benefícios da configuração, categorias, relâmpago com contador e estoque promocional reais, mais vendidos com Top 1/2/3, recomendações por sinais do navegador em `/api/recommendations`, faixas promocionais, confiança), sem repetir produtos entre vitrines e com vitrine única para catálogo pequeno; campanha de boas-vindas configurável (Admin → Configurações + cupom) com pop-up, aba flutuante e `/cupom/[code]` — desconto sempre validado no servidor; presets de movimento e revelação ao rolar (ver ENGINEERING "Design system"); cards premium, fly-to-cart, toasts com saída, busca com marcas, skeletons e estados vazios; analytics de cupom, banner e clique em produto.
 - **Testes**: unitários (86), integração do checkout (8, incluindo corrida de clique duplo) e E2E Playwright (compra PIX completa, controle de acesso, mobile). Lint e typecheck sem erros.
 
 ## PENDENTE / PRÓXIMOS PASSOS
@@ -26,6 +27,8 @@
 - Testes de integração adicionais (busca, carrinho, estoque, pedidos/IDOR, autenticação, marketing) e E2E do fluxo admin (criar produto → publicar → aparece na loja).
 - Revisão jurídica dos textos legais e preenchimento de razão social/CNPJ/endereço/encarregado.
 - Observabilidade externa (ex.: Sentry/Logtail) e cron mais frequente no plano Pro da Vercel.
+- Desconto no PIX: o campo existe nas configurações, mas o checkout ainda não aplica — não anunciar até implementar.
+- Newsletter: sem envio de e-mails configurado (Resend pendente); a home não coleta e-mails até isso existir.
 
 ## BLOCOS DE UI REUTILIZÁVEIS (use antes de criar novos)
 
