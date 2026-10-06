@@ -124,6 +124,7 @@ export async function updateSettings(actorId: string, input: z.infer<typeof sett
     tagline: rest.tagline ?? null, logoUrl: rest.logoUrl ?? null, faviconUrl: rest.faviconUrl ?? null, contactEmail: rest.contactEmail ?? null,
     contactPhone: rest.contactPhone ?? null, whatsapp: rest.whatsapp ?? null, seoTitle: rest.seoTitle ?? null, seoDescription: rest.seoDescription ?? null,
     freeShippingThresholdCents: rest.freeShippingThresholdCents ?? null,
+    welcomeCouponCode: rest.welcomeCouponCode || null,
     socialLinks: { instagram: instagram ?? null, facebook: facebook ?? null, tiktok: tiktok ?? null, youtube: youtube ?? null, x: x ?? null },
   };
   await db.storeSettings.upsert({ where: { id: "default" }, update: data, create: { id: "default", ...data } });

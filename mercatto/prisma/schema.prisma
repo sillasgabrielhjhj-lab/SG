@@ -1112,6 +1112,10 @@ model StoreSettings {
   interestFreeInstallments   Int      @default(10)
   monthlyInterestBps         Int      @default(199) // juros ao mês acima do sem-juros (1,99%)
   minInstallmentCents        Int      @default(500)
+  /// Cupom da campanha de boas-vindas (pop-up da home). Null = campanha desligada.
+  welcomeCouponCode          String?
+  /// Dias até o pop-up de boas-vindas poder reaparecer para quem já o viu.
+  welcomeCouponReshowDays    Int      @default(7)
   updatedAt                  DateTime @updatedAt
 }
 

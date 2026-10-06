@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ProductCardData } from "@/features/catalog/types";
-import { ProductCard } from "@/components/commerce/product-card";
+import { ProductCard, type ProductCardOptions } from "@/components/commerce/product-card";
 
 /** Carrossel horizontal: scroll-snap no mobile, setas no desktop; nunca vaza a largura da página. */
-export function ProductRail({ products, label, favorites, className }: { products: ProductCardData[]; label: string; favorites?: string[]; className?: string }) {
+export function ProductRail({ products, label, favorites, className, cardOptions }: { products: ProductCardData[]; label: string; favorites?: string[]; className?: string; cardOptions?: Omit<ProductCardOptions, "rank"> }) {
   const ref = useRef<HTMLUListElement>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
   const fav = new Set(favorites);
@@ -30,10 +30,10 @@ export function ProductRail({ products, label, favorites, className }: { product
 
   return (
     <div className={cn("relative", className)}>
-      <ul ref={ref} aria-label={label} className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-2 overflow-x-auto px-4 pb-1 scrollbar-none sm:mx-0 sm:scroll-px-0 sm:gap-3 sm:px-0">
-        {products.map((p) => (
-          <li key={p.id} className="flex w-[44%] shrink-0 snap-start sm:w-[31%] md:w-[23.5%] lg:w-[18.8%] xl:w-[15.8%]">
-            <ProductCard product={p} variant="compact" favorited={fav.has(p.id)} className="w-full" />
+      <ul ref={ref} aria-label={label} data-stagger className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-2 overflow-x-auto px-4 pb-1 scrollbar-none sm:mx-0 sm:scroll-px-0 sm:gap-3 sm:px-0">
+        {products.map((p, i) => (
+          <li key={p.id} style={{ "--i": i } as CSSProperties} className="flex w-[44%] shrink-0 snap-start py-1.5 sm:w-[31%] md:w-[23.5%] lg:w-[18.8%] xl:w-[15.8%]">
+            <ProductCard product={p} variant="compact" favorited={fav.has(p.id)} listName={label} {...cardOptions} className="w-full" />
           </li>
         ))}
       </ul>

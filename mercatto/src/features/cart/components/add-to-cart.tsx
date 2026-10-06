@@ -7,9 +7,14 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
 import { useCartIndicator } from "@/components/providers/cart-indicator";
 import { trackEvent } from "@/lib/analytics";
+import { flyToCart } from "@/lib/fly-to-cart";
 import { addToCartAction } from "@/features/cart/actions";
 
-/** "Comprar agora" (vai direto ao carrinho/checkout) e "Adicionar ao carrinho" (abre o mini-carrinho). */
+/**
+ * "Comprar agora" (vai direto ao carrinho) e "Adicionar ao carrinho": a imagem
+ * do produto voa até o carrinho e um aviso com "Ver carrinho" aparece — sem
+ * bloquear a navegação.
+ */
 export function AddToCartButtons({ variantId, quantity, disabled, productName, priceCents, layout = "stack" }: { variantId: string | null; quantity: number; disabled?: boolean; productName: string; priceCents: number; layout?: "stack" | "row" }) {
   const [pending, start] = useTransition();
   const [buying, startBuy] = useTransition();
@@ -27,14 +32,19 @@ export function AddToCartButtons({ variantId, quantity, disabled, productName, p
       toast.error(res.error);
       return;
     }
-    setCount(res.data.count);
-    bump();
     trackEvent("add_to_cart", { item_name: productName, price: priceCents / 100, quantity });
-    if (goToCart) router.push("/carrinho");
-    else {
-      toast.success("Adicionado ao carrinho", { description: productName });
-      openMiniCart();
+    if (goToCart) {
+      setCount(res.data.count);
+      router.push("/carrinho");
+      return;
     }
+    flyToCart(document.querySelector("[data-product-main-image] img") ?? document.querySelector("[data-product-main-image]"));
+    // O contador "pula" quando a miniatura chega ao carrinho.
+    window.setTimeout(() => {
+      setCount(res.data.count);
+      bump();
+    }, 520);
+    toast.success("Produto adicionado ao carrinho ✓", { description: productName, action: { label: "Ver carrinho", onClick: openMiniCart } });
   };
 
   return (

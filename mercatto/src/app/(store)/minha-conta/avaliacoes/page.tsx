@@ -9,6 +9,7 @@ import { DemoBadge } from "@/components/commerce/badges";
 import { PageHeading } from "@/components/layout/page-heading";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
+import { ButtonLink } from "@/components/ui/button";
 import { Pagination } from "@/components/ui/pagination";
 import { formatDate } from "@/lib/format";
 
@@ -38,7 +39,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams: Prom
         </h2>
         {mine.items.length === 0 ? (
           <div className="rounded-card border border-line bg-surface">
-            <EmptyState compact icon={<MessageSquareText />} title="Você ainda não avaliou produtos" />
+            <EmptyState compact icon={<MessageSquareText />} title="Você ainda não avaliou produtos" description="Depois que um pedido for entregue, conte como foi — sua avaliação ajuda outros compradores." action={<ButtonLink href="/minha-conta/pedidos" variant="outline">Ver meus pedidos</ButtonLink>} />
           </div>
         ) : (
           <ul className="flex flex-col gap-3">

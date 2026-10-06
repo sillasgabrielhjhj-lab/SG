@@ -67,7 +67,7 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
           </div>
           <div className="flex items-start justify-between gap-3">
             <h1 className="text-xl leading-snug font-bold text-fg sm:text-2xl">{product.name}</h1>
-            <FavoriteButton productId={product.id} initial={favorited} className="shrink-0" />
+            <FavoriteButton productId={product.id} productName={product.name} initial={favorited} className="shrink-0" />
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
             {product.ratingCount > 0 ? (

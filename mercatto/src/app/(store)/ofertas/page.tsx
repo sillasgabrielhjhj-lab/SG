@@ -26,7 +26,7 @@ export default async function OffersPage({ searchParams }: Props) {
     <div className="container-page flex flex-col gap-6 py-4 sm:py-6">
       <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: "Ofertas" }]} />
       <h1 className="text-xl font-bold tracking-tight sm:text-2xl">Ofertas do dia</h1>
-      {data.flash && data.flash.products.length ? (
+      {data.flash?.endsAt && data.flash.products.length ? (
         <section aria-labelledby="flash-offers" className="overflow-hidden rounded-panel border border-sun-300 bg-sun-50">
           <div className="flex flex-wrap items-center justify-between gap-3 bg-sun-400 px-4 py-3">
             <h2 id="flash-offers" className="flex items-center gap-2 text-lg font-extrabold text-sun-900">

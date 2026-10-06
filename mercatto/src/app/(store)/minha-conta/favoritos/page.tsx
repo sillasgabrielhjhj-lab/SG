@@ -26,7 +26,7 @@ export default async function FavoritesPage({ searchParams }: { searchParams: Pr
         <PageHeading title="Favoritos" description={total ? `${total} produto(s) salvos` : undefined} />
         {products.length === 0 ? (
           <div className="rounded-card border border-line bg-surface">
-            <EmptyState icon={<Heart />} title="Sua lista de favoritos está vazia" description="Toque no coração dos produtos para salvá-los e acompanhar preço e estoque." action={<ButtonLink href="/ofertas">Ver ofertas</ButtonLink>} />
+            <EmptyState icon={<Heart />} title="Seus achados favoritos moram aqui." description="Toque no coração dos produtos para salvá-los e acompanhar preço e estoque." action={<ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>} />
           </div>
         ) : (
           <>

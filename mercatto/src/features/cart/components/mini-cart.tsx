@@ -66,7 +66,7 @@ export function MiniCart() {
           ))}
         </div>
       ) : data && data.lines.length === 0 ? (
-        <EmptyState icon={<ShoppingCart />} title="Seu carrinho está vazio" description="Explore as ofertas e adicione produtos." action={<ButtonLink href="/ofertas" onClick={closeMiniCart}>Ver ofertas</ButtonLink>} />
+        <EmptyState icon={<ShoppingCart />} title="Seu carrinho está esperando por boas escolhas." description="Explore as ofertas de hoje e adicione seus achados." action={<ButtonLink href="/ofertas" onClick={closeMiniCart}>Explorar ofertas</ButtonLink>} />
       ) : (
         <ul className="divide-y divide-line">
           {data?.lines.map((l) => (

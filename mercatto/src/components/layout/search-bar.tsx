@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useId, useMemo, useRef, useState } from "react";
-import { ArrowUpLeft, History, Search, TrendingUp, X } from "lucide-react";
+import { ArrowUpLeft, History, LayoutGrid, Search, Tag, TrendingUp, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatBRL } from "@/lib/money";
 import { useDebounce } from "@/hooks/use-debounce";
@@ -12,10 +12,20 @@ import { useSearchHistory } from "@/hooks/use-search-history";
 type Suggestions = {
   terms: string[];
   categories: { name: string; slug: string }[];
+  brands?: { name: string; slug: string }[];
   products: { id: string; name: string; slug: string; imageUrl: string | null; priceCents: number }[];
 };
 
-type Option = { key: string; kind: "history" | "term" | "category" | "product"; label: string; href: string; extra?: string; imageUrl?: string | null };
+type OptionKind = "history" | "term" | "category" | "brand" | "product";
+type Option = { key: string; kind: OptionKind; label: string; href: string; extra?: string; imageUrl?: string | null };
+
+const GROUP_LABEL: Record<OptionKind, (hasQuery: boolean) => string> = {
+  history: () => "Buscas recentes",
+  term: (q) => (q ? "Sugestões" : "Pesquisas populares"),
+  product: () => "Produtos",
+  category: () => "Categorias",
+  brand: () => "Marcas",
+};
 
 /**
  * Busca com autocomplete (combobox WAI-ARIA): histórico local, termos
@@ -70,9 +80,10 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
       data?.terms.slice(0, 6).forEach((t) => list.push({ key: `t:${t}`, kind: "term", label: t, href: `/buscar?q=${encodeURIComponent(t)}` }));
       return list;
     }
-    data?.terms.slice(0, 4).forEach((t) => list.push({ key: `t:${t}`, kind: "term", label: t, href: `/buscar?q=${encodeURIComponent(t)}` }));
-    data?.categories.forEach((c) => list.push({ key: `c:${c.slug}`, kind: "category", label: c.name, href: `/categoria/${c.slug}`, extra: "Categoria" }));
+    data?.terms.slice(0, 3).forEach((t) => list.push({ key: `t:${t}`, kind: "term", label: t, href: `/buscar?q=${encodeURIComponent(t)}` }));
     data?.products.forEach((p) => list.push({ key: `p:${p.id}`, kind: "product", label: p.name, href: `/produto/${p.slug}`, extra: formatBRL(p.priceCents), imageUrl: p.imageUrl }));
+    data?.categories.forEach((c) => list.push({ key: `c:${c.slug}`, kind: "category", label: c.name, href: `/categoria/${c.slug}`, extra: "Categoria" }));
+    data?.brands?.forEach((b) => list.push({ key: `b:${b.slug}`, kind: "brand", label: b.name, href: `/marca/${b.slug}`, extra: "Marca" }));
     return list;
   }, [query, data, history]);
 
@@ -87,7 +98,7 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
   const submit = (e?: React.FormEvent) => {
     e?.preventDefault();
     const opt = options[active];
-    if (opt) return go(opt.href, opt.kind === "product" || opt.kind === "category" ? undefined : opt.label);
+    if (opt) return go(opt.href, opt.kind === "history" || opt.kind === "term" ? opt.label : undefined);
     const q = value.trim();
     if (!q) return;
     go(`/buscar?q=${encodeURIComponent(q)}`, q);
@@ -139,8 +150,8 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
           className={cn(
-            "h-11 w-full rounded-field border bg-white pr-20 pl-4 text-[15px] text-fg shadow-sm placeholder:text-fg-subtle focus:outline-none [&::-webkit-search-cancel-button]:hidden",
-            variant === "header" ? "border-transparent focus:shadow-[0_0_0_3px_oklch(0.875_0.15_80/0.6)]" : "border-line-strong focus:border-brand-600 focus:shadow-focus",
+            "h-11 w-full rounded-field border bg-white pr-20 pl-4 text-[15px] text-fg shadow-sm transition-[box-shadow,border-color] duration-200 ease-out-soft placeholder:text-fg-subtle focus:outline-none [&::-webkit-search-cancel-button]:hidden",
+            variant === "header" ? "border-transparent focus:shadow-[0_0_0_3px_oklch(0.875_0.15_80/0.65),0_10px_30px_-10px_oklch(0.15_0.05_180/0.55)]" : "border-line-strong focus:border-brand-600 focus:shadow-focus",
           )}
         />
         {value ? (
@@ -155,25 +166,27 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
 
       {showPanel ? (
         <div className="absolute top-full right-0 left-0 z-50 mt-2 max-h-[70dvh] origin-top animate-scale-in overflow-y-auto rounded-card border border-line bg-surface py-1.5 text-fg shadow-popover">
-          {!query && history.length > 0 ? (
-            <div className="flex items-center justify-between px-4 pt-1.5 pb-1 text-xs font-semibold text-fg-subtle">
-              <span>Buscas recentes</span>
-              <button type="button" onClick={clear} className="font-semibold text-brand-700 hover:underline focus-ring">
-                Limpar
-              </button>
-            </div>
-          ) : null}
           <ul id={listId} role="listbox" aria-label="Sugestões de busca">
-            {options.map((opt, i) => (
+            {options.map((opt, i) => [
+              i === 0 || options[i - 1]!.kind !== opt.kind ? (
+                <li key={`g:${opt.kind}`} role="presentation" className={cn("flex items-center justify-between px-4 pt-2 pb-1 text-2xs font-bold tracking-wider text-fg-subtle uppercase", i > 0 && "mt-1 border-t border-line pt-2.5")}>
+                  <span>{GROUP_LABEL[opt.kind](Boolean(query))}</span>
+                  {opt.kind === "history" ? (
+                    <button type="button" onClick={clear} className="text-xs font-semibold tracking-normal text-brand-700 normal-case hover:underline focus-ring">
+                      Limpar
+                    </button>
+                  ) : null}
+                </li>
+              ) : null,
               <li
                 key={opt.key}
                 id={`${listId}-opt-${i}`}
                 role="option"
                 aria-selected={i === active}
                 onMouseEnter={() => setActive(i)}
-                className={cn("group flex cursor-pointer items-center gap-3 px-4 py-2 text-sm", i === active && "bg-brand-50")}
+                className={cn("group mx-1.5 flex cursor-pointer items-center gap-3 rounded-md px-2.5 py-2 text-sm transition-colors", i === active && "bg-brand-50")}
                 onMouseDown={(e) => e.preventDefault()}
-                onClick={() => go(opt.href, opt.kind === "product" || opt.kind === "category" ? undefined : opt.label)}
+                onClick={() => go(opt.href, opt.kind === "history" || opt.kind === "term" ? opt.label : undefined)}
               >
                 {opt.kind === "product" ? (
                   <span className="relative size-10 shrink-0 overflow-hidden rounded-md border border-line bg-white">
@@ -185,15 +198,15 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
                 ) : opt.kind === "history" ? (
                   <History className="size-4 shrink-0 text-fg-subtle" aria-hidden />
                 ) : opt.kind === "category" ? (
-                  <span className="grid size-4 shrink-0 place-items-center text-brand-700">
-                    <Search className="size-4" aria-hidden />
-                  </span>
+                  <LayoutGrid className="size-4 shrink-0 text-brand-700" aria-hidden />
+                ) : opt.kind === "brand" ? (
+                  <Tag className="size-4 shrink-0 text-brand-700" aria-hidden />
                 ) : (
                   <TrendingUp className="size-4 shrink-0 text-fg-subtle" aria-hidden />
                 )}
                 <span className="min-w-0 flex-1 truncate">
                   {opt.label}
-                  {opt.kind === "category" ? <span className="ml-1.5 text-xs text-fg-subtle">em categorias</span> : null}
+                  {opt.kind === "category" ? <span className="ml-1.5 text-xs text-fg-subtle">em categorias</span> : opt.kind === "brand" ? <span className="ml-1.5 text-xs text-fg-subtle">marca</span> : null}
                 </span>
                 {opt.kind === "product" ? <span className="shrink-0 text-sm font-semibold tabular">{opt.extra}</span> : null}
                 {opt.kind === "history" ? (
@@ -211,8 +224,8 @@ export function SearchBar({ defaultValue = "", className, autoFocus, onNavigate,
                 ) : opt.kind === "term" ? (
                   <ArrowUpLeft className="size-4 shrink-0 text-fg-subtle" aria-hidden />
                 ) : null}
-              </li>
-            ))}
+              </li>,
+            ])}
           </ul>
           {query.length >= 2 && options.length === 0 && !loading ? <p className="px-4 py-3 text-sm text-fg-muted">Nenhuma sugestão. Pressione Enter para buscar “{query}”.</p> : null}
           {query.length >= 2 ? (

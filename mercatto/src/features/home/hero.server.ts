@@ -1,0 +1,135 @@
+import "server-only";
+import { db } from "@/server/db";
+import { getProductCards } from "@/features/catalog/cards.server";
+import { getCategoryTree } from "@/features/catalog/categories.server";
+import { getStoreSettings } from "@/features/settings/queries";
+import { effectiveInstallmentConfig } from "@/features/checkout/installments";
+import type { CategoryNode } from "@/features/catalog/types";
+import type { WelcomeCampaignView } from "@/features/coupons/campaign.server";
+import { formatBRL } from "@/lib/money";
+import { getActiveBanners } from "@/features/home/queries";
+
+export type HeroSlideArt =
+  | { kind: "image" }
+  | { kind: "coupon"; code: string; headline: string }
+  | { kind: "products"; images: { url: string; alt: string }[] }
+  | { kind: "shipping" }
+  | { kind: "brand" };
+
+export type HeroSlide = {
+  id: string;
+  eyebrow: string | null;
+  title: string;
+  subtitle: string | null;
+  ctaLabel: string;
+  link: string;
+  imageUrl: string | null;
+  theme: "brand" | "sun" | "ink" | "coral" | "light";
+  art: HeroSlideArt;
+};
+
+const TECH_SLUGS = ["celulares", "smartphones", "iphone", "eletronicos", "informatica"];
+const THEMES = new Set<HeroSlide["theme"]>(["brand", "sun", "ink", "coral", "light"]);
+
+function collect(nodes: CategoryNode[], slugs: Set<string>, inside = false, out: { ids: string[]; first: CategoryNode | null } = { ids: [], first: null }) {
+  for (const n of nodes) {
+    const hit = inside || slugs.has(n.slug);
+    if (hit) {
+      out.ids.push(n.id);
+      if (!out.first && !inside) out.first = n;
+    }
+    collect(n.children, slugs, hit, out);
+  }
+  return out;
+}
+
+/**
+ * Slides do carrossel principal: primeiro os banners cadastrados no painel;
+ * depois campanhas automáticas que SÓ entram quando são verdadeiras agora
+ * (cupom ativo com produtos, tecnologia com produtos à venda, frete grátis
+ * existente). Nada de promessa sem lastro nos dados.
+ */
+export async function getHeroSlides(welcome: WelcomeCampaignView | null): Promise<HeroSlide[]> {
+  const [banners, tree, settings, freeShippingCount] = await Promise.all([
+    getActiveBanners("HOME_HERO"),
+    getCategoryTree(),
+    getStoreSettings(),
+    db.product.count({ where: { status: "ACTIVE", store: { status: "ACTIVE" }, freeShipping: true, totalStock: { gt: 0 } } }),
+  ]);
+
+  const slides: HeroSlide[] = banners.map((b) => ({
+    id: b.id,
+    eyebrow: b.eyebrow,
+    title: b.title,
+    subtitle: b.subtitle,
+    ctaLabel: b.ctaLabel ?? "Confira",
+    link: b.link,
+    imageUrl: b.imageUrl,
+    theme: THEMES.has(b.theme as HeroSlide["theme"]) ? (b.theme as HeroSlide["theme"]) : "brand",
+    art: { kind: "image" },
+  }));
+
+  if (welcome) {
+    slides.push({
+      id: "auto-coupon",
+      eyebrow: "Presente de boas-vindas",
+      title: `${welcome.headline} para começar`,
+      subtitle: "Seu primeiro achado na Mercatto ficou ainda melhor. Válido em produtos selecionados.",
+      ctaLabel: "Aproveitar agora",
+      link: welcome.href,
+      imageUrl: null,
+      theme: "brand",
+      art: { kind: "coupon", code: welcome.code, headline: welcome.headline },
+    });
+  }
+
+  const tech = collect(tree, new Set(TECH_SLUGS));
+  if (tech.ids.length && tech.first) {
+    const products = await getProductCards({ where: { categoryId: { in: tech.ids }, totalStock: { gt: 0 } }, orderBy: [{ discountPercent: "desc" }, { salesCount: "desc" }, { isFeatured: "desc" }], take: 6 });
+    const withImage = products.filter((p) => p.imageUrl).slice(0, 3);
+    if (withImage.length) {
+      const hasDeals = products.some((p) => p.discountPercent > 0);
+      const installments = effectiveInstallmentConfig(settings).interestFreeInstallments;
+      slides.push({
+        id: "auto-tech",
+        eyebrow: "Tecnologia",
+        title: "Tecnologia que cabe no seu bolso",
+        subtitle: hasDeals ? "Ofertas especiais em smartphones e eletrônicos." : installments > 1 ? `Smartphones e eletrônicos em até ${installments}x sem juros no cartão.` : "Smartphones e eletrônicos novos e originais.",
+        ctaLabel: hasDeals ? "Ver ofertas" : "Ver produtos",
+        link: hasDeals ? `/ofertas?categoria=${tech.first.slug}` : `/categoria/${tech.first.slug}`,
+        imageUrl: null,
+        theme: "ink",
+        art: { kind: "products", images: withImage.map((p) => ({ url: p.imageUrl!, alt: p.imageAlt })) },
+      });
+    }
+  }
+
+  if (freeShippingCount > 0) {
+    slides.push({
+      id: "auto-shipping",
+      eyebrow: "Entrega",
+      title: "Frete grátis em produtos selecionados",
+      subtitle: settings.freeShippingThresholdCents ? `Compre mais, pague menos: produtos oficiais com frete grátis acima de ${formatBRL(settings.freeShippingThresholdCents)}.` : "Procure o selo “Frete grátis” e receba sem pagar a entrega.",
+      ctaLabel: "Conferir",
+      link: "/buscar?frete_gratis=1",
+      imageUrl: null,
+      theme: "light",
+      art: { kind: "shipping" },
+    });
+  }
+
+  if (!slides.length) {
+    slides.push({
+      id: "auto-brand",
+      eyebrow: "Mercatto",
+      title: "Achou. Gostou. É Mercatto.",
+      subtitle: "Produtos originais, pagamento protegido e entrega acompanhada do início ao fim.",
+      ctaLabel: "Explorar categorias",
+      link: "/categorias",
+      imageUrl: null,
+      theme: "brand",
+      art: { kind: "brand" },
+    });
+  }
+  return slides.slice(0, 6);
+}

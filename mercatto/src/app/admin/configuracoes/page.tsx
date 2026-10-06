@@ -1,13 +1,14 @@
 import { requirePermissionPage } from "@/server/auth/guards";
 import { db } from "@/server/db";
 import { SettingsForm } from "@/features/admin/components/settings-form";
+import { getWelcomeCampaignStatus } from "@/features/coupons/campaign.server";
 import { PageHeading } from "@/components/layout/page-heading";
 
 export const metadata = { title: "Configurações" };
 
 export default async function AdminSettingsPage() {
   await requirePermissionPage("admin:settings", "/admin/configuracoes");
-  const s = await db.storeSettings.upsert({ where: { id: "default" }, update: {}, create: { id: "default" } });
+  const [s, welcomeStatus] = await Promise.all([db.storeSettings.upsert({ where: { id: "default" }, update: {}, create: { id: "default" } }), getWelcomeCampaignStatus()]);
   const social = (s.socialLinks as Record<string, string | null> | null) ?? {};
   return (
     <div>
@@ -37,7 +38,10 @@ export default async function AdminSettingsPage() {
           interestFreeInstallments: s.interestFreeInstallments,
           monthlyInterestBps: s.monthlyInterestBps,
           minInstallmentCents: s.minInstallmentCents,
+          welcomeCouponCode: s.welcomeCouponCode ?? "",
+          welcomeCouponReshowDays: s.welcomeCouponReshowDays,
         }}
+        welcomeStatus={welcomeStatus}
       />
     </div>
   );

@@ -8,7 +8,7 @@ import { useCartIndicator } from "@/components/providers/cart-indicator";
 export function CartLink({ className }: { className?: string }) {
   const { count, bumpKey } = useCartIndicator();
   return (
-    <Link href="/carrinho" className={cn("relative grid size-11 place-items-center rounded-field text-white hover:bg-white/10 focus-ring", className)} aria-label={`Carrinho, ${count} ${count === 1 ? "item" : "itens"}`}>
+    <Link href="/carrinho" data-cart-target="" className={cn("press relative grid size-11 place-items-center rounded-field text-white transition-colors hover:bg-white/10 focus-ring", className)} aria-label={`Carrinho, ${count} ${count === 1 ? "item" : "itens"}`}>
       <ShoppingCart className="size-6" aria-hidden />
       {count > 0 ? (
         <span key={bumpKey} className="absolute top-0.5 right-0.5 grid h-5 min-w-5 animate-bump place-items-center rounded-full bg-sun-400 px-1 text-2xs font-extrabold text-sun-900 tabular">

@@ -9,6 +9,7 @@ import { formatBRL, installmentOptions } from "@/lib/money";
 import { updateSettingsAction } from "@/features/admin/actions";
 import { ImageField } from "@/features/admin/components/image-field";
 import { useAdminAction } from "@/features/admin/components/use-admin-action";
+import type { WelcomeCampaignStatus } from "@/features/coupons/campaign.server";
 
 export type SettingsValues = {
   storeName: string;
@@ -34,6 +35,8 @@ export type SettingsValues = {
   interestFreeInstallments: number;
   monthlyInterestBps: number;
   minInstallmentCents: number;
+  welcomeCouponCode: string;
+  welcomeCouponReshowDays: number;
 };
 
 function Card({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
@@ -46,7 +49,7 @@ function Card({ title, description, children }: { title: string; description?: s
   );
 }
 
-export function SettingsForm({ initial }: { initial: SettingsValues }) {
+export function SettingsForm({ initial, welcomeStatus }: { initial: SettingsValues; welcomeStatus: WelcomeCampaignStatus }) {
   const [v, setV] = useState(initial);
   const [interestText, setInterestText] = useState((initial.monthlyInterestBps / 100).toFixed(2).replace(".", ","));
   const { pending, run, err } = useAdminAction();
@@ -117,7 +120,7 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
         <Field label="Frete grátis a partir de (produtos oficiais)" error={e("freeShippingThresholdCents")} hint="Vazio = desativado">
           <PriceInput defaultCents={v.freeShippingThresholdCents} onCentsChange={(c) => setV((p) => ({ ...p, freeShippingThresholdCents: c }))} />
         </Field>
-        <Field label="Desconto no PIX (%)" error={e("pixDiscountPercent")} hint="0 = sem desconto (máx. 20%)">
+        <Field label="Desconto no PIX (%)" error={e("pixDiscountPercent")} hint="Ainda não é aplicado no checkout — mantenha 0 e não anuncie desconto no PIX.">
           <Input type="number" min={0} max={20} value={v.pixDiscountPercent} onChange={set("pixDiscountPercent")} />
         </Field>
         <Field label="Validade da reserva / PIX (minutos)" error={e("orderReservationMinutes")} hint="Tempo em que o estoque fica reservado aguardando pagamento">
@@ -126,6 +129,26 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
         <Field label="Alerta de estoque baixo (unidades)" error={e("lowStockThreshold")}>
           <Input type="number" min={0} value={v.lowStockThreshold} onChange={set("lowStockThreshold")} />
         </Field>
+      </Card>
+
+      <Card title="Campanha de boas-vindas" description="Pop-up da primeira visita, aba flutuante e faixas da home. Percentual, mínimo, teto, datas e produtos participantes vêm do cupom (Marketing → Cupons).">
+        <Field label="Código do cupom da campanha" error={e("welcomeCouponCode")} hint="Vazio = campanha desligada">
+          <Input value={v.welcomeCouponCode} maxLength={40} autoCapitalize="characters" onChange={set("welcomeCouponCode")} placeholder="MERCATTO30" />
+        </Field>
+        <Field label="Mostrar o pop-up de novo após (dias)" error={e("welcomeCouponReshowDays")} hint="Quem já viu só vê de novo depois desse prazo">
+          <Input type="number" min={1} max={365} value={v.welcomeCouponReshowDays} onChange={set("welcomeCouponReshowDays")} />
+        </Field>
+        <p className={`rounded-field px-3 py-2 text-sm font-medium sm:col-span-2 ${welcomeStatus.visible ? "bg-success-50 text-success-700" : "bg-warning-50 text-warning-700"}`} role="status">
+          {welcomeStatus.message}
+          {welcomeStatus.couponId ? (
+            <>
+              {" "}
+              <a href={`/admin/cupons/${welcomeStatus.couponId}`} className="font-semibold underline underline-offset-2">
+                Editar cupom {welcomeStatus.code}
+              </a>
+            </>
+          ) : null}
+        </p>
       </Card>
 
       <Card title="Parcelamento no cartão" description="Acima das parcelas sem juros aplica-se a Tabela Price com a taxa mensal informada.">

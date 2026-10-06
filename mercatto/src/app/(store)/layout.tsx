@@ -9,9 +9,11 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { MiniCart } from "@/features/cart/components/mini-cart";
+import { getWelcomeCampaign } from "@/features/coupons/campaign.server";
+import { WelcomeCoupon } from "@/features/coupons/components/welcome-coupon";
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
-  const [categories, user, cartCount, settings] = await Promise.all([getCategoryTree(), getCurrentUser(), getCartItemCount(), getStoreSettings()]);
+  const [categories, user, cartCount, settings, welcome] = await Promise.all([getCategoryTree(), getCurrentUser(), getCartItemCount(), getStoreSettings(), getWelcomeCampaign()]);
   const unreadNotifications = user ? await db.notification.count({ where: { userId: user.id, readAt: null } }) : 0;
   const sandbox = isSandboxPayments();
   return (
@@ -34,6 +36,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
       <Footer social={(settings.socialLinks as Record<string, string | null> | null) ?? null} sandbox={sandbox} contactEmail={settings.contactEmail} />
       <BottomNav />
       <MiniCart />
+      <WelcomeCoupon campaign={welcome} />
     </AppProviders>
   );
 }

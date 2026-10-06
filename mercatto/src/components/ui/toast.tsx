@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 type ToastTone = "success" | "error" | "info" | "warning";
 type ToastOptions = { description?: ReactNode; action?: { label: string; onClick: () => void }; duration?: number };
-type ToastItem = ToastOptions & { id: number; tone: ToastTone; title: ReactNode };
+type ToastItem = ToastOptions & { id: number; tone: ToastTone; title: ReactNode; leaving?: boolean };
 type ToastApi = Record<ToastTone, (title: ReactNode, opts?: ToastOptions) => void> & { dismiss: (id: number) => void };
 
 const ToastContext = createContext<ToastApi | null>(null);
@@ -22,7 +22,11 @@ const tones = {
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ToastItem[]>([]);
   const counter = useRef(0);
-  const dismiss = useCallback((id: number) => setItems((list) => list.filter((t) => t.id !== id)), []);
+  // Saída animada: marca como "saindo" e remove após a animação (180ms).
+  const dismiss = useCallback((id: number) => {
+    setItems((list) => list.map((t) => (t.id === id ? { ...t, leaving: true } : t)));
+    window.setTimeout(() => setItems((list) => list.filter((t) => t.id !== id)), 190);
+  }, []);
   const push = useCallback(
     (tone: ToastTone) => (title: ReactNode, opts: ToastOptions = {}) => {
       const id = ++counter.current;
@@ -36,12 +40,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={api}>
       {children}
-      <div aria-live="polite" aria-atomic="false" className="pointer-events-none fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-[100] flex flex-col items-center gap-2 px-4 md:right-4 md:bottom-4 md:left-auto md:items-end">
+      <div aria-live="polite" aria-atomic="false" className="pointer-events-none fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-(--z-toast) flex flex-col items-center gap-2 px-4 md:top-20 md:right-4 md:bottom-auto md:left-auto md:items-end lg:top-[7.5rem]">
         {items.map((t) => {
           const Icon = icons[t.tone];
           return (
-            <div key={t.id} role={t.tone === "error" ? "alert" : "status"} className="pointer-events-auto flex w-full max-w-sm animate-toast-in items-start gap-3 rounded-card border border-line bg-surface p-3.5 shadow-popover">
-              <Icon className={cn("mt-0.5 size-5 shrink-0", tones[t.tone])} aria-hidden />
+            <div key={t.id} role={t.tone === "error" ? "alert" : "status"} className={cn("pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-card border border-line bg-surface p-3.5 shadow-popover", t.leaving ? "animate-toast-out" : "animate-toast-in")}>
+              <Icon className={cn("mt-0.5 size-5 shrink-0 animate-check [animation-delay:80ms]", tones[t.tone])} aria-hidden />
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold text-fg">{t.title}</p>
                 {t.description ? <div className="mt-0.5 text-sm text-fg-muted">{t.description}</div> : null}

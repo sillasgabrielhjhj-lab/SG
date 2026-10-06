@@ -43,11 +43,11 @@ export function CartPageView({ cart, isLoggedIn }: { cart: CartView; isLoggedIn:
     return (
       <EmptyState
         icon={<ShoppingCart />}
-        title="Seu carrinho está vazio"
-        description="Que tal aproveitar as ofertas de hoje? Produtos favoritados ficam salvos para depois."
+        title="Seu carrinho está esperando por boas escolhas."
+        description="Explore as ofertas de hoje — e os produtos que você favoritar ficam salvos para depois."
         action={
           <>
-            <ButtonLink href="/ofertas">Ver ofertas do dia</ButtonLink>
+            <ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>
             {isLoggedIn ? <ButtonLink href="/minha-conta/favoritos" variant="outline">Meus favoritos</ButtonLink> : null}
           </>
         }

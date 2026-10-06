@@ -27,7 +27,7 @@ export function Header({ data }: { data: HeaderData }) {
     <>
       {data.sandbox ? <DevEnvironmentBanner /> : null}
       <StickyHeader>
-        <div className="container-page flex h-16 items-center gap-2 sm:gap-4">
+        <div className="container-page flex h-16 animate-enter items-center gap-2 sm:gap-4">
           <MobileMenu user={data.user} categories={data.categories} />
           <Link href="/" className="shrink-0 rounded-md focus-ring" aria-label="Mercatto — página inicial">
             <Logo tone="inverse" size="md" className="max-sm:[&>span:last-child]:text-[1.35rem]" />
@@ -42,11 +42,11 @@ export function Header({ data }: { data: HeaderData }) {
             <CartLink />
           </div>
         </div>
-        <div className="container-page pb-2.5 md:hidden">
+        <div className="container-page animate-enter pb-2.5 [--enter-delay:60ms] md:hidden">
           <HeaderSearchBar />
         </div>
         <div className="hidden border-t border-white/10 lg:block">
-          <nav aria-label="Navegação da loja" className="container-page flex h-11 items-center gap-1">
+          <nav aria-label="Navegação da loja" className="container-page flex h-11 animate-enter items-center gap-1 [--enter-delay:80ms]">
             <CepSelector className="mr-3 max-w-56" />
             <CategoriesMenu categories={data.categories} />
             <Link href="/ofertas" className="flex h-9 items-center gap-1.5 rounded-md px-2.5 text-sm font-semibold text-sun-300 hover:bg-white/10 focus-ring">
@@ -67,7 +67,7 @@ export function Header({ data }: { data: HeaderData }) {
         </div>
       </StickyHeader>
       <div className="border-b border-line bg-surface lg:hidden">
-        <div className="container-page py-1.5">
+        <div className="container-page animate-enter py-1.5 [--enter-delay:100ms]">
           <CepSelector tone="default" />
         </div>
       </div>

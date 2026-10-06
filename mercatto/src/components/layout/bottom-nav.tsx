@@ -17,9 +17,9 @@ const ITEMS = [
 /** Navegação inferior estilo aplicativo (somente mobile). */
 export function BottomNav() {
   const pathname = usePathname();
-  const { count } = useCartIndicator();
+  const { count, bumpKey } = useCartIndicator();
   return (
-    <nav aria-label="Navegação principal" className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden">
+    <nav aria-label="Navegação principal" className="fixed inset-x-0 bottom-0 z-(--z-header) border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden">
       <ul className="grid grid-cols-5">
         {ITEMS.map(({ href, label, icon: Icon, match }) => {
           const active = match(pathname);
@@ -27,9 +27,9 @@ export function BottomNav() {
             <li key={href}>
               <Link href={href} aria-current={active ? "page" : undefined} className={cn("relative flex h-14 flex-col items-center justify-center gap-0.5 text-2xs font-semibold focus-ring", active ? "text-brand-700" : "text-fg-muted")}>
                 {active ? <span className="absolute top-0 h-0.5 w-8 rounded-full bg-brand-700" aria-hidden /> : null}
-                <span className="relative">
+                <span className="relative" data-cart-target={href === "/carrinho" ? "" : undefined}>
                   <Icon className="size-[22px]" aria-hidden />
-                  {href === "/carrinho" && count > 0 ? <span className="absolute -top-1.5 -right-2.5 grid h-4 min-w-4 place-items-center rounded-full bg-sun-400 px-1 text-[10px] font-extrabold text-sun-900">{count > 99 ? "99+" : count}</span> : null}
+                  {href === "/carrinho" && count > 0 ? <span key={bumpKey} className="absolute -top-1.5 -right-2.5 grid h-4 min-w-4 animate-bump place-items-center rounded-full bg-sun-400 px-1 text-[10px] font-extrabold text-sun-900">{count > 99 ? "99+" : count}</span> : null}
                 </span>
                 {label}
               </Link>

@@ -4,11 +4,12 @@ import Image from "next/image";
 import { useState } from "react";
 import { ImageOff } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { skipImageOptimization } from "@/lib/images";
 
 /** Imagem de produto: quadrada, contida sobre fundo branco; SVG/demo sem otimização; fallback em erro. */
 export function ProductImage({ src, alt, sizes = "(max-width: 640px) 50vw, 240px", priority, className, imgClassName }: { src: string | null; alt: string; sizes?: string; priority?: boolean; className?: string; imgClassName?: string }) {
   const [failed, setFailed] = useState(false);
-  const unoptimized = Boolean(src && (src.endsWith(".svg") || src.startsWith("/demo-assets/")));
+  const unoptimized = Boolean(src && skipImageOptimization(src));
   return (
     <div className={cn("relative aspect-square overflow-hidden bg-white", className)}>
       {src && !failed ? (

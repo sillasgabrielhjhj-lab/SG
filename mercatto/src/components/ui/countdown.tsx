@@ -16,7 +16,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
  * hydration mismatch). Ao zerar chama onExpire e, por padrão, atualiza a página
  * para o servidor refletir o novo estado (oferta encerrada).
  */
-export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className, variant = "blocks", label = "Termina em" }: { endsAt: string; onExpire?: () => void; refreshOnExpire?: boolean; className?: string; variant?: "blocks" | "inline"; label?: string }) {
+export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className, variant = "blocks", label = "Termina em" }: { endsAt: string; onExpire?: () => void; refreshOnExpire?: boolean; className?: string; variant?: "blocks" | "inline" | "labeled"; label?: string }) {
   const router = useRouter();
   const now = useNowSecond();
   const fired = useRef(false);
@@ -40,6 +40,25 @@ export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className,
     );
   }
   const blocks = now === null ? ["--", "--", "--"] : [pad(p.days * 24 + p.hours), pad(p.minutes), pad(p.seconds)];
+  if (variant === "labeled") {
+    return (
+      <span role="timer" aria-label={`${label} ${text}`} className={cn("inline-flex items-start gap-1.5 tabular", className)}>
+        {p.total === 0 && now !== null ? (
+          <span className="rounded-md bg-fg/80 px-2.5 py-1.5 text-xs font-bold text-white">Encerrada</span>
+        ) : (
+          blocks.map((b, i) => (
+            <span key={i} className="flex items-start gap-1.5" aria-hidden>
+              <span className="flex flex-col items-center gap-0.5">
+                <span className="min-w-10 rounded-lg bg-fg px-1.5 py-1.5 text-center text-lg leading-none font-extrabold text-white shadow-sm">{b}</span>
+                <span className="text-[10px] font-bold tracking-wider uppercase opacity-80">{["Horas", "Min", "Seg"][i]}</span>
+              </span>
+              {i < 2 ? <span className="pt-1 text-lg leading-none font-extrabold">:</span> : null}
+            </span>
+          ))
+        )}
+      </span>
+    );
+  }
   return (
     <span role="timer" aria-label={`${label} ${text}`} className={cn("inline-flex items-center gap-1 tabular", className)}>
       {p.total === 0 && now !== null ? (

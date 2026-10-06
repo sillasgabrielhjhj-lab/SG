@@ -86,6 +86,8 @@ export const settingsSchema = z.object({
   interestFreeInstallments: z.coerce.number().int().min(1).max(24).default(10),
   monthlyInterestBps: z.coerce.number().int().min(0).max(1500).default(199),
   minInstallmentCents: cents.default(500),
+  welcomeCouponCode: z.preprocess((v) => (typeof v === "string" ? v.replace(/\s+/g, "").toUpperCase() : v), z.string().max(40).regex(/^[A-Z0-9_-]*$/, "Use letras, números, - ou _").optional()),
+  welcomeCouponReshowDays: z.coerce.number().int().min(1, "Mínimo de 1 dia").max(365).default(7),
 }).refine((s) => s.interestFreeInstallments <= s.maxInstallments, { path: ["interestFreeInstallments"], message: "Não pode exceder o máximo de parcelas" });
 
 export const userRoleSchema = z.object({ userId: z.string().min(1).max(64), role: z.enum(["CUSTOMER", "SELLER", "ADMIN", "SUPPORT"]) });

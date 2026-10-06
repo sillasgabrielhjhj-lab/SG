@@ -16,7 +16,7 @@ export function Footer({ social, sandbox, contactEmail }: { social: Record<strin
   const socials = Object.entries(social ?? {}).filter(([, url]) => Boolean(url)) as [string, string][];
   return (
     <footer className="mt-12 border-t border-line bg-surface">
-      <div className="border-b border-line">
+      <div data-footer-trust className="border-b border-line">
         <ul className="container-page grid grid-cols-2 gap-4 py-6 md:grid-cols-5">
           {[
             [ShieldCheck, "Compra segura", "Seus dados protegidos"],

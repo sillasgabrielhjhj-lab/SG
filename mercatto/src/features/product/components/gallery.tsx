@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { skipImageOptimization } from "@/lib/images";
 
 export type GalleryImage = { id: string; url: string; alt: string };
 
-const isUnoptimized = (url: string) => url.endsWith(".svg") || url.startsWith("/demo-assets/");
 
 /** Galeria com miniaturas, zoom por ponteiro (desktop), swipe (mobile) e tela cheia acessível. */
 export function ProductGallery({ images, activeImageId, name }: { images: GalleryImage[]; activeImageId?: string | null; name: string }) {
@@ -45,7 +45,7 @@ export function ProductGallery({ images, activeImageId, name }: { images: Galler
           {images.map((img, i) => (
             <li key={img.id} className="shrink-0">
               <button type="button" onClick={() => setIndex(i)} onMouseEnter={() => setIndex(i)} aria-label={`Ver imagem ${i + 1} de ${count}`} aria-current={i === index} className={cn("relative block size-16 overflow-hidden rounded-md border-2 bg-white transition-colors focus-ring", i === index ? "border-brand-600" : "border-line hover:border-line-strong")}>
-                <Image src={img.url} alt="" fill sizes="64px" unoptimized={isUnoptimized(img.url)} className="object-contain p-1" />
+                <Image src={img.url} alt="" fill sizes="64px" unoptimized={skipImageOptimization(img.url)} className="object-contain p-1" />
               </button>
             </li>
           ))}
@@ -53,6 +53,7 @@ export function ProductGallery({ images, activeImageId, name }: { images: Galler
       ) : null}
       <div className="relative min-w-0 flex-1">
         <div
+          data-product-main-image=""
           className="relative aspect-square cursor-zoom-in overflow-hidden rounded-card border border-line bg-white"
           onMouseMove={(e) => {
             if (window.matchMedia("(hover: none)").matches) return;
@@ -75,7 +76,7 @@ export function ProductGallery({ images, activeImageId, name }: { images: Galler
             fill
             priority
             sizes="(max-width: 768px) 100vw, 560px"
-            unoptimized={isUnoptimized(current.url)}
+            unoptimized={skipImageOptimization(current.url)}
             className="animate-fade-in object-contain p-4 transition-transform duration-150 ease-out"
             style={zoom ? { transform: "scale(2)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
           />
@@ -102,7 +103,7 @@ export function ProductGallery({ images, activeImageId, name }: { images: Galler
               </button>
             </div>
             <div className="relative min-h-0 flex-1">
-              <Image src={current.url} alt={current.alt || name} fill sizes="100vw" unoptimized={isUnoptimized(current.url)} className="object-contain p-4" />
+              <Image src={current.url} alt={current.alt || name} fill sizes="100vw" unoptimized={skipImageOptimization(current.url)} className="object-contain p-4" />
               {count > 1 ? (
                 <>
                   <button type="button" onClick={() => go(index - 1)} className="absolute top-1/2 left-3 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-surface shadow-raised ring-1 ring-line focus-ring" aria-label="Imagem anterior">

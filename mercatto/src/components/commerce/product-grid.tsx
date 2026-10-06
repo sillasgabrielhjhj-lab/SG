@@ -1,14 +1,14 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import type { ProductCardData } from "@/features/catalog/types";
 import { ProductCard, ProductCardSkeleton } from "@/components/commerce/product-card";
 
-export function ProductGrid({ products, favorites, className, columns = "default", priorityCount = 0 }: { products: ProductCardData[]; favorites?: Set<string>; className?: string; columns?: "default" | "wide"; priorityCount?: number }) {
+export function ProductGrid({ products, favorites, className, columns = "default", priorityCount = 0, listName, ranked }: { products: ProductCardData[]; favorites?: Set<string>; className?: string; columns?: "default" | "wide"; priorityCount?: number; listName?: string; ranked?: boolean }) {
   return (
-    <ul className={cn("grid grid-cols-2 gap-2 sm:gap-3", columns === "default" ? "sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" : "sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6", className)}>
+    <ul data-stagger className={cn("grid grid-cols-2 gap-2 sm:gap-3", columns === "default" ? "sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" : "sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6", className)}>
       {products.map((p, i) => (
-        <li key={p.id} className="flex">
-          <ProductCard product={p} favorited={favorites?.has(p.id)} priority={i < priorityCount} className="w-full" />
+        <li key={p.id} style={{ "--i": i } as CSSProperties} className="flex">
+          <ProductCard product={p} favorited={favorites?.has(p.id)} priority={i < priorityCount} listName={listName} rank={ranked ? i + 1 : undefined} className="w-full" />
         </li>
       ))}
     </ul>

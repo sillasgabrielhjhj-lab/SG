@@ -54,7 +54,7 @@ export function Listing({ basePath, filters, result, favorites, hideCategoryFilt
             action={
               <>
                 {result.appliedFilters.length ? <ButtonLink href={clearHref} variant="outline">Remover filtros</ButtonLink> : null}
-                {emptyAction ?? <ButtonLink href="/ofertas">Ver ofertas do dia</ButtonLink>}
+                {emptyAction ?? <ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>}
               </>
             }
           />

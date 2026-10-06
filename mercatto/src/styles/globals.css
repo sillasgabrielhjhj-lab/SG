@@ -91,10 +91,32 @@
   --shadow-popover: 0 12px 32px -8px oklch(0.25 0.03 200 / 0.22), 0 4px 10px -4px oklch(0.25 0.03 200 / 0.1);
   --shadow-sheet: 0 -8px 30px -10px oklch(0.25 0.03 200 / 0.25);
   --shadow-focus: 0 0 0 3px oklch(0.69 0.14 172 / 0.35);
+  --shadow-lift: 0 16px 32px -14px oklch(0.3 0.04 200 / 0.24), 0 4px 10px -4px oklch(0.3 0.03 200 / 0.08);
+  --shadow-glow: 0 18px 50px -12px oklch(0.42 0.085 175 / 0.35);
 
-  /* Movimento */
+  /* Movimento
+     Presets da marca (use sempre estes, nunca valores soltos):
+       animate-fade-up   → entrada de conteúdo (opacity 0→1, translateY 15px→0)
+       animate-enter     → entrada da página com atraso (--enter-delay)
+       animate-enter-scale → entrada sem opacidade (seguro para LCP: scale .98→1)
+       animate-modal-in  → modais promocionais (scale .88→1)
+       hover-lift / press → cards e botões (utilitários abaixo)
+       [data-reveal] / [data-stagger] → revelação ao rolar (RevealObserver) */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+
+  --animate-fade-up: fade-up 480ms var(--ease-out-soft) backwards;
+  --animate-enter: fade-up 520ms var(--ease-out-soft) var(--enter-delay, 0ms) backwards;
+  --animate-enter-scale: enter-scale 560ms var(--ease-out-soft) var(--enter-delay, 0ms) backwards;
+  --animate-modal-in: modal-in 420ms var(--ease-out-soft) backwards;
+  --animate-heart: heart 250ms var(--ease-out-soft);
+  --animate-toast-out: toast-out 180ms ease-in both;
+  --animate-float-in: float-in 560ms var(--ease-spring) backwards;
+  --animate-nudge: nudge 1.2s var(--ease-out-soft) 1.4s 2;
+  --animate-confetti: confetti 1100ms var(--ease-out-soft) var(--confetti-delay, 0ms) both;
+  --animate-check: check 360ms var(--ease-spring) backwards;
+  --animate-progress: progress var(--progress-duration, 6s) linear both;
 
   --animate-fade-in: fade-in 180ms var(--ease-out-soft) both;
   --animate-fade-out: fade-out 140ms ease-in both;
@@ -119,11 +141,11 @@
   }
   @keyframes slide-up {
     from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes scale-in {
     from { opacity: 0; transform: scale(0.96) translateY(-4px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes drawer-right {
     from { transform: translateX(100%); }
@@ -135,7 +157,7 @@
   }
   @keyframes sheet-up {
     from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    to { transform: none; }
   }
   @keyframes shimmer {
     from { background-position: -200% 0; }
@@ -148,7 +170,7 @@
   }
   @keyframes toast-in {
     from { opacity: 0; transform: translateY(16px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes bump {
     0% { transform: scale(1); }
@@ -158,6 +180,58 @@
   @keyframes pulse-soft {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.55; }
+  }
+  /* Entradas usam fill-mode "backwards" (não "both"): terminada a animação o
+     elemento volta ao estilo natural, sem transform residual — que criaria
+     contexto de empilhamento e prenderia dropdowns abaixo de elementos vizinhos. */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes enter-scale {
+    from { transform: translateY(8px) scale(0.98); }
+    to { transform: none; }
+  }
+  @keyframes modal-in {
+    from { opacity: 0; transform: scale(0.88); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes heart {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  @keyframes toast-out {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(8px) scale(0.98); }
+  }
+  @keyframes float-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.92); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes nudge {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-6deg); }
+    40% { transform: rotate(5deg); }
+    60% { transform: rotate(-3deg); }
+    80% { transform: rotate(1deg); }
+  }
+  @keyframes confetti {
+    0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(0.6); }
+    12% { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--cx, 0), var(--cy, 0)) rotate(var(--cr, 180deg)) scale(1); }
+  }
+  @keyframes check {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes shine {
+    from { transform: translateX(-130%) skewX(-18deg); }
+    to { transform: translateX(260%) skewX(-18deg); }
   }
 }
 
@@ -198,6 +272,66 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Cards: elevação suave no hover (só em dispositivos com hover) e resposta ao toque. */
+@utility hover-lift {
+  transition:
+    transform 220ms var(--ease-out-soft),
+    box-shadow 220ms var(--ease-out-soft),
+    border-color 220ms var(--ease-out-soft);
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+  &:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+}
+
+/* Botões/alvos de toque: leve compressão ao pressionar. */
+@utility press {
+  transition: transform 120ms var(--ease-out-soft);
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* Favorito do card: em dispositivos com mouse aparece no hover/foco do card
+   (sempre visível quando já favoritado); no toque fica sempre visível. */
+@utility fav-reveal {
+  transition:
+    opacity 200ms var(--ease-out-soft),
+    transform 200ms var(--ease-out-soft);
+  @media (hover: hover) {
+    &:not([aria-pressed="true"]) {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    :where(.group):hover &,
+    :where(.group):focus-within & {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Brilho único (1x) atravessando o elemento — selos de oferta. Nunca em loop. */
+@utility shine-once {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.55), transparent);
+    transform: translateX(-130%) skewX(-18deg);
+    animation: shine 1s var(--ease-out-soft) 700ms 1 both;
+    pointer-events: none;
+  }
+}
+
 @utility focus-ring {
   outline: none;
   &:focus-visible {
@@ -214,6 +348,12 @@
   :root {
     color-scheme: light;
     -webkit-tap-highlight-color: transparent;
+    /* Camadas (use z-(--z-*)): conteúdo < header < flutuantes < drawers < modais < toasts */
+    --z-header: 40;
+    --z-floating: 45;
+    --z-overlay: 50;
+    --z-modal: 60;
+    --z-toast: 100;
   }
 
   html {
@@ -263,6 +403,42 @@
     background: oklch(0.2 0.02 200 / 0.5);
     backdrop-filter: blur(2px);
   }
+}
+
+/* -----------------------------------------------------------------------------
+   Revelação ao rolar (RevealObserver). Só esconde o que está ABAIXO da dobra e
+   apenas depois que o JS assume — sem JS, tudo aparece; acima da dobra nunca pisca.
+   ----------------------------------------------------------------------------- */
+[data-reveal] {
+  transition:
+    opacity 560ms var(--ease-out-soft),
+    transform 560ms var(--ease-out-soft);
+}
+[data-reveal][data-reveal-pending] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+[data-reveal] [data-stagger] > * {
+  transition:
+    opacity 420ms var(--ease-out-soft),
+    transform 420ms var(--ease-out-soft);
+  transition-delay: calc(min(var(--i, 0), 8) * 50ms);
+}
+[data-reveal][data-reveal-pending] [data-stagger] > * {
+  opacity: 0;
+  transform: translateY(12px);
+}
+@media print {
+  [data-reveal][data-reveal-pending],
+  [data-reveal][data-reveal-pending] [data-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* A home já tem a seção completa "Comprar na Mercatto é simples e seguro": evita repetir a faixa do rodapé. */
+body:has([data-trust-section]) [data-footer-trust] {
+  display: none;
 }
 
 /* Acessibilidade: respeita a preferência por menos movimento. */

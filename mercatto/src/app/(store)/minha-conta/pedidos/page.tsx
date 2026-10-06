@@ -56,7 +56,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
 
       {data.items.length === 0 ? (
         <div className="rounded-card border border-line bg-surface">
-          <EmptyState icon={<Package />} title={status ? "Nenhum pedido com este status" : "Você ainda não fez pedidos"} description="Seus pedidos aparecem aqui com o status atualizado em tempo real." action={<ButtonLink href="/">Começar a comprar</ButtonLink>} />
+          <EmptyState icon={<Package />} title={status ? "Nenhum pedido com este status" : "Sua primeira compra vai aparecer aqui."} description="Acompanhe cada pedido do pagamento à entrega, com o status sempre atualizado." action={<ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>} />
         </div>
       ) : (
         <ul className="flex flex-col gap-3">
