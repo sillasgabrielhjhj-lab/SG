@@ -149,13 +149,16 @@ function contentData(e: Entry, categoryId: string, brandId: string) {
 
 async function createProduct(e: Entry, ctx: Awaited<ReturnType<typeof ensureStructure>>, file: CatalogFile, attrIds: Map<string, string>) {
   const combos = e.storages.flatMap((storage) => e.colors.map((color) => ({ storage, color })));
+  // Slug ocupado por anúncio de outra loja: usa um sufixo em vez de falhar.
+  const slugTaken = await db.product.findUnique({ where: { slug: e.key }, select: { id: true } });
+  const slug = slugTaken ? `${e.key}-mercatto` : e.key;
   await db.$transaction(
     async (tx) => {
       const product = await tx.product.create({
         data: {
           ...contentData(e, ctx.category.id, ctx.brand.id),
           storeId: ctx.store.id,
-          slug: e.key,
+          slug,
           sku: `MCT-APL-${e.skuCode}`,
           condition: "NEW",
           status: "DRAFT",
@@ -264,10 +267,13 @@ async function main() {
     const attrIds = await attributeIds(ctx.category.id);
     for (const e of file.products) {
       try {
+        // Só adota anúncios da loja oficial — nunca altera produtos de outros vendedores.
+        const official = { storeId: ctx.store.id };
+        const sel = { id: true, catalogVersion: true } as const;
         const existing =
-          (await db.product.findUnique({ where: { catalogKey: e.key }, select: { id: true, catalogVersion: true } })) ??
-          (await db.product.findUnique({ where: { slug: e.key }, select: { id: true, catalogVersion: true } })) ??
-          (e.legacySlugs?.length ? await db.product.findFirst({ where: { slug: { in: e.legacySlugs } }, select: { id: true, catalogVersion: true } }) : null);
+          (await db.product.findFirst({ where: { ...official, catalogKey: e.key }, select: sel })) ??
+          (await db.product.findFirst({ where: { ...official, slug: e.key }, select: sel })) ??
+          (e.legacySlugs?.length ? await db.product.findFirst({ where: { ...official, slug: { in: e.legacySlugs } }, select: sel }) : null);
         if (existing && (existing.catalogVersion ?? 0) >= e.version) continue;
         const result = existing ? await updateProduct(e, existing.id, ctx, attrIds) : await createProduct(e, ctx, file, attrIds);
         const id = existing?.id ?? (await db.product.findUniqueOrThrow({ where: { catalogKey: e.key }, select: { id: true } })).id;
