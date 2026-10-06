@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
-import { CornerDownRight, MessageCircle } from "lucide-react";
+import { CornerDownRight, MessageCircle, Store } from "lucide-react";
 import { formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
@@ -70,9 +70,15 @@ export function ProductQuestions({ productId, initial, isLoggedIn, isOwner }: { 
             <li key={q.id} className="flex flex-col gap-1.5">
               <p className="flex flex-wrap items-center gap-2 text-sm text-fg">
                 {q.body} {q.isDemo ? <DemoBadge /> : null}
-                <time dateTime={q.createdAt} className="text-xs text-fg-subtle">
-                  {formatDate(q.createdAt)}
-                </time>
+                {q.isFaq ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-semibold text-brand-800">
+                    <Store className="size-3" aria-hidden /> Pergunta frequente · respondida pela loja
+                  </span>
+                ) : (
+                  <time dateTime={q.createdAt} className="text-xs text-fg-subtle">
+                    {formatDate(q.createdAt)}
+                  </time>
+                )}
               </p>
               {q.answer ? (
                 <p className="flex gap-2 pl-1 text-sm text-fg-muted">

@@ -1,0 +1,44 @@
+{
+  "iphone-16-128gb-5g": [
+    {
+      "q": "O carregador vem na caixa?",
+      "a": "Não. Como em todos os iPhones atuais, a caixa traz o iPhone 16, um cabo USB-C para recarga (1 metro) e documentação. Ele funciona com qualquer carregador USB-C; para recarga rápida (cerca de 50% em 30 minutos), use um adaptador de 20 W ou mais."
+    },
+    {
+      "q": "Ele é 5G?",
+      "a": "Sim. O iPhone 16 é compatível com redes 5G e 4G, além de Wi-Fi 7 e Bluetooth 5.3."
+    },
+    {
+      "q": "Quanto de armazenamento ele tem? Dá para colocar cartão de memória?",
+      "a": "Este modelo tem 128 GB de armazenamento interno. O iPhone não aceita cartão de memória, mas você pode usar o iCloud para guardar fotos e arquivos na nuvem."
+    },
+    {
+      "q": "Como são as câmeras?",
+      "a": "Na traseira: câmera Fusion de 48 MP e ultra-angular de 12 MP (que também faz fotos macro), zoom de 2x com qualidade óptica e gravação em 4K Dolby Vision a até 60 quadros por segundo. Na frente: câmera TrueDepth de 12 MP. Ele também tem o botão Controle da Câmera, que abre a câmera e ajusta zoom e exposição com um toque."
+    },
+    {
+      "q": "Qual o tamanho da tela?",
+      "a": "Tela Super Retina XDR OLED de 6,1 polegadas, com Dynamic Island."
+    },
+    {
+      "q": "Ele tem Apple Intelligence em português?",
+      "a": "Sim. O iPhone 16 é compatível com a Apple Intelligence, disponível em português do Brasil a partir do iOS 18.4. Basta manter o iPhone atualizado."
+    },
+    {
+      "q": "Ele é à prova d'água?",
+      "a": "Ele tem certificação IP68 de resistência a respingos, água e poeira (até 6 metros de profundidade por até 30 minutos). Essa resistência pode diminuir com o uso, e danos causados por líquidos não são cobertos pela garantia."
+    },
+    {
+      "q": "Quanto dura a bateria?",
+      "a": "Segundo a Apple, até 22 horas de reprodução de vídeo. Ele também carrega sem fio com MagSafe e com carregadores Qi2 e Qi."
+    },
+    {
+      "q": "Tem garantia?",
+      "a": "Sim: 12 meses de garantia limitada Apple contra defeitos de fabricação, conforme os termos do fabricante. E, por ser uma compra online, você pode desistir em até 7 dias após o recebimento (direito de arrependimento do Código de Defesa do Consumidor)."
+    },
+    {
+      "q": "Quais são as formas de pagamento?",
+      "a": "Pix, com aprovação na hora, ou cartão de crédito, com opção de parcelamento sem juros. As parcelas disponíveis aparecem na página do produto e no checkout."
+    }
+  ]
+}

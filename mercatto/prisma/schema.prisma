@@ -1017,6 +1017,8 @@ model Question {
   body      String
   status    QuestionStatus @default(PUBLISHED)
   isDemo    Boolean        @default(false)
+  /// Pergunta frequente escrita pela própria loja (exibida como tal, nunca como pergunta de cliente).
+  isFaq     Boolean        @default(false)
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 

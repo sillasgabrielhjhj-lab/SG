@@ -9,6 +9,7 @@ const QUESTION_SELECT = {
   body: true,
   status: true,
   isDemo: true,
+  isFaq: true,
   createdAt: true,
   user: { select: { name: true } },
   product: { select: { id: true, name: true, slug: true, images: { take: 1, orderBy: { position: "asc" as const }, select: { url: true } } } },

@@ -154,15 +154,16 @@ export async function getProductQuestions(productId: string, opts: { page?: numb
   const [rows, total] = await Promise.all([
     db.question.findMany({
       where,
-      orderBy: { createdAt: "desc" },
+      // Perguntas frequentes da loja primeiro; depois as dos clientes, mais recentes antes.
+      orderBy: [{ isFaq: "desc" }, { createdAt: "desc" }],
       skip: (page - 1) * pageSize,
       take: pageSize,
-      select: { id: true, body: true, isDemo: true, createdAt: true, answer: { select: { body: true, createdAt: true } } },
+      select: { id: true, body: true, isDemo: true, isFaq: true, createdAt: true, answer: { select: { body: true, createdAt: true } } },
     }),
     db.question.count({ where }),
   ]);
   return {
-    items: rows.map((q) => ({ id: q.id, body: q.body, isDemo: q.isDemo, createdAt: q.createdAt.toISOString(), answer: q.answer ? { body: q.answer.body, createdAt: q.answer.createdAt.toISOString() } : null })),
+    items: rows.map((q) => ({ id: q.id, body: q.body, isDemo: q.isDemo, isFaq: q.isFaq, createdAt: q.createdAt.toISOString(), answer: q.answer ? { body: q.answer.body, createdAt: q.answer.createdAt.toISOString() } : null })),
     total,
     page,
     totalPages: Math.max(1, Math.ceil(total / pageSize)),

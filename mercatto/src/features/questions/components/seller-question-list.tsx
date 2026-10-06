@@ -33,9 +33,7 @@ export function SellerQuestionList({ items }: { items: StoreQuestion[] }) {
                     {q.body}
                   </p>
                   <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-fg-subtle">
-                    <span>
-                      Por <span className="font-semibold text-fg-muted">{asker}</span>
-                    </span>
+                    <span>{q.isFaq ? <span className="font-semibold text-brand-800">Pergunta frequente da loja</span> : <>Por <span className="font-semibold text-fg-muted">{asker}</span></>}</span>
                     <span aria-hidden>·</span>
                     <time dateTime={q.createdAt.toISOString()} title={formatDateTime(q.createdAt)}>
                       {formatRelative(q.createdAt)}
