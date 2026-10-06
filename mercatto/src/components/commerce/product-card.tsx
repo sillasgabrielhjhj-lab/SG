@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 import type { ProductCardData } from "@/features/catalog/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ProductImage } from "@/components/commerce/product-image";
-import { InstallmentsText, Price } from "@/components/commerce/price";
+import { Price } from "@/components/commerce/price";
+import { formatBRL } from "@/lib/money";
 import { RatingStars } from "@/components/commerce/rating";
 import { DemoBadge, DiscountBadge, FlashBadge, FreeShippingBadge, OfficialBadge, StockIndicator } from "@/components/commerce/badges";
 import { FavoriteButton } from "@/components/commerce/favorite-button";
@@ -53,8 +54,16 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
           <p className="text-sm font-semibold text-fg-muted">Indisponível</p>
         ) : (
           <>
+            {product.fromPrice ? <span className="-mb-1 text-xs text-fg-muted">a partir de</span> : null}
             <Price priceCents={product.priceCents} listPriceCents={product.listPriceCents} discountPercent={product.discountPercent} size={variant === "compact" ? "sm" : "md"} showDiscount={product.discountPercent < 5} />
-            <InstallmentsText priceCents={product.priceCents} />
+            {product.installment && product.installment.count > 1 ? (
+              <p className="text-xs text-fg-muted">
+                em até{" "}
+                <span className="font-semibold text-brand-700">
+                  {product.installment.count}x de {formatBRL(product.installment.installmentCents)} sem juros
+                </span>
+              </p>
+            ) : null}
           </>
         )}
         <div className="mt-auto flex flex-col gap-1 pt-1">

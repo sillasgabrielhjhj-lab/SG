@@ -58,7 +58,8 @@ export const variantInput = z
     sku,
     gtin,
     optionValues: z.record(z.string().max(40), z.string().trim().min(1).max(40)),
-    priceCents: cents("Preço"),
+    // 0 = sem preço definido: permitido só em variação inativa (validado abaixo).
+    priceCents: z.coerce.number({ error: "Preço inválido" }).int("Preço inválido").min(0, "Preço inválido").max(100_000_000, "Preço muito alto"),
     compareAtPriceCents: z.coerce.number().int().min(0).max(100_000_000).optional().nullable(),
     costCents: z.coerce.number().int().min(0).max(100_000_000).optional().nullable(),
     /** Estoque desejado. Para variantes existentes, aplicado como delta sobre stockBaseline. */
@@ -70,6 +71,7 @@ export const variantInput = z
     imageIndex: z.number().int().min(0).max(20).optional().nullable(),
     status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
   })
+  .refine((v) => v.status === "INACTIVE" || v.priceCents >= 1, { path: ["priceCents"], message: "Defina o preço (ou desative a variação)" })
   .refine((v) => !v.compareAtPriceCents || v.compareAtPriceCents > v.priceCents, {
     path: ["compareAtPriceCents"],
     message: "O preço anterior deve ser maior que o preço de venda",

@@ -1,4 +1,7 @@
 import "server-only";
+import { bestInterestFreeInstallment } from "@/lib/money";
+import { getStoreSettings } from "@/features/settings/queries";
+import { effectiveInstallmentConfig } from "@/features/checkout/installments";
 import type { Prisma } from "@/generated/prisma/client";
 import { db } from "@/server/db";
 import { computeEffectivePrice } from "@/features/pricing/engine";
@@ -29,7 +32,8 @@ export const CARD_SELECT = {
   store: { select: { name: true, slug: true, isOfficial: true } },
   images: { take: 1, orderBy: { position: "asc" }, select: { url: true, alt: true } },
   variants: {
-    where: { status: "ACTIVE" },
+    // Só variações vendáveis (com preço definido).
+    where: { status: "ACTIVE", priceCents: { gt: 0 } },
     orderBy: { position: "asc" },
     select: { id: true, priceCents: true, compareAtPriceCents: true, stock: true },
   },
@@ -43,6 +47,8 @@ type CardRow = Prisma.ProductGetPayload<{ select: typeof CARD_SELECT }>;
  */
 export async function toProductCards(rows: CardRow[], now: Date = new Date()): Promise<ProductCardData[]> {
   if (!rows.length) return [];
+  // Parcelamento com a MESMA configuração da página do produto e do checkout.
+  const installmentConfig = effectiveInstallmentConfig(await getStoreSettings());
   const ancestors = await getCategoryAncestorsMap();
   const promotions = await loadActivePromotionsFor(
     rows.map((r) => ({ id: r.id, categoryId: r.categoryId, storeId: r.storeId })),
@@ -68,6 +74,8 @@ export async function toProductCards(rows: CardRow[], now: Date = new Date()): P
       isOfficial: r.store.isOfficial,
       condition: r.condition,
       priceCents: best?.eff.priceCents ?? 0,
+      fromPrice: new Set(priced.map((v) => v.eff.priceCents)).size > 1,
+      installment: best ? bestInterestFreeInstallment(best.eff.priceCents, installmentConfig) : null,
       listPriceCents: best?.eff.listPriceCents ?? null,
       discountPercent: best?.eff.discountPercent ?? 0,
       freeShipping: r.freeShipping,

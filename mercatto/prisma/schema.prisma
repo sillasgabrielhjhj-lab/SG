@@ -408,6 +408,8 @@ model Product {
   warrantyMonths      Int?
   warrantyText        String?
   includedItems       String[]
+  /// Destaques curtos exibidos junto da compra ("o que você precisa saber").
+  highlights          String[]         @default([])
   specifications      Json? // [{ group, items: [{ name, value }] }]
   // Logística (padrão do produto)
   weightGrams         Int              @default(500)
@@ -422,6 +424,7 @@ model Product {
   isFeatured          Boolean          @default(false)
   // Desnormalizados para listagem/busca/ordenação (recalculados por serviço)
   minPriceCents       Int              @default(0) // menor preço base entre variantes ativas
+  maxPriceCents       Int              @default(0) // maior preço base entre variantes ativas ("a partir de")
   effectivePriceCents Int              @default(0) // menor preço considerando promoções ativas
   compareAtPriceCents Int? // "preço anterior" exibido
   discountPercent     Int              @default(0)
@@ -433,6 +436,9 @@ model Product {
   hasActivePromotion  Boolean          @default(false)
   searchText          String           @default("") // texto normalizado (sem acento, minúsculo) para busca
   isDemo              Boolean          @default(false)
+  /// Produto mantido pelo catálogo versionado (prisma/content/catalog); null = cadastrado manualmente.
+  catalogKey          String?          @unique
+  catalogVersion      Int?
   publishedAt         DateTime?
   createdAt           DateTime         @default(now())
   updatedAt           DateTime         @updatedAt

@@ -27,8 +27,9 @@
     "test:integration": "vitest run --project integration",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "vercel-build": "prisma generate && prisma migrate deploy && node scripts/seed-on-build.mjs && tsx --conditions=react-server prisma/apply-product-faq.ts && next build",
-    "postinstall": "prisma generate"
+    "vercel-build": "prisma generate && prisma migrate deploy && node scripts/seed-on-build.mjs && tsx --conditions=react-server prisma/apply-catalog.ts && next build",
+    "postinstall": "prisma generate",
+    "catalog:apply": "tsx --conditions=react-server prisma/apply-catalog.ts"
   },
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.3.0",

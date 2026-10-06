@@ -18,6 +18,8 @@ import { Countdown } from "@/components/ui/countdown";
 import { AddToCartButtons } from "@/features/cart/components/add-to-cart";
 import { ShippingSimulator } from "@/features/product/components/shipping-simulator";
 import { ProductGallery } from "@/features/product/components/gallery";
+import { swatchFor } from "@/lib/swatches";
+import "@/lib/swatches-apple";
 
 const CONDITION = { NEW: "Novo", USED: "Usado", REFURBISHED: "Recondicionado" } as const;
 
@@ -106,7 +108,9 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
             <p className="text-sm font-semibold text-warning-700">Combinação indisponível — escolha outras opções.</p>
           )}
 
-          {product.options.map((option) => (
+          {product.options.map((option) => {
+            const isColor = /^cor(es)?$/i.test(option.name.trim());
+            return (
             <fieldset key={option.name} className="flex flex-col gap-2">
               <legend className="mb-1.5 text-sm">
                 {option.name}: <strong>{selection[option.name] ?? "—"}</strong>
@@ -127,14 +131,18 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
                         !available && "border-dashed text-fg-subtle",
                       )}
                     >
-                      {value}
+                      <span className="flex items-center gap-2">
+                        {isColor && swatchFor(value) ? <span aria-hidden className="size-4 shrink-0 rounded-full border border-black/15" style={{ backgroundColor: swatchFor(value)! }} /> : null}
+                        {value}
+                      </span>
                       {!available ? <span className="sr-only"> (esgotado)</span> : null}
                     </button>
                   );
                 })}
               </div>
             </fieldset>
-          ))}
+            );
+          })}
 
           <div className="flex flex-wrap items-center gap-3">
             {variant ? <StockIndicator stock={stock} /> : null}
@@ -171,6 +179,19 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
             ) : null}
           </ul>
         </div>
+
+        {product.highlights.length ? (
+          <section aria-labelledby="destaques-title" className="rounded-card border border-line bg-surface p-4">
+            <h2 id="destaques-title" className="mb-2 text-sm font-bold">
+              O que você precisa saber sobre este produto
+            </h2>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-fg-muted marker:text-brand-600">
+              {product.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <ShippingSimulator variantId={purchasable ? (variant?.id ?? null) : null} quantity={quantity} />
         <div className="flex justify-end">

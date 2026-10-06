@@ -26,7 +26,8 @@ export const getProductPageData = cache(async (slug: string) => {
     include: {
       images: { orderBy: { position: "asc" } },
       options: { orderBy: { position: "asc" } },
-      variants: { where: { status: "ACTIVE" }, orderBy: { position: "asc" } },
+      // Somente variações vendáveis: ativas e com preço definido.
+      variants: { where: { status: "ACTIVE", priceCents: { gt: 0 } }, orderBy: { position: "asc" } },
       attributes: { include: { attribute: { select: { name: true, unit: true, position: true } } } },
       brand: { select: { name: true, slug: true } },
       category: { select: { id: true, name: true, slug: true } },
@@ -78,6 +79,7 @@ export const getProductPageData = cache(async (slug: string) => {
     warrantyMonths: product.warrantyMonths,
     warrantyText: product.warrantyText,
     includedItems: product.includedItems,
+    highlights: product.highlights,
     specifications: (Array.isArray(product.specifications) ? product.specifications : []) as ProductSpecGroup[],
     freeShipping: product.freeShipping,
     salesCount: product.salesCount,

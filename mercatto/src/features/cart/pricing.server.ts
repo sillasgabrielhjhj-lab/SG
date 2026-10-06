@@ -146,7 +146,8 @@ export async function priceLines(requests: LineRequest[], opts: { now?: Date; tx
 
     let availability: Availability = "AVAILABLE";
     let availabilityMessage: string | null = null;
-    if (v.status !== "ACTIVE" || !["ACTIVE", "OUT_OF_STOCK"].includes(p.status) || p.store.status !== "ACTIVE") {
+    // Variação sem preço definido (ex.: rascunho de catálogo) nunca é vendável.
+    if (v.status !== "ACTIVE" || v.priceCents <= 0 || !["ACTIVE", "OUT_OF_STOCK"].includes(p.status) || p.store.status !== "ACTIVE") {
       availability = "UNAVAILABLE";
       availabilityMessage = "Este produto não está mais disponível.";
     } else if (v.stock <= 0) {

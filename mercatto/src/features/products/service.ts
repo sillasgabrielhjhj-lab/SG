@@ -426,13 +426,15 @@ export async function setProductStatus(scope: ProductScope, actorId: string, pro
       where: { id: productId },
       select: {
         _count: { select: { images: true } },
-        variants: { where: { status: "ACTIVE" }, select: { id: true } },
+        variants: { where: { status: "ACTIVE" }, select: { id: true, priceCents: true } },
         category: { select: { isActive: true } },
         store: { select: { status: true } },
       },
     });
     if (full._count.images === 0) throw new AppError("UNPROCESSABLE", "Adicione pelo menos uma foto antes de publicar.");
     if (full.variants.length === 0) throw new AppError("UNPROCESSABLE", "Ative pelo menos uma variação antes de publicar.");
+    const unpriced = full.variants.filter((v) => v.priceCents <= 0).length;
+    if (unpriced > 0) throw new AppError("UNPROCESSABLE", `Defina o preço de todas as variações ativas antes de publicar (${unpriced} sem preço) — ou desative as que você não vende.`);
     if (!full.category.isActive) throw new AppError("UNPROCESSABLE", "A categoria do produto está inativa.");
     if (full.store.status !== "ACTIVE") throw new AppError("UNPROCESSABLE", "A loja precisa estar ativa para publicar.");
   }

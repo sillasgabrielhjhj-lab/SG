@@ -57,9 +57,11 @@ export async function recomputeProductAggregates(productIds: string[], tx?: Tx) 
 
   for (const p of products) {
     const promos = promotions.get(p.id) ?? [];
-    const priced = p.variants.map((v) => ({ stock: v.stock, base: v.priceCents, eff: computeEffectivePrice(v, promos, now) }));
+    // Só variações com preço definido entram em preço e estoque (sem preço = não vendável).
+    const priced = p.variants.filter((v) => v.priceCents > 0).map((v) => ({ stock: v.stock, base: v.priceCents, eff: computeEffectivePrice(v, promos, now) }));
     const totalStock = priced.reduce((sum, v) => sum + v.stock, 0);
     const minBase = priced.length ? Math.min(...priced.map((v) => v.base)) : 0;
+    const maxBase = priced.length ? Math.max(...priced.map((v) => v.base)) : 0;
     // Preço exibido: a variante mais barata COM estoque (ou a mais barata, se nenhuma tiver).
     const pool = priced.some((v) => v.stock > 0) ? priced.filter((v) => v.stock > 0) : priced;
     const best = pool.reduce<(typeof priced)[number]["eff"] | null>(
@@ -95,6 +97,7 @@ export async function recomputeProductAggregates(productIds: string[], tx?: Tx) 
       where: { id: p.id },
       data: {
         minPriceCents: minBase,
+        maxPriceCents: maxBase,
         effectivePriceCents: best?.priceCents ?? minBase,
         compareAtPriceCents: best?.listPriceCents ?? null,
         discountPercent: best?.discountPercent ?? 0,

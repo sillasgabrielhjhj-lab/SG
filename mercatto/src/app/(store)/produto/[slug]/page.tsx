@@ -19,6 +19,7 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { ProductRail } from "@/components/commerce/product-rail";
 import { SectionHeader } from "@/components/commerce/product-grid";
 import { RatingStars } from "@/components/commerce/rating";
+import { RichText, richTextToPlain } from "@/components/commerce/rich-text";
 import { OfficialBadge } from "@/components/commerce/badges";
 import { formatCompact, formatMembership } from "@/lib/format";
 import { truncate } from "@/lib/utils";
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   return buildMetadata({
     title: product.seoTitle ?? product.name,
-    description: product.seoDescription ?? truncate(product.shortDescription ?? product.description, 160),
+    description: product.seoDescription ?? truncate(product.shortDescription ?? richTextToPlain(product.description), 160),
     path: `/produto/${product.slug}`,
     image: product.images[0]?.url,
     imageAlt: product.name,
@@ -85,7 +86,7 @@ export default async function ProductPage({ params }: Props) {
           productJsonLd({
             name: product.name,
             slug: product.slug,
-            description: product.description,
+            description: richTextToPlain(product.description),
             images: product.images.map((i) => i.url),
             sku: product.sku,
             gtin: product.isDemo ? null : product.gtin,
@@ -106,7 +107,7 @@ export default async function ProductPage({ params }: Props) {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="flex min-w-0 flex-col gap-6">
           <Section id="descricao" title="Descrição">
-            <p className="text-sm leading-relaxed whitespace-pre-line text-fg">{product.description}</p>
+            <RichText source={product.description} />
           </Section>
 
           {product.specifications.length || product.attributes.length ? (

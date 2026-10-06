@@ -14,6 +14,10 @@ export type ProductCardData = {
   isOfficial: boolean; // vendido pela Mercatto
   condition: "NEW" | "USED" | "REFURBISHED";
   priceCents: number; // preço efetivo (com promoção)
+  /** Variações com preços diferentes: exibe "a partir de". */
+  fromPrice: boolean;
+  /** Melhor parcelamento sem juros pela configuração real da loja (null = sem parcelamento). */
+  installment: { count: number; installmentCents: number } | null;
   listPriceCents: number | null; // preço "de" riscado
   discountPercent: number;
   freeShipping: boolean;

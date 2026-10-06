@@ -74,6 +74,55 @@ function cartesian(options: OptionState[]): Record<string, string>[] {
   return options.reduce<Record<string, string>[]>((acc, o) => acc.flatMap((combo) => o.values.map((v) => ({ ...combo, [o.name]: v }))), [{}]);
 }
 
+/** Preço/estoque/ativação em lote para todas as variações ou para um valor de opção. */
+function BulkFill({ opts, onApply }: { opts: OptionState[]; onApply: (target: string, patch: Partial<VariantState>) => void }) {
+  const [target, setTarget] = useState("*");
+  const [price, setPrice] = useState<number | null>(null);
+  const [stock, setStock] = useState("");
+  return (
+    <div className="mb-3 flex flex-wrap items-end gap-2 rounded-md border border-dashed border-line-strong p-3">
+      <label className="flex flex-col gap-1 text-xs font-semibold text-fg-muted">
+        Aplicar em
+        <Select value={target} onChange={(e) => setTarget(e.target.value)} className="h-10 min-w-48">
+          <option value="*">Todas as variações</option>
+          {opts
+            .filter((o) => o.name.trim())
+            .map((o) => (
+              <optgroup key={o.name} label={o.name}>
+                {o.values.map((v) => (
+                  <option key={v} value={`${o.name}\u0000${v}`}>
+                    {o.name}: {v}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+        </Select>
+      </label>
+      <label className="flex flex-col gap-1 text-xs font-semibold text-fg-muted">
+        Preço de venda
+        <PriceInput defaultCents={null} aria-label="Preço em lote" className="h-10 w-32" onCentsChange={setPrice} />
+      </label>
+      <Button type="button" variant="outline" size="sm" className="h-10" disabled={!price} onClick={() => price && onApply(target, { priceCents: price })}>
+        Aplicar preço
+      </Button>
+      <label className="flex flex-col gap-1 text-xs font-semibold text-fg-muted">
+        Estoque
+        <Input value={stock} inputMode="numeric" aria-label="Estoque em lote" className="h-10 w-24" onChange={(e) => setStock(e.target.value.replace(/\D/g, "").slice(0, 6))} />
+      </label>
+      <Button type="button" variant="outline" size="sm" className="h-10" disabled={stock === ""} onClick={() => onApply(target, { stock })}>
+        Aplicar estoque
+      </Button>
+      <Button type="button" variant="ghost" size="sm" className="h-10" onClick={() => onApply(target, { status: "INACTIVE" })}>
+        Desativar
+      </Button>
+      <Button type="button" variant="ghost" size="sm" className="h-10" onClick={() => onApply(target, { status: "ACTIVE" })}>
+        Ativar
+      </Button>
+      <p className="w-full text-2xs text-fg-subtle">Variações sem preço não podem ser vendidas. Desative as combinações que você não vende.</p>
+    </div>
+  );
+}
+
 function blankVariant(sku: string, base?: VariantState): VariantState {
   return { sku, gtin: "", optionValues: {}, priceCents: base?.priceCents ?? null, compareAtPriceCents: base?.compareAtPriceCents ?? null, costCents: base?.costCents ?? null, stock: "0", minStock: base?.minStock ?? "0", imageIndex: null, status: "ACTIVE" };
 }
@@ -177,7 +226,8 @@ export function ProductEditor({ mode, options, productId, initial, storeName, ba
   const [opts, setOpts] = useState<OptionState[]>(initial?.options ?? []);
   const [variants, setVariants] = useState<VariantState[]>(() =>
     initial?.variants.length
-      ? initial.variants.map((v) => ({ ...v, gtin: v.gtin ?? "", stock: String(v.stock), minStock: String(v.minStock) }))
+      ? // Preço 0 = ainda não definido (rascunho do catálogo): campo vazio para o lojista preencher.
+        initial.variants.map((v) => ({ ...v, priceCents: v.priceCents > 0 ? v.priceCents : null, gtin: v.gtin ?? "", stock: String(v.stock), minStock: String(v.minStock) }))
       : [blankVariant("")],
   );
 
@@ -208,6 +258,14 @@ export function ProductEditor({ mode, options, productId, initial, storeName, ba
   };
 
   const updateVariant = (i: number, patch: Partial<VariantState>) => setVariants((vs) => vs.map((v, j) => (j === i ? { ...v, ...patch } : v)));
+  // Preenchimento em lote (ex.: preço de todas as cores de 256 GB). Os campos de preço
+  // não são controlados: a revisão força a remontagem das linhas com os novos valores.
+  const [bulkRev, setBulkRev] = useState(0);
+  const applyBulk = (target: string, patch: Partial<VariantState>) => {
+    const [name, value] = target === "*" ? [null, null] : target.split("\u0000");
+    setVariants((vs) => vs.map((v) => (name === null || v.optionValues[name] === value ? { ...v, ...patch } : v)));
+    setBulkRev((r) => r + 1);
+  };
 
   const moveImage = (from: number, to: number) => {
     if (to < 0 || to >= images.length) return;
@@ -505,6 +563,8 @@ export function ProductEditor({ mode, options, productId, initial, storeName, ba
               </div>
             ) : null}
 
+            {hasOptions && variants.length > 1 ? <BulkFill opts={opts} onApply={applyBulk} /> : null}
+
             <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
               <table className="w-full min-w-[860px] text-sm">
                 <thead className="text-left text-xs font-semibold text-fg-muted">
@@ -525,7 +585,7 @@ export function ProductEditor({ mode, options, productId, initial, storeName, ba
                     const key = comboKey(opts, v.optionValues) || "single";
                     const e = (f: string) => errors[`variants.${i}.${f}`]?.[0];
                     return (
-                      <tr key={key} className={cn("align-top", v.status === "INACTIVE" && "opacity-60")}>
+                      <tr key={`${key}:${bulkRev}`} className={cn("align-top", v.status === "INACTIVE" && "opacity-60")}>
                         {hasOptions ? <td className="py-2 pr-2 pt-4 font-semibold whitespace-nowrap">{opts.map((o) => v.optionValues[o.name]).filter(Boolean).join(" / ") || "—"}</td> : null}
                         <td className="py-2 pr-2">
                           <Input value={v.sku} aria-label="SKU da variação" aria-invalid={Boolean(e("sku")) || undefined} maxLength={64} className="h-10 w-36 font-mono text-xs uppercase" onChange={(ev) => updateVariant(i, { sku: ev.target.value.toUpperCase() })} />
