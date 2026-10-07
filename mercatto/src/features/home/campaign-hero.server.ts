@@ -7,10 +7,11 @@ import type { HeroSlide } from "@/features/home/hero.server";
  * Configuração ÚNICA da campanha do hero: cupom MERCATTO25 (25% OFF na
  * primeira compra) e suas artes oficiais (public/banners, 2000×667). As artes
  * já trazem título, cupom e botão — o carrossel não sobrepõe nenhum texto.
- * Cada arte só entra no ar quando é verdade agora: o cupom está ativo (é
- * validado no servidor, no carrinho e no checkout — primeira compra, limite
- * por cliente, categorias) e aceita ao menos um produto publicado da
- * categoria para onde o banner leva.
+ * As artes só entram no ar com o cupom ativo (validado no servidor, no
+ * carrinho e no checkout — primeira compra, limite por cliente, categorias).
+ * O banner leva à categoria quando ela tem produto participante à venda;
+ * senão, à página do cupom (condições e produtos participantes) — nunca a
+ * uma vitrine vazia.
  */
 export const HERO_CAMPAIGN_COUPON = "MERCATTO25";
 
@@ -76,22 +77,22 @@ function subtreeIds(node: CategoryNode): string[] {
 export async function getCampaignHeroSlides(tree: CategoryNode[]): Promise<HeroSlide[]> {
   const coupon = await findPromotableCoupon(HERO_CAMPAIGN_COUPON);
   if (!coupon) return [];
-  const slides = await Promise.all(
-    ARTWORKS.map(async (art): Promise<HeroSlide | null> => {
+  const couponPage = `/cupom/${encodeURIComponent(coupon.code)}`;
+  return Promise.all(
+    ARTWORKS.map(async (art): Promise<HeroSlide> => {
       const category = findCategory(tree, art.category);
-      if (!category || !(await countEligibleProductsIn(coupon, subtreeIds(category)))) return null;
+      const hasProducts = category ? (await countEligibleProductsIn(coupon, subtreeIds(category))) > 0 : false;
       return {
         id: art.id,
         eyebrow: null,
         title: art.alt,
         subtitle: null,
         ctaLabel: "Aproveitar agora",
-        link: `/categoria/${category.slug}`,
+        link: category && hasProducts ? `/categoria/${category.slug}` : couponPage,
         imageUrl: art.src,
         theme: "brand",
         art: { kind: "artwork", src: art.src, width: ART.width, height: ART.height, alt: art.alt, frame: framing(art.crop) },
       };
     }),
   );
-  return slides.filter((s): s is HeroSlide => s !== null);
 }

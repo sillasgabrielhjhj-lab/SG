@@ -226,6 +226,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
 
       {count > 1 ? (
         <div className="mt-1.5 flex items-center justify-center sm:absolute sm:bottom-3 sm:left-1/2 sm:z-[2] sm:mt-0 sm:-translate-x-1/2 sm:rounded-full sm:bg-black/30 sm:px-1.5 sm:backdrop-blur-[2px]">
+          <StepButton side="left" onClick={() => step(-1)} />
           {slides.map((s, i) => {
             const active = i === index;
             return (
@@ -258,9 +259,25 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
           >
             {manual ? <Play className="size-3" fill="currentColor" aria-hidden /> : <Pause className="size-3" fill="currentColor" aria-hidden />}
           </button>
+          <StepButton side="right" onClick={() => step(1)} />
         </div>
       ) : null}
     </section>
+  );
+}
+
+/** Setas junto dos indicadores no celular/tablet (no desktop ficam sobre o banner). */
+function StepButton({ side, onClick }: { side: "left" | "right"; onClick: () => void }) {
+  const Icon = side === "left" ? ChevronLeft : ChevronRight;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={side === "left" ? "Banner anterior" : "Próximo banner"}
+      className="press grid size-10 place-items-center rounded-full text-fg-muted transition-colors duration-(--motion-fast) hover:text-fg focus-ring sm:size-7 sm:text-white lg:hidden"
+    >
+      <Icon className="size-5 sm:size-4" aria-hidden />
+    </button>
   );
 }
 
