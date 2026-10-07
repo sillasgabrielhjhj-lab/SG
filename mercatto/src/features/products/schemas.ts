@@ -98,7 +98,7 @@ export const productInputSchema = z
     status: z.enum(["DRAFT", "ACTIVE", "PAUSED"]).default("DRAFT"),
     sku,
     gtin,
-    tags: z.array(z.string().trim().min(1).max(30)).max(20).default([]),
+    tags: z.array(z.string().trim().min(1).max(40, "Cada palavra-chave pode ter até 40 caracteres.")).max(20, "Use no máximo 20 palavras-chave.").default([]),
     warrantyMonths: z.coerce.number().int().min(0).max(120).optional().nullable(),
     warrantyText: z.string().trim().max(500).optional().nullable(),
     includedItems: z.array(z.string().trim().min(1).max(120)).max(20).default([]),

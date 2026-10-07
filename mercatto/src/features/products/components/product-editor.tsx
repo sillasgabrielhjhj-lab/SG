@@ -232,7 +232,8 @@ export function ProductEditor({ mode, options, productId, initial, storeName, ba
   );
 
   const set = <K extends keyof typeof s>(k: K, v: (typeof s)[K]) => setS((p) => ({ ...p, [k]: v }));
-  const err = (path: string) => errors[path];
+  // Erros de itens de lista (ex.: "tags.3") aparecem no campo da lista.
+  const err = (path: string) => errors[path] ?? Object.entries(errors).find(([k]) => k.startsWith(`${path}.`) && !k.slice(path.length + 1).includes("."))?.[1];
   const attrs = s.categoryId ? (options.attributesByCategory[s.categoryId] ?? []) : [];
 
   /** Regenera a matriz de variações preservando as combinações existentes. */
