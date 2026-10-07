@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { after } from "next/server";
-import { ArrowRight, BadgeCheck, Flame, Gift, Sparkles, Star, Store, ThumbsUp, TrendingUp, Truck, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, Flame, Gift, Sparkles, Star, Store, ThumbsUp, TrendingUp } from "lucide-react";
 import { getCurrentUser } from "@/server/auth/guards";
 import { getHomePageData } from "@/features/home/queries";
 import { getHeroSlides } from "@/features/home/hero.server";
@@ -161,32 +161,6 @@ export default async function HomePage() {
               <li key={b.id} style={{ "--i": i } as CSSProperties}>
                 <Link href={`/marca/${b.slug}`} className="press inline-flex h-11 items-center rounded-full border border-line bg-surface px-5 text-sm font-bold text-fg-muted shadow-card transition-[color,border-color,box-shadow] hover:border-brand-400 hover:text-brand-800 hover:shadow-raised focus-ring">
                   {b.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      {data.freeShipping.length ? (
-        <section data-reveal aria-labelledby="free-title">
-          <SectionHeader id="free-title" title="Frete grátis" subtitle="Receba sem pagar a entrega" href="/buscar?frete_gratis=1" icon={<Truck />} />
-          <ProductRail products={data.freeShipping} label="Frete grátis" favorites={favorites} />
-        </section>
-      ) : null}
-
-      {data.priceBands.length ? (
-        <section data-reveal aria-labelledby="price-title">
-          <SectionHeader id="price-title" title="Compre por preço" icon={<Wallet />} />
-          <ul data-stagger className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-3 sm:gap-3">
-            {data.priceBands.map((b, i) => (
-              <li key={b.maxCents} style={{ "--i": i } as CSSProperties}>
-                <Link href={`/buscar?preco_max=${b.maxCents / 100}`} className="group flex items-center justify-between gap-2 rounded-card border border-line bg-surface px-4 py-3 transition-[transform,translate,scale,box-shadow,border-color] duration-(--motion-base) ease-enter hover:border-brand-300 focus-ring active:scale-[0.99] [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-card">
-                  <span>
-                    <span className="block text-xs font-semibold text-fg-muted">Até</span>
-                    <span className="block text-lg font-extrabold text-brand-800 tabular">{formatBRL(b.maxCents).replace(",00", "")}</span>
-                  </span>
-                  <span className="text-xs text-fg-muted">{b.count} produtos</span>
                 </Link>
               </li>
             ))}

@@ -2,16 +2,13 @@ import "server-only";
 import type { BannerPlacement } from "@/generated/prisma/enums";
 import { db } from "@/server/db";
 import { getProductCards, publicProductWhere } from "@/features/catalog/cards.server";
-import { getNavCategoryTree } from "@/features/catalog/nav-categories.server";
+import { getCategoryTree } from "@/features/catalog/categories.server";
 import type { ProductCardData } from "@/features/catalog/types";
 
 const SECTION = 12;
 const POOL = 24;
 /** Abaixo disso a home vira uma vitrine única (sem repetir o mesmo produto em várias seções). */
 const SHOWCASE_BELOW = 8;
-/** Faixas de "Compre por preço" (centavos) e mínimo de produtos para cada uma aparecer. */
-const PRICE_BANDS = [10_000, 30_000, 50_000];
-const MIN_BAND_PRODUCTS = 4;
 
 export async function getActiveBanners(placement: BannerPlacement, take = 6) {
   const now = new Date();
@@ -89,10 +86,10 @@ function allocator(initial: Iterable<string>) {
 
 /** Todas as seções da home em paralelo; cada uma funciona vazia. */
 export async function getHomePageData() {
-  const [mid, strip, categories, flash, dealsPool, officialPool, bestPool, newPool, topPool, popularPool, featuredStores, brands, catalogSize, freeShippingPool, priceBandCounts] = await Promise.all([
+  const [mid, strip, categories, flash, dealsPool, officialPool, bestPool, newPool, topPool, popularPool, featuredStores, brands, catalogSize] = await Promise.all([
     getActiveBanners("HOME_MID", 2),
     getActiveBanners("HOME_STRIP", 1),
-    getNavCategoryTree(),
+    getCategoryTree(),
     getFlashDeal(),
     getProductCards({ where: { discountPercent: { gte: 5 } }, orderBy: [{ discountPercent: "desc" }, { salesCount: "desc" }], take: POOL }),
     getProductCards({ where: { store: { isOfficial: true }, OR: [{ isFeatured: true }, { discountPercent: { gt: 0 } }] }, orderBy: [{ isFeatured: "desc" }, { discountPercent: "desc" }], take: POOL }),
@@ -108,11 +105,7 @@ export async function getHomePageData() {
     }),
     db.brand.findMany({ where: { isFeatured: true, products: { some: { status: "ACTIVE", store: { status: "ACTIVE" } } } }, orderBy: { name: "asc" }, take: 16, select: { id: true, name: true, slug: true, logoUrl: true } }),
     db.product.count({ where: { status: "ACTIVE", store: { status: "ACTIVE" } } }),
-    getProductCards({ where: { freeShipping: true, totalStock: { gt: 0 } }, orderBy: [{ salesCount: "desc" }, { discountPercent: "desc" }], take: POOL }),
-    Promise.all(PRICE_BANDS.map((maxCents) => db.product.count({ where: { AND: [publicProductWhere, { totalStock: { gt: 0 }, effectivePriceCents: { gt: 0, lte: maxCents } }] } }))),
   ]);
-  // Faixas de preço só com produtos reais suficientes (ex.: "Até R$ 100").
-  const priceBands = PRICE_BANDS.map((maxCents, i) => ({ maxCents, count: priceBandCounts[i] ?? 0 })).filter((b) => b.count >= MIN_BAND_PRODUCTS);
 
   const flashProducts = flash?.products ?? [];
   const pool = allocator(flashProducts.map((p) => p.id));
@@ -120,7 +113,7 @@ export async function getHomePageData() {
   // Catálogo pequeno: uma vitrine só, cada produto uma vez.
   if (catalogSize < SHOWCASE_BELOW) {
     const showcase = pool.take(newPool, { max: SHOWCASE_BELOW, min: 1 });
-    return { mode: "showcase" as const, banners: { mid, strip }, categories, flash, showcase, freeShipping: [] as ProductCardData[], priceBands: [], dayDeals: [], official: [], bestSellers: [], recommended: [], newArrivals: [], topRated: [], featuredStores, brands, shownIds: [...pool.used] };
+    return { mode: "showcase" as const, banners: { mid, strip }, categories, flash, showcase, dayDeals: [], official: [], bestSellers: [], recommended: [], newArrivals: [], topRated: [], featuredStores, brands, shownIds: [...pool.used] };
   }
 
   // Ranking real primeiro (rótulos Top 1/2/3 precisam bater com as vendas).
@@ -129,11 +122,10 @@ export async function getHomePageData() {
   const dayDeals = pool.take(dealsPool);
   const official = pool.take(officialPool);
   const recommended = pool.take(popularPool);
-  const freeShipping = pool.take(freeShippingPool, { min: 4 });
   const newArrivals = pool.take(newPool);
   const topRated = pool.take(topPool, { min: 4 });
 
-  return { mode: "full" as const, banners: { mid, strip }, categories, flash, showcase: [] as ProductCardData[], freeShipping, priceBands, dayDeals, official, bestSellers, recommended, newArrivals, topRated, featuredStores, brands, shownIds: [...pool.used] };
+  return { mode: "full" as const, banners: { mid, strip }, categories, flash, showcase: [] as ProductCardData[], dayDeals, official, bestSellers, recommended, newArrivals, topRated, featuredStores, brands, shownIds: [...pool.used] };
 }
 
 export type HomePageData = Awaited<ReturnType<typeof getHomePageData>>;

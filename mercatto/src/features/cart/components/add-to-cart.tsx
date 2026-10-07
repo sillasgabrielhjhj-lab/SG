@@ -15,7 +15,7 @@ import { addToCartAction } from "@/features/cart/actions";
  * do produto voa até o carrinho e um aviso com "Ver carrinho" aparece — sem
  * bloquear a navegação.
  */
-export function AddToCartButtons({ variantId, quantity, disabled, productName, priceCents, layout = "stack" }: { variantId: string | null; quantity: number; disabled?: boolean; productName: string; priceCents: number; layout?: "buyOnly" | "stack" | "row" }) {
+export function AddToCartButtons({ variantId, quantity, disabled, productName, priceCents, layout = "stack" }: { variantId: string | null; quantity: number; disabled?: boolean; productName: string; priceCents: number; layout?: "stack" | "row" }) {
   const [pending, start] = useTransition();
   const [buying, startBuy] = useTransition();
   const { setCount, bump, openMiniCart } = useCartIndicator();
@@ -47,13 +47,6 @@ export function AddToCartButtons({ variantId, quantity, disabled, productName, p
     toast.success("Produto adicionado ao carrinho ✓", { description: productName, action: { label: "Ver carrinho", onClick: openMiniCart } });
   };
 
-  if (layout === "buyOnly") {
-    return (
-      <Button size="md" disabled={disabled || pending} loading={buying} leftIcon={<Zap className="size-4" />} onClick={() => startBuy(() => add(true))}>
-        Comprar agora
-      </Button>
-    );
-  }
   return (
     <div className={layout === "row" ? "grid grid-cols-2 gap-2" : "flex flex-col gap-2"}>
       <Button size="lg" fullWidth disabled={disabled || pending} loading={buying} leftIcon={<Zap className="size-4" />} onClick={() => startBuy(() => add(true))}>

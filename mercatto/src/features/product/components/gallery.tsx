@@ -74,8 +74,7 @@ export function ProductGallery({ images, activeImageId, name }: { images: Galler
             src={current.url}
             alt={current.alt || name}
             fill
-            loading="eager"
-            fetchPriority="high"
+            priority
             sizes="(max-width: 768px) 100vw, 560px"
             unoptimized={skipImageOptimization(current.url)}
             className="animate-fade-in object-contain p-4 transition-transform duration-150 ease-out"

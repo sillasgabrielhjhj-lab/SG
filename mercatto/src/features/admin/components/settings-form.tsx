@@ -19,10 +19,6 @@ export type SettingsValues = {
   contactEmail: string;
   contactPhone: string;
   whatsapp: string;
-  companyLegalName: string;
-  companyDocument: string;
-  companyAddress: string;
-  supportHours: string;
   instagram: string;
   facebook: string;
   tiktok: string;
@@ -90,18 +86,6 @@ export function SettingsForm({ initial, welcomeStatus }: { initial: SettingsValu
         </Field>
         <Field label="WhatsApp" error={e("whatsapp")} hint="Somente números com DDD">
           <Input value={v.whatsapp} maxLength={20} inputMode="tel" onChange={set("whatsapp")} />
-        </Field>
-        <Field label="Horário de atendimento" error={e("supportHours")} hint="Ex.: Seg. a sex., 9h às 18h. Vazio = não exibido.">
-          <Input value={v.supportHours} maxLength={80} onChange={set("supportHours")} />
-        </Field>
-        <Field label="Razão social" error={e("companyLegalName")} hint="Aparece no rodapé e em Fale conosco. Vazio = não exibido.">
-          <Input value={v.companyLegalName} maxLength={120} onChange={set("companyLegalName")} />
-        </Field>
-        <Field label="CNPJ" error={e("companyDocument")}>
-          <Input value={v.companyDocument} maxLength={20} inputMode="numeric" onChange={set("companyDocument")} />
-        </Field>
-        <Field label="Endereço da empresa" error={e("companyAddress")}>
-          <Input value={v.companyAddress} maxLength={240} onChange={set("companyAddress")} />
         </Field>
         <Field label="Instagram (URL)" error={e("instagram")}>
           <Input value={v.instagram} maxLength={200} onChange={set("instagram")} />

@@ -1,7 +1,7 @@
 import { db } from "@/server/db";
 import { isSandboxPayments } from "@/server/providers/payments";
 import { getCurrentUser } from "@/server/auth/guards";
-import { getNavCategoryTree } from "@/features/catalog/nav-categories.server";
+import { getCategoryTree } from "@/features/catalog/categories.server";
 import { getCartItemCount } from "@/features/cart/count.server";
 import { getStoreSettings } from "@/features/settings/queries";
 import { AppProviders } from "@/components/providers/app-providers";
@@ -11,16 +11,14 @@ import { BottomNav } from "@/components/layout/bottom-nav";
 import { MiniCart } from "@/features/cart/components/mini-cart";
 import { getWelcomeCampaign } from "@/features/coupons/campaign.server";
 import { WelcomeCoupon } from "@/features/coupons/components/welcome-coupon";
-import { getStoreBenefits } from "@/features/home/benefits.server";
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
-  const [categories, user, cartCount, settings, welcome, benefits] = await Promise.all([
-    getNavCategoryTree(),
+  const [categories, user, cartCount, settings, welcome] = await Promise.all([
+    getCategoryTree(),
     getCurrentUser(),
     getCartItemCount(),
     getStoreSettings(),
     getCurrentUser().then((u) => getWelcomeCampaign(u?.id ?? null)),
-    getStoreBenefits(),
   ]);
   const unreadNotifications = user ? await db.notification.count({ where: { userId: user.id, readAt: null } }) : 0;
   const sandbox = isSandboxPayments();
@@ -41,13 +39,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
       <main id="conteudo" className="min-h-[60vh] pb-20 md:pb-0">
         {children}
       </main>
-      <Footer
-        social={(settings.socialLinks as Record<string, string | null> | null) ?? null}
-        sandbox={sandbox}
-        benefits={benefits.items}
-        paymentMethods={benefits.methods}
-        company={{ legalName: settings.companyLegalName, document: settings.companyDocument, address: settings.companyAddress, email: settings.contactEmail, phone: settings.contactPhone, hours: settings.supportHours }}
-      />
+      <Footer social={(settings.socialLinks as Record<string, string | null> | null) ?? null} sandbox={sandbox} contactEmail={settings.contactEmail} />
       <BottomNav />
       <MiniCart />
       <WelcomeCoupon campaign={welcome} />

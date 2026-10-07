@@ -122,8 +122,7 @@ export async function updateSettings(actorId: string, input: z.infer<typeof sett
   const data = {
     ...rest,
     tagline: rest.tagline ?? null, logoUrl: rest.logoUrl ?? null, faviconUrl: rest.faviconUrl ?? null, contactEmail: rest.contactEmail ?? null,
-    contactPhone: rest.contactPhone ?? null, whatsapp: rest.whatsapp ?? null,
-    companyLegalName: rest.companyLegalName ?? null, companyDocument: rest.companyDocument ?? null, companyAddress: rest.companyAddress ?? null, supportHours: rest.supportHours ?? null, seoTitle: rest.seoTitle ?? null, seoDescription: rest.seoDescription ?? null,
+    contactPhone: rest.contactPhone ?? null, whatsapp: rest.whatsapp ?? null, seoTitle: rest.seoTitle ?? null, seoDescription: rest.seoDescription ?? null,
     freeShippingThresholdCents: rest.freeShippingThresholdCents ?? null,
     welcomeCouponCode: rest.welcomeCouponCode || null,
     socialLinks: { instagram: instagram ?? null, facebook: facebook ?? null, tiktok: tiktok ?? null, youtube: youtube ?? null, x: x ?? null },

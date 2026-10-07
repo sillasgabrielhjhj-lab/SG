@@ -460,16 +460,6 @@
   }
 }
 
-/* Barra fixa "Comprar agora" (produto, celular/tablet): a aba do cupom sai do caminho e o rodapé ganha respiro. */
-body:has([data-sticky-buy]) [data-coupon-tab] {
-  display: none;
-}
-@media (width < 64rem) {
-  body:has([data-sticky-buy]) footer {
-    padding-bottom: 4.5rem;
-  }
-}
-
 /* A home já tem a seção completa "Comprar na Mercatto é simples e seguro": evita repetir a faixa do rodapé. */
 body:has([data-trust-section]) [data-footer-trust] {
   display: none;
