@@ -1,4 +1,5 @@
 import "server-only";
+import { countStoreSales } from "@/features/orders/stats.server";
 import { db } from "@/server/db";
 import { getCategoryBreadcrumb, getCategoryTree } from "@/features/catalog/categories.server";
 import { searchProducts } from "@/features/search/service";
@@ -39,15 +40,21 @@ export async function getStorePageData(slug: string, filters: SearchFilters) {
     }
     return null;
   }
-  const results = await searchProducts({ ...filters, store: undefined }, { basePath: `/loja/${store.slug}`, fixed: { storeId: store.id } });
+  const [results, sales] = await Promise.all([
+    searchProducts({ ...filters, store: undefined }, { basePath: `/loja/${store.slug}`, fixed: { storeId: store.id } }),
+    countStoreSales(store.id),
+  ]);
   const totalOrders = store.salesCount + store.cancelledCount;
-  return { store: { ...store, cancellationRate: totalOrders ? store.cancelledCount / totalOrders : 0 }, results };
+  return { store: { ...store, salesCount: sales, cancellationRate: totalOrders ? store.cancelledCount / totalOrders : 0 }, results };
 }
 
 export async function getOfficialStoreData(filters: SearchFilters) {
   const store = await db.store.findFirst({ where: { isOfficial: true, status: "ACTIVE" }, orderBy: { createdAt: "asc" }, select: { id: true, name: true, slug: true, ratingAvg: true, ratingCount: true, salesCount: true } });
-  const results = await searchProducts({ ...filters, official: false }, { basePath: "/oficial", fixed: { store: { isOfficial: true } } });
-  return { store, results };
+  const [results, sales] = await Promise.all([
+    searchProducts({ ...filters, official: false }, { basePath: "/oficial", fixed: { store: { isOfficial: true } } }),
+    store ? countStoreSales(store.id) : Promise.resolve(0),
+  ]);
+  return { store: store ? { ...store, salesCount: sales } : null, results };
 }
 
 export async function getOffersPageData(filters: SearchFilters) {

@@ -1,4 +1,5 @@
 import "server-only";
+import { countStoreSales } from "@/features/orders/stats.server";
 import { cache } from "react";
 import { db } from "@/server/db";
 import { computeEffectivePrice } from "@/features/pricing/engine";
@@ -64,6 +65,7 @@ export const getProductPageData = cache(async (slug: string) => {
   ]);
   const distribution = [5, 4, 3, 2, 1].map((r) => ({ rating: r, count: distributionRows.find((d) => d.rating === r)?._count._all ?? 0 }));
   const totalOrders = product.store.salesCount + product.store.cancelledCount;
+  const storeSales = await countStoreSales(product.store.id);
 
   return {
     id: product.id,
@@ -101,6 +103,7 @@ export const getProductPageData = cache(async (slug: string) => {
     breadcrumb,
     store: {
       ...product.store,
+      salesCount: storeSales,
       cancellationRate: totalOrders > 0 ? product.store.cancelledCount / totalOrders : 0,
     },
     reviews: { distribution, withPhotos: photoReviews, total: distribution.reduce((s, d) => s + d.count, 0) },
