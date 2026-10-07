@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BadgeCheck, RotateCcw, ShieldCheck, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatCompact } from "@/lib/format";
+import { formatBRL } from "@/lib/money";
 import type { InstallmentConfig } from "@/lib/money";
 import { trackEvent } from "@/lib/analytics";
 import type { ProductPageData } from "@/features/product/queries";
@@ -51,6 +52,15 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
   // Quantidade efetiva limitada ao estoque da variação escolhida (derivada, sem efeito).
   const quantity = Math.max(1, Math.min(requestedQuantity, stock || 1, 99));
   const purchasable = product.isAvailable && Boolean(variant) && stock > 0 && product.status === "ACTIVE";
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const [barVisible, setBarVisible] = useState(false);
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setBarVisible(Boolean(entry) && !entry!.isIntersecting && entry!.boundingClientRect.top < 0));
+    io.observe(el);
+    return () => io.disconnect();
+  }, [purchasable]);
   const images = product.images.map((i) => ({ id: i.id, url: i.url, alt: i.alt }));
 
   return (
@@ -158,12 +168,28 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
           ) : null}
 
           {purchasable ? (
-            <AddToCartButtons variantId={variant?.id ?? null} quantity={quantity} productName={product.name} priceCents={variant?.priceCents ?? 0} />
+            <div ref={ctaRef}>
+              <AddToCartButtons variantId={variant?.id ?? null} quantity={quantity} productName={product.name} priceCents={variant?.priceCents ?? 0} />
+            </div>
           ) : (
             <div className="rounded-md bg-surface-muted p-3 text-sm text-fg-muted">
-              {product.status === "PAUSED" ? "Este anúncio está pausado no momento." : "Produto esgotado. Favorite para acompanhar o retorno do estoque."}
+              <p className="font-semibold text-fg">Produto indisponível no momento.</p>
+              <p className="mt-0.5">{product.status === "PAUSED" ? "Este anúncio está pausado." : "Salve nos favoritos para encontrá-lo depois."}</p>
             </div>
           )}
+
+          {/* Celular/tablet: depois de rolar além dos botões, preço e "Comprar agora" ficam à mão. */}
+          {purchasable && variant && barVisible ? (
+            <div data-sticky-buy className="fixed inset-x-0 bottom-[calc(3.5rem+env(safe-area-inset-bottom))] z-(--z-floating) animate-slide-up border-t border-line bg-surface/95 px-4 py-2 shadow-[0_-6px_16px_-10px_oklch(0.2_0.03_200/0.35)] backdrop-blur md:bottom-0 lg:hidden">
+              <div className="mx-auto flex max-w-3xl items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-xs text-fg-muted">{product.name}</p>
+                  <p className="text-lg leading-tight font-extrabold text-fg tabular">{formatBRL(variant.priceCents)}</p>
+                </div>
+                <AddToCartButtons layout="buyOnly" variantId={variant.id} quantity={quantity} productName={product.name} priceCents={variant.priceCents} />
+              </div>
+            </div>
+          ) : null}
 
           <ul className="flex flex-col gap-1.5 border-t border-line pt-3 text-xs text-fg-muted">
             <li className="flex items-center gap-2">

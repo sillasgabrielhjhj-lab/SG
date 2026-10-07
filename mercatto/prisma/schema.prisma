@@ -1101,6 +1101,11 @@ model StoreSettings {
   contactPhone               String?
   whatsapp                   String?
   socialLinks                Json? // { instagram, facebook, tiktok, youtube, x }
+  /// Dados empresariais (rodapé e "Fale conosco"); vazio = não exibido.
+  companyLegalName           String?
+  companyDocument            String? // CNPJ
+  companyAddress             String?
+  supportHours               String? // ex.: "Seg. a sex., 9h às 18h"
   seoTitle                   String?
   seoDescription             String?
   minOrderCents              Int      @default(0)

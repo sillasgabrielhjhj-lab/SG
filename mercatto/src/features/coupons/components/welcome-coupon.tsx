@@ -89,7 +89,7 @@ export function WelcomeCoupon({ campaign }: { campaign: WelcomeCampaignView | nu
 
   if (NO_TAB.test(pathname)) return null;
   return (
-    <div className="fixed right-3 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-(--z-floating) flex animate-float-in items-center md:right-6 md:bottom-6">
+    <div data-coupon-tab className="fixed right-3 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-(--z-floating) flex animate-float-in items-center md:right-6 md:bottom-6">
       <button
         type="button"
         onClick={() => setPhase("modal")}

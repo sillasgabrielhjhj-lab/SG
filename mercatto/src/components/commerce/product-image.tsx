@@ -13,7 +13,7 @@ export function ProductImage({ src, alt, sizes = "(max-width: 640px) 50vw, 240px
   return (
     <div className={cn("relative aspect-square overflow-hidden bg-white", className)}>
       {src && !failed ? (
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} unoptimized={unoptimized} onError={() => setFailed(true)} className={cn("object-contain", imgClassName)} />
+        <Image src={src} alt={alt} fill sizes={sizes} loading={priority ? "eager" : undefined} fetchPriority={priority ? "high" : undefined} unoptimized={unoptimized} onError={() => setFailed(true)} className={cn("object-contain", imgClassName)} />
       ) : (
         <div className="absolute inset-0 grid place-items-center bg-surface-muted text-fg-subtle">
           <ImageOff className="size-8" aria-hidden />

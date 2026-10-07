@@ -1,6 +1,7 @@
 import "server-only";
+import { getNavCategoryTree } from "@/features/catalog/nav-categories.server";
 import { db } from "@/server/db";
-import { getCategoryBreadcrumb, getCategoryTree } from "@/features/catalog/categories.server";
+import { getCategoryBreadcrumb } from "@/features/catalog/categories.server";
 import { searchProducts } from "@/features/search/service";
 import type { SearchFilters } from "@/features/search/schemas";
 import { getFlashDeal } from "@/features/home/queries";
@@ -70,6 +71,7 @@ export async function getCampaignPageData(slug: string, filters: SearchFilters) 
 }
 
 /** Índice de todas as categorias (página /categorias). */
+/** "Todas as categorias": só as que têm produto à venda. */
 export async function getAllCategoriesForIndex() {
-  return getCategoryTree();
+  return getNavCategoryTree();
 }
