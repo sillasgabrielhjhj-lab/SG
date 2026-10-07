@@ -8,13 +8,16 @@ import type { CategoryNode } from "@/features/catalog/types";
 import type { WelcomeCampaignView } from "@/features/coupons/campaign.server";
 import { formatBRL } from "@/lib/money";
 import { getActiveBanners } from "@/features/home/queries";
+import { getCampaignHeroSlides } from "@/features/home/campaign-hero.server";
 
 export type HeroSlideArt =
   | { kind: "image" }
   | { kind: "coupon"; code: string; headline: string }
   | { kind: "products"; images: { url: string; alt: string }[] }
   | { kind: "shipping" }
-  | { kind: "brand" };
+  | { kind: "brand" }
+  /** Arte pronta (título, cupom e botão já desenhados): exibida inteira, sem texto por cima. */
+  | { kind: "artwork"; src: string; width: number; height: number; alt: string };
 
 export type HeroSlide = {
   id: string;
@@ -44,19 +47,23 @@ function collect(nodes: CategoryNode[], slugs: Set<string>, inside = false, out:
 }
 
 /**
- * Slides do carrossel principal: primeiro os banners cadastrados no painel;
+ * Slides do carrossel principal: as artes oficiais da campanha (quando o cupom
+ * está no ar); senão, os banners cadastrados no painel;
  * depois campanhas automáticas que SÓ entram quando são verdadeiras agora
  * (cupom ativo com produtos, tecnologia com produtos à venda, frete grátis
  * existente). Nada de promessa sem lastro nos dados.
  */
 export async function getHeroSlides(welcome: WelcomeCampaignView | null): Promise<HeroSlide[]> {
-  const [banners, tree, settings, benefits, freeShippingCount] = await Promise.all([
+  const [campaign, banners, tree, settings, benefits, freeShippingCount] = await Promise.all([
+    getCategoryTree().then(getCampaignHeroSlides),
     getActiveBanners("HOME_HERO"),
     getCategoryTree(),
     getStoreSettings(),
     getStoreBenefits(),
     db.product.count({ where: { status: "ACTIVE", store: { status: "ACTIVE" }, freeShipping: true, totalStock: { gt: 0 } } }),
   ]);
+  // Campanha oficial no ar: as artes ocupam o hero sozinhas.
+  if (campaign.length) return campaign;
 
   const slides: HeroSlide[] = banners.map((b) => ({
     id: b.id,

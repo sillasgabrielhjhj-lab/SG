@@ -102,6 +102,12 @@ async function countEligibleProducts(coupon: LoadedCoupon): Promise<number> {
   return db.product.count({ where: { AND: [publicProductWhere, await eligibleWhere(coupon)] } });
 }
 
+/** Produtos publicados que o cupom aceita dentro destas categorias (já com subcategorias). */
+export async function countEligibleProductsIn(coupon: LoadedCoupon, categoryIds: string[]): Promise<number> {
+  if (!categoryIds.length) return 0;
+  return db.product.count({ where: { AND: [publicProductWhere, { categoryId: { in: categoryIds } }, await eligibleWhere(coupon)] } });
+}
+
 /**
  * Motivo pelo qual o cliente logado não pode usar o cupom (limite por cliente
  * ou "só na primeira compra") — o mesmo histórico que o checkout consulta.

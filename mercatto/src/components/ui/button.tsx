@@ -7,7 +7,7 @@ export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "dan
 export type ButtonSize = "sm" | "md" | "lg" | "icon" | "icon-sm";
 
 const base =
-  "relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-field font-semibold transition-[background-color,border-color,color,box-shadow,transform] duration-150 focus-ring active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50";
+  "relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-field font-semibold transition-[background-color,border-color,color,box-shadow,transform,translate,scale] duration-150 focus-ring active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-brand-700 text-white shadow-sm hover:bg-brand-800 active:bg-brand-900",

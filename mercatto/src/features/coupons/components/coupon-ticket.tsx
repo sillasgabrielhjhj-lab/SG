@@ -26,7 +26,7 @@ export function CouponTicket({ code, className, source }: { code: string; classN
     setCopied(true);
     trackEvent("coupon_copy", { coupon: code, source });
     // Dentro do pop-up o próprio botão confirma (o aviso ficaria atrás do fundo do modal).
-    if (!button.current?.closest("dialog")) toast.success("Cupom copiado ✓", { description: `${code} já está na sua área de transferência.` });
+    if (!button.current?.closest("dialog")) toast.success("Cupom copiado ✓", { description: `${code} já está na sua área de transferência.`, duration: 2500 });
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => setCopied(false), 2400);
   };

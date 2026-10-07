@@ -31,7 +31,7 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
   return (
     <article
       className={cn(
-        "group relative flex overflow-hidden rounded-card border border-line bg-surface transition-[box-shadow,border-color,transform] duration-200 ease-out-soft hover:border-line-strong [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:shadow-lift",
+        "group relative flex overflow-hidden rounded-card border border-line bg-surface transition-[box-shadow,border-color,transform,translate,scale] duration-200 ease-out-soft hover:border-line-strong [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:shadow-lift",
         horizontal ? "flex-row" : "flex-col",
         className,
       )}
@@ -42,7 +42,7 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
           alt={product.imageAlt}
           priority={priority}
           sizes={horizontal ? "160px" : variant === "compact" ? "180px" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 240px"}
-          imgClassName={cn("p-3 transition-transform duration-500 ease-out-soft motion-safe:group-hover:scale-[1.035]", unavailable && "opacity-50 grayscale")}
+          imgClassName={cn("p-3 transition-transform duration-[250ms] ease-enter motion-safe:group-hover:scale-[1.025]", unavailable && "opacity-50 grayscale")}
         />
         <div className="absolute top-2 left-2 z-[2] flex flex-col items-start gap-1">
           {rank && rank <= 3 ? (
@@ -62,7 +62,7 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
           className="fav-reveal absolute top-2 right-2 z-[3]"
         />
         {!horizontal && !unavailable ? (
-          <span aria-hidden className="pointer-events-none absolute inset-x-2 bottom-2 z-[2] hidden translate-y-2 items-center justify-center gap-1 rounded-field bg-brand-800/95 py-1.5 text-xs font-bold text-white opacity-0 shadow-raised transition-[opacity,transform] duration-200 ease-out-soft group-hover:translate-y-0 group-hover:opacity-100 [@media(hover:hover)]:flex">
+          <span aria-hidden className="pointer-events-none absolute inset-x-2 bottom-2 z-[2] hidden translate-y-2 items-center justify-center gap-1 rounded-field bg-brand-800/95 py-1.5 text-xs font-bold text-white opacity-0 shadow-raised transition-[opacity,transform,translate,scale] duration-200 ease-out-soft group-hover:translate-y-0 group-hover:opacity-100 [@media(hover:hover)]:flex">
             Ver detalhes <ArrowRight className="size-3.5" />
           </span>
         ) : null}

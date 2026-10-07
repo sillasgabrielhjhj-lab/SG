@@ -52,10 +52,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // 85: artes do hero com texto (nitidez); 75: o resto.
+    qualities: [75, 85],
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
-    localPatterns: [{ pathname: "/uploads/**" }, { pathname: "/demo/**" }, { pathname: "/brand/**" }],
+    localPatterns: [{ pathname: "/uploads/**" }, { pathname: "/demo/**" }, { pathname: "/brand/**" }, { pathname: "/banners/**" }],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

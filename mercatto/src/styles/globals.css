@@ -99,18 +99,29 @@
        animate-fade-up   → entrada de conteúdo (opacity 0→1, translateY 15px→0)
        animate-enter     → entrada da página com atraso (--enter-delay)
        animate-enter-scale → entrada sem opacidade (seguro para LCP: scale .98→1)
-       animate-modal-in  → modais promocionais (scale .88→1)
+       animate-modal-in  → modais promocionais (scale .96→1)
+       animate-hero-in / slide-in / slide-out → entrada e troca de slides do hero
        hover-lift / press → cards e botões (utilitários abaixo)
        [data-reveal] / [data-stagger] → revelação ao rolar (RevealObserver) */
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Durações e curvas únicas para todo o site (use estas, não valores soltos). */
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 450ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out-soft: var(--ease-enter);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: var(--ease-standard);
 
-  --animate-fade-up: fade-up 480ms var(--ease-out-soft) backwards;
+  --animate-fade-up: fade-up var(--motion-slow) var(--ease-enter) backwards;
   --animate-enter: fade-up 520ms var(--ease-out-soft) var(--enter-delay, 0ms) backwards;
   --animate-enter-scale: enter-scale 560ms var(--ease-out-soft) var(--enter-delay, 0ms) backwards;
-  --animate-modal-in: modal-in 420ms var(--ease-out-soft) backwards;
-  --animate-heart: heart 250ms var(--ease-out-soft);
+  --animate-modal-in: modal-in 300ms var(--ease-enter) backwards;
+  --animate-heart: heart 220ms var(--ease-enter);
+  --animate-hero-in: hero-in 520ms var(--ease-enter) var(--enter-delay, 0ms) backwards;
+  --animate-slide-in: slide-in 520ms var(--ease-enter) backwards;
+  --animate-slide-out: slide-out 520ms var(--ease-enter) both;
   --animate-toast-out: toast-out 180ms ease-in both;
   --animate-float-in: float-in 560ms var(--ease-spring) backwards;
   --animate-nudge: nudge 1.2s var(--ease-out-soft) 1.4s 2;
@@ -185,20 +196,33 @@
      elemento volta ao estilo natural, sem transform residual — que criaria
      contexto de empilhamento e prenderia dropdowns abaixo de elementos vizinhos. */
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(15px); }
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: none; }
+  }
+  /* Entrada do hero e troca de slides: fade + deslocamento mínimo (8px). */
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(var(--slide-from, 8px)); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-out {
+    from { opacity: 1; transform: none; }
+    to { opacity: 0; transform: translateX(var(--slide-to, -8px)); }
   }
   @keyframes enter-scale {
     from { transform: translateY(8px) scale(0.98); }
     to { transform: none; }
   }
   @keyframes modal-in {
-    from { opacity: 0; transform: scale(0.88); }
+    from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: none; }
   }
   @keyframes heart {
     0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+    50% { transform: scale(1.12); }
     100% { transform: scale(1); }
   }
   @keyframes toast-out {
@@ -411,22 +435,22 @@
    ----------------------------------------------------------------------------- */
 [data-reveal] {
   transition:
-    opacity 560ms var(--ease-out-soft),
-    transform 560ms var(--ease-out-soft);
+    opacity var(--motion-slow) var(--ease-enter),
+    transform var(--motion-slow) var(--ease-enter);
 }
 [data-reveal][data-reveal-pending] {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(12px);
 }
 [data-reveal] [data-stagger] > * {
   transition:
-    opacity 420ms var(--ease-out-soft),
-    transform 420ms var(--ease-out-soft);
-  transition-delay: calc(min(var(--i, 0), 8) * 50ms);
+    opacity 380ms var(--ease-enter),
+    transform 380ms var(--ease-enter);
+  transition-delay: calc(min(var(--i, 0), 10) * 35ms);
 }
 [data-reveal][data-reveal-pending] [data-stagger] > * {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(10px);
 }
 @media print {
   [data-reveal][data-reveal-pending],

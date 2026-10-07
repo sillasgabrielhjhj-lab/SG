@@ -83,8 +83,9 @@ src/
 - Sombras: `shadow-card`, `shadow-raised` (hover), `shadow-lift` (hover de cards), `shadow-glow` (modais promocionais), `shadow-popover`, `shadow-sheet`.
 - Camadas (z-index): use `z-(--z-header)`, `z-(--z-floating)` (aba de cupom), `z-(--z-overlay)`, `z-(--z-modal)`, `z-(--z-toast)` — nunca números soltos em componentes novos.
 - Animações: `animate-fade-in`, `animate-slide-up`, `animate-scale-in`, `animate-drawer-right`, `animate-drawer-left`, `animate-sheet-up`, `animate-pop`, `animate-toast-in`, `animate-toast-out`, `animate-bump`, `animate-pulse-soft`; utilitário `skeleton`.
-- **Movimento (presets)** — só `transform`/`opacity`, 250–600ms, curva `ease-out-soft`:
-  - `animate-fade-up` (opacity 0→1, translateY 15px→0); `animate-enter` com `[--enter-delay:120ms]` para a entrada progressiva da página; `animate-enter-scale` (sem opacidade — seguro para o elemento de LCP); `animate-modal-in` (scale .88→1); `animate-heart`, `animate-check`, `animate-float-in`, `animate-nudge` (2x e para), `animate-confetti` (1x).
+- **Movimento (tokens)** — durações `--motion-fast` 160ms, `--motion-base` 240ms, `--motion-slow` 450ms (`duration-(--motion-base)`); curvas `ease-standard`, `ease-enter` (= `ease-out-soft`), `ease-exit`. Tailwind 4 anima `translate`/`scale` como propriedades próprias: em `transition-[...]` inclua `translate,scale` junto de `transform`.
+- **Movimento (presets)** — só `transform`/`opacity`, 250–600ms, curva `ease-enter`:
+  - `animate-fade-up` (opacity 0→1, translateY 12px→0); `animate-enter` com `[--enter-delay:120ms]` para a entrada progressiva da página; `animate-enter-scale` (sem opacidade — seguro para o elemento de LCP); `animate-hero-in`, `animate-slide-in`/`animate-slide-out` (troca de slides: fade + `--slide-from`/`--slide-to` de 8px); `animate-modal-in` (scale .96→1); `animate-heart`, `animate-check`, `animate-float-in`, `animate-nudge` (2x e para), `animate-confetti` (1x).
   - Entradas usam fill-mode `backwards`: nunca deixe `transform` residual (cria contexto de empilhamento e prende dropdowns).
   - Utilitários: `hover-lift` (cards), `press` (botões/alvos de toque), `shine-once` (selo de oferta, 1x), `fav-reveal` (favorito que aparece no hover do card).
   - **Revelação ao rolar**: marque a seção com `data-reveal` (e a lista com `data-stagger` + `style={{"--i": i}}` nos itens) e renderize `<RevealObserver />` como ÚLTIMO filho da página. Só esconde o que está abaixo da dobra e só depois de hidratar.
@@ -130,3 +131,9 @@ Por isso: **serviços de domínio recebem identidade por parâmetro** (`userId`,
 ## Qualidade
 
 `npx tsc --noEmit`, `npm run lint`, `npm run test:unit` devem passar. Ao trabalhar em paralelo com outras frentes, filtre a saída do `tsc` pelos seus arquivos e não edite arquivos de outra frente.
+
+## Hero da campanha (artes oficiais)
+
+- Artes em `public/banners/` (2000×667, WebP) configuradas em `src/features/home/campaign-hero.server.ts`.
+- Cada arte só aparece com o cupom da campanha (MERCATTO30) ativo e com ao menos um produto aceito pelo cupom na categoria de destino; com alguma no ar, o hero mostra só as artes. Sem nenhuma, volta aos banners do painel e às campanhas automáticas.
+- As artes já trazem texto e botão: o carrossel não sobrepõe nada; o slide inteiro é o link. Proporção fixa (`aspect-[2000/667]`, `object-contain`) — nunca corta.

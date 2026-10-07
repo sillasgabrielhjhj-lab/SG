@@ -35,9 +35,9 @@ export function CategoryShowcase({ categories }: { categories: CategoryNode[] })
           <li key={c.id} style={{ "--i": i } as CSSProperties} className="w-[5.75rem] shrink-0 snap-start sm:w-28 lg:w-auto lg:min-w-0 lg:flex-1">
             <Link
               href={`/categoria/${c.slug}`}
-              className="group flex h-full flex-col items-center gap-2 rounded-card border border-line bg-surface px-2 py-3 text-center shadow-card transition-[transform,box-shadow,border-color] duration-200 ease-out-soft hover:border-brand-200 focus-ring active:scale-[0.97] [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:scale-[1.02] [@media(hover:hover)]:hover:shadow-lift"
+              className="group flex h-full flex-col items-center gap-2 rounded-card border border-line bg-surface px-2 py-3 text-center shadow-card transition-[transform,translate,scale,box-shadow,border-color] duration-200 ease-enter hover:border-brand-200 focus-ring active:scale-[0.97] [@media(hover:hover)]:hover:-translate-y-[3px] [@media(hover:hover)]:hover:scale-[1.01] [@media(hover:hover)]:hover:shadow-lift"
             >
-              <span className={cn("grid size-12 place-items-center rounded-full transition-[transform,background-color] duration-200 ease-out-soft group-hover:scale-110 sm:size-14", TINTS[i % TINTS.length])}>
+              <span className={cn("grid size-12 place-items-center rounded-full transition-[transform,translate,scale,background-color] duration-200 ease-enter group-hover:scale-[1.04] sm:size-14", TINTS[i % TINTS.length])}>
                 <CategoryIcon name={c.icon} className="size-6 sm:size-7" />
               </span>
               <span className="line-clamp-2 text-xs leading-tight font-semibold text-fg group-hover:text-brand-800">{c.name}</span>

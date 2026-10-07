@@ -3,145 +3,108 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Gift, MapPin, Package, Pause, Play, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { skipImageOptimization } from "@/lib/images";
-import { LogoMark } from "@/components/brand/logo";
-import type { HeroSlide, HeroSlideArt } from "@/features/home/hero.server";
+import { SlideArt, THEMES } from "@/features/home/components/hero-slide-art";
+import type { HeroSlide } from "@/features/home/hero.server";
 
-const AUTOPLAY_MS = 6500;
+const AUTOPLAY_MS = 6000;
+/** Depois de um toque, o autoplay espera este tempo antes de seguir. */
 const HOLD_AFTER_TOUCH_MS = 6000;
+/** Arraste mínimo (px) para trocar de slide. */
+const SWIPE_MIN_PX = 40;
+/** Quanto o slide acompanha o dedo durante o arraste (resistência). */
+const DRAG_FOLLOW = 0.35;
+/** Deslocamento da troca de slides (fade + 8px). */
+const SLIDE_SHIFT_PX = 8;
+const IMAGE_SIZES = "(max-width: 1280px) 100vw, 1280px";
 
-const THEMES: Record<HeroSlide["theme"], { bg: string; text: string; sub: string; eyebrow: string; cta: string; notch: string }> = {
-  brand: { bg: "bg-brand-800", text: "text-white", sub: "text-white/85", eyebrow: "text-sun-300", cta: "bg-sun-400 text-sun-900 hover:bg-sun-300", notch: "bg-brand-800" },
-  sun: { bg: "bg-sun-200", text: "text-sun-900", sub: "text-sun-900/80", eyebrow: "text-sun-800", cta: "bg-brand-800 text-white hover:bg-brand-900", notch: "bg-sun-200" },
-  ink: { bg: "bg-[oklch(0.24_0.03_210)]", text: "text-white", sub: "text-white/80", eyebrow: "text-brand-300", cta: "bg-white text-brand-900 hover:bg-brand-50", notch: "bg-[oklch(0.24_0.03_210)]" },
-  coral: { bg: "bg-coral-600", text: "text-white", sub: "text-white/85", eyebrow: "text-white", cta: "bg-white text-coral-700 hover:bg-coral-50", notch: "bg-coral-600" },
-  light: { bg: "bg-brand-50", text: "text-brand-950", sub: "text-fg-muted", eyebrow: "text-brand-700", cta: "bg-brand-800 text-white hover:bg-brand-900", notch: "bg-brand-50" },
-};
-
-/** Arte do slide — composições leves (HTML/SVG), fotos reais dos produtos ou o banner enviado no painel. */
-function SlideArt({ art, theme, eager }: { art: HeroSlideArt; theme: (typeof THEMES)[HeroSlide["theme"]]; eager: boolean }) {
-  if (art.kind === "coupon") {
-    return (
-      <div className="relative size-full">
-        <div className="absolute top-1/2 left-1/2 w-[86%] max-w-[17.5rem] -translate-x-1/2 -translate-y-1/2 -rotate-6">
-          <div className="relative rounded-[1.25rem] bg-white px-4 py-4 text-center shadow-[0_24px_50px_-18px_oklch(0.15_0.04_200/0.6)] sm:px-6 sm:py-6">
-            <span aria-hidden className={cn("absolute top-[58%] -left-3 size-6 rounded-full", theme.notch)} />
-            <span aria-hidden className={cn("absolute top-[58%] -right-3 size-6 rounded-full", theme.notch)} />
-            <p className="text-[10px] font-bold tracking-[0.2em] text-brand-700 uppercase sm:text-xs">Cupom</p>
-            <p className="mt-1 text-[1.65rem] leading-none font-extrabold tracking-tight text-brand-900 sm:text-5xl">{art.headline}</p>
-            <p className="mt-3 border-t-2 border-dashed border-sun-300 pt-2 font-mono text-xs font-extrabold tracking-[0.18em] text-fg sm:text-base">{art.code}</p>
-          </div>
-        </div>
-        <span aria-hidden className="absolute top-[12%] right-[10%] grid size-9 place-items-center rounded-full bg-sun-400 text-sun-900 shadow-raised sm:size-12">
-          <Gift className="size-4 sm:size-6" />
-        </span>
-        <Sparkles aria-hidden className="absolute bottom-[16%] left-[12%] size-4 text-sun-300 sm:size-6" />
-      </div>
-    );
-  }
-  if (art.kind === "products") {
-    const [main, second, third] = art.images;
-    const tile = "absolute overflow-hidden rounded-2xl bg-white shadow-[0_20px_40px_-16px_oklch(0.1_0.03_200/0.55)]";
-    return (
-      <div className="relative size-full">
-        {second ? (
-          <div className={cn(tile, "top-[10%] left-[4%] size-[38%] -rotate-6")}>
-            <Image src={second.url} alt="" fill sizes="(max-width: 640px) 25vw, 180px" unoptimized={skipImageOptimization(second.url)} className="object-contain p-2" />
-          </div>
-        ) : null}
-        {third ? (
-          <div className={cn(tile, "bottom-[8%] left-[14%] size-[32%] rotate-3")}>
-            <Image src={third.url} alt="" fill sizes="(max-width: 640px) 20vw, 150px" unoptimized={skipImageOptimization(third.url)} className="object-contain p-2" />
-          </div>
-        ) : null}
-        {main ? (
-          <div className={cn(tile, "top-1/2 right-[6%] aspect-square h-[70%] -translate-y-1/2")}>
-            <Image src={main.url} alt={main.alt} fill priority={eager} sizes="(max-width: 640px) 40vw, 300px" unoptimized={skipImageOptimization(main.url)} className="object-contain p-3" />
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-  if (art.kind === "shipping") {
-    return (
-      <div className="relative size-full text-brand-700">
-        <svg aria-hidden viewBox="0 0 200 120" className="absolute inset-x-[6%] top-[22%] h-[56%] w-[88%]" fill="none">
-          <path d="M8 100 C 60 100, 70 20, 120 30 S 180 60, 192 18" stroke="currentColor" strokeOpacity="0.35" strokeWidth="3" strokeDasharray="6 7" strokeLinecap="round" />
-        </svg>
-        <span className="absolute top-1/2 left-1/2 grid size-[42%] max-h-40 max-w-40 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white shadow-[0_24px_50px_-20px_oklch(0.3_0.06_175/0.5)]">
-          <Truck className="size-1/2" aria-hidden />
-        </span>
-        <span aria-hidden className="absolute top-[14%] left-[10%] grid size-10 rotate-[-8deg] place-items-center rounded-xl bg-sun-300 text-sun-900 shadow-raised sm:size-12">
-          <Package className="size-5 sm:size-6" />
-        </span>
-        <span aria-hidden className="absolute right-[8%] bottom-[14%] grid size-10 place-items-center rounded-full bg-brand-700 text-white shadow-raised sm:size-12">
-          <MapPin className="size-5 sm:size-6" />
-        </span>
-      </div>
-    );
-  }
-  if (art.kind === "brand") {
-    return (
-      <div className="relative grid size-full place-items-center">
-        <span aria-hidden className="absolute size-[70%] rounded-full bg-white/10" />
-        <LogoMark inverse className="relative size-24 drop-shadow-xl sm:size-36" />
-      </div>
-    );
-  }
-  return null;
-}
+type Drag = { x: number; y: number; dx: number; axis: "x" | "y" | null };
 
 /**
- * Carrossel principal. Autoplay moderado com barra de progresso, pausa ao
- * passar o mouse/focar/tocar (e botão de pausa), swipe no mobile, setas e
- * teclado (← →), profundidade sutil na arte e prefers-reduced-motion.
- * O primeiro slide não anima a opacidade (preserva o LCP).
+ * Carrossel principal: troca com fade + deslocamento mínimo, autoplay de 6s
+ * com barra de progresso, pausa ao passar o mouse/focar/tocar (e botão de
+ * pausa), arraste no celular (o slide acompanha o dedo; rolagem vertical
+ * livre), setas, teclado (← →) e prefers-reduced-motion (sem autoplay).
+ * O primeiro slide não anima ao trocar de página e é o único carregado com
+ * prioridade (LCP); os demais só baixam depois dele.
  */
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+  const [dir, setDir] = useState<1 | -1>(1);
+  const [cycle, setCycle] = useState(0);
   const [hover, setHover] = useState(false);
   const [focus, setFocus] = useState(false);
   const [manual, setManual] = useState(false);
   const [hold, setHold] = useState(false);
-  const [changed, setChanged] = useState(false);
-  const [cycle, setCycle] = useState(0);
+  const [warm, setWarm] = useState(false);
   const [failed, setFailed] = useState<Record<string, boolean>>({});
   const reduced = usePrefersReducedMotion();
-  const touch = useRef<{ x: number; y: number } | null>(null);
+  const remaining = useRef(AUTOPLAY_MS);
+  const drag = useRef<Drag | null>(null);
+  const swiped = useRef(false);
   const holdTimer = useRef<number | undefined>(undefined);
+  const slideEls = useRef<(HTMLDivElement | null)[]>([]);
   const count = slides.length;
   const paused = hover || focus || manual || hold || reduced;
+  const artwork = count > 0 && slides.every((s) => s.art.kind === "artwork");
 
-  const go = useCallback(
-    (i: number) => {
-      setChanged(true);
-      setIndex((i + count) % count);
+  const show = useCallback(
+    (next: number, direction: 1 | -1) => {
+      if (next === index) return;
+      setPrev(index);
+      setDir(direction);
+      setIndex(next);
       setCycle((c) => c + 1);
     },
-    [count],
+    [index],
   );
+  const step = (delta: 1 | -1) => show((index + delta + count) % count, delta);
 
+  // Novo slide → tempo cheio; pausa → guarda o que falta e a barra congela junto.
+  useEffect(() => {
+    remaining.current = AUTOPLAY_MS;
+  }, [index, cycle]);
   useEffect(() => {
     if (paused || count < 2) return;
+    const started = performance.now();
     const t = window.setTimeout(() => {
-      setChanged(true);
-      setIndex((i) => (i + 1) % count);
-    }, AUTOPLAY_MS);
-    return () => window.clearTimeout(t);
-  }, [index, paused, count, cycle]);
+      setPrev(index);
+      setDir(1);
+      setIndex((index + 1) % count);
+    }, remaining.current);
+    return () => {
+      window.clearTimeout(t);
+      remaining.current = Math.max(0, remaining.current - (performance.now() - started));
+    };
+  }, [index, cycle, paused, count]);
 
+  // Os slides seguintes só baixam depois do primeiro (ou após 2,5s, no pior caso).
+  useEffect(() => {
+    const t = window.setTimeout(() => setWarm(true), 2500);
+    return () => window.clearTimeout(t);
+  }, []);
   useEffect(() => () => window.clearTimeout(holdTimer.current), []);
+
+  const activeEl = () => slideEls.current[index] ?? null;
+  const resetDrag = () => {
+    const el = activeEl();
+    if (el) {
+      el.style.transform = "";
+      el.style.transition = "";
+    }
+  };
 
   if (!count) return null;
   return (
     <section
       aria-roledescription="carrossel"
       aria-label="Destaques e campanhas"
-      className="group/hero relative animate-enter-scale touch-pan-y overflow-hidden rounded-banner shadow-card [--enter-delay:60ms]"
+      className={cn("group/hero relative animate-hero-in [--enter-delay:40ms]", artwork && "max-sm:-mx-2")}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onFocusCapture={() => setFocus(true)}
@@ -149,105 +112,220 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocus(false);
       }}
       onKeyDown={(e) => {
-        if (e.key === "ArrowRight") go(index + 1);
-        else if (e.key === "ArrowLeft") go(index - 1);
+        if (e.key === "ArrowRight") step(1);
+        else if (e.key === "ArrowLeft") step(-1);
       }}
-      onTouchStart={(e) => {
-        const t = e.touches[0];
-        touch.current = t ? { x: t.clientX, y: t.clientY } : null;
-        window.clearTimeout(holdTimer.current);
-        setHold(true);
-      }}
-      onTouchEnd={(e) => {
-        const start = touch.current;
-        const end = e.changedTouches[0];
-        if (start && end) {
-          const dx = end.clientX - start.x;
-          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(end.clientY - start.y)) go(index + (dx < 0 ? 1 : -1));
+      onClickCapture={(e) => {
+        // Um arraste não vira clique no banner.
+        if (swiped.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          swiped.current = false;
         }
-        touch.current = null;
-        holdTimer.current = window.setTimeout(() => setHold(false), HOLD_AFTER_TOUCH_MS);
       }}
     >
-      <div className="flex transition-transform duration-[650ms] ease-out-soft" style={{ transform: `translateX(-${index * 100}%)` }}>
+      <div
+        className={cn("relative grid touch-pan-y overflow-hidden shadow-card", artwork ? "rounded-xl bg-brand-900 sm:rounded-banner" : "rounded-banner")}
+        onTouchStart={(e) => {
+          const t = e.touches[0];
+          drag.current = t ? { x: t.clientX, y: t.clientY, dx: 0, axis: null } : null;
+          swiped.current = false;
+          window.clearTimeout(holdTimer.current);
+          setHold(true);
+        }}
+        onTouchMove={(e) => {
+          const d = drag.current;
+          const t = e.touches[0];
+          if (!d || !t || count < 2) return;
+          d.dx = t.clientX - d.x;
+          const dy = t.clientY - d.y;
+          if (!d.axis && (Math.abs(d.dx) > 8 || Math.abs(dy) > 8)) d.axis = Math.abs(d.dx) > Math.abs(dy) ? "x" : "y";
+          const el = activeEl();
+          if (d.axis === "x" && el && !reduced) {
+            el.style.transition = "none";
+            el.style.transform = `translateX(${d.dx * DRAG_FOLLOW}px)`;
+          }
+        }}
+        onTouchEnd={() => {
+          const d = drag.current;
+          drag.current = null;
+          resetDrag();
+          if (d?.axis === "x") {
+            swiped.current = true;
+            if (Math.abs(d.dx) > SWIPE_MIN_PX) step(d.dx < 0 ? 1 : -1);
+          }
+          holdTimer.current = window.setTimeout(() => setHold(false), HOLD_AFTER_TOUCH_MS);
+        }}
+        onTouchCancel={() => {
+          drag.current = null;
+          resetDrag();
+          holdTimer.current = window.setTimeout(() => setHold(false), HOLD_AFTER_TOUCH_MS);
+        }}
+      >
         {slides.map((s, i) => {
-          const t = THEMES[s.theme];
           const active = i === index;
-          const enter = changed && active;
-          const bannerImage = s.art.kind === "image" && s.imageUrl && !failed[s.id] ? s.imageUrl : null;
+          const leaving = i === prev && !active;
+          const motion = active && prev !== null ? "animate-slide-in" : leaving ? "animate-slide-out" : "";
           return (
-            <div key={s.id} role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${count}: ${s.title}`} aria-hidden={!active} inert={!active} className={cn("relative w-full shrink-0 overflow-hidden", t.bg)}>
-              <div className="relative h-[15.5rem] sm:h-[18.75rem] lg:h-[22.5rem]">
-                {bannerImage ? (
-                  <>
-                    <Image src={bannerImage} alt="" fill priority={i === 0} onError={() => setFailed((f) => ({ ...f, [s.id]: true }))} sizes="(max-width: 1280px) 100vw, 1280px" unoptimized={skipImageOptimization(bannerImage)} className="object-cover object-[75%_center] sm:object-right" />
-                    {/* Legibilidade no celular: a arte do banner fica sob o texto. */}
-                    <span aria-hidden className={cn("absolute inset-y-0 left-0 w-[80%] bg-gradient-to-r to-transparent sm:hidden", s.theme === "sun" || s.theme === "light" ? "from-white/80 via-white/50" : "from-black/55 via-black/30")} />
-                  </>
-                ) : (
-                  <>
-                    <span aria-hidden className="absolute -top-24 -right-20 size-80 rounded-full bg-white/[0.06] sm:size-[28rem]" />
-                    <span aria-hidden className="absolute -bottom-32 left-[38%] size-72 rounded-full bg-black/[0.05]" />
-                    <div
-                      aria-hidden={s.art.kind !== "products"}
-                      className="absolute inset-y-0 right-0 w-[44%] transition-transform duration-[900ms] ease-out-soft sm:w-[48%] lg:right-[3%] lg:w-[44%]"
-                      style={{ transform: active ? "translateX(0)" : `translateX(${i < index ? -28 : 28}px)` }}
-                    >
-                      <SlideArt art={s.art} theme={t} eager={i === 0} />
-                    </div>
-                  </>
-                )}
-                <div className="relative z-[1] flex h-full max-w-[58%] flex-col justify-center gap-1.5 pr-2 pl-5 sm:max-w-[52%] sm:gap-3 sm:pl-10 lg:pl-14">
-                  {s.eyebrow ? (
-                    <span className={cn("text-[11px] font-bold tracking-wider uppercase sm:text-sm", t.eyebrow, enter && "animate-fade-up")} style={enter ? ({ animationDelay: "40ms" } as CSSProperties) : undefined}>
-                      {s.eyebrow}
-                    </span>
+            <div
+              key={s.id}
+              ref={(el) => {
+                slideEls.current[i] = el;
+              }}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} de ${count}: ${s.title}`}
+              aria-hidden={!active}
+              inert={!active}
+              className={cn(
+                "relative col-start-1 row-start-1 transition-transform duration-(--motion-base) ease-enter",
+                active ? "z-[1] opacity-100" : "pointer-events-none opacity-0",
+                motion,
+              )}
+              style={{ "--slide-from": `${SLIDE_SHIFT_PX * dir}px`, "--slide-to": `${-SLIDE_SHIFT_PX * dir}px` } as CSSProperties}
+            >
+              {s.art.kind === "artwork" ? (
+                <Link
+                  href={s.link}
+                  draggable={false}
+                  onClick={() => trackEvent("select_promotion", { promotion_id: s.id, promotion_name: s.title, creative_slot: String(i + 1) })}
+                  className="relative block aspect-[2000/667] cursor-pointer outline-none transition-[scale,filter] duration-[120ms] ease-standard select-none active:scale-[0.998] active:brightness-[0.98] focus-visible:ring-4 focus-visible:ring-sun-300 focus-visible:ring-inset"
+                >
+                  {i === 0 || warm || active ? (
+                    <Image
+                      src={s.art.src}
+                      alt={s.art.alt}
+                      fill
+                      sizes={IMAGE_SIZES}
+                      quality={85}
+                      draggable={false}
+                      loading={i === 0 ? "eager" : undefined}
+                      fetchPriority={i === 0 ? "high" : "low"}
+                      onLoad={i === 0 ? () => setWarm(true) : undefined}
+                      className="object-contain"
+                    />
                   ) : null}
-                  <h2 className={cn("text-[1.35rem] leading-[1.15] font-extrabold tracking-tight text-balance sm:text-3xl lg:text-[2.6rem]", t.text, enter && "animate-fade-up")} style={enter ? ({ animationDelay: "90ms" } as CSSProperties) : undefined}>
-                    {s.title}
-                  </h2>
-                  {s.subtitle ? (
-                    <p className={cn("line-clamp-3 text-[13px] leading-snug sm:line-clamp-2 sm:text-base", t.sub, enter && "animate-fade-up")} style={enter ? ({ animationDelay: "140ms" } as CSSProperties) : undefined}>
-                      {s.subtitle}
-                    </p>
-                  ) : null}
-                  <Link
-                    href={s.link}
-                    onClick={() => trackEvent("select_promotion", { promotion_id: s.id, promotion_name: s.title, creative_slot: String(i + 1) })}
-                    className={cn("press mt-1 inline-flex h-9 w-fit items-center gap-1.5 rounded-full px-4 text-xs font-extrabold tracking-wide uppercase shadow-sm transition-colors focus-ring sm:h-11 sm:px-5 sm:text-sm", t.cta, enter && "animate-fade-up")}
-                    style={enter ? ({ animationDelay: "190ms" } as CSSProperties) : undefined}
-                  >
-                    {s.ctaLabel}
-                    <ArrowRight className="size-4" aria-hidden />
-                  </Link>
-                </div>
-              </div>
+                </Link>
+              ) : (
+                <TextSlide slide={s} position={i} animate={active && prev !== null} loadImage={i === 0 || warm || active} failed={Boolean(failed[s.id])} onImageError={() => setFailed((f) => ({ ...f, [s.id]: true }))} />
+              )}
             </div>
           );
         })}
+
+        {count > 1 ? (
+          <>
+            <ArrowButton side="left" onClick={() => step(-1)} />
+            <ArrowButton side="right" onClick={() => step(1)} />
+          </>
+        ) : null}
       </div>
+
       {count > 1 ? (
-        <>
-          <button type="button" onClick={() => go(index - 1)} aria-label="Destaque anterior" className="press absolute top-1/2 left-3 z-10 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-fg opacity-0 shadow-raised transition-opacity group-hover/hero:opacity-100 focus:opacity-100 focus-ring md:grid">
-            <ChevronLeft className="size-5" />
-          </button>
-          <button type="button" onClick={() => go(index + 1)} aria-label="Próximo destaque" className="press absolute top-1/2 right-3 z-10 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-fg opacity-0 shadow-raised transition-opacity group-hover/hero:opacity-100 focus:opacity-100 focus-ring md:grid">
-            <ChevronRight className="size-5" />
-          </button>
-          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-black/25 px-2.5 py-1.5 backdrop-blur-sm">
-            {slides.map((s, i) => (
-              <button key={s.id} type="button" onClick={() => go(i)} aria-label={`Ir para o destaque ${i + 1}: ${s.title}`} aria-current={i === index} className="grid h-4 place-items-center focus-ring">
-                <span className={cn("block h-1.5 overflow-hidden rounded-full transition-[width,background-color] duration-300", i === index ? "w-7 bg-white/40" : "w-1.5 bg-white/60 hover:bg-white/90")}>
-                  {i === index ? <span key={`${index}-${cycle}-${paused}`} className="block h-full origin-left animate-progress rounded-full bg-white" style={{ "--progress-duration": `${AUTOPLAY_MS}ms`, animationPlayState: paused ? "paused" : "running" } as CSSProperties} /> : null}
+        <div className="mt-1.5 flex items-center justify-center sm:absolute sm:bottom-3 sm:left-1/2 sm:z-[2] sm:mt-0 sm:-translate-x-1/2 sm:rounded-full sm:bg-black/30 sm:px-1.5 sm:backdrop-blur-[2px]">
+          {slides.map((s, i) => {
+            const active = i === index;
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => show(i, i > index ? 1 : -1)}
+                aria-label={`Ir para o banner ${i + 1}`}
+                aria-current={active}
+                className="group/dot grid h-10 w-9 place-items-center rounded-full focus-ring sm:h-7 sm:w-8"
+              >
+                <span className={cn("relative block h-1 w-6 overflow-hidden rounded-full bg-fg/15 transition-colors duration-(--motion-fast) group-hover/dot:bg-fg/30 sm:bg-white/40 sm:group-hover/dot:bg-white/70", active && "bg-fg/20 sm:bg-white/50")}>
+                  {active ? (
+                    <span
+                      key={`${index}-${cycle}`}
+                      className="absolute inset-0 origin-left animate-progress rounded-full bg-brand-700 sm:bg-white"
+                      style={{ "--progress-duration": `${AUTOPLAY_MS}ms`, animationPlayState: paused ? "paused" : "running" } as CSSProperties}
+                    />
+                  ) : null}
                 </span>
               </button>
-            ))}
-            <button type="button" onClick={() => setManual((p) => !p)} aria-label={manual ? "Retomar rotação" : "Pausar rotação"} aria-pressed={manual} className="ml-0.5 grid size-5 place-items-center text-white focus-ring">
-              {manual ? <Play className="size-3" fill="currentColor" /> : <Pause className="size-3" fill="currentColor" />}
-            </button>
-          </div>
-        </>
+            );
+          })}
+          <button
+            type="button"
+            onClick={() => setManual((p) => !p)}
+            aria-label={manual ? "Retomar a troca automática dos banners" : "Pausar a troca automática dos banners"}
+            aria-pressed={manual}
+            className="grid size-10 place-items-center rounded-full text-fg-muted focus-ring hover:text-fg sm:size-7 sm:text-white sm:hover:text-white"
+          >
+            {manual ? <Play className="size-3" fill="currentColor" aria-hidden /> : <Pause className="size-3" fill="currentColor" aria-hidden />}
+          </button>
+        </div>
       ) : null}
     </section>
+  );
+}
+
+function ArrowButton({ side, onClick }: { side: "left" | "right"; onClick: () => void }) {
+  const Icon = side === "left" ? ChevronLeft : ChevronRight;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={side === "left" ? "Banner anterior" : "Próximo banner"}
+      className={cn(
+        "absolute top-1/2 z-[2] hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-fg shadow-[0_2px_10px_-3px_oklch(0.2_0.03_200/0.35)] transition-[scale,background-color,box-shadow] duration-(--motion-fast) ease-standard hover:scale-[1.04] hover:bg-white hover:shadow-raised focus-ring active:scale-[0.97] lg:grid xl:size-10",
+        side === "left" ? "left-2.5 xl:left-4" : "right-2.5 xl:right-4",
+      )}
+    >
+      <Icon className="size-5" aria-hidden />
+    </button>
+  );
+}
+
+/** Slide com texto (banners do painel e campanhas automáticas) — usado quando não há arte oficial no ar. */
+function TextSlide({ slide: s, position, animate, loadImage, failed, onImageError }: { slide: HeroSlide; position: number; animate: boolean; loadImage: boolean; failed: boolean; onImageError: () => void }) {
+  const t = THEMES[s.theme];
+  const bannerImage = s.art.kind === "image" && s.imageUrl && !failed ? s.imageUrl : null;
+  const fade = (delay: number) => (animate ? { className: "animate-fade-up", style: { animationDelay: `${delay}ms` } as CSSProperties } : { className: "", style: undefined });
+  return (
+    <div className={cn("relative h-[15.5rem] overflow-hidden sm:h-[18.75rem] lg:h-[22.5rem]", t.bg)}>
+      {bannerImage ? (
+        <>
+          {loadImage ? (
+            <Image src={bannerImage} alt="" fill loading={position === 0 ? "eager" : undefined} fetchPriority={position === 0 ? "high" : "low"} onError={onImageError} sizes={IMAGE_SIZES} unoptimized={skipImageOptimization(bannerImage)} className="object-cover object-[75%_center] sm:object-right" />
+          ) : null}
+          {/* Legibilidade no celular: a arte do banner fica sob o texto. */}
+          <span aria-hidden className={cn("absolute inset-y-0 left-0 w-[80%] bg-gradient-to-r to-transparent sm:hidden", s.theme === "sun" || s.theme === "light" ? "from-white/80 via-white/50" : "from-black/55 via-black/30")} />
+        </>
+      ) : (
+        <>
+          <span aria-hidden className="absolute -top-24 -right-20 size-80 rounded-full bg-white/[0.06] sm:size-[28rem]" />
+          <span aria-hidden className="absolute -bottom-32 left-[38%] size-72 rounded-full bg-black/[0.05]" />
+          <div aria-hidden={s.art.kind !== "products"} className="absolute inset-y-0 right-0 w-[44%] sm:w-[48%] lg:right-[3%] lg:w-[44%]">
+            <SlideArt art={s.art} theme={t} eager={position === 0} />
+          </div>
+        </>
+      )}
+      <div className="relative z-[1] flex h-full max-w-[58%] flex-col justify-center gap-1.5 pr-2 pl-5 sm:max-w-[52%] sm:gap-3 sm:pl-10 lg:pl-14">
+        {s.eyebrow ? (
+          <span className={cn("text-[11px] font-bold tracking-wider uppercase sm:text-sm", t.eyebrow, fade(40).className)} style={fade(40).style}>
+            {s.eyebrow}
+          </span>
+        ) : null}
+        <h2 className={cn("text-[1.35rem] leading-[1.15] font-extrabold tracking-tight text-balance sm:text-3xl lg:text-[2.6rem]", t.text, fade(90).className)} style={fade(90).style}>
+          {s.title}
+        </h2>
+        {s.subtitle ? (
+          <p className={cn("line-clamp-3 text-[13px] leading-snug sm:line-clamp-2 sm:text-base", t.sub, fade(140).className)} style={fade(140).style}>
+            {s.subtitle}
+          </p>
+        ) : null}
+        <Link
+          href={s.link}
+          onClick={() => trackEvent("select_promotion", { promotion_id: s.id, promotion_name: s.title, creative_slot: String(position + 1) })}
+          className={cn("press mt-1 inline-flex h-9 w-fit items-center gap-1.5 rounded-full px-4 text-xs font-extrabold tracking-wide uppercase shadow-sm transition-colors focus-ring sm:h-11 sm:px-5 sm:text-sm", t.cta, fade(190).className)}
+          style={fade(190).style}
+        >
+          {s.ctaLabel}
+          <ArrowRight className="size-4" aria-hidden />
+        </Link>
+      </div>
+    </div>
   );
 }

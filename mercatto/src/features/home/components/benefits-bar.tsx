@@ -21,8 +21,8 @@ export function BenefitsBar({ items }: { items: StoreBenefit[] }) {
           const Icon = BENEFIT_ICONS[b.key];
           return (
             <li key={b.key} className="w-[68%] shrink-0 snap-start min-[420px]:w-[46%] sm:w-auto">
-              <Link href={b.href} className="hover-lift group flex h-full items-center gap-3 rounded-card border border-line bg-surface px-3.5 py-3 hover:border-brand-200 focus-ring">
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700 transition-transform duration-200 group-hover:scale-105">
+              <Link href={b.href} className="group flex h-full items-center gap-3 rounded-card border border-line bg-surface px-3.5 py-3 transition-[transform,translate,scale,box-shadow,border-color] duration-(--motion-base) ease-enter hover:border-brand-300 focus-ring active:scale-[0.99] [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-card">
+                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700 transition-transform duration-(--motion-base) ease-enter group-hover:scale-[1.03]">
                   <Icon className="size-5" aria-hidden />
                 </span>
                 <span className="min-w-0">
