@@ -1,5 +1,6 @@
 "use client";
 
+import { ReviewVideos } from "@/features/reviews/components/review-videos";
 import Image from "next/image";
 import { useState, useTransition } from "react";
 import { BadgeCheck, Camera, MessageSquare, Star } from "lucide-react";
@@ -93,6 +94,7 @@ export function ProductReviews({ productId, ratingAvg, distribution, total, with
               {r.isDemo ? <DemoBadge /> : null}
             </div>
             {r.comment ? <p className="text-sm whitespace-pre-line text-fg">{r.comment}</p> : null}
+            <ReviewVideos urls={r.videos} />
             {r.photos.length ? (
               <ul className="flex gap-2">
                 {r.photos.map((src) => (

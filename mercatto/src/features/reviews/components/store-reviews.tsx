@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ReviewVideos } from "@/features/reviews/components/review-videos";
 import Link from "next/link";
 import { BadgeCheck, MessageSquareText, Star } from "lucide-react";
 import type { listStoreReviews } from "@/features/reviews/queries";
@@ -142,6 +143,7 @@ export function StoreReviewsList({ data, basePath, rating }: { data: StoreReview
                 {r.product.name}
               </Link>
               {r.comment ? <p className="text-sm break-words whitespace-pre-line text-fg">{r.comment}</p> : <p className="text-sm text-fg-subtle italic">Sem comentário.</p>}
+              <ReviewVideos urls={r.videos} />
               {r.photos.length ? (
                 <ul className="flex flex-wrap gap-2" aria-label="Fotos enviadas pelo comprador">
                   {r.photos.map((src, i) => (

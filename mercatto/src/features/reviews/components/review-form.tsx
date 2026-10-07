@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useRef, useState, useTransition } from "react";
-import { Camera, PartyPopper, Star, X } from "lucide-react";
+import { Camera, PartyPopper, Star, Video, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,8 @@ import { useToast } from "@/components/ui/toast";
 import { ProductImage } from "@/components/commerce/product-image";
 import { createReviewAction } from "@/features/reviews/actions";
 import { uploadImages } from "@/features/media/client-upload";
+import { uploadReviewVideo } from "@/features/media/client-video-upload";
+import type { ReviewVideoUploadMode } from "@/features/media/review-video";
 
 export type PendingReviewItem = { id: string; productName: string; variantName: string | null; imageUrl: string | null; productSlug: string; orderNumber: string; deliveredAt: string | null };
 
@@ -39,7 +41,7 @@ export function StarInput({ value, onChange, name }: { value: number; onChange: 
   );
 }
 
-function ReviewForm({ item, onDone }: { item: PendingReviewItem; onDone: () => void }) {
+function ReviewForm({ item, onDone, videoMode }: { item: PendingReviewItem; onDone: () => void; videoMode: ReviewVideoUploadMode }) {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
@@ -47,6 +49,9 @@ function ReviewForm({ item, onDone }: { item: PendingReviewItem; onDone: () => v
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [videos, setVideos] = useState<string[]>([]);
+  const [videoUploading, setVideoUploading] = useState(false);
+  const videoRef = useRef<HTMLInputElement>(null);
   const [pending, start] = useTransition();
   const fileRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
@@ -65,6 +70,17 @@ function ReviewForm({ item, onDone }: { item: PendingReviewItem; onDone: () => v
     if (failed.length) toast.error(`${failed.length} foto(s) não enviada(s)`, { description: (failed[0] as { error: string }).error });
   };
 
+  const uploadVideo = async (files: FileList | null) => {
+    const file = files?.[0];
+    if (!file || !videoMode) return;
+    setVideoUploading(true);
+    const res = await uploadReviewVideo(file, videoMode);
+    setVideoUploading(false);
+    if (videoRef.current) videoRef.current.value = "";
+    if (!res.ok) return toast.error("Vídeo não enviado", { description: res.error });
+    setVideos([res.url]);
+  };
+
   return (
     <form
       noValidate
@@ -72,7 +88,7 @@ function ReviewForm({ item, onDone }: { item: PendingReviewItem; onDone: () => v
         e.preventDefault();
         if (!rating) return setErrors({ rating: ["Escolha de 1 a 5 estrelas"] });
         start(async () => {
-          const res = await createReviewAction({ orderItemId: item.id, rating, title, comment, photos });
+          const res = await createReviewAction({ orderItemId: item.id, rating, title, comment, photos, videos });
           if (!res.ok) {
             setErrors(res.fieldErrors ?? {});
             setFormError(res.fieldErrors ? null : res.error);
@@ -126,20 +142,42 @@ function ReviewForm({ item, onDone }: { item: PendingReviewItem; onDone: () => v
         </div>
         {errors.photos?.[0] ? <p className="mt-1 text-xs text-danger-700">{errors.photos[0]}</p> : null}
       </div>
+      {videoMode ? (
+        <div>
+          <p className="mb-1.5 text-sm font-medium">
+            Vídeo <span className="font-normal text-fg-subtle">(opcional, até 60 segundos e 50 MB)</span>
+          </p>
+          {videos.length ? (
+            <span className="relative inline-block">
+              <video src={videos[0]} controls preload="metadata" playsInline aria-label="Pré-visualização do vídeo" className="aspect-video w-56 rounded-md bg-black" />
+              <button type="button" onClick={() => setVideos([])} className="absolute top-1 right-1 grid size-6 place-items-center rounded-full bg-black/60 text-white focus-ring" aria-label="Remover vídeo">
+                <X className="size-3.5" />
+              </button>
+            </span>
+          ) : (
+            <label className={cn("inline-flex h-20 cursor-pointer items-center gap-2 rounded-md border-2 border-dashed border-line-strong px-4 text-sm font-semibold text-fg-subtle hover:border-brand-400 hover:text-brand-700 focus-within:outline-2 focus-within:outline-brand-600", videoUploading && "pointer-events-none opacity-60")}>
+              <Video className="size-5" aria-hidden />
+              {videoUploading ? "Enviando vídeo…" : "Adicionar vídeo"}
+              <input ref={videoRef} type="file" accept="video/mp4,video/webm,video/quicktime" className="sr-only" onChange={(e) => uploadVideo(e.target.files)} aria-label="Adicionar vídeo" />
+            </label>
+          )}
+          {errors.videos?.[0] ? <p className="mt-1 text-xs text-danger-700">{errors.videos[0]}</p> : null}
+        </div>
+      ) : null}
       {formError ? (
         <p role="alert" className="rounded-md bg-danger-50 px-3 py-2 text-sm text-danger-700">
           {formError}
         </p>
       ) : null}
       <p className="text-xs text-fg-subtle">Avaliações passam por verificação automática e podem ser moderadas conforme as regras da comunidade.</p>
-      <Button type="submit" loading={pending} disabled={uploading}>
+      <Button type="submit" loading={pending} disabled={uploading || videoUploading}>
         Enviar avaliação
       </Button>
     </form>
   );
 }
 
-export function PendingReviews({ items, initialItemId }: { items: PendingReviewItem[]; initialItemId?: string }) {
+export function PendingReviews({ items, initialItemId, videoMode = null }: { items: PendingReviewItem[]; initialItemId?: string; videoMode?: ReviewVideoUploadMode }) {
   const [current, setCurrent] = useState<PendingReviewItem | null>(() => items.find((i) => i.id === initialItemId) ?? null);
   const router = useRouter();
 
@@ -176,6 +214,7 @@ export function PendingReviews({ items, initialItemId }: { items: PendingReviewI
           <ReviewForm
             key={current.id}
             item={current}
+            videoMode={videoMode}
             onDone={() => {
               setCurrent(null);
               router.replace("/minha-conta/avaliacoes", { scroll: false });

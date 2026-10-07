@@ -1001,6 +1001,7 @@ model Review {
   title              String?
   comment            String?
   photos             String[]
+  videos             String[]     @default([])
   status             ReviewStatus @default(PUBLISHED)
   isVerifiedPurchase Boolean      @default(false)
   isDemo             Boolean      @default(false) // dados de seed — NUNCA usar em produção

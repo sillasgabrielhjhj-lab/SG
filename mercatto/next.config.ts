@@ -26,7 +26,10 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://viacep.com.br" + mpConnect + stripeConnect + (isDev ? " ws: wss:" : ""),
+  // Vídeos das avaliações (Vercel Blob da loja).
+  "media-src 'self' blob: https://*.public.blob.vercel-storage.com",
+  // vercel.com/api/blob: envio direto do vídeo da avaliação ao Blob da loja.
+  "connect-src 'self' https://viacep.com.br https://vercel.com https://*.blob.vercel-storage.com" + mpConnect + stripeConnect + (isDev ? " ws: wss:" : ""),
   `frame-src 'self'${mpFrame}${stripeFrame}`,
   "worker-src 'self'",
   "manifest-src 'self'",

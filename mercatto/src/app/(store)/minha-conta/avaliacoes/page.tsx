@@ -3,6 +3,7 @@ import { MessageSquareText } from "lucide-react";
 import { requireUserPage } from "@/server/auth/guards";
 import { listPendingReviewItems, listUserReviews } from "@/features/reviews/queries";
 import { PendingReviews } from "@/features/reviews/components/review-form";
+import { reviewVideoUploadMode } from "@/features/media/review-video.server";
 import { ProductImage } from "@/components/commerce/product-image";
 import { RatingStars } from "@/components/commerce/rating";
 import { DemoBadge } from "@/components/commerce/badges";
@@ -28,6 +29,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams: Prom
       <section>
         <PageHeading title="Avaliações" description="Sua opinião ajuda outros compradores. Só é possível avaliar produtos comprados e entregues." />
         <PendingReviews
+          videoMode={reviewVideoUploadMode()}
           initialItemId={sp.item}
           items={pending.map((i) => ({ id: i.id, productName: i.productName, variantName: i.variantName, imageUrl: i.imageUrl, productSlug: i.product.slug, orderNumber: i.order.number, deliveredAt: i.order.deliveredAt?.toISOString() ?? null }))}
         />

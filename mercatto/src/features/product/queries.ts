@@ -143,12 +143,12 @@ export async function getProductReviews(productId: string, opts: { page?: number
       orderBy,
       skip: (page - 1) * pageSize,
       take: pageSize,
-      select: { id: true, rating: true, title: true, comment: true, photos: true, isVerifiedPurchase: true, isDemo: true, createdAt: true, user: { select: { name: true } }, orderItem: { select: { variantName: true } } },
+      select: { id: true, rating: true, title: true, comment: true, photos: true, videos: true, isVerifiedPurchase: true, isDemo: true, createdAt: true, user: { select: { name: true } }, orderItem: { select: { variantName: true } } },
     }),
     db.review.count({ where }),
   ]);
   return {
-    items: rows.map((r) => ({ id: r.id, rating: r.rating, title: r.title, comment: r.comment, photos: r.photos, isVerifiedPurchase: r.isVerifiedPurchase, isDemo: r.isDemo, createdAt: r.createdAt.toISOString(), author: abbreviate(r.user.name), variantName: r.orderItem?.variantName ?? null })),
+    items: rows.map((r) => ({ id: r.id, rating: r.rating, title: r.title, comment: r.comment, photos: r.photos, videos: r.videos, isVerifiedPurchase: r.isVerifiedPurchase, isDemo: r.isDemo, createdAt: r.createdAt.toISOString(), author: abbreviate(r.user.name), variantName: r.orderItem?.variantName ?? null })),
     total,
     page,
     totalPages: Math.max(1, Math.ceil(total / pageSize)),

@@ -63,6 +63,7 @@ export async function createReview(userId: string, input: CreateReviewInput) {
         title,
         comment,
         photos: input.photos,
+        videos: input.videos,
         isVerifiedPurchase: true,
         status: screening.flagged ? "PENDING" : "PUBLISHED",
         moderationNote: screening.flagged ? `Triagem automática: ${screening.reasons.join(", ")}` : null,

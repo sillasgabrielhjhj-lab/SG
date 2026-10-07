@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ReviewVideos } from "@/features/reviews/components/review-videos";
 import { MessageSquareWarning } from "lucide-react";
 import type { QuestionStatus, ReviewStatus } from "@/generated/prisma/enums";
 import { requirePermissionPage } from "@/server/auth/guards";
@@ -94,6 +95,7 @@ export default async function AdminModerationPage({ searchParams }: { searchPara
               </p>
               {r.title ? <p className="mt-2 text-sm font-semibold">{r.title}</p> : null}
               {r.comment ? <p className="mt-0.5 text-sm whitespace-pre-line text-fg-muted">{r.comment}</p> : null}
+              <ReviewVideos urls={r.videos} />
               {r.photos.length ? (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {r.photos.map((url) => (
