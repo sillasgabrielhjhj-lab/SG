@@ -142,7 +142,7 @@ export default async function HomePage() {
 
       {welcome ? (
         <PromoStrip
-          title={welcome.percent ? `Até ${welcome.percent}% OFF em produtos selecionados.` : `${welcome.headline} em produtos selecionados.`}
+          title={welcome.firstPurchaseOnly ? `${welcome.headline} ${welcome.scopeLabel}.` : welcome.percent ? `Até ${welcome.percent}% OFF ${welcome.scopeLabel}.` : `${welcome.headline} ${welcome.scopeLabel}.`}
           subtitle="Use o cupom no carrinho. Confira os produtos participantes."
           cta="Ver participantes"
           href={welcome.href}

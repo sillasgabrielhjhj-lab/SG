@@ -20,7 +20,7 @@ import { formatDate } from "@/lib/format";
 
 export type CouponCampaignView = {
   code: string;
-  /** "30% OFF" | "R$ 20,00 OFF" | "Frete grátis" */
+  /** "25% OFF" | "R$ 20,00 OFF" | "Frete grátis" */
   headline: string;
   percent: number | null;
   benefit: string;
@@ -30,6 +30,9 @@ export type CouponCampaignView = {
   stackWithPromotions: boolean;
   /** Restrito a produtos/categorias ("produtos selecionados") ou válido na loja toda. */
   restricted: boolean;
+  firstPurchaseOnly: boolean;
+  /** Complemento do título: "na sua primeira compra" | "em produtos selecionados" | "em toda a loja". */
+  scopeLabel: string;
 };
 
 export type WelcomeCampaignView = CouponCampaignView & { reshowDays: number };
@@ -137,6 +140,8 @@ function toView(coupon: LoadedCoupon): CouponCampaignView {
     href: `/cupom/${encodeURIComponent(coupon.code)}`,
     stackWithPromotions: coupon.stackWithPromotions,
     restricted: coupon.productIds.length > 0 || coupon.categoryIds.length > 0,
+    firstPurchaseOnly: coupon.firstPurchaseOnly,
+    scopeLabel: coupon.firstPurchaseOnly ? "na sua primeira compra" : coupon.productIds.length || coupon.categoryIds.length ? "em produtos selecionados" : "em toda a loja",
   };
 }
 

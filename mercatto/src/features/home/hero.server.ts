@@ -17,7 +17,15 @@ export type HeroSlideArt =
   | { kind: "shipping" }
   | { kind: "brand" }
   /** Arte pronta (título, cupom e botão já desenhados): exibida inteira, sem texto por cima. */
-  | { kind: "artwork"; src: string; width: number; height: number; alt: string };
+  | {
+      kind: "artwork";
+      src: string;
+      width: number;
+      height: number;
+      alt: string;
+      /** Quadro exibido (proporção) e posição da imagem nele, em % — sem distorcer. */
+      frame: { aspect: number; width: number; left: number; top: number };
+    };
 
 export type HeroSlide = {
   id: string;
@@ -82,7 +90,7 @@ export async function getHeroSlides(welcome: WelcomeCampaignView | null): Promis
       id: "auto-coupon",
       eyebrow: "Presente de boas-vindas",
       title: `${welcome.headline} para começar`,
-      subtitle: "Seu primeiro achado na Mercatto ficou ainda melhor. Válido em produtos selecionados.",
+      subtitle: `Seu primeiro achado na Mercatto ficou ainda melhor. Válido ${welcome.scopeLabel}.`,
       ctaLabel: "Aproveitar agora",
       link: welcome.href,
       imageUrl: null,

@@ -4,36 +4,61 @@ import { countEligibleProductsIn, findPromotableCoupon } from "@/features/coupon
 import type { HeroSlide } from "@/features/home/hero.server";
 
 /**
- * Artes oficiais da campanha MERCATTO30 (public/banners, 2000×667). As artes
+ * Configuração ÚNICA da campanha do hero: cupom MERCATTO25 (25% OFF na
+ * primeira compra) e suas artes oficiais (public/banners, 2000×667). As artes
  * já trazem título, cupom e botão — o carrossel não sobrepõe nenhum texto.
  * Cada arte só entra no ar quando é verdade agora: o cupom está ativo (é
- * validado no servidor, no carrinho e no checkout) e aceita ao menos um
- * produto publicado da categoria para onde o banner leva.
+ * validado no servidor, no carrinho e no checkout — primeira compra, limite
+ * por cliente, categorias) e aceita ao menos um produto publicado da
+ * categoria para onde o banner leva.
  */
-const CAMPAIGN_COUPON = "MERCATTO30";
-const ART_WIDTH = 2000;
-const ART_HEIGHT = 667;
+export const HERO_CAMPAIGN_COUPON = "MERCATTO25";
 
-const ARTWORKS = [
+const ART = { width: 2000, height: 667 } as const;
+/** Proporção exibida: a das artes sem a moldura clara que duas delas trazem. */
+const DISPLAY_ASPECT = 3.12;
+
+type Crop = { x: number; y: number; w: number; h: number };
+
+const ARTWORKS: { id: string; src: string; alt: string; category: string; crop: Crop }[] = [
   {
-    id: "mercatto30-tv-audio",
-    src: "/banners/mercatto-tv-audio-30off.webp",
-    alt: "Ofertas Mercatto de até 30% em TV, celular e áudio com cupom MERCATTO30",
+    id: "mercatto25-tv-audio",
+    src: "/banners/mercatto-tv-audio-25off.webp",
+    alt: "25% OFF na primeira compra em TV, celular e áudio na Mercatto com cupom MERCATTO25",
     category: "tv-e-audio",
+    crop: { x: 17, y: 18, w: 1965, h: 626 },
   },
   {
-    id: "mercatto30-eletrodomesticos",
-    src: "/banners/mercatto-eletrodomesticos-30off.webp",
-    alt: "Ofertas Mercatto de até 30% em eletrodomésticos com cupom MERCATTO30",
+    id: "mercatto25-eletrodomesticos",
+    src: "/banners/mercatto-eletrodomesticos-25off.webp",
+    alt: "25% OFF na primeira compra em eletrodomésticos na Mercatto com cupom MERCATTO25",
     category: "eletrodomesticos",
+    crop: { x: 17, y: 17, w: 1965, h: 632 },
   },
   {
-    id: "mercatto30-celulares",
-    src: "/banners/mercatto-celulares-acessorios-30off.webp",
-    alt: "Ofertas Mercatto de até 30% em celulares e acessórios com cupom MERCATTO30",
+    id: "mercatto25-celulares",
+    src: "/banners/mercatto-celulares-acessorios-25off.webp",
+    alt: "25% OFF na primeira compra em celulares e acessórios na Mercatto com cupom MERCATTO25",
     category: "celulares",
+    crop: { x: 0, y: 0, w: ART.width, h: ART.height },
   },
-] as const;
+];
+
+/**
+ * Posição da imagem (em % do quadro) para que a área `crop` cubra o quadro
+ * sem distorcer — esconde a moldura desenhada em algumas artes sem editar
+ * o arquivo.
+ */
+function framing(crop: Crop) {
+  const scale = Math.max(1 / crop.w, 1 / (DISPLAY_ASPECT * crop.h)); // por unidade de largura do quadro
+  const round = (n: number) => Math.round(n * 1000) / 1000;
+  return {
+    aspect: DISPLAY_ASPECT,
+    width: round(ART.width * scale * 100),
+    left: round(50 - (crop.x + crop.w / 2) * scale * 100),
+    top: round(50 - (crop.y + crop.h / 2) * scale * DISPLAY_ASPECT * 100),
+  };
+}
 
 function findCategory(nodes: CategoryNode[], slug: string): CategoryNode | null {
   for (const n of nodes) {
@@ -49,7 +74,7 @@ function subtreeIds(node: CategoryNode): string[] {
 }
 
 export async function getCampaignHeroSlides(tree: CategoryNode[]): Promise<HeroSlide[]> {
-  const coupon = await findPromotableCoupon(CAMPAIGN_COUPON);
+  const coupon = await findPromotableCoupon(HERO_CAMPAIGN_COUPON);
   if (!coupon) return [];
   const slides = await Promise.all(
     ARTWORKS.map(async (art): Promise<HeroSlide | null> => {
@@ -60,11 +85,11 @@ export async function getCampaignHeroSlides(tree: CategoryNode[]): Promise<HeroS
         eyebrow: null,
         title: art.alt,
         subtitle: null,
-        ctaLabel: "Ver ofertas",
+        ctaLabel: "Aproveitar agora",
         link: `/categoria/${category.slug}`,
         imageUrl: art.src,
         theme: "brand",
-        art: { kind: "artwork", src: art.src, width: ART_WIDTH, height: ART_HEIGHT, alt: art.alt },
+        art: { kind: "artwork", src: art.src, width: ART.width, height: ART.height, alt: art.alt, frame: framing(art.crop) },
       };
     }),
   );

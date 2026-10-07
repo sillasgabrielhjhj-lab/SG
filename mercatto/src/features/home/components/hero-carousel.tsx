@@ -189,20 +189,23 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                   href={s.link}
                   draggable={false}
                   onClick={() => trackEvent("select_promotion", { promotion_id: s.id, promotion_name: s.title, creative_slot: String(i + 1) })}
-                  className="relative block aspect-[2000/667] cursor-pointer outline-none transition-[scale,filter] duration-[120ms] ease-standard select-none active:scale-[0.998] active:brightness-[0.98] focus-visible:ring-4 focus-visible:ring-sun-300 focus-visible:ring-inset"
+                  style={{ aspectRatio: s.art.frame.aspect }}
+                  className="relative block cursor-pointer overflow-hidden outline-none transition-[scale,filter] duration-[120ms] ease-standard select-none active:scale-[0.998] active:brightness-[0.98] focus-visible:ring-4 focus-visible:ring-sun-300 focus-visible:ring-inset"
                 >
                   {i === 0 || warm || active ? (
                     <Image
                       src={s.art.src}
                       alt={s.art.alt}
-                      fill
+                      width={s.art.width}
+                      height={s.art.height}
                       sizes={IMAGE_SIZES}
                       quality={85}
                       draggable={false}
                       loading={i === 0 ? "eager" : undefined}
                       fetchPriority={i === 0 ? "high" : "low"}
                       onLoad={i === 0 ? () => setWarm(true) : undefined}
-                      className="object-contain"
+                      style={{ width: `${s.art.frame.width}%`, left: `${s.art.frame.left}%`, top: `${s.art.frame.top}%` }}
+                      className="absolute h-auto max-w-none"
                     />
                   ) : null}
                 </Link>
@@ -269,7 +272,7 @@ function ArrowButton({ side, onClick }: { side: "left" | "right"; onClick: () =>
       onClick={onClick}
       aria-label={side === "left" ? "Banner anterior" : "Próximo banner"}
       className={cn(
-        "absolute top-1/2 z-[2] hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-fg shadow-[0_2px_10px_-3px_oklch(0.2_0.03_200/0.35)] transition-[scale,background-color,box-shadow] duration-(--motion-fast) ease-standard hover:scale-[1.04] hover:bg-white hover:shadow-raised focus-ring active:scale-[0.97] lg:grid xl:size-10",
+        "absolute top-1/2 z-[2] hidden size-9 -translate-y-1/2 place-items-center rounded-full bg-white/85 text-fg opacity-85 group-hover/hero:opacity-100 shadow-[0_2px_10px_-3px_oklch(0.2_0.03_200/0.35)] transition-[scale,background-color,box-shadow,opacity] duration-(--motion-fast) ease-standard hover:scale-[1.04] hover:bg-white hover:shadow-raised focus-ring active:scale-[0.97] lg:grid xl:size-10",
         side === "left" ? "left-2.5 xl:left-4" : "right-2.5 xl:right-4",
       )}
     >

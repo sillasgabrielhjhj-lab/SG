@@ -48,7 +48,7 @@ function tabHiddenThisSession(): boolean {
 }
 
 /**
- * Controla o pop-up de boas-vindas e a aba flutuante "🎁 30% OFF":
+ * Controla o pop-up de boas-vindas e a aba flutuante ("25% OFF · 1ª compra"):
  *  - abre uma vez (após a página carregar), e só volta depois de `reshowDays`
  *    dias ou se o cupom da campanha mudar;
  *  - fechado o pop-up, fica a aba discreta para reabrir os detalhes;
@@ -93,13 +93,16 @@ export function WelcomeCoupon({ campaign }: { campaign: WelcomeCampaignView | nu
       <button
         type="button"
         onClick={() => setPhase("modal")}
-        aria-label={`Ver cupom de boas-vindas: ${campaign.headline} em produtos selecionados`}
+        aria-label={`Ver cupom de boas-vindas: ${campaign.headline} ${campaign.scopeLabel}`}
         className="press flex h-11 items-center gap-2 rounded-full bg-brand-800 pr-4 pl-3 text-sm font-extrabold text-white shadow-glow ring-1 ring-white/10 transition-colors hover:bg-brand-900 focus-ring"
       >
         <span className="grid size-7 animate-nudge place-items-center rounded-full bg-sun-400 text-sun-900">
           <Gift className="size-4" aria-hidden />
         </span>
-        <span className="tabular">{campaign.headline}</span>
+        <span className="tabular">
+          {campaign.headline}
+          {campaign.firstPurchaseOnly ? <span className="font-semibold opacity-80"> · 1ª compra</span> : null}
+        </span>
       </button>
       <button
         type="button"

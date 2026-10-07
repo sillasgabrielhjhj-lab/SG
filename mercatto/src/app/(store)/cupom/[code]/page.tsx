@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CheckCircle2, Gift, SearchX, ShieldCheck } from "lucide-react";
 import { getCurrentUser } from "@/server/auth/guards";
-import { getCouponLanding, type CouponCampaignView } from "@/features/coupons/campaign.server";
+import { getCouponLanding } from "@/features/coupons/campaign.server";
 import { CouponTicket } from "@/features/coupons/components/coupon-ticket";
 import { ActivateCouponButton } from "@/features/coupons/components/activate-coupon-button";
 import { getWishlistProductIds } from "@/features/wishlist/queries";
@@ -15,14 +15,13 @@ import { formatDate } from "@/lib/format";
 
 type Props = { params: Promise<{ code: string }> };
 
-const scopeOf = (campaign: CouponCampaignView) => (campaign.restricted ? "em produtos selecionados" : "em toda a loja");
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params;
   const data = await getCouponLanding(decodeURIComponent(code));
   if (!data) return buildMetadata({ title: "Cupom não encontrado", path: `/cupom/${code}`, noindex: true });
   return buildMetadata({
-    title: `Cupom ${data.campaign.code}: ${data.campaign.headline} ${scopeOf(data.campaign)}`,
+    title: `Cupom ${data.campaign.code}: ${data.campaign.headline} ${data.campaign.scopeLabel}`,
     description: `Use o cupom ${data.campaign.code} e ganhe ${data.campaign.benefit} ${data.campaign.restricted ? "nos produtos participantes" : "nas compras"} da Mercatto. Confira as condições.`,
     path: `/cupom/${data.campaign.code}`,
     // Cupons expiram: a página não deve ficar indexada com uma oferta antiga.
@@ -51,7 +50,7 @@ export default async function CouponPage({ params }: Props) {
           </p>
           <h1 id="coupon-title" className="mt-3 text-4xl leading-none font-extrabold tracking-tight sm:text-5xl">
             {campaign.headline}
-            <span className="mt-2 block text-lg font-semibold text-white/85 sm:text-xl">{scopeOf(campaign)}</span>
+            <span className="mt-2 block text-lg font-semibold text-white/85 sm:text-xl">{campaign.scopeLabel}</span>
           </h1>
           {campaign.endsAt && live ? <p className="mt-3 text-sm text-white/80">Válido até {formatDate(new Date(new Date(campaign.endsAt).getTime() - 1))}.</p> : null}
         </div>

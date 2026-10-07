@@ -134,6 +134,6 @@ Por isso: **serviços de domínio recebem identidade por parâmetro** (`userId`,
 
 ## Hero da campanha (artes oficiais)
 
-- Artes em `public/banners/` (2000×667, WebP) configuradas em `src/features/home/campaign-hero.server.ts`.
-- Cada arte só aparece com o cupom da campanha (MERCATTO30) ativo e com ao menos um produto aceito pelo cupom na categoria de destino; com alguma no ar, o hero mostra só as artes. Sem nenhuma, volta aos banners do painel e às campanhas automáticas.
-- As artes já trazem texto e botão: o carrossel não sobrepõe nada; o slide inteiro é o link. Proporção fixa (`aspect-[2000/667]`, `object-contain`) — nunca corta.
+- Configuração única em `src/features/home/campaign-hero.server.ts` (cupom `HERO_CAMPAIGN_COUPON`, artes em `public/banners/` 2000×667 WebP, categoria de destino, recorte da moldura). Textos da campanha (pop-up, aba, faixa, /cupom) vêm do cupom configurado em Admin → Configurações (`scopeLabel`: "na sua primeira compra" quando `firstPurchaseOnly`).
+- Cada arte só aparece com o cupom da campanha (MERCATTO25, 25% OFF na primeira compra) ativo e com ao menos um produto aceito pelo cupom na categoria de destino; com alguma no ar, o hero mostra só as artes. Sem nenhuma, volta aos banners do painel e às campanhas automáticas.
+- As artes já trazem texto e botão: o carrossel não sobrepõe nada; o slide inteiro é o link. Quadro de proporção fixa (3,12); duas artes trazem moldura clara desenhada, escondida pelo enquadramento (sem editar o arquivo e sem distorcer).

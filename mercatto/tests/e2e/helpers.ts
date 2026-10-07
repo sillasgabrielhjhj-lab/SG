@@ -4,7 +4,7 @@ export const DEMO_PASSWORD = "Mercatto@2026";
 
 /** Fecha o pop-up de boas-vindas sempre que ele aparecer (campanha ativa no banco de teste). */
 export async function skipWelcomePopup(page: Page) {
-  await page.addLocatorHandler(page.getByRole("dialog", { name: /Presente de boas-vindas/ }), async (dialog) => {
+  await page.addLocatorHandler(page.getByRole("dialog", { name: /presente/i }), async (dialog) => {
     await dialog.getByRole("button", { name: "Fechar presente de boas-vindas" }).click();
   });
 }

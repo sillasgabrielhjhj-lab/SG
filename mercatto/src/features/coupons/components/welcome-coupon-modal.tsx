@@ -30,7 +30,7 @@ const CONFETTI = Array.from({ length: 18 }, (_, i) => {
 });
 
 /**
- * Pop-up "Presente de boas-vindas". <dialog> nativo: foco preso, ESC e clique
+ * Pop-up da campanha de boas-vindas (ex.: "Um presente para sua primeira compra"). <dialog> nativo: foco preso, ESC e clique
  * fora fecham, foco volta ao elemento de origem. Carregado sob demanda (não
  * pesa no carregamento inicial da página).
  */
@@ -126,9 +126,9 @@ export default function WelcomeCouponModal({ campaign, onClose }: { campaign: We
               <Gift className="size-7" aria-hidden />
             </span>
             <h2 id={titleId} className="mt-4 flex flex-col items-center">
-              <span className="animate-fade-up text-sm font-bold tracking-wide text-brand-800 [animation-delay:120ms]">Presente de boas-vindas</span>
+              <span className="animate-fade-up text-sm font-bold tracking-wide text-brand-800 [animation-delay:120ms]">{campaign.firstPurchaseOnly ? "Um presente para sua primeira compra" : "Presente de boas-vindas"}</span>
               <span className="mt-1 animate-fade-up text-5xl leading-none font-extrabold tracking-tight text-brand-900 [animation-delay:200ms] sm:text-6xl">{campaign.headline}</span>
-              <span className="mt-2 animate-fade-up text-base font-semibold text-fg-muted [animation-delay:260ms]">em produtos selecionados</span>
+              <span className="mt-2 animate-fade-up text-base font-semibold text-fg-muted [animation-delay:260ms]">{campaign.scopeLabel}</span>
             </h2>
           </div>
         </div>
@@ -148,10 +148,10 @@ export default function WelcomeCouponModal({ campaign, onClose }: { campaign: We
           ) : null}
           <div className="flex animate-fade-up flex-col gap-2 [animation-delay:400ms]">
             <Button size="lg" fullWidth loading={pending} loadingText="Ativando cupom" onClick={activate} className="tracking-wide uppercase" rightIcon={<ArrowRight className="size-4" aria-hidden />}>
-              Quero meu desconto
+              Aproveitar desconto
             </Button>
             <Link href={campaign.href} onClick={finish} className="press inline-flex h-11 items-center justify-center rounded-field text-sm font-semibold text-brand-700 transition-colors hover:bg-brand-50 focus-ring">
-              Ver produtos participantes
+              Ver ofertas
             </Link>
           </div>
           <p id={descId} className="text-center text-xs leading-relaxed text-fg-subtle">

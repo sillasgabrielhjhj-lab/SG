@@ -133,7 +133,7 @@ export function SettingsForm({ initial, welcomeStatus }: { initial: SettingsValu
 
       <Card title="Campanha de boas-vindas" description="Pop-up da primeira visita, aba flutuante e faixas da home. Percentual, mínimo, teto, datas e produtos participantes vêm do cupom (Marketing → Cupons).">
         <Field label="Código do cupom da campanha" error={e("welcomeCouponCode")} hint="Vazio = campanha desligada">
-          <Input value={v.welcomeCouponCode} maxLength={40} autoCapitalize="characters" onChange={set("welcomeCouponCode")} placeholder="MERCATTO30" />
+          <Input value={v.welcomeCouponCode} maxLength={40} autoCapitalize="characters" onChange={set("welcomeCouponCode")} placeholder="MERCATTO25" />
         </Field>
         <Field label="Mostrar o pop-up de novo após (dias)" error={e("welcomeCouponReshowDays")} hint="Quem já viu só vê de novo depois desse prazo">
           <Input type="number" min={1} max={365} value={v.welcomeCouponReshowDays} onChange={set("welcomeCouponReshowDays")} />
