@@ -4,7 +4,7 @@ import { db } from "@/server/db";
 import { env } from "@/server/env";
 import { AppError, conflict, notFound } from "@/server/errors";
 import { logger } from "@/server/observability/logger";
-import { getPaymentGateway, installmentInterestPolicy } from "@/server/providers/payments";
+import { getPaymentGateway, installmentInterestPolicy, tryGetPaymentGateway } from "@/server/providers/payments";
 import { isProviderError } from "@/server/providers/errors";
 import { allocateProportionally, installmentOptions, formatBRL } from "@/lib/money";
 import { computeTotals } from "@/features/pricing/engine";
@@ -110,6 +110,11 @@ export async function buildCheckoutQuote(userId: string, input: Pick<CheckoutInp
     pixDiscountPercent: settings.pixDiscountPercent,
     paymentMethod: input.paymentMethod,
   });
+  // Abaixo do mínimo do processador (ex.: Stripe, R$ 0,50) a cobrança seria recusada: avisa antes de criar o pedido.
+  const minCharge = tryGetPaymentGateway().gateway?.minAmountCents ?? 0;
+  if (totals.totalCents < minCharge) {
+    throw new AppError("UNPROCESSABLE", `O valor mínimo para pagamento é ${formatBRL(minCharge)}. Adicione mais itens ao carrinho para continuar.`);
+  }
 
   // Distribui descontos por loja (sem perder centavos).
   const groups = [...groupByStore(lines)];

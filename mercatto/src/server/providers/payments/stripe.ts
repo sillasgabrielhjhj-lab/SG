@@ -4,6 +4,7 @@ import QRCode from "qrcode";
 import { z } from "zod";
 import { logger } from "@/server/observability/logger";
 import { ProviderConfigurationError, ProviderError, isProviderError } from "@/server/providers/errors";
+import { formatBRL } from "@/lib/money";
 import { providerRequest } from "@/server/providers/http";
 import type {
   ClientPaymentAction,
@@ -284,7 +285,9 @@ export type StripeConfig = {
 export class StripeGateway implements PaymentGateway {
   readonly name = STRIPE_PROVIDER;
   readonly isSandbox: boolean;
-  readonly supportsMethods: PaymentMethodCode[];
+readonly supportsMethods: PaymentMethodCode[];
+  /** A Stripe recusa cobranças em BRL abaixo de R$ 0,50 (amount_too_small). */
+  readonly minAmountCents = 50;
   readonly publicKey: string | null;
 
   private readonly secretKey: string;
@@ -388,6 +391,7 @@ export class StripeGateway implements PaymentGateway {
 
   async createPayment(input: CreatePaymentInput): Promise<CreatePaymentResult> {
     if (!Number.isSafeInteger(input.amountCents) || input.amountCents <= 0) throw rejected("Valor do pagamento inválido.");
+    if (input.amountCents < this.minAmountCents) throw rejected(`O valor mínimo para pagamento é ${formatBRL(this.minAmountCents)}.`);
     if (!this.supportsMethods.includes(input.method)) throw rejected("Forma de pagamento indisponível.");
     const common = {
       amount: input.amountCents,

@@ -87,6 +87,8 @@ export interface PaymentGateway {
   /** true quando nenhuma cobrança real é realizada. */
   readonly isSandbox: boolean;
   readonly supportsMethods: PaymentMethodCode[];
+  /** Menor valor que o processador aceita cobrar (centavos); abaixo disso o checkout avisa antes de criar o pedido. */
+  readonly minAmountCents?: number;
   /** Chave pública usada pelo formulário de cartão no navegador (quando aplicável). */
   readonly publicKey?: string | null;
   /** Ação pendente no navegador para um pagamento (somente gateways que exigem). */
