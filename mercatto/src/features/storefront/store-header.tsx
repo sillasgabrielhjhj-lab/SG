@@ -1,4 +1,4 @@
-import { BadgeCheck, CalendarDays, Package, ShieldCheck, Star } from "lucide-react";
+import { CalendarDays, Package, ShieldCheck, Star } from "lucide-react";
 import { formatCompact, formatMembership } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { RatingStars } from "@/components/commerce/rating";
@@ -20,11 +20,10 @@ export function StoreHeader({ store, children }: { store: { name: string; descri
         </div>
         {children}
       </div>
-      <dl className={cn("grid grid-cols-2 gap-px text-sm sm:grid-cols-4", store.isOfficial ? "bg-white/10" : "bg-line")}>
+      <dl className={cn("grid grid-cols-2 gap-px text-sm sm:grid-cols-3", store.isOfficial ? "bg-white/10" : "bg-line")}>
         {[
           [Star, "Reputação", store.ratingCount ? <span key="r" className="flex items-center gap-1.5">{reputation} <RatingStars value={store.ratingAvg} size="xs" /></span> : "Nova loja"],
           [Package, "Vendas", `+${formatCompact(store.salesCount)}`],
-          [BadgeCheck, "Cancelamentos", `${(store.cancellationRate * 100).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%`],
           [CalendarDays, "Na plataforma", formatMembership(store.createdAt).replace(" na Mercatto", "")],
         ].map(([Icon, label, value]) => {
           const I = Icon as typeof Star;

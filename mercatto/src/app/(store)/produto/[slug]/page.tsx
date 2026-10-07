@@ -200,10 +200,6 @@ export default async function ProductPage({ params }: Props) {
                 <dd className="text-sm font-semibold">{product.store.ratingCount ? <RatingStars value={product.store.ratingAvg} size="xs" showValue /> : "—"}</dd>
               </div>
               <div>
-                <dt className="text-fg-subtle">Cancelamentos</dt>
-                <dd className="text-sm font-semibold">{(product.store.cancellationRate * 100).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%</dd>
-              </div>
-              <div>
                 <dt className="text-fg-subtle">Tempo</dt>
                 <dd className="text-sm font-semibold">{formatMembership(product.store.createdAt).replace(" na Mercatto", "")}</dd>
               </div>
