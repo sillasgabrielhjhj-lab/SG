@@ -3,7 +3,7 @@ import { db } from "@/server/db";
 import { getProductCards } from "@/features/catalog/cards.server";
 import { getCategoryTree } from "@/features/catalog/categories.server";
 import { getStoreSettings } from "@/features/settings/queries";
-import { effectiveInstallmentConfig } from "@/features/checkout/installments";
+import { getStoreBenefits } from "@/features/home/benefits.server";
 import type { CategoryNode } from "@/features/catalog/types";
 import type { WelcomeCampaignView } from "@/features/coupons/campaign.server";
 import { formatBRL } from "@/lib/money";
@@ -50,10 +50,11 @@ function collect(nodes: CategoryNode[], slugs: Set<string>, inside = false, out:
  * existente). Nada de promessa sem lastro nos dados.
  */
 export async function getHeroSlides(welcome: WelcomeCampaignView | null): Promise<HeroSlide[]> {
-  const [banners, tree, settings, freeShippingCount] = await Promise.all([
+  const [banners, tree, settings, benefits, freeShippingCount] = await Promise.all([
     getActiveBanners("HOME_HERO"),
     getCategoryTree(),
     getStoreSettings(),
+    getStoreBenefits(),
     db.product.count({ where: { status: "ACTIVE", store: { status: "ACTIVE" }, freeShipping: true, totalStock: { gt: 0 } } }),
   ]);
 
@@ -89,12 +90,13 @@ export async function getHeroSlides(welcome: WelcomeCampaignView | null): Promis
     const withImage = products.filter((p) => p.imageUrl).slice(0, 3);
     if (withImage.length) {
       const hasDeals = products.some((p) => p.discountPercent > 0);
-      const installments = effectiveInstallmentConfig(settings).interestFreeInstallments;
+      // Parcelamento só quando o gateway aceita cartão de verdade.
+      const installments = benefits.methods.includes("CREDIT_CARD") ? benefits.installments : 1;
       slides.push({
         id: "auto-tech",
         eyebrow: "Tecnologia",
         title: "Tecnologia que cabe no seu bolso",
-        subtitle: hasDeals ? "Ofertas especiais em smartphones e eletrônicos." : installments > 1 ? `Smartphones e eletrônicos em até ${installments}x sem juros no cartão.` : "Smartphones e eletrônicos novos e originais.",
+        subtitle: hasDeals ? "Ofertas especiais em smartphones e eletrônicos." : installments > 1 ? `Smartphones e eletrônicos em até ${installments}x sem juros no cartão.` : "Smartphones, fones e acessórios para o seu dia a dia.",
         ctaLabel: hasDeals ? "Ver ofertas" : "Ver produtos",
         link: hasDeals ? `/ofertas?categoria=${tech.first.slug}` : `/categoria/${tech.first.slug}`,
         imageUrl: null,
@@ -123,7 +125,7 @@ export async function getHeroSlides(welcome: WelcomeCampaignView | null): Promis
       id: "auto-brand",
       eyebrow: "Mercatto",
       title: "Achou. Gostou. É Mercatto.",
-      subtitle: "Produtos originais, pagamento protegido e entrega acompanhada do início ao fim.",
+      subtitle: "Pagamento protegido e entrega acompanhada do início ao fim.",
       ctaLabel: "Explorar categorias",
       link: "/categorias",
       imageUrl: null,

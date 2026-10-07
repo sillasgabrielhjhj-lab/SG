@@ -14,27 +14,9 @@ import { FavoriteButton } from "@/components/commerce/favorite-button";
 export type ProductCardOptions = {
   /** Posição real no ranking de vendas (exibe "Top 1/2/3"). */
   rank?: number;
-  /** Barra do estoque promocional (só quando a promoção tem limite cadastrado). */
-  showPromoStock?: boolean;
   /** Nome da vitrine, para analytics (select_item). */
   listName?: string;
 };
-
-/** Barra de estoque da promoção: vendidos / limite promocional cadastrado. */
-function PromoStockBar({ promotion }: { promotion: NonNullable<ProductCardData["promotion"]> }) {
-  if (!promotion.stockLimit) return null;
-  const sold = Math.min(promotion.soldCount, promotion.stockLimit);
-  const left = promotion.stockLimit - sold;
-  const pct = Math.round((sold / promotion.stockLimit) * 100);
-  return (
-    <div className="flex flex-col gap-1">
-      <div className="h-1.5 overflow-hidden rounded-full bg-sun-100" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label={`${pct}% do estoque promocional vendido`}>
-        <div className="h-full origin-left rounded-full bg-sun-500 transition-transform duration-700" style={{ transform: `scaleX(${Math.max(0.04, sold / promotion.stockLimit)})` }} />
-      </div>
-      <span className="text-2xs font-semibold text-sun-800">{left > 0 ? `${pct}% vendido · restam ${left}` : "Estoque promocional esgotado"}</span>
-    </div>
-  );
-}
 
 /**
  * Card de produto. Link "esticado" cobre o card inteiro (um único alvo de
@@ -42,7 +24,7 @@ function PromoStockBar({ promotion }: { promotion: NonNullable<ProductCardData["
  * Hover (só em dispositivos com mouse): o card sobe, a sombra aprofunda, a
  * imagem aproxima levemente e surgem o favorito e o atalho "Ver detalhes".
  */
-export function ProductCard({ product, variant = "grid", favorited, priority, className, rank, showPromoStock, listName }: { product: ProductCardData; variant?: "grid" | "compact" | "horizontal"; favorited?: boolean; priority?: boolean; className?: string } & ProductCardOptions) {
+export function ProductCard({ product, variant = "grid", favorited, priority, className, rank, listName }: { product: ProductCardData; variant?: "grid" | "compact" | "horizontal"; favorited?: boolean; priority?: boolean; className?: string } & ProductCardOptions) {
   const href = `/produto/${product.slug}`;
   const unavailable = product.totalStock <= 0;
   const horizontal = variant === "horizontal";
@@ -112,7 +94,6 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
           </>
         )}
         <div className="mt-auto flex flex-col gap-1 pt-1">
-          {showPromoStock && product.promotion && !unavailable ? <PromoStockBar promotion={product.promotion} /> : null}
           {product.freeShipping && !unavailable ? <FreeShippingBadge /> : null}
           {!unavailable && product.totalStock <= 5 ? <StockIndicator stock={product.totalStock} /> : null}
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-fg-subtle">

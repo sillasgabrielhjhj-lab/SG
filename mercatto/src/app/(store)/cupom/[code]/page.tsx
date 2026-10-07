@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CheckCircle2, Gift, SearchX, ShieldCheck } from "lucide-react";
 import { getCurrentUser } from "@/server/auth/guards";
-import { getCouponLanding } from "@/features/coupons/campaign.server";
+import { getCouponLanding, type CouponCampaignView } from "@/features/coupons/campaign.server";
 import { CouponTicket } from "@/features/coupons/components/coupon-ticket";
 import { ActivateCouponButton } from "@/features/coupons/components/activate-coupon-button";
 import { getWishlistProductIds } from "@/features/wishlist/queries";
@@ -15,13 +15,15 @@ import { formatDate } from "@/lib/format";
 
 type Props = { params: Promise<{ code: string }> };
 
+const scopeOf = (campaign: CouponCampaignView) => (campaign.restricted ? "em produtos selecionados" : "em toda a loja");
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params;
   const data = await getCouponLanding(decodeURIComponent(code));
   if (!data) return buildMetadata({ title: "Cupom não encontrado", path: `/cupom/${code}`, noindex: true });
   return buildMetadata({
-    title: `Cupom ${data.campaign.code}: ${data.campaign.headline} em produtos selecionados`,
-    description: `Use o cupom ${data.campaign.code} e ganhe ${data.campaign.benefit} nos produtos participantes da Mercatto. Confira as condições.`,
+    title: `Cupom ${data.campaign.code}: ${data.campaign.headline} ${scopeOf(data.campaign)}`,
+    description: `Use o cupom ${data.campaign.code} e ganhe ${data.campaign.benefit} ${data.campaign.restricted ? "nos produtos participantes" : "nas compras"} da Mercatto. Confira as condições.`,
     path: `/cupom/${data.campaign.code}`,
     // Cupons expiram: a página não deve ficar indexada com uma oferta antiga.
     noindex: true,
@@ -32,7 +34,8 @@ export default async function CouponPage({ params }: Props) {
   const { code } = await params;
   const [data, user] = await Promise.all([getCouponLanding(decodeURIComponent(code)), getCurrentUser()]);
   if (!data) notFound();
-  const { campaign, live, products } = data;
+  const { campaign, status, startsAt, products, total } = data;
+  const live = status === "live";
   const favorites = user ? await getWishlistProductIds(user.id) : undefined;
 
   return (
@@ -48,15 +51,21 @@ export default async function CouponPage({ params }: Props) {
           </p>
           <h1 id="coupon-title" className="mt-3 text-4xl leading-none font-extrabold tracking-tight sm:text-5xl">
             {campaign.headline}
-            <span className="mt-2 block text-lg font-semibold text-white/85 sm:text-xl">em produtos selecionados</span>
+            <span className="mt-2 block text-lg font-semibold text-white/85 sm:text-xl">{scopeOf(campaign)}</span>
           </h1>
           {campaign.endsAt && live ? <p className="mt-3 text-sm text-white/80">Válido até {formatDate(new Date(new Date(campaign.endsAt).getTime() - 1))}.</p> : null}
         </div>
         <div className="relative flex flex-col gap-3 rounded-panel bg-surface p-4 text-fg shadow-popover">
           <CouponTicket code={campaign.code} source="coupon_page" />
-          {live ? <ActivateCouponButton code={campaign.code} /> : <p className="rounded-field bg-danger-50 px-3 py-2 text-sm font-semibold text-danger-700">Este cupom não está disponível no momento.</p>}
+          {live ? (
+            <ActivateCouponButton code={campaign.code} />
+          ) : status === "scheduled" && startsAt ? (
+            <p className="rounded-field bg-info-50 px-3 py-2 text-sm font-semibold text-info-700">Disponível a partir de {formatDate(new Date(startsAt))}.</p>
+          ) : (
+            <p className="rounded-field bg-danger-50 px-3 py-2 text-sm font-semibold text-danger-700">Este cupom não está disponível no momento.</p>
+          )}
           <p className="flex items-start gap-1.5 text-xs text-fg-muted">
-            <ShieldCheck className="mt-px size-4 shrink-0 text-brand-700" aria-hidden />O desconto é calculado no carrinho e confirmado no checkout, só nos produtos participantes.
+            <ShieldCheck className="mt-px size-4 shrink-0 text-brand-700" aria-hidden />O desconto é calculado no carrinho e confirmado no checkout{campaign.restricted ? ", só nos produtos participantes" : ""}.
           </p>
         </div>
       </section>
@@ -64,12 +73,14 @@ export default async function CouponPage({ params }: Props) {
       {live ? (
         products.length ? (
           <section aria-labelledby="participants-title">
-            <SectionHeader id="participants-title" title="Produtos participantes" subtitle={`${products.length} ${products.length === 1 ? "produto" : "produtos"} com o cupom ${campaign.code}`} />
+            <SectionHeader id="participants-title" title="Produtos participantes" subtitle={`${total} ${total === 1 ? "produto" : "produtos"} com o cupom ${campaign.code}${total > products.length ? ` — veja uma seleção` : ""}`} />
             <ProductGrid products={products} favorites={favorites} priorityCount={4} />
           </section>
         ) : (
           <EmptyState icon={<SearchX />} title="Nenhum produto participante disponível agora" description="Os produtos desta campanha estão esgotados ou foram pausados. Confira as outras ofertas." action={<ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>} />
         )
+      ) : status === "scheduled" ? (
+        <EmptyState icon={<Gift />} title="Esta campanha ainda vai começar" description="Os produtos participantes aparecem aqui quando o cupom entrar em vigor." action={<ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>} />
       ) : (
         <EmptyState icon={<Gift />} title="Esta campanha foi encerrada" description="Mas tem muita oferta boa esperando por você." action={<ButtonLink href="/ofertas">Explorar ofertas</ButtonLink>} />
       )}

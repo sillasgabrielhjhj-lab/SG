@@ -74,8 +74,13 @@ export default function WelcomeCouponModal({ campaign, onClose }: { campaign: We
     start(async () => {
       const res = await activateCampaignCouponAction({ code: campaign.code });
       trackEvent("coupon_applied", { coupon: campaign.code, source: "welcome_modal", success: res.ok });
-      if (res.ok) toast.success("Cupom ativado ✓", { description: `O desconto do ${campaign.code} aparece no carrinho com produtos participantes.` });
+      // Fecha antes do aviso: dentro do <dialog> ele ficaria atrás do fundo do modal.
       finish();
+      if (!res.ok) {
+        toast.error("Não foi possível ativar o cupom", { description: res.error });
+        return;
+      }
+      toast.success("Cupom ativado ✓", { description: `O desconto do ${campaign.code} aparece no carrinho com produtos participantes.` });
       router.push(campaign.href);
     });
 

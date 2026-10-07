@@ -33,7 +33,7 @@ export default async function OffersPage({ searchParams }: Props) {
               <Zap className="size-5" fill="currentColor" aria-hidden /> Relâmpago agora
             </h2>
             <span className="flex items-center gap-2 text-sm font-semibold text-sun-900">
-              Termina em <Countdown endsAt={data.flash.endsAt} />
+              {data.flash.sameEnd ? "Termina em" : "A primeira termina em"} <Countdown endsAt={data.flash.endsAt} label={data.flash.sameEnd ? "Termina em" : "A primeira termina em"} />
             </span>
           </div>
           <div className="p-3 sm:p-4">

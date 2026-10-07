@@ -21,7 +21,10 @@ export function RecentlyViewed({ excludeId, title = "Vistos recentemente" }: { e
     fetch(`/api/products/by-ids?ids=${key}`, { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : { items: [] }))
       .then((d: { items: ProductCardData[] }) => setResult({ key, items: d.items }))
-      .catch(() => undefined);
+      .catch(() => {
+        // Falha de rede: some a seção em vez de ficar no esqueleto para sempre.
+        if (!controller.signal.aborted) setResult({ key, items: [] });
+      });
     return () => controller.abort();
   }, [key]);
   if (!key) return null;

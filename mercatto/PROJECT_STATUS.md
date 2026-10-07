@@ -27,7 +27,6 @@
 - Testes de integração adicionais (busca, carrinho, estoque, pedidos/IDOR, autenticação, marketing) e E2E do fluxo admin (criar produto → publicar → aparece na loja).
 - Revisão jurídica dos textos legais e preenchimento de razão social/CNPJ/endereço/encarregado.
 - Observabilidade externa (ex.: Sentry/Logtail) e cron mais frequente no plano Pro da Vercel.
-- Desconto no PIX: o campo existe nas configurações, mas o checkout ainda não aplica — não anunciar até implementar.
 - Newsletter: sem envio de e-mails configurado (Resend pendente); a home não coleta e-mails até isso existir.
 
 ## BLOCOS DE UI REUTILIZÁVEIS (use antes de criar novos)

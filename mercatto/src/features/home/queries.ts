@@ -1,7 +1,7 @@
 import "server-only";
 import type { BannerPlacement } from "@/generated/prisma/enums";
 import { db } from "@/server/db";
-import { getProductCards } from "@/features/catalog/cards.server";
+import { getProductCards, publicProductWhere } from "@/features/catalog/cards.server";
 import { getCategoryTree } from "@/features/catalog/categories.server";
 import type { ProductCardData } from "@/features/catalog/types";
 
@@ -19,29 +19,51 @@ export async function getActiveBanners(placement: BannerPlacement, take = 6) {
   });
 }
 
-/** Oferta relâmpago com término mais próximo + produtos (para o contador regressivo). */
-export async function getFlashDeal() {
+export type FlashDeal = {
+  /** Término da oferta (a primeira a acabar, quando há várias). */
+  endsAt: string | null;
+  /** Todos os produtos exibidos terminam juntos (o contador vale para todos). */
+  sameEnd: boolean;
+  products: ProductCardData[];
+  /** Limite promocional real — só quando uma única promoção cobre a vitrine. */
+  stock: { limit: number; left: number } | null;
+  next: { name: string; startsAt: string } | null;
+};
+
+/**
+ * Ofertas relâmpago ativas (isFlash) + a próxima agendada. O término e o
+ * estoque promocional vêm dos produtos efetivamente exibidos — nunca de uma
+ * promoção cujos produtos não aparecem.
+ */
+export async function getFlashDeal(): Promise<FlashDeal | null> {
   const now = new Date();
-  const promo = await db.promotion.findFirst({
-    where: { isFlash: true, status: { not: "CANCELLED" }, startsAt: { lte: now }, endsAt: { gt: now } },
-    orderBy: { endsAt: "asc" },
-    select: { id: true, name: true, endsAt: true, stockLimit: true, soldCount: true, items: { select: { productId: true } } },
-  });
-  const next = await db.promotion.findFirst({ where: { isFlash: true, status: { not: "CANCELLED" }, startsAt: { gt: now } }, orderBy: { startsAt: "asc" }, select: { name: true, startsAt: true } });
-  if (!promo) return next ? { id: null, name: null, endsAt: null, products: [] as ProductCardData[], next: { name: next.name, startsAt: next.startsAt.toISOString() } } : null;
-  const allFlash = await db.promotion.findMany({
-    where: { isFlash: true, status: { not: "CANCELLED" }, startsAt: { lte: now }, endsAt: { gt: now } },
-    select: { items: { select: { productId: true } } },
-  });
-  const ids = [...new Set(allFlash.flatMap((p) => p.items.map((i) => i.productId)))];
-  const products = await getProductCards({ where: { id: { in: ids } }, orderBy: [{ discountPercent: "desc" }], take: SECTION });
-  return {
-    id: promo.id,
-    name: promo.name,
-    endsAt: promo.endsAt.toISOString(),
-    products: products.filter((p) => p.promotion?.isFlash),
-    next: next ? { name: next.name, startsAt: next.startsAt.toISOString() } : null,
-  };
+  const [active, next] = await Promise.all([
+    db.promotion.findMany({
+      where: { isFlash: true, status: { not: "CANCELLED" }, startsAt: { lte: now }, endsAt: { gt: now } },
+      select: { id: true, stockLimit: true, soldCount: true, items: { select: { productId: true } } },
+    }),
+    // Próxima: só campanhas da plataforma com ao menos um produto à venda.
+    db.promotion.findFirst({
+      where: { isFlash: true, storeId: null, status: { not: "CANCELLED" }, startsAt: { gt: now }, items: { some: { product: publicProductWhere } } },
+      orderBy: { startsAt: "asc" },
+      select: { name: true, startsAt: true },
+    }),
+  ]);
+  const upcoming = next ? { name: next.name, startsAt: next.startsAt.toISOString() } : null;
+  const ids = [...new Set(active.flatMap((p) => p.items.map((i) => i.productId)))];
+  const cards = ids.length ? await getProductCards({ where: { id: { in: ids } }, orderBy: [{ discountPercent: "desc" }], take: SECTION }) : [];
+  // A primeira a terminar vem antes (o contador do topo é o dela).
+  const products = cards.filter((p) => p.promotion?.isFlash).sort((a, b) => a.promotion!.endsAt.localeCompare(b.promotion!.endsAt));
+  if (!products.length) return upcoming ? { endsAt: null, sameEnd: true, products: [], stock: null, next: upcoming } : null;
+
+  const promoIds = new Set(products.map((p) => p.promotion!.id));
+  const only = promoIds.size === 1 ? active.find((p) => promoIds.has(p.id)) : undefined;
+  const stock =
+    only?.stockLimit
+      ? { limit: only.stockLimit, left: Math.max(0, Math.min(only.stockLimit - only.soldCount, products.reduce((s, p) => s + p.totalStock, 0))) }
+      : null;
+  const endsAt = products[0]!.promotion!.endsAt;
+  return { endsAt, sameEnd: products.every((p) => p.promotion!.endsAt === endsAt), products, stock, next: upcoming };
 }
 
 /**

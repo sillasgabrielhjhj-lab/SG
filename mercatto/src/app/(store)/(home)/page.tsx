@@ -56,7 +56,7 @@ function paymentLabel(methods: string[]): string {
  */
 export default async function HomePage() {
   after(maybeSyncPromotions);
-  const [data, user, settings, welcome, benefits] = await Promise.all([getHomePageData(), getCurrentUser(), getStoreSettings(), getWelcomeCampaign(), getStoreBenefits()]);
+  const [data, user, settings, welcome, benefits] = await Promise.all([getHomePageData(), getCurrentUser(), getStoreSettings(), getCurrentUser().then((u) => getWelcomeCampaign(u?.id ?? null)), getStoreBenefits()]);
   const [slides, favoriteSet] = await Promise.all([getHeroSlides(welcome), user ? getWishlistProductIds(user.id) : Promise.resolve(new Set<string>())]);
   const favorites = [...favoriteSet];
   const social = Object.values((settings.socialLinks as Record<string, string | null> | null) ?? {}).filter((v): v is string => Boolean(v));
@@ -85,7 +85,7 @@ export default async function HomePage() {
 
       {data.dayDeals.length ? (
         <section data-reveal aria-labelledby="deals-title">
-          <SectionHeader id="deals-title" title="Ofertas do dia" subtitle="Os maiores descontos de hoje" href="/ofertas" icon={<Flame />} />
+          <SectionHeader id="deals-title" title="Ofertas do dia" subtitle="Descontos selecionados para você" href="/ofertas" icon={<Flame />} />
           <ProductRail products={data.dayDeals} label="Ofertas do dia" favorites={favorites} />
         </section>
       ) : null}
@@ -170,7 +170,7 @@ export default async function HomePage() {
 
       {data.newArrivals.length ? (
         <section data-reveal aria-labelledby="new-title">
-          <SectionHeader id="new-title" title="Novidades" subtitle="Acabaram de chegar" href="/buscar?ordenar=novidades" icon={<Sparkles />} />
+          <SectionHeader id="new-title" title="Novidades" subtitle="Lançamentos recentes na loja" href="/buscar?ordenar=novidades" icon={<Sparkles />} />
           <ProductRail products={data.newArrivals} label="Novidades" favorites={favorites} />
         </section>
       ) : null}

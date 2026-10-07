@@ -2,10 +2,10 @@ import "server-only";
 import { cache } from "react";
 import type { Prisma } from "@/generated/prisma/client";
 import { db } from "@/server/db";
-import { getProductCards } from "@/features/catalog/cards.server";
+import { getProductCards, publicProductWhere } from "@/features/catalog/cards.server";
 import { getCategoryTree } from "@/features/catalog/categories.server";
 import { getStoreSettings } from "@/features/settings/queries";
-import { describeCouponBenefit, loadCouponForEvaluation, normalizeCouponCode, type LoadedCoupon } from "@/features/coupons/service";
+import { describeCouponBenefit, getUserCouponContext, loadCouponForEvaluation, normalizeCouponCode, type LoadedCoupon } from "@/features/coupons/service";
 import type { CategoryNode, ProductCardData } from "@/features/catalog/types";
 import { formatBRL } from "@/lib/money";
 import { formatDate } from "@/lib/format";
@@ -28,6 +28,8 @@ export type CouponCampaignView = {
   endsAt: string | null;
   href: string;
   stackWithPromotions: boolean;
+  /** Restrito a produtos/categorias ("produtos selecionados") ou válido na loja toda. */
+  restricted: boolean;
 };
 
 export type WelcomeCampaignView = CouponCampaignView & { reshowDays: number };
@@ -95,6 +97,23 @@ async function eligibleWhere(coupon: LoadedCoupon): Promise<Prisma.ProductWhereI
   return { AND: and };
 }
 
+/** Quantos produtos publicados participam (número real, sem o limite da vitrine). */
+async function countEligibleProducts(coupon: LoadedCoupon): Promise<number> {
+  return db.product.count({ where: { AND: [publicProductWhere, await eligibleWhere(coupon)] } });
+}
+
+/**
+ * Motivo pelo qual o cliente logado não pode usar o cupom (limite por cliente
+ * ou "só na primeira compra") — o mesmo histórico que o checkout consulta.
+ */
+export async function couponBlockedForUser(coupon: LoadedCoupon, userId: string | null): Promise<string | null> {
+  if (!userId || (coupon.usageLimitPerUser === null && !coupon.firstPurchaseOnly)) return null;
+  const ctx = await getUserCouponContext(userId, coupon.id);
+  if (coupon.usageLimitPerUser !== null && ctx.userUsageCount >= coupon.usageLimitPerUser) return "Você já utilizou este cupom o máximo de vezes permitido.";
+  if (coupon.firstPurchaseOnly && ctx.userCompletedOrders > 0) return "Este cupom é válido somente na primeira compra.";
+  return null;
+}
+
 /** Produtos participantes (cards prontos), já sem os que o motor recusaria. */
 export async function getEligibleProducts(coupon: LoadedCoupon, take = 48): Promise<ProductCardData[]> {
   const cards = await getProductCards({ where: await eligibleWhere(coupon), orderBy: [{ isFeatured: "desc" }, { salesCount: "desc" }], take });
@@ -111,34 +130,57 @@ function toView(coupon: LoadedCoupon): CouponCampaignView {
     endsAt: coupon.endsAt?.toISOString() ?? null,
     href: `/cupom/${encodeURIComponent(coupon.code)}`,
     stackWithPromotions: coupon.stackWithPromotions,
+    restricted: coupon.productIds.length > 0 || coupon.categoryIds.length > 0,
   };
 }
 
-/**
- * Campanha de boas-vindas (configurada em Admin → Configurações). Só existe
- * quando o cupom está ativo, é da plataforma, restringe produtos/categorias
- * ("produtos selecionados") e há ao menos um produto participante à venda —
- * assim o pop-up nunca promete um desconto que não pode ser usado.
- */
-export const getWelcomeCampaign = cache(async (): Promise<WelcomeCampaignView | null> => {
+const loadWelcomeCampaign = cache(async (): Promise<{ coupon: LoadedCoupon; view: WelcomeCampaignView } | null> => {
   const settings = await getStoreSettings();
   if (!settings.welcomeCouponCode) return null;
   const coupon = await loadCouponForEvaluation(settings.welcomeCouponCode);
   if (!coupon || coupon.storeId || !isLive(coupon)) return null;
   if (!coupon.productIds.length && !coupon.categoryIds.length) return null;
-  const sample = await getEligibleProducts(coupon, 1);
+  // Amostra (não 1 só): um card pode sair do filtro de promoção ativa.
+  const sample = await getEligibleProducts(coupon, 12);
   if (!sample.length) return null;
-  return { ...toView(coupon), reshowDays: settings.welcomeCouponReshowDays };
+  return { coupon, view: { ...toView(coupon), reshowDays: settings.welcomeCouponReshowDays } };
 });
 
-/** Página pública do cupom: só cupons públicos (ou o de boas-vindas) da plataforma. */
-export async function getCouponLanding(rawCode: string): Promise<{ campaign: CouponCampaignView; live: boolean; products: ProductCardData[] } | null> {
+/**
+ * Campanha de boas-vindas (configurada em Admin → Configurações). Só existe
+ * quando o cupom está ativo, é da plataforma, restringe produtos/categorias
+ * ("produtos selecionados") e há ao menos um produto participante à venda —
+ * assim o pop-up nunca promete um desconto que não pode ser usado. Para o
+ * cliente logado que já não pode usar o cupom (limite/primeira compra), some.
+ */
+export const getWelcomeCampaign = cache(async (userId: string | null): Promise<WelcomeCampaignView | null> => {
+  const found = await loadWelcomeCampaign();
+  if (!found || (await couponBlockedForUser(found.coupon, userId))) return null;
+  return found.view;
+});
+
+export type CouponLanding = {
+  campaign: CouponCampaignView;
+  status: "live" | "scheduled" | "ended";
+  startsAt: string | null;
+  products: ProductCardData[];
+  total: number;
+};
+
+/**
+ * Página pública do cupom: só cupons ativos e públicos (ou o de boas-vindas)
+ * da plataforma. Cupom desativado (rascunho) não tem página.
+ */
+export async function getCouponLanding(rawCode: string): Promise<CouponLanding | null> {
   const code = normalizeCouponCode(rawCode);
   const [coupon, settings] = await Promise.all([loadCouponForEvaluation(code), getStoreSettings()]);
-  if (!coupon || coupon.storeId) return null;
+  if (!coupon || coupon.storeId || !coupon.isActive) return null;
   if (!coupon.isPublic && coupon.code !== settings.welcomeCouponCode) return null;
-  const live = isLive(coupon);
-  return { campaign: toView(coupon), live, products: live ? await getEligibleProducts(coupon) : [] };
+  const startsAt = coupon.startsAt?.toISOString() ?? null;
+  if (coupon.startsAt && coupon.startsAt > new Date()) return { campaign: toView(coupon), status: "scheduled", startsAt, products: [], total: 0 };
+  if (!isLive(coupon)) return { campaign: toView(coupon), status: "ended", startsAt, products: [], total: 0 };
+  const [products, total] = await Promise.all([getEligibleProducts(coupon), countEligibleProducts(coupon)]);
+  return { campaign: toView(coupon), status: "live", startsAt, products, total: Math.max(total, products.length) };
 }
 
 /** Cupom que pode ser ativado direto da vitrine (pop-up/página do cupom). */
@@ -162,7 +204,7 @@ export async function getWelcomeCampaignStatus(): Promise<WelcomeCampaignStatus>
   const base = { code, couponId: coupon.id };
   if (coupon.storeId) return { ...base, visible: false, eligibleCount: 0, message: "Use um cupom da plataforma (não de vendedor)." };
   if (!coupon.productIds.length && !coupon.categoryIds.length) return { ...base, visible: false, eligibleCount: 0, message: "Escolha os produtos ou categorias participantes no cupom." };
-  const eligibleCount = await db.product.count({ where: { AND: [{ status: "ACTIVE", store: { status: "ACTIVE" } }, await eligibleWhere(coupon)] } });
+  const eligibleCount = await countEligibleProducts(coupon);
   if (!isLive(coupon)) return { ...base, visible: false, eligibleCount, message: coupon.isActive ? "O cupom está fora do período de validade ou sem usos disponíveis." : "O cupom está inativo. Ative-o em Cupons." };
   if (!eligibleCount) return { ...base, visible: false, eligibleCount, message: "Nenhum produto participante está publicado no momento." };
   return { ...base, visible: true, eligibleCount, message: `Campanha no ar com ${eligibleCount} ${eligibleCount === 1 ? "produto participante" : "produtos participantes"}.` };

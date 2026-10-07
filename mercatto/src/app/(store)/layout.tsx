@@ -13,7 +13,13 @@ import { getWelcomeCampaign } from "@/features/coupons/campaign.server";
 import { WelcomeCoupon } from "@/features/coupons/components/welcome-coupon";
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
-  const [categories, user, cartCount, settings, welcome] = await Promise.all([getCategoryTree(), getCurrentUser(), getCartItemCount(), getStoreSettings(), getWelcomeCampaign()]);
+  const [categories, user, cartCount, settings, welcome] = await Promise.all([
+    getCategoryTree(),
+    getCurrentUser(),
+    getCartItemCount(),
+    getStoreSettings(),
+    getCurrentUser().then((u) => getWelcomeCampaign(u?.id ?? null)),
+  ]);
   const unreadNotifications = user ? await db.notification.count({ where: { userId: user.id, readAt: null } }) : 0;
   const sandbox = isSandboxPayments();
   return (

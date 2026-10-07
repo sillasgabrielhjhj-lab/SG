@@ -120,7 +120,7 @@ export function SettingsForm({ initial, welcomeStatus }: { initial: SettingsValu
         <Field label="Frete grátis a partir de (produtos oficiais)" error={e("freeShippingThresholdCents")} hint="Vazio = desativado">
           <PriceInput defaultCents={v.freeShippingThresholdCents} onCentsChange={(c) => setV((p) => ({ ...p, freeShippingThresholdCents: c }))} />
         </Field>
-        <Field label="Desconto no PIX (%)" error={e("pixDiscountPercent")} hint="Ainda não é aplicado no checkout — mantenha 0 e não anuncie desconto no PIX.">
+        <Field label="Desconto no PIX (%)" error={e("pixDiscountPercent")} hint="0 = sem desconto (máx. 20%). Aplicado no checkout ao pagar com PIX.">
           <Input type="number" min={0} max={20} value={v.pixDiscountPercent} onChange={set("pixDiscountPercent")} />
         </Field>
         <Field label="Validade da reserva / PIX (minutos)" error={e("orderReservationMinutes")} hint="Tempo em que o estoque fica reservado aguardando pagamento">

@@ -16,7 +16,24 @@ const pad = (n: number) => String(n).padStart(2, "0");
  * hydration mismatch). Ao zerar chama onExpire e, por padrão, atualiza a página
  * para o servidor refletir o novo estado (oferta encerrada).
  */
-export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className, variant = "blocks", label = "Termina em" }: { endsAt: string; onExpire?: () => void; refreshOnExpire?: boolean; className?: string; variant?: "blocks" | "inline" | "labeled"; label?: string }) {
+export function Countdown({
+  endsAt,
+  onExpire,
+  refreshOnExpire = true,
+  className,
+  variant = "blocks",
+  label = "Termina em",
+  expiredText = "Encerrada",
+}: {
+  endsAt: string;
+  onExpire?: () => void;
+  refreshOnExpire?: boolean;
+  className?: string;
+  variant?: "blocks" | "inline" | "labeled";
+  label?: string;
+  /** Texto ao zerar (ex.: "Começando…" num contador para o início). */
+  expiredText?: string;
+}) {
   const router = useRouter();
   const now = useNowSecond();
   const fired = useRef(false);
@@ -31,7 +48,7 @@ export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className,
     }
   }, [now, p.total, onExpire, refreshOnExpire, router]);
 
-  const text = now === null ? "--:--:--" : p.total === 0 ? "Encerrada" : `${p.days > 0 ? `${p.days}d ` : ""}${pad(p.hours)}:${pad(p.minutes)}:${pad(p.seconds)}`;
+  const text = now === null ? "--:--:--" : p.total === 0 ? expiredText : `${p.days > 0 ? `${p.days}d ` : ""}${pad(p.hours)}:${pad(p.minutes)}:${pad(p.seconds)}`;
   if (variant === "inline") {
     return (
       <span className={cn("tabular", className)} role="timer" aria-live="off" aria-label={`${label} ${text}`}>
@@ -44,7 +61,7 @@ export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className,
     return (
       <span role="timer" aria-label={`${label} ${text}`} className={cn("inline-flex items-start gap-1.5 tabular", className)}>
         {p.total === 0 && now !== null ? (
-          <span className="rounded-md bg-fg/80 px-2.5 py-1.5 text-xs font-bold text-white">Encerrada</span>
+          <span className="rounded-md bg-fg/80 px-2.5 py-1.5 text-xs font-bold text-white">{expiredText}</span>
         ) : (
           blocks.map((b, i) => (
             <span key={i} className="flex items-start gap-1.5" aria-hidden>
@@ -62,7 +79,7 @@ export function Countdown({ endsAt, onExpire, refreshOnExpire = true, className,
   return (
     <span role="timer" aria-label={`${label} ${text}`} className={cn("inline-flex items-center gap-1 tabular", className)}>
       {p.total === 0 && now !== null ? (
-        <span className="rounded-md bg-fg/80 px-2 py-1 text-xs font-bold text-white">Encerrada</span>
+        <span className="rounded-md bg-fg/80 px-2 py-1 text-xs font-bold text-white">{expiredText}</span>
       ) : (
         blocks.map((b, i) => (
           <span key={i} className="flex items-center gap-1">
