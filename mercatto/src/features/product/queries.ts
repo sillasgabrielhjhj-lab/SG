@@ -82,7 +82,10 @@ export const getProductPageData = cache(async (slug: string) => {
     warrantyText: product.warrantyText,
     includedItems: product.includedItems,
     highlights: product.highlights,
-    specifications: (Array.isArray(product.specifications) ? product.specifications : []) as ProductSpecGroup[],
+    // Campos preparados no painel e ainda sem valor não aparecem na loja.
+    specifications: ((Array.isArray(product.specifications) ? product.specifications : []) as ProductSpecGroup[])
+      .map((g) => ({ ...g, items: g.items.filter((i) => i.value?.trim()) }))
+      .filter((g) => g.items.length),
     freeShipping: product.freeShipping,
     salesCount: product.salesCount,
     ratingAvg: product.ratingAvg,

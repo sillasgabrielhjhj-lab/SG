@@ -257,6 +257,104 @@ async function updateProduct(e: Entry, productId: string, ctx: Awaited<ReturnTyp
   return `atualizado${notes.length ? ` — ${notes.join("; ")}` : ""}`;
 }
 
+/**
+ * PRODUTOS AVULSOS (prisma/content/products/*.json): criados UMA ÚNICA VEZ
+ * como rascunho na loja oficial — sem fotos, preço 0 e estoque 0 (só publicam
+ * depois que o lojista completa). Se o produto já existe (mesma chave ou
+ * slug), nada é alterado: fotos, preços, textos e variações editados no
+ * painel nunca são sobrescritos. Campos de ficha técnica com valor vazio
+ * ficam preparados no painel e não aparecem na loja.
+ */
+type GenericEntry = {
+  key: string;
+  skuCode: string;
+  categorySlug: string;
+  name: string;
+  shortDescription: string;
+  description: string;
+  highlights: string[];
+  specifications: { group: string; items: { name: string; value: string }[] }[];
+  includedItems: string[];
+  seoTitle: string;
+  seoDescription: string;
+  tags: string[];
+  options?: { name: string; values: string[] }[];
+};
+
+const optionCode = (v: string) => normalizeText(v).replace(/[^a-z0-9]+/g, "").toUpperCase().slice(0, 10);
+
+function combinations(options: { name: string; values: string[] }[]): Record<string, string>[] {
+  return options.reduce<Record<string, string>[]>((acc, o) => acc.flatMap((c) => o.values.map((v) => ({ ...c, [o.name]: v }))), [{}]);
+}
+
+async function applyGenericProducts(touched: string[]) {
+  const dir = new URL("./content/products/", import.meta.url);
+  let files: string[];
+  try {
+    files = readdirSync(dir).filter((f) => f.endsWith(".json"));
+  } catch {
+    return;
+  }
+  const store = await db.store.findFirst({ where: { isOfficial: true }, select: { id: true } });
+  if (!store) throw new Error("Loja oficial não encontrada.");
+  for (const f of files) {
+    const { products } = JSON.parse(readFileSync(new URL(f, dir), "utf8")) as { products: GenericEntry[] };
+    for (const e of products) {
+      try {
+        const exists = await db.product.findFirst({ where: { OR: [{ catalogKey: e.key }, { storeId: store.id, slug: e.key }] }, select: { id: true } });
+        if (exists) continue;
+        const category = await db.category.findUnique({ where: { slug: e.categorySlug }, select: { id: true } });
+        if (!category) throw new Error(`categoria "${e.categorySlug}" não encontrada`);
+        const slugTaken = await db.product.findUnique({ where: { slug: e.key }, select: { id: true } });
+        const options = e.options ?? [];
+        const sku = `MCT-${e.skuCode}`;
+        const combos = combinations(options);
+        const product = await db.product.create({
+          data: {
+            storeId: store.id,
+            categoryId: category.id,
+            slug: slugTaken ? `${e.key}-mercatto` : e.key,
+            sku,
+            name: e.name,
+            shortDescription: e.shortDescription,
+            description: e.description,
+            highlights: e.highlights,
+            specifications: e.specifications as unknown as Prisma.InputJsonValue,
+            includedItems: e.includedItems,
+            tags: e.tags,
+            seoTitle: e.seoTitle,
+            seoDescription: e.seoDescription,
+            catalogKey: e.key,
+            catalogVersion: 1,
+            condition: "NEW",
+            status: "DRAFT",
+            options: { create: options.map((o, i) => ({ name: o.name, values: o.values, position: i })) },
+            variants: {
+              create: combos.map((c, i) => {
+                const values = Object.values(c);
+                return {
+                  sku: values.length ? `${sku}-${values.map(optionCode).join("-")}` : `${sku}-UN`,
+                  name: values.length ? values.join(" · ") : "Padrão",
+                  optionValues: c,
+                  priceCents: 0,
+                  stock: 0,
+                  status: "ACTIVE" as const,
+                  position: i,
+                };
+              }),
+            },
+          },
+          select: { id: true },
+        });
+        touched.push(product.id);
+        console.info(`[produtos] ${e.name}: criado (rascunho)`);
+      } catch (error) {
+        console.warn(`[produtos] ${e.name}: falhou —`, error instanceof Error ? error.message : error);
+      }
+    }
+  }
+}
+
 async function main() {
   const dir = new URL("./content/catalog/", import.meta.url);
   const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
@@ -284,6 +382,7 @@ async function main() {
       }
     }
   }
+  await applyGenericProducts(touched);
   if (touched.length) await recomputeProductAggregates(touched);
   console.info(`[catálogo] ${touched.length} produto(s) criado(s)/atualizado(s).`);
 }
