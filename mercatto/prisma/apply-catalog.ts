@@ -281,6 +281,8 @@ type GenericEntry = {
   options?: { name: string; values: string[] }[];
   /** Preço sugerido (centavos) das variações; sem ele, 0 (não publica). */
   priceCents?: number;
+  /** SKUs das variações, na ordem das combinações de opções (opcional). */
+  variantSkus?: string[];
   minStock?: number;
   warrantyMonths?: number;
   warrantyText?: string;
@@ -342,7 +344,7 @@ async function applyGenericProducts(touched: string[]) {
               create: combos.map((c, i) => {
                 const values = Object.values(c);
                 return {
-                  sku: values.length ? `${sku}-${values.map(optionCode).join("-")}` : `${sku}-UN`,
+                  sku: e.variantSkus?.[i] ?? (values.length ? `${sku}-${values.map(optionCode).join("-")}` : `${sku}-UN`),
                   name: values.length ? values.join(" · ") : "Padrão",
                   optionValues: c,
                   priceCents: e.priceCents ?? 0,

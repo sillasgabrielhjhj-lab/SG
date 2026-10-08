@@ -398,6 +398,161 @@
         "acessórios cozinha",
         "kit cozinha completo"
       ]
+    },
+    {
+      "key": "chaleira-eletrica-inox-18l-desligamento-automatico",
+      "skuCode": "ELE-CHA18INOX",
+      "categorySlug": "eletrodomesticos",
+      "priceCents": 4990,
+      "minStock": 2,
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "variantSkus": [
+        "MCT-ELE-CHA18INOX-127",
+        "MCT-ELE-CHA18INOX-220"
+      ],
+      "name": "Chaleira Elétrica Inox 1,8L com Desligamento Automático e Aquecimento Rápido",
+      "shortDescription": "Chaleira elétrica em aço inox com capacidade de 1,8 litro, aquecimento rápido e desligamento automático. Ideal para aquecer água para café, chá, preparo de alimentos e outras bebidas com mais praticidade no dia a dia.",
+      "description": "Tenha água quente de maneira rápida e prática com a Chaleira Elétrica Inox 1,8L.\n\nDesenvolvida para facilitar a rotina na cozinha, ela possui capacidade de 1,8 litro e estrutura em aço inox, combinando resistência, praticidade e um visual moderno.\n\nSeu sistema elétrico aquece a água rapidamente, sendo ideal para o preparo de cafés, chás, cappuccinos, chimarrão, bebidas quentes e diversas receitas que utilizam água aquecida.\n\nO desligamento automático aumenta a praticidade durante o uso, interrompendo o funcionamento após o processo de aquecimento conforme o funcionamento do produto.\n\nA capacidade de 1,8 litro permite preparar uma quantidade generosa de água de uma só vez, tornando a chaleira adequada tanto para uso individual quanto familiar.\n\nO acabamento em inox também facilita a limpeza externa e combina com diferentes estilos de cozinha.\n\n## Principais benefícios\n\n- Capacidade de 1,8 litro\n- Corpo em aço inox\n- Funcionamento elétrico\n- Aquecimento rápido\n- Desligamento automático\n- Fácil utilização\n- Design moderno\n- Ideal para uso doméstico\n- Boa capacidade para uso diário\n- Prática para preparo de diferentes bebidas\n\n## Ideal para\n\n- Café\n- Chá\n- Cappuccino\n- Chimarrão\n- Água quente\n- Bebidas instantâneas\n- Preparo de alimentos\n- Uso diário na cozinha\n- Escritórios\n- Pequenas áreas de convivência\n\n## Cuidados e segurança\n\n- Utilize somente na voltagem correspondente ao produto.\n- Não ligue a chaleira vazia.\n- Não ultrapasse o nível máximo indicado no recipiente.\n- Mantenha a parte elétrica longe de água.\n- Não mergulhe a base, cabo ou componentes elétricos em líquidos.\n- Aguarde o aparelho esfriar antes da limpeza.\n- Mantenha fora do alcance de crianças durante o funcionamento.\n- Utilize em superfície firme e estável.\n- Antes do primeiro uso, siga as orientações do manual.",
+      "highlights": [
+        "Capacidade de 1,8 litro",
+        "Corpo em aço inox",
+        "Aquecimento rápido",
+        "Desligamento automático",
+        "Versões 127V e 220V"
+      ],
+      "specifications": [
+        {
+          "group": "Ficha técnica",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Chaleira elétrica"
+            },
+            {
+              "name": "Categoria",
+              "value": "Eletrodomésticos"
+            },
+            {
+              "name": "Capacidade",
+              "value": "1,8 L"
+            },
+            {
+              "name": "Material do corpo",
+              "value": "Aço inox"
+            },
+            {
+              "name": "Material predominante",
+              "value": "Aço inox e componentes plásticos"
+            },
+            {
+              "name": "Funcionamento",
+              "value": "Elétrico"
+            },
+            {
+              "name": "Desligamento automático",
+              "value": "Sim"
+            },
+            {
+              "name": "Aquecimento rápido",
+              "value": "Sim"
+            },
+            {
+              "name": "Tampa",
+              "value": "Sim"
+            },
+            {
+              "name": "Alça",
+              "value": "Sim"
+            },
+            {
+              "name": "Uso",
+              "value": "Doméstico"
+            },
+            {
+              "name": "Cor",
+              "value": "Prata / Inox com detalhes pretos"
+            },
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (escolha na variação)"
+            },
+            {
+              "name": "Potência",
+              "value": "Não informado pelo fabricante"
+            },
+            {
+              "name": "Comprimento do cabo",
+              "value": "Não informado"
+            },
+            {
+              "name": "Indicador de funcionamento",
+              "value": ""
+            },
+            {
+              "name": "Base 360°",
+              "value": ""
+            },
+            {
+              "name": "Proteção contra superaquecimento",
+              "value": ""
+            },
+            {
+              "name": "Frequência",
+              "value": ""
+            },
+            {
+              "name": "Peso do produto",
+              "value": ""
+            },
+            {
+              "name": "Dimensões do produto",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 Chaleira Elétrica Inox 1,8L"
+      ],
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias contra defeitos de fabricação, conforme legislação aplicável.",
+      "packaging": {
+        "weightGrams": 1000,
+        "heightCm": 22,
+        "widthCm": 18,
+        "lengthCm": 20
+      },
+      "seoTitle": "Chaleira Elétrica Inox 1,8L Automática | Mercatto",
+      "seoDescription": "Chaleira elétrica inox 1,8L com aquecimento rápido e desligamento automático. Praticidade para preparar café, chá e água quente. Compre na Mercatto.",
+      "tags": [
+        "chaleira elétrica",
+        "chaleira inox",
+        "chaleira 1.8 litros",
+        "chaleira 1,8l",
+        "chaleira elétrica inox",
+        "jarra elétrica",
+        "bule elétrico",
+        "chaleira automática",
+        "chaleira desligamento automático",
+        "chaleira aquecimento rápido",
+        "chaleira café",
+        "chaleira chá",
+        "ferver água",
+        "aquecedor de água",
+        "chaleira 110v",
+        "chaleira 127v",
+        "chaleira 220v",
+        "eletrodoméstico cozinha",
+        "água quente"
+      ]
     }
   ]
 }
