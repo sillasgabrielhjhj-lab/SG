@@ -1,0 +1,403 @@
+{
+  "products": [
+    {
+      "key": "escova-eletrica-limpeza-12-em-1-sem-fio",
+      "skuCode": "CAS-ESC12X1",
+      "categorySlug": "casa",
+      "priceCents": 7990,
+      "minStock": 2,
+      "name": "Escova Elétrica de Limpeza 12 em 1 Sem Fio Giratória Recarregável",
+      "shortDescription": "Escova elétrica giratória sem fio com kit multifuncional de acessórios para facilitar a limpeza de banheiro, cozinha, pisos, azulejos e outras superfícies.",
+      "description": "Facilite a rotina de limpeza com a Escova Elétrica de Limpeza 12 em 1. Seu sistema giratório auxilia na remoção de sujeiras em diferentes superfícies e reduz o esforço necessário durante a limpeza.\n\nSem fio e portátil, é uma solução prática para limpeza de banheiro, cozinha, azulejos, pisos, box, pias e diferentes áreas da casa.\n\n## Principais benefícios\n\n- Funcionamento sem fio\n- Sistema de limpeza giratório\n- Kit com múltiplos acessórios\n- Adequada para diferentes superfícies\n- Facilita a limpeza de áreas de difícil acesso\n- Design portátil\n- Uso doméstico versátil\n\n## Ideal para\n\n- Box\n- Banheiro\n- Pisos\n- Azulejos\n- Pias\n- Cozinha\n- Rejuntes\n- Superfícies domésticas",
+      "highlights": [
+        "Sem fio e recarregável",
+        "Sistema giratório",
+        "Kit 12 em 1 com acessórios",
+        "Banheiro, cozinha, pisos e azulejos"
+      ],
+      "specifications": [
+        {
+          "group": "Ficha técnica",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Escova elétrica para limpeza"
+            },
+            {
+              "name": "Modelo",
+              "value": "12 em 1"
+            },
+            {
+              "name": "Funcionamento",
+              "value": "Elétrico"
+            },
+            {
+              "name": "Formato",
+              "value": "Portátil"
+            },
+            {
+              "name": "Sistema",
+              "value": "Giratório"
+            },
+            {
+              "name": "Uso",
+              "value": "Doméstico"
+            },
+            {
+              "name": "Alimentação",
+              "value": "Bateria recarregável"
+            },
+            {
+              "name": "Sem fio",
+              "value": "Sim"
+            },
+            {
+              "name": "Quantidade de acessórios",
+              "value": "Até 12 conforme kit"
+            },
+            {
+              "name": "Cor",
+              "value": "Conforme disponibilidade"
+            },
+            {
+              "name": "Material",
+              "value": "Conforme fabricante"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 Escova elétrica",
+        "Kit de acessórios compatíveis"
+      ],
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal contra defeitos de fabricação conforme legislação aplicável.",
+      "packaging": {
+        "weightGrams": 1000,
+        "heightCm": 15,
+        "widthCm": 20,
+        "lengthCm": 45
+      },
+      "seoTitle": "Escova Elétrica de Limpeza 12 em 1 Sem Fio | Mercatto",
+      "seoDescription": "Escova elétrica giratória 12 em 1 sem fio para limpeza de banheiro, cozinha, pisos, azulejos e diferentes superfícies. Confira na Mercatto.",
+      "tags": [
+        "escova elétrica",
+        "escova de limpeza",
+        "escova elétrica limpeza",
+        "escova giratória",
+        "escova 12 em 1",
+        "limpeza banheiro",
+        "limpeza cozinha",
+        "limpeza pesada",
+        "escova sem fio",
+        "escova recarregável",
+        "limpeza azulejo",
+        "limpeza piso"
+      ]
+    },
+    {
+      "key": "descascador-eletrico-frutas-alho-tomate",
+      "skuCode": "COZ-DESC-ELE",
+      "categorySlug": "cozinha",
+      "priceCents": 4990,
+      "minStock": 2,
+      "name": "Descascador Elétrico Multifuncional para Frutas, Alho e Tomate",
+      "shortDescription": "Descascador elétrico compacto desenvolvido para tornar o preparo de alimentos mais rápido e prático no dia a dia.",
+      "description": "Ganhe praticidade durante o preparo dos alimentos com o Descascador Elétrico Multifuncional.\n\nCompacto e fácil de utilizar, ele auxilia no preparo de diferentes ingredientes e é uma alternativa prática para quem deseja agilizar tarefas repetitivas da cozinha.\n\n## Principais benefícios\n\n- Funcionamento elétrico\n- Operação prática\n- Tamanho compacto\n- Fácil armazenamento\n- Adequado para diferentes alimentos\n- Facilita a rotina na cozinha\n\n## Ideal para\n\n- Frutas\n- Alho\n- Tomate\n- Pequenas tarefas de preparo",
+      "highlights": [
+        "Elétrico e compacto",
+        "Para frutas, alho e tomate",
+        "Fácil de usar e guardar"
+      ],
+      "specifications": [
+        {
+          "group": "Ficha técnica",
+          "items": [
+            {
+              "name": "Produto",
+              "value": "Descascador elétrico"
+            },
+            {
+              "name": "Uso",
+              "value": "Doméstico"
+            },
+            {
+              "name": "Funcionamento",
+              "value": "Elétrico"
+            },
+            {
+              "name": "Formato",
+              "value": "Compacto"
+            },
+            {
+              "name": "Aplicação",
+              "value": "Preparo de alimentos"
+            },
+            {
+              "name": "Cor",
+              "value": "Conforme disponibilidade"
+            },
+            {
+              "name": "Material",
+              "value": "Conforme fabricante"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 Descascador elétrico"
+      ],
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal contra defeitos de fabricação conforme legislação aplicável.",
+      "packaging": {
+        "weightGrams": 500,
+        "heightCm": 10,
+        "widthCm": 12,
+        "lengthCm": 15
+      },
+      "seoTitle": "Descascador Elétrico para Frutas e Alho | Mercatto",
+      "seoDescription": "Descascador elétrico multifuncional compacto para auxiliar no preparo de frutas, alho, tomate e outros alimentos. Confira na Mercatto.",
+      "tags": [
+        "descascador elétrico",
+        "descascador de alho",
+        "descascador frutas",
+        "descascador tomate",
+        "utensílio cozinha",
+        "acessório cozinha",
+        "descascador automático",
+        "cozinha prática",
+        "descascador"
+      ]
+    },
+    {
+      "key": "faqueiro-inox-25-pecas-porta-talheres",
+      "skuCode": "COZ-FAQ25",
+      "categorySlug": "cozinha",
+      "priceCents": 5490,
+      "minStock": 2,
+      "name": "Faqueiro Inox 25 Peças com Porta-Talheres",
+      "shortDescription": "Jogo de talheres com 25 peças e suporte organizador, ideal para compor a cozinha e facilitar a organização dos utensílios no dia a dia.",
+      "description": "Complete sua cozinha com um conjunto funcional e organizado.\n\nO Faqueiro Inox de 25 Peças acompanha suporte porta-talheres, facilitando a organização e deixando os utensílios sempre acessíveis.\n\nSeu conjunto foi pensado para refeições do dia a dia e ocasiões especiais.\n\n## Principais benefícios\n\n- Conjunto completo\n- 25 peças\n- Acabamento em aço inox\n- Acompanha organizador\n- Fácil armazenamento\n- Adequado para uso diário",
+      "highlights": [
+        "25 peças em aço inox",
+        "Acompanha porta-talheres",
+        "Para o dia a dia e ocasiões especiais"
+      ],
+      "specifications": [
+        {
+          "group": "Ficha técnica",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Faqueiro"
+            },
+            {
+              "name": "Quantidade",
+              "value": "25 peças"
+            },
+            {
+              "name": "Material principal",
+              "value": "Aço inox"
+            },
+            {
+              "name": "Acompanha suporte",
+              "value": "Sim"
+            },
+            {
+              "name": "Uso",
+              "value": "Doméstico"
+            },
+            {
+              "name": "Cor/acabamento",
+              "value": "Conforme variação disponível"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Conjunto de talheres",
+        "1 Porta-talheres"
+      ],
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia contra defeitos de fabricação.",
+      "packaging": {
+        "weightGrams": 1500,
+        "heightCm": 10,
+        "widthCm": 20,
+        "lengthCm": 30
+      },
+      "seoTitle": "Faqueiro Inox 25 Peças com Porta-Talheres | Mercatto",
+      "seoDescription": "Faqueiro inox com 25 peças e porta-talheres organizador para deixar sua cozinha prática e organizada. Confira na Mercatto.",
+      "tags": [
+        "faqueiro",
+        "faqueiro inox",
+        "jogo de talheres",
+        "talheres 25 peças",
+        "porta talheres",
+        "talheres cozinha",
+        "kit talheres",
+        "faqueiro completo"
+      ]
+    },
+    {
+      "key": "varal-chao-3-andares-dobravel-4-rodas",
+      "skuCode": "CAS-VARAL3A",
+      "categorySlug": "casa",
+      "priceCents": 14990,
+      "minStock": 1,
+      "name": "Varal de Chão 3 Andares Dobrável Grande com 4 Rodas",
+      "shortDescription": "Varal de chão com 3 andares, estrutura dobrável e quatro rodas para facilitar a organização e secagem das roupas mesmo em espaços menores.",
+      "description": "Otimize o espaço da lavanderia com o Varal de Chão de 3 Andares.\n\nSua estrutura vertical oferece diferentes áreas para pendurar roupas, enquanto o formato dobrável facilita o armazenamento quando não está em uso.\n\nAs quatro rodas tornam a movimentação pela casa mais prática.\n\n## Principais benefícios\n\n- Três andares\n- Estrutura vertical\n- Dobrável\n- Quatro rodas\n- Aproveitamento eficiente do espaço\n- Fácil movimentação\n- Adequado para apartamentos e casas",
+      "highlights": [
+        "3 andares",
+        "Dobrável",
+        "4 rodas",
+        "Ideal para apartamentos"
+      ],
+      "specifications": [
+        {
+          "group": "Ficha técnica",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Varal de chão"
+            },
+            {
+              "name": "Quantidade de níveis",
+              "value": "3"
+            },
+            {
+              "name": "Dobrável",
+              "value": "Sim"
+            },
+            {
+              "name": "Quantidade de rodas",
+              "value": "4"
+            },
+            {
+              "name": "Uso",
+              "value": "Interno/doméstico"
+            },
+            {
+              "name": "Formato",
+              "value": "Vertical"
+            },
+            {
+              "name": "Cor",
+              "value": "Conforme disponibilidade"
+            },
+            {
+              "name": "Material",
+              "value": "Conforme fabricante"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 Varal de chão de 3 andares"
+      ],
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal contra defeitos de fabricação conforme legislação aplicável.",
+      "packaging": {
+        "weightGrams": 4000,
+        "heightCm": 12,
+        "widthCm": 30,
+        "lengthCm": 80
+      },
+      "seoTitle": "Varal de Chão 3 Andares Dobrável com Rodas | Mercatto",
+      "seoDescription": "Varal de chão vertical com 3 andares, estrutura dobrável e quatro rodas. Mais espaço e praticidade para sua lavanderia.",
+      "tags": [
+        "varal de chão",
+        "varal 3 andares",
+        "varal dobrável",
+        "varal com rodas",
+        "varal grande",
+        "varal apartamento",
+        "varal roupas",
+        "lavanderia",
+        "varal vertical",
+        "varal portátil",
+        "varal"
+      ]
+    },
+    {
+      "key": "kit-19-pecas-utensilios-cozinha",
+      "skuCode": "COZ-KIT19",
+      "categorySlug": "cozinha",
+      "priceCents": 5990,
+      "minStock": 2,
+      "name": "Kit 19 Peças de Utensílios para Cozinha com Tábua, Espátulas e Tesoura",
+      "shortDescription": "Kit completo com 19 utensílios para facilitar o preparo, organização e serviço das refeições no dia a dia.",
+      "description": "Tenha os principais utensílios sempre à mão com o Kit de 19 Peças para Cozinha.\n\nO conjunto reúne diferentes acessórios para auxiliar no preparo das refeições, proporcionando mais organização e praticidade para a rotina.\n\nÉ uma ótima opção para cozinhas novas, presentes e para quem deseja renovar os utensílios do dia a dia.\n\n## Principais benefícios\n\n- Kit com 19 peças\n- Diferentes utensílios em um único conjunto\n- Acompanha tábua\n- Inclui espátulas\n- Inclui tesoura\n- Facilita a organização\n- Indicado para uso diário",
+      "highlights": [
+        "19 peças",
+        "Tábua, espátulas e tesoura",
+        "Ótima opção para presente"
+      ],
+      "specifications": [
+        {
+          "group": "Ficha técnica",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Kit de utensílios de cozinha"
+            },
+            {
+              "name": "Quantidade",
+              "value": "19 peças"
+            },
+            {
+              "name": "Uso",
+              "value": "Doméstico"
+            },
+            {
+              "name": "Tábua inclusa",
+              "value": "Sim"
+            },
+            {
+              "name": "Espátulas inclusas",
+              "value": "Sim"
+            },
+            {
+              "name": "Tesoura inclusa",
+              "value": "Sim"
+            },
+            {
+              "name": "Cor",
+              "value": "Conforme disponibilidade"
+            },
+            {
+              "name": "Material",
+              "value": "Conforme fabricante"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "19 peças conforme composição do kit do fornecedor"
+      ],
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal contra defeitos de fabricação conforme legislação aplicável.",
+      "packaging": {
+        "weightGrams": 2000,
+        "heightCm": 15,
+        "widthCm": 30,
+        "lengthCm": 40
+      },
+      "seoTitle": "Kit 19 Peças de Utensílios para Cozinha | Mercatto",
+      "seoDescription": "Kit com 19 utensílios para cozinha, incluindo tábua, espátulas, tesoura e acessórios para facilitar o preparo das refeições.",
+      "tags": [
+        "kit cozinha",
+        "utensilios cozinha",
+        "utensílios cozinha",
+        "kit utensilios",
+        "19 peças cozinha",
+        "espátula cozinha",
+        "tábua cozinha",
+        "tesoura cozinha",
+        "acessórios cozinha",
+        "kit cozinha completo"
+      ]
+    }
+  ]
+}

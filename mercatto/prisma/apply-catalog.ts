@@ -279,6 +279,12 @@ type GenericEntry = {
   seoDescription: string;
   tags: string[];
   options?: { name: string; values: string[] }[];
+  /** Preço sugerido (centavos) das variações; sem ele, 0 (não publica). */
+  priceCents?: number;
+  minStock?: number;
+  warrantyMonths?: number;
+  warrantyText?: string;
+  packaging?: { weightGrams: number; heightCm: number; widthCm: number; lengthCm: number };
 };
 
 const optionCode = (v: string) => normalizeText(v).replace(/[^a-z0-9]+/g, "").toUpperCase().slice(0, 10);
@@ -328,6 +334,9 @@ async function applyGenericProducts(touched: string[]) {
             catalogVersion: 1,
             condition: "NEW",
             status: "DRAFT",
+            warrantyMonths: e.warrantyMonths ?? null,
+            warrantyText: e.warrantyText ?? null,
+            ...e.packaging,
             options: { create: options.map((o, i) => ({ name: o.name, values: o.values, position: i })) },
             variants: {
               create: combos.map((c, i) => {
@@ -336,8 +345,9 @@ async function applyGenericProducts(touched: string[]) {
                   sku: values.length ? `${sku}-${values.map(optionCode).join("-")}` : `${sku}-UN`,
                   name: values.length ? values.join(" · ") : "Padrão",
                   optionValues: c,
-                  priceCents: 0,
+                  priceCents: e.priceCents ?? 0,
                   stock: 0,
+                  minStock: e.minStock ?? 0,
                   status: "ACTIVE" as const,
                   position: i,
                 };
