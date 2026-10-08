@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Trophy } from "lucide-react";
-import { formatCompact } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { ProductCardData } from "@/features/catalog/types";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,7 +7,7 @@ import { ProductImage } from "@/components/commerce/product-image";
 import { Price } from "@/components/commerce/price";
 import { formatBRL } from "@/lib/money";
 import { RatingStars } from "@/components/commerce/rating";
-import { DemoBadge, DiscountBadge, FlashBadge, FreeShippingBadge, OfficialBadge, StockIndicator } from "@/components/commerce/badges";
+import { DemoBadge, FlashBadge, FreeShippingBadge, OfficialBadge, StockIndicator } from "@/components/commerce/badges";
 import { FavoriteButton } from "@/components/commerce/favorite-button";
 
 export type ProductCardOptions = {
@@ -52,7 +51,6 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
             </span>
           ) : null}
           {product.promotion?.isFlash ? <FlashBadge label="Relâmpago" /> : null}
-          {product.discountPercent >= 5 ? <DiscountBadge percent={product.discountPercent} className="shine-once" /> : null}
         </div>
         <FavoriteButton
           productId={product.id}
@@ -82,7 +80,7 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
         ) : (
           <>
             {product.fromPrice ? <span className="-mb-1 text-xs text-fg-muted">a partir de</span> : null}
-            <Price priceCents={product.priceCents} listPriceCents={product.listPriceCents} discountPercent={product.discountPercent} size={variant === "compact" ? "sm" : "md"} showDiscount={product.discountPercent < 5} />
+            <Price priceCents={product.priceCents} listPriceCents={product.listPriceCents} soldCount={product.salesCount} size={variant === "compact" ? "sm" : "md"} />
             {product.installment && product.installment.count > 1 ? (
               <p className="text-xs text-fg-muted">
                 em até{" "}
@@ -96,10 +94,7 @@ export function ProductCard({ product, variant = "grid", favorited, priority, cl
         <div className="mt-auto flex flex-col gap-1 pt-1">
           {product.freeShipping && !unavailable ? <FreeShippingBadge /> : null}
           {!unavailable && product.totalStock <= 5 ? <StockIndicator stock={product.totalStock} /> : null}
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-fg-subtle">
-            {product.ratingCount > 0 ? <RatingStars value={product.ratingAvg} count={product.ratingCount} size="xs" /> : null}
-            {product.salesCount > 0 ? <span>+{formatCompact(product.salesCount)} vendidos</span> : null}
-          </div>
+          {product.ratingCount > 0 ? <RatingStars value={product.ratingAvg} count={product.ratingCount} size="xs" /> : null}
           {!product.isOfficial && variant !== "compact" ? <p className="truncate text-xs text-fg-subtle">por {product.storeName}</p> : null}
         </div>
       </div>

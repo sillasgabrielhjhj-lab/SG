@@ -7,6 +7,7 @@ import { db } from "@/server/db";
 import { computeEffectivePrice } from "@/features/pricing/engine";
 import { loadActivePromotionsFor } from "@/features/pricing/promotions.server";
 import { getCategoryAncestorsMap } from "@/features/catalog/categories.server";
+import { soldUnitsByProduct } from "@/features/orders/stats.server";
 import type { ProductCardData } from "@/features/catalog/types";
 
 /** Status visíveis em listagens públicas. */
@@ -50,11 +51,15 @@ export async function toProductCards(rows: CardRow[], now: Date = new Date()): P
   // Parcelamento com a MESMA configuração da página do produto e do checkout.
   const installmentConfig = effectiveInstallmentConfig(await getStoreSettings());
   const ancestors = await getCategoryAncestorsMap();
-  const promotions = await loadActivePromotionsFor(
-    rows.map((r) => ({ id: r.id, categoryId: r.categoryId, storeId: r.storeId })),
-    ancestors,
-    now,
-  );
+  const [promotions, sold] = await Promise.all([
+    loadActivePromotionsFor(
+      rows.map((r) => ({ id: r.id, categoryId: r.categoryId, storeId: r.storeId })),
+      ancestors,
+      now,
+    ),
+    // "Vendidos" exibido: unidades de pedidos pagos, sem cancelados/reembolsados.
+    soldUnitsByProduct(rows.map((r) => r.id)),
+  ]);
   return rows.map((r) => {
     const promos = promotions.get(r.id) ?? [];
     const priced = r.variants.map((v) => ({ stock: v.stock, id: v.id, eff: computeEffectivePrice(v, promos, now) }));
@@ -80,7 +85,7 @@ export async function toProductCards(rows: CardRow[], now: Date = new Date()): P
       discountPercent: best?.eff.discountPercent ?? 0,
       freeShipping: r.freeShipping,
       totalStock: r.totalStock,
-      salesCount: r.salesCount,
+      salesCount: sold.get(r.id) ?? 0,
       ratingAvg: r.ratingAvg,
       ratingCount: r.ratingCount,
       promotion: promo

@@ -28,6 +28,23 @@ export const formatNumber = (n: number) => numberFmt.format(n);
 /** 12,3 mil */
 export const formatCompact = (n: number) => compactFmt.format(n);
 
+const SOLD_STEPS: [number, string][] = [
+  [100_000, "+100 mil"],
+  [10_000, "+10 mil"],
+  [1_000, "+1 mil"],
+  [500, "+500"],
+  [100, "+100"],
+];
+
+/** "1 vendido", "57 vendidos", "+100 vendidos", "+1 mil vendidos"… — null sem vendas. */
+export function formatSoldCount(units: number): string | null {
+  if (!Number.isFinite(units) || units <= 0) return null;
+  if (units === 1) return "1 vendido";
+  if (units < 100) return `${Math.floor(units)} vendidos`;
+  const step = SOLD_STEPS.find(([min]) => units >= min);
+  return `${step![1]} vendidos`;
+}
+
 /** "há 3 dias", "há 2 horas" */
 export function formatRelative(d: DateInput, now: Date = new Date()): string {
   const diffMs = toDate(d).getTime() - now.getTime();

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { BadgeCheck, RotateCcw, ShieldCheck, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { formatCompact } from "@/lib/format";
 import type { InstallmentConfig } from "@/lib/money";
 import { trackEvent } from "@/lib/analytics";
 import type { ProductPageData } from "@/features/product/queries";
@@ -61,7 +60,6 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
         <div className="flex flex-col gap-2">
           <div className="flex flex-wrap items-center gap-2 text-xs text-fg-muted">
             <span>{CONDITION[product.condition]}</span>
-            {product.salesCount > 0 ? <span>· +{formatCompact(product.salesCount)} vendidos</span> : null}
             {product.store.isOfficial ? <OfficialBadge compact /> : null}
             {product.isDemo ? <DemoBadge /> : null}
           </div>
@@ -99,7 +97,7 @@ export function ProductPurchase({ product, favorited, installmentConfig, pixDisc
 
           {variant ? (
             <>
-              <Price priceCents={variant.priceCents} listPriceCents={variant.listPriceCents} discountPercent={variant.discountPercent} size="xl" />
+              <Price priceCents={variant.priceCents} listPriceCents={variant.listPriceCents} soldCount={product.salesCount} size="xl" />
               <PixPrice priceCents={variant.priceCents} pixDiscountPercent={pixDiscountPercent} />
               <InstallmentsText priceCents={variant.priceCents} config={installmentConfig} className="text-sm" />
               {variant.promotion && !variant.promotion.isFlash ? <p className="text-xs font-semibold text-brand-700">{variant.promotion.name.replace("[DEMO] ", "")}</p> : null}

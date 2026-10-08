@@ -1,5 +1,5 @@
 import "server-only";
-import { countStoreSales } from "@/features/orders/stats.server";
+import { countStoreSales, soldUnitsByProduct } from "@/features/orders/stats.server";
 import { cache } from "react";
 import { db } from "@/server/db";
 import { computeEffectivePrice } from "@/features/pricing/engine";
@@ -65,7 +65,7 @@ export const getProductPageData = cache(async (slug: string) => {
   ]);
   const distribution = [5, 4, 3, 2, 1].map((r) => ({ rating: r, count: distributionRows.find((d) => d.rating === r)?._count._all ?? 0 }));
   const totalOrders = product.store.salesCount + product.store.cancelledCount;
-  const storeSales = await countStoreSales(product.store.id);
+  const [storeSales, soldUnits] = await Promise.all([countStoreSales(product.store.id), soldUnitsByProduct([product.id])]);
 
   return {
     id: product.id,
@@ -87,7 +87,7 @@ export const getProductPageData = cache(async (slug: string) => {
       .map((g) => ({ ...g, items: g.items.filter((i) => i.value?.trim()) }))
       .filter((g) => g.items.length),
     freeShipping: product.freeShipping,
-    salesCount: product.salesCount,
+    salesCount: soldUnits.get(product.id) ?? 0,
     ratingAvg: product.ratingAvg,
     ratingCount: product.ratingCount,
     seoTitle: product.seoTitle,
