@@ -287,6 +287,8 @@ type GenericEntry = {
   warrantyMonths?: number;
   warrantyText?: string;
   packaging?: { weightGrams: number; heightCm: number; widthCm: number; lengthCm: number };
+  brand?: { slug: string; name: string };
+  faq?: { q: string; a: string }[];
 };
 
 const optionCode = (v: string) => normalizeText(v).replace(/[^a-z0-9]+/g, "").toUpperCase().slice(0, 10);
@@ -303,7 +305,7 @@ async function applyGenericProducts(touched: string[]) {
   } catch {
     return;
   }
-  const store = await db.store.findFirst({ where: { isOfficial: true }, select: { id: true } });
+  const store = await db.store.findFirst({ where: { isOfficial: true }, select: { id: true, ownerId: true } });
   if (!store) throw new Error("Loja oficial não encontrada.");
   for (const f of files) {
     const { products } = JSON.parse(readFileSync(new URL(f, dir), "utf8")) as { products: GenericEntry[] };
@@ -317,9 +319,11 @@ async function applyGenericProducts(touched: string[]) {
         const options = e.options ?? [];
         const sku = `MCT-${e.skuCode}`;
         const combos = combinations(options);
+        const brand = e.brand ? await db.brand.upsert({ where: { slug: e.brand.slug }, update: {}, create: { slug: e.brand.slug, name: e.brand.name }, select: { id: true } }) : null;
         const product = await db.product.create({
           data: {
             storeId: store.id,
+            brandId: brand?.id ?? null,
             categoryId: category.id,
             slug: slugTaken ? `${e.key}-mercatto` : e.key,
             sku,
@@ -358,6 +362,10 @@ async function applyGenericProducts(touched: string[]) {
           },
           select: { id: true },
         });
+        // Perguntas frequentes respondidas pela loja (criadas de trás para frente: a página lista as recentes primeiro).
+        for (const { q, a } of [...(e.faq ?? [])].reverse()) {
+          await db.question.create({ data: { productId: product.id, userId: store.ownerId, body: q, status: "PUBLISHED", isFaq: true, answer: { create: { storeId: store.id, userId: store.ownerId, body: a } } } });
+        }
         touched.push(product.id);
         console.info(`[produtos] ${e.name}: criado (rascunho)`);
       } catch (error) {
