@@ -1,0 +1,276 @@
+{
+  "products": [
+    {
+      "key": "cooktop-a-gas-itatiaia-essencial-5-bocas-preto",
+      "skuCode": "ELE-CKITAESS5",
+      "categorySlug": "fogoes-e-cooktops",
+      "category": { "name": "Fogões e Cooktops", "parentSlug": "eletrodomesticos", "icon": "flame" },
+      "brand": { "slug": "itatiaia", "name": "Itatiaia" },
+      "priceCents": 33990,
+      "minStock": 1,
+      "name": "Cooktop a Gás Itatiaia Essencial 5 Bocas Mesa de Vidro Temperado Preto Bivolt",
+      "shortDescription": "Cooktop a gás Itatiaia Essencial com 5 bocas, mesa de vidro temperado preto, acendimento superautomático, grades individuais e botões removíveis. Bivolt. Elegância e praticidade para a sua cozinha planejada.",
+      "description": "Deixe a sua cozinha mais bonita e funcional. O Cooktop Itatiaia Essencial 5 Bocas une o visual elegante da mesa de vidro temperado preto à praticidade do acendimento superautomático: é só girar o botão para acender a chama, sem fósforo nem acendedor.\n\n## Por que escolher o Itatiaia Essencial\n- 5 bocas para preparar vários pratos ao mesmo tempo.\n- Mesa de vidro temperado preto: visual moderno e limpeza fácil.\n- Acendimento superautomático em todos os queimadores.\n- Grades individuais em aço esmaltado: mais fáceis de retirar e lavar.\n- Botões removíveis, que facilitam a limpeza do painel.\n- Bivolt: funciona em tomadas 127V e 220V.\n\n## Queimadores\n- 2 queimadores rápidos de 3,0 kW, para fervuras e frituras.\n- 3 queimadores semirrápidos de 1,75 kW, para o preparo do dia a dia.\n\n## Gás e instalação\n- Sai de fábrica preparado para gás GLP (botijão).\n- Pode ser convertido para gás natural (GN) pela Rede de Serviço Autorizada Itatiaia.\n- Encaixa em nicho de 63,6 cm de largura por 35 cm de profundidade.\n- A instalação deve ser feita por profissional qualificado, seguindo o manual de instruções.\n\n## Cuidados e limpeza\n- Espere a mesa esfriar antes de limpar.\n- Use pano macio e detergente neutro; evite esponjas e produtos abrasivos no vidro.\n- Retire as grades e os botões para uma limpeza completa.",
+      "highlights": [
+        "5 bocas: 2 rápidas e 3 semirrápidas",
+        "Mesa de vidro temperado preto",
+        "Acendimento superautomático",
+        "Grades individuais em aço esmaltado",
+        "Botões removíveis",
+        "Bivolt (127V e 220V)"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            { "name": "Marca", "value": "Itatiaia" },
+            { "name": "Linha", "value": "Essencial" },
+            { "name": "Código do fabricante", "value": "3700000193" },
+            { "name": "Tipo", "value": "Cooktop a gás" },
+            { "name": "Número de bocas", "value": "5" },
+            { "name": "Cor", "value": "Preto" },
+            { "name": "Código EAN", "value": "" }
+          ]
+        },
+        {
+          "group": "Mesa e acabamento",
+          "items": [
+            { "name": "Material da mesa", "value": "Vidro temperado" },
+            { "name": "Grades (trempes)", "value": "Individuais, em aço esmaltado" },
+            { "name": "Botões", "value": "Removíveis" }
+          ]
+        },
+        {
+          "group": "Queimadores e gás",
+          "items": [
+            { "name": "Queimadores rápidos", "value": "2 × 3,0 kW" },
+            { "name": "Queimadores semirrápidos", "value": "3 × 1,75 kW" },
+            { "name": "Acendimento", "value": "Superautomático" },
+            { "name": "Gás", "value": "GLP de fábrica; conversível para GN pela rede autorizada" }
+          ]
+        },
+        {
+          "group": "Dimensões e elétrica",
+          "items": [
+            { "name": "Dimensões do produto (L × P × A)", "value": "73 × 45 × 16 cm" },
+            { "name": "Medidas do nicho (L × P)", "value": "63,6 × 35 cm" },
+            { "name": "Peso", "value": "9,5 kg" },
+            { "name": "Voltagem", "value": "Bivolt (127V e 220V)" }
+          ]
+        }
+      ],
+      "includedItems": ["1 Cooktop Itatiaia Essencial 5 bocas", "1 Manual de instruções"],
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses contra defeitos de fabricação. Consulte o certificado que acompanha o produto.",
+      "packaging": { "weightGrams": 9500, "heightCm": 16, "widthCm": 45, "lengthCm": 73 },
+      "seoTitle": "Cooktop a Gás Itatiaia Essencial 5 Bocas Vidro Preto | Mercatto",
+      "seoDescription": "Cooktop Itatiaia Essencial 5 bocas com mesa de vidro temperado, acendimento superautomático, grades individuais e bivolt. Compre na Mercatto.",
+      "tags": [
+        "cooktop",
+        "cooktop 5 bocas",
+        "cooktop a gás",
+        "cooktop itatiaia",
+        "itatiaia essencial",
+        "cooktop vidro temperado",
+        "cooktop preto",
+        "cooktop bivolt",
+        "fogão cooktop",
+        "acendimento superautomático",
+        "cooktop 5 queimadores",
+        "cozinha planejada",
+        "fogões e cooktops"
+      ],
+      "images": [
+        { "src": "/products/cooktop-itatiaia-essencial-5-bocas/1.webp", "alt": "Cooktop a gás Itatiaia Essencial 5 bocas com mesa de vidro preto instalado na bancada", "width": 1254, "height": 1254 },
+        { "src": "/products/cooktop-itatiaia-essencial-5-bocas/2.webp", "alt": "Cooktop Itatiaia Essencial 5 bocas em uso com panelas e chamas acesas em cozinha moderna", "width": 1254, "height": 1254 },
+        { "src": "/products/cooktop-itatiaia-essencial-5-bocas/3.webp", "alt": "Detalhe dos queimadores, grades individuais e botões do cooktop Itatiaia Essencial", "width": 1254, "height": 1254 }
+      ],
+      "faq": [
+        { "q": "O cooktop é bivolt?", "a": "Sim. O acendimento funciona em tomadas 127V e 220V." },
+        { "q": "Funciona com gás natural (GN)?", "a": "Ele sai de fábrica para gás GLP (botijão). A conversão para gás natural deve ser feita pela Rede de Serviço Autorizada Itatiaia." },
+        { "q": "Qual o tamanho do nicho para embutir?", "a": "O nicho deve ter 63,6 cm de largura por 35 cm de profundidade. O cooktop mede 73 × 45 cm." },
+        { "q": "Precisa de acendedor?", "a": "Não. O acendimento é superautomático: basta girar o botão." },
+        { "q": "Como limpar a mesa de vidro?", "a": "Com a mesa fria, use pano macio e detergente neutro. As grades e os botões podem ser retirados para a limpeza." }
+      ]
+    },
+    {
+      "key": "micro-ondas-electrolux-mto30-20-litros-branco",
+      "skuCode": "ELE-MTO30",
+      "categorySlug": "micro-ondas",
+      "brand": { "slug": "electrolux", "name": "Electrolux" },
+      "priceCents": 43990,
+      "minStock": 1,
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "variantSkus": ["MCT-ELE-MTO30-127", "MCT-ELE-MTO30-220"],
+      "name": "Micro-ondas Electrolux MTO30 20 Litros Branco com Função Tira Odor e Descongelar",
+      "shortDescription": "Micro-ondas Electrolux MTO30 de 20 litros, branco, com função tira odor, descongelar, receitas pré-programadas, aquecer prato pronto e manter aquecido. Selo Procel A. Praticidade para o dia a dia.",
+      "description": "Refeições prontas em minutos, sem cheiro de comida na cozinha. O Micro-ondas Electrolux MTO30 tem 20 litros de capacidade e reúne funções que facilitam a rotina: tira odor, descongelar, receitas pré-programadas e as funções aquecer prato pronto e manter aquecido.\n\n## Por que escolher o MTO30\n- Função tira odor: ajuda a eliminar o cheiro de alimentos do interior do aparelho.\n- Função descongelar para preparar carnes e outros alimentos com antecedência.\n- Receitas pré-programadas: arroz, macarrão, bolo, brigadeiro, pipoca e sopas.\n- Aquecer prato pronto e manter aquecido com um toque.\n- Selo Procel A de eficiência energética.\n- 20 litros: tamanho ideal para cozinhas compactas.\n\n## Funcionalidades\n- Cozimento programado com timer.\n- Painel digital com teclas de atalho para as receitas.\n\n## Voltagem\nEste produto não é bivolt. Escolha a voltagem (127V ou 220V) de acordo com a tomada da sua casa antes de finalizar a compra.\n\n## Cuidados\n- Use somente recipientes próprios para micro-ondas.\n- Mantenha espaço livre ao redor do aparelho para a ventilação, conforme o manual.",
+      "highlights": [
+        "Capacidade de 20 litros",
+        "Função tira odor",
+        "Função descongelar",
+        "Receitas pré-programadas",
+        "Aquecer prato pronto e manter aquecido",
+        "Selo Procel A"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            { "name": "Marca", "value": "Electrolux" },
+            { "name": "Modelo", "value": "MTO30" },
+            { "name": "Tipo", "value": "Micro-ondas de bancada" },
+            { "name": "Cor", "value": "Branco" },
+            { "name": "Código EAN", "value": "" }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            { "name": "Capacidade", "value": "20 litros" },
+            { "name": "Potência", "value": "1300 W" },
+            { "name": "Eficiência energética", "value": "Selo Procel A" }
+          ]
+        },
+        {
+          "group": "Funções",
+          "items": [
+            { "name": "Tira odor", "value": "Sim" },
+            { "name": "Descongelar", "value": "Sim" },
+            { "name": "Receitas pré-programadas", "value": "Arroz, macarrão, bolo, brigadeiro, pipoca e sopas" },
+            { "name": "Aquecer prato pronto", "value": "Sim" },
+            { "name": "Manter aquecido", "value": "Sim" },
+            { "name": "Timer", "value": "Sim" }
+          ]
+        },
+        {
+          "group": "Dimensões e elétrica",
+          "items": [
+            { "name": "Dimensões (A × L × P)", "value": "26,25 × 45,5 × 34,8 cm" },
+            { "name": "Peso", "value": "11,1 kg" },
+            { "name": "Voltagem", "value": "127V ou 220V (não é bivolt)" }
+          ]
+        }
+      ],
+      "includedItems": ["1 Micro-ondas Electrolux MTO30"],
+      "packaging": { "weightGrams": 11100, "heightCm": 27, "widthCm": 35, "lengthCm": 46 },
+      "seoTitle": "Micro-ondas Electrolux MTO30 20 Litros Branco | Mercatto",
+      "seoDescription": "Micro-ondas Electrolux MTO30 20L branco com tira odor, descongelar, receitas pré-programadas e Selo Procel A. 127V ou 220V. Compre na Mercatto.",
+      "tags": [
+        "micro-ondas",
+        "microondas",
+        "micro-ondas electrolux",
+        "electrolux mto30",
+        "mto30",
+        "micro-ondas 20 litros",
+        "micro-ondas branco",
+        "micro-ondas tira odor",
+        "micro-ondas 127v",
+        "micro-ondas 220v",
+        "micro-ondas procel a",
+        "micro-ondas pequeno",
+        "eletrodoméstico cozinha"
+      ],
+      "images": [
+        { "src": "/products/micro-ondas-electrolux-mto30/1.webp", "alt": "Micro-ondas Electrolux MTO30 20 litros branco visto de frente", "width": 1254, "height": 1254 },
+        { "src": "/products/micro-ondas-electrolux-mto30/2.webp", "alt": "Micro-ondas Electrolux MTO30 branco na bancada da cozinha ao lado de prato de comida", "width": 1254, "height": 1254 },
+        { "src": "/products/micro-ondas-electrolux-mto30/3.webp", "alt": "Micro-ondas Electrolux MTO30 com a porta aberta mostrando o interior e o prato giratório", "width": 1254, "height": 1254 }
+      ],
+      "faq": [
+        { "q": "O micro-ondas é bivolt?", "a": "Não. Ele é vendido em 127V ou em 220V. Escolha a voltagem igual à da sua tomada antes de finalizar a compra." },
+        { "q": "Qual a capacidade?", "a": "20 litros." },
+        { "q": "O que faz a função tira odor?", "a": "Ajuda a eliminar o cheiro de alimentos que fica dentro do micro-ondas depois do uso." },
+        { "q": "Quais receitas vêm programadas?", "a": "Arroz, macarrão, bolo, brigadeiro, pipoca e sopas." },
+        { "q": "Quais as medidas?", "a": "26,25 cm de altura, 45,5 cm de largura e 34,8 cm de profundidade, com 11,1 kg." }
+      ]
+    },
+    {
+      "key": "purificador-de-agua-electrolux-pe12g-pure-4x-cinza",
+      "skuCode": "ELE-PE12G",
+      "categorySlug": "purificadores-de-agua",
+      "category": { "name": "Purificadores de Água", "parentSlug": "eletrodomesticos", "icon": "droplets" },
+      "brand": { "slug": "electrolux", "name": "Electrolux" },
+      "priceCents": 59990,
+      "minStock": 1,
+      "name": "Purificador de Água Electrolux Pure 4x PE12G Painel Touch Gelada, Fria e Natural Cinza Bivolt",
+      "shortDescription": "Purificador de água Electrolux Pure 4x PE12G com painel touch, água gelada, fria e natural, pressurizador que enche o copo até 4x mais rápido e alerta de troca de filtro. Bivolt, compacto e na cor cinza.",
+      "description": "Água purificada na temperatura que você prefere, direto na sua cozinha. O Purificador Electrolux Pure 4x PE12G tem painel touch com três opções de temperatura — gelada, fria e natural — e um pressurizador interno que enche o copo até 4 vezes mais rápido.\n\n## Por que escolher o Pure 4x PE12G\n- Três temperaturas: gelada, fria e natural.\n- Pressurizador interno: enche o copo até 4x mais rápido, mesmo com baixa pressão na entrada de água.\n- Painel touch moderno e fácil de usar.\n- Alerta de troca de filtro: você sabe a hora certa de trocar o refil.\n- Refrigeração eletrônica, sem compressor.\n- Design compacto em cinza, que ocupa pouco espaço na bancada.\n- Bivolt: funciona em 127V e 220V.\n\n## Refil\n- Troque o refil a cada 6 meses ou a cada 3.000 litros, o que acontecer primeiro.\n\n## Instalação\n- É instalado em um ponto de água (torneira) e em uma tomada.\n- Precisa de energia elétrica para funcionar.\n- Siga as orientações do manual de instruções.",
+      "highlights": [
+        "Água gelada, fria e natural",
+        "Pressurizador: enche o copo até 4x mais rápido",
+        "Painel touch",
+        "Alerta de troca de filtro",
+        "Refrigeração eletrônica",
+        "Bivolt (127V e 220V)"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            { "name": "Marca", "value": "Electrolux" },
+            { "name": "Linha", "value": "Pure 4x" },
+            { "name": "Modelo", "value": "PE12G" },
+            { "name": "Tipo", "value": "Purificador de água" },
+            { "name": "Cor", "value": "Cinza" },
+            { "name": "Código EAN", "value": "" }
+          ]
+        },
+        {
+          "group": "Funcionamento",
+          "items": [
+            { "name": "Temperaturas", "value": "Gelada, fria e natural" },
+            { "name": "Refrigeração", "value": "Eletrônica (placa termoelétrica)" },
+            { "name": "Reservatório de água gelada", "value": "0,8 L" },
+            { "name": "Pressurizador", "value": "Sim, enche o copo até 4x mais rápido" },
+            { "name": "Acionamento", "value": "Painel touch" }
+          ]
+        },
+        {
+          "group": "Filtro",
+          "items": [
+            { "name": "Alerta de troca de filtro", "value": "Sim" },
+            { "name": "Troca do refil", "value": "A cada 6 meses ou 3.000 litros" }
+          ]
+        },
+        {
+          "group": "Elétrica e instalação",
+          "items": [
+            { "name": "Voltagem", "value": "Bivolt (127V e 220V)" },
+            { "name": "Instalação", "value": "Ponto de água e tomada" }
+          ]
+        }
+      ],
+      "includedItems": ["1 Purificador de água Electrolux Pure 4x PE12G"],
+      "packaging": { "weightGrams": 4300, "heightCm": 35, "widthCm": 16, "lengthCm": 42 },
+      "seoTitle": "Purificador de Água Electrolux Pure 4x PE12G Cinza | Mercatto",
+      "seoDescription": "Purificador Electrolux Pure 4x PE12G com painel touch, água gelada, fria e natural, pressurizador e alerta de troca de filtro. Bivolt. Compre na Mercatto.",
+      "tags": [
+        "purificador de água",
+        "purificador electrolux",
+        "electrolux pe12g",
+        "pe12g",
+        "pure 4x",
+        "purificador água gelada",
+        "purificador painel touch",
+        "purificador bivolt",
+        "purificador cinza",
+        "filtro de água",
+        "purificador de água gelada",
+        "purificador compacto",
+        "purificadores de água"
+      ],
+      "images": [
+        { "src": "/products/purificador-electrolux-pe12g/1.webp", "alt": "Purificador de água Electrolux Pure 4x PE12G cinza sobre a bancada", "width": 1254, "height": 1254 },
+        { "src": "/products/purificador-electrolux-pe12g/2.webp", "alt": "Purificador Electrolux PE12G servindo água em um copo", "width": 1254, "height": 1254 },
+        { "src": "/products/purificador-electrolux-pe12g/3.webp", "alt": "Design do purificador Electrolux PE12G com painel touch e bandeja coletora, ao lado de copo com água", "width": 1254, "height": 1254 }
+      ],
+      "faq": [
+        { "q": "Quais temperaturas ele oferece?", "a": "Água gelada, fria e natural, escolhidas no painel touch." },
+        { "q": "O purificador é bivolt?", "a": "Sim, funciona em 127V e 220V." },
+        { "q": "De quanto em quanto tempo troco o refil?", "a": "A cada 6 meses ou a cada 3.000 litros, o que acontecer primeiro. O aparelho avisa quando é hora da troca." },
+        { "q": "Funciona sem energia elétrica?", "a": "Não. O purificador precisa estar ligado na tomada para funcionar." },
+        { "q": "Tem compressor?", "a": "Não. A refrigeração é eletrônica, por placa termoelétrica." }
+      ]
+    }
+  ]
+}

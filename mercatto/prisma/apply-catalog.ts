@@ -269,6 +269,8 @@ type GenericEntry = {
   key: string;
   skuCode: string;
   categorySlug: string;
+  /** Subcategoria nova (criada uma única vez sob a categoria-pai) quando `categorySlug` ainda não existe. */
+  category?: { name: string; parentSlug: string; icon?: string };
   name: string;
   shortDescription: string;
   description: string;
@@ -299,6 +301,13 @@ function combinations(options: { name: string; values: string[] }[]): Record<str
   return options.reduce<Record<string, string>[]>((acc, o) => acc.flatMap((c) => o.values.map((v) => ({ ...c, [o.name]: v }))), [{}]);
 }
 
+async function createSubcategory(slug: string, c: NonNullable<GenericEntry["category"]>) {
+  const parent = await db.category.findUnique({ where: { slug: c.parentSlug }, select: { id: true } });
+  if (!parent) return null;
+  const position = await db.category.count({ where: { parentId: parent.id } });
+  return db.category.create({ data: { slug, name: c.name, parentId: parent.id, icon: c.icon ?? null, position, isActive: true }, select: { id: true } });
+}
+
 async function applyGenericProducts(touched: string[]) {
   const dir = new URL("./content/products/", import.meta.url);
   let files: string[];
@@ -315,7 +324,7 @@ async function applyGenericProducts(touched: string[]) {
       try {
         const exists = await db.product.findFirst({ where: { OR: [{ catalogKey: e.key }, { storeId: store.id, slug: e.key }] }, select: { id: true } });
         if (exists) continue;
-        const category = await db.category.findUnique({ where: { slug: e.categorySlug }, select: { id: true } });
+        const category = (await db.category.findUnique({ where: { slug: e.categorySlug }, select: { id: true } })) ?? (e.category ? await createSubcategory(e.categorySlug, e.category) : null);
         if (!category) throw new Error(`categoria "${e.categorySlug}" não encontrada`);
         const slugTaken = await db.product.findUnique({ where: { slug: e.key }, select: { id: true } });
         const options = e.options ?? [];
