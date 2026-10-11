@@ -3,7 +3,7 @@ import type { PrismaClient } from "../../src/generated/prisma/client";
 /** Dados de referência — usados em produção (minimal) e desenvolvimento (demo). */
 
 type Attr = { key: string; name: string; type: "TEXT" | "NUMBER" | "SELECT" | "BOOLEAN"; options?: string[]; unit?: string; filterable?: boolean };
-type Cat = { slug: string; name: string; icon: string; featured?: boolean; description: string; attrs?: Attr[]; children: { slug: string; name: string; icon: string; attrs?: Attr[] }[] };
+type Cat = { slug: string; name: string; icon: string; featured?: boolean; /** Fora da vitrine (criada desativada). */ hidden?: boolean; description: string; attrs?: Attr[]; children: { slug: string; name: string; icon: string; attrs?: Attr[] }[] };
 
 const STORAGE = ["64 GB", "128 GB", "256 GB", "512 GB", "1 TB"];
 const RAM = ["4 GB", "6 GB", "8 GB", "12 GB", "16 GB", "32 GB"];
@@ -100,7 +100,7 @@ export const CATEGORY_TREE: Cat[] = [
     ],
   },
   {
-    slug: "automotivo", name: "Automotivo", icon: "Car", description: "Pneus e acessórios automotivos.",
+    slug: "automotivo", hidden: true, name: "Automotivo", icon: "Car", description: "Pneus e acessórios automotivos.",
     attrs: [{ key: "aro", name: "Aro", type: "SELECT", options: ["13", "14", "15", "16", "17", "18"], filterable: true }],
     children: [
       { slug: "pneus", name: "Pneus", icon: "CircleDot" },
@@ -108,7 +108,7 @@ export const CATEGORY_TREE: Cat[] = [
     ],
   },
   {
-    slug: "ferramentas", name: "Ferramentas", icon: "Wrench", description: "Ferramentas elétricas e organização.",
+    slug: "ferramentas", hidden: true, name: "Ferramentas", icon: "Wrench", description: "Ferramentas elétricas e organização.",
     attrs: [{ key: "voltagem", name: "Voltagem", type: "SELECT", options: VOLT, filterable: true }],
     children: [
       { slug: "ferramentas-eletricas", name: "Ferramentas elétricas", icon: "Drill" },
@@ -116,7 +116,7 @@ export const CATEGORY_TREE: Cat[] = [
     ],
   },
   {
-    slug: "esportes", name: "Esportes", icon: "Dumbbell", description: "Bicicletas, musculação, yoga e futebol.",
+    slug: "esportes", hidden: true, name: "Esportes", icon: "Dumbbell", description: "Bicicletas, musculação, yoga e futebol.",
     children: [
       { slug: "bicicletas", name: "Bicicletas", icon: "Bike" },
       { slug: "musculacao", name: "Musculação", icon: "Dumbbell" },
@@ -187,7 +187,7 @@ export async function seedReference(db: PrismaClient) {
     const parent = await db.category.upsert({
       where: { slug: root.slug },
       update: { name: root.name, icon: root.icon, position: i, isFeatured: Boolean(root.featured), description: root.description },
-      create: { slug: root.slug, name: root.name, icon: root.icon, position: i, isFeatured: Boolean(root.featured), description: root.description },
+      create: { slug: root.slug, name: root.name, icon: root.icon, position: i, isFeatured: Boolean(root.featured), description: root.description, isActive: !root.hidden },
     });
     categoryIds.set(root.slug, parent.id);
     for (const [pos, a] of (root.attrs ?? []).entries()) {
@@ -201,7 +201,7 @@ export async function seedReference(db: PrismaClient) {
       const c = await db.category.upsert({
         where: { slug: child.slug },
         update: { name: child.name, icon: child.icon, parentId: parent.id, position: j },
-        create: { slug: child.slug, name: child.name, icon: child.icon, parentId: parent.id, position: j },
+        create: { slug: child.slug, name: child.name, icon: child.icon, parentId: parent.id, position: j, isActive: !root.hidden },
       });
       categoryIds.set(child.slug, c.id);
     }

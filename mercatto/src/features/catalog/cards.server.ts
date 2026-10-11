@@ -13,8 +13,8 @@ import type { ProductCardData } from "@/features/catalog/types";
 /** Status visíveis em listagens públicas. */
 export const LISTABLE_STATUSES = ["ACTIVE"] as const;
 
-/** Filtro base de visibilidade pública (produto ativo + loja ativa). */
-export const publicProductWhere: Prisma.ProductWhereInput = { status: { in: [...LISTABLE_STATUSES] }, store: { status: "ACTIVE" } };
+/** Filtro base de visibilidade pública (produto ativo + loja ativa + categoria ativa). */
+export const publicProductWhere: Prisma.ProductWhereInput = { status: { in: [...LISTABLE_STATUSES] }, store: { status: "ACTIVE" }, category: { isActive: true } };
 
 export const CARD_SELECT = {
   id: true,

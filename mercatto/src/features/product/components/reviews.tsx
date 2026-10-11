@@ -1,13 +1,10 @@
 "use client";
 
-import { ReviewVideos } from "@/features/reviews/components/review-videos";
-import Image from "next/image";
+import { ReviewCard } from "@/features/reviews/components/review-card";
 import { useState, useTransition } from "react";
-import { BadgeCheck, Camera, MessageSquare, Star } from "lucide-react";
+import { Camera, MessageSquare, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { formatDate } from "@/lib/format";
 import { RatingStars } from "@/components/commerce/rating";
-import { DemoBadge } from "@/components/commerce/badges";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { loadReviewsAction } from "@/features/product/actions";
@@ -87,33 +84,9 @@ export function ProductReviews({ productId, ratingAvg, distribution, total, with
       <div className={cn("flex flex-col divide-y divide-line transition-opacity", pending && "opacity-60")} aria-busy={pending}>
         {data.items.length === 0 ? <p className="py-6 text-sm text-fg-muted">Nenhuma avaliação com este filtro.</p> : null}
         {data.items.map((r) => (
-          <article key={r.id} className="flex flex-col gap-1.5 py-4 first:pt-0">
-            <div className="flex flex-wrap items-center gap-2">
-              <RatingStars value={r.rating} size="sm" />
-              {r.title ? <h3 className="text-sm font-semibold">{r.title}</h3> : null}
-              {r.isDemo ? <DemoBadge /> : null}
-            </div>
-            {r.comment ? <p className="text-sm whitespace-pre-line text-fg">{r.comment}</p> : null}
-            <ReviewVideos urls={r.videos} />
-            {r.photos.length ? (
-              <ul className="flex gap-2">
-                {r.photos.map((src) => (
-                  <li key={src} className="relative size-16 overflow-hidden rounded-md border border-line">
-                    <Image src={src} alt="Foto enviada pelo comprador" fill sizes="64px" className="object-cover" />
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            <p className="flex flex-wrap items-center gap-2 text-xs text-fg-subtle">
-              <span>{r.author}</span>·<time dateTime={r.createdAt}>{formatDate(r.createdAt)}</time>
-              {r.variantName && r.variantName !== "Padrão" ? <span>· {r.variantName}</span> : null}
-              {r.isVerifiedPurchase ? (
-                <span className="inline-flex items-center gap-1 font-semibold text-success-700">
-                  <BadgeCheck className="size-3.5" aria-hidden /> Compra verificada
-                </span>
-              ) : null}
-            </p>
-          </article>
+          <div key={r.id} className="py-5 first:pt-0">
+            <ReviewCard author={r.author} rating={r.rating} title={r.title} comment={r.comment} photos={r.photos} videos={r.videos} isVerifiedPurchase={r.isVerifiedPurchase} isDemo={r.isDemo} variantName={r.variantName} />
+          </div>
         ))}
         {data.page < data.totalPages ? (
           <div className="pt-4">

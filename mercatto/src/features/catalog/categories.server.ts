@@ -17,8 +17,9 @@ export const getCategoryTree = cache(async (): Promise<CategoryNode[]> => {
   const byId = new Map<string, CategoryNode>(all.map((c) => [c.id, { ...c, children: [] }]));
   const roots: CategoryNode[] = [];
   for (const node of byId.values()) {
-    if (node.parentId && byId.has(node.parentId)) byId.get(node.parentId)!.children.push(node);
-    else roots.push(node);
+    if (!node.parentId) roots.push(node);
+    // Subcategoria de categoria desativada some junto (não vira categoria raiz).
+    else byId.get(node.parentId)?.children.push(node);
   }
   return roots;
 });

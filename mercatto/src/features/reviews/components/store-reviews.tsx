@@ -1,15 +1,13 @@
-import Image from "next/image";
-import { ReviewVideos } from "@/features/reviews/components/review-videos";
+import { ReviewCard } from "@/features/reviews/components/review-card";
 import Link from "next/link";
-import { BadgeCheck, MessageSquareText, Star } from "lucide-react";
+import { MessageSquareText, Star } from "lucide-react";
 import type { listStoreReviews } from "@/features/reviews/queries";
 import { RatingStars } from "@/components/commerce/rating";
-import { DemoBadge } from "@/components/commerce/badges";
 import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Pagination } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import { formatDate, formatNumber } from "@/lib/format";
+import { formatNumber } from "@/lib/format";
 
 type StoreReviewsData = Awaited<ReturnType<typeof listStoreReviews>>;
 
@@ -133,39 +131,9 @@ export function StoreReviewsList({ data, basePath, rating }: { data: StoreReview
       <ul className="divide-y divide-line rounded-card border border-line bg-surface">
         {data.items.map((r) => (
           <li key={r.id}>
-            <article className="flex flex-col gap-1.5 p-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <RatingStars value={r.rating} size="sm" />
-                {r.title ? <h3 className="min-w-0 text-sm font-semibold break-words">{r.title}</h3> : null}
-                {r.isDemo ? <DemoBadge /> : null}
-              </div>
-              <Link href={`/produto/${r.product.slug}#avaliacoes`} className="line-clamp-1 self-start text-xs font-semibold text-fg-muted hover:text-brand-700 hover:underline focus-ring">
-                {r.product.name}
-              </Link>
-              {r.comment ? <p className="text-sm break-words whitespace-pre-line text-fg">{r.comment}</p> : <p className="text-sm text-fg-subtle italic">Sem comentário.</p>}
-              <ReviewVideos urls={r.videos} />
-              {r.photos.length ? (
-                <ul className="flex flex-wrap gap-2" aria-label="Fotos enviadas pelo comprador">
-                  {r.photos.map((src, i) => (
-                    <li key={src}>
-                      <a href={src} target="_blank" rel="noopener noreferrer" className="relative block size-16 overflow-hidden rounded-md border border-line bg-white focus-ring" aria-label={`Abrir foto ${i + 1} em tamanho real`}>
-                        <Image src={src} alt={`Foto ${i + 1} enviada pelo comprador`} fill sizes="64px" unoptimized={src.endsWith(".svg")} className="object-cover" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-              <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-fg-subtle">
-                <span>{firstName(r.user.name)}</span>
-                <span aria-hidden>·</span>
-                <time dateTime={r.createdAt.toISOString()}>{formatDate(r.createdAt)}</time>
-                {r.isVerifiedPurchase ? (
-                  <span className="inline-flex items-center gap-1 font-semibold text-success-700">
-                    <BadgeCheck className="size-3.5" aria-hidden /> Compra verificada
-                  </span>
-                ) : null}
-              </p>
-            </article>
+            <div className="p-4 sm:p-5">
+              <ReviewCard author={firstName(r.user.name)} rating={r.rating} title={r.title} comment={r.comment} photos={r.photos} videos={r.videos} isVerifiedPurchase={r.isVerifiedPurchase} isDemo={r.isDemo} product={r.product} date={r.createdAt} />
+            </div>
           </li>
         ))}
       </ul>
