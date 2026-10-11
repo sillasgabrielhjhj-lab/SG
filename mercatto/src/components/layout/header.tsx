@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck, FlaskConical, Store, Tag } from "lucide-react";
+import { BadgeCheck, FlaskConical, Store, Tag, Truck } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { AccountMenu } from "@/components/layout/account-menu";
 import { CartLink, FavoritesLink, NotificationsLink } from "@/components/layout/header-actions";
@@ -9,6 +9,7 @@ import { MobileMenu } from "@/components/layout/mobile-menu";
 import { HeaderSearchBar } from "@/components/layout/search-bar";
 import { StickyHeader } from "@/components/layout/sticky-header";
 import type { HeaderData } from "@/components/layout/types";
+import { FREE_SHIPPING_WEEK, isFreeShippingWeek } from "@/features/shipping/free-shipping-week";
 
 export function DevEnvironmentBanner() {
   return (
@@ -21,10 +22,25 @@ export function DevEnvironmentBanner() {
   );
 }
 
+/** Faixa da semana do frete grátis — some sozinha quando o período termina. */
+export function FreeShippingWeekBar() {
+  if (!isFreeShippingWeek()) return null;
+  return (
+    <div className="bg-deal text-white" role="region" aria-label="Promoção de frete grátis">
+      <p className="container-page flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 py-2 text-center text-xs sm:text-sm">
+        <Truck className="size-4 shrink-0 sm:size-5" aria-hidden />
+        <strong className="font-extrabold tracking-wide uppercase">Frete grátis em todo o site</strong>
+        <span className="font-medium">Só esta semana: até {FREE_SHIPPING_WEEK.endsLabel}</span>
+      </p>
+    </div>
+  );
+}
+
 export function Header({ data }: { data: HeaderData }) {
   const featured = data.categories.filter((c) => c.isFeatured).slice(0, 5);
   return (
     <>
+      <FreeShippingWeekBar />
       {data.sandbox ? <DevEnvironmentBanner /> : null}
       <StickyHeader>
         <div className="container-page flex h-16 animate-enter items-center gap-2 sm:gap-4">

@@ -1,4 +1,5 @@
 import "server-only";
+import { isFreeShippingWeek } from "@/features/shipping/free-shipping-week";
 import { bestInterestFreeInstallment } from "@/lib/money";
 import { getStoreSettings } from "@/features/settings/queries";
 import { effectiveInstallmentConfig } from "@/features/checkout/installments";
@@ -83,7 +84,7 @@ export async function toProductCards(rows: CardRow[], now: Date = new Date()): P
       installment: best ? bestInterestFreeInstallment(best.eff.priceCents, installmentConfig) : null,
       listPriceCents: best?.eff.listPriceCents ?? null,
       discountPercent: best?.eff.discountPercent ?? 0,
-      freeShipping: r.freeShipping,
+      freeShipping: r.freeShipping || isFreeShippingWeek(),
       totalStock: r.totalStock,
       salesCount: sold.get(r.id) ?? 0,
       ratingAvg: r.ratingAvg,

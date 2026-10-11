@@ -5,13 +5,14 @@ import type { ShippingOption } from "@/server/providers/shipping/types";
 import { ufFromCep } from "@/lib/cep-ranges";
 import { groupByStore, priceLines, type PricedLine } from "@/features/cart/pricing.server";
 import { getStoreSettings } from "@/features/settings/queries";
+import { isFreeShippingWeek } from "@/features/shipping/free-shipping-week";
 
 export type StoreShippingQuote = {
   storeId: string;
   storeName: string;
   isOfficial: boolean;
   subtotalCents: number;
-  freeShippingReason: "PRODUCT" | "THRESHOLD" | null;
+  freeShippingReason: "PRODUCT" | "THRESHOLD" | "CAMPAIGN" | null;
   options: ShippingOption[];
   error: string | null;
 };
@@ -19,17 +20,19 @@ export type StoreShippingQuote = {
 /**
  * Cota o frete de um conjunto de linhas, por loja (cada loja envia de sua
  * origem). Produtos com frete grátis não entram no peso cobrado; a loja
- * oficial dá frete grátis acima do limite configurado.
+ * oficial dá frete grátis acima do limite configurado; na semana do frete
+ * grátis, nenhuma entrega é cobrada.
  */
 export async function quoteForLines(lines: PricedLine[], destinationCep: string, destinationState?: string | null): Promise<StoreShippingQuote[]> {
   const settings = await getStoreSettings();
   const provider = getShippingProvider();
+  const campaign = isFreeShippingWeek();
   const quotes: StoreShippingQuote[] = [];
   for (const [storeId, storeLines] of groupByStore(lines)) {
     const store = storeLines[0]!.store;
     const subtotal = storeLines.reduce((s, l) => s + l.lineTotalCents, 0);
     const thresholdReached = store.isOfficial && settings.freeShippingThresholdCents !== null && subtotal >= settings.freeShippingThresholdCents;
-    const chargeable = thresholdReached ? [] : storeLines.filter((l) => !l.freeShipping);
+    const chargeable = campaign || thresholdReached ? [] : storeLines.filter((l) => !l.freeShipping);
     const freeShipping = chargeable.length === 0;
     const items = (freeShipping ? storeLines : chargeable).map((l) => ({
       weightGrams: l.weightGrams,
@@ -54,7 +57,7 @@ export async function quoteForLines(lines: PricedLine[], destinationCep: string,
         storeName: store.name,
         isOfficial: store.isOfficial,
         subtotalCents: subtotal,
-        freeShippingReason: thresholdReached ? "THRESHOLD" : freeShipping ? "PRODUCT" : null,
+        freeShippingReason: campaign ? "CAMPAIGN" : thresholdReached ? "THRESHOLD" : freeShipping ? "PRODUCT" : null,
         options,
         error: options.length ? null : "Entrega indisponível para este CEP.",
       });

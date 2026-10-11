@@ -1,3 +1,4 @@
+import { isFreeShippingWeek } from "@/features/shipping/free-shipping-week";
 import "server-only";
 import { db } from "@/server/db";
 import { computeTotals } from "@/features/pricing/engine";
@@ -88,11 +89,12 @@ export async function getCartView(identity: CartIdentity | null): Promise<CartVi
     const store = storeLines[0]!.store;
     const selectedSubtotal = storeLines.filter((l) => l.selected && l.availability === "AVAILABLE").reduce((s, l) => s + l.lineTotalCents, 0);
     const threshold = store.isOfficial ? settings.freeShippingThresholdCents : null;
+    const week = isFreeShippingWeek();
     groups.push({
       store: { id: store.id, name: store.name, slug: store.slug, isOfficial: store.isOfficial },
       lines: storeLines.map(toLineView),
       selectedSubtotalCents: selectedSubtotal,
-      freeShipping: threshold ? { thresholdCents: threshold, remainingCents: Math.max(0, threshold - selectedSubtotal), reached: selectedSubtotal >= threshold } : null,
+      freeShipping: week ? { thresholdCents: 0, remainingCents: 0, reached: true } : threshold ? { thresholdCents: threshold, remainingCents: Math.max(0, threshold - selectedSubtotal), reached: selectedSubtotal >= threshold } : null,
     });
   }
   // Loja oficial primeiro.

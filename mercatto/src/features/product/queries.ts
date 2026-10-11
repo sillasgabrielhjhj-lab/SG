@@ -1,4 +1,5 @@
 import "server-only";
+import { isFreeShippingWeek } from "@/features/shipping/free-shipping-week";
 import { countStoreSales, soldUnitsByProduct } from "@/features/orders/stats.server";
 import { cache } from "react";
 import { db } from "@/server/db";
@@ -86,7 +87,7 @@ export const getProductPageData = cache(async (slug: string) => {
     specifications: ((Array.isArray(product.specifications) ? product.specifications : []) as ProductSpecGroup[])
       .map((g) => ({ ...g, items: g.items.filter((i) => i.value?.trim()) }))
       .filter((g) => g.items.length),
-    freeShipping: product.freeShipping,
+    freeShipping: product.freeShipping || isFreeShippingWeek(),
     salesCount: soldUnits.get(product.id) ?? 0,
     ratingAvg: product.ratingAvg,
     ratingCount: product.ratingCount,

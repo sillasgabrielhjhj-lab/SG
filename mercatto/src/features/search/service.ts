@@ -1,4 +1,5 @@
 import "server-only";
+import { isFreeShippingWeek } from "@/features/shipping/free-shipping-week";
 import { Prisma } from "@/generated/prisma/client";
 import { db } from "@/server/db";
 import { normalizeText } from "@/lib/utils";
@@ -153,7 +154,7 @@ export async function searchProducts(
       filters.priceMax !== undefined ? { effectivePriceCents: { lte: filters.priceMax } } : {},
       filters.condition ? { condition: filters.condition } : {},
       filters.rating ? { ratingAvg: { gte: filters.rating } } : {},
-      filters.freeShipping ? { freeShipping: true } : {},
+      filters.freeShipping && !isFreeShippingWeek() ? { freeShipping: true } : {},
       filters.promotion ? { OR: [{ hasActivePromotion: true }, { discountPercent: { gt: 0 } }] } : {},
       filters.official ? { store: { isOfficial: true } } : {},
       scope.store ? { storeId: scope.store.id } : filters.store ? { id: "__none__" } : {},
@@ -216,7 +217,7 @@ async function computeFacets(base: Prisma.ProductWhereInput, attrDefs: { id: str
     db.product.groupBy({ by: ["brandId"], where: { AND: [base, { brandId: { not: null } }] }, _count: { _all: true } }),
     db.product.groupBy({ by: ["condition"], where: base, _count: { _all: true } }),
     db.product.aggregate({ where: base, _min: { effectivePriceCents: true }, _max: { effectivePriceCents: true } }),
-    db.product.count({ where: { AND: [base, { freeShipping: true }] } }),
+    db.product.count({ where: isFreeShippingWeek() ? base : { AND: [base, { freeShipping: true }] } }),
     db.product.count({ where: { AND: [base, { OR: [{ hasActivePromotion: true }, { discountPercent: { gt: 0 } }] }] } }),
     db.product.count({ where: { AND: [base, { store: { isOfficial: true } }] } }),
     db.product.groupBy({ by: ["storeId"], where: base, _count: { _all: true }, orderBy: { _count: { storeId: "desc" } }, take: 10 }),
