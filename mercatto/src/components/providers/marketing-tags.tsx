@@ -2,7 +2,9 @@ import Script from "next/script";
 import { PixelPageViews } from "@/components/providers/pixel-page-views";
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID?.trim();
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim();
+/** Pixel da Mercatto (público). Só no site em produção, para testes e prévias não sujarem os dados. */
+const DEFAULT_META_PIXEL_ID = "1126487013153442";
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() || (process.env.VERCEL_ENV === "production" ? DEFAULT_META_PIXEL_ID : undefined);
 
 /**
  * Google Analytics 4 e Pixel do Meta para tráfego pago. Só carregam quando os
