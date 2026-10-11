@@ -1,0 +1,794 @@
+{
+  "products": [
+    {
+      "key": "gamesir-nova-lite-t4n-lite",
+      "skuCode": "GAM-GSNOVA-LITE",
+      "categorySlug": "controles",
+      "brand": {
+        "slug": "gamesir",
+        "name": "GameSir"
+      },
+      "name": "Controle Sem Fio GameSir Nova Lite (T4n Lite) Hall Effect Bluetooth 2,4 GHz e USB-C",
+      "shortDescription": "Controle multiplataforma GameSir Nova Lite (T4n Lite) com analógicos e gatilhos Hall Effect, três modos de conexão (Bluetooth, receptor 2,4 GHz e cabo USB-C), vibração e função turbo. Para PC, Steam, Android, iOS e Nintendo Switch.",
+      "description": "O GameSir Nova Lite, também identificado pelo código T4n Lite, é um controle sem fio compacto para quem joga em mais de uma tela. Ele funciona com PC (incluindo jogos da Steam), celulares Android, iPhone e Nintendo Switch, e você escolhe a forma de conexão mais conveniente para cada aparelho: Bluetooth, receptor USB de 2,4 GHz ou cabo USB-C.\n\nO principal diferencial está nos analógicos e gatilhos com sensores Hall Effect. Em vez de depender do atrito de trilhas resistivas, essa tecnologia lê a posição por meio de campo magnético, o que reduz o desgaste das peças e ajuda a evitar o drift, aquele movimento fantasma que costuma aparecer com o tempo em controles comuns.\n\n## Destaques\n\n- Analógicos e gatilhos Hall Effect, segundo a GameSir\n- Três modos de conexão: Bluetooth, 2,4 GHz e com fio\n- Um motor de vibração em cada empunhadura\n- Função turbo e botão M multifunção\n- Bateria interna recarregável de 600 mAh\n- 205 g e medidas de 155 x 104 x 61 mm\n\n## Para quem é\n\nPara quem quer um único controle para alternar entre computador, celular e console sem gastar muito, e para quem já perdeu um gamepad por causa de drift. O receptor de 2,4 GHz é a opção indicada para jogar no PC com conexão estável; o Bluetooth facilita o pareamento com celulares e com o Switch; e o cabo USB-C permite continuar jogando enquanto a bateria recarrega.\n\nVale saber antes de comprar: os botões ABXY são do tipo membrana e o modelo não tem giroscópio de 6 eixos, então jogos que usam mira por movimento não aproveitam esse recurso com ele.\n\n## Cuidados\n\nA recarga é feita pela porta USB-C, e o carregador de tomada não acompanha o produto. Guarde o receptor de 2,4 GHz em local seguro quando não estiver em uso para não perdê-lo e evite expor o controle a calor excessivo, umidade ou quedas.",
+      "highlights": [
+        "Analógicos e gatilhos com sensores Hall Effect",
+        "Conexão por Bluetooth, receptor 2,4 GHz ou cabo USB-C",
+        "Compatível com PC, Steam, Android, iOS e Nintendo Switch",
+        "Vibração com um motor em cada empunhadura",
+        "Função turbo e botão M multifunção",
+        "Bateria recarregável de 600 mAh e peso de 205 g"
+      ],
+      "specifications": [
+        {
+          "group": "Compatibilidade",
+          "items": [
+            {
+              "name": "Plataformas",
+              "value": "PC (Windows e Steam), Android, iOS e Nintendo Switch"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Modos de conexão",
+              "value": "Bluetooth, receptor USB 2,4 GHz e cabo USB-C"
+            },
+            {
+              "name": "Porta de recarga",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Controles",
+          "items": [
+            {
+              "name": "Analógicos",
+              "value": "Sensores Hall Effect"
+            },
+            {
+              "name": "Gatilhos",
+              "value": "Sensores Hall Effect"
+            },
+            {
+              "name": "Botões ABXY",
+              "value": "Membrana"
+            },
+            {
+              "name": "Giroscópio de 6 eixos",
+              "value": "Não possui"
+            },
+            {
+              "name": "Recursos extras",
+              "value": "Função turbo e botão M multifunção"
+            },
+            {
+              "name": "Vibração",
+              "value": "Um motor em cada empunhadura"
+            }
+          ]
+        },
+        {
+          "group": "Energia",
+          "items": [
+            {
+              "name": "Bateria",
+              "value": "Interna recarregável de 600 mAh"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões e peso",
+          "items": [
+            {
+              "name": "Medidas do controle",
+              "value": "155 x 104 x 61 mm"
+            },
+            {
+              "name": "Peso líquido",
+              "value": "205 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 controle GameSir Nova Lite (T4n Lite)",
+        "1 receptor USB 2,4 GHz (dongle)"
+      ],
+      "seoTitle": "Controle GameSir Nova Lite Hall Effect Sem Fio | Mercatto",
+      "seoDescription": "Controle GameSir Nova Lite (T4n Lite) com analógicos Hall Effect, Bluetooth, 2,4 GHz e USB-C. Para PC, Steam, Android, iOS e Switch.",
+      "tags": [
+        "controle gamesir",
+        "gamesir nova lite",
+        "gamesir t4n lite",
+        "controle hall effect",
+        "controle sem fio",
+        "controle bluetooth",
+        "controle para pc",
+        "controle nintendo switch",
+        "controle para celular",
+        "controle android",
+        "controle iphone",
+        "gamepad steam"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco",
+            "Cinza",
+            "Azul",
+            "Roxo",
+            "Rosa"
+          ]
+        }
+      ],
+      "priceCents": 15490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "packaging": {
+        "weightGrams": 246,
+        "heightCm": 6.1,
+        "widthCm": 10.8,
+        "lengthCm": 15.7
+      },
+      "attributes": {
+        "plataforma": "PC"
+      },
+      "aliases": [
+        "Nova Lite",
+        "T4N"
+      ],
+      "faq": [
+        {
+          "q": "O controle funciona no Nintendo Switch e no celular?",
+          "a": "Sim. Segundo a GameSir, o Nova Lite é compatível com Nintendo Switch, celulares Android, iPhone (iOS), PC e Steam."
+        },
+        {
+          "q": "Quais são as formas de conexão?",
+          "a": "São três: Bluetooth, receptor USB de 2,4 GHz (que acompanha o controle) e cabo USB-C."
+        },
+        {
+          "q": "O que são os analógicos Hall Effect?",
+          "a": "São sensores que medem a posição do analógico por campo magnético, sem atrito entre peças de contato. Isso reduz o desgaste e ajuda a evitar o drift."
+        },
+        {
+          "q": "O controle tem giroscópio?",
+          "a": "Não. A ficha da GameSir informa que o Nova Lite não possui giroscópio de 6 eixos."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "O produto tem a garantia legal de 90 dias prevista no Código de Defesa do Consumidor. A garantia contratual do fabricante não foi confirmada."
+        }
+      ]
+    },
+    {
+      "key": "jbl-quantum-100m2",
+      "skuCode": "GAM-JBLQ100M2",
+      "categorySlug": "headsets-gamer",
+      "brand": {
+        "slug": "jbl",
+        "name": "JBL"
+      },
+      "name": "Headset Gamer JBL Quantum 100M2 com Microfone Removível e Drivers de 40 mm P2",
+      "shortDescription": "Headset gamer com fio JBL Quantum 100M2 com drivers de 40 mm, microfone boom removível com função mudo, almofadas de espuma com memória e conector P2 de 3,5 mm. Funciona com PC, Mac, consoles, celulares e VR. Pesa 220 g.",
+      "description": "O JBL Quantum 100M2 é o modelo de entrada da linha gamer da JBL, pensado para quem quer ouvir passos, disparos e diálogos com clareza sem pagar por recursos que não vai usar. Os drivers dinâmicos de 40 mm ficam em um fone over-ear leve, de 220 g, que acompanha bem as partidas mais longas.\n\nA conexão é a mais simples possível: um cabo de 1,2 m com conector P2 de 3,5 mm, sem bateria para recarregar e sem software obrigatório. Isso permite usar o mesmo headset no PC, no Mac, no PlayStation, no Xbox, no Nintendo Switch, no celular e em dispositivos de realidade virtual com entrada de áudio de 3,5 mm.\n\n## Destaques\n\n- Drivers dinâmicos de 40 mm com resposta de 20 Hz a 20 kHz\n- Microfone boom removível com função mudo\n- Almofadas de espuma com memória revestidas em tecido\n- Cabo de 1,2 m com conector P2 de 3,5 mm\n- Estrutura leve, com 220 g\n\n## Para quem é\n\nPara quem está montando o primeiro setup, para quem joga em mais de uma plataforma e para quem também usa o headset em aulas e reuniões on-line. Como o microfone é destacável, dá para removê-lo e usar o Quantum 100M2 apenas como fone de ouvido para ouvir música ou assistir a vídeos.\n\n## Como usar\n\nConecte o plugue P2 na entrada de fone do controle do console, do notebook ou do celular. Em computadores com entradas separadas para fone e microfone, é necessário um adaptador P2 em Y, que não acompanha o produto. Encaixe o microfone, posicione a haste próxima à boca e acione a função mudo sempre que precisar.\n\n## Cuidados\n\nGuarde o microfone removível junto com o headset para não perdê-lo, evite dobrar o cabo em ângulos fechados ou puxá-lo pelo fio e limpe as almofadas apenas com pano seco.",
+      "highlights": [
+        "Drivers dinâmicos de 40 mm",
+        "Microfone boom removível com função mudo",
+        "Almofadas de espuma com memória revestidas em tecido",
+        "Conector P2 de 3,5 mm e cabo de 1,2 m",
+        "Funciona com PC, Mac, consoles, celulares e VR",
+        "Leve: apenas 220 g"
+      ],
+      "specifications": [
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Over-ear, com fio"
+            },
+            {
+              "name": "Drivers",
+              "value": "Dinâmicos de 40 mm"
+            },
+            {
+              "name": "Resposta de frequência",
+              "value": "20 Hz a 20 kHz"
+            },
+            {
+              "name": "Impedância",
+              "value": "32 ohms"
+            },
+            {
+              "name": "Sensibilidade",
+              "value": "96 dB SPL a 1 kHz/1 mW"
+            }
+          ]
+        },
+        {
+          "group": "Microfone",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Boom removível com função mudo"
+            },
+            {
+              "name": "Resposta de frequência",
+              "value": "100 Hz a 10 kHz"
+            },
+            {
+              "name": "Sensibilidade",
+              "value": "-42 dBV a 1 kHz/Pa"
+            }
+          ]
+        },
+        {
+          "group": "Conexão",
+          "items": [
+            {
+              "name": "Conector",
+              "value": "P2 de 3,5 mm"
+            },
+            {
+              "name": "Comprimento do cabo",
+              "value": "1,2 m"
+            },
+            {
+              "name": "Compatibilidade",
+              "value": "PC, Mac, PlayStation, Xbox, Nintendo Switch, celulares e VR (via 3,5 mm)"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Almofadas",
+              "value": "Espuma com memória revestida em tecido"
+            },
+            {
+              "name": "Peso",
+              "value": "220 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 headset JBL Quantum 100M2",
+        "1 microfone boom removível",
+        "1 espuma protetora para o microfone",
+        "Guia de início rápido, certificado de garantia e folheto de segurança"
+      ],
+      "seoTitle": "Headset Gamer JBL Quantum 100M2 Drivers 40 mm | Mercatto",
+      "seoDescription": "JBL Quantum 100M2: headset gamer com fio, drivers de 40 mm, microfone removível com mudo e conector P2 para PC, consoles e celular.",
+      "tags": [
+        "headset jbl",
+        "jbl quantum 100m2",
+        "jbl quantum 100",
+        "headset gamer",
+        "fone gamer",
+        "headset p2",
+        "headset com microfone",
+        "headset ps5",
+        "headset xbox",
+        "headset pc",
+        "headset nintendo switch",
+        "fone jbl com fio"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco",
+            "Roxo",
+            "Ciano"
+          ]
+        }
+      ],
+      "priceCents": 15990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "plataforma": "PC"
+      },
+      "aliases": [
+        "Quantum 100"
+      ],
+      "faq": [
+        {
+          "q": "Funciona no PS5, Xbox e Nintendo Switch?",
+          "a": "Sim. O Quantum 100M2 usa conector P2 de 3,5 mm e é compatível com PlayStation, Xbox e Nintendo Switch, além de PC, Mac, celulares e VR."
+        },
+        {
+          "q": "O microfone pode ser retirado?",
+          "a": "Sim. O microfone boom é removível e tem função mudo, então o headset também pode ser usado como fone de ouvido comum."
+        },
+        {
+          "q": "Funciona no PC com entradas separadas de fone e microfone?",
+          "a": "Funciona com um adaptador P2 em Y, que não acompanha o produto. Em PCs e notebooks com entrada combinada de 3,5 mm, a conexão é direta."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "Headset, microfone removível, espuma protetora para o microfone, guia de início rápido, certificado de garantia e folheto de segurança."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "12 meses de garantia do fabricante, já incluindo a garantia legal de 90 dias do Código de Defesa do Consumidor."
+        }
+      ]
+    },
+    {
+      "key": "havit-gamenote-h2002d-preto",
+      "skuCode": "GAM-HVH2002D-PT",
+      "categorySlug": "headsets-gamer",
+      "brand": {
+        "slug": "havit",
+        "name": "Havit"
+      },
+      "name": "Headset Gamer Havit Gamenote H2002D Drivers 53 mm Microfone Removível P2 Preto",
+      "shortDescription": "Headset gamer com fio Havit Gamenote H2002D com drivers de 53 mm, microfone removível e flexível, cabo de 1,7 m com plugue P2 de 3,5 mm e adaptador Y incluso para PC. Compatível com PC, PlayStation, Xbox e celulares.",
+      "description": "O Havit Gamenote H2002D é um headset gamer com fio que aposta em drivers grandes, de 53 mm, para entregar som encorpado em jogos, filmes e músicas. A sensibilidade de 110 dB e a resposta de frequência de 20 Hz a 20 kHz garantem volume de sobra mesmo quando ligado diretamente ao controle do console ou ao celular.\n\nO microfone é removível e tem haste flexível, então você ajusta a posição exata perto da boca durante a partida e o retira quando quiser usar o headset só para ouvir. O cabo de 1,7 m com plugue P2 de 3,5 mm dá liberdade para jogar a uma boa distância da TV ou do computador.\n\n## Destaques\n\n- Drivers de 53 mm com sensibilidade de 110 dB ± 3 dB\n- Resposta de frequência de 20 Hz a 20 kHz\n- Microfone removível com haste flexível\n- Cabo de 1,7 m com plugue P2 de 3,5 mm\n- Adaptador Y incluso para PCs com entradas separadas\n\n## Para quem é\n\nPara quem joga em várias plataformas e quer um único headset para PC, PlayStation, Xbox e celular, gastando pouco. Também atende quem participa de chamadas de voz em jogos on-line, aulas e reuniões, graças ao microfone ajustável.\n\n## Como usar\n\nNo console ou no celular, conecte o plugue P2 diretamente na entrada de fone do controle ou do aparelho. Em computadores com entradas separadas para fone e microfone, use o adaptador Y que acompanha o produto: ligue a saída verde de áudio e a rosa de microfone nas portas correspondentes. Encaixe o microfone e ajuste a haste antes de começar.\n\n## Cuidados\n\nAo desconectar, puxe sempre pelo plugue e não pelo fio, evite dobrar o cabo em ângulos fechados e guarde o microfone removível junto com o headset. Limpe as almofadas com pano seco.",
+      "highlights": [
+        "Drivers de 53 mm com sensibilidade de 110 dB",
+        "Microfone removível com haste flexível",
+        "Cabo de 1,7 m com plugue P2 de 3,5 mm",
+        "Adaptador Y incluso para PC",
+        "Compatível com PC, PlayStation, Xbox e celulares"
+      ],
+      "specifications": [
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Drivers",
+              "value": "53 mm"
+            },
+            {
+              "name": "Resposta de frequência",
+              "value": "20 Hz a 20 kHz"
+            },
+            {
+              "name": "Sensibilidade",
+              "value": "110 dB ± 3 dB"
+            },
+            {
+              "name": "Impedância",
+              "value": "64 ohms ± 15%"
+            }
+          ]
+        },
+        {
+          "group": "Microfone",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Removível, com haste flexível e ajustável"
+            },
+            {
+              "name": "Cápsula",
+              "value": "6,0 mm de diâmetro"
+            }
+          ]
+        },
+        {
+          "group": "Conexão",
+          "items": [
+            {
+              "name": "Conector",
+              "value": "P2 de 3,5 mm"
+            },
+            {
+              "name": "Comprimento do cabo",
+              "value": "1,7 m"
+            },
+            {
+              "name": "Adaptador",
+              "value": "Y P2 para entradas separadas de fone e microfone (incluso)"
+            }
+          ]
+        },
+        {
+          "group": "Compatibilidade",
+          "items": [
+            {
+              "name": "Plataformas",
+              "value": "PC (Windows, Mac e Linux), PlayStation, Xbox e celulares Android e iOS"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Cor",
+              "value": "Preto"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 headset Havit Gamenote H2002D com microfone removível",
+        "1 adaptador Y P2 para PC"
+      ],
+      "seoTitle": "Headset Gamer Havit H2002D Drivers 53 mm Preto | Mercatto",
+      "seoDescription": "Headset gamer Havit Gamenote H2002D com drivers de 53 mm, microfone removível, cabo P2 de 1,7 m e adaptador Y para PC. Para PC, consoles e celular.",
+      "tags": [
+        "headset havit",
+        "havit h2002d",
+        "gamenote h2002d",
+        "hv-h2002d",
+        "headset gamer",
+        "fone gamer",
+        "headset p2",
+        "headset com microfone",
+        "headset ps4",
+        "headset xbox",
+        "headset pc",
+        "headset barato"
+      ],
+      "priceCents": 17490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": {
+        "plataforma": "PC"
+      },
+      "aliases": [
+        "H2002D"
+      ],
+      "faq": [
+        {
+          "q": "Funciona no PC?",
+          "a": "Sim. Em computadores com entradas separadas para fone e microfone, use o adaptador Y que vem na caixa. Também é compatível com Windows, Mac e Linux."
+        },
+        {
+          "q": "Funciona no PlayStation e no Xbox?",
+          "a": "Sim, conectando o plugue P2 de 3,5 mm na entrada de fone do controle do console."
+        },
+        {
+          "q": "O microfone é removível?",
+          "a": "Sim. O microfone é removível e tem haste flexível e ajustável."
+        },
+        {
+          "q": "Qual é o tamanho do cabo?",
+          "a": "O cabo tem 1,7 m e termina em um plugue P2 de 3,5 mm."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "O produto tem a garantia legal de 90 dias prevista no Código de Defesa do Consumidor. A garantia contratual do fabricante não foi confirmada."
+        }
+      ]
+    },
+    {
+      "key": "philco-p50crb-smart-tv-50-4k-roku",
+      "skuCode": "TVA-PHP50CRB",
+      "categorySlug": "smart-tvs",
+      "brand": {
+        "slug": "philco",
+        "name": "Philco"
+      },
+      "name": "Smart TV Philco 50\" P50CRB 4K UHD Roku TV HDR10 Dolby Audio",
+      "shortDescription": "Smart TV Philco P50CRB de 50 polegadas com resolução 4K UHD, HDR10, sistema Roku TV, som Dolby Audio de 24 W RMS, Wi-Fi integrado, 4 entradas HDMI e 2 USB. Bivolt.",
+      "description": "A Smart TV Philco P50CRB junta uma tela de 50 polegadas com resolução 4K UHD (3840 x 2160) ao sistema Roku TV, conhecido pela navegação simples: a tela inicial reúne em blocos os aplicativos de streaming, as entradas HDMI e a TV aberta, sem menus complicados. É uma boa escolha para quem quer sair do Full HD e ganhar nitidez em filmes, séries e esportes.\n\nO painel DLED de 60 Hz é compatível com HDR10, formato que amplia a diferença entre áreas claras e escuras em conteúdos preparados para ele. No som, são 24 W RMS distribuídos em dois alto-falantes de 12 W, com processamento Dolby Audio.\n\n## Destaques\n\n- Tela de 50\" com resolução 4K UHD e HDR10\n- Sistema Roku TV com acesso aos principais streamings\n- Som de 24 W RMS (2 x 12 W) com Dolby Audio\n- 4 entradas HDMI e 2 entradas USB\n- Wi-Fi integrado, entrada de rede RJ-45 e saída óptica\n- Compatível com Alexa e Google Assistente\n\n## Para quem é\n\nPara salas e quartos em que a TV é o centro do entretenimento da família. Pelo Roku TV você acessa aplicativos como Netflix, Prime Video, Disney+ e YouTube. As quatro entradas HDMI dão conta de console, receptor, soundbar e notebook ao mesmo tempo, e a saída digital óptica facilita a ligação de um sistema de som externo. Com o conversor digital integrado, basta uma antena para assistir à TV aberta.\n\n## Cuidados\n\nA TV é bivolt, mas use sempre tomada aterrada e, de preferência, um protetor contra surtos. Para instalar na parede, utilize um suporte compatível com o padrão VESA 200 x 200 e siga as orientações do manual. Limpe a tela apenas com pano macio e seco, sem álcool ou produtos abrasivos.",
+      "highlights": [
+        "Tela de 50\" 4K UHD (3840 x 2160) com HDR10",
+        "Sistema Roku TV com os principais streamings",
+        "Som de 24 W RMS (2 x 12 W) com Dolby Audio",
+        "4 entradas HDMI, 2 USB, Wi-Fi e rede RJ-45",
+        "Conversor digital integrado e saída óptica",
+        "Bivolt e compatível com suporte VESA 200 x 200"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "50 polegadas"
+            },
+            {
+              "name": "Resolução",
+              "value": "4K UHD (3840 x 2160)"
+            },
+            {
+              "name": "Tipo de painel",
+              "value": "DLED"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "60 Hz"
+            },
+            {
+              "name": "HDR",
+              "value": "HDR10"
+            },
+            {
+              "name": "Brilho",
+              "value": "280 nits"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Potência",
+              "value": "24 W RMS (2 alto-falantes de 12 W)"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "Dolby Audio"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Roku TV"
+            },
+            {
+              "name": "Assistentes de voz",
+              "value": "Compatível com Alexa e Google Assistente"
+            },
+            {
+              "name": "TV digital",
+              "value": "Conversor digital integrado"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "HDMI",
+              "value": "4 entradas"
+            },
+            {
+              "name": "USB",
+              "value": "2 entradas USB 2.0"
+            },
+            {
+              "name": "Rede",
+              "value": "Wi-Fi integrado e LAN (RJ-45)"
+            },
+            {
+              "name": "Outras conexões",
+              "value": "Entrada RF e saída de áudio digital óptica"
+            }
+          ]
+        },
+        {
+          "group": "Instalação e energia",
+          "items": [
+            {
+              "name": "Padrão VESA",
+              "value": "200 x 200 mm"
+            },
+            {
+              "name": "Voltagem",
+              "value": "Bivolt"
+            },
+            {
+              "name": "Classificação energética",
+              "value": "A (Selo ENCE)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 Smart TV Philco P50CRB de 50 polegadas"
+      ],
+      "seoTitle": "Smart TV Philco 50\" P50CRB 4K Roku TV | Mercatto",
+      "seoDescription": "Smart TV Philco P50CRB de 50\" 4K UHD com HDR10, Roku TV, Dolby Audio 24 W RMS, Wi-Fi, 4 HDMI e 2 USB. Bivolt.",
+      "tags": [
+        "smart tv philco",
+        "philco p50crb",
+        "tv 50 polegadas",
+        "smart tv 50",
+        "tv 4k",
+        "roku tv",
+        "smart tv roku",
+        "tv philco 50",
+        "tv hdr10",
+        "tv dolby audio",
+        "smart tv 4k barata",
+        "tv bivolt"
+      ],
+      "priceCents": 187990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": {
+        "tamanho_tela": "50\"",
+        "resolucao": "4K"
+      },
+      "aliases": [
+        "P50CRB"
+      ],
+      "faq": [
+        {
+          "q": "A TV é bivolt?",
+          "a": "Sim. A Smart TV Philco P50CRB é bivolt."
+        },
+        {
+          "q": "Quais aplicativos posso usar?",
+          "a": "Ela usa o sistema Roku TV, que dá acesso a aplicativos de streaming como Netflix, Prime Video, Disney+ e YouTube."
+        },
+        {
+          "q": "Quantas entradas HDMI e USB ela tem?",
+          "a": "São 4 entradas HDMI e 2 entradas USB 2.0, além de LAN (RJ-45), entrada RF e saída de áudio digital óptica."
+        },
+        {
+          "q": "Posso instalar na parede?",
+          "a": "Sim. A TV segue o padrão VESA 200 x 200 mm; o suporte de parede deve ser compatível com esse padrão."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "O produto tem a garantia legal de 90 dias prevista no Código de Defesa do Consumidor. A garantia contratual do fabricante não foi confirmada."
+        }
+      ]
+    },
+    {
+      "key": "tcl-75p7l-smart-tv-75-qled-4k-google-tv",
+      "skuCode": "TVA-TCL75P7L",
+      "categorySlug": "smart-tvs",
+      "brand": {
+        "slug": "tcl",
+        "name": "TCL"
+      },
+      "name": "Smart TV TCL 75\" 75P7L QLED 4K Google TV Dolby Vision HDR10+ Dolby Atmos",
+      "shortDescription": "Smart TV TCL 75P7L de 75 polegadas com tela QLED 4K, processador AiPQ, Dolby Vision, HDR10+, VRR, som Dolby Atmos de 30 W RMS e Google TV com comando de voz, Wi-Fi e Bluetooth.",
+      "description": "A TCL 75P7L é uma Smart TV de 75 polegadas para quem quer transformar a sala em um cinema sem abrir mão de uma interface moderna. A tela QLED usa pontos quânticos para reproduzir cores mais vivas e saturadas, e a resolução 4K (3840 x 2160) mantém a imagem nítida mesmo em uma diagonal tão grande.\n\nO processador AiPQ ajusta a imagem de acordo com o conteúdo, e o suporte aos formatos Dolby Vision e HDR10+ permite aproveitar filmes e séries masterizados em HDR dinâmico nos serviços de streaming compatíveis. No áudio, a tecnologia Dolby Atmos cria uma sensação de som mais envolvente, com 30 W RMS de potência.\n\n## Destaques\n\n- Tela QLED de 75\" com resolução 4K\n- Dolby Vision e HDR10+ para conteúdos em HDR dinâmico\n- Processador de imagem AiPQ\n- Som Dolby Atmos com 30 W RMS\n- Google TV com comando de voz, Wi-Fi e Bluetooth\n- VRR para jogos mais fluidos em aparelhos compatíveis\n\n## Para quem é\n\nPara salas amplas, home theaters e famílias que assistem a esportes, filmes e séries juntas. O Google TV organiza recomendações de vários aplicativos em uma única tela e dá acesso à loja Google Play; com o comando de voz, é possível buscar títulos e abrir aplicativos sem digitar. Para quem joga, o suporte a VRR (taxa de atualização variável) ajuda a reduzir cortes e travamentos na imagem com consoles e PCs compatíveis, e as três entradas HDMI permitem deixar console, receptor e soundbar conectados ao mesmo tempo.\n\n## Cuidados\n\nUma TV de 75 polegadas exige planejamento: confira as medidas do móvel ou da parede antes da compra e, para instalação em parede, use um suporte adequado ao tamanho e ao peso do aparelho, de preferência com instalação profissional. Ligue a TV em tomada aterrada e limpe a tela apenas com pano macio e seco.",
+      "highlights": [
+        "Tela QLED de 75\" com resolução 4K (3840 x 2160)",
+        "Dolby Vision e HDR10+",
+        "Processador de imagem AiPQ",
+        "Som Dolby Atmos com 30 W RMS",
+        "Google TV com comando de voz, Wi-Fi e Bluetooth",
+        "VRR e 3 entradas HDMI"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "75 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "QLED"
+            },
+            {
+              "name": "Resolução",
+              "value": "4K UHD (3840 x 2160)"
+            },
+            {
+              "name": "HDR",
+              "value": "Dolby Vision e HDR10+"
+            },
+            {
+              "name": "Recursos para jogos",
+              "value": "VRR (taxa de atualização variável)"
+            }
+          ]
+        },
+        {
+          "group": "Processamento",
+          "items": [
+            {
+              "name": "Processador de imagem",
+              "value": "AiPQ"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Tecnologia",
+              "value": "Dolby Atmos"
+            },
+            {
+              "name": "Potência",
+              "value": "30 W RMS"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Google TV"
+            },
+            {
+              "name": "Comando de voz",
+              "value": "Sim"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "HDMI",
+              "value": "3 entradas"
+            },
+            {
+              "name": "Sem fio",
+              "value": "Wi-Fi integrado e Bluetooth"
+            },
+            {
+              "name": "Espelhamento de tela",
+              "value": "Sim"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 Smart TV TCL 75P7L de 75 polegadas"
+      ],
+      "seoTitle": "Smart TV TCL 75\" 75P7L QLED 4K Google TV | Mercatto",
+      "seoDescription": "Smart TV TCL 75P7L de 75\" QLED 4K com Dolby Vision, HDR10+, Dolby Atmos 30 W RMS, VRR e Google TV com comando de voz.",
+      "tags": [
+        "smart tv tcl",
+        "tcl 75p7l",
+        "tcl p7l",
+        "tv 75 polegadas",
+        "smart tv 75",
+        "tv qled",
+        "tv 4k",
+        "google tv",
+        "tv dolby vision",
+        "tv hdr10+",
+        "tv dolby atmos",
+        "tv qled 75 polegadas"
+      ],
+      "priceCents": 464990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "tamanho_tela": "75\"",
+        "resolucao": "4K"
+      },
+      "aliases": [
+        "75P7L"
+      ],
+      "faq": [
+        {
+          "q": "Qual é o sistema operacional da TV?",
+          "a": "A TCL 75P7L usa o Google TV, com acesso à loja Google Play e busca por comando de voz."
+        },
+        {
+          "q": "Quais formatos de HDR ela suporta?",
+          "a": "Ela é compatível com Dolby Vision e HDR10+."
+        },
+        {
+          "q": "A TV tem Bluetooth?",
+          "a": "Sim. Além do Wi-Fi integrado, a 75P7L tem conexão Bluetooth."
+        },
+        {
+          "q": "Quantas entradas HDMI ela tem?",
+          "a": "São 3 entradas HDMI."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "12 meses de garantia do fabricante, já incluindo a garantia legal de 90 dias do Código de Defesa do Consumidor."
+        }
+      ]
+    }
+  ]
+}

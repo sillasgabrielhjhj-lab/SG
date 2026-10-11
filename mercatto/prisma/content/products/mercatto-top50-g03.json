@@ -1,0 +1,813 @@
+{
+  "products": [
+    {
+      "key": "asus-vivobook-go-15-e1504fa-nj732",
+      "skuCode": "INF-ASVGO15-NJ732",
+      "categorySlug": "notebooks",
+      "brand": {
+        "slug": "asus",
+        "name": "ASUS"
+      },
+      "name": "Notebook ASUS Vivobook Go 15 Ryzen 5 7520U 8GB SSD 512GB 15,6\" Full HD KeepOS",
+      "shortDescription": "Notebook ASUS Vivobook Go 15 (E1504FA-NJ732) com AMD Ryzen 5 7520U, 8 GB de RAM LPDDR5, SSD de 512 GB e tela de 15,6\" Full HD antirreflexo. Vem com o sistema KeepOS (Linux), na cor Mixed Black.",
+      "description": "O ASUS Vivobook Go 15 E1504FA-NJ732 foi pensado para quem precisa de um notebook leve e direto ao ponto para estudar, trabalhar e resolver as tarefas do dia a dia. O processador AMD Ryzen 5 7520U, com 4 núcleos e 8 threads, dá conta de navegação com várias abas, editores de texto, planilhas, videochamadas e streaming, enquanto o SSD de 512 GB garante inicialização rápida e espaço de sobra para documentos, fotos e programas.\n\nA tela de 15,6 polegadas Full HD (1920 x 1080) tem acabamento antirreflexo, o que ajuda a reduzir o incômodo de lâmpadas e janelas refletidas durante longas sessões de leitura. Com cerca de 1,63 kg e 1,79 cm de espessura, segundo a ASUS, ele cabe na mochila e acompanha a rotina entre casa, faculdade e escritório.\n\n## Destaques\n\n- AMD Ryzen 5 7520U com gráficos integrados AMD Radeon 610M\n- 8 GB de memória LPDDR5 integrada à placa\n- SSD M.2 NVMe de 512 GB\n- Tela de 15,6\" Full HD com acabamento antirreflexo\n- Teclado ABNT2 com teclado numérico e webcam HD 720p\n- Sistema operacional KeepOS, baseado em Linux\n\n## Para quem é\n\nEstudantes, profissionais que trabalham com ferramentas on-line e famílias que querem um computador para internet, aulas, reuniões e entretenimento. Por vir com KeepOS (Linux) em vez de Windows, é uma opção interessante para quem já usa aplicativos na web ou pretende instalar o sistema de sua preferência. Quem depende de programas exclusivos do Windows deve considerar a compra de uma licença à parte.\n\n## Cuidados\n\nA memória de 8 GB é soldada na placa e não pode ser ampliada; o armazenamento usa slot M.2 e, segundo lojistas, pode ser trocado por um SSD de maior capacidade. Use o carregador original, mantenha as saídas de ar livres e evite apoiar o notebook sobre superfícies macias, como cama ou sofá, durante o uso.",
+      "highlights": [
+        "AMD Ryzen 5 7520U com 4 núcleos e 8 threads",
+        "8 GB de memória LPDDR5",
+        "SSD NVMe de 512 GB",
+        "Tela de 15,6\" Full HD com acabamento antirreflexo",
+        "Teclado ABNT2 com numérico e webcam HD 720p",
+        "Sistema KeepOS (Linux) e cor Mixed Black"
+      ],
+      "specifications": [
+        {
+          "group": "Processador",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "AMD Ryzen 5 7520U"
+            },
+            {
+              "name": "Núcleos / threads",
+              "value": "4 núcleos / 8 threads"
+            },
+            {
+              "name": "Frequência máxima",
+              "value": "Até 4,3 GHz"
+            },
+            {
+              "name": "Cache",
+              "value": "4 MB"
+            }
+          ]
+        },
+        {
+          "group": "Gráficos",
+          "items": [
+            {
+              "name": "Placa de vídeo",
+              "value": "AMD Radeon 610M (integrada)"
+            }
+          ]
+        },
+        {
+          "group": "Memória e armazenamento",
+          "items": [
+            {
+              "name": "Memória RAM",
+              "value": "8 GB LPDDR5 (soldada na placa, não expansível)"
+            },
+            {
+              "name": "Armazenamento",
+              "value": "SSD de 512 GB M.2 NVMe PCIe 3.0"
+            }
+          ]
+        },
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "15,6 polegadas"
+            },
+            {
+              "name": "Resolução",
+              "value": "Full HD (1920 x 1080), 16:9"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "60 Hz"
+            },
+            {
+              "name": "Acabamento",
+              "value": "Antirreflexo"
+            },
+            {
+              "name": "Touchscreen",
+              "value": "Não"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "KeepOS (baseado em Linux)"
+            }
+          ]
+        },
+        {
+          "group": "Conexões (ficha oficial da linha E1504F)",
+          "items": [
+            {
+              "name": "USB Type-A",
+              "value": "1x USB 2.0 e 1x USB 3.2 Gen 1 (até 5 Gbps)"
+            },
+            {
+              "name": "USB Type-C",
+              "value": "1x USB 3.2 Gen 1 (até 5 Gbps)"
+            },
+            {
+              "name": "Vídeo",
+              "value": "1x HDMI 1.4"
+            },
+            {
+              "name": "Áudio",
+              "value": "1x conector combo de áudio de 3,5 mm"
+            },
+            {
+              "name": "Energia",
+              "value": "Entrada DC"
+            }
+          ]
+        },
+        {
+          "group": "Teclado e câmera",
+          "items": [
+            {
+              "name": "Teclado",
+              "value": "Padrão ABNT2 com teclado numérico"
+            },
+            {
+              "name": "Webcam",
+              "value": "HD 720p"
+            }
+          ]
+        },
+        {
+          "group": "Energia",
+          "items": [
+            {
+              "name": "Bateria",
+              "value": "42 Wh, 3 células, íon de lítio"
+            },
+            {
+              "name": "Carregador",
+              "value": "45 W, saída 19 V / 2,37 A, entrada 100–240 V"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões e peso",
+          "items": [
+            {
+              "name": "Dimensões (L x P x A)",
+              "value": "36,03 x 23,25 x 1,79 cm"
+            },
+            {
+              "name": "Peso",
+              "value": "1,63 kg"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "E1504FA-NJ732"
+            },
+            {
+              "name": "Cor",
+              "value": "Mixed Black (preto)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Notebook ASUS Vivobook Go 15 E1504FA-NJ732",
+        "Carregador (adaptador de energia)"
+      ],
+      "seoTitle": "Notebook ASUS Vivobook Go 15 Ryzen 5 8GB 512GB | Mercatto",
+      "seoDescription": "ASUS Vivobook Go 15 E1504FA-NJ732 com Ryzen 5 7520U, 8 GB de RAM, SSD de 512 GB e tela de 15,6\" Full HD antirreflexo. Leve, com KeepOS.",
+      "tags": [
+        "notebook asus",
+        "vivobook go 15",
+        "e1504fa",
+        "e1504fa-nj732",
+        "ryzen 5 7520u",
+        "notebook 8gb",
+        "notebook ssd 512gb",
+        "notebook 15,6 polegadas",
+        "notebook linux",
+        "keepos",
+        "notebook para estudar",
+        "notebook leve"
+      ],
+      "priceCents": 254990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": {
+        "processador": "AMD Ryzen 5",
+        "memoria_ram": "8 GB",
+        "tela": "15,6\""
+      },
+      "faq": [
+        {
+          "q": "O notebook vem com Windows?",
+          "a": "Não. O modelo E1504FA-NJ732 vem com o KeepOS, sistema baseado em Linux. Para usar o Windows é preciso adquirir e instalar uma licença à parte."
+        },
+        {
+          "q": "Dá para aumentar a memória RAM?",
+          "a": "Não. Os 8 GB de LPDDR5 são soldados na placa. O armazenamento usa um SSD M.2 NVMe, que pode ser substituído por um de maior capacidade."
+        },
+        {
+          "q": "O teclado é ABNT2?",
+          "a": "Sim. O teclado segue o padrão ABNT2 e tem teclado numérico dedicado."
+        },
+        {
+          "q": "Quais conexões ele oferece?",
+          "a": "Segundo a ficha oficial da linha E1504F: uma USB 2.0 Type-A, uma USB 3.2 Gen 1 Type-A, uma USB 3.2 Gen 1 Type-C, uma HDMI 1.4 e um conector combo de áudio de 3,5 mm."
+        },
+        {
+          "q": "O carregador funciona em 127 V e 220 V?",
+          "a": "Sim. Segundo a ASUS, o adaptador de 45 W tem entrada de 100 a 240 V, compatível com as duas tensões usadas no Brasil."
+        }
+      ],
+      "aliases": [
+        "E1504FA",
+        "Vivobook Go 15"
+      ]
+    },
+    {
+      "key": "lenovo-ideapad-slim-3-15irh10-83ns0001br",
+      "skuCode": "INF-LNVS3-83NS0001",
+      "categorySlug": "notebooks",
+      "brand": {
+        "slug": "lenovo",
+        "name": "Lenovo"
+      },
+      "name": "Notebook Lenovo IdeaPad Slim 3 Core i5-13420H 16GB SSD 512GB 15,3\" WUXGA Win 11",
+      "shortDescription": "Notebook Lenovo IdeaPad Slim 3 15IRH10 (83NS0001BR) com Intel Core i5-13420H, 16 GB de RAM DDR5, SSD de 512 GB, tela IPS de 15,3\" WUXGA (1920 x 1200) e Windows 11 Home, na cor Luna Grey.",
+      "description": "O Lenovo IdeaPad Slim 3 83NS0001BR combina um processador Intel da série H com 16 GB de memória DDR5, configuração que dá fôlego para manter navegador, planilhas, videochamadas e aplicativos de produtividade abertos ao mesmo tempo. O Intel Core i5-13420H tem 8 núcleos (4 de desempenho e 4 de eficiência) e 12 threads, e o SSD de 512 GB acelera a inicialização do sistema e a abertura de arquivos.\n\nA tela de 15,3 polegadas no formato 16:10, com resolução WUXGA (1920 x 1200), oferece mais área vertical que uma tela Full HD tradicional, o que ajuda a ver mais linhas de uma planilha ou de um documento sem rolar a página. Segundo a Lenovo, o painel IPS tem acabamento antirreflexo e brilho de 300 nits.\n\n## Destaques\n\n- Intel Core i5-13420H com 8 núcleos e 12 threads\n- 16 GB de memória DDR5-4800\n- SSD de 512 GB\n- Tela IPS de 15,3\" WUXGA (16:10) com acabamento antirreflexo\n- USB-C com Power Delivery e DisplayPort, HDMI e leitor de cartão SD\n- Windows 11 Home e acabamento na cor Luna Grey\n\n## Para quem é\n\nProfissionais e estudantes que trabalham com muitas abas, pacote Office, sistemas de gestão, videoconferências e edição leve de fotos. O leitor de cartão SD facilita a transferência de imagens de câmeras, e a saída HDMI permite ligar um monitor externo ou projetor em reuniões e aulas.\n\n## Cuidados\n\nOs gráficos são integrados (Intel UHD Graphics), portanto o notebook não é indicado para jogos pesados ou renderização 3D profissional. Para preservar a bateria e o desempenho, use o carregador de 65 W que acompanha o produto e mantenha as saídas de ventilação desobstruídas.",
+      "highlights": [
+        "Intel Core i5-13420H com 8 núcleos e 12 threads",
+        "16 GB de memória DDR5-4800",
+        "SSD de 512 GB",
+        "Tela IPS de 15,3\" WUXGA 1920 x 1200 antirreflexo",
+        "Windows 11 Home instalado",
+        "Garantia de 12 meses do fabricante"
+      ],
+      "specifications": [
+        {
+          "group": "Processador",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "Intel Core i5-13420H (13ª geração)"
+            },
+            {
+              "name": "Núcleos / threads",
+              "value": "8 núcleos (4 de desempenho + 4 de eficiência) / 12 threads"
+            },
+            {
+              "name": "Cache",
+              "value": "12 MB Intel Smart Cache"
+            }
+          ]
+        },
+        {
+          "group": "Gráficos",
+          "items": [
+            {
+              "name": "Placa de vídeo",
+              "value": "Intel UHD Graphics (integrada)"
+            }
+          ]
+        },
+        {
+          "group": "Memória e armazenamento",
+          "items": [
+            {
+              "name": "Memória RAM",
+              "value": "16 GB DDR5-4800"
+            },
+            {
+              "name": "Armazenamento",
+              "value": "SSD de 512 GB"
+            }
+          ]
+        },
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "15,3 polegadas"
+            },
+            {
+              "name": "Resolução",
+              "value": "WUXGA (1920 x 1200), formato 16:10"
+            },
+            {
+              "name": "Tipo de painel",
+              "value": "IPS"
+            },
+            {
+              "name": "Brilho",
+              "value": "300 nits"
+            },
+            {
+              "name": "Acabamento",
+              "value": "Antirreflexo"
+            },
+            {
+              "name": "Gama de cores",
+              "value": "45% NTSC"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "60 Hz"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Windows 11 Home"
+            }
+          ]
+        },
+        {
+          "group": "Conexões (ficha oficial da linha 15IRH10)",
+          "items": [
+            {
+              "name": "USB Type-A",
+              "value": "USB 5 Gbps"
+            },
+            {
+              "name": "USB Type-C",
+              "value": "USB 5 Gbps com USB PD 3.0 e DisplayPort 1.2"
+            },
+            {
+              "name": "Vídeo",
+              "value": "HDMI"
+            },
+            {
+              "name": "Leitor de cartão",
+              "value": "Cartão SD"
+            },
+            {
+              "name": "Áudio",
+              "value": "Conector combo fone/microfone de 3,5 mm"
+            }
+          ]
+        },
+        {
+          "group": "Energia",
+          "items": [
+            {
+              "name": "Bateria",
+              "value": "50 Wh"
+            },
+            {
+              "name": "Carregador",
+              "value": "65 W"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "IdeaPad Slim 3 15IRH10 (83NS0001BR)"
+            },
+            {
+              "name": "Cor",
+              "value": "Luna Grey (cinza)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Notebook Lenovo IdeaPad Slim 3 83NS0001BR",
+        "Carregador de 65 W"
+      ],
+      "seoTitle": "Notebook Lenovo IdeaPad Slim 3 i5 16GB 512GB 15,3\" | Mercatto",
+      "seoDescription": "Lenovo IdeaPad Slim 3 83NS0001BR com Core i5-13420H, 16 GB DDR5, SSD de 512 GB, tela 15,3\" WUXGA antirreflexo e Windows 11 Home.",
+      "tags": [
+        "notebook lenovo",
+        "ideapad slim 3",
+        "ideapad slim 3i",
+        "83ns0001br",
+        "15irh10",
+        "core i5 13420h",
+        "notebook 16gb",
+        "notebook ssd 512gb",
+        "notebook windows 11",
+        "notebook 15,3 polegadas",
+        "notebook para trabalho",
+        "luna grey"
+      ],
+      "priceCents": 439990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "processador": "Intel Core i5",
+        "memoria_ram": "16 GB"
+      },
+      "faq": [
+        {
+          "q": "O notebook já vem com Windows?",
+          "a": "Sim. O modelo 83NS0001BR vem com Windows 11 Home instalado."
+        },
+        {
+          "q": "Posso ligar um monitor externo?",
+          "a": "Sim. Há saída HDMI e, segundo a Lenovo, a porta USB-C também transmite vídeo via DisplayPort 1.2."
+        },
+        {
+          "q": "Ele serve para jogos?",
+          "a": "Os gráficos são integrados (Intel UHD Graphics). O notebook é voltado a produtividade, estudo e entretenimento; não é indicado para jogos pesados."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "O notebook IdeaPad Slim 3 83NS0001BR e o carregador de 65 W."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses do fabricante, que já inclui a garantia legal de 90 dias do Código de Defesa do Consumidor."
+        }
+      ],
+      "aliases": [
+        "83NS0001BR"
+      ]
+    },
+    {
+      "key": "samsung-galaxy-book4-np750xgj-kg3br",
+      "skuCode": "INF-SGBK4-KG3BR",
+      "categorySlug": "notebooks",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Notebook Samsung Galaxy Book4 Core i5-1335U 8GB SSD 512GB 15,6\" Full HD Grafite",
+      "shortDescription": "Notebook Samsung Galaxy Book4 (NP750XGJ-KG3BR) com Intel Core i5-1335U de 13ª geração, 8 GB de RAM LPDDR4X, SSD de 512 GB, tela de 15,6\" Full HD e Windows 11 Home. Corpo em metal, 1,55 kg, cor Grafite.",
+      "description": "O Samsung Galaxy Book4 NP750XGJ-KG3BR é um notebook de 15,6 polegadas com corpo em metal e cerca de 1,55 kg, feito para quem quer uma máquina fina para o trabalho, os estudos e o uso pessoal. O processador Intel Core i5-1335U, de 13ª geração, trabalha em conjunto com os gráficos integrados Intel Iris Xe e entrega desempenho consistente em navegação, pacote Office, aulas on-line e reprodução de vídeos.\n\nO SSD NVMe de 512 GB oferece espaço para arquivos e programas com carregamento ágil, e a tela Full HD (1920 x 1080) de 15,6 polegadas dá boa área de trabalho para deixar planilhas e documentos lado a lado. O notebook vem com Windows 11 Home, pronto para uso logo após a configuração inicial.\n\n## Destaques\n\n- Intel Core i5-1335U de 13ª geração com Intel Iris Xe Graphics\n- 8 GB de memória LPDDR4X\n- SSD NVMe de 512 GB\n- Tela de 15,6\" Full HD\n- Corpo em metal com 1,55 kg\n- Wi-Fi 6, HDMI, USB-C e porta de rede RJ-45\n\n## Para quem é\n\nProfissionais e estudantes que passam o dia entre e-mails, planilhas, apresentações e videochamadas e que precisam levar o notebook com frequência. A porta de rede RJ-45 ajuda em escritórios com internet cabeada, e a saída HDMI facilita apresentações em TVs e projetores.\n\n## Cuidados\n\nA memória LPDDR4X é integrada à placa e não pode ser ampliada, então avalie se os 8 GB atendem ao seu uso: eles dão conta de tarefas de escritório e estudo. Por ser um modelo fino com gráficos integrados, não é indicado para jogos pesados ou edição profissional de vídeo. Transporte-o em capa ou mochila acolchoada para preservar o acabamento em metal.",
+      "highlights": [
+        "Intel Core i5-1335U de 13ª geração",
+        "8 GB de memória LPDDR4X",
+        "SSD NVMe de 512 GB",
+        "Tela de 15,6\" Full HD (1920 x 1080)",
+        "Corpo em metal com 1,55 kg",
+        "Windows 11 Home e Wi-Fi 6"
+      ],
+      "specifications": [
+        {
+          "group": "Processador",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "Intel Core i5-1335U (13ª geração)"
+            },
+            {
+              "name": "Frequência máxima",
+              "value": "Até 4,6 GHz"
+            }
+          ]
+        },
+        {
+          "group": "Gráficos",
+          "items": [
+            {
+              "name": "Placa de vídeo",
+              "value": "Intel Iris Xe Graphics (integrada)"
+            }
+          ]
+        },
+        {
+          "group": "Memória e armazenamento",
+          "items": [
+            {
+              "name": "Memória RAM",
+              "value": "8 GB LPDDR4X"
+            },
+            {
+              "name": "Armazenamento",
+              "value": "SSD NVMe de 512 GB"
+            }
+          ]
+        },
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "15,6 polegadas"
+            },
+            {
+              "name": "Resolução",
+              "value": "Full HD (1920 x 1080)"
+            },
+            {
+              "name": "Touchscreen",
+              "value": "Não"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Windows 11 Home"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede sem fio",
+              "value": "Wi-Fi 6 e Bluetooth"
+            },
+            {
+              "name": "Portas",
+              "value": "USB-C, USB, HDMI, Ethernet (RJ-45) e conector de áudio"
+            }
+          ]
+        },
+        {
+          "group": "Câmera",
+          "items": [
+            {
+              "name": "Webcam",
+              "value": "HD 720p"
+            }
+          ]
+        },
+        {
+          "group": "Construção e peso",
+          "items": [
+            {
+              "name": "Material",
+              "value": "Corpo em metal"
+            },
+            {
+              "name": "Peso",
+              "value": "1,55 kg"
+            },
+            {
+              "name": "Espessura",
+              "value": "Cerca de 1,5 cm"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "NP750XGJ-KG3BR"
+            },
+            {
+              "name": "Cor",
+              "value": "Grafite"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Notebook Samsung Galaxy Book4 NP750XGJ-KG3BR",
+        "Carregador (adaptador de energia)"
+      ],
+      "seoTitle": "Notebook Samsung Galaxy Book4 i5 8GB 512GB 15,6\" | Mercatto",
+      "seoDescription": "Samsung Galaxy Book4 NP750XGJ-KG3BR com Core i5-1335U, 8 GB de RAM, SSD de 512 GB, tela 15,6\" Full HD, Windows 11 Home e corpo em metal.",
+      "tags": [
+        "notebook samsung",
+        "galaxy book4",
+        "galaxy book 4",
+        "np750xgj-kg3br",
+        "np750xgj",
+        "core i5 1335u",
+        "notebook 8gb",
+        "notebook ssd 512gb",
+        "notebook windows 11",
+        "notebook 15,6 polegadas",
+        "notebook fino",
+        "notebook grafite"
+      ],
+      "priceCents": 384990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": {
+        "processador": "Intel Core i5",
+        "memoria_ram": "8 GB",
+        "tela": "15,6\""
+      },
+      "faq": [
+        {
+          "q": "O Galaxy Book4 vem com Windows?",
+          "a": "Sim. O modelo NP750XGJ-KG3BR vem com Windows 11 Home."
+        },
+        {
+          "q": "Tem entrada para cabo de rede?",
+          "a": "Sim. Além de USB-C, USB e HDMI, o notebook tem porta Ethernet RJ-45 para internet cabeada."
+        },
+        {
+          "q": "Posso aumentar a memória RAM depois?",
+          "a": "Não. A memória LPDDR4X de 8 GB é integrada à placa e não aceita expansão."
+        },
+        {
+          "q": "Ele é leve para levar todo dia?",
+          "a": "Sim. O Galaxy Book4 pesa 1,55 kg e tem corpo em metal com cerca de 1,5 cm de espessura."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia legal de 90 dias pelo Código de Defesa do Consumidor. A garantia contratual do fabricante para este anúncio ainda não foi confirmada."
+        }
+      ],
+      "aliases": [
+        "NP750XGJ",
+        "Galaxy Book4"
+      ]
+    },
+    {
+      "key": "acer-nitro-v15-anv15-51-58az",
+      "skuCode": "INF-ACNV15-58AZ",
+      "categorySlug": "notebooks",
+      "brand": {
+        "slug": "acer",
+        "name": "Acer"
+      },
+      "name": "Notebook Gamer Acer Nitro V15 Core i5-13420H RTX 3050 6GB 8GB SSD 512GB 144Hz",
+      "shortDescription": "Notebook gamer Acer Nitro V15 (ANV15-51-58AZ) com Intel Core i5-13420H, NVIDIA GeForce RTX 3050 de 6 GB, 8 GB de RAM DDR5, SSD de 512 GB e tela de 15,6\" Full HD IPS de 144 Hz, com Windows 11.",
+      "description": "O Acer Nitro V15 ANV15-51-58AZ é uma porta de entrada para quem quer jogar no PC sem abrir mão de um notebook para estudar e trabalhar. A combinação do Intel Core i5-13420H, com 8 núcleos e 12 threads, e da placa de vídeo dedicada NVIDIA GeForce RTX 3050 com 6 GB GDDR6 permite rodar títulos populares em Full HD e acelera programas de edição de vídeo e modelagem que aproveitam a GPU.\n\nA tela de 15,6 polegadas Full HD com painel IPS e taxa de atualização de 144 Hz deixa os movimentos mais fluidos em jogos competitivos, e o SSD NVMe de 512 GB reduz o tempo de carregamento de jogos e programas. A memória DDR5 de 8 GB a 5200 MHz pode ser expandida até 32 GB, o que dá margem para crescer junto com a sua biblioteca de jogos.\n\n## Destaques\n\n- Intel Core i5-13420H com 8 núcleos e 12 threads\n- NVIDIA GeForce RTX 3050 com 6 GB GDDR6\n- Tela de 15,6\" Full HD IPS de 144 Hz\n- 8 GB de RAM DDR5 5200 MHz, expansível até 32 GB\n- SSD NVMe de 512 GB\n- Thunderbolt 4, HDMI, RJ-45 e Wi-Fi 6\n\n## Para quem é\n\nJogadores que estão montando o primeiro setup, estudantes de engenharia, arquitetura e design que usam softwares com aceleração por GPU e criadores de conteúdo que editam vídeos em Full HD. A porta Thunderbolt 4 e a saída HDMI facilitam a conexão de um monitor externo, e a porta de rede RJ-45 garante conexão cabeada estável para partidas on-line.\n\n## Cuidados\n\nNotebooks gamer geram mais calor sob carga: use o equipamento sobre superfície firme, mantenha as saídas de ar desobstruídas e deixe o carregador original conectado durante as partidas para obter o desempenho máximo. Para jogos mais recentes e exigentes, considere ampliar a memória para 16 GB ou mais.",
+      "highlights": [
+        "Intel Core i5-13420H com 8 núcleos e 12 threads",
+        "NVIDIA GeForce RTX 3050 com 6 GB GDDR6",
+        "Tela de 15,6\" Full HD IPS de 144 Hz",
+        "8 GB DDR5 5200 MHz, expansível até 32 GB",
+        "SSD NVMe de 512 GB",
+        "Thunderbolt 4, HDMI, RJ-45 e Wi-Fi 6"
+      ],
+      "specifications": [
+        {
+          "group": "Processador",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "Intel Core i5-13420H (13ª geração)"
+            },
+            {
+              "name": "Núcleos / threads",
+              "value": "8 núcleos / 12 threads"
+            }
+          ]
+        },
+        {
+          "group": "Placa de vídeo",
+          "items": [
+            {
+              "name": "GPU dedicada",
+              "value": "NVIDIA GeForce RTX 3050"
+            },
+            {
+              "name": "Memória de vídeo",
+              "value": "6 GB GDDR6"
+            }
+          ]
+        },
+        {
+          "group": "Memória e armazenamento",
+          "items": [
+            {
+              "name": "Memória RAM",
+              "value": "8 GB DDR5 5200 MHz"
+            },
+            {
+              "name": "Expansão de memória",
+              "value": "Até 32 GB"
+            },
+            {
+              "name": "Armazenamento",
+              "value": "SSD de 512 GB NVMe PCIe Gen4"
+            }
+          ]
+        },
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "15,6 polegadas"
+            },
+            {
+              "name": "Resolução",
+              "value": "Full HD (1920 x 1080)"
+            },
+            {
+              "name": "Tipo de painel",
+              "value": "IPS"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "144 Hz"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Windows 11"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede sem fio",
+              "value": "Wi-Fi 6 e Bluetooth"
+            },
+            {
+              "name": "Portas",
+              "value": "USB 3.2, Thunderbolt 4 (USB-C), HDMI, Ethernet (RJ-45) e conector de áudio"
+            }
+          ]
+        },
+        {
+          "group": "Peso",
+          "items": [
+            {
+              "name": "Peso aproximado",
+              "value": "2,11 kg"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "ANV15-51-58AZ"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Notebook Acer Nitro V15 ANV15-51-58AZ",
+        "Fonte de alimentação (carregador)"
+      ],
+      "seoTitle": "Notebook Gamer Acer Nitro V15 i5 RTX 3050 512GB | Mercatto",
+      "seoDescription": "Acer Nitro V15 ANV15-51-58AZ com Core i5-13420H, RTX 3050 6 GB, 8 GB DDR5, SSD de 512 GB e tela 15,6\" Full HD IPS de 144 Hz.",
+      "tags": [
+        "notebook gamer",
+        "acer nitro v15",
+        "nitro v 15",
+        "anv15-51-58az",
+        "anv15-51",
+        "rtx 3050",
+        "core i5 13420h",
+        "notebook gamer barato",
+        "notebook 144hz",
+        "notebook ssd 512gb",
+        "notebook windows 11",
+        "notebook acer"
+      ],
+      "priceCents": 474990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": {
+        "processador": "Intel Core i5",
+        "memoria_ram": "8 GB",
+        "tela": "15,6\""
+      },
+      "faq": [
+        {
+          "q": "O Nitro V15 roda jogos atuais?",
+          "a": "Com o Core i5-13420H e a RTX 3050 de 6 GB, ele roda jogos populares em Full HD. Em títulos mais exigentes pode ser necessário reduzir as configurações gráficas."
+        },
+        {
+          "q": "Dá para aumentar a memória RAM?",
+          "a": "Sim. O modelo vem com 8 GB de DDR5 a 5200 MHz e aceita expansão até 32 GB."
+        },
+        {
+          "q": "Qual é a taxa de atualização da tela?",
+          "a": "A tela é de 15,6 polegadas, Full HD, painel IPS e 144 Hz."
+        },
+        {
+          "q": "Quais conexões ele oferece?",
+          "a": "Portas USB 3.2, Thunderbolt 4 (USB-C), HDMI, Ethernet RJ-45 e conector de áudio, além de Wi-Fi 6 e Bluetooth."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia legal de 90 dias pelo Código de Defesa do Consumidor. A garantia contratual do fabricante para este anúncio ainda não foi confirmada."
+        }
+      ],
+      "aliases": [
+        "ANV15-51",
+        "Nitro V15"
+      ]
+    }
+  ]
+}

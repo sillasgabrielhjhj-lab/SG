@@ -1,0 +1,751 @@
+{
+  "products": [
+    {
+      "key": "monitor-lg-24ms500-b-24-ips-full-hd-100hz",
+      "skuCode": "INF-LG-24MS500B",
+      "categorySlug": "monitores",
+      "brand": {
+        "slug": "lg",
+        "name": "LG"
+      },
+      "name": "Monitor LG 24MS500-B 24\" IPS Full HD 100 Hz 5 ms com 2 HDMI e Ajuste de Inclinação",
+      "shortDescription": "Monitor LG de 24 polegadas (23,8\" de área visível) com painel IPS Full HD, taxa de 100 Hz, tempo de resposta de 5 ms, duas entradas HDMI, saída para fones e ajuste de inclinação. Para trabalho, estudo e jogos.",
+      "description": "O Monitor LG 24MS500-B reúne o que mais pesa no uso diário: imagem nítida, cores consistentes de qualquer ângulo e movimento mais fluido do que nos monitores comuns de 60 Hz. O painel IPS de 23,8 polegadas (classe 24\") tem resolução Full HD de 1920 x 1080 pixels e ângulos de visão de 178° na horizontal e na vertical, o que mantém cores e contraste estáveis mesmo quando você olha a tela de lado ou divide a imagem com outra pessoa.\n\nA taxa de atualização de 100 Hz, somada ao tempo de resposta de 5 ms, deixa a rolagem de páginas, planilhas e vídeos mais suave e ajuda em jogos do dia a dia. Para quem joga, o Black Stabilizer realça detalhes em cenas escuras e o Dynamic Action Sync é voltado a uma resposta mais rápida aos comandos.\n\n## Destaques\n\n- Painel IPS de 23,8\" Full HD com ângulos de visão de 178°\n- Taxa de atualização de 100 Hz e tempo de resposta de 5 ms\n- Duas entradas HDMI e saída para fones de ouvido\n- Brilho típico de 250 cd/m², contraste de 1000:1 e 16,7 milhões de cores\n- Modo leitor, Black Stabilizer e Dynamic Action Sync\n- Ajuste de inclinação de -5° a 15°\n\n## Para quem é\n\nUma escolha equilibrada para home office, estudo e escritório, seja para ampliar a área de trabalho do notebook, seja para montar um setup com dois aparelhos ligados ao mesmo tempo: as duas entradas HDMI permitem conectar, por exemplo, um computador e um console. O Modo leitor ajusta a imagem para quem passa horas lendo textos e documentos.\n\n## Como usar\n\nConecte o monitor ao computador, notebook ou console por um cabo HDMI e ligue o adaptador de energia na tomada. Para aproveitar os 100 Hz, selecione essa taxa nas configurações de vídeo do sistema operacional ou do equipamento conectado; a placa de vídeo ou o aparelho precisa ser capaz de enviar o sinal nessa frequência.\n\n## Cuidados\n\nLimpe a tela apenas com pano macio e seco, sem álcool ou produtos abrasivos, e evite pressionar o painel. Mantenha o monitor longe de umidade e de fontes de calor.",
+      "highlights": [
+        "Painel IPS de 23,8\" com resolução Full HD (1920 x 1080)",
+        "Taxa de atualização de 100 Hz e tempo de resposta de 5 ms",
+        "Duas entradas HDMI e saída para fones de ouvido",
+        "Ângulos de visão de 178° na horizontal e na vertical",
+        "Black Stabilizer, Dynamic Action Sync e Modo leitor",
+        "Ajuste de inclinação de -5° a 15°"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "23,8 polegadas (classe 24\")"
+            },
+            {
+              "name": "Tipo de painel",
+              "value": "IPS"
+            },
+            {
+              "name": "Resolução",
+              "value": "Full HD (1920 x 1080 pixels)"
+            },
+            {
+              "name": "Proporção",
+              "value": "16:9"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "100 Hz"
+            },
+            {
+              "name": "Tempo de resposta",
+              "value": "5 ms"
+            },
+            {
+              "name": "Brilho típico",
+              "value": "250 cd/m²"
+            },
+            {
+              "name": "Contraste",
+              "value": "1000:1"
+            },
+            {
+              "name": "Número de cores",
+              "value": "16,7 milhões"
+            },
+            {
+              "name": "Gama de cores",
+              "value": "NTSC 72% (CIE1931), valor típico"
+            },
+            {
+              "name": "Ângulo de visão",
+              "value": "178° (horizontal) / 178° (vertical)"
+            }
+          ]
+        },
+        {
+          "group": "Recursos",
+          "items": [
+            {
+              "name": "Black Stabilizer (estabilizador de preto)",
+              "value": "Sim"
+            },
+            {
+              "name": "Dynamic Action Sync",
+              "value": "Sim"
+            },
+            {
+              "name": "Modo leitor",
+              "value": "Sim"
+            }
+          ]
+        },
+        {
+          "group": "Conexões",
+          "items": [
+            {
+              "name": "Entradas de vídeo",
+              "value": "2 x HDMI (1.4)"
+            },
+            {
+              "name": "Saída de áudio",
+              "value": "Saída para fones de ouvido"
+            }
+          ]
+        },
+        {
+          "group": "Ergonomia e alimentação",
+          "items": [
+            {
+              "name": "Ajuste de inclinação",
+              "value": "-5° a 15°"
+            },
+            {
+              "name": "Alimentação",
+              "value": "Adaptador de energia externo"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões e peso",
+          "items": [
+            {
+              "name": "Dimensões com suporte (L x A x P)",
+              "value": "53,99 x 41,44 x 19,0 cm"
+            },
+            {
+              "name": "Dimensões sem suporte (L x A x P)",
+              "value": "53,99 x 32,14 x 5,62 cm"
+            },
+            {
+              "name": "Peso com suporte",
+              "value": "2,6 kg"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Monitor LG 24MS500-B",
+        "Suporte de mesa (base)",
+        "Adaptador de energia com cabo de alimentação"
+      ],
+      "seoTitle": "Monitor LG 24MS500-B 24\" IPS Full HD 100 Hz | Mercatto",
+      "seoDescription": "Monitor LG 24MS500-B de 23,8\" com painel IPS Full HD, 100 Hz, 5 ms, duas entradas HDMI e ajuste de inclinação. Compre na Mercatto.",
+      "tags": [
+        "monitor lg",
+        "lg 24ms500-b",
+        "24ms500",
+        "monitor 24 polegadas",
+        "monitor ips",
+        "monitor full hd",
+        "monitor 100hz",
+        "monitor hdmi",
+        "monitor home office",
+        "monitor gamer",
+        "monitor para pc"
+      ],
+      "priceCents": 47990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "tela": "24\""
+      },
+      "faq": [
+        {
+          "q": "Quais conexões o monitor tem?",
+          "a": "O LG 24MS500-B tem duas entradas HDMI e uma saída para fones de ouvido. Assim, é possível deixar dois aparelhos conectados ao mesmo tempo, como um computador e um console."
+        },
+        {
+          "q": "O monitor serve para jogos?",
+          "a": "Sim, para jogos do dia a dia. Ele tem taxa de atualização de 100 Hz, tempo de resposta de 5 ms e os recursos Black Stabilizer e Dynamic Action Sync. Para usar os 100 Hz, o computador ou console precisa enviar o sinal nessa frequência."
+        },
+        {
+          "q": "Quais ajustes de posição estão disponíveis?",
+          "a": "O suporte permite ajustar a inclinação da tela de -5° a 15°."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "O monitor, o suporte de mesa e o adaptador de energia com cabo de alimentação."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses do fabricante, já incluídos os 90 dias de garantia legal do Código de Defesa do Consumidor."
+        }
+      ],
+      "aliases": [
+        "24MS500"
+      ]
+    },
+    {
+      "key": "mouse-gamer-logitech-g203-lightsync",
+      "skuCode": "INF-LOGI-G203LS",
+      "categorySlug": "perifericos",
+      "brand": {
+        "slug": "logitech",
+        "name": "Logitech"
+      },
+      "name": "Mouse Gamer Logitech G203 LIGHTSYNC RGB 8.000 DPI 6 Botões Programáveis",
+      "shortDescription": "Mouse gamer com fio Logitech G203 LIGHTSYNC: sensor de 200 a 8.000 DPI, taxa de resposta de 1.000 Hz, 6 botões programáveis, iluminação RGB LIGHTSYNC personalizável pelo Logitech G HUB e peso de 85 g.",
+      "description": "O Logitech G203 LIGHTSYNC é um mouse gamer com fio que oferece precisão e personalização sem complicação. O sensor trabalha de 200 a 8.000 DPI, faixa que vai de movimentos milimétricos de mira a deslocamentos rápidos em telas grandes, e a taxa de resposta de 1.000 Hz (1 ms) faz o cursor acompanhar a mão com fidelidade.\n\nSão seis botões programáveis. Pelo software Logitech G HUB, é possível reatribuir comandos, salvar até cinco níveis de DPI para alternar durante a partida e configurar a iluminação LIGHTSYNC RGB, com cerca de 16,8 milhões de cores e efeitos como ondas de cor. Com 85 g, o mouse é leve para movimentos rápidos e confortável em sessões longas.\n\n## Destaques\n\n- Sensor de 200 a 8.000 DPI, com até 5 níveis configuráveis\n- Taxa de resposta de 1.000 Hz (1 ms)\n- 6 botões programáveis pelo Logitech G HUB\n- Iluminação LIGHTSYNC RGB personalizável\n- Peso de 85 g e cabo de 2,1 m\n- Garantia de 2 anos\n\n## Para quem é\n\nIndicado para quem está montando o primeiro setup gamer ou quer trocar um mouse comum por um modelo mais preciso, seja para jogos de tiro, MOBA e estratégia, seja para o uso diário no computador. Por padrão, os botões laterais avançam e voltam páginas no navegador, o que agiliza também tarefas fora dos jogos.\n\n## Como usar\n\nConecte o cabo a uma porta USB do computador com Windows, macOS ou Chrome OS. Para personalizar DPI, botões e iluminação, baixe o Logitech G HUB no site da Logitech; o software é opcional e as configurações podem ser alteradas a qualquer momento.\n\n## Cuidados\n\nUse o mouse sobre uma superfície limpa ou um mousepad para manter o rastreamento preciso, evite dobrar ou tensionar o cabo e limpe a carcaça com pano levemente umedecido, sempre com o mouse desconectado.",
+      "highlights": [
+        "Sensor de 200 a 8.000 DPI com até 5 níveis configuráveis",
+        "Taxa de resposta de 1.000 Hz (1 ms)",
+        "6 botões programáveis pelo Logitech G HUB",
+        "Iluminação LIGHTSYNC RGB com cerca de 16,8 milhões de cores",
+        "Leve: 85 g, com cabo USB de 2,1 m",
+        "Garantia de 2 anos"
+      ],
+      "specifications": [
+        {
+          "group": "Sensor e desempenho",
+          "items": [
+            {
+              "name": "Resolução",
+              "value": "200 a 8.000 DPI"
+            },
+            {
+              "name": "Níveis de DPI",
+              "value": "Até 5, configuráveis no Logitech G HUB"
+            },
+            {
+              "name": "Taxa de resposta (polling rate)",
+              "value": "1.000 Hz (1 ms)"
+            }
+          ]
+        },
+        {
+          "group": "Botões e iluminação",
+          "items": [
+            {
+              "name": "Botões",
+              "value": "6 programáveis"
+            },
+            {
+              "name": "Iluminação",
+              "value": "LIGHTSYNC RGB, cerca de 16,8 milhões de cores"
+            },
+            {
+              "name": "Software",
+              "value": "Logitech G HUB (opcional)"
+            }
+          ]
+        },
+        {
+          "group": "Conexão e compatibilidade",
+          "items": [
+            {
+              "name": "Conexão",
+              "value": "Com fio, USB"
+            },
+            {
+              "name": "Comprimento do cabo",
+              "value": "2,1 m"
+            },
+            {
+              "name": "Sistemas compatíveis",
+              "value": "Windows, macOS e Chrome OS (porta USB)"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões e peso",
+          "items": [
+            {
+              "name": "Dimensões",
+              "value": "116,6 x 62,15 x 38,2 mm"
+            },
+            {
+              "name": "Peso",
+              "value": "85 g (sem cabo)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Mouse gamer Logitech G203 LIGHTSYNC",
+        "Documentação do usuário"
+      ],
+      "seoTitle": "Mouse Gamer Logitech G203 LIGHTSYNC RGB 8.000 DPI | Mercatto",
+      "seoDescription": "Mouse gamer Logitech G203 LIGHTSYNC com sensor de até 8.000 DPI, 1.000 Hz, 6 botões programáveis, RGB e 85 g. Garantia de 2 anos.",
+      "tags": [
+        "mouse gamer",
+        "logitech g203",
+        "g203 lightsync",
+        "mouse logitech",
+        "mouse rgb",
+        "mouse 8000 dpi",
+        "mouse com fio",
+        "mouse usb",
+        "mouse para pc",
+        "periferico gamer",
+        "logitech g"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco",
+            "Azul",
+            "Lilás"
+          ]
+        }
+      ],
+      "priceCents": 8790,
+      "minStock": 1,
+      "warrantyMonths": 24,
+      "warrantyText": "Garantia de 24 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "q": "O G203 LIGHTSYNC é sem fio?",
+          "a": "Não. É um mouse com fio, com conexão USB e cabo de 2,1 m."
+        },
+        {
+          "q": "Preciso instalar algum software?",
+          "a": "O Logitech G HUB é opcional. Ele serve para personalizar os níveis de DPI, a função dos 6 botões e a iluminação LIGHTSYNC RGB."
+        },
+        {
+          "q": "Com quais sistemas ele funciona?",
+          "a": "Com computadores Windows, macOS e Chrome OS que tenham porta USB."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "O mouse Logitech G203 LIGHTSYNC e a documentação do usuário."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 2 anos, sendo 90 dias de garantia legal e 21 meses de garantia contratual do fabricante."
+        }
+      ],
+      "aliases": [
+        "G203"
+      ]
+    },
+    {
+      "key": "ssd-kingston-nv3-1tb-m2-nvme-pcie-4",
+      "skuCode": "INF-KNG-NV3-1TB",
+      "categorySlug": "informatica",
+      "brand": {
+        "slug": "kingston",
+        "name": "Kingston"
+      },
+      "name": "SSD Kingston NV3 1TB M.2 2280 NVMe PCIe 4.0 Leitura até 6.000 MB/s SNV3S/1000G",
+      "shortDescription": "SSD NVMe Kingston NV3 de 1 TB no formato M.2 2280, interface PCIe 4.0 x4, leitura de até 6.000 MB/s e gravação de até 4.000 MB/s, segundo a Kingston. Durabilidade de 320 TBW e garantia limitada de 3 anos.",
+      "description": "O SSD Kingston NV3 de 1 TB é um upgrade direto para quem quer um computador mais ágil no dia a dia. Com interface PCIe 4.0 x4 NVMe e formato M.2 2280, ele alcança leitura sequencial de até 6.000 MB/s e gravação sequencial de até 4.000 MB/s, segundo a Kingston. Na prática, isso significa inicialização mais rápida do sistema, programas que abrem em menos tempo e cópias de arquivos grandes concluídas sem longas esperas, sobretudo em comparação com HDs e SSDs SATA.\n\nO formato M.2 2280 dispensa cabos: o SSD é encaixado diretamente no slot da placa-mãe ou do notebook. A capacidade de 1 TB comporta o sistema operacional, os programas de trabalho e uma boa biblioteca de jogos e arquivos.\n\n## Destaques\n\n- 1 TB de capacidade no formato M.2 2280\n- Interface PCIe 4.0 x4 NVMe\n- Leitura de até 6.000 MB/s e gravação de até 4.000 MB/s\n- Durabilidade de 320 TB gravados (TBW)\n- Garantia limitada de 3 anos da Kingston\n\n## Para quem é\n\nPara quem vai montar um PC novo, atualizar um desktop ou notebook que tenha slot M.2 NVMe livre ou substituir um HD por um armazenamento muito mais rápido. Atende gamers, estudantes e profissionais que lidam com arquivos pesados e querem reduzir tempos de carregamento.\n\n## Como usar\n\nAntes de comprar, confira no manual da placa-mãe ou do notebook se existe um slot M.2 2280 com suporte a NVMe. As velocidades máximas anunciadas dependem de um slot PCIe 4.0; em slots de geração anterior, o desempenho fica limitado pela interface. Com o equipamento desligado e fora da tomada, encaixe o SSD no slot e fixe-o com o parafuso do próprio slot M.2. Ao ligar, inicialize e formate a unidade pelo sistema operacional ou instale o sistema diretamente nela.\n\n## Cuidados\n\nManuseie o SSD pelas bordas, sem tocar nos contatos, e descarregue a eletricidade estática do corpo antes da instalação. Faça backup dos seus dados antes de migrar o sistema para a nova unidade.",
+      "highlights": [
+        "1 TB no formato M.2 2280 com interface PCIe 4.0 x4 NVMe",
+        "Leitura sequencial de até 6.000 MB/s, segundo a Kingston",
+        "Gravação sequencial de até 4.000 MB/s, segundo a Kingston",
+        "Durabilidade de 320 TBW",
+        "Garantia limitada de 3 anos do fabricante"
+      ],
+      "specifications": [
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "SNV3S/1000G"
+            },
+            {
+              "name": "Capacidade",
+              "value": "1 TB"
+            },
+            {
+              "name": "Formato",
+              "value": "M.2 2280 (22 x 80 mm)"
+            },
+            {
+              "name": "Interface",
+              "value": "PCIe 4.0 x4 NVMe"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Leitura sequencial",
+              "value": "Até 6.000 MB/s"
+            },
+            {
+              "name": "Gravação sequencial",
+              "value": "Até 4.000 MB/s"
+            }
+          ]
+        },
+        {
+          "group": "Durabilidade e operação",
+          "items": [
+            {
+              "name": "Durabilidade (TBW)",
+              "value": "320 TB gravados"
+            },
+            {
+              "name": "Temperatura de operação",
+              "value": "0 °C a 70 °C"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "SSD Kingston NV3 1TB (SNV3S/1000G)"
+      ],
+      "seoTitle": "SSD Kingston NV3 1TB NVMe PCIe 4.0 M.2 2280 | Mercatto",
+      "seoDescription": "SSD Kingston NV3 1TB M.2 2280 NVMe PCIe 4.0 com leitura de até 6.000 MB/s, gravação de até 4.000 MB/s e 320 TBW. Garantia de 3 anos.",
+      "tags": [
+        "ssd nvme",
+        "ssd 1tb",
+        "kingston nv3",
+        "ssd kingston",
+        "ssd m.2",
+        "ssd m.2 2280",
+        "ssd pcie 4.0",
+        "snv3s/1000g",
+        "ssd para notebook",
+        "upgrade pc",
+        "armazenamento"
+      ],
+      "priceCents": 86990,
+      "minStock": 1,
+      "warrantyMonths": 36,
+      "warrantyText": "Garantia de 36 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "q": "O NV3 funciona no meu computador ou notebook?",
+          "a": "É preciso ter um slot M.2 2280 com suporte a NVMe (PCIe). Confira no manual da placa-mãe ou do notebook. As velocidades máximas dependem de um slot PCIe 4.0; em slots de geração anterior, o desempenho fica limitado pela interface."
+        },
+        {
+          "q": "Ele funciona em slot M.2 SATA?",
+          "a": "Não. O NV3 é um SSD NVMe e precisa de um slot M.2 com suporte a NVMe/PCIe."
+        },
+        {
+          "q": "Qual é a velocidade do SSD?",
+          "a": "Segundo a Kingston, leitura sequencial de até 6.000 MB/s e gravação sequencial de até 4.000 MB/s na versão de 1 TB."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "A unidade SSD Kingston NV3 1TB (SNV3S/1000G)."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia limitada de 3 anos da Kingston, já incluídos os 90 dias de garantia legal do Código de Defesa do Consumidor. A durabilidade informada é de 320 TB gravados (TBW)."
+        }
+      ],
+      "aliases": [
+        "Kingston NV3"
+      ]
+    },
+    {
+      "key": "console-playstation-5-slim-digital-825gb-astro-bot-gran-turismo-7",
+      "skuCode": "GAM-PS5SD-ABGT7",
+      "categorySlug": "consoles",
+      "brand": {
+        "slug": "sony",
+        "name": "Sony"
+      },
+      "name": "Console PlayStation 5 Slim Edição Digital 825GB + ASTRO BOT e Gran Turismo 7",
+      "shortDescription": "PS5 Slim Edição Digital com SSD de 825 GB, controle sem fio DualSense e vouchers dos jogos completos ASTRO BOT e Gran Turismo 7. Versão sem leitor de disco: os jogos são baixados pela PlayStation Store.",
+      "description": "O pacote PlayStation 5 Slim Edição Digital com ASTRO BOT e Gran Turismo 7 junta o console da Sony a dois jogos completos de estúdios PlayStation, prontos para baixar assim que você configurar o aparelho. É uma forma prática de começar na geração atual com títulos bem diferentes entre si: uma aventura de plataforma e um simulador de corrida.\n\nPor ser a Edição Digital, o console não tem leitor de discos: os jogos são comprados e baixados pela PlayStation Store. O SSD de 825 GB, com velocidade bruta de 5,5 GB/s, reduz os tempos de carregamento, e o conjunto formado por processador AMD Zen 2 de 8 núcleos, GPU AMD RDNA 2 e 16 GB de memória GDDR6 permite jogos em até 4K e até 120 fps em TVs compatíveis.\n\n## Destaques\n\n- Console PS5 Slim Edição Digital com SSD de 825 GB\n- Vouchers dos jogos completos ASTRO BOT e Gran Turismo 7\n- Controle sem fio DualSense com feedback tátil e gatilhos adaptáveis\n- Jogos em até 4K e até 120 fps em TVs compatíveis\n- Wi-Fi 6 e Bluetooth 5.1\n- Expansão por SSD M.2 de até 8 TB (vendido separadamente)\n\n## Os jogos do pacote\n\nASTRO BOT é uma aventura de plataforma que aproveita os recursos do DualSense, como o feedback tátil e os gatilhos adaptáveis. Gran Turismo 7 é o simulador de corrida da série clássica da PlayStation, com foco em carros, pistas e personalização. Os dois jogos vêm como vouchers (códigos) para resgate na PlayStation Store.\n\n## Para quem é\n\nPara quem vai comprar o primeiro PS5, para quem quer trocar o PS4 pela geração atual e para presentear quem já prefere comprar jogos em formato digital.\n\n## Cuidados\n\nPara resgatar os vouchers e baixar os jogos, é necessário ter uma conta PlayStation Network e conexão com a internet. Instale o console em local ventilado, sem obstruir as entradas e saídas de ar, e mantenha o software do sistema atualizado.",
+      "highlights": [
+        "PS5 Slim Edição Digital com SSD de 825 GB",
+        "Vouchers dos jogos ASTRO BOT e Gran Turismo 7",
+        "Controle sem fio DualSense incluso",
+        "Jogos em até 4K e até 120 fps em TVs compatíveis",
+        "Wi-Fi 6 e Bluetooth 5.1",
+        "Garantia de 12 meses da Sony"
+      ],
+      "specifications": [
+        {
+          "group": "Console",
+          "items": [
+            {
+              "name": "Versão",
+              "value": "PlayStation 5 Slim Edição Digital (sem leitor de disco)"
+            },
+            {
+              "name": "Processador",
+              "value": "AMD Zen 2 personalizado, 8 núcleos, até 3,5 GHz"
+            },
+            {
+              "name": "GPU",
+              "value": "AMD RDNA 2 personalizada, 10,28 TFLOPS"
+            },
+            {
+              "name": "Memória",
+              "value": "16 GB GDDR6"
+            }
+          ]
+        },
+        {
+          "group": "Armazenamento",
+          "items": [
+            {
+              "name": "SSD interno",
+              "value": "825 GB"
+            },
+            {
+              "name": "Velocidade do SSD",
+              "value": "5,5 GB/s (bruta)"
+            },
+            {
+              "name": "Expansão",
+              "value": "SSD M.2 adicional de até 8 TB (vendido separadamente)"
+            }
+          ]
+        },
+        {
+          "group": "Vídeo e conectividade",
+          "items": [
+            {
+              "name": "Desempenho em jogos",
+              "value": "Até 4K e até 120 fps em TVs compatíveis"
+            },
+            {
+              "name": "Wi-Fi",
+              "value": "Wi-Fi 6 (802.11a/b/g/n/ac/ax)"
+            },
+            {
+              "name": "Bluetooth",
+              "value": "5.1"
+            }
+          ]
+        },
+        {
+          "group": "Conteúdo do pacote",
+          "items": [
+            {
+              "name": "Jogos inclusos",
+              "value": "ASTRO BOT e Gran Turismo 7 (vouchers de jogo completo)"
+            },
+            {
+              "name": "Controle",
+              "value": "1 controle sem fio DualSense"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Console PlayStation 5 Slim Edição Digital (SSD de 825 GB)",
+        "Controle sem fio DualSense",
+        "Voucher do jogo completo ASTRO BOT",
+        "Voucher do jogo completo Gran Turismo 7",
+        "Cabo HDMI",
+        "Cabo de alimentação",
+        "Cabo USB",
+        "2 pés de apoio para posição horizontal",
+        "Materiais impressos"
+      ],
+      "seoTitle": "PS5 Slim Digital 825GB + ASTRO BOT e Gran Turismo 7 | Mercatto",
+      "seoDescription": "PlayStation 5 Slim Edição Digital 825GB com DualSense e os jogos ASTRO BOT e Gran Turismo 7. Até 4K e 120 fps. Garantia de 12 meses.",
+      "tags": [
+        "ps5",
+        "playstation 5",
+        "ps5 slim",
+        "ps5 digital",
+        "ps5 825gb",
+        "console sony",
+        "console playstation",
+        "astro bot",
+        "gran turismo 7",
+        "bundle ps5",
+        "videogame",
+        "dualsense"
+      ],
+      "priceCents": 389990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "plataforma": "PlayStation"
+      },
+      "faq": [
+        {
+          "q": "O console lê discos?",
+          "a": "Não. Esta é a Edição Digital, sem leitor de disco. Os jogos são comprados e baixados pela PlayStation Store. A Sony vende separadamente uma unidade de disco para os modelos PS5 Edição Digital."
+        },
+        {
+          "q": "Como recebo os jogos ASTRO BOT e Gran Turismo 7?",
+          "a": "Os dois jogos vêm como vouchers (códigos) na caixa. Para resgatá-los e baixá-los, é preciso ter uma conta PlayStation Network e conexão com a internet."
+        },
+        {
+          "q": "Os 825 GB de armazenamento podem ser ampliados?",
+          "a": "Sim. O console aceita um SSD M.2 adicional de até 8 TB, vendido separadamente."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "Console PS5 Slim Edição Digital, controle sem fio DualSense, vouchers de ASTRO BOT e Gran Turismo 7, cabo HDMI, cabo de alimentação, cabo USB, 2 pés de apoio para a posição horizontal e materiais impressos."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses da Sony, já incluídos os 90 dias de garantia legal do Código de Defesa do Consumidor."
+        }
+      ],
+      "aliases": [
+        "PlayStation 5 Slim",
+        "PS5 Slim"
+      ]
+    },
+    {
+      "key": "controle-sem-fio-sony-dualsense-ps5",
+      "skuCode": "GAM-PS5-DUALSENSE",
+      "categorySlug": "controles",
+      "brand": {
+        "slug": "sony",
+        "name": "Sony"
+      },
+      "name": "Controle sem Fio Sony DualSense para PS5 com Feedback Tátil e Gatilhos Adaptáveis",
+      "shortDescription": "Controle sem fio oficial DualSense para PlayStation 5, com feedback tátil, gatilhos adaptáveis, microfone embutido, alto-falante, entrada para headset, touch pad e bateria recarregável de 1.560 mAh via USB-C.",
+      "description": "O DualSense é o controle sem fio oficial do PlayStation 5 e foi desenhado para aproximar o jogador do que acontece na tela. O feedback tátil substitui a vibração tradicional por respostas mais detalhadas, que mudam conforme a ação do jogo, e os gatilhos adaptáveis L2 e R2 podem oferecer níveis diferentes de força e tensão, como ao puxar a corda de um arco ou frear um carro, nos jogos compatíveis.\n\nO controle também traz matriz de microfones embutida com botão MUTE, alto-falante mono, entrada para headset estéreo, touch pad capacitivo de 2 pontos com clique e sensor de movimento de seis eixos. O botão Create permite capturar e compartilhar imagens e vídeos das partidas. A bateria interna de íon-lítio, de 1.560 mAh, é recarregada pela porta USB-C, por onde o controle também pode ser usado com fio.\n\n## Destaques\n\n- Feedback tátil e gatilhos adaptáveis em jogos compatíveis\n- Microfone embutido, alto-falante e entrada para headset\n- Touch pad de 2 pontos e sensor de movimento de seis eixos\n- Bateria recarregável de 1.560 mAh com porta USB-C\n- Conexão sem fio Bluetooth 5.1\n- Peso aproximado de 280 g\n\n## Para quem é\n\nPara quem precisa de um segundo controle para jogar em dupla, quer substituir um controle desgastado ou deseja mudar a cor do setup. Funciona com os consoles PlayStation 5, incluindo os modelos Slim e Pro.\n\n## Como usar\n\nNo primeiro uso, conecte o DualSense ao console com um cabo USB-C e pressione o botão PS para fazer o pareamento. Depois disso, ele passa a funcionar sem fio. Para recarregar, basta conectar o cabo USB-C ao console.\n\n## Cuidados\n\nEvite quedas, umidade e calor excessivo. Para preservar a bateria, não deixe o controle totalmente descarregado por longos períodos e mantenha o software do console atualizado.",
+      "highlights": [
+        "Feedback tátil e gatilhos adaptáveis em jogos compatíveis",
+        "Microfone embutido, alto-falante mono e entrada para headset",
+        "Touch pad de 2 pontos e sensor de movimento de seis eixos",
+        "Bateria recarregável de 1.560 mAh com porta USB-C",
+        "Conexão sem fio Bluetooth 5.1",
+        "Garantia de 12 meses do fabricante"
+      ],
+      "specifications": [
+        {
+          "group": "Recursos",
+          "items": [
+            {
+              "name": "Feedback",
+              "value": "Feedback tátil (háptico)"
+            },
+            {
+              "name": "Gatilhos",
+              "value": "Gatilhos adaptáveis L2 e R2"
+            },
+            {
+              "name": "Touch pad",
+              "value": "Capacitivo de 2 pontos, com mecanismo de clique"
+            },
+            {
+              "name": "Sensor de movimento",
+              "value": "Seis eixos (giroscópio de 3 eixos e acelerômetro de 3 eixos)"
+            },
+            {
+              "name": "Botões",
+              "value": "PS, Create, Options, MUTE, touch pad, direcionais, botões de ação, L1/R1, L2/R2 e L3/R3"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Microfone",
+              "value": "Matriz de microfones embutida"
+            },
+            {
+              "name": "Alto-falante",
+              "value": "Mono, embutido"
+            },
+            {
+              "name": "Entrada para headset",
+              "value": "Estéreo (P2)"
+            }
+          ]
+        },
+        {
+          "group": "Conexão e bateria",
+          "items": [
+            {
+              "name": "Conexão sem fio",
+              "value": "Bluetooth 5.1"
+            },
+            {
+              "name": "Porta",
+              "value": "USB-C (recarga e uso com fio)"
+            },
+            {
+              "name": "Bateria",
+              "value": "Íon-lítio recarregável embutida, 3,65 V, 1.560 mAh"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões e peso",
+          "items": [
+            {
+              "name": "Dimensões (L x A x P)",
+              "value": "Aprox. 160 x 66 x 106 mm (sem a maior projeção)"
+            },
+            {
+              "name": "Peso",
+              "value": "Aprox. 280 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "1 controle sem fio DualSense"
+      ],
+      "seoTitle": "Controle DualSense PS5 sem Fio Sony | Mercatto",
+      "seoDescription": "Controle sem fio Sony DualSense para PS5 com feedback tátil, gatilhos adaptáveis, microfone embutido e bateria recarregável via USB-C.",
+      "tags": [
+        "dualsense",
+        "controle ps5",
+        "controle playstation 5",
+        "controle sem fio",
+        "controle sony",
+        "joystick ps5",
+        "dualsense branco",
+        "dualsense midnight black",
+        "acessorios ps5",
+        "controle gamer"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Branco",
+            "Midnight Black",
+            "Cosmic Red",
+            "Galactic Purple"
+          ]
+        }
+      ],
+      "priceCents": 37990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "plataforma": "PlayStation"
+      },
+      "faq": [
+        {
+          "q": "O DualSense funciona com qualquer PS5?",
+          "a": "Sim. Ele é o controle oficial dos consoles PlayStation 5, incluindo os modelos Slim e Pro."
+        },
+        {
+          "q": "Como faço o pareamento com o console?",
+          "a": "Conecte o controle ao PS5 com um cabo USB-C e pressione o botão PS. Depois do pareamento, ele funciona sem fio."
+        },
+        {
+          "q": "Dá para usar fone de ouvido no controle?",
+          "a": "Sim. O DualSense tem entrada para headset estéreo, além de microfone e alto-falante embutidos."
+        },
+        {
+          "q": "Como o controle é recarregado?",
+          "a": "Pela porta USB-C. A bateria interna é de íon-lítio, com 1.560 mAh."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses do fabricante, já incluídos os 90 dias de garantia legal do Código de Defesa do Consumidor."
+        }
+      ],
+      "aliases": [
+        "DualSense"
+      ]
+    }
+  ]
+}

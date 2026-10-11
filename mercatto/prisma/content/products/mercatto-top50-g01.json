@@ -1,0 +1,1082 @@
+{
+  "products": [
+    {
+      "key": "samsung-galaxy-a17-4g-128gb",
+      "skuCode": "CEL-SGA17-4G-128",
+      "categorySlug": "smartphones",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Smartphone Samsung Galaxy A17 4G 128GB 4GB RAM Tela Super AMOLED 6,7\" 90Hz",
+      "shortDescription": "Galaxy A17 4G com tela Super AMOLED de 6,7\" e 90 Hz, câmera principal de 50 MP com estabilização óptica, bateria de 5.000 mAh, NFC, proteção IP54 e até 6 atualizações de sistema, segundo a Samsung.",
+      "description": "O Samsung Galaxy A17 4G foi pensado para quem quer uma boa tela e um aparelho que continue atualizado por muitos anos. O painel Super AMOLED de 6,7 polegadas, com resolução Full HD+ e taxa de atualização de 90 Hz, entrega cores vivas, pretos profundos e rolagem mais fluida em redes sociais, vídeos e navegação.\n\nNa traseira, o conjunto triplo é liderado por uma câmera principal de 50 MP com estabilização óptica de imagem (OIS), recurso que ajuda a reduzir tremidos em fotos noturnas e vídeos. Completam o conjunto uma ultra-angular de 5 MP, para enquadrar paisagens e grupos, e uma macro de 2 MP. Para selfies e videochamadas, a câmera frontal tem 13 MP.\n\n## Destaques\n\n- Tela Super AMOLED de 6,7\" Full HD+ com 90 Hz\n- Câmera principal de 50 MP com OIS, ultra-angular de 5 MP e macro de 2 MP\n- Processador MediaTek Helio G99, 4 GB de RAM e 128 GB expansíveis por microSD\n- Bateria de 5.000 mAh com suporte a recarga de 25 W\n- NFC para pagamentos por aproximação e proteção IP54 contra poeira e respingos\n- Android 15 com One UI 7 e até 6 atualizações de sistema, segundo a Samsung\n\n## Para quem é\n\nO Galaxy A17 4G atende bem quem usa o celular para mensagens, redes sociais, streaming, fotos do dia a dia e aplicativos de banco. A bateria de 5.000 mAh acompanha uma rotina movimentada, e o compromisso da Samsung com seis anos de atualizações de sistema e de segurança ajuda a manter o aparelho protegido e com recursos novos por mais tempo, uma vantagem concreta para quem troca de celular com pouca frequência.\n\n## Cuidados\n\nA certificação IP54 protege contra poeira e respingos d'água, mas o aparelho não deve ser submerso nem exposto a jatos fortes. Na versão vendida no Brasil, a caixa traz carregador de 15 W; para aproveitar a recarga de 25 W, é preciso um carregador compatível, vendido separadamente. Mantenha o sistema sempre atualizado para receber as correções de segurança.",
+      "highlights": [
+        "Tela Super AMOLED de 6,7\" Full HD+ com 90 Hz",
+        "Câmera principal de 50 MP com estabilização óptica (OIS)",
+        "Bateria de 5.000 mAh com suporte a recarga de 25 W",
+        "NFC e proteção IP54 contra poeira e respingos",
+        "4 GB de RAM e 128 GB expansíveis por microSD até 2 TB",
+        "Até 6 atualizações do Android, segundo a Samsung"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "6,7 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "Super AMOLED"
+            },
+            {
+              "name": "Resolução",
+              "value": "Full HD+ (1080 x 2340 pixels)"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "90 Hz"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho e memória",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "MediaTek Helio G99 (octa-core)"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "4 GB"
+            },
+            {
+              "name": "Armazenamento interno",
+              "value": "128 GB"
+            },
+            {
+              "name": "Cartão de memória",
+              "value": "microSD de até 2 TB"
+            }
+          ]
+        },
+        {
+          "group": "Câmeras",
+          "items": [
+            {
+              "name": "Câmera principal",
+              "value": "50 MP (f/1.8) com estabilização óptica (OIS)"
+            },
+            {
+              "name": "Ultra-angular",
+              "value": "5 MP"
+            },
+            {
+              "name": "Macro",
+              "value": "2 MP"
+            },
+            {
+              "name": "Câmera frontal",
+              "value": "13 MP"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "5.000 mAh"
+            },
+            {
+              "name": "Carregamento suportado",
+              "value": "Até 25 W com carregador compatível"
+            },
+            {
+              "name": "Carregador na caixa",
+              "value": "15 W (versão brasileira)"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede",
+              "value": "4G"
+            },
+            {
+              "name": "NFC",
+              "value": "Sim"
+            },
+            {
+              "name": "Chip",
+              "value": "Dual SIM"
+            },
+            {
+              "name": "Conector",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Android 15 com One UI 7"
+            },
+            {
+              "name": "Atualizações",
+              "value": "Até 6 atualizações de sistema operacional e 6 anos de atualizações de segurança, segundo a Samsung"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência",
+              "value": "IP54 (poeira e respingos d'água)"
+            },
+            {
+              "name": "Dimensões do aparelho",
+              "value": "164,4 x 77,9 x 7,5 mm"
+            },
+            {
+              "name": "Peso do aparelho",
+              "value": "190 g"
+            },
+            {
+              "name": "Modelo",
+              "value": "SM-A175F"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Smartphone Samsung Galaxy A17 4G",
+        "Carregador de tomada de 15 W",
+        "Cabo USB-C"
+      ],
+      "seoTitle": "Samsung Galaxy A17 4G 128GB Tela AMOLED 6,7\" | Mercatto",
+      "seoDescription": "Galaxy A17 4G 128GB com tela Super AMOLED 6,7\" 90 Hz, câmera 50 MP com OIS, bateria 5.000 mAh, NFC e IP54. Compre na Mercatto.",
+      "tags": [
+        "galaxy a17",
+        "samsung a17",
+        "galaxy a17 4g",
+        "a17 128gb",
+        "celular samsung",
+        "smartphone samsung",
+        "celular 4g",
+        "tela amoled",
+        "celular com nfc",
+        "celular 128gb",
+        "celular bateria 5000 mah",
+        "samsung galaxy a"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Cinza",
+            "Azul"
+          ]
+        }
+      ],
+      "priceCents": 83990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "armazenamento": "128 GB",
+        "memoria_ram": "4 GB",
+        "rede_5g": "Não"
+      },
+      "faq": [
+        {
+          "q": "O Galaxy A17 4G funciona em redes 5G?",
+          "a": "Não. Este modelo opera em redes 4G. Existe uma versão 5G do Galaxy A17, que é outro produto, com processador diferente."
+        },
+        {
+          "q": "Vem carregador na caixa?",
+          "a": "Sim. Na versão vendida no Brasil, a caixa traz carregador de 15 W e cabo USB-C. O aparelho suporta recarga de até 25 W com um carregador compatível, vendido separadamente."
+        },
+        {
+          "q": "Dá para pagar por aproximação com ele?",
+          "a": "Sim. O Galaxy A17 4G tem NFC, que permite pagamentos por aproximação em carteiras digitais compatíveis."
+        },
+        {
+          "q": "Posso aumentar o armazenamento de 128 GB?",
+          "a": "Sim. O aparelho aceita cartão microSD de até 2 TB, vendido separadamente."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "A Samsung oferece 12 meses de garantia para smartphones no Brasil (90 dias de garantia legal mais 9 meses de garantia contratual), contados a partir da data da nota fiscal."
+        }
+      ],
+      "aliases": [
+        "Galaxy A17"
+      ]
+    },
+    {
+      "key": "samsung-galaxy-a07-4g-128gb",
+      "skuCode": "CEL-SGA07-4G-128",
+      "categorySlug": "smartphones",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Smartphone Samsung Galaxy A07 4G 128GB 4GB RAM Tela 6,7\" 90Hz Câmera 50MP",
+      "shortDescription": "Galaxy A07 4G com tela de 6,7\" e 90 Hz, processador MediaTek Helio G99, câmera de 50 MP, bateria de 5.000 mAh com recarga de 25 W, proteção IP54 e até 6 atualizações de sistema, segundo a Samsung.",
+      "description": "O Samsung Galaxy A07 4G é a porta de entrada da linha Galaxy A para quem busca tela grande, bateria duradoura e suporte de software por muitos anos. A tela de 6,7 polegadas com taxa de atualização de 90 Hz deixa a rolagem de conversas, feeds e páginas mais suave do que em painéis comuns de 60 Hz, e o tamanho favorece vídeos e leitura.\n\nO processador MediaTek Helio G99 trabalha com 4 GB de RAM e 128 GB de armazenamento, que podem ser ampliados com cartão microSD. Na fotografia, a câmera principal de 50 MP é acompanhada por um sensor de profundidade de 2 MP para fotos com fundo desfocado, e a câmera frontal de 8 MP atende selfies e videochamadas.\n\n## Destaques\n\n- Tela de 6,7\" HD+ com 90 Hz\n- Processador MediaTek Helio G99 com 4 GB de RAM\n- 128 GB de armazenamento, expansível por microSD\n- Câmera principal de 50 MP e sensor de profundidade de 2 MP\n- Bateria de 5.000 mAh com suporte a recarga de 25 W\n- Proteção IP54 contra poeira e respingos d'água\n\n## Para quem é\n\nO Galaxy A07 4G é indicado para quem quer um celular confiável para o dia a dia: mensagens, redes sociais, vídeos, aplicativos de banco e fotos. É uma boa opção como primeiro smartphone, para presentear ou para quem deseja trocar um aparelho antigo sem gastar muito. Com Android 15, interface One UI 7 e a promessa da Samsung de até seis atualizações de sistema e seis anos de atualizações de segurança, o aparelho tende a continuar recebendo melhorias e correções por bastante tempo.\n\n## Cuidados\n\nA certificação IP54 protege contra poeira e respingos, mas o celular não deve ser mergulhado. Use carregadores e cabos de boa procedência e mantenha o sistema atualizado. Para fotos e vídeos guardados no cartão microSD, faça cópias de segurança periodicamente.",
+      "highlights": [
+        "Tela de 6,7\" HD+ com taxa de atualização de 90 Hz",
+        "Processador MediaTek Helio G99 e 4 GB de RAM",
+        "128 GB de armazenamento, expansível por microSD",
+        "Câmera principal de 50 MP e frontal de 8 MP",
+        "Bateria de 5.000 mAh com suporte a recarga de 25 W",
+        "Proteção IP54 contra poeira e respingos"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "6,7 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "PLS LCD"
+            },
+            {
+              "name": "Resolução",
+              "value": "HD+ (720 x 1600 pixels)"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "90 Hz"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho e memória",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "MediaTek Helio G99"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "4 GB (com RAM Plus de até 4 GB virtuais)"
+            },
+            {
+              "name": "Armazenamento interno",
+              "value": "128 GB"
+            },
+            {
+              "name": "Cartão de memória",
+              "value": "Aceita microSD"
+            }
+          ]
+        },
+        {
+          "group": "Câmeras",
+          "items": [
+            {
+              "name": "Câmera principal",
+              "value": "50 MP (f/1.8)"
+            },
+            {
+              "name": "Profundidade",
+              "value": "2 MP (f/2.4)"
+            },
+            {
+              "name": "Câmera frontal",
+              "value": "8 MP (f/2.0)"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "5.000 mAh"
+            },
+            {
+              "name": "Carregamento suportado",
+              "value": "Até 25 W"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede",
+              "value": "4G"
+            },
+            {
+              "name": "Chip",
+              "value": "Dual SIM"
+            },
+            {
+              "name": "Wi-Fi",
+              "value": "Wi-Fi 5"
+            },
+            {
+              "name": "Conector",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Android 15 com One UI 7"
+            },
+            {
+              "name": "Atualizações",
+              "value": "Até 6 atualizações de sistema operacional e 6 anos de atualizações de segurança, segundo a Samsung"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência",
+              "value": "IP54 (poeira e respingos d'água)"
+            },
+            {
+              "name": "Dimensões do aparelho",
+              "value": "167,4 x 77,4 x 7,6 mm"
+            },
+            {
+              "name": "Peso do aparelho",
+              "value": "184 g"
+            },
+            {
+              "name": "Modelo",
+              "value": "SM-A075M"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Smartphone Samsung Galaxy A07 4G",
+        "Carregador de tomada",
+        "Cabo USB-C",
+        "Extrator de chip",
+        "Manual do usuário"
+      ],
+      "seoTitle": "Samsung Galaxy A07 4G 128GB Tela 6,7\" 90Hz | Mercatto",
+      "seoDescription": "Galaxy A07 4G 128GB com tela 6,7\" 90 Hz, Helio G99, câmera 50 MP, bateria 5.000 mAh com recarga 25 W e IP54. Compre na Mercatto.",
+      "tags": [
+        "galaxy a07",
+        "samsung a07",
+        "galaxy a07 4g",
+        "a07 128gb",
+        "celular samsung",
+        "smartphone samsung",
+        "celular barato",
+        "celular 4g",
+        "celular 128gb",
+        "celular bateria 5000 mah",
+        "celular de entrada",
+        "samsung galaxy a"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Verde",
+            "Violeta"
+          ]
+        }
+      ],
+      "priceCents": 68990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "armazenamento": "128 GB",
+        "memoria_ram": "4 GB",
+        "rede_5g": "Não"
+      },
+      "faq": [
+        {
+          "q": "O Galaxy A07 4G tem 5G?",
+          "a": "Não. Este modelo funciona em redes 4G. A Samsung vende separadamente uma versão 5G do Galaxy A07, que é outro produto."
+        },
+        {
+          "q": "Vem carregador na caixa?",
+          "a": "Sim. Segundo a ficha da versão vendida no Brasil, acompanham o aparelho carregador, cabo USB, extrator de chip e manual."
+        },
+        {
+          "q": "Quanto de memória ele tem?",
+          "a": "São 4 GB de RAM e 128 GB de armazenamento interno. O espaço pode ser ampliado com cartão microSD, vendido separadamente."
+        },
+        {
+          "q": "Ele é resistente à água?",
+          "a": "O Galaxy A07 4G tem certificação IP54, que protege contra poeira e respingos d'água. Ele não deve ser mergulhado."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "A Samsung oferece 12 meses de garantia para smartphones no Brasil (90 dias de garantia legal mais 9 meses de garantia contratual), contados a partir da data da nota fiscal."
+        }
+      ],
+      "aliases": [
+        "Galaxy A07"
+      ]
+    },
+    {
+      "key": "motorola-moto-g06-128gb",
+      "skuCode": "CEL-MG06-128",
+      "categorySlug": "smartphones",
+      "brand": {
+        "slug": "motorola",
+        "name": "Motorola"
+      },
+      "name": "Smartphone Motorola Moto G06 128GB 4GB RAM Tela 6,88\" 120Hz Bateria 5200mAh",
+      "shortDescription": "Moto G06 com tela de 6,88\" e 120 Hz protegida por Gorilla Glass 3, câmera de 50 MP, bateria de 5.200 mAh, 128 GB expansíveis por microSD, proteção IP64 e Android 15.",
+      "description": "O Motorola Moto G06 reúne em um aparelho de entrada recursos que costumavam aparecer apenas em modelos mais caros. O principal deles é a tela de 6,88 polegadas com taxa de atualização de 120 Hz, que deixa a rolagem de redes sociais e a navegação mais fluidas. O vidro Corning Gorilla Glass 3 oferece proteção extra contra riscos no uso diário.\n\nA bateria de 5.200 mAh foi dimensionada para acompanhar o dia inteiro de mensagens, vídeos e chamadas. Por dentro, o processador MediaTek Helio G81 Extreme trabalha com 4 GB de RAM, que podem ser complementados pelo recurso RAM Boost, que usa parte do armazenamento como memória virtual. São 128 GB de espaço interno, com entrada para cartão microSD.\n\n## Destaques\n\n- Tela de 6,88\" HD+ com 120 Hz e Gorilla Glass 3\n- Bateria de 5.200 mAh\n- Câmera principal de 50 MP com tecnologia quad pixel\n- Câmera frontal de 8 MP\n- 4 GB de RAM com RAM Boost e 128 GB expansíveis por microSD\n- Proteção IP64 contra poeira e respingos d'água\n\n## Para quem é\n\nO Moto G06 é uma escolha sensata para quem precisa de um celular para o dia a dia: WhatsApp, redes sociais, vídeos, aplicativos de banco e fotos. A tela grande facilita a leitura e o consumo de vídeos, e a bateria generosa reduz a preocupação com a tomada. Também funciona bem como primeiro smartphone ou como aparelho reserva.\n\n## Cuidados\n\nA certificação IP64 protege contra poeira e respingos, mas não permite mergulhar o aparelho. Lembre-se de que o RAM Boost é memória virtual: a RAM física do aparelho é de 4 GB. Use o carregador que acompanha o produto ou outro de boa procedência e mantenha o Android atualizado.",
+      "highlights": [
+        "Tela de 6,88\" HD+ com 120 Hz e Gorilla Glass 3",
+        "Bateria de 5.200 mAh",
+        "Câmera principal de 50 MP e frontal de 8 MP",
+        "4 GB de RAM com RAM Boost de até 8 GB virtuais",
+        "128 GB de armazenamento, expansível por microSD",
+        "Proteção IP64 contra poeira e respingos"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "6,88 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "IPS LCD"
+            },
+            {
+              "name": "Resolução",
+              "value": "HD+ (720 x 1640 pixels)"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "120 Hz"
+            },
+            {
+              "name": "Proteção",
+              "value": "Corning Gorilla Glass 3"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho e memória",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "MediaTek Helio G81 Extreme"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "4 GB (com RAM Boost de até 8 GB virtuais)"
+            },
+            {
+              "name": "Armazenamento interno",
+              "value": "128 GB"
+            },
+            {
+              "name": "Cartão de memória",
+              "value": "Aceita microSD (slot dedicado)"
+            }
+          ]
+        },
+        {
+          "group": "Câmeras",
+          "items": [
+            {
+              "name": "Câmera principal",
+              "value": "50 MP com tecnologia quad pixel"
+            },
+            {
+              "name": "Sensor auxiliar",
+              "value": "Sensor de luz"
+            },
+            {
+              "name": "Câmera frontal",
+              "value": "8 MP"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "5.200 mAh"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede",
+              "value": "4G"
+            },
+            {
+              "name": "Wi-Fi",
+              "value": "Wi-Fi 5"
+            },
+            {
+              "name": "Conector",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Sistema",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Android 15"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência",
+              "value": "IP64 (poeira e respingos d'água)"
+            },
+            {
+              "name": "Dimensões do aparelho",
+              "value": "171,35 x 77,50 x 8,31 mm"
+            },
+            {
+              "name": "Peso do aparelho",
+              "value": "194 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Smartphone Motorola Moto G06",
+        "Carregador de tomada",
+        "Cabo USB-A para USB-C",
+        "Ferramenta para remoção do chip",
+        "Manual do usuário"
+      ],
+      "seoTitle": "Motorola Moto G06 128GB Tela 6,88\" 120Hz | Mercatto",
+      "seoDescription": "Moto G06 128GB com tela 6,88\" 120 Hz, Gorilla Glass 3, câmera 50 MP, bateria 5.200 mAh, IP64 e Android 15. Compre na Mercatto.",
+      "tags": [
+        "moto g06",
+        "motorola g06",
+        "moto g06 128gb",
+        "celular motorola",
+        "smartphone motorola",
+        "celular barato",
+        "celular 4g",
+        "celular 128gb",
+        "tela 120hz",
+        "celular bateria grande",
+        "moto g",
+        "celular de entrada"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Azul Marinho",
+            "Laranja"
+          ]
+        }
+      ],
+      "priceCents": 68990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "armazenamento": "128 GB",
+        "memoria_ram": "4 GB",
+        "rede_5g": "Não"
+      },
+      "faq": [
+        {
+          "q": "O Moto G06 tem 12 GB de RAM?",
+          "a": "Não exatamente. Ele tem 4 GB de RAM física. Os anúncios de 12 GB somam a RAM Boost, recurso que usa até 8 GB do armazenamento como memória virtual."
+        },
+        {
+          "q": "Vem carregador na caixa?",
+          "a": "Sim. Segundo as fichas de varejistas, a caixa traz o aparelho, carregador de tomada, cabo USB-A para USB-C, ferramenta para remoção do chip e manual."
+        },
+        {
+          "q": "Ele é 5G?",
+          "a": "Não. O Moto G06 opera em redes 4G."
+        },
+        {
+          "q": "Posso usar cartão de memória?",
+          "a": "Sim. O aparelho tem entrada para cartão microSD, vendido separadamente, para ampliar os 128 GB internos."
+        },
+        {
+          "q": "O Moto G06 é à prova d'água?",
+          "a": "Ele tem certificação IP64, que protege contra poeira e respingos d'água. Não é indicado mergulhar o aparelho."
+        }
+      ],
+      "aliases": [
+        "Moto G06"
+      ]
+    },
+    {
+      "key": "motorola-moto-g17-128gb",
+      "skuCode": "CEL-MG17-128",
+      "categorySlug": "smartphones",
+      "brand": {
+        "slug": "motorola",
+        "name": "Motorola"
+      },
+      "name": "Smartphone Motorola Moto G17 4G 128GB 4GB RAM Câmera Sony 50MP Selfie 32MP",
+      "shortDescription": "Moto G17 com câmera principal Sony LYTIA 600 de 50 MP, selfie de 32 MP, tela Full HD+ de 6,7\" com Gorilla Glass 3, bateria de 5.200 mAh com carregador TurboPower de 20 W, NFC, IP64 e som Dolby Atmos.",
+      "description": "O Motorola Moto G17 chegou ao Brasil em 2026 como sucessor do Moto G15, com foco em câmeras e acabamento. O conjunto traseiro tem câmera principal de 50 MP com sensor Sony LYTIA 600 e lente ultra-angular de 5 MP. Na frente, a câmera de 32 MP é um diferencial na categoria para selfies e videochamadas com mais detalhes.\n\nA tela IPS LCD de 6,7 polegadas tem resolução Full HD+, mais nítida do que o HD+ comum em aparelhos de entrada, e conta com proteção Corning Gorilla Glass 3. Os alto-falantes estéreo com Dolby Atmos completam a experiência em vídeos, músicas e jogos. A traseira com acabamento em couro vegano, em cores desenvolvidas com a Pantone, oferece pegada firme e visual diferenciado.\n\n## Destaques\n\n- Câmera principal Sony LYTIA 600 de 50 MP e ultra-angular de 5 MP\n- Câmera frontal de 32 MP\n- Tela de 6,7\" Full HD+ com Gorilla Glass 3\n- Bateria de 5.200 mAh com carregador TurboPower de 20 W na caixa\n- Som estéreo com Dolby Atmos\n- NFC e proteção IP64 contra poeira e respingos\n\n## Para quem é\n\nO Moto G17 é indicado para quem quer um celular de preço acessível sem abrir mão de boas selfies, tela nítida e som de qualidade. Atende bem quem grava vídeos para redes sociais, faz muitas videochamadas ou simplesmente quer um aparelho bonito e resistente para o dia a dia. O NFC permite pagamentos por aproximação, e a bateria de 5.200 mAh acompanha uma rotina intensa.\n\n## Cuidados\n\nA proteção IP64 cobre poeira e respingos, mas o aparelho não deve ser submerso. O processador MediaTek Helio G81 Extreme e os 4 GB de RAM física são voltados ao uso cotidiano; o RAM Boost amplia a memória de forma virtual, usando parte do armazenamento. Para limpar a traseira em couro vegano, use um pano macio e levemente úmido.",
+      "highlights": [
+        "Câmera principal Sony LYTIA 600 de 50 MP",
+        "Câmera frontal de 32 MP",
+        "Tela de 6,7\" Full HD+ com Gorilla Glass 3",
+        "Bateria de 5.200 mAh e carregador TurboPower 20 W",
+        "Som estéreo com Dolby Atmos",
+        "NFC e proteção IP64 contra poeira e respingos"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "6,7 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "IPS LCD"
+            },
+            {
+              "name": "Resolução",
+              "value": "Full HD+ (1080 x 2400 pixels)"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "60 Hz"
+            },
+            {
+              "name": "Brilho",
+              "value": "800 nits (típico) e 1.000 nits (pico)"
+            },
+            {
+              "name": "Proteção",
+              "value": "Corning Gorilla Glass 3"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho e memória",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "MediaTek Helio G81 Extreme"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "4 GB (com RAM Boost de até 8 GB virtuais)"
+            },
+            {
+              "name": "Armazenamento interno",
+              "value": "128 GB"
+            },
+            {
+              "name": "Cartão de memória",
+              "value": "microSD de até 1 TB"
+            }
+          ]
+        },
+        {
+          "group": "Câmeras",
+          "items": [
+            {
+              "name": "Câmera principal",
+              "value": "50 MP, sensor Sony LYTIA 600"
+            },
+            {
+              "name": "Ultra-angular",
+              "value": "5 MP"
+            },
+            {
+              "name": "Câmera frontal",
+              "value": "32 MP"
+            },
+            {
+              "name": "Recursos",
+              "value": "Night Vision automático, sensor de cintilação e sensor de luz ambiente"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "5.200 mAh"
+            },
+            {
+              "name": "Carregador na caixa",
+              "value": "TurboPower 20 W"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Alto-falantes",
+              "value": "Estéreo com Dolby Atmos"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede",
+              "value": "4G"
+            },
+            {
+              "name": "NFC",
+              "value": "Sim"
+            },
+            {
+              "name": "Bluetooth",
+              "value": "5.4"
+            },
+            {
+              "name": "Chip",
+              "value": "Dual SIM"
+            }
+          ]
+        },
+        {
+          "group": "Sistema e construção",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Android 15"
+            },
+            {
+              "name": "Resistência",
+              "value": "IP64 (poeira e respingos d'água)"
+            },
+            {
+              "name": "Acabamento traseiro",
+              "value": "Couro vegano"
+            },
+            {
+              "name": "Modelo",
+              "value": "XT2623"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Smartphone Motorola Moto G17",
+        "Carregador TurboPower 20 W",
+        "Cabo USB-A para USB-C",
+        "Ferramenta para remoção do chip",
+        "Manual do usuário e garantia"
+      ],
+      "seoTitle": "Motorola Moto G17 128GB Câmera Sony 50MP | Mercatto",
+      "seoDescription": "Moto G17 128GB com câmera Sony LYTIA 600 de 50 MP, selfie 32 MP, tela Full HD+ 6,7\", bateria 5.200 mAh, NFC e IP64. Compre na Mercatto.",
+      "tags": [
+        "moto g17",
+        "motorola g17",
+        "moto g17 128gb",
+        "celular motorola",
+        "smartphone motorola",
+        "celular com nfc",
+        "celular 4g",
+        "celular 128gb",
+        "selfie 32mp",
+        "camera sony lytia",
+        "dolby atmos",
+        "moto g"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Roxo",
+            "Azul Claro",
+            "Rosa"
+          ]
+        }
+      ],
+      "priceCents": 78990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "armazenamento": "128 GB",
+        "memoria_ram": "4 GB",
+        "rede_5g": "Não"
+      },
+      "faq": [
+        {
+          "q": "O Moto G17 vem com carregador?",
+          "a": "Sim. Acompanham o aparelho um carregador TurboPower de 20 W, cabo USB-A para USB-C, ferramenta para remoção do chip e manual."
+        },
+        {
+          "q": "Ele tem NFC para pagamento por aproximação?",
+          "a": "Sim. O Moto G17 tem NFC e pode ser usado com carteiras digitais compatíveis."
+        },
+        {
+          "q": "O Moto G17 é 5G?",
+          "a": "Não. Este modelo opera em redes 4G."
+        },
+        {
+          "q": "Quais são as cores disponíveis?",
+          "a": "Roxo (PANTONE Evening Blue), Azul Claro (PANTONE Alaskan Blue) e Rosa (PANTONE Bordeaux), todas com acabamento em couro vegano."
+        },
+        {
+          "q": "Posso ampliar o armazenamento?",
+          "a": "Sim. Além dos 128 GB internos, o aparelho aceita cartão microSD de até 1 TB, vendido separadamente."
+        }
+      ],
+      "aliases": [
+        "Moto G17"
+      ]
+    },
+    {
+      "key": "motorola-moto-g86-5g-256gb",
+      "skuCode": "CEL-MG86-5G-256",
+      "categorySlug": "smartphones",
+      "brand": {
+        "slug": "motorola",
+        "name": "Motorola"
+      },
+      "name": "Smartphone Motorola Moto G86 5G 256GB 8GB RAM Tela pOLED 6,7\" 120Hz IP69",
+      "shortDescription": "Moto G86 5G com tela pOLED 1,5K de 6,7\" e 120 Hz, Dimensity 7300, 8 GB de RAM, câmera Sony LYTIA 600 de 50 MP com OIS, bateria de 5.200 mAh com carregador de 33 W, IP68/IP69 e MIL-STD-810H.",
+      "description": "O Motorola Moto G86 5G é um intermediário que se destaca pela combinação de tela, câmera e resistência. A tela pOLED de 6,7 polegadas com resolução 1,5K e taxa de atualização de 120 Hz atinge, segundo a Motorola, pico de brilho de até 4.500 nits, o que ajuda na leitura sob o sol. O vidro Corning Gorilla Glass 7i protege a parte frontal.\n\nNa fotografia, a câmera principal de 50 MP usa o sensor Sony LYTIA 600 com estabilização óptica (OIS) e grava vídeos em 4K. Ela é acompanhada por uma ultra-angular de 8 MP, e a câmera frontal tem 32 MP. O processador MediaTek Dimensity 7300, com 8 GB de RAM e 256 GB de armazenamento, dá conta de multitarefa, jogos e aplicativos pesados, com conexão 5G.\n\n## Destaques\n\n- Tela pOLED 1,5K de 6,7\" com 120 Hz e Gorilla Glass 7i\n- Câmera Sony LYTIA 600 de 50 MP com OIS e vídeo em 4K\n- MediaTek Dimensity 7300, 8 GB de RAM e 256 GB de armazenamento\n- Bateria de 5.200 mAh com carregador TurboPower de 33 W na caixa\n- Certificações IP68 e IP69 e padrão militar MIL-STD-810H\n- Som estéreo com Dolby Atmos e NFC\n\n## Para quem é\n\nO Moto G86 5G é indicado para quem quer um celular completo sem pagar o preço de um topo de linha: boa tela para vídeos e jogos, câmera com estabilização para fotos noturnas e vídeos, conexão 5G e um aparelho preparado para quedas, poeira e água. Também atende quem trabalha na rua ou pratica atividades ao ar livre e precisa de um smartphone mais resistente.\n\n## Cuidados\n\nAs certificações IP68 e IP69 indicam proteção contra poeira, submersão e jatos d'água em condições de teste, mas não substituem os cuidados básicos: evite expor o aparelho a água salgada, produtos químicos ou calor excessivo, e seque bem a entrada USB-C antes de carregar. Use preferencialmente o carregador de 33 W que acompanha o produto.",
+      "highlights": [
+        "Tela pOLED 1,5K de 6,7\" com 120 Hz",
+        "Câmera Sony LYTIA 600 de 50 MP com OIS",
+        "Dimensity 7300, 8 GB de RAM e 256 GB",
+        "Bateria de 5.200 mAh e carregador de 33 W na caixa",
+        "IP68, IP69 e padrão militar MIL-STD-810H",
+        "Conexão 5G, NFC e som estéreo com Dolby Atmos"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "6,7 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "pOLED"
+            },
+            {
+              "name": "Resolução",
+              "value": "1,5K (1220 x 2712 pixels)"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "120 Hz"
+            },
+            {
+              "name": "Brilho máximo",
+              "value": "Até 4.500 nits (pico), segundo a Motorola"
+            },
+            {
+              "name": "Proteção",
+              "value": "Corning Gorilla Glass 7i"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho e memória",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "MediaTek Dimensity 7300"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "8 GB (com RAM Boost de até 16 GB virtuais)"
+            },
+            {
+              "name": "Armazenamento interno",
+              "value": "256 GB"
+            }
+          ]
+        },
+        {
+          "group": "Câmeras",
+          "items": [
+            {
+              "name": "Câmera principal",
+              "value": "50 MP, sensor Sony LYTIA 600, com estabilização óptica (OIS)"
+            },
+            {
+              "name": "Ultra-angular",
+              "value": "8 MP"
+            },
+            {
+              "name": "Câmera frontal",
+              "value": "32 MP"
+            },
+            {
+              "name": "Gravação de vídeo",
+              "value": "Até 4K"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "5.200 mAh"
+            },
+            {
+              "name": "Carregador na caixa",
+              "value": "TurboPower 33 W"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Alto-falantes",
+              "value": "Estéreo com Dolby Atmos"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede",
+              "value": "5G"
+            },
+            {
+              "name": "NFC",
+              "value": "Sim"
+            },
+            {
+              "name": "Conector",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Sistema e resistência",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Android 15 (de fábrica, no lançamento)"
+            },
+            {
+              "name": "Resistência à água e poeira",
+              "value": "IP68 e IP69"
+            },
+            {
+              "name": "Padrão militar",
+              "value": "MIL-STD-810H"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Smartphone Motorola Moto G86 5G",
+        "Carregador TurboPower 33 W",
+        "Cabo USB-A para USB-C",
+        "Ferramenta para remoção do chip",
+        "Manual do usuário"
+      ],
+      "seoTitle": "Motorola Moto G86 5G 256GB Tela pOLED 120Hz | Mercatto",
+      "seoDescription": "Moto G86 5G 256GB, 8 GB RAM, tela pOLED 1,5K 120 Hz, câmera Sony 50 MP com OIS, bateria 5.200 mAh, carregador 33 W e IP69. Compre na Mercatto.",
+      "tags": [
+        "moto g86",
+        "motorola g86",
+        "moto g86 5g",
+        "moto g86 256gb",
+        "celular motorola",
+        "smartphone 5g",
+        "celular 5g",
+        "celular 256gb",
+        "tela poled",
+        "celular resistente",
+        "celular ip69",
+        "camera sony lytia",
+        "celular com nfc",
+        "moto g"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Vermelho",
+            "Grafite"
+          ]
+        }
+      ],
+      "priceCents": 149990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "armazenamento": "256 GB",
+        "memoria_ram": "8 GB",
+        "rede_5g": "Sim"
+      },
+      "faq": [
+        {
+          "q": "O Moto G86 vem com carregador?",
+          "a": "Sim. O carregador TurboPower de 33 W acompanha o aparelho, junto com cabo USB-A para USB-C, ferramenta para remoção do chip e manual."
+        },
+        {
+          "q": "Posso usar o Moto G86 na chuva ou molhá-lo?",
+          "a": "Ele tem certificações IP68 e IP69, que indicam proteção contra poeira, submersão e jatos d'água em condições de teste. Mesmo assim, evite água salgada, produtos químicos e seque a entrada USB-C antes de carregar."
+        },
+        {
+          "q": "Quanto de RAM ele tem de verdade?",
+          "a": "São 8 GB de RAM física. O RAM Boost pode somar até 16 GB de memória virtual usando parte do armazenamento."
+        },
+        {
+          "q": "Ele funciona em redes 5G?",
+          "a": "Sim. O Moto G86 tem conectividade 5G, além de NFC para pagamentos por aproximação."
+        },
+        {
+          "q": "A câmera tem estabilização?",
+          "a": "Sim. A câmera principal de 50 MP com sensor Sony LYTIA 600 tem estabilização óptica de imagem (OIS) e grava vídeos em até 4K."
+        }
+      ],
+      "aliases": [
+        "Moto G86"
+      ]
+    }
+  ]
+}

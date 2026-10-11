@@ -1,0 +1,925 @@
+{
+  "products": [
+    {
+      "key": "samsung-galaxy-a36-5g-128gb",
+      "skuCode": "CEL-SGA36-128",
+      "categorySlug": "smartphones",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Smartphone Samsung Galaxy A36 5G 128GB 6GB RAM Tela 6,7\" Super AMOLED 120Hz",
+      "shortDescription": "Galaxy A36 5G com tela Super AMOLED de 6,7\" e 120 Hz, processador Snapdragon 6 Gen 3, 128 GB de armazenamento e 6 GB de RAM, bateria de 5.000 mAh com carregamento de até 45 W e certificação IP67 contra água e poeira.",
+      "description": "O Samsung Galaxy A36 5G reúne o que mais pesa no uso diário: tela grande e fluida, bateria para o dia inteiro e conexão 5G. A tela Super AMOLED de 6,7 polegadas com taxa de atualização de 120 Hz deixa a rolagem de redes sociais, vídeos e jogos mais suave, enquanto o processador Snapdragon 6 Gen 3 dá conta das tarefas do dia a dia com folga.\n\n## Destaques\n\n- Tela Super AMOLED de 6,7\" com resolução Full HD+ (1080 x 2340) e 120 Hz.\n- Processador Snapdragon 6 Gen 3 de oito núcleos, com 6 GB de RAM.\n- 128 GB de armazenamento para fotos, vídeos e aplicativos.\n- Bateria de 5.000 mAh com suporte a carregamento rápido de até 45 W (carregador vendido separadamente).\n- Certificação IP67 de resistência à água e à poeira e vidro Corning Gorilla Glass Victus+ na frente e na traseira.\n\n## Câmeras para o dia a dia\n\nA câmera principal de 50 MP tem estabilização óptica de imagem (OIS), que ajuda a reduzir tremidas em fotos com pouca luz e em vídeos. A ultra-angular de 8 MP amplia o enquadramento para paisagens e fotos em grupo, e a macro de 5 MP registra detalhes de perto. Na frente, a câmera de 12 MP atende selfies e chamadas de vídeo.\n\n## Software e atualizações\n\nO aparelho chegou com Android 15 e interface One UI 7, e a Samsung informa seis atualizações de sistema operacional para o modelo: mais tempo recebendo recursos novos e correções de segurança.\n\n## Para quem é\n\nPara quem quer um intermediário 5G com tela grande de boa qualidade, bateria de longa duração e construção resistente, sem pagar por um topo de linha. Atende bem quem usa o celular para redes sociais, streaming, fotos, estudos e trabalho.\n\n## Cuidados\n\n- A certificação IP67 se refere a testes em água doce: evite expor o aparelho a água salgada, piscina, sabão ou líquidos quentes.\n- Para aproveitar o carregamento de até 45 W, use um carregador compatível com essa potência.",
+      "highlights": [
+        "Tela Super AMOLED de 6,7\" com taxa de 120 Hz",
+        "Processador Snapdragon 6 Gen 3 e 6 GB de RAM",
+        "128 GB de armazenamento interno",
+        "Bateria de 5.000 mAh com carregamento de até 45 W",
+        "Câmera principal de 50 MP com estabilização óptica",
+        "Resistência à água e à poeira IP67"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Samsung"
+            },
+            {
+              "name": "Modelo",
+              "value": "Galaxy A36 5G"
+            },
+            {
+              "name": "Código do modelo",
+              "value": "SM-A366E"
+            },
+            {
+              "name": "Sistema operacional (de fábrica)",
+              "value": "Android 15 com One UI 7"
+            },
+            {
+              "name": "Atualizações de sistema",
+              "value": "6 atualizações de sistema operacional, segundo a Samsung"
+            }
+          ]
+        },
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "6,7 polegadas"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "Super AMOLED"
+            },
+            {
+              "name": "Resolução",
+              "value": "1080 x 2340 pixels (Full HD+)"
+            },
+            {
+              "name": "Taxa de atualização",
+              "value": "120 Hz"
+            },
+            {
+              "name": "Proteção",
+              "value": "Corning Gorilla Glass Victus+"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "Qualcomm Snapdragon 6 Gen 3"
+            },
+            {
+              "name": "Núcleos",
+              "value": "Octa-core (4x 2,4 GHz + 4x 1,8 GHz)"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "6 GB"
+            },
+            {
+              "name": "Armazenamento interno",
+              "value": "128 GB"
+            }
+          ]
+        },
+        {
+          "group": "Câmeras",
+          "items": [
+            {
+              "name": "Traseira principal",
+              "value": "50 MP com estabilização óptica (OIS)"
+            },
+            {
+              "name": "Traseira ultra-angular",
+              "value": "8 MP"
+            },
+            {
+              "name": "Traseira macro",
+              "value": "5 MP"
+            },
+            {
+              "name": "Frontal",
+              "value": "12 MP"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "5.000 mAh"
+            },
+            {
+              "name": "Carregamento com fio",
+              "value": "Até 45 W (carregador não incluso)"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Rede",
+              "value": "5G"
+            },
+            {
+              "name": "Chip",
+              "value": "Dois chips (Dual SIM)"
+            },
+            {
+              "name": "Bluetooth",
+              "value": "5.4"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência à água e poeira",
+              "value": "IP67"
+            },
+            {
+              "name": "Vidro frontal e traseiro",
+              "value": "Corning Gorilla Glass Victus+"
+            },
+            {
+              "name": "Dimensões",
+              "value": "162,9 x 78,2 x 7,4 mm"
+            },
+            {
+              "name": "Peso",
+              "value": "195 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Smartphone Samsung Galaxy A36 5G",
+        "Cabo de dados",
+        "Ferramenta para remoção do chip",
+        "Guia rápido de uso"
+      ],
+      "seoTitle": "Samsung Galaxy A36 5G 128GB 6GB RAM Tela 6,7\" | Mercatto",
+      "seoDescription": "Galaxy A36 5G 128GB com tela Super AMOLED de 6,7\" e 120 Hz, Snapdragon 6 Gen 3, bateria de 5.000 mAh e IP67. Compre no Mercatto.",
+      "tags": [
+        "galaxy a36",
+        "samsung a36",
+        "galaxy a36 5g",
+        "celular samsung",
+        "smartphone 5g",
+        "celular 128gb",
+        "samsung galaxy",
+        "celular tela amoled",
+        "celular 120hz",
+        "snapdragon 6 gen 3",
+        "celular ip67",
+        "celular intermediário"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco",
+            "Violeta",
+            "Verde"
+          ]
+        }
+      ],
+      "priceCents": 129990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": {
+        "armazenamento": "128 GB",
+        "memoria_ram": "6 GB",
+        "rede_5g": "Sim"
+      },
+      "faq": [
+        {
+          "q": "O Galaxy A36 5G vem com carregador?",
+          "a": "Não. O carregador não acompanha o produto. O aparelho suporta carregamento rápido de até 45 W com um carregador compatível, vendido separadamente."
+        },
+        {
+          "q": "Quanto de memória tem esta versão?",
+          "a": "Esta versão tem 128 GB de armazenamento interno e 6 GB de memória RAM."
+        },
+        {
+          "q": "Ele é resistente à água?",
+          "a": "Sim. O Galaxy A36 5G tem certificação IP67 de resistência à água e à poeira. Evite expor o aparelho a água salgada, piscina, sabão ou líquidos quentes."
+        },
+        {
+          "q": "Funciona com 5G e dois chips?",
+          "a": "Sim. O modelo é compatível com redes 5G e aceita dois chips. Consulte a cobertura 5G da sua operadora na sua região."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses da Samsung, sendo 90 dias de garantia legal e 9 meses de garantia contratual, contados a partir da nota fiscal."
+        }
+      ],
+      "aliases": [
+        "Galaxy A36"
+      ]
+    },
+    {
+      "key": "samsung-galaxy-fit3",
+      "skuCode": "CEL-SGFIT3",
+      "categorySlug": "smartwatches",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Pulseira Inteligente Samsung Galaxy Fit3 Tela AMOLED 1,6\" Bateria de até 13 Dias",
+      "shortDescription": "Galaxy Fit3 com tela AMOLED de 1,6\", até 13 dias de bateria por carga, resistência 5ATM e IP68, acompanhamento de até 100 tipos de exercício e monitoramento do sono e da frequência cardíaca. Compatível com smartphones Android.",
+      "description": "A Samsung Galaxy Fit3 é uma pulseira inteligente leve para acompanhar treinos, sono e a rotina sem tirar o celular do bolso. A tela AMOLED de 1,6 polegada facilita a leitura de métricas de atividade e mostradores, e a bateria de 208 mAh rende até 13 dias com uma carga, segundo a Samsung.\n\n## Destaques\n\n- Tela AMOLED de 1,6\" com resolução de 256 x 402 pixels.\n- Até 13 dias de bateria por carga, com a tela sempre ativa desligada, segundo a fabricante.\n- Resistência à água 5ATM e certificação IP68 contra poeira e água.\n- Acompanhamento de até 100 tipos de exercício e reconhecimento automático de atividades como corrida, remo, elíptico e natação em piscina.\n- Monitoramento do sono e da frequência cardíaca com sensor óptico.\n- Corpo de 18,5 g (sem a pulseira), confortável para usar de dia e à noite.\n\n## Saúde e treino no pulso\n\nCom acelerômetro, giroscópio, barômetro, sensor óptico de frequência cardíaca e sensor de luz, a Fit3 registra atividades, treinos e o sono, e sincroniza os dados com o aplicativo Samsung Health no celular. Assim fica mais fácil acompanhar a evolução da rotina e dos hábitos de descanso ao longo das semanas.\n\n## Para quem é\n\nPara quem quer começar a acompanhar a atividade física e o sono com um aparelho discreto, leve e de bateria duradoura, sem o tamanho e o preço de um smartwatch completo.\n\n## Compatibilidade\n\nA Galaxy Fit3 se conecta a smartphones Android por Bluetooth 5.3. Ela não é compatível com iPhone (iOS) e não oferece pagamentos por aproximação com Samsung Wallet.\n\n## Cuidados\n\n- A resistência 5ATM permite natação em piscina, mas a pulseira não é indicada para mergulho nem para atividades aquáticas de alta pressão.\n- Seque bem o aparelho antes de conectá-lo ao cabo de carregamento.",
+      "highlights": [
+        "Tela AMOLED de 1,6\" (256 x 402 pixels)",
+        "Até 13 dias de bateria por carga",
+        "Resistência à água 5ATM e certificação IP68",
+        "Até 100 tipos de exercício monitorados",
+        "Monitoramento do sono e da frequência cardíaca",
+        "Corpo leve, com 18,5 g sem a pulseira"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Samsung"
+            },
+            {
+              "name": "Modelo",
+              "value": "Galaxy Fit3"
+            },
+            {
+              "name": "Código do modelo",
+              "value": "SM-R390"
+            },
+            {
+              "name": "Sistema operacional",
+              "value": "FreeRTOS"
+            }
+          ]
+        },
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "1,6 polegada"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "AMOLED"
+            },
+            {
+              "name": "Resolução",
+              "value": "256 x 402 pixels"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "208 mAh"
+            },
+            {
+              "name": "Autonomia",
+              "value": "Até 13 dias (com a tela sempre ativa desligada, segundo a Samsung)"
+            }
+          ]
+        },
+        {
+          "group": "Sensores e recursos",
+          "items": [
+            {
+              "name": "Sensores",
+              "value": "Acelerômetro, barômetro, giroscópio, sensor óptico de frequência cardíaca e sensor de luz"
+            },
+            {
+              "name": "Exercícios",
+              "value": "Até 100 tipos, com reconhecimento automático de corrida, elíptico, remo e natação em piscina"
+            },
+            {
+              "name": "Monitoramento do sono",
+              "value": "Sim"
+            }
+          ]
+        },
+        {
+          "group": "Resistência",
+          "items": [
+            {
+              "name": "Resistência à água",
+              "value": "5ATM"
+            },
+            {
+              "name": "Certificação",
+              "value": "IP68"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade e memória",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.3"
+            },
+            {
+              "name": "Compatibilidade",
+              "value": "Smartphones Android (não compatível com iPhone)"
+            },
+            {
+              "name": "Memória RAM",
+              "value": "16 MB"
+            },
+            {
+              "name": "Armazenamento",
+              "value": "256 MB"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões",
+          "items": [
+            {
+              "name": "Dimensões (sem pulseira)",
+              "value": "42,9 x 28,8 x 9,9 mm"
+            },
+            {
+              "name": "Peso (sem pulseira)",
+              "value": "18,5 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Galaxy Fit3",
+        "Pulseira",
+        "Cabo de carregamento USB-C",
+        "Manual do usuário"
+      ],
+      "seoTitle": "Samsung Galaxy Fit3 Pulseira Inteligente AMOLED 1,6\" | Mercatto",
+      "seoDescription": "Galaxy Fit3 com tela AMOLED de 1,6\", até 13 dias de bateria, 5ATM e IP68, monitoramento de sono e até 100 exercícios. Compre no Mercatto.",
+      "tags": [
+        "galaxy fit3",
+        "samsung fit3",
+        "galaxy fit",
+        "pulseira inteligente",
+        "smartband",
+        "smartband samsung",
+        "pulseira fitness",
+        "relógio fitness",
+        "monitor de sono",
+        "monitor cardíaco",
+        "samsung health",
+        "smartband resistente à água"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Grafite",
+            "Prata",
+            "Rosé"
+          ]
+        }
+      ],
+      "priceCents": 21990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "q": "A Galaxy Fit3 funciona com iPhone?",
+          "a": "Não. A Galaxy Fit3 é compatível com smartphones Android e não funciona com iPhone (iOS)."
+        },
+        {
+          "q": "Posso nadar com a Galaxy Fit3?",
+          "a": "Sim, em piscina. Ela tem resistência 5ATM e certificação IP68 e reconhece natação em piscina. Não é indicada para mergulho nem para atividades aquáticas de alta pressão."
+        },
+        {
+          "q": "Quanto tempo dura a bateria?",
+          "a": "Segundo a Samsung, até 13 dias com uma carga, com a tela sempre ativa desligada. Com a tela sempre ativa ligada, a autonomia é menor."
+        },
+        {
+          "q": "O que vem na caixa?",
+          "a": "A Galaxy Fit3, a pulseira, o cabo de carregamento USB-C e o manual do usuário."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses da Samsung, sendo 90 dias de garantia legal e 9 meses de garantia contratual, contados a partir da nota fiscal."
+        }
+      ],
+      "aliases": [
+        "Galaxy Fit3",
+        "Galaxy Fit 3"
+      ]
+    },
+    {
+      "key": "xiaomi-redmi-buds-6-play",
+      "skuCode": "CEL-RBUDS6PLAY",
+      "categorySlug": "fones-de-ouvido",
+      "brand": {
+        "slug": "xiaomi",
+        "name": "Xiaomi"
+      },
+      "name": "Fone de Ouvido Bluetooth Xiaomi Redmi Buds 6 Play até 36h de Bateria IPX4",
+      "shortDescription": "Fone sem fio Redmi Buds 6 Play com driver dinâmico de 10 mm, Bluetooth 5.4, até 7,5 horas por carga e até 36 horas com o estojo, redução de ruído em chamadas com IA e resistência IPX4 a suor e respingos.",
+      "description": "O Redmi Buds 6 Play é um fone true wireless compacto para quem quer se livrar dos fios no dia a dia sem gastar muito. Cada fone pesa cerca de 3,6 g, o que ajuda no conforto em trajetos, treinos leves e chamadas longas, e o estojo de carregamento garante bateria para vários dias de uso.\n\n## Destaques\n\n- Driver dinâmico de 10 mm para músicas, vídeos e podcasts.\n- Até 7,5 horas de reprodução com uma carga e até 36 horas no total com o estojo.\n- Recarga rápida: 10 minutos de carga rendem até 3 horas de música.\n- Bluetooth 5.4 com alcance de até 10 metros em ambiente aberto.\n- Redução de ruído em chamadas com algoritmo de voz por IA, que diferencia a sua voz do som ambiente.\n- Resistência IPX4 a suor e respingos.\n\n## Para quem é\n\nPara quem procura o primeiro fone sem fio, um fone reserva para a academia ou um modelo leve para usar no transporte e no trabalho. O par se conecta por Bluetooth a celulares, tablets e computadores.\n\n## Bom saber\n\nO Redmi Buds 6 Play não tem cancelamento de ruído ativo (ANC) para músicas: a redução de ruído atua nas chamadas, para que a outra pessoa ouça sua voz com mais clareza. Na caixa vêm três pares de ponteiras de silicone (P, M e G) para ajustar a vedação ao formato do seu ouvido; uma boa vedação deixa o som mais cheio e reduz a entrada de barulho externo.\n\nO cabo de carregamento não faz parte da lista oficial de conteúdo da embalagem.\n\n## Cuidados\n\n- A proteção IPX4 cobre suor e respingos: não mergulhe os fones nem os use no banho ou na piscina.\n- Seque os fones antes de guardá-los no estojo para recarregar.",
+      "highlights": [
+        "Driver dinâmico de 10 mm",
+        "Até 7,5 h por carga e até 36 h com o estojo",
+        "Bluetooth 5.4 com alcance de até 10 m",
+        "Redução de ruído em chamadas com IA",
+        "Resistência IPX4 a suor e respingos",
+        "Fones leves, com cerca de 3,6 g cada"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Xiaomi"
+            },
+            {
+              "name": "Modelo",
+              "value": "Redmi Buds 6 Play"
+            },
+            {
+              "name": "Tipo",
+              "value": "Fone intra-auricular true wireless (sem fio)"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Driver",
+              "value": "Dinâmico de 10 mm"
+            },
+            {
+              "name": "Cancelamento de ruído ativo (ANC)",
+              "value": "Não"
+            },
+            {
+              "name": "Redução de ruído em chamadas",
+              "value": "Sim, com algoritmo de voz por IA"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Autonomia dos fones",
+              "value": "Até 7,5 horas"
+            },
+            {
+              "name": "Autonomia total com o estojo",
+              "value": "Até 36 horas"
+            },
+            {
+              "name": "Recarga rápida",
+              "value": "10 minutos para até 3 horas de reprodução"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.4"
+            },
+            {
+              "name": "Alcance",
+              "value": "Até 10 m em ambiente aberto"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência",
+              "value": "IPX4 (suor e respingos)"
+            },
+            {
+              "name": "Peso de cada fone",
+              "value": "3,6 g"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Par de fones Redmi Buds 6 Play",
+        "Estojo de carregamento",
+        "3 pares de ponteiras de silicone (P, M e G; o M vem instalado)",
+        "Manual do usuário"
+      ],
+      "seoTitle": "Fone Bluetooth Xiaomi Redmi Buds 6 Play até 36h | Mercatto",
+      "seoDescription": "Redmi Buds 6 Play: fone sem fio com driver de 10 mm, Bluetooth 5.4, até 36 h de bateria com o estojo e IPX4. Compre no Mercatto.",
+      "tags": [
+        "redmi buds 6 play",
+        "fone xiaomi",
+        "fone redmi",
+        "fone bluetooth",
+        "fone sem fio",
+        "fone true wireless",
+        "fone bluetooth barato",
+        "fone para academia",
+        "fone ipx4",
+        "bluetooth 5.4",
+        "fone com estojo",
+        "fone intra-auricular"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco",
+            "Rosa"
+          ]
+        }
+      ],
+      "priceCents": 9990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "q": "O Redmi Buds 6 Play tem cancelamento de ruído ativo?",
+          "a": "Não. Ele tem redução de ruído em chamadas com algoritmo de voz por IA, que ajuda a destacar a sua voz, mas não tem cancelamento de ruído ativo (ANC) para músicas."
+        },
+        {
+          "q": "Quanto dura a bateria?",
+          "a": "Até 7,5 horas por carga e até 36 horas no total com as recargas do estojo. Uma carga de 10 minutos rende até 3 horas de música."
+        },
+        {
+          "q": "O cabo de carregamento vem na caixa?",
+          "a": "Não consta na lista oficial de conteúdo. A embalagem traz os fones, o estojo de carregamento, três pares de ponteiras de silicone e o manual do usuário."
+        },
+        {
+          "q": "Posso usar na academia?",
+          "a": "Sim. Os fones têm resistência IPX4 a suor e respingos. Eles não devem ser mergulhados nem usados no banho ou na piscina."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "O produto conta com a garantia legal de 90 dias prevista no Código de Defesa do Consumidor."
+        }
+      ],
+      "aliases": [
+        "Redmi Buds 6 Play"
+      ]
+    },
+    {
+      "key": "anker-soundcore-p30i",
+      "skuCode": "CEL-SCP30I",
+      "categorySlug": "fones-de-ouvido",
+      "brand": {
+        "slug": "anker",
+        "name": "Anker"
+      },
+      "name": "Fone de Ouvido Bluetooth Anker Soundcore P30i com Cancelamento de Ruído e 45h",
+      "shortDescription": "Soundcore P30i com cancelamento de ruído ativo adaptativo de até 42 dB (segundo a Anker), drivers de 10 mm com BassUp, até 10 h por carga e 45 h com o estojo, Bluetooth 5.4 com multiponto, IP54 e estojo que vira suporte para celular.",
+      "description": "O Soundcore P30i, da Anker, leva o cancelamento de ruído ativo a um fone true wireless de preço acessível. O sistema é adaptativo: detecta o som ao redor e escolhe automaticamente o nível de cancelamento, que chega a até 42 dB, segundo a fabricante. Isso ajuda a reduzir o barulho do ônibus, do metrô ou do escritório para você ouvir música e podcasts em volume mais baixo.\n\n## Destaques\n\n- Cancelamento de ruído ativo adaptativo de até 42 dB (dado da fabricante).\n- Drivers de 10 mm com a tecnologia BassUp, que reforça os graves.\n- Até 10 horas de reprodução por carga e até 45 horas com o estojo; 10 minutos de carga rendem 2 horas de uso.\n- Bluetooth 5.4 com conexão multiponto.\n- Quatro microfones com IA para chamadas e videochamadas.\n- Resistência IP54 a poeira e respingos.\n\n## Estojo 2 em 1\n\nO estojo de carregamento tem uma tampa separada que funciona como suporte para o celular, na horizontal ou na vertical: útil para assistir a vídeos ou fazer chamadas de vídeo com o aparelho apoiado na mesa. Como as tampas são independentes, dá para usar o suporte mesmo com os fones nos ouvidos.\n\n## Personalize pelo aplicativo\n\nPelo aplicativo Soundcore é possível ajustar o equalizador do seu jeito e usar a função para localizar os fones.\n\n## Para quem é\n\nPara quem quer o primeiro fone com cancelamento de ruído, usa transporte público ou trabalha em ambientes barulhentos e precisa de bateria para vários dias.\n\n## Cuidados\n\n- A proteção IP54 cobre poeira e respingos: não use os fones debaixo de água corrente nem os mergulhe.\n- Com o cancelamento de ruído ligado, a autonomia cai para até 7 horas por carga (até 30 horas com o estojo).",
+      "highlights": [
+        "Cancelamento de ruído adaptativo de até 42 dB",
+        "Drivers de 10 mm com tecnologia BassUp",
+        "Até 10 h por carga e até 45 h com o estojo",
+        "Bluetooth 5.4 com conexão multiponto",
+        "Estojo 2 em 1 que vira suporte de celular",
+        "Resistência IP54 a poeira e respingos"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Anker (Soundcore)"
+            },
+            {
+              "name": "Modelo",
+              "value": "Soundcore P30i"
+            },
+            {
+              "name": "Tipo",
+              "value": "Fone intra-auricular true wireless (sem fio)"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Drivers",
+              "value": "10 mm com tecnologia BassUp"
+            },
+            {
+              "name": "Cancelamento de ruído",
+              "value": "Ativo e adaptativo, até 42 dB (segundo a fabricante)"
+            },
+            {
+              "name": "Microfones",
+              "value": "4 microfones com IA para chamadas"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Autonomia dos fones (ANC desligado)",
+              "value": "Até 10 horas"
+            },
+            {
+              "name": "Autonomia total com o estojo (ANC desligado)",
+              "value": "Até 45 horas"
+            },
+            {
+              "name": "Autonomia com ANC ligado",
+              "value": "Até 7 horas nos fones e até 30 horas com o estojo"
+            },
+            {
+              "name": "Recarga rápida",
+              "value": "10 minutos para 2 horas de reprodução"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.4"
+            },
+            {
+              "name": "Multiponto",
+              "value": "Sim"
+            },
+            {
+              "name": "Aplicativo",
+              "value": "Soundcore (equalizador personalizável e localização dos fones)"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência",
+              "value": "IP54 (poeira e respingos)"
+            },
+            {
+              "name": "Estojo",
+              "value": "2 em 1, com suporte para celular na horizontal ou na vertical"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Par de fones Soundcore P30i",
+        "Estojo de carregamento com suporte para celular",
+        "Ponteiras de silicone em 3 tamanhos",
+        "Cabo de carregamento USB-A para USB-C",
+        "Guia rápido e manual de segurança"
+      ],
+      "seoTitle": "Fone Anker Soundcore P30i com Cancelamento de Ruído | Mercatto",
+      "seoDescription": "Soundcore P30i: ANC adaptativo de até 42 dB, drivers de 10 mm BassUp, até 45 h de bateria, Bluetooth 5.4 multiponto e IP54. Compre no Mercatto.",
+      "tags": [
+        "soundcore p30i",
+        "anker p30i",
+        "fone anker",
+        "fone soundcore",
+        "fone com cancelamento de ruído",
+        "fone anc",
+        "fone bluetooth",
+        "fone sem fio",
+        "fone true wireless",
+        "fone multiponto",
+        "bluetooth 5.4",
+        "fone com suporte para celular"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco",
+            "Azul"
+          ]
+        }
+      ],
+      "priceCents": 17990,
+      "minStock": 1,
+      "warrantyMonths": 18,
+      "warrantyText": "Garantia de 18 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "q": "O cancelamento de ruído é ajustável?",
+          "a": "Sim. O cancelamento é adaptativo: o fone detecta o som externo e escolhe automaticamente o nível de redução, que chega a até 42 dB, segundo a Anker."
+        },
+        {
+          "q": "Posso conectar em dois aparelhos?",
+          "a": "Sim. O P30i usa Bluetooth 5.4 e tem conexão multiponto, para ficar pareado com dois aparelhos, como o celular e o notebook."
+        },
+        {
+          "q": "Quanto dura a bateria?",
+          "a": "Com o cancelamento de ruído desligado, até 10 horas por carga e até 45 horas com o estojo. Com ele ligado, até 7 horas por carga e até 30 horas com o estojo. 10 minutos de carga rendem 2 horas de uso."
+        },
+        {
+          "q": "Como funciona o suporte para celular?",
+          "a": "O estojo tem uma tampa própria, separada da tampa dos fones, que se abre e apoia o celular na horizontal ou na vertical."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 18 meses da Anker, já incluída a garantia legal de 90 dias do Código de Defesa do Consumidor."
+        }
+      ],
+      "aliases": [
+        "P30i"
+      ]
+    },
+    {
+      "key": "samsung-galaxy-buds-core",
+      "skuCode": "CEL-SGBUDSCORE",
+      "categorySlug": "fones-de-ouvido",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Fone de Ouvido Bluetooth Samsung Galaxy Buds Core com Cancelamento de Ruído",
+      "shortDescription": "Galaxy Buds Core com cancelamento de ruído ativo, driver de 6,5 mm, três microfones para chamadas, até 35 horas de bateria com o estojo (ANC desligado), Bluetooth 5.4, IP54 e integração com o Intérprete da Galaxy AI em celulares Galaxy compatíveis.",
+      "description": "O Galaxy Buds Core é o fone true wireless de entrada da Samsung com cancelamento de ruído ativo (ANC). Ele reduz o barulho de fundo no transporte e no trabalho e se integra aos celulares Galaxy, inclusive com o Intérprete da Galaxy AI, que traduz conversas em tempo real pelo áudio dos fones, sem precisar olhar para a tela do smartphone.\n\n## Destaques\n\n- Cancelamento de ruído ativo (ANC).\n- Driver de 6,5 mm.\n- Sistema de três microfones para chamadas mais nítidas.\n- Até 35 horas de reprodução com o estojo, com o ANC desligado.\n- Bluetooth 5.4 com codecs AAC, SBC e Samsung Scalable.\n- Resistência IP54 a poeira e respingos.\n\n## Encaixe firme e confortável\n\nAs aletas de silicone (wingtips) ajudam os fones a ficarem no lugar sem pressionar a orelha, o que faz diferença em caminhadas, treinos leves e longos períodos de uso.\n\n## Galaxy AI no ouvido\n\nCom um smartphone Galaxy compatível e com o sistema atualizado, o Buds Core funciona com o Intérprete da Galaxy AI para conversar com quem fala outro idioma. A disponibilidade do recurso depende do modelo do celular e da versão do sistema.\n\n## Para quem é\n\nPara quem tem um celular Galaxy e quer um fone com cancelamento de ruído por um preço acessível, ou para quem procura um fone leve para o dia a dia com bateria de sobra. Ele também pode ser pareado a outros aparelhos Bluetooth, mas os recursos de Galaxy AI exigem um smartphone Galaxy compatível.\n\n## Cuidados\n\n- A proteção IP54 cobre poeira e respingos: não mergulhe os fones nem os use no banho.\n- Com o cancelamento de ruído ligado, a autonomia é menor do que as 35 horas informadas com o ANC desligado.\n- O estojo é recarregado por cabo USB-C.",
+      "highlights": [
+        "Cancelamento de ruído ativo (ANC)",
+        "Até 35 h de bateria com o estojo (ANC desligado)",
+        "Sistema de três microfones para chamadas",
+        "Bluetooth 5.4 e resistência IP54",
+        "Aletas de silicone para encaixe firme",
+        "Intérprete da Galaxy AI em celulares compatíveis"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Samsung"
+            },
+            {
+              "name": "Modelo",
+              "value": "Galaxy Buds Core"
+            },
+            {
+              "name": "Código do modelo",
+              "value": "SM-R410"
+            },
+            {
+              "name": "Tipo",
+              "value": "Fone intra-auricular true wireless (sem fio)"
+            }
+          ]
+        },
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Driver",
+              "value": "6,5 mm"
+            },
+            {
+              "name": "Cancelamento de ruído ativo (ANC)",
+              "value": "Sim"
+            },
+            {
+              "name": "Microfones",
+              "value": "Sistema de três microfones"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Autonomia total com o estojo (ANC desligado)",
+              "value": "Até 35 horas"
+            },
+            {
+              "name": "Recarga do estojo",
+              "value": "Por cabo USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.4"
+            },
+            {
+              "name": "Codecs",
+              "value": "AAC, SBC e Samsung Scalable"
+            },
+            {
+              "name": "Galaxy AI",
+              "value": "Intérprete (requer smartphone Galaxy compatível e atualizado)"
+            }
+          ]
+        },
+        {
+          "group": "Construção",
+          "items": [
+            {
+              "name": "Resistência",
+              "value": "IP54 (poeira e respingos)"
+            },
+            {
+              "name": "Ajuste",
+              "value": "Aletas (wingtips) de silicone"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Par de fones Galaxy Buds Core",
+        "Estojo de carregamento"
+      ],
+      "seoTitle": "Samsung Galaxy Buds Core com Cancelamento de Ruído | Mercatto",
+      "seoDescription": "Galaxy Buds Core com ANC, até 35 h de bateria com o estojo, Bluetooth 5.4, IP54 e Intérprete da Galaxy AI em celulares compatíveis. Compre no Mercatto.",
+      "tags": [
+        "galaxy buds core",
+        "buds core",
+        "fone samsung",
+        "fone galaxy",
+        "galaxy buds",
+        "fone bluetooth",
+        "fone sem fio",
+        "fone com cancelamento de ruído",
+        "fone anc",
+        "galaxy ai",
+        "fone true wireless",
+        "bluetooth 5.4"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Branco"
+          ]
+        }
+      ],
+      "priceCents": 19490,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "q": "O Galaxy Buds Core tem cancelamento de ruído?",
+          "a": "Sim. Ele tem cancelamento de ruído ativo (ANC), que reduz o barulho de fundo em ambientes como transporte público e escritório."
+        },
+        {
+          "q": "Quanto dura a bateria?",
+          "a": "Até 35 horas no total com o estojo, com o cancelamento de ruído desligado. Com o ANC ligado, a autonomia é menor."
+        },
+        {
+          "q": "Funciona com celulares que não são Samsung?",
+          "a": "Ele usa Bluetooth 5.4 e pode ser pareado a outros aparelhos Bluetooth. Recursos como o Intérprete da Galaxy AI, porém, exigem um smartphone Galaxy compatível e atualizado."
+        },
+        {
+          "q": "É resistente à água?",
+          "a": "Tem certificação IP54, que protege contra poeira e respingos, como suor e chuva leve. Não mergulhe os fones nem os use no banho."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia de 12 meses da Samsung, sendo 90 dias de garantia legal e 9 meses de garantia contratual, contados a partir da nota fiscal."
+        }
+      ],
+      "aliases": [
+        "Buds Core"
+      ]
+    }
+  ]
+}
