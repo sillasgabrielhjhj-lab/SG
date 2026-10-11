@@ -1,0 +1,357 @@
+{
+  "products": [
+    {
+      "key": "amazon-fire-tv-stick-hd-2026",
+      "skuCode": "TVA-FIRESTICKHD26",
+      "categorySlug": "tv-e-audio",
+      "brand": { "slug": "amazon", "name": "Amazon" },
+      "name": "Fire TV Stick HD Amazon (2026) Full HD com Controle por Voz Alexa Wi-Fi 6",
+      "shortDescription": "Streaming em Full HD com o novo Fire TV Stick HD lançado no Brasil em 2026: sistema Vega OS, Wi-Fi 6, Bluetooth 5.3, 8 GB de armazenamento e controle remoto por voz com Alexa.",
+      "description": "O Fire TV Stick HD de 2026 é a forma mais simples de levar filmes, séries, esportes e aplicativos de streaming para qualquer TV com entrada HDMI. Lançado oficialmente no Brasil em abril de 2026, ele chega com o novo sistema Vega OS e um corpo mais compacto que a geração anterior, ficando discreto atrás da televisão.\n\nSegundo a Amazon, o novo modelo é cerca de 30% mais rápido que o antecessor, o que deixa a navegação entre menus e aplicativos mais fluida no dia a dia. A conexão também evoluiu: o Wi-Fi 6 ajuda a manter a estabilidade do streaming em redes compatíveis, e o Bluetooth 5.3 permite parear acessórios como fones de ouvido.\n\n## Destaques\n\n- Reprodução em Full HD (1080p) com suporte a HDR10+\n- Sistema Vega OS, que substitui o Fire OS das gerações anteriores\n- Wi-Fi 6 e Bluetooth 5.3\n- 8 GB de armazenamento interno para aplicativos\n- Controle remoto por voz com Alexa e botões dedicados de volume e liga/desliga da TV\n- Pode ser alimentado pela porta USB da própria TV, sem ocupar uma tomada\n- Compatível com o Xbox Game Pass para jogos na nuvem\n\n## Para quem é\n\nIdeal para quem tem uma TV Full HD ou HD sem recursos smart, ou uma smart TV antiga com sistema lento e poucos aplicativos atualizados. Também é uma boa opção para o quarto, a casa de praia ou para levar em viagens, já que a instalação leva poucos minutos: basta conectar à entrada HDMI, alimentar pelo cabo e configurar a rede Wi-Fi.\n\n## Como usar\n\nConecte o stick à porta HDMI da TV e ligue o cabo de alimentação USB-C a uma porta USB da televisão. Em seguida, insira as pilhas no controle, siga as instruções na tela para conectar ao Wi-Fi e entre com sua conta Amazon. Os aplicativos de streaming exigem assinatura própria de cada serviço.\n\n## Cuidados\n\nO aparelho reproduz em resolução máxima Full HD; para conteúdo em 4K, é necessário um modelo da linha 4K. Recursos da Alexa+ não estavam disponíveis no Brasil no lançamento deste modelo.",
+      "highlights": [
+        "Streaming em Full HD (1080p) com suporte a HDR10+",
+        "Novo sistema Vega OS, lançado no Brasil em 2026",
+        "Wi-Fi 6 e Bluetooth 5.3",
+        "8 GB de armazenamento interno",
+        "Controle remoto por voz com Alexa",
+        "Pode ser alimentado pela porta USB da TV"
+      ],
+      "specifications": [
+        { "group": "Vídeo", "items": [
+          { "name": "Resolução máxima", "value": "Full HD (1080p)" },
+          { "name": "HDR", "value": "HDR10+" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Sistema operacional", "value": "Vega OS" },
+          { "name": "Processador", "value": "Quad-core 1,7 GHz" },
+          { "name": "Armazenamento", "value": "8 GB" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Wi-Fi", "value": "Wi-Fi 6" },
+          { "name": "Bluetooth", "value": "5.3" },
+          { "name": "Conexão com a TV", "value": "HDMI" },
+          { "name": "Alimentação", "value": "Cabo USB-C, podendo usar a porta USB da TV" }
+        ] },
+        { "group": "Controle", "items": [
+          { "name": "Tipo", "value": "Controle remoto por voz com Alexa" },
+          { "name": "Botões de TV", "value": "Volume e liga/desliga da TV" }
+        ] }
+      ],
+      "includedItems": [
+        "1 Fire TV Stick HD",
+        "1 controle remoto por voz com Alexa",
+        "1 cabo de alimentação USB-C",
+        "2 pilhas AAA",
+        "Guia de início rápido"
+      ],
+      "seoTitle": "Fire TV Stick HD 2026 Full HD com Alexa e Wi-Fi 6 | Mercatto",
+      "seoDescription": "Fire TV Stick HD 2026 da Amazon com Vega OS, Full HD, HDR10+, Wi-Fi 6, Bluetooth 5.3 e controle por voz com Alexa. Transforme sua TV em smart.",
+      "tags": [
+        "fire tv stick",
+        "fire tv stick hd",
+        "fire stick 2026",
+        "amazon fire tv",
+        "streaming full hd",
+        "alexa",
+        "vega os",
+        "tv box",
+        "transformar tv em smart",
+        "controle por voz",
+        "wi-fi 6",
+        "dispositivo de streaming"
+      ],
+      "priceCents": 21990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": { "resolucao": "Full HD" },
+      "aliases": ["Fire TV Stick HD"],
+      "faq": [
+        { "q": "Funciona em qualquer televisão?", "a": "Funciona em TVs com entrada HDMI. É preciso também uma rede Wi-Fi e uma conta Amazon para configurar o aparelho." },
+        { "q": "Ele reproduz conteúdo em 4K?", "a": "Não. A resolução máxima deste modelo é Full HD (1080p), com suporte a HDR10+. Para 4K é necessário um modelo da linha Fire TV Stick 4K." },
+        { "q": "Precisa ligar em uma tomada?", "a": "Não necessariamente. Ele pode ser alimentado pelo cabo USB-C conectado à porta USB da própria TV." },
+        { "q": "O que vem na caixa?", "a": "O Fire TV Stick HD, o controle remoto por voz com Alexa, o cabo de alimentação USB-C, duas pilhas AAA e o guia de início rápido." },
+        { "q": "Qual a diferença para a geração anterior?", "a": "O modelo 2026 usa o sistema Vega OS, traz Wi-Fi 6 e Bluetooth 5.3 (antes Wi-Fi 5 e Bluetooth 5.0) e, segundo a Amazon, é cerca de 30% mais rápido." }
+      ]
+    },
+    {
+      "key": "jbl-go-4-preta",
+      "skuCode": "TVA-JBLGO4-PRT",
+      "categorySlug": "caixas-de-som",
+      "brand": { "slug": "jbl", "name": "JBL" },
+      "name": "Caixa de Som Bluetooth JBL Go 4 Preta 4,2W RMS IP67 Bateria até 7h",
+      "shortDescription": "Caixa de som portátil JBL Go 4 na cor preta, com 4,2 W RMS, Bluetooth 5.3, proteção IP67 contra água e poeira, até 7 horas de bateria e Auracast para conectar várias caixas.",
+      "description": "A JBL Go 4 é a caixa de som ultracompacta da JBL pensada para acompanhar você em qualquer lugar. Com cerca de 190 g e medidas de 9,4 x 7,8 x 4,2 cm, ela cabe na mochila, na bolsa ou pendurada pela alça, levando o som JBL Pro Sound para a praia, a piscina, o churrasco ou a mesa do escritório.\n\nCom 4,2 W RMS e resposta de frequência de 90 Hz a 20 kHz, ela entrega som claro para o tamanho que tem. A proteção IP67 indica resistência à poeira e à imersão temporária em água, o que dá mais tranquilidade em ambientes externos.\n\n## Destaques\n\n- Potência de 4,2 W RMS\n- Proteção IP67 contra água e poeira\n- Até 7 horas de reprodução, com até 2 horas extras pelo Playtime Boost\n- Bluetooth 5.3 com perfis A2DP e AVRCP\n- Auracast: conecte duas Go 4 em estéreo ou várias caixas JBL compatíveis\n- Recarga via USB-C\n- Ajuste de equalização e atualizações pelo app JBL Portable\n\n## Para quem é\n\nPara quem quer uma caixa de som pequena, resistente e fácil de levar, sem abrir mão da praticidade. Funciona bem em ambientes pequenos, viagens, atividades ao ar livre e como complemento ao celular ou tablet para ouvir música, podcasts e vídeos.\n\n## Como usar\n\nLigue a caixa, ative o Bluetooth do celular e selecione JBL Go 4 na lista de dispositivos. Pelo app JBL Portable é possível ajustar o equalizador e manter o software atualizado. Para som estéreo, conecte duas unidades Go 4 usando a função Auracast.\n\n## Cuidados\n\nA recarga completa leva cerca de 3 horas. Antes de recarregar após contato com água, deixe a caixa secar completamente. A proteção IP67 cobre imersão temporária; evite deixá-la submersa por longos períodos.",
+      "highlights": [
+        "4,2 W RMS com som JBL Pro Sound",
+        "Proteção IP67 contra água e poeira",
+        "Até 7h de bateria + 2h com Playtime Boost",
+        "Bluetooth 5.3 e recarga via USB-C",
+        "Auracast para estéreo com duas Go 4",
+        "Compacta: cerca de 190 g"
+      ],
+      "specifications": [
+        { "group": "Áudio", "items": [
+          { "name": "Potência", "value": "4,2 W RMS" },
+          { "name": "Resposta de frequência", "value": "90 Hz a 20 kHz" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Bluetooth", "value": "5.3" },
+          { "name": "Perfis Bluetooth", "value": "A2DP, AVRCP" },
+          { "name": "Multicaixa", "value": "Auracast (estéreo com duas Go 4 ou várias caixas JBL compatíveis)" },
+          { "name": "Aplicativo", "value": "JBL Portable" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Autonomia", "value": "Até 7 horas, mais até 2 horas com Playtime Boost" },
+          { "name": "Tempo de recarga", "value": "Cerca de 3 horas" },
+          { "name": "Entrada de carga", "value": "USB-C" }
+        ] },
+        { "group": "Físico", "items": [
+          { "name": "Proteção", "value": "IP67" },
+          { "name": "Dimensões", "value": "9,4 x 7,8 x 4,2 cm" },
+          { "name": "Peso", "value": "Aproximadamente 190 g" },
+          { "name": "Cor", "value": "Preta" }
+        ] }
+      ],
+      "includedItems": [
+        "1 caixa de som JBL Go 4",
+        "1 cabo USB tipo C",
+        "Guia de início rápido",
+        "Cartão de garantia e ficha de segurança"
+      ],
+      "seoTitle": "Caixa de Som JBL Go 4 Preta Bluetooth IP67 | Mercatto",
+      "seoDescription": "JBL Go 4 preta com 4,2 W RMS, Bluetooth 5.3, IP67, até 7h de bateria, Auracast e recarga USB-C. Compacta para levar a qualquer lugar.",
+      "tags": [
+        "jbl go 4",
+        "caixa de som jbl",
+        "caixa bluetooth",
+        "caixinha de som",
+        "caixa de som portátil",
+        "jbl preta",
+        "ip67",
+        "à prova d'água",
+        "auracast",
+        "caixa de som pequena",
+        "jbl go",
+        "som portátil"
+      ],
+      "priceCents": 19990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "aliases": ["JBL Go 4"],
+      "faq": [
+        { "q": "A JBL Go 4 pode molhar?", "a": "Ela tem proteção IP67, que indica resistência à poeira e à imersão temporária em água. Deixe secar completamente antes de recarregar." },
+        { "q": "Quanto tempo dura a bateria?", "a": "Até 7 horas de reprodução, com até 2 horas adicionais pelo recurso Playtime Boost. A recarga completa leva cerca de 3 horas." },
+        { "q": "Posso conectar duas caixas?", "a": "Sim. Com o Auracast é possível conectar duas JBL Go 4 para som estéreo ou várias caixas JBL compatíveis com Auracast." },
+        { "q": "O que vem na caixa?", "a": "A caixa de som JBL Go 4, um cabo USB tipo C, o guia de início rápido e o cartão de garantia com ficha de segurança." },
+        { "q": "Precisa de aplicativo?", "a": "Não para o uso básico via Bluetooth. O app JBL Portable é opcional e serve para ajustar o equalizador e atualizar o software." }
+      ]
+    },
+    {
+      "key": "air-fryer-mondial-family-afn-40-bi-4l",
+      "skuCode": "CAS-AFN40BI",
+      "categorySlug": "air-fryers",
+      "brand": { "slug": "mondial", "name": "Mondial" },
+      "name": "Air Fryer Mondial Family AFN-40-BI 4 Litros 1500W Preta e Inox",
+      "shortDescription": "Fritadeira elétrica sem óleo Mondial Family AFN-40-BI com cesto de 4 litros, 1500 W, painel em inox, temperatura de até 200 °C e timer de 60 minutos com aviso sonoro e desligamento automático.",
+      "description": "A Air Fryer Mondial Family AFN-40-BI foi pensada para quem quer preparar batatas, carnes, legumes e salgados de forma prática, com pouco ou nenhum óleo. Com capacidade de 4 litros, atende bem refeições do dia a dia para casais e famílias pequenas.\n\nOs 1500 W de potência e o controle de temperatura de até 200 °C permitem dourar e assar alimentos com rapidez, enquanto o timer de 60 minutos avisa com sinal sonoro e desliga o aparelho automaticamente ao final do tempo. O acabamento combina preto com painel em aço inox, que valoriza a bancada da cozinha.\n\n## Destaques\n\n- Capacidade de 4 litros, linha Family\n- Potência de 1500 W\n- Temperatura ajustável até 200 °C\n- Timer de até 60 minutos com aviso sonoro\n- Desligamento automático ao fim do tempo programado\n- Painel em aço inox\n\n## Para quem é\n\nIndicada para quem cozinha para duas a quatro pessoas e quer reduzir o uso de óleo nas frituras, ganhar tempo no preparo de refeições rápidas ou reaquecer alimentos mantendo a crocância. É uma alternativa prática ao forno convencional para porções do dia a dia.\n\n## Como usar\n\nColoque os alimentos no cesto sem sobrecarregar, para que o ar quente circule bem. Ajuste a temperatura e o tempo, e chacoalhe o cesto na metade do preparo para um resultado mais uniforme. Ao final, o aparelho avisa e desliga sozinho.\n\n## Cuidados\n\nVerifique a voltagem antes de ligar: o modelo é vendido em versões 110 V e 220 V e não é bivolt. Mantenha espaço livre ao redor da saída de ar durante o uso. Para limpar, espere esfriar e use esponja macia para preservar o revestimento do cesto. O acabamento em inox brilhante pode marcar com digitais, então um pano macio ajuda a manter a aparência.",
+      "highlights": [
+        "Capacidade de 4 litros",
+        "Potência de 1500 W",
+        "Temperatura ajustável até 200 °C",
+        "Timer de 60 min com aviso sonoro",
+        "Desligamento automático",
+        "Painel em aço inox"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "AFN-40-BI (Family)" },
+          { "name": "Tipo", "value": "Fritadeira elétrica sem óleo" },
+          { "name": "Capacidade", "value": "4 litros" },
+          { "name": "Cor", "value": "Preta com painel em inox" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Potência", "value": "1500 W" },
+          { "name": "Temperatura máxima", "value": "200 °C" },
+          { "name": "Timer", "value": "Até 60 minutos, com aviso sonoro" },
+          { "name": "Desligamento automático", "value": "Sim" }
+        ] },
+        { "group": "Elétrica", "items": [
+          { "name": "Voltagem", "value": "110 V ou 220 V (conforme a versão escolhida)" }
+        ] }
+      ],
+      "includedItems": [
+        "1 Air Fryer Mondial Family AFN-40-BI"
+      ],
+      "seoTitle": "Air Fryer Mondial AFN-40-BI 4L 1500W Inox | Mercatto",
+      "seoDescription": "Air Fryer Mondial Family AFN-40-BI com 4 litros, 1500 W, até 200 °C, timer de 60 min e desligamento automático. Versões 110 V e 220 V.",
+      "tags": [
+        "air fryer",
+        "air fryer mondial",
+        "afn-40-bi",
+        "afn40bi",
+        "fritadeira sem óleo",
+        "fritadeira elétrica",
+        "air fryer 4 litros",
+        "mondial family",
+        "air fryer inox",
+        "fritadeira mondial",
+        "1500w"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["110V", "220V"] }],
+      "priceCents": 22990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "aliases": ["AFN-40-BI", "AFN40BI"],
+      "faq": [
+        { "q": "A air fryer é bivolt?", "a": "Não. Ela é vendida em versões 110 V e 220 V. Escolha a voltagem correspondente à tomada onde será usada." },
+        { "q": "Qual a capacidade?", "a": "O modelo AFN-40-BI tem capacidade de 4 litros, adequada para refeições do dia a dia de casais e famílias pequenas." },
+        { "q": "Qual a temperatura máxima?", "a": "A temperatura pode ser ajustada até 200 °C." },
+        { "q": "Ela desliga sozinha?", "a": "Sim. O timer vai até 60 minutos e, ao final, emite aviso sonoro e desliga o aparelho automaticamente." },
+        { "q": "Qual a garantia?", "a": "Garantia de 12 meses, já incluindo a garantia legal de 90 dias do Código de Defesa do Consumidor." }
+      ]
+    },
+    {
+      "key": "aspirador-vertical-electrolux-stk15",
+      "skuCode": "CAS-STK15",
+      "categorySlug": "aspiradores",
+      "brand": { "slug": "electrolux", "name": "Electrolux" },
+      "name": "Aspirador de Pó Vertical Electrolux STK15 2 em 1 1450W Filtro HEPA 1,6L",
+      "shortDescription": "Aspirador vertical Electrolux STK15 com função 2 em 1 (vertical e de mão), 1450 W, reservatório de 1,6 L sem saco, filtro HEPA e cabo de 6 metros.",
+      "description": "O aspirador Electrolux STK15 une duas funções em um único aparelho: usado na vertical, limpa pisos com agilidade sem que você precise se abaixar; retirado da haste, vira um aspirador de mão para sofás, cantos, estofados e interior do carro.\n\nCom 1450 W de potência e reservatório de 1,6 litro, segundo a Electrolux 70% maior que o do modelo STK10, ele permite limpar mais cômodos antes de esvaziar o coletor. O sistema é sem saco, e o coletor pode ser lavado, o que reduz custos com refis.\n\n## Destaques\n\n- Função 2 em 1: vertical e portátil de mão\n- Potência de 1450 W\n- Reservatório de 1,6 litro, sem saco e lavável\n- Filtro HEPA Allergy Protect\n- Cabo de 6 metros\n- Suporte para enrolar e guardar o cabo\n\n## Para quem é\n\nIdeal para apartamentos e casas que precisam de limpeza rápida do dia a dia, para quem tem pets ou para quem quer um aparelho leve e fácil de guardar. O formato vertical ocupa pouco espaço em armários e áreas de serviço, e o cabo longo ajuda a percorrer o cômodo sem trocar de tomada a todo momento.\n\n## Como usar\n\nPara pisos, use o aparelho montado na haste. Para sofás, colchões e cantos, destaque o módulo de mão. Ao terminar, esvazie o reservatório sobre a lixeira e, periodicamente, lave o coletor e limpe o filtro conforme o manual, deixando secar bem antes de recolocar.\n\n## Cuidados\n\nO STK15 não é bivolt: confira a voltagem (127 V ou 220 V) antes de ligar. Não aspire líquidos, cinzas quentes ou objetos cortantes. Mantenha o filtro limpo para preservar o desempenho de sucção.",
+      "highlights": [
+        "2 em 1: aspirador vertical e de mão",
+        "Potência de 1450 W",
+        "Reservatório de 1,6 L sem saco e lavável",
+        "Filtro HEPA Allergy Protect",
+        "Cabo de 6 metros",
+        "Reservatório 70% maior que o do STK10"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "STK15" },
+          { "name": "Tipo", "value": "Aspirador vertical com fio, 2 em 1 (vertical e de mão)" },
+          { "name": "Cor", "value": "Cinza" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Potência", "value": "1450 W" },
+          { "name": "Capacidade do reservatório", "value": "1,6 litro" },
+          { "name": "Coleta", "value": "Sem saco, coletor lavável" },
+          { "name": "Filtro", "value": "HEPA Allergy Protect" }
+        ] },
+        { "group": "Elétrica", "items": [
+          { "name": "Voltagem", "value": "127 V ou 220 V (conforme a versão escolhida)" },
+          { "name": "Comprimento do cabo", "value": "6 metros" }
+        ] },
+        { "group": "Dimensões", "items": [
+          { "name": "Dimensões do produto", "value": "108,6 x 25,5 x 17,1 cm" },
+          { "name": "Peso do produto", "value": "1,91 kg" }
+        ] }
+      ],
+      "includedItems": [
+        "1 aspirador vertical Electrolux STK15"
+      ],
+      "seoTitle": "Aspirador Vertical Electrolux STK15 1450W 2 em 1 | Mercatto",
+      "seoDescription": "Aspirador Electrolux STK15 2 em 1, vertical e de mão, 1450 W, reservatório de 1,6 L sem saco, filtro HEPA e cabo de 6 m. Versões 127 V e 220 V.",
+      "tags": [
+        "aspirador vertical",
+        "electrolux stk15",
+        "stk15",
+        "aspirador de pó",
+        "aspirador electrolux",
+        "aspirador 2 em 1",
+        "aspirador de mão",
+        "filtro hepa",
+        "aspirador sem saco",
+        "aspirador 1450w",
+        "powerspeed"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "priceCents": 17490,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "aliases": ["STK15"],
+      "faq": [
+        { "q": "O aspirador é bivolt?", "a": "Não. O STK15 é vendido em versões 127 V e 220 V. Escolha a voltagem da tomada onde ele será usado." },
+        { "q": "Ele pode ser usado como aspirador de mão?", "a": "Sim. É um modelo 2 em 1: funciona na vertical para pisos e como aspirador de mão para sofás, cantos e carro." },
+        { "q": "Precisa de saco coletor?", "a": "Não. O reservatório de 1,6 litro é sem saco e pode ser lavado." },
+        { "q": "Qual o tamanho do cabo?", "a": "O cabo tem 6 metros de comprimento, e o aparelho tem suporte para enrolá-lo." },
+        { "q": "Qual a garantia?", "a": "Garantia de 12 meses, já incluindo a garantia legal de 90 dias do Código de Defesa do Consumidor." }
+      ]
+    },
+    {
+      "key": "ventilador-mesa-mondial-super-power-vsp-30-b",
+      "skuCode": "CAS-VSP30B",
+      "categorySlug": "eletrodomesticos",
+      "brand": { "slug": "mondial", "name": "Mondial" },
+      "name": "Ventilador de Mesa Mondial Super Power VSP-30-B 30cm 6 Pás 60W Preto",
+      "shortDescription": "Ventilador de mesa Mondial Super Power VSP-30-B com hélice de 30 cm e 6 pás, 60 W, 3 velocidades, oscilação lateral contínua e inclinação vertical regulável. Cor preta.",
+      "description": "O ventilador de mesa Mondial Super Power VSP-30-B é uma opção compacta para refrescar quartos, escritórios, salas pequenas e bancadas de trabalho. Com hélice de 30 cm e 6 pás, ele distribui o vento de forma ampla sem ocupar muito espaço.\n\nSão 3 velocidades para ajustar o fluxo de ar a cada momento: Turbo, para os dias mais quentes; Conforto, para uso contínuo; e Silencioso, indicado para dormir ou trabalhar com menos ruído. A potência de 60 W mantém o consumo aproximado em torno de 0,06 kWh por hora de uso na potência nominal.\n\n## Destaques\n\n- Hélice de 30 cm com 6 pás\n- Potência de 60 W\n- 3 velocidades: Turbo, Conforto e Silencioso\n- Oscilação lateral contínua para ampliar a área ventilada\n- Inclinação vertical regulável para direcionar o fluxo de ar\n- Grade frontal removível, que facilita a limpeza\n\n## Para quem é\n\nPara quem precisa de ventilação localizada em ambientes pequenos e médios, como quarto, home office, recepção ou cozinha. O tamanho de mesa permite usar sobre cômodas, escrivaninhas e prateleiras, e o peso de cerca de 1,6 kg facilita mudar o aparelho de lugar.\n\n## Como usar\n\nPosicione o ventilador sobre uma superfície firme e plana, ligue na tomada com a voltagem correta e escolha a velocidade. Ative a oscilação para espalhar o vento pelo ambiente ou deixe fixo para direcionar o ar a um ponto. Ajuste a inclinação vertical conforme a necessidade.\n\n## Cuidados\n\nO modelo não é bivolt: confira se a versão é 127 V ou 220 V antes de ligar. Desligue da tomada antes de remover a grade para limpeza e use apenas pano seco ou levemente umedecido.",
+      "highlights": [
+        "Hélice de 30 cm com 6 pás",
+        "Potência de 60 W",
+        "3 velocidades: Turbo, Conforto e Silencioso",
+        "Oscilação lateral contínua",
+        "Inclinação vertical regulável",
+        "Grade frontal removível"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "VSP-30-B Super Power" },
+          { "name": "Tipo", "value": "Ventilador de mesa" },
+          { "name": "Cor", "value": "Preto" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Diâmetro da hélice", "value": "30 cm" },
+          { "name": "Número de pás", "value": "6" },
+          { "name": "Velocidades", "value": "3 (Turbo, Conforto e Silencioso)" },
+          { "name": "Oscilação", "value": "Lateral contínua" },
+          { "name": "Inclinação", "value": "Vertical regulável" },
+          { "name": "Grade", "value": "Frontal removível" }
+        ] },
+        { "group": "Elétrica", "items": [
+          { "name": "Potência", "value": "60 W" },
+          { "name": "Consumo aproximado", "value": "0,06 kWh" },
+          { "name": "Voltagem", "value": "127 V ou 220 V (conforme a versão escolhida)" }
+        ] },
+        { "group": "Dimensões", "items": [
+          { "name": "Peso do produto", "value": "Aproximadamente 1,6 kg" }
+        ] }
+      ],
+      "includedItems": [
+        "1 ventilador de mesa Mondial Super Power VSP-30-B"
+      ],
+      "seoTitle": "Ventilador de Mesa Mondial VSP-30-B 30cm 60W | Mercatto",
+      "seoDescription": "Ventilador de mesa Mondial Super Power VSP-30-B: 30 cm, 6 pás, 60 W, 3 velocidades, oscilação e inclinação regulável. Versões 127 V e 220 V.",
+      "tags": [
+        "ventilador",
+        "ventilador de mesa",
+        "ventilador mondial",
+        "vsp-30-b",
+        "vsp30",
+        "super power",
+        "ventilador 30cm",
+        "ventilador 6 pás",
+        "ventilador preto",
+        "ventilador silencioso",
+        "ventilador pequeno"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "priceCents": 8990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "aliases": ["VSP-30-B", "VSP30B"],
+      "faq": [
+        { "q": "O ventilador é bivolt?", "a": "Não. O VSP-30-B é vendido em versões 127 V e 220 V. Escolha a voltagem correspondente à sua tomada." },
+        { "q": "Quantas velocidades ele tem?", "a": "Três: Turbo, Conforto e Silencioso." },
+        { "q": "Ele oscila?", "a": "Sim. Tem oscilação lateral contínua e inclinação vertical regulável para direcionar o vento." },
+        { "q": "Qual a potência e o consumo?", "a": "A potência é de 60 W, com consumo aproximado de 0,06 kWh por hora de uso." },
+        { "q": "Qual a garantia?", "a": "Garantia de 12 meses, já incluindo a garantia legal de 90 dias do Código de Defesa do Consumidor." }
+      ]
+    }
+  ]
+}

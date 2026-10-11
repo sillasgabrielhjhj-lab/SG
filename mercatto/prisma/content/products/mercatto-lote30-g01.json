@@ -1,0 +1,429 @@
+{
+  "products": [
+    {
+      "key": "motorola-moto-g56-5g-256gb",
+      "skuCode": "CEL-MG56-256",
+      "categorySlug": "smartphones",
+      "brand": { "slug": "motorola", "name": "Motorola" },
+      "name": "Smartphone Motorola Moto G56 5G 256GB 8GB RAM Tela 6,72\" 120Hz IP68/IP69",
+      "shortDescription": "Moto G56 5G com 256 GB e 8 GB de RAM, tela de 6,72\" a 120 Hz com Gorilla Glass 7i, câmera principal Sony LYTIA de 50 MP, bateria de 5.200 mAh e proteção IP68/IP69 com padrão militar MIL-STD-810H.",
+      "description": "O Motorola Moto G56 5G foi feito para quem precisa de um celular que aguente a rotina sem pedir cuidados excessivos. Ele combina proteção contra água e poeira nos níveis IP68 e IP69, resistência no padrão militar MIL-STD-810H e vidro Corning Gorilla Glass 7i na frente, um conjunto pouco comum na faixa intermediária.\n\nA tela de 6,72 polegadas tem resolução Full HD+ e taxa de atualização de 120 Hz, o que deixa a rolagem em redes sociais e a navegação mais fluidas. Por dentro, o processador MediaTek Dimensity 7060 trabalha com 8 GB de RAM e 256 GB de armazenamento, espaço suficiente para fotos, vídeos e aplicativos, com a opção de ampliar por cartão microSD.\n\n## Destaques\n\n- Proteção IP68/IP69 e resistência no padrão MIL-STD-810H\n- Tela de 6,72\" Full HD+ com 120 Hz e Gorilla Glass 7i\n- Câmera principal Sony LYTIA de 50 MP e ultra-angular de 8 MP\n- Câmera frontal de 32 MP para selfies e videochamadas\n- Bateria de 5.200 mAh com carregamento rápido TurboPower\n- Conexão 5G, Wi-Fi 5 e Bluetooth 5.3\n\n## Para quem é\n\nO Moto G56 5G atende bem quem trabalha na rua, pratica esportes ao ar livre ou simplesmente quer menos preocupação com quedas e respingos. A bateria de 5.200 mAh acompanha um dia intenso de uso, e os 256 GB dispensam a limpeza constante de arquivos. A câmera de 50 MP com sensor Sony registra bem o dia a dia, e a ultra-angular ajuda em paisagens e fotos em grupo.\n\n## Cuidados\n\nAs certificações IP68 e IP69 indicam resistência a poeira, submersão e jatos d'água em condições de teste controladas; evite expor o aparelho a água salgada, piscina com cloro ou produtos químicos, e seque bem a entrada USB-C antes de carregar. A proteção pode diminuir com o desgaste natural, e danos por líquidos não costumam ser cobertos pela garantia.",
+      "highlights": [
+        "Proteção IP68/IP69 e padrão militar MIL-STD-810H",
+        "Tela de 6,72\" Full HD+ a 120 Hz com Gorilla Glass 7i",
+        "Câmera principal Sony LYTIA de 50 MP + ultra-angular de 8 MP",
+        "8 GB de RAM e 256 GB expansíveis por microSD",
+        "Bateria de 5.200 mAh com carregamento TurboPower",
+        "Processador MediaTek Dimensity 7060 com 5G"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "6,72 polegadas" },
+          { "name": "Tecnologia", "value": "LCD" },
+          { "name": "Resolução", "value": "Full HD+ (2400 x 1080 pixels)" },
+          { "name": "Taxa de atualização", "value": "120 Hz" },
+          { "name": "Proteção", "value": "Corning Gorilla Glass 7i" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Processador", "value": "MediaTek Dimensity 7060 (octa-core)" },
+          { "name": "Memória RAM", "value": "8 GB (expansão virtual via RAM Boost)" },
+          { "name": "Armazenamento", "value": "256 GB" },
+          { "name": "Cartão de memória", "value": "microSD" },
+          { "name": "Sistema operacional", "value": "Android 15" }
+        ] },
+        { "group": "Câmeras", "items": [
+          { "name": "Traseira", "value": "50 MP (Sony LYTIA, f/1.8) + 8 MP ultra-angular (f/2.2)" },
+          { "name": "Frontal", "value": "32 MP" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "5.200 mAh" },
+          { "name": "Carregamento", "value": "TurboPower (carregamento rápido)" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Rede", "value": "5G" },
+          { "name": "Wi-Fi", "value": "Wi-Fi 5" },
+          { "name": "Bluetooth", "value": "5.3" },
+          { "name": "Conector", "value": "USB-C" }
+        ] },
+        { "group": "Resistência", "items": [
+          { "name": "Proteção contra água e poeira", "value": "IP68 e IP69" },
+          { "name": "Padrão militar", "value": "MIL-STD-810H" }
+        ] },
+        { "group": "Dimensões", "items": [
+          { "name": "Medidas do aparelho", "value": "165,8 x 76,3 x 8,4 mm" },
+          { "name": "Peso do aparelho", "value": "200 g" }
+        ] }
+      ],
+      "includedItems": [
+        "1 smartphone Motorola Moto G56 5G",
+        "1 carregador",
+        "1 cabo USB",
+        "1 extrator de chip",
+        "Manual do usuário"
+      ],
+      "seoTitle": "Moto G56 5G 256GB 8GB RAM IP68/IP69 | Mercatto",
+      "seoDescription": "Motorola Moto G56 5G 256GB e 8GB RAM: tela 6,72\" 120Hz, câmera Sony 50MP, bateria 5.200mAh, IP68/IP69 e padrão militar.",
+      "tags": [
+        "moto g56",
+        "moto g56 5g",
+        "motorola g56",
+        "celular motorola",
+        "smartphone 5g",
+        "celular 256gb",
+        "celular 8gb ram",
+        "celular resistente",
+        "ip69",
+        "celular a prova d'agua",
+        "dimensity 7060",
+        "celular intermediario"
+      ],
+      "options": [{ "name": "Cor", "values": ["Cinza", "Grafite", "Verde"] }],
+      "priceCents": 124990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": { "armazenamento": "256 GB", "memoria_ram": "8 GB", "rede_5g": "Sim" },
+      "aliases": ["Moto G56"],
+      "faq": [
+        { "q": "O Moto G56 5G pode ser molhado?", "a": "Ele tem certificações IP68 e IP69 contra poeira e água, obtidas em testes controlados. Mesmo assim, evite água salgada, cloro e produtos químicos, e seque a entrada USB-C antes de carregar." },
+        { "q": "Dá para aumentar o armazenamento de 256 GB?", "a": "Sim. O aparelho aceita cartão microSD, vendido separadamente." },
+        { "q": "O que vem na caixa?", "a": "Segundo a listagem do produto, a caixa traz o smartphone, carregador, cabo USB, extrator de chip e manual do usuário. Capa não está incluída." },
+        { "q": "Quais câmeras ele tem?", "a": "Na traseira, câmera principal Sony LYTIA de 50 MP e ultra-angular de 8 MP. Na frente, câmera de 32 MP para selfies e videochamadas." },
+        { "q": "Qual é a garantia?", "a": "Garantia total de 12 meses do fabricante, já incluídos os 90 dias de garantia legal do Código de Defesa do Consumidor." }
+      ]
+    },
+    {
+      "key": "motorola-edge-60-fusion-5g-256gb",
+      "skuCode": "CEL-ME60F-256",
+      "categorySlug": "smartphones",
+      "brand": { "slug": "motorola", "name": "Motorola" },
+      "name": "Smartphone Motorola Edge 60 Fusion 5G 256GB 8GB RAM Tela pOLED 6,67\" 120Hz",
+      "shortDescription": "Edge 60 Fusion 5G com tela pOLED de 6,67\" e 120 Hz validada pela Pantone, câmera Sony LYTIA 700C de 50 MP, bateria de 5.200 mAh com carregador de 68 W na caixa e proteção IP68/IP69.",
+      "description": "O Motorola Edge 60 Fusion 5G reúne uma tela de visual premium, câmeras com foco em cor fiel e resistência acima do comum para a categoria. A tela pOLED quad-curva de 6,67 polegadas tem resolução de 1220 x 2712 pixels, taxa de atualização de 120 Hz, suporte a HDR10+ e pico de brilho de até 4.500 nits, segundo a Motorola. A reprodução de cores do painel foi validada pela Pantone, assim como a câmera principal.\n\nNo desempenho, o processador MediaTek Dimensity 7400 trabalha com 8 GB de RAM e 256 GB de armazenamento, um conjunto confortável para aplicativos, jogos casuais, fotos e vídeos. A traseira tem acabamento em couro ecológico, que melhora a pegada e reduz marcas de dedo.\n\n## Destaques\n\n- Tela pOLED quad-curva de 6,67\" com 120 Hz e HDR10+\n- Câmera principal Sony LYTIA 700C de 50 MP com validação Pantone\n- Ultra-angular/macro de 13 MP e frontal de 32 MP\n- Bateria de 5.200 mAh com carregador de 68 W incluso\n- Proteção IP68 e IP69 contra água e poeira\n- 5G, Wi-Fi 6, Bluetooth 5.4 e NFC\n\n## Para quem é\n\nO Edge 60 Fusion é indicado para quem consome muito vídeo, gosta de fotografar e quer um aparelho com aparência sofisticada sem pagar preço de topo de linha. O carregador de 68 W que acompanha o produto reduz bastante o tempo na tomada, e o NFC permite pagamentos por aproximação. A ultra-angular também funciona como macro, útil para detalhes de objetos, plantas e comida.\n\n## Cuidados\n\nA tela curva fica mais exposta nas bordas; recomenda-se usar capa e película compatíveis com o formato. As certificações IP68 e IP69 foram obtidas em testes controlados, então evite água salgada, cloro e produtos químicos, e seque a porta USB-C antes de recarregar.",
+      "highlights": [
+        "Tela pOLED quad-curva de 6,67\" a 120 Hz com HDR10+",
+        "Câmera Sony LYTIA 700C de 50 MP validada pela Pantone",
+        "Bateria de 5.200 mAh com carregador de 68 W na caixa",
+        "Proteção IP68 e IP69 contra água e poeira",
+        "Dimensity 7400, 8 GB de RAM e 256 GB",
+        "NFC, Wi-Fi 6 e Bluetooth 5.4"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "6,67 polegadas" },
+          { "name": "Tecnologia", "value": "pOLED quad-curva" },
+          { "name": "Resolução", "value": "1220 x 2712 pixels" },
+          { "name": "Taxa de atualização", "value": "120 Hz" },
+          { "name": "HDR", "value": "HDR10+" },
+          { "name": "Brilho máximo", "value": "Até 4.500 nits (pico)" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Processador", "value": "MediaTek Dimensity 7400" },
+          { "name": "Memória RAM", "value": "8 GB (mais RAM virtual)" },
+          { "name": "Armazenamento", "value": "256 GB" },
+          { "name": "Sistema operacional", "value": "Android 15" }
+        ] },
+        { "group": "Câmeras", "items": [
+          { "name": "Principal", "value": "50 MP Sony LYTIA 700C" },
+          { "name": "Secundária", "value": "13 MP ultra-angular/macro" },
+          { "name": "Frontal", "value": "32 MP" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "5.200 mAh" },
+          { "name": "Carregador incluso", "value": "68 W" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Rede", "value": "5G" },
+          { "name": "Wi-Fi", "value": "Wi-Fi 6" },
+          { "name": "Bluetooth", "value": "5.4" },
+          { "name": "NFC", "value": "Sim" }
+        ] },
+        { "group": "Construção", "items": [
+          { "name": "Proteção contra água e poeira", "value": "IP68 e IP69" },
+          { "name": "Acabamento traseiro", "value": "Couro ecológico" }
+        ] }
+      ],
+      "includedItems": [
+        "1 smartphone Motorola Edge 60 Fusion 5G",
+        "1 carregador de 68 W"
+      ],
+      "seoTitle": "Motorola Edge 60 Fusion 5G 256GB 8GB pOLED | Mercatto",
+      "seoDescription": "Edge 60 Fusion 5G 256GB e 8GB RAM: tela pOLED 6,67\" 120Hz, câmera Sony 50MP, bateria 5.200mAh com carregador 68W e IP68/IP69.",
+      "tags": [
+        "edge 60 fusion",
+        "motorola edge",
+        "motorola edge 60 fusion 5g",
+        "celular motorola",
+        "smartphone 5g",
+        "celular 256gb",
+        "celular 8gb ram",
+        "tela curva",
+        "pantone",
+        "dimensity 7400",
+        "carregador 68w",
+        "celular ip69"
+      ],
+      "priceCents": 199990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": { "armazenamento": "256 GB", "memoria_ram": "8 GB", "rede_5g": "Sim" },
+      "aliases": ["Edge 60 Fusion"],
+      "faq": [
+        { "q": "O carregador vem na caixa?", "a": "Sim. O Edge 60 Fusion vendido no Brasil acompanha carregador de 68 W." },
+        { "q": "A tela é curva?", "a": "Sim. É uma tela pOLED quad-curva de 6,67 polegadas, com 120 Hz e HDR10+." },
+        { "q": "Ele tem NFC para pagamento por aproximação?", "a": "Sim, o aparelho tem NFC." },
+        { "q": "Pode ser molhado?", "a": "Ele tem certificações IP68 e IP69 obtidas em testes controlados. Evite água salgada, cloro e produtos químicos, e seque a porta USB-C antes de carregar." },
+        { "q": "Qual é a garantia?", "a": "O produto conta com a garantia legal de 90 dias do Código de Defesa do Consumidor. A garantia contratual do fabricante será informada no momento da venda." }
+      ]
+    },
+    {
+      "key": "samsung-galaxy-a17-5g-256gb",
+      "skuCode": "CEL-SGA17-5G-256",
+      "categorySlug": "smartphones",
+      "brand": { "slug": "samsung", "name": "Samsung" },
+      "name": "Smartphone Samsung Galaxy A17 5G 256GB 8GB RAM Tela Super AMOLED 6,7\" 90Hz",
+      "shortDescription": "Galaxy A17 5G com 256 GB e 8 GB de RAM, processador Exynos 1330, tela Super AMOLED de 6,7\" a 90 Hz, câmera tripla de 50 MP, bateria de 5.000 mAh, NFC, IP54 e 6 anos de atualizações, segundo a Samsung.",
+      "description": "O Samsung Galaxy A17 5G é a versão com conexão 5G e mais memória da linha Galaxy A17. Ele traz o processador Exynos 1330, fabricado em 5 nm, com 8 GB de RAM e 256 GB de armazenamento, o dobro do espaço da versão de entrada, o que dá folga para fotos, vídeos, aplicativos e jogos leves.\n\nA tela Super AMOLED de 6,7 polegadas tem resolução Full HD+ e taxa de atualização de 90 Hz, com cores intensas e pretos profundos para séries, vídeos e redes sociais. Na traseira, o conjunto triplo combina câmera principal de 50 MP, ultra-angular de 5 MP e macro de 2 MP; na frente, a câmera de 13 MP cuida das selfies e videochamadas.\n\n## Destaques\n\n- Conexão 5G com processador Samsung Exynos 1330\n- 8 GB de RAM e 256 GB, com entrada para cartão microSD\n- Tela Super AMOLED de 6,7\" Full HD+ com 90 Hz\n- Câmeras traseiras de 50 MP + 5 MP + 2 MP e frontal de 13 MP\n- Bateria de 5.000 mAh com suporte a recarga de 25 W\n- Android 15 com One UI 7 e 6 anos de atualizações, segundo a Samsung\n\n## Para quem é\n\nO Galaxy A17 5G é uma boa escolha para quem quer um celular atualizado por muito tempo, com espaço de sobra e internet móvel mais rápida onde houver cobertura 5G. O NFC permite pagamentos por aproximação, e a bateria de 5.000 mAh acompanha a rotina de mensagens, streaming e aplicativos de banco. É também uma opção sensata para presentear, já que a Samsung promete seis anos de atualizações de sistema.\n\n## Cuidados\n\nA certificação IP54 protege contra poeira e respingos, mas o aparelho não deve ser submerso nem exposto a jatos d'água. Para usar a recarga de 25 W, é necessário um carregador compatível com essa potência. Mantenha o sistema atualizado para receber as correções de segurança.",
+      "highlights": [
+        "5G com processador Exynos 1330 de 5 nm",
+        "8 GB de RAM e 256 GB expansíveis por microSD",
+        "Tela Super AMOLED de 6,7\" Full HD+ a 90 Hz",
+        "Câmera principal de 50 MP e frontal de 13 MP",
+        "Bateria de 5.000 mAh com suporte a recarga de 25 W",
+        "NFC, IP54 e 6 anos de atualizações, segundo a Samsung"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "6,7 polegadas" },
+          { "name": "Tecnologia", "value": "Super AMOLED" },
+          { "name": "Resolução", "value": "Full HD+" },
+          { "name": "Taxa de atualização", "value": "90 Hz" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Processador", "value": "Samsung Exynos 1330 (5 nm)" },
+          { "name": "Memória RAM", "value": "8 GB" },
+          { "name": "Armazenamento", "value": "256 GB" },
+          { "name": "Cartão de memória", "value": "microSD" },
+          { "name": "Sistema operacional", "value": "Android 15 com One UI 7" },
+          { "name": "Atualizações", "value": "6 anos, segundo a Samsung" }
+        ] },
+        { "group": "Câmeras", "items": [
+          { "name": "Traseira", "value": "50 MP (principal) + 5 MP (ultra-angular) + 2 MP (macro)" },
+          { "name": "Frontal", "value": "13 MP" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "5.000 mAh" },
+          { "name": "Recarga", "value": "Suporte a até 25 W" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Rede", "value": "5G" },
+          { "name": "NFC", "value": "Sim" },
+          { "name": "Conector", "value": "USB-C" }
+        ] },
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "SM-A176B/DS" },
+          { "name": "Proteção contra água e poeira", "value": "IP54" }
+        ] }
+      ],
+      "includedItems": [
+        "1 smartphone Samsung Galaxy A17 5G"
+      ],
+      "seoTitle": "Samsung Galaxy A17 5G 256GB 8GB RAM | Mercatto",
+      "seoDescription": "Galaxy A17 5G 256GB e 8GB RAM: Exynos 1330, tela Super AMOLED 6,7\" 90Hz, câmera 50MP, bateria 5.000mAh, NFC e 6 anos de atualizações.",
+      "tags": [
+        "galaxy a17 5g",
+        "samsung a17 5g",
+        "galaxy a17",
+        "celular samsung",
+        "smartphone 5g",
+        "celular 256gb",
+        "celular 8gb ram",
+        "exynos 1330",
+        "super amoled",
+        "celular com nfc",
+        "sm-a176b"
+      ],
+      "options": [{ "name": "Cor", "values": ["Preto", "Cinza", "Azul"] }],
+      "priceCents": 127990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": { "armazenamento": "256 GB", "memoria_ram": "8 GB", "rede_5g": "Sim" },
+      "aliases": ["Galaxy A17 5G"],
+      "faq": [
+        { "q": "Qual a diferença entre o Galaxy A17 5G e o A17 4G?", "a": "A versão 5G usa o processador Samsung Exynos 1330 e tem conexão 5G; a versão 4G usa o MediaTek Helio G99 e não acessa redes 5G. Este anúncio é da versão 5G com 256 GB e 8 GB de RAM." },
+        { "q": "Dá para expandir o armazenamento?", "a": "Sim, o aparelho tem entrada para cartão microSD, vendido separadamente." },
+        { "q": "Ele tem NFC?", "a": "Sim, permite pagamentos por aproximação em aplicativos compatíveis." },
+        { "q": "Por quanto tempo ele recebe atualizações?", "a": "Segundo a Samsung, o Galaxy A17 5G recebe 6 anos de atualizações. Ele sai de fábrica com Android 15 e One UI 7." },
+        { "q": "Pode molhar?", "a": "A certificação IP54 protege contra poeira e respingos d'água, mas o aparelho não deve ser submerso." }
+      ]
+    },
+    {
+      "key": "xiaomi-poco-x8-pro-256gb",
+      "skuCode": "CEL-PX8P-256",
+      "categorySlug": "smartphones",
+      "brand": { "slug": "xiaomi", "name": "Xiaomi" },
+      "name": "Smartphone Xiaomi POCO X8 Pro 5G 256GB 8GB RAM Dimensity 8500 Ultra 6.500mAh",
+      "shortDescription": "POCO X8 Pro 5G com processador Dimensity 8500 Ultra, 8 GB de RAM LPDDR5X e 256 GB UFS 4.1, tela AMOLED de 6,59\" a 120 Hz, câmera Sony de 50 MP, bateria de 6.500 mAh com carga de 100 W e IP68.",
+      "description": "O Xiaomi POCO X8 Pro é o modelo da linha POCO voltado a desempenho, lançado oficialmente no Brasil em 2026. O destaque é o processador MediaTek Dimensity 8500 Ultra, de 4 nm, que trabalha com 8 GB de memória RAM LPDDR5X e 256 GB de armazenamento UFS 4.1, tecnologias rápidas que ajudam em jogos, edição de fotos e na abertura de aplicativos.\n\nA tela AMOLED de 6,59 polegadas tem resolução de 1268 x 2756 pixels, taxa de atualização de 120 Hz e pico de brilho de 3.500 nits, segundo as fichas publicadas. A bateria de 6.500 mAh é uma das maiores da categoria e aceita carregamento rápido de 100 W.\n\n## Destaques\n\n- Processador MediaTek Dimensity 8500 Ultra (4 nm)\n- 8 GB de RAM LPDDR5X e 256 GB de armazenamento UFS 4.1\n- Tela AMOLED de 6,59\" com 120 Hz\n- Câmera principal Sony IMX882 de 50 MP (f/1.5) e ultra-angular de 8 MP\n- Bateria de 6.500 mAh com suporte a carregamento de 100 W\n- Certificação IP68 e Android 16 com HyperOS 3\n\n## Para quem é\n\nO POCO X8 Pro é indicado para quem joga no celular, assiste a muitos vídeos e quer autonomia para passar o dia longe da tomada. A câmera principal de 50 MP com abertura f/1.5 capta mais luz, e a gravação em 4K a 60 quadros por segundo atende quem produz conteúdo para redes sociais. A câmera frontal tem 20 MP.\n\n## Cuidados\n\nA certificação IP68 foi obtida em testes controlados; evite água salgada, cloro e produtos químicos, e seque a entrada USB-C antes de carregar. Para alcançar a velocidade máxima de 100 W é preciso usar carregador e cabo compatíveis com essa potência. Em jogos longos, é normal o aparelho aquecer um pouco.",
+      "highlights": [
+        "Processador MediaTek Dimensity 8500 Ultra de 4 nm",
+        "8 GB de RAM LPDDR5X e 256 GB UFS 4.1",
+        "Tela AMOLED de 6,59\" a 120 Hz",
+        "Câmera Sony IMX882 de 50 MP com gravação 4K a 60 fps",
+        "Bateria de 6.500 mAh com suporte a carga de 100 W",
+        "Certificação IP68 e Android 16 com HyperOS 3"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "6,59 polegadas" },
+          { "name": "Tecnologia", "value": "AMOLED" },
+          { "name": "Resolução", "value": "1268 x 2756 pixels" },
+          { "name": "Taxa de atualização", "value": "120 Hz" },
+          { "name": "Brilho máximo", "value": "3.500 nits (pico)" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Processador", "value": "MediaTek Dimensity 8500 Ultra (4 nm)" },
+          { "name": "Memória RAM", "value": "8 GB LPDDR5X" },
+          { "name": "Armazenamento", "value": "256 GB UFS 4.1" },
+          { "name": "Sistema operacional", "value": "Android 16 com HyperOS 3" }
+        ] },
+        { "group": "Câmeras", "items": [
+          { "name": "Principal", "value": "50 MP Sony IMX882, f/1.5" },
+          { "name": "Ultra-angular", "value": "8 MP" },
+          { "name": "Frontal", "value": "20 MP, f/2.2" },
+          { "name": "Gravação de vídeo", "value": "4K a 60 fps" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "6.500 mAh" },
+          { "name": "Carregamento", "value": "Suporte a até 100 W" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Rede", "value": "5G" },
+          { "name": "NFC", "value": "Sim" }
+        ] },
+        { "group": "Construção", "items": [
+          { "name": "Proteção contra água e poeira", "value": "IP68" },
+          { "name": "Medidas do aparelho", "value": "157,5 x 75,2 x 8,4 mm" },
+          { "name": "Peso do aparelho", "value": "202 g" }
+        ] }
+      ],
+      "includedItems": [
+        "1 smartphone Xiaomi POCO X8 Pro"
+      ],
+      "seoTitle": "Xiaomi POCO X8 Pro 5G 256GB 8GB RAM | Mercatto",
+      "seoDescription": "POCO X8 Pro 5G 256GB e 8GB RAM: Dimensity 8500 Ultra, tela AMOLED 6,59\" 120Hz, câmera Sony 50MP, bateria 6.500mAh com carga de 100W e IP68.",
+      "tags": [
+        "poco x8 pro",
+        "xiaomi poco x8 pro",
+        "poco x8",
+        "celular xiaomi",
+        "celular poco",
+        "smartphone 5g",
+        "celular 256gb",
+        "celular gamer",
+        "dimensity 8500",
+        "bateria 6500mah",
+        "carregamento 100w",
+        "hyperos 3"
+      ],
+      "priceCents": 229990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": { "armazenamento": "256 GB", "memoria_ram": "8 GB", "rede_5g": "Sim" },
+      "aliases": ["POCO X8 Pro"],
+      "faq": [
+        { "q": "O POCO X8 Pro foi lançado oficialmente no Brasil?", "a": "Sim. A Xiaomi lançou o POCO X8 Pro oficialmente no Brasil em março de 2026, em versões de 8 GB ou 12 GB de RAM e 256 GB ou 512 GB. Este anúncio é da versão de 8 GB e 256 GB." },
+        { "q": "Qual a velocidade de carregamento?", "a": "A bateria de 6.500 mAh aceita carregamento rápido de até 100 W com carregador e cabo compatíveis." },
+        { "q": "Ele é resistente à água?", "a": "Tem certificação IP68, obtida em testes controlados. Evite água salgada, cloro e produtos químicos." },
+        { "q": "Qual sistema ele usa?", "a": "Sai de fábrica com Android 16 e interface HyperOS 3." },
+        { "q": "Ele tem NFC?", "a": "Sim, o modelo tem NFC para pagamentos por aproximação em aplicativos compatíveis." }
+      ]
+    },
+    {
+      "key": "samsung-galaxy-a56-5g-256gb",
+      "skuCode": "CEL-SGA56-256",
+      "categorySlug": "smartphones",
+      "brand": { "slug": "samsung", "name": "Samsung" },
+      "name": "Smartphone Samsung Galaxy A56 5G 256GB 8GB RAM Tela Super AMOLED 6,7\" 120Hz",
+      "shortDescription": "Galaxy A56 5G com 256 GB e 8 GB de RAM, processador Exynos 1580, tela Super AMOLED de 6,7\" a 120 Hz, câmera tripla de 50 MP, bateria de 5.000 mAh com suporte a recarga de 45 W e certificação IP67.",
+      "description": "O Samsung Galaxy A56 5G é o modelo mais completo da linha Galaxy A de 2025 no Brasil. Ele combina o processador Exynos 1580, com GPU Xclipse 540, a 8 GB de RAM e 256 GB de armazenamento, em um corpo de apenas 7,4 mm de espessura e 198 gramas.\n\nA tela Super AMOLED de 6,7 polegadas tem resolução Full HD+ e taxa de atualização de 120 Hz, garantindo rolagem fluida, cores vivas e bom contraste para filmes e jogos. Na traseira, o conjunto triplo reúne câmera principal de 50 MP, ultra-angular de 12 MP e macro de 5 MP, com gravação em 4K; a câmera frontal tem 12 MP.\n\n## Destaques\n\n- Processador Samsung Exynos 1580 com GPU Xclipse 540\n- Tela Super AMOLED de 6,7\" Full HD+ com 120 Hz\n- Câmeras de 50 MP + 12 MP + 5 MP, com gravação em 4K\n- Bateria de 5.000 mAh com suporte a recarga de até 45 W\n- Certificação IP67 contra poeira e água\n- Corpo com 7,4 mm de espessura e 198 g\n\n## Para quem é\n\nO Galaxy A56 5G é indicado para quem quer recursos de intermediário avançado, como tela de 120 Hz, gravação em 4K e resistência à água, sem chegar ao preço de um topo de linha. Os 256 GB acomodam bem fotos e vídeos em alta resolução, e o NFC permite pagamentos por aproximação. Segundo a Samsung, com um carregador de 45 W a bateria vai de 0 a 100% em cerca de 68 minutos.\n\n## Cuidados\n\nA certificação IP67 foi obtida em testes controlados; evite água salgada, cloro e produtos químicos, e seque a entrada USB-C antes de carregar. A recarga de 45 W exige carregador compatível com essa potência, vendido separadamente. Mantenha o sistema atualizado para receber as correções de segurança.",
+      "highlights": [
+        "Processador Exynos 1580 com GPU Xclipse 540",
+        "Tela Super AMOLED de 6,7\" Full HD+ a 120 Hz",
+        "Câmera principal de 50 MP com gravação em 4K",
+        "Bateria de 5.000 mAh com suporte a recarga de 45 W",
+        "Certificação IP67 contra poeira e água",
+        "8 GB de RAM, 256 GB e corpo de 7,4 mm"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "6,7 polegadas" },
+          { "name": "Tecnologia", "value": "Super AMOLED" },
+          { "name": "Resolução", "value": "Full HD+ (1080 x 2340 pixels)" },
+          { "name": "Taxa de atualização", "value": "120 Hz" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Processador", "value": "Samsung Exynos 1580 (octa-core: 1x 2,9 GHz + 3x 2,6 GHz + 4x 1,9 GHz)" },
+          { "name": "GPU", "value": "Xclipse 540" },
+          { "name": "Memória RAM", "value": "8 GB" },
+          { "name": "Armazenamento", "value": "256 GB" },
+          { "name": "Sistema operacional", "value": "Android 15 com One UI" }
+        ] },
+        { "group": "Câmeras", "items": [
+          { "name": "Traseira", "value": "50 MP (principal) + 12 MP (ultra-angular) + 5 MP (macro)" },
+          { "name": "Frontal", "value": "12 MP" },
+          { "name": "Gravação de vídeo", "value": "4K (3840 x 2160)" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "5.000 mAh" },
+          { "name": "Recarga", "value": "Suporte a até 45 W (carregador compatível)" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Rede", "value": "5G" },
+          { "name": "NFC", "value": "Sim" },
+          { "name": "Conector", "value": "USB-C" }
+        ] },
+        { "group": "Construção", "items": [
+          { "name": "Proteção contra água e poeira", "value": "IP67" },
+          { "name": "Espessura", "value": "7,4 mm" },
+          { "name": "Peso do aparelho", "value": "198 g" }
+        ] }
+      ],
+      "includedItems": [
+        "1 smartphone Samsung Galaxy A56 5G"
+      ],
+      "seoTitle": "Samsung Galaxy A56 5G 256GB 8GB RAM | Mercatto",
+      "seoDescription": "Galaxy A56 5G 256GB e 8GB RAM: Exynos 1580, tela Super AMOLED 6,7\" 120Hz, câmera 50MP com 4K, bateria 5.000mAh com recarga 45W e IP67.",
+      "tags": [
+        "galaxy a56",
+        "galaxy a56 5g",
+        "samsung a56",
+        "celular samsung",
+        "smartphone 5g",
+        "celular 256gb",
+        "celular 8gb ram",
+        "exynos 1580",
+        "super amoled 120hz",
+        "celular ip67",
+        "celular com nfc"
+      ],
+      "options": [{ "name": "Cor", "values": ["Preto", "Cinza", "Verde", "Rosa"] }],
+      "priceCents": 224990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": { "armazenamento": "256 GB", "memoria_ram": "8 GB", "rede_5g": "Sim" },
+      "aliases": ["Galaxy A56"],
+      "faq": [
+        { "q": "Qual a potência de carregamento do Galaxy A56?", "a": "Ele suporta recarga de até 45 W. Segundo a Samsung, com carregador de 45 W a bateria vai de 0 a 100% em cerca de 68 minutos. O carregador de 45 W é vendido separadamente." },
+        { "q": "Ele é resistente à água?", "a": "Sim, tem certificação IP67 contra poeira e água, obtida em testes controlados. Evite água salgada, cloro e produtos químicos." },
+        { "q": "Grava vídeos em 4K?", "a": "Sim, a câmera traseira grava em 4K (3840 x 2160)." },
+        { "q": "Tem NFC?", "a": "Sim, permite pagamentos por aproximação em aplicativos compatíveis." },
+        { "q": "Quanto ele pesa?", "a": "O aparelho pesa 198 g e tem 7,4 mm de espessura." }
+      ]
+    }
+  ]
+}

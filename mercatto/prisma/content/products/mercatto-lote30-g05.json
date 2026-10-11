@@ -1,0 +1,365 @@
+{
+  "products": [
+    {
+      "key": "liquidificador-oster-oliq610-1400w-3-2l",
+      "skuCode": "CAS-OLIQ610",
+      "categorySlug": "liquidificadores",
+      "brand": { "slug": "oster", "name": "Oster" },
+      "name": "Liquidificador Oster 1400 Full OLIQ610 1400W Jarra 3,2L 15 Velocidades Preto",
+      "shortDescription": "Liquidificador Oster OLIQ610 com motor de 1400W, jarra de 3,2 litros, 15 velocidades com função pulsar, lâmina de 4 pontas em aço inox e tampa medidora de 100 ml. Disponível em 127V ou 220V.",
+      "description": "O Liquidificador Oster 1400 Full OLIQ610 foi pensado para quem usa o liquidificador todos os dias e precisa de força e controle na mesma máquina. O motor de 1400W dá conta de vitaminas, sucos, molhos, massas leves e preparos com gelo, enquanto as 15 velocidades e a função pulsar permitem acertar a textura de cada receita, do creme liso ao picado mais rústico.\n\nA jarra de 3,2 litros de volume total comporta receitas para a família inteira, e a tampa medidora de 100 ml ajuda a acrescentar líquidos na medida certa sem interromper o preparo. A lâmina de 4 pontas em aço inoxidável fica integrada à jarra, o que simplifica a montagem no dia a dia.\n\n## Destaques\n\n- Motor de 1400W para preparos do dia a dia\n- 15 velocidades e função pulsar para controlar a textura\n- Jarra com volume total de 3,2 litros\n- Lâmina de 4 pontas em aço inox\n- Tampa medidora de 100 ml\n- Versões 127V e 220V (não é bivolt)\n\n## Para quem é\n\nIndicado para famílias e para quem prepara sucos, vitaminas, sopas cremosas e molhos com frequência e quer um aparelho com ajuste fino de velocidade. A função pulsar é útil para picar ingredientes em pulsos curtos, mantendo o controle sobre o ponto desejado.\n\n## Como usar\n\n- Monte a jarra na base com o aparelho desligado da tomada.\n- Coloque primeiro os líquidos e depois os ingredientes sólidos.\n- Comece em velocidade baixa e aumente aos poucos; use o pulsar para picar.\n- Respeite a capacidade útil da jarra e mantenha a tampa encaixada durante o uso.\n\n## Cuidados\n\nConfira a voltagem da sua tomada antes de escolher a versão: o modelo é vendido em 127V ou 220V e não é bivolt. Não mergulhe a base do motor em água; limpe-a apenas com pano úmido. Evite processar alimentos muito duros ou secos por longos períodos e siga as orientações do manual da Oster para preservar a lâmina e o motor.",
+      "highlights": [
+        "Motor de 1400W de potência",
+        "Jarra com volume total de 3,2 litros",
+        "15 velocidades com função pulsar",
+        "Lâmina de 4 pontas em aço inoxidável",
+        "Tampa medidora de 100 ml",
+        "Versões 127V e 220V (não é bivolt)"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Marca", "value": "Oster" },
+          { "name": "Modelo", "value": "OLIQ610 (1400 Full)" },
+          { "name": "Cor", "value": "Preto" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Potência", "value": "1400W" },
+          { "name": "Velocidades", "value": "15 velocidades + função pulsar" },
+          { "name": "Voltagem", "value": "127V ou 220V, conforme a versão (não é bivolt)" }
+        ] },
+        { "group": "Jarra e lâmina", "items": [
+          { "name": "Capacidade total da jarra", "value": "3,2 litros" },
+          { "name": "Material da jarra", "value": "Plástico" },
+          { "name": "Lâmina", "value": "4 pontas em aço inoxidável, integrada à jarra" },
+          { "name": "Tampa medidora", "value": "100 ml" },
+          { "name": "Filtro", "value": "Não possui" }
+        ] },
+        { "group": "Dimensões", "items": [
+          { "name": "Dimensões do produto (L x A x P)", "value": "20,5 x 42,2 x 22 cm" },
+          { "name": "Peso do produto", "value": "2,3 kg" }
+        ] }
+      ],
+      "includedItems": [
+        "1 Liquidificador Oster OLIQ610 (base com motor e jarra de 3,2 L)",
+        "Tampa com tampa medidora de 100 ml"
+      ],
+      "seoTitle": "Liquidificador Oster OLIQ610 1400W 3,2L 15 Velocidades | Mercatto",
+      "seoDescription": "Liquidificador Oster 1400 Full OLIQ610: 1400W, jarra de 3,2 L, 15 velocidades com pulsar e lâmina inox de 4 pontas. Versões 127V e 220V.",
+      "tags": [
+        "liquidificador oster",
+        "oliq610",
+        "oster 1400 full",
+        "liquidificador 1400w",
+        "liquidificador 3,2 litros",
+        "liquidificador 15 velocidades",
+        "liquidificador preto",
+        "liquidificador com pulsar",
+        "liquidificador potente",
+        "vitaminas e sucos"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "priceCents": 14990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        { "q": "O liquidificador Oster OLIQ610 é bivolt?", "a": "Não. Ele é vendido em duas versões, 127V e 220V. Escolha a voltagem compatível com a sua tomada antes de finalizar a compra." },
+        { "q": "Qual é a capacidade da jarra?", "a": "A jarra tem volume total de 3,2 litros e acompanha tampa medidora de 100 ml para adicionar líquidos durante o preparo." },
+        { "q": "Quantas velocidades ele tem?", "a": "São 15 velocidades, além da função pulsar, que aciona o motor em pulsos curtos para picar e controlar a textura." },
+        { "q": "O modelo vem com filtro?", "a": "Não. O OLIQ610 não acompanha filtro; a lâmina de 4 pontas em aço inox fica integrada à jarra." },
+        { "q": "Qual é a garantia?", "a": "As lojas informam garantia de 12 meses do fabricante, que já inclui a garantia legal de 90 dias prevista no Código de Defesa do Consumidor." }
+      ],
+      "aliases": ["OLIQ610"]
+    },
+    {
+      "key": "airfryer-philips-walita-serie-3000-na341-7-2l",
+      "skuCode": "CAS-NA341-72L",
+      "categorySlug": "air-fryers",
+      "brand": { "slug": "philips-walita", "name": "Philips Walita" },
+      "name": "Fritadeira Airfryer Philips Walita Série 3000 NA341 7,2L Digital com Visor Preta",
+      "shortDescription": "Airfryer Philips Walita Série 3000 NA341 com capacidade total de 7,2 litros, painel digital, visor para acompanhar o preparo, 12 funções pré-definidas e temperatura de 40 a 200 °C. Versões 110V (1800W) e 220V (2000W).",
+      "description": "A Fritadeira Airfryer Philips Walita Série 3000 NA341 foi feita para quem cozinha para a família e quer praticidade sem abrir mão do controle. Com capacidade total de 7,2 litros, ela permite preparar porções maiores de uma só vez, e o visor no cesto deixa acompanhar o ponto do alimento sem interromper o ciclo de preparo.\n\nO painel digital reúne 12 funções pré-definidas e uma opção personalizável, além de ajuste de temperatura de 40 a 200 °C e timer de até 24 horas. Isso amplia o uso para além das frituras sem óleo: dá para assar, gratinar, reaquecer e preparar receitas que pedem temperaturas mais baixas.\n\n## Destaques\n\n- Capacidade total de 7,2 litros\n- Visor para acompanhar o preparo\n- 12 funções pré-definidas + 1 personalizável\n- Temperatura ajustável de 40 a 200 °C\n- Timer de até 24 horas\n- Cesto removível antiaderente; peças podem ir à lava-louças\n\n## Para quem é\n\nIndicada para famílias e para quem gosta de preparar refeições completas na airfryer, com espaço para porções maiores de batatas, carnes, legumes e salgados. O painel digital facilita repetir as receitas favoritas com as funções pré-definidas.\n\n## Como usar\n\n- Escolha uma função pré-definida ou ajuste manualmente tempo e temperatura.\n- Distribua os alimentos no cesto sem sobrepor demais, para uma circulação de ar uniforme.\n- Acompanhe o preparo pelo visor e, se necessário, agite os alimentos na metade do tempo.\n\n## Cuidados\n\nO modelo não é bivolt: a versão 110V tem 1800W e a versão 220V tem 2000W, então confira a voltagem da sua tomada antes de escolher. Deixe espaço livre ao redor do aparelho durante o uso, espere esfriar antes de limpar e siga as orientações do manual da Philips Walita.",
+      "highlights": [
+        "Capacidade total de 7,2 litros",
+        "Visor para acompanhar o preparo",
+        "12 funções pré-definidas e 1 personalizável",
+        "Temperatura de 40 a 200 °C",
+        "Timer de até 24 horas",
+        "Garantia de 24 meses do fabricante"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Marca", "value": "Philips Walita" },
+          { "name": "Linha", "value": "Série 3000" },
+          { "name": "Modelo", "value": "NA341" },
+          { "name": "Cor", "value": "Preta" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "Potência", "value": "1800W (110V) / 2000W (220V)" },
+          { "name": "Voltagem", "value": "110V ou 220V, conforme a versão (não é bivolt)" },
+          { "name": "Temperatura", "value": "40 a 200 °C" },
+          { "name": "Timer", "value": "Até 24 horas" },
+          { "name": "Funções", "value": "12 pré-definidas + 1 personalizável" }
+        ] },
+        { "group": "Capacidade e cesto", "items": [
+          { "name": "Capacidade total", "value": "7,2 litros" },
+          { "name": "Capacidade útil do cesto", "value": "4,7 litros" },
+          { "name": "Cesto", "value": "Removível, com revestimento antiaderente" },
+          { "name": "Visor", "value": "Sim" },
+          { "name": "Lavável em lava-louças", "value": "Peças removíveis" }
+        ] }
+      ],
+      "includedItems": [
+        "1 Fritadeira Airfryer Philips Walita NA341",
+        "1 Manual de instruções",
+        "1 Certificado de garantia"
+      ],
+      "seoTitle": "Airfryer Philips Walita Série 3000 NA341 7,2L com Visor | Mercatto",
+      "seoDescription": "Airfryer Philips Walita NA341 Série 3000: 7,2 L, visor, painel digital, 12 funções, 40 a 200 °C e timer de 24 h. 110V (1800W) ou 220V (2000W).",
+      "tags": [
+        "airfryer philips walita",
+        "na341",
+        "airfryer série 3000",
+        "air fryer 7,2 litros",
+        "airfryer com visor",
+        "airfryer digital",
+        "fritadeira sem óleo",
+        "air fryer grande",
+        "philips walita",
+        "airfryer família"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["110V", "220V"] }],
+      "priceCents": 84990,
+      "minStock": 1,
+      "warrantyMonths": 24,
+      "warrantyText": "Garantia de 24 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        { "q": "A Airfryer NA341 é bivolt?", "a": "Não. Há uma versão 110V, com 1800W, e uma versão 220V, com 2000W. Escolha a voltagem da sua tomada." },
+        { "q": "Qual é a capacidade?", "a": "A capacidade total é de 7,2 litros, com capacidade útil de 4,7 litros no cesto, segundo a ficha da loja." },
+        { "q": "Dá para ver o alimento durante o preparo?", "a": "Sim. O modelo tem visor, que permite acompanhar o ponto sem abrir o cesto." },
+        { "q": "O que vem na caixa?", "a": "A fritadeira, o manual de instruções e o certificado de garantia." },
+        { "q": "Qual é a garantia?", "a": "24 meses do fabricante, já incluindo a garantia legal de 90 dias do Código de Defesa do Consumidor." }
+      ],
+      "aliases": ["NA341"]
+    },
+    {
+      "key": "geladeira-consul-crm39ab-frost-free-duplex-340l-branca",
+      "skuCode": "CAS-CRM39AB",
+      "categorySlug": "geladeiras",
+      "brand": { "slug": "consul", "name": "Consul" },
+      "name": "Geladeira Consul CRM39AB Frost Free Duplex 340 Litros Branca com Prateleiras Altura Flex",
+      "shortDescription": "Geladeira Consul CRM39AB frost free duplex com 340 litros (268 L no refrigerador e 72 L no freezer), prateleiras Altura Flex, Função Turbo e selo Procel A. Versões 127V e 220V.",
+      "description": "A Geladeira Consul CRM39AB combina capacidade de sobra com a praticidade do degelo frost free, que dispensa o descongelamento manual. São 340 litros no total, divididos em 268 litros no refrigerador e 72 litros no freezer, em formato duplex que mantém os congelados separados dos alimentos do dia a dia.\n\nAs prateleiras Altura Flex podem ser reposicionadas para acomodar garrafas, travessas e potes de tamanhos diferentes, e a Função Turbo acelera o resfriamento quando a geladeira acaba de ser abastecida. O modelo tem selo Procel A, com consumo informado de 49,1 kWh por mês.\n\n## Destaques\n\n- 340 litros totais: 268 L no refrigerador e 72 L no freezer\n- Degelo frost free, sem acúmulo de gelo\n- Prateleiras Altura Flex ajustáveis\n- Função Turbo para resfriamento mais rápido\n- Selo Procel A\n- Versões 127V e 220V (não é bivolt)\n\n## Para quem é\n\nBoa escolha para famílias de três a cinco pessoas que fazem compras grandes e precisam de espaço organizado tanto para alimentos frescos quanto para congelados, com manutenção simples no dia a dia.\n\n## Instalação\n\nCom 169,5 cm de altura, 62,1 cm de largura e 71,4 cm de profundidade, vale medir o espaço da cozinha antes da compra, deixando folga para ventilação e para a abertura das portas. Após a instalação, siga o tempo de espera recomendado no manual antes de ligar.\n\n## Cuidados\n\nConfira a voltagem da sua tomada antes de escolher a versão, pois o modelo não é bivolt. Evite colocar alimentos quentes diretamente no refrigerador e mantenha as portas bem fechadas para preservar o desempenho e a eficiência energética.",
+      "highlights": [
+        "340 litros: 268 L refrigerador e 72 L freezer",
+        "Degelo frost free",
+        "Prateleiras Altura Flex ajustáveis",
+        "Função Turbo de resfriamento",
+        "Selo Procel A",
+        "Versões 127V e 220V (não é bivolt)"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Marca", "value": "Consul" },
+          { "name": "Modelo", "value": "CRM39AB" },
+          { "name": "Cor", "value": "Branca" },
+          { "name": "Tipo", "value": "Duplex" },
+          { "name": "Degelo", "value": "Frost free" }
+        ] },
+        { "group": "Capacidade", "items": [
+          { "name": "Capacidade total", "value": "340 litros" },
+          { "name": "Refrigerador", "value": "268 litros" },
+          { "name": "Freezer", "value": "72 litros" }
+        ] },
+        { "group": "Recursos", "items": [
+          { "name": "Prateleiras", "value": "Altura Flex (ajustáveis)" },
+          { "name": "Função Turbo", "value": "Sim" }
+        ] },
+        { "group": "Energia", "items": [
+          { "name": "Selo Procel", "value": "A" },
+          { "name": "Consumo de energia", "value": "49,1 kWh/mês" },
+          { "name": "Voltagem", "value": "127V ou 220V, conforme a versão (não é bivolt)" }
+        ] },
+        { "group": "Dimensões", "items": [
+          { "name": "Altura", "value": "169,5 cm" },
+          { "name": "Largura", "value": "62,1 cm" },
+          { "name": "Profundidade", "value": "71,4 cm" },
+          { "name": "Peso", "value": "58,5 kg" }
+        ] }
+      ],
+      "includedItems": [
+        "1 Geladeira Consul CRM39AB"
+      ],
+      "seoTitle": "Geladeira Consul CRM39AB Frost Free Duplex 340L Branca | Mercatto",
+      "seoDescription": "Geladeira Consul CRM39AB frost free duplex 340 L (268 L + 72 L freezer), prateleiras Altura Flex, Função Turbo e Procel A. 127V ou 220V.",
+      "tags": [
+        "geladeira consul",
+        "crm39ab",
+        "geladeira frost free",
+        "geladeira duplex",
+        "geladeira 340 litros",
+        "geladeira branca",
+        "refrigerador consul",
+        "geladeira procel a",
+        "geladeira altura flex",
+        "geladeira família"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "priceCents": 237990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        { "q": "A geladeira Consul CRM39AB é bivolt?", "a": "Não. Ela é vendida em versões 127V e 220V. Escolha a voltagem compatível com a sua tomada." },
+        { "q": "Como os 340 litros são divididos?", "a": "São 268 litros no refrigerador e 72 litros no freezer, no formato duplex." },
+        { "q": "Precisa descongelar?", "a": "Não. O degelo é frost free, o que evita o acúmulo de gelo e dispensa o descongelamento manual." },
+        { "q": "Quais são as medidas?", "a": "169,5 cm de altura, 62,1 cm de largura e 71,4 cm de profundidade, com peso de 58,5 kg. Considere uma folga para ventilação." },
+        { "q": "Qual é o consumo de energia?", "a": "O modelo tem selo Procel A, com consumo informado de 49,1 kWh por mês." }
+      ],
+      "aliases": ["CRM39AB"]
+    },
+    {
+      "key": "maquina-de-lavar-electrolux-led13-essential-care-13kg",
+      "skuCode": "CAS-LED13",
+      "categorySlug": "lavadoras",
+      "brand": { "slug": "electrolux", "name": "Electrolux" },
+      "name": "Máquina de Lavar Electrolux 13kg Essential Care LED13 Cesto Inox, Jet&Clean e Ultra Filter",
+      "shortDescription": "Máquina de lavar Electrolux Essential Care LED13 com capacidade de 13 kg, cesto inox, 11 programas, tecnologia Jet&Clean, filtro de fiapos Ultra Filter, reaproveitamento de água e selo Procel A. Versões 127V e 220V.",
+      "description": "A Máquina de Lavar Electrolux Essential Care LED13 reúne capacidade de 13 kg e recursos que facilitam a rotina da lavanderia. O cesto em aço inox é resistente e fácil de manter, e os 11 programas de lavagem cobrem desde roupas do dia a dia até peças volumosas, com opções como Lava Edredom, Lavagem Turbo e Tira-manchas.\n\nA tecnologia Jet&Clean ajuda a distribuir o sabão de forma mais eficiente, e o filtro Ultra Filter retém fiapos para que eles não voltem às roupas. O programa de Autolimpeza contribui para a conservação da máquina, e o recurso de reaproveitamento de água permite reutilizar a água do enxágue em outras tarefas da casa.\n\n## Destaques\n\n- Capacidade de 13 kg de roupas\n- Cesto em aço inox\n- 11 programas, incluindo Lava Edredom e Tira-manchas\n- Jet&Clean e filtro de fiapos Ultra Filter\n- Reaproveitamento de água e programa de Autolimpeza\n- Selo Procel A, com cerca de 0,40 kWh por ciclo\n\n## Para quem é\n\nIndicada para famílias que lavam grandes volumes de roupa por semana e querem lavar edredons e peças volumosas em casa, com um painel simples e programas prontos para cada tipo de tecido.\n\n## Instalação\n\nA máquina mede 105,5 cm de altura, 59,5 cm de largura e 66,5 cm de profundidade, com peso de 40 kg. Verifique o espaço da área de serviço, a proximidade de ponto de água e de saída de esgoto. A embalagem traz a curva da mangueira; a mangueira de entrada de água é vendida separadamente pela Electrolux.\n\n## Cuidados\n\nO modelo não é bivolt: confira a voltagem da sua tomada antes de escolher a versão. Respeite a capacidade de carga, limpe o filtro de fiapos periodicamente e use a Autolimpeza conforme as orientações do manual.",
+      "highlights": [
+        "Capacidade de 13 kg",
+        "Cesto em aço inox",
+        "11 programas de lavagem",
+        "Jet&Clean e filtro Ultra Filter",
+        "Reaproveitamento de água",
+        "Selo Procel A e garantia de 1 ano"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Marca", "value": "Electrolux" },
+          { "name": "Linha", "value": "Essential Care" },
+          { "name": "Modelo", "value": "LED13" },
+          { "name": "Tipo", "value": "Lavadora de abertura superior" },
+          { "name": "Capacidade", "value": "13 kg" }
+        ] },
+        { "group": "Lavagem", "items": [
+          { "name": "Cesto", "value": "Aço inox" },
+          { "name": "Programas", "value": "11, incluindo Lava Edredom, Lavagem Turbo, Tira-manchas e Autolimpeza" },
+          { "name": "Tecnologias", "value": "Jet&Clean e filtro de fiapos Ultra Filter" },
+          { "name": "Reaproveitamento de água", "value": "Sim" }
+        ] },
+        { "group": "Energia", "items": [
+          { "name": "Selo Procel", "value": "A" },
+          { "name": "Consumo de energia", "value": "Aproximadamente 0,40 kWh por ciclo" },
+          { "name": "Voltagem", "value": "127V ou 220V, conforme a versão (não é bivolt)" }
+        ] },
+        { "group": "Dimensões", "items": [
+          { "name": "Altura", "value": "105,5 cm" },
+          { "name": "Largura", "value": "59,5 cm" },
+          { "name": "Profundidade", "value": "66,5 cm" },
+          { "name": "Peso", "value": "40 kg" }
+        ] }
+      ],
+      "includedItems": [
+        "1 Máquina de lavar Electrolux LED13",
+        "1 Guia rápido",
+        "1 Curva da mangueira"
+      ],
+      "seoTitle": "Máquina de Lavar Electrolux LED13 13kg Cesto Inox | Mercatto",
+      "seoDescription": "Lavadora Electrolux Essential Care LED13 13 kg: cesto inox, 11 programas, Jet&Clean, Ultra Filter e Procel A. Versões 127V e 220V. Garantia de 1 ano.",
+      "tags": [
+        "máquina de lavar electrolux",
+        "led13",
+        "lavadora 13kg",
+        "essential care",
+        "lavadora cesto inox",
+        "máquina de lavar 13 kg",
+        "lava edredom",
+        "jet&clean",
+        "lavadora electrolux",
+        "lavadora procel a"
+      ],
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "priceCents": 169990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        { "q": "A Electrolux LED13 é bivolt?", "a": "Não. Ela é vendida em versões 127V e 220V. Escolha a voltagem da sua tomada antes de comprar." },
+        { "q": "Qual a diferença entre a LED13 e a LES13?", "a": "A LED13 tem cesto em aço inox, Jet&Clean e filtro Ultra Filter. A LES13 é outro modelo da linha, com cesto plástico." },
+        { "q": "Dá para lavar edredom?", "a": "Sim. Entre os 11 programas está o Lava Edredom, indicado para peças volumosas, respeitando a capacidade de 13 kg." },
+        { "q": "A mangueira de entrada de água vem na caixa?", "a": "Segundo a Electrolux, a embalagem traz a máquina, o guia rápido e a curva da mangueira. A mangueira de entrada é vendida separadamente." },
+        { "q": "Qual é a garantia?", "a": "1 ano de garantia do fabricante, que já inclui a garantia legal de 90 dias do Código de Defesa do Consumidor." }
+      ],
+      "aliases": ["LED13"]
+    },
+    {
+      "key": "jogo-de-panelas-tramontina-paris-7-pecas-starflon-max",
+      "skuCode": "CAS-TRAMPARIS7",
+      "categorySlug": "cozinha",
+      "brand": { "slug": "tramontina", "name": "Tramontina" },
+      "name": "Jogo de Panelas Tramontina Paris 7 Peças Alumínio Antiaderente Starflon Max",
+      "shortDescription": "Jogo de panelas Tramontina Paris com 7 peças em alumínio e revestimento antiaderente Starflon Max, tampas de vidro com saída de vapor e cabos de baquelite. Para fogão a gás, elétrico e vitrocerâmico.",
+      "description": "O Jogo de Panelas Tramontina Paris reúne as peças mais usadas no dia a dia em um conjunto de 7 itens em alumínio com revestimento antiaderente Starflon Max. O antiaderente facilita o preparo com pouca gordura e torna a limpeza mais rápida, e o revestimento é livre de PFOA, segundo a fabricante.\n\nAs tampas de vidro temperado com saída de vapor permitem acompanhar o cozimento sem abrir a panela, e os cabos de baquelite ajudam a manusear as peças com mais segurança, já que não aquecem como o metal.\n\n## Destaques\n\n- 7 peças: 2 caçarolas, 2 panelas, 2 frigideiras e 1 fervedor\n- Alumínio com revestimento antiaderente Starflon Max\n- Revestimento livre de PFOA, segundo a Tramontina\n- Tampas de vidro temperado com saída de vapor\n- Cabos de baquelite antitérmicos\n- Uso em fogão a gás, elétrico e vitrocerâmico\n\n## Para quem é\n\nIdeal para quem está montando a primeira cozinha ou quer renovar as panelas com um conjunto completo, que cobre do arroz e feijão do dia a dia aos molhos, ovos e grelhados na frigideira.\n\n## Como usar\n\n- Antes do primeiro uso, lave as peças com água morna e detergente neutro.\n- Cozinhe em fogo baixo a médio: o alumínio distribui bem o calor.\n- Prefira utensílios de silicone, nylon ou madeira para preservar o antiaderente.\n\n## Cuidados\n\nO conjunto não é indicado para fogão de indução. Evite choques térmicos, como colocar a panela quente sob água fria, e não use esponjas abrasivas ou palha de aço. Não aqueça as peças vazias por longos períodos, para conservar o revestimento por mais tempo.",
+      "highlights": [
+        "7 peças: caçarolas, panelas, frigideiras e fervedor",
+        "Antiaderente Starflon Max livre de PFOA",
+        "Tampas de vidro com saída de vapor",
+        "Cabos de baquelite antitérmicos",
+        "Para gás, elétrico e vitrocerâmico",
+        "Não indicado para fogão de indução"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Marca", "value": "Tramontina" },
+          { "name": "Linha", "value": "Paris" },
+          { "name": "Quantidade de peças", "value": "7" },
+          { "name": "Composição", "value": "2 caçarolas, 2 panelas, 2 frigideiras e 1 fervedor" }
+        ] },
+        { "group": "Materiais", "items": [
+          { "name": "Corpo", "value": "Alumínio" },
+          { "name": "Revestimento", "value": "Antiaderente Starflon Max, livre de PFOA" },
+          { "name": "Tampas", "value": "Vidro temperado com saída de vapor" },
+          { "name": "Cabos", "value": "Baquelite antitérmico" }
+        ] },
+        { "group": "Compatibilidade", "items": [
+          { "name": "Fogões compatíveis", "value": "Gás, elétrico e vitrocerâmico" },
+          { "name": "Indução", "value": "Não" }
+        ] }
+      ],
+      "includedItems": [
+        "2 caçarolas com tampa de vidro",
+        "2 panelas com tampa de vidro",
+        "2 frigideiras",
+        "1 fervedor"
+      ],
+      "seoTitle": "Jogo de Panelas Tramontina Paris 7 Peças Starflon Max | Mercatto",
+      "seoDescription": "Jogo de panelas Tramontina Paris com 7 peças em alumínio antiaderente Starflon Max, tampas de vidro e cabos de baquelite. Para gás, elétrico e vitrocerâmico.",
+      "tags": [
+        "jogo de panelas tramontina",
+        "tramontina paris",
+        "panelas antiaderentes",
+        "starflon max",
+        "jogo de panelas 7 peças",
+        "conjunto de panelas",
+        "panelas de alumínio",
+        "panelas com tampa de vidro",
+        "frigideira tramontina",
+        "panelas para fogão a gás"
+      ],
+      "options": [{ "name": "Cor", "values": ["Chumbo", "Vermelho"] }],
+      "priceCents": 39490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia de 3 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        { "q": "O jogo Tramontina Paris funciona em fogão de indução?", "a": "Não. O conjunto é indicado para fogões a gás, elétrico e vitrocerâmico, mas não para indução." },
+        { "q": "Quais peças fazem parte do jogo?", "a": "São 7 peças: 2 caçarolas, 2 panelas, 2 frigideiras e 1 fervedor. As caçarolas e panelas têm tampa de vidro com saída de vapor." },
+        { "q": "O revestimento tem PFOA?", "a": "Segundo a Tramontina, o revestimento antiaderente Starflon Max é livre de PFOA." },
+        { "q": "Que utensílios devo usar?", "a": "Prefira utensílios de silicone, nylon ou madeira e evite esponjas abrasivas, para preservar o antiaderente." },
+        { "q": "Qual é a garantia?", "a": "A Tramontina informa garantia de 90 dias contra defeitos de fabricação, equivalente à garantia legal do Código de Defesa do Consumidor." }
+      ],
+      "aliases": ["Tramontina Paris"]
+    }
+  ]
+}

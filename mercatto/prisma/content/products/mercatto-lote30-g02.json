@@ -1,0 +1,278 @@
+{
+  "products": [
+    {
+      "key": "samsung-galaxy-tab-a9-plus-5g-64gb-4gb",
+      "skuCode": "CEL-TABA9P5G-64",
+      "categorySlug": "tablets",
+      "brand": { "slug": "samsung", "name": "Samsung" },
+      "name": "Tablet Samsung Galaxy Tab A9+ 5G 11 polegadas 64GB 4GB RAM Grafite SM-X216B",
+      "shortDescription": "Galaxy Tab A9+ com conexão 5G, tela de 11 polegadas 1920 x 1200, processador Snapdragon 695, 4 GB de RAM, 64 GB expansíveis por microSD até 1 TB e bateria de 7.040 mAh.",
+      "description": "O Samsung Galaxy Tab A9+ 5G foi pensado para quem precisa de uma tela grande e de internet em qualquer lugar, sem depender de Wi-Fi. Com chip de dados e conexão 5G, ele acompanha o trabalho em campo, os estudos e o entretenimento fora de casa, mantendo o mesmo conforto de uso de um tablet de 11 polegadas.\n\nA tela de 11 polegadas com resolução 1920 x 1200 oferece bom espaço para ler documentos, preencher formulários, assistir a aulas e acompanhar vídeos. O conjunto de quatro alto-falantes reforça o som em chamadas e conteúdos, e o corpo de apenas 6,9 mm de espessura facilita levar o aparelho na mochila ou na pasta.\n\n## Destaques\n\n- Conectividade 5G para navegar e trabalhar longe do Wi-Fi\n- Processador Qualcomm Snapdragon 695 de oito núcleos\n- 4 GB de RAM e 64 GB de armazenamento, com slot microSD de até 1 TB\n- Bateria de 7.040 mAh para longas jornadas\n- Câmera traseira de 8 MP e frontal de 5 MP para videochamadas\n- Wi-Fi 5 (802.11ac) quando houver rede disponível\n\n## Para quem é\n\nIndicado para profissionais que precisam consultar sistemas, registrar pedidos ou fazer videochamadas em deslocamento, para estudantes que querem um aparelho leve para aulas on-line e leitura, e para famílias que buscam uma tela maior para vídeos e navegação. O armazenamento expansível ajuda quem guarda muitos arquivos, fotos ou conteúdos baixados para uso off-line.\n\n## Cuidados\n\nUse um carregador compatível e de procedência confiável. Para ampliar o espaço, utilize um cartão microSD de boa qualidade. Evite expor o tablet a umidade, calor excessivo e quedas, e considere o uso de capa e película para proteger a tela no dia a dia.",
+      "highlights": [
+        "Conexão 5G para usar a internet sem depender de Wi-Fi",
+        "Tela de 11 polegadas com resolução 1920 x 1200",
+        "Processador Qualcomm Snapdragon 695 de 8 núcleos",
+        "4 GB de RAM e 64 GB expansíveis via microSD até 1 TB",
+        "Bateria de 7.040 mAh",
+        "Quatro alto-falantes e corpo de 6,9 mm de espessura"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "SM-X216B (Galaxy Tab A9+ 5G)" },
+          { "name": "Cor", "value": "Grafite" },
+          { "name": "Sistema operacional", "value": "Android 14 (conforme anúncio do varejo brasileiro)" }
+        ]},
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "11 polegadas" },
+          { "name": "Resolução", "value": "1920 x 1200 pixels (WUXGA)" },
+          { "name": "Tecnologia", "value": "TFT" }
+        ]},
+        { "group": "Desempenho", "items": [
+          { "name": "Processador", "value": "Qualcomm Snapdragon 695, octa-core" },
+          { "name": "Memória RAM", "value": "4 GB" },
+          { "name": "Armazenamento interno", "value": "64 GB" },
+          { "name": "Expansão", "value": "Cartão microSD de até 1 TB" }
+        ]},
+        { "group": "Câmeras", "items": [
+          { "name": "Traseira", "value": "8 MP" },
+          { "name": "Frontal", "value": "5 MP" }
+        ]},
+        { "group": "Conectividade", "items": [
+          { "name": "Rede móvel", "value": "5G" },
+          { "name": "Wi-Fi", "value": "Wi-Fi 5 (802.11ac)" }
+        ]},
+        { "group": "Áudio", "items": [
+          { "name": "Alto-falantes", "value": "4 alto-falantes estéreo" }
+        ]},
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "7.040 mAh" }
+        ]},
+        { "group": "Dimensões", "items": [
+          { "name": "Dimensões do aparelho", "value": "257,1 x 168,7 x 6,9 mm" },
+          { "name": "Peso do aparelho", "value": "491 g" }
+        ]}
+      ],
+      "includedItems": [],
+      "seoTitle": "Galaxy Tab A9+ 5G 64GB 4GB RAM Tela 11 polegadas | Mercatto",
+      "seoDescription": "Tablet Samsung Galaxy Tab A9+ 5G com tela de 11 polegadas, Snapdragon 695, 4 GB de RAM, 64 GB expansíveis e bateria de 7.040 mAh.",
+      "tags": [
+        "galaxy tab a9+",
+        "tab a9 plus 5g",
+        "tablet samsung 5g",
+        "sm-x216b",
+        "tablet 11 polegadas",
+        "tablet com chip",
+        "tablet 64gb",
+        "tablet android",
+        "tablet para trabalho",
+        "tablet para estudos"
+      ],
+      "priceCents": 119990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": { "armazenamento": "64 GB", "memoria_ram": "4 GB", "rede_5g": "Sim" },
+      "aliases": ["Tab A9+ 5G", "SM-X216"],
+      "faq": [
+        { "q": "O tablet funciona com chip de operadora?", "a": "Sim. Esta é a versão 5G do Galaxy Tab A9+ (SM-X216B), que aceita chip de dados para acessar a internet pela rede móvel, além de Wi-Fi 5." },
+        { "q": "Dá para aumentar o armazenamento de 64 GB?", "a": "Sim. O aparelho tem slot para cartão microSD de até 1 TB (cartão vendido separadamente)." },
+        { "q": "Qual o tamanho e a resolução da tela?", "a": "A tela tem 11 polegadas e resolução de 1920 x 1200 pixels." },
+        { "q": "Qual a capacidade da bateria?", "a": "A bateria tem 7.040 mAh." },
+        { "q": "Qual é a garantia?", "a": "Garantia de 12 meses do fabricante, já incluindo a garantia legal de 90 dias prevista no Código de Defesa do Consumidor." }
+      ]
+    },
+    {
+      "key": "logitech-mk270-combo-teclado-mouse-sem-fio-abnt2",
+      "skuCode": "INF-LGMK270",
+      "categorySlug": "perifericos",
+      "brand": { "slug": "logitech", "name": "Logitech" },
+      "name": "Combo Teclado e Mouse Sem Fio Logitech MK270 ABNT2 com Receptor USB e Pilhas Inclusas",
+      "shortDescription": "Kit Logitech MK270 com teclado ABNT2 e mouse sem fio conectados por um único receptor USB de 2,4 GHz, alcance de até 10 metros, teclas de mídia e pilhas inclusas.",
+      "description": "O combo Logitech MK270 reúne teclado e mouse sem fio em um único kit, conectados ao computador por um pequeno receptor USB de 2,4 GHz. Basta encaixar o receptor e começar a usar, sem cabos atravessando a mesa e com liberdade para posicionar teclado e mouse onde for mais confortável.\n\nO teclado segue o layout ABNT2, o padrão brasileiro com cedilha e acentuação nas posições habituais, o que evita erros de digitação em textos, planilhas e e-mails. As teclas de mídia de fácil acesso ajudam a controlar reprodução e volume sem interromper o que você está fazendo.\n\n## Destaques\n\n- Teclado e mouse sem fio com um único receptor USB de 2,4 GHz\n- Alcance sem fio de até 10 metros, segundo a Logitech\n- Layout ABNT2, com cedilha e acentos no padrão brasileiro\n- Teclas de mídia de fácil acesso\n- Autonomia informada pela fabricante de até 36 meses no teclado e 12 meses no mouse\n- Pilhas inclusas para começar a usar logo ao abrir a caixa\n\n## Para quem é\n\nUma opção prática para home office, escritórios, recepções e estudantes que querem organizar a mesa e digitar em português sem adaptações. Também é uma boa escolha para notebooks usados com monitor externo, já que libera o usuário do teclado embutido e ocupa apenas uma porta USB.\n\n## Como usar\n\nInstale as pilhas no teclado e no mouse, conecte o receptor a uma porta USB livre do computador e ligue os dispositivos. Guarde o receptor em local seguro ao transportar o kit, pois ele é necessário para a conexão.\n\n## Cuidados\n\nRetire as pilhas se o kit ficar muito tempo sem uso e evite derramar líquidos sobre o teclado. Para limpar, use um pano seco ou levemente umedecido, com o equipamento desligado.",
+      "highlights": [
+        "Teclado e mouse sem fio com um único receptor USB",
+        "Conexão de 2,4 GHz com alcance de até 10 metros",
+        "Layout ABNT2 com cedilha e acentos",
+        "Teclas de mídia de fácil acesso",
+        "Pilhas: até 36 meses no teclado e 12 no mouse (fabricante)",
+        "Pilhas inclusas"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "MK270" },
+          { "name": "Código do fabricante", "value": "920-004433" },
+          { "name": "Layout do teclado", "value": "ABNT2 (português do Brasil)" }
+        ]},
+        { "group": "Conexão", "items": [
+          { "name": "Tecnologia", "value": "Sem fio 2,4 GHz com receptor USB" },
+          { "name": "Alcance", "value": "Até 10 metros" }
+        ]},
+        { "group": "Alimentação", "items": [
+          { "name": "Teclado", "value": "2 pilhas AAA, duração de até 36 meses (segundo a Logitech)" },
+          { "name": "Mouse", "value": "1 pilha AA, duração de até 12 meses (segundo a Logitech)" }
+        ]}
+      ],
+      "includedItems": [
+        "Teclado sem fio Logitech MK270 ABNT2",
+        "Mouse sem fio",
+        "Receptor USB",
+        "Pilhas"
+      ],
+      "seoTitle": "Combo Teclado e Mouse Sem Fio Logitech MK270 ABNT2 | Mercatto",
+      "seoDescription": "Kit Logitech MK270 sem fio com teclado ABNT2, mouse, receptor USB 2,4 GHz, alcance de até 10 m, teclas de mídia e pilhas inclusas.",
+      "tags": [
+        "logitech mk270",
+        "combo teclado e mouse",
+        "teclado sem fio",
+        "mouse sem fio",
+        "kit teclado mouse wireless",
+        "teclado abnt2",
+        "920-004433",
+        "teclado e mouse logitech",
+        "periférico home office",
+        "teclado usb sem fio"
+      ],
+      "priceCents": 14490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "aliases": ["MK270"],
+      "faq": [
+        { "q": "O teclado é no padrão brasileiro?", "a": "Sim. Esta versão do MK270 (código 920-004433) tem layout ABNT2, com cedilha e acentuação no padrão brasileiro." },
+        { "q": "Preciso de dois receptores para teclado e mouse?", "a": "Não. Teclado e mouse funcionam com um único receptor USB de 2,4 GHz." },
+        { "q": "Qual é o alcance da conexão sem fio?", "a": "Segundo a ficha técnica da Logitech, o alcance é de até 10 metros." },
+        { "q": "As pilhas vêm na caixa?", "a": "Sim, o kit acompanha pilhas. O teclado usa 2 pilhas AAA e o mouse 1 pilha AA." },
+        { "q": "Qual é a garantia?", "a": "Garantia legal de 90 dias prevista no Código de Defesa do Consumidor." }
+      ]
+    },
+    {
+      "key": "sandisk-ultra-microsdxc-128gb-140mbs-a1",
+      "skuCode": "INF-SDULTRA-128",
+      "categorySlug": "informatica",
+      "brand": { "slug": "sandisk", "name": "SanDisk" },
+      "name": "Cartão de Memória SanDisk Ultra microSDXC 128GB 140MB/s Classe 10 A1 com Adaptador",
+      "shortDescription": "Cartão SanDisk Ultra microSDXC de 128 GB, UHS-I U1, Classe 10 e A1, com leitura de até 140 MB/s e adaptador SD. Ideal para ampliar o espaço de smartphones, tablets e câmeras.",
+      "description": "O SanDisk Ultra microSDXC de 128 GB é uma forma simples de ganhar espaço para fotos, vídeos, músicas e aplicativos em smartphones, tablets, câmeras e outros aparelhos com slot microSD. Esta é a versão com leitura de até 140 MB/s (modelo SDSQUAB-128G-GN6MA), que agiliza a transferência de arquivos para o computador.\n\nA classificação A1 indica desempenho mínimo adequado para executar aplicativos a partir do cartão em aparelhos Android compatíveis, e as classes UHS-I U1 e Classe 10 atendem à gravação de vídeo em Full HD. O adaptador SD que acompanha o cartão permite usá-lo em notebooks, leitores e câmeras com entrada SD convencional.\n\n## Destaques\n\n- 128 GB de capacidade no formato microSDXC\n- Leitura de até 140 MB/s, segundo a fabricante\n- Classificações UHS-I U1, Classe 10 e A1\n- Adaptador microSD para SD incluso\n- Indicado para gravação de vídeo Full HD e armazenamento de apps\n\n## Para quem é\n\nPara quem está sem espaço no celular ou no tablet, para quem grava vídeos com frequência e para quem precisa transportar arquivos entre aparelhos. Também atende quem usa câmeras compactas, consoles portáteis ou dispositivos que aceitam cartões microSDXC.\n\n## Como usar\n\nAntes de usar, confirme se o aparelho aceita cartões microSDXC de 128 GB. Ao inserir pela primeira vez, siga as orientações do aparelho para formatar o cartão. Para usar em computador ou câmera com entrada SD, encaixe o microSD no adaptador incluso.\n\n## Cuidados\n\nNão remova o cartão durante a gravação ou a transferência de arquivos. Faça cópias de segurança regulares dos conteúdos importantes e guarde o cartão longe de umidade e calor.",
+      "highlights": [
+        "Capacidade de 128 GB no formato microSDXC",
+        "Leitura de até 140 MB/s, segundo a fabricante",
+        "Classificações UHS-I U1, Classe 10 e A1",
+        "Adaptador microSD para SD incluso",
+        "Para smartphones, tablets e câmeras com microSDXC"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "SanDisk Ultra microSDXC UHS-I" },
+          { "name": "Código do fabricante", "value": "SDSQUAB-128G-GN6MA" },
+          { "name": "Capacidade", "value": "128 GB" },
+          { "name": "Formato", "value": "microSDXC" }
+        ]},
+        { "group": "Desempenho", "items": [
+          { "name": "Velocidade de leitura", "value": "Até 140 MB/s" },
+          { "name": "Classe de velocidade", "value": "Classe 10, UHS-I U1" },
+          { "name": "Classe de desempenho de apps", "value": "A1" }
+        ]}
+      ],
+      "includedItems": [
+        "Cartão de memória SanDisk Ultra microSDXC 128 GB",
+        "Adaptador microSD para SD"
+      ],
+      "seoTitle": "Cartão microSD SanDisk Ultra 128GB 140MB/s A1 | Mercatto",
+      "seoDescription": "Cartão de memória SanDisk Ultra microSDXC 128 GB com leitura de até 140 MB/s, Classe 10, U1 e A1, com adaptador SD incluso.",
+      "tags": [
+        "sandisk ultra 128gb",
+        "cartão micro sd 128gb",
+        "microsdxc 128gb",
+        "cartão de memória sandisk",
+        "sdsquab-128g",
+        "micro sd classe 10",
+        "cartão a1",
+        "cartão para celular",
+        "micro sd para câmera",
+        "cartão sd 140mb/s"
+      ],
+      "priceCents": 11490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "aliases": ["SDSQUAB-128G", "SanDisk Ultra microSDXC 128"],
+      "faq": [
+        { "q": "Qual a velocidade deste cartão?", "a": "Segundo a fabricante, a leitura chega a até 140 MB/s. O cartão tem classificações Classe 10, UHS-I U1 e A1." },
+        { "q": "O adaptador SD vem junto?", "a": "Sim. Acompanha adaptador microSD para SD, útil para notebooks, leitores e câmeras com entrada SD." },
+        { "q": "Funciona em qualquer celular?", "a": "Funciona em aparelhos com slot microSD compatíveis com cartões microSDXC. Confira no manual do seu aparelho a capacidade máxima suportada." },
+        { "q": "Posso instalar aplicativos no cartão?", "a": "A classificação A1 indica desempenho adequado para executar apps em aparelhos Android que permitem mover aplicativos para o cartão." },
+        { "q": "Qual é a garantia?", "a": "Garantia legal de 90 dias prevista no Código de Defesa do Consumidor." }
+      ]
+    },
+    {
+      "key": "tp-link-archer-c6-ac1200-dual-band-gigabit",
+      "skuCode": "INF-TPARCHERC6",
+      "categorySlug": "informatica",
+      "brand": { "slug": "tp-link", "name": "TP-Link" },
+      "name": "Roteador Wi-Fi TP-Link Archer C6 AC1200 Dual Band Gigabit MU-MIMO 4 Antenas",
+      "shortDescription": "Roteador TP-Link Archer C6 AC1200 dual band, com até 867 Mbps em 5 GHz e 300 Mbps em 2,4 GHz, MU-MIMO, beamforming, 4 antenas externas e portas Gigabit (1 WAN e 4 LAN).",
+      "description": "O TP-Link Archer C6 é um roteador dual band AC1200 para quem quer aproveitar melhor a internet de casa ou do pequeno escritório. Ele trabalha simultaneamente nas faixas de 2,4 GHz, com até 300 Mbps, e de 5 GHz, com até 867 Mbps, permitindo separar aparelhos que precisam de alcance daqueles que precisam de mais velocidade.\n\nAs quatro antenas externas e a tecnologia beamforming ajudam a direcionar o sinal para os dispositivos conectados, enquanto o MU-MIMO permite atender mais de um aparelho ao mesmo tempo. Todas as portas com fio são Gigabit, o que favorece planos de fibra acima de 100 Mbps e conexões estáveis para computadores, TVs e consoles.\n\n## Destaques\n\n- Wi-Fi AC1200 dual band: 867 Mbps em 5 GHz e 300 Mbps em 2,4 GHz\n- 1 porta WAN e 4 portas LAN, todas Gigabit\n- Quatro antenas externas com beamforming\n- MU-MIMO para atender dispositivos simultaneamente\n- Modo Access Point para ampliar uma rede existente\n- Configuração e gerenciamento pelo aplicativo TP-Link Tether\n\n## Para quem é\n\nIndicado para residências com vários aparelhos conectados, como celulares, smart TVs e notebooks, para quem trabalha em home office com chamadas de vídeo e para quem tem plano de fibra e deseja aproveitar a velocidade também nas conexões por cabo.\n\n## Como usar\n\nConecte o cabo do modem ou da ONU da operadora à porta WAN, ligue o roteador à fonte e faça a configuração pelo aplicativo TP-Link Tether ou pelo navegador. Depois, defina nomes e senhas para as redes de 2,4 GHz e 5 GHz.\n\n## Cuidados\n\nInstale o roteador em local central, elevado e ventilado, longe de paredes grossas, espelhos e micro-ondas. Mantenha o firmware atualizado e troque a senha padrão de acesso ao painel.",
+      "highlights": [
+        "AC1200 dual band: 867 Mbps (5 GHz) + 300 Mbps (2,4 GHz)",
+        "Portas Gigabit: 1 WAN e 4 LAN",
+        "Quatro antenas externas com beamforming",
+        "MU-MIMO para conexões simultâneas",
+        "Modo Access Point",
+        "Gerenciamento pelo app TP-Link Tether"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "Archer C6" },
+          { "name": "Classe", "value": "AC1200" }
+        ]},
+        { "group": "Wi-Fi", "items": [
+          { "name": "Bandas", "value": "Dual band simultâneo (2,4 GHz e 5 GHz)" },
+          { "name": "Velocidade em 5 GHz", "value": "Até 867 Mbps" },
+          { "name": "Velocidade em 2,4 GHz", "value": "Até 300 Mbps" },
+          { "name": "Padrões", "value": "IEEE 802.11ac/n/a (5 GHz) e 802.11b/g/n (2,4 GHz)" },
+          { "name": "Tecnologias", "value": "MU-MIMO e beamforming" },
+          { "name": "Antenas", "value": "4 antenas externas" }
+        ]},
+        { "group": "Portas", "items": [
+          { "name": "WAN", "value": "1 porta Gigabit" },
+          { "name": "LAN", "value": "4 portas Gigabit" }
+        ]},
+        { "group": "Recursos", "items": [
+          { "name": "Modos de operação", "value": "Roteador e Access Point" },
+          { "name": "Gerenciamento", "value": "Aplicativo TP-Link Tether e interface web" }
+        ]}
+      ],
+      "includedItems": [
+        "Roteador TP-Link Archer C6",
+        "Fonte de alimentação",
+        "Cabo Ethernet"
+      ],
+      "seoTitle": "Roteador TP-Link Archer C6 AC1200 Dual Band Gigabit | Mercatto",
+      "seoDescription": "Roteador TP-Link Archer C6 AC1200 dual band com MU-MIMO, beamforming, 4 antenas e portas Gigabit (1 WAN e 4 LAN).",
+      "tags": [
+        "tp-link archer c6",
+        "roteador ac1200",
+        "roteador dual band",
+        "roteador gigabit",
+        "roteador wi-fi 5",
+        "roteador mu-mimo",
+        "roteador para fibra",
+        "roteador tp-link",
+        "archer c6",
+        "roteador 4 antenas"
+      ],
+      "priceCents": 31990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "aliases": ["Archer C6"],
+      "faq": [
+        { "q": "O roteador tem portas Gigabit?", "a": "Sim. O Archer C6 tem 1 porta WAN e 4 portas LAN, todas Gigabit." },
+        { "q": "Quais as velocidades do Wi-Fi?", "a": "Até 867 Mbps na faixa de 5 GHz e até 300 Mbps na faixa de 2,4 GHz, totalizando a classe AC1200." },
+        { "q": "Posso usar como ponto de acesso?", "a": "Sim. O Archer C6 tem modo Access Point para trabalhar junto a um roteador ou modem já existente." },
+        { "q": "Como configurar?", "a": "A configuração pode ser feita pelo aplicativo TP-Link Tether ou pela interface web do roteador." },
+        { "q": "O que vem na caixa?", "a": "O roteador, a fonte de alimentação e um cabo Ethernet." }
+      ]
+    }
+  ]
+}

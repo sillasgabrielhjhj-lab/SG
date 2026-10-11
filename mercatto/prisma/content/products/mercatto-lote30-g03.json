@@ -1,0 +1,369 @@
+{
+  "products": [
+    {
+      "key": "nintendo-switch-2-256gb",
+      "skuCode": "GAM-NSW2-256",
+      "categorySlug": "consoles",
+      "brand": { "slug": "nintendo", "name": "Nintendo" },
+      "name": "Console Nintendo Switch 2 256 GB com Joy-Con 2, Tela LCD de 7,9\" Full HD 120 Hz",
+      "shortDescription": "Nintendo Switch 2 com 256 GB de armazenamento, tela LCD de 7,9 polegadas Full HD com até 120 Hz e HDR, saída para TV em até 4K pela base e compatibilidade com jogos do Nintendo Switch.",
+      "description": "O Nintendo Switch 2 mantém a ideia que tornou a família Switch tão popular: jogar na TV da sala e, em segundos, levar a mesma partida para qualquer lugar. A nova geração chega com tela maior, mais armazenamento interno e saída de vídeo em resolução mais alta quando conectada à base.\n\nNo modo portátil, a tela LCD de 7,9 polegadas tem resolução Full HD (1920 x 1080), taxa de atualização de até 120 Hz e suporte a HDR. Na base conectada a uma TV compatível, o console pode exibir jogos em até 4K, com até 60 quadros por segundo, conforme o título.\n\n## Destaques\n\n- Tela LCD de 7,9 polegadas, Full HD, até 120 Hz e HDR\n- Saída para TV em até 4K pela base (em TVs e jogos compatíveis)\n- 256 GB de armazenamento interno, expansível com cartões microSD Express (vendidos separadamente)\n- Novos controles Joy-Con 2, que se acoplam às laterais do console\n- Bateria de 5.220 mAh, com autonomia estimada de 2 a 6,5 horas, dependendo do jogo\n- Compatível com jogos do Nintendo Switch original\n\n## Para quem é\n\nPara quem quer jogar os lançamentos da Nintendo, como Mario Kart World e Donkey Kong Bananza, e também para quem já tem uma biblioteca de jogos do primeiro Switch e quer continuar jogando com mais armazenamento e imagem mais nítida. A possibilidade de destacar os Joy-Con 2 facilita partidas em dupla no próprio console, em casa ou em viagem.\n\n## Como usar\n\nNo modo TV, encaixe o console na base e ligue-a à TV pelo cabo HDMI. No modo portátil, basta retirar o console da base, com os Joy-Con 2 acoplados. Para mais espaço, use exclusivamente cartões microSD Express: cartões microSD comuns não são compatíveis com o Switch 2 para jogos.\n\n## Cuidados\n\nA tela vem sem película de proteção dentro da caixa. Se quiser proteger o vidro, use acessórios específicos para o Switch 2. Jogos e cartões de memória são vendidos separadamente, e a compatibilidade de alguns títulos do Switch original pode ter exceções informadas pela Nintendo.",
+      "highlights": [
+        "Tela LCD de 7,9\" Full HD com até 120 Hz e HDR",
+        "Saída para TV em até 4K pela base",
+        "256 GB de armazenamento interno",
+        "Expansão por cartão microSD Express",
+        "Bateria de 5.220 mAh (2 a 6,5 horas)",
+        "Compatível com jogos do Nintendo Switch"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tipo", "value": "LCD" },
+          { "name": "Tamanho", "value": "7,9 polegadas" },
+          { "name": "Resolução", "value": "1920 x 1080 (Full HD)" },
+          { "name": "Taxa de atualização", "value": "Até 120 Hz" },
+          { "name": "HDR", "value": "Sim" }
+        ] },
+        { "group": "Vídeo na TV", "items": [
+          { "name": "Resolução máxima", "value": "Até 4K com até 60 fps, via base, em TVs e jogos compatíveis" }
+        ] },
+        { "group": "Armazenamento", "items": [
+          { "name": "Interno", "value": "256 GB (UFS)" },
+          { "name": "Expansão", "value": "Cartão microSD Express (vendido separadamente)" }
+        ] },
+        { "group": "Bateria", "items": [
+          { "name": "Capacidade", "value": "5.220 mAh" },
+          { "name": "Autonomia estimada", "value": "De 2 a 6,5 horas, conforme o jogo" }
+        ] },
+        { "group": "Físico", "items": [
+          { "name": "Peso", "value": "Aprox. 534 g com os Joy-Con 2 acoplados (aprox. 401 g sem eles)" }
+        ] },
+        { "group": "Compatibilidade", "items": [
+          { "name": "Jogos", "value": "Jogos do Nintendo Switch 2 e do Nintendo Switch original (com exceções informadas pela Nintendo)" }
+        ] }
+      ],
+      "includedItems": [
+        "Console Nintendo Switch 2",
+        "Controles Joy-Con 2 (L) e (R)",
+        "Alças Joy-Con 2",
+        "Grip Joy-Con 2",
+        "Base para TV",
+        "Cabo HDMI",
+        "Adaptador AC"
+      ],
+      "seoTitle": "Nintendo Switch 2 256 GB Tela 7,9\" 120 Hz | Mercatto",
+      "seoDescription": "Console Nintendo Switch 2 com 256 GB, tela LCD de 7,9\" Full HD 120 Hz com HDR, saída 4K na TV e Joy-Con 2. Compre na Mercatto.",
+      "tags": [
+        "nintendo switch 2",
+        "switch 2",
+        "console nintendo",
+        "console portátil",
+        "videogame",
+        "joy-con 2",
+        "switch 2 256gb",
+        "mario kart world",
+        "console híbrido",
+        "microsd express",
+        "nintendo"
+      ],
+      "priceCents": 394990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": { "plataforma": "Nintendo Switch" },
+      "aliases": ["Switch 2"],
+      "faq": [
+        { "q": "Quanto de armazenamento o Switch 2 tem?", "a": "São 256 GB internos. É possível ampliar com cartões microSD Express, vendidos separadamente." },
+        { "q": "Posso jogar meus jogos do Nintendo Switch original?", "a": "Sim. O Switch 2 é compatível com jogos do Nintendo Switch original, com algumas exceções informadas pela Nintendo." },
+        { "q": "O console roda em 4K?", "a": "Na TV, conectado à base, o console pode exibir até 4K com até 60 fps em TVs e jogos compatíveis. No modo portátil, a tela é Full HD com até 120 Hz." },
+        { "q": "Quanto dura a bateria?", "a": "A bateria de 5.220 mAh tem autonomia estimada de 2 a 6,5 horas, dependendo do jogo." },
+        { "q": "Vem com jogo ou película?", "a": "Esta versão não inclui jogo, e a tela não vem com película de proteção. Ambos são vendidos separadamente." }
+      ]
+    },
+    {
+      "key": "xbox-series-s-512gb-branco",
+      "skuCode": "GAM-XSS-512-BR",
+      "categorySlug": "consoles",
+      "brand": { "slug": "microsoft", "name": "Microsoft" },
+      "name": "Console Xbox Series S 512 GB SSD Branco com Controle Sem Fio RRS-00006",
+      "shortDescription": "Xbox Series S totalmente digital com SSD de 512 GB, jogos em até 1440p com até 120 fps, upscaling para 4K, HDMI 2.1 e controle sem fio incluso. Bivolt.",
+      "description": "O Xbox Series S é o console de nova geração mais compacto da Microsoft. Totalmente digital, sem leitor de discos, ele é pensado para quem compra jogos pela loja online ou usa serviços de assinatura e quer carregamentos rápidos em um aparelho que ocupa pouco espaço no rack.\n\nO SSD de 512 GB, com taxa de transferência de 2,4 GB/s (bruta), reduz bastante o tempo de carregamento em relação a consoles com disco rígido. A GPU de 4 TFLOPS e os 10 GB de memória GDDR6 permitem jogos em até 1440p com meta de até 120 quadros por segundo, com upscaling para TVs 4K.\n\n## Destaques\n\n- Console 100% digital, sem leitor de discos\n- SSD de 512 GB, expansível com cartão de expansão próprio (vendido separadamente)\n- Jogos em até 1440p, com até 120 fps nos títulos compatíveis\n- Upscaling para TVs 4K\n- Saída HDMI 2.1 e 3 portas USB 3.1 Gen 1\n- Controle sem fio Xbox na cor branca incluso\n\n## Para quem é\n\nPara quem quer entrar na geração atual do Xbox gastando menos que no Series X, especialmente quem joga títulos digitais, competitivos ou em família. Também é uma boa opção como segundo console para o quarto, graças ao tamanho compacto.\n\n## Como usar\n\nConecte o console à TV pelo cabo HDMI e à tomada pelo cabo de força (o console é bivolt). Na primeira inicialização, faça login com sua conta Microsoft para baixar jogos e atualizações. Como não há leitor de discos, todos os jogos são obtidos digitalmente.\n\n## Cuidados\n\nMantenha o console em local ventilado, sem obstruir as saídas de ar. O espaço de 512 GB pode encher rápido com jogos grandes: gerencie a biblioteca ou use um cartão de expansão compatível com Xbox Series X|S.",
+      "highlights": [
+        "SSD de 512 GB com 2,4 GB/s de transferência",
+        "Jogos em até 1440p com até 120 fps",
+        "Upscaling para TVs 4K",
+        "Console 100% digital, sem leitor de discos",
+        "HDMI 2.1 e 3 portas USB 3.1 Gen 1",
+        "Controle sem fio incluso; bivolt"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "Xbox Series S 512 GB" },
+          { "name": "Código do fabricante", "value": "RRS-00006" },
+          { "name": "Cor", "value": "Branco" },
+          { "name": "Mídia", "value": "Somente digital (sem leitor de discos)" },
+          { "name": "Voltagem", "value": "Bivolt" }
+        ] },
+        { "group": "Desempenho", "items": [
+          { "name": "GPU", "value": "4 TFLOPS, 20 CUs a 1,565 GHz" },
+          { "name": "Memória", "value": "10 GB GDDR6, barramento de 128 bits" },
+          { "name": "Resolução de jogos", "value": "Até 1440p, com upscaling para 4K" },
+          { "name": "Taxa de quadros", "value": "Até 120 fps" }
+        ] },
+        { "group": "Armazenamento", "items": [
+          { "name": "SSD interno", "value": "512 GB" },
+          { "name": "Taxa de E/S", "value": "2,4 GB/s (bruta), 4,8 GB/s (compactada)" },
+          { "name": "Expansão", "value": "Cartão de expansão para Xbox Series X|S (vendido separadamente)" }
+        ] },
+        { "group": "Conexões", "items": [
+          { "name": "Vídeo", "value": "1 porta HDMI 2.1" },
+          { "name": "USB", "value": "3 portas USB 3.1 Gen 1" }
+        ] }
+      ],
+      "includedItems": [
+        "Console Xbox Series S 512 GB (branco)",
+        "Controle sem fio Xbox",
+        "Cabo HDMI",
+        "Cabo de força"
+      ],
+      "seoTitle": "Xbox Series S 512 GB Branco com Controle | Mercatto",
+      "seoDescription": "Console Xbox Series S 512 GB branco, 100% digital, jogos em até 1440p a 120 fps, upscaling 4K e controle sem fio. Bivolt. Compre na Mercatto.",
+      "tags": [
+        "xbox series s",
+        "xbox series s 512gb",
+        "console xbox",
+        "xbox branco",
+        "videogame",
+        "console digital",
+        "microsoft xbox",
+        "rrs-00006",
+        "xbox game pass",
+        "console nova geração"
+      ],
+      "priceCents": 329990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "attributes": { "plataforma": "Xbox" },
+      "aliases": ["RRS-00006", "Series S 512"],
+      "faq": [
+        { "q": "O Xbox Series S lê discos?", "a": "Não. O Series S é totalmente digital: os jogos são comprados e baixados pela loja online ou acessados por assinatura." },
+        { "q": "O console é bivolt?", "a": "Sim, o Xbox Series S 512 GB (RRS-00006) é bivolt." },
+        { "q": "Roda jogos em 4K?", "a": "O console renderiza jogos em até 1440p, com até 120 fps nos títulos compatíveis, e faz upscaling da imagem para TVs 4K." },
+        { "q": "O que vem na caixa?", "a": "Console Xbox Series S 512 GB branco, um controle sem fio Xbox, cabo HDMI e cabo de força." },
+        { "q": "Dá para aumentar o armazenamento?", "a": "Sim, com o cartão de expansão para Xbox Series X|S, vendido separadamente." }
+      ]
+    },
+    {
+      "key": "headset-gamer-redragon-zeus-lite-h510-lt-preto",
+      "skuCode": "GAM-RD-H510LT",
+      "categorySlug": "headsets-gamer",
+      "brand": { "slug": "redragon", "name": "Redragon" },
+      "name": "Headset Gamer Redragon Zeus Lite H510-LT Preto, Drivers 53 mm, P3, Microfone Removível",
+      "shortDescription": "Headset gamer Redragon Zeus Lite H510-LT com drivers de 53 mm, conexão P3 de 3,5 mm, microfone removível e controle no cabo para volume e mudo. Compatível com PC, consoles e celulares.",
+      "description": "O Redragon Zeus Lite H510-LT é a versão com fio e conexão P3 da linha Zeus, uma das mais conhecidas da marca. Ele foi pensado para quem quer um headset over-ear confortável, sem depender de bateria, pareamento ou software, e que funcione em diferentes aparelhos com o mesmo cabo.\n\nOs drivers de 53 mm entregam som encorpado para identificar passos, tiros e efeitos durante as partidas, e também para filmes e músicas. O microfone é removível: em chamadas e partidas online, basta encaixá-lo; para ouvir música, ele pode ser retirado.\n\n## Destaques\n\n- Drivers de 53 mm\n- Conexão P3 (3,5 mm), sem bateria e sem pareamento\n- Microfone removível com redução de ruído de fundo\n- Controle no cabo para volume e para silenciar o microfone\n- Formato over-ear, com almofadas e arco revestidos em tecido de malha\n- Cabo de 1,8 m\n\n## Para quem é\n\nPara jogadores de PC e consoles que querem um headset simples de conectar, e para quem também usa o fone em aulas, reuniões ou no celular. Como a conexão é analógica, ele funciona em aparelhos com entrada P3 combinada de áudio e microfone, como controles de consoles atuais, notebooks e celulares com entrada de 3,5 mm.\n\n## Como usar\n\nEncaixe o microfone na concha, conecte o plugue P3 ao aparelho e ajuste o volume pelo controle no próprio cabo. Em computadores com entradas separadas de fone e microfone, pode ser necessário um adaptador P3 para P2 duplo (não incluso).\n\n## Cuidados\n\nGuarde o headset sem dobrar o cabo de forma acentuada e retire o microfone com cuidado, puxando pelo conector. Limpe as almofadas de malha com pano seco ou levemente úmido.",
+      "highlights": [
+        "Drivers de 53 mm",
+        "Conexão P3 de 3,5 mm, sem bateria",
+        "Microfone removível",
+        "Controle no cabo: volume e mudo",
+        "Over-ear com acabamento em malha",
+        "Compatível com PC, consoles e celulares"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "Zeus Lite H510-LT" },
+          { "name": "Cor", "value": "Preto" },
+          { "name": "Formato", "value": "Over-ear (circum-auricular)" }
+        ] },
+        { "group": "Áudio", "items": [
+          { "name": "Drivers", "value": "53 mm" },
+          { "name": "Potência máxima", "value": "20 mW" }
+        ] },
+        { "group": "Microfone", "items": [
+          { "name": "Tipo", "value": "Removível, com redução de ruído de fundo" },
+          { "name": "Controle", "value": "Botão de mudo no controle do cabo" }
+        ] },
+        { "group": "Conexão", "items": [
+          { "name": "Tipo", "value": "Com fio, plugue P3 (3,5 mm)" },
+          { "name": "Comprimento do cabo", "value": "1,8 m" },
+          { "name": "Compatibilidade", "value": "PC, consoles e celulares com entrada P3" }
+        ] }
+      ],
+      "includedItems": [],
+      "seoTitle": "Headset Gamer Redragon Zeus Lite H510-LT Preto | Mercatto",
+      "seoDescription": "Headset gamer Redragon Zeus Lite H510-LT preto com drivers de 53 mm, P3, microfone removível e controle no cabo. PC, consoles e celular.",
+      "tags": [
+        "headset gamer",
+        "redragon zeus lite",
+        "h510-lt",
+        "redragon",
+        "headset p3",
+        "fone gamer",
+        "headset com microfone",
+        "headset ps5",
+        "headset xbox",
+        "headset pc"
+      ],
+      "priceCents": 14490,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "aliases": ["H510-LT", "Zeus Lite"],
+      "faq": [
+        { "q": "O Zeus Lite H510-LT é sem fio?", "a": "Não. Ele é com fio, com plugue P3 de 3,5 mm, e não precisa de bateria nem pareamento." },
+        { "q": "Funciona em consoles e celular?", "a": "Sim, funciona em PC, consoles e celulares com entrada P3 combinada de áudio e microfone." },
+        { "q": "O microfone sai?", "a": "Sim, o microfone é removível e tem redução de ruído de fundo." },
+        { "q": "Dá para ajustar o volume sem ir ao computador?", "a": "Sim. O controle no cabo tem ajuste de volume e botão para silenciar o microfone." },
+        { "q": "Qual é o tamanho dos drivers?", "a": "Os drivers têm 53 mm." }
+      ]
+    },
+    {
+      "key": "smart-tv-philco-32-p32crb-roku-tv",
+      "skuCode": "TVA-PH-P32CRB",
+      "categorySlug": "smart-tvs",
+      "brand": { "slug": "philco", "name": "Philco" },
+      "name": "Smart TV Philco 32\" P32CRB Roku TV HD, HDR10, Dolby Audio, Wi-Fi Dual Band",
+      "shortDescription": "Smart TV Philco 32 polegadas P32CRB com sistema Roku TV, resolução HD, HDR10, Dolby Audio com 20 W RMS, Wi-Fi dual band, 2 HDMI (um com ARC) e conversor digital integrado. Bivolt.",
+      "description": "A Smart TV Philco P32CRB reúne em 32 polegadas o sistema Roku TV, conhecido pela tela inicial simples, com os aplicativos de streaming organizados em blocos, e o conversor digital integrado para assistir à TV aberta. É uma opção prática para quarto, cozinha, escritório ou como segunda TV da casa.\n\nO painel DLED com tecnologia VA tem resolução HD (1366 x 768), taxa de 60 Hz e suporte a HDR10. O som tem Dolby Audio, com 20 W RMS distribuídos em dois alto-falantes de 10 W.\n\n## Destaques\n\n- Sistema Roku TV com acesso aos principais aplicativos de streaming\n- Tela de 32 polegadas, resolução HD e HDR10\n- Dolby Audio com 20 W RMS (2 x 10 W)\n- Wi-Fi dual band (2,4 GHz e 5 GHz) e entrada de rede RJ-45\n- 2 entradas HDMI (uma com ARC), 1 USB e saída de áudio óptica digital\n- Conversor digital integrado e bivolt\n\n## Para quem é\n\nPara quem quer uma TV compacta e conectada, sem precisar de aparelho extra para streaming. O Wi-Fi dual band ajuda a manter a conexão mais estável em redes de 5 GHz, e a entrada RJ-45 é uma alternativa para quem prefere internet cabeada.\n\n## Como usar\n\nConecte a TV à tomada (bivolt) e à antena para os canais abertos. Na configuração inicial, conecte-se ao Wi-Fi e entre ou crie uma conta Roku para instalar os aplicativos. A saída óptica e o HDMI com ARC permitem ligar uma soundbar ou home theater.\n\n## Cuidados\n\nLimpe a tela apenas com pano macio e seco, sem produtos abrasivos. Mantenha as aberturas de ventilação livres e, se for fixar na parede, use um suporte compatível com o padrão da TV (vendido separadamente).",
+      "highlights": [
+        "Sistema Roku TV com apps de streaming",
+        "Tela de 32\" HD com HDR10",
+        "Dolby Audio com 20 W RMS (2 x 10 W)",
+        "Wi-Fi dual band e entrada RJ-45",
+        "2 HDMI (1 com ARC), USB e saída óptica",
+        "Conversor digital integrado e bivolt"
+      ],
+      "specifications": [
+        { "group": "Tela", "items": [
+          { "name": "Tamanho", "value": "32 polegadas" },
+          { "name": "Tipo de painel", "value": "DLED, tecnologia VA" },
+          { "name": "Resolução", "value": "HD (1366 x 768)" },
+          { "name": "Taxa de atualização", "value": "60 Hz" },
+          { "name": "HDR", "value": "HDR10" },
+          { "name": "Formato", "value": "16:9" },
+          { "name": "Ângulo de visão", "value": "170° x 170°" }
+        ] },
+        { "group": "Sistema", "items": [
+          { "name": "Plataforma", "value": "Roku TV" },
+          { "name": "Processador", "value": "Quad Core" }
+        ] },
+        { "group": "Áudio", "items": [
+          { "name": "Potência", "value": "20 W RMS (2 x 10 W)" },
+          { "name": "Tecnologia", "value": "Dolby Audio" },
+          { "name": "Canais", "value": "2.0" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "HDMI", "value": "2 entradas HDMI 1.4 (1 com ARC)" },
+          { "name": "USB", "value": "1 entrada USB 2.0" },
+          { "name": "Wi-Fi", "value": "Dual band (2,4 GHz e 5 GHz)" },
+          { "name": "Rede cabeada", "value": "RJ-45" },
+          { "name": "Antena", "value": "Entrada RF com conversor digital integrado" },
+          { "name": "Saída de áudio", "value": "Óptica digital" }
+        ] },
+        { "group": "Energia", "items": [
+          { "name": "Voltagem", "value": "Bivolt" }
+        ] }
+      ],
+      "includedItems": [],
+      "seoTitle": "Smart TV Philco 32\" P32CRB Roku TV HD HDR10 | Mercatto",
+      "seoDescription": "Smart TV Philco 32\" P32CRB com Roku TV, HD, HDR10, Dolby Audio 20 W, Wi-Fi dual band, 2 HDMI e conversor digital. Bivolt.",
+      "tags": [
+        "smart tv 32",
+        "tv 32 polegadas",
+        "philco p32crb",
+        "philco roku tv",
+        "roku tv",
+        "smart tv philco",
+        "tv hd",
+        "tv para quarto",
+        "dolby audio",
+        "tv bivolt"
+      ],
+      "priceCents": 78990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "aliases": ["P32CRB"],
+      "faq": [
+        { "q": "A TV Philco P32CRB é bivolt?", "a": "Sim, o modelo P32CRB é bivolt." },
+        { "q": "Qual é a resolução da tela?", "a": "A tela de 32 polegadas tem resolução HD (1366 x 768), 60 Hz e suporte a HDR10." },
+        { "q": "Preciso de conversor para canais abertos?", "a": "Não. A TV tem conversor digital integrado; basta ligar a antena na entrada RF." },
+        { "q": "Posso ligar uma soundbar?", "a": "Sim, pela entrada HDMI com ARC ou pela saída de áudio óptica digital." },
+        { "q": "Como a TV se conecta à internet?", "a": "Por Wi-Fi dual band (2,4 GHz e 5 GHz) ou por cabo de rede na entrada RJ-45." }
+      ]
+    },
+    {
+      "key": "amazon-echo-dot-5-geracao-alexa",
+      "skuCode": "ELE-ECHODOT5",
+      "categorySlug": "caixas-de-som",
+      "brand": { "slug": "amazon", "name": "Amazon" },
+      "name": "Smart Speaker Amazon Echo Dot 5ª Geração com Alexa, Wi-Fi e Bluetooth",
+      "shortDescription": "Echo Dot 5ª geração com Alexa: alto-falante frontal de 44 mm, sensor de temperatura, toque no topo para pausar e compatibilidade com Matter para casa inteligente. Wi-Fi dual band e Bluetooth.",
+      "description": "O Echo Dot de 5ª geração é o smart speaker compacto da Amazon com a Alexa integrada. Com comandos de voz, você ouve música e podcasts, cria alarmes e lembretes, pergunta a previsão do tempo e controla dispositivos de casa inteligente compatíveis, sem precisar pegar o celular.\n\nEm relação à geração anterior, o modelo trouxe melhorias de áudio, com alto-falante de direcionamento frontal de 44 mm, e ganhou um acelerômetro: um toque no topo do aparelho pausa a música ou adia o alarme. Ele também tem sensor de temperatura ambiente, que pode ser usado em rotinas da Alexa.\n\n## Destaques\n\n- Alexa integrada para comandos de voz\n- Alto-falante frontal de 44 mm\n- Toque no topo para pausar músicas e alarmes\n- Sensor de temperatura ambiente para rotinas\n- Wi-Fi dual band (2,4 GHz e 5 GHz) e Bluetooth\n- Compatível com Matter e Bluetooth Low Energy para casa inteligente\n\n## Para quem é\n\nPara quem quer começar a montar uma casa inteligente, controlar lâmpadas, tomadas e outros dispositivos compatíveis pela voz, ou simplesmente ter um alto-falante prático no quarto, na cozinha ou no escritório. Também pode ser usado como caixa de som Bluetooth para o celular.\n\n## Como usar\n\nLigue o Echo Dot à tomada com o adaptador de energia incluso e configure pelo aplicativo Amazon Alexa, conectando-o à sua rede Wi-Fi. Depois, basta dizer \"Alexa\" seguido do comando. Rotinas, como acender a luz ao chegar em casa ou agir conforme a temperatura, são criadas no aplicativo.\n\n## Cuidados\n\nO Echo Dot precisa de tomada e de conexão Wi-Fi para os recursos da Alexa. Use apenas o adaptador de energia que acompanha o produto e evite instalá-lo próximo a fontes de calor, o que pode afetar a leitura do sensor de temperatura.",
+      "highlights": [
+        "Alexa integrada para comandos de voz",
+        "Alto-falante frontal de 44 mm",
+        "Toque no topo para pausar ou adiar alarme",
+        "Sensor de temperatura ambiente",
+        "Wi-Fi dual band e Bluetooth",
+        "Compatível com Matter para casa inteligente"
+      ],
+      "specifications": [
+        { "group": "Geral", "items": [
+          { "name": "Modelo", "value": "Echo Dot (5ª geração)" },
+          { "name": "Assistente de voz", "value": "Alexa" },
+          { "name": "Dimensões", "value": "Aprox. 100 x 100 x 89 mm" },
+          { "name": "Peso", "value": "304 g" }
+        ] },
+        { "group": "Áudio", "items": [
+          { "name": "Alto-falante", "value": "44 mm, direcionamento frontal" }
+        ] },
+        { "group": "Sensores", "items": [
+          { "name": "Temperatura", "value": "Sensor de temperatura ambiente" },
+          { "name": "Toque", "value": "Acelerômetro para pausar música e adiar alarmes com um toque" }
+        ] },
+        { "group": "Conectividade", "items": [
+          { "name": "Wi-Fi", "value": "Dual band (2,4 GHz e 5 GHz)" },
+          { "name": "Bluetooth", "value": "Sim, com suporte a A2DP" },
+          { "name": "Casa inteligente", "value": "Matter, Bluetooth Low Energy e Wi-Fi" }
+        ] },
+        { "group": "Energia", "items": [
+          { "name": "Alimentação", "value": "Adaptador de energia de 15 W (incluso)" }
+        ] }
+      ],
+      "includedItems": [
+        "Echo Dot (5ª geração)",
+        "Adaptador de energia de 15 W",
+        "Guia de início rápido"
+      ],
+      "seoTitle": "Echo Dot 5ª Geração com Alexa | Mercatto",
+      "seoDescription": "Amazon Echo Dot 5ª geração com Alexa, alto-falante de 44 mm, sensor de temperatura, Matter, Wi-Fi dual band e Bluetooth. Compre na Mercatto.",
+      "tags": [
+        "echo dot",
+        "echo dot 5",
+        "echo dot 5 geração",
+        "alexa",
+        "smart speaker",
+        "caixa de som inteligente",
+        "amazon echo",
+        "casa inteligente",
+        "assistente virtual",
+        "matter"
+      ],
+      "options": [{ "name": "Cor", "values": ["Preto", "Branco", "Azul"] }],
+      "priceCents": 31990,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "aliases": ["Echo Dot 5"],
+      "faq": [
+        { "q": "O Echo Dot 5ª geração funciona sem Wi-Fi?", "a": "Os recursos da Alexa dependem de conexão Wi-Fi. O aparelho também precisa ficar ligado à tomada." },
+        { "q": "Posso usar como caixa de som Bluetooth?", "a": "Sim, ele tem Bluetooth com suporte a A2DP para tocar áudio do celular." },
+        { "q": "Funciona com dispositivos de casa inteligente?", "a": "Sim, ele é compatível com Matter, Bluetooth Low Energy e dispositivos Wi-Fi compatíveis com a Alexa." },
+        { "q": "O que vem na caixa?", "a": "O Echo Dot (5ª geração), um adaptador de energia de 15 W e o guia de início rápido." },
+        { "q": "Quais cores estão disponíveis?", "a": "Preto, branco e azul." }
+      ]
+    }
+  ]
+}
