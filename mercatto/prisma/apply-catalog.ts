@@ -297,6 +297,8 @@ type GenericEntry = {
   attributes?: Record<string, string>;
   /** EAN/GTIN — só quando confirmado. */
   gtin?: string;
+  /** Trechos do nome (ex.: "Galaxy A17"): se a loja já tiver produto com algum deles no nome, não cadastra de novo. */
+  aliases?: string[];
 };
 
 const optionCode = (v: string) => normalizeText(v).replace(/[^a-z0-9]+/g, "").toUpperCase().slice(0, 10);
@@ -328,6 +330,13 @@ async function applyGenericProducts(touched: string[]) {
       try {
         const exists = await db.product.findFirst({ where: { OR: [{ catalogKey: e.key }, { storeId: store.id, slug: e.key }] }, select: { id: true } });
         if (exists) continue;
+        const sameProduct = e.aliases?.length
+          ? await db.product.findFirst({ where: { storeId: store.id, OR: e.aliases.map((a) => ({ name: { contains: a, mode: "insensitive" as const } })) }, select: { name: true } })
+          : null;
+        if (sameProduct) {
+          console.info(`[produtos] ${e.name}: já cadastrado como "${sameProduct.name}" — ignorado`);
+          continue;
+        }
         const category = (await db.category.findUnique({ where: { slug: e.categorySlug }, select: { id: true } })) ?? (e.category ? await createSubcategory(e.categorySlug, e.category) : null);
         if (!category) throw new Error(`categoria "${e.categorySlug}" não encontrada`);
         const slugTaken = await db.product.findUnique({ where: { slug: e.key }, select: { id: true } });
