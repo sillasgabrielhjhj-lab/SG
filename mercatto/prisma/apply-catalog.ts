@@ -289,6 +289,8 @@ type GenericEntry = {
   packaging?: { weightGrams: number; heightCm: number; widthCm: number; lengthCm: number };
   brand?: { slug: string; name: string };
   faq?: { q: string; a: string }[];
+  /** Fotos enviadas pelo dono da loja (public/products/...), na ordem da galeria — a primeira é a capa. */
+  images?: { src: string; alt: string; width: number; height: number }[];
 };
 
 const optionCode = (v: string) => normalizeText(v).replace(/[^a-z0-9]+/g, "").toUpperCase().slice(0, 10);
@@ -344,6 +346,7 @@ async function applyGenericProducts(touched: string[]) {
             warrantyText: e.warrantyText ?? null,
             ...e.packaging,
             options: { create: options.map((o, i) => ({ name: o.name, values: o.values, position: i })) },
+            images: { create: (e.images ?? []).map((img, i) => ({ url: img.src, alt: img.alt, width: img.width, height: img.height, position: i })) },
             variants: {
               create: combos.map((c, i) => {
                 const values = Object.values(c);

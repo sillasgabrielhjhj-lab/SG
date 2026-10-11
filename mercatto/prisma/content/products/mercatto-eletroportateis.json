@@ -1,0 +1,272 @@
+{
+  "products": [
+    {
+      "key": "ferro-de-passar-a-vapor-black-decker-fx3060-speed-steam",
+      "skuCode": "ELE-FX3060",
+      "categorySlug": "eletrodomesticos",
+      "brand": { "slug": "black-decker", "name": "Black+Decker" },
+      "priceCents": 15990,
+      "minStock": 2,
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "variantSkus": ["MCT-ELE-FX3060-127", "MCT-ELE-FX3060-220"],
+      "name": "Ferro de Passar a Vapor e a Seco Black+Decker Speed Steam FX3060 Base Antiaderente",
+      "shortDescription": "Ferro a vapor e a seco Black+Decker Speed Steam FX3060 com base antiaderente, reservatório de 300 ml, sistema antigotejamento, spray, vapor vertical e autolimpeza. Roupas lisas em menos tempo, do dia a dia às peças delicadas.",
+      "description": "Passar roupa pode ser rápido e sem complicação. O Black+Decker Speed Steam FX3060 combina vapor e base antiaderente para deslizar com facilidade sobre os tecidos e eliminar os amassados com menos esforço — ideal para camisas, calças, vestidos e roupas de cama.\n\n## Por que escolher o Speed Steam FX3060\n- Base antiaderente que desliza com facilidade e ajuda a proteger os tecidos.\n- Reservatório de 300 ml: passe mais peças sem precisar reabastecer a todo momento.\n- Sistema antigotejamento, que ajuda a evitar manchas de água nas roupas.\n- Vapor vertical para dar acabamento em peças no cabide e cortinas.\n- Spray frontal para umedecer vincos mais resistentes.\n- Função autolimpeza, que ajuda a manter o ferro em bom funcionamento por mais tempo.\n\n## Funcionalidades\n- Passa a vapor ou a seco, conforme o tecido.\n- Seletor de temperatura com indicação de tipos de tecido.\n- Controle de vapor e botão de spray no cabo, ao alcance do polegar.\n\n## Dicas de uso\n- Aguarde o ferro atingir a temperatura escolhida antes de usar o vapor: isso evita gotejamento.\n- Nas temperaturas mais baixas (tecidos delicados), prefira passar a seco.\n- Ao terminar, esvazie o reservatório e guarde o ferro na posição vertical.\n\n## Voltagem\nEste produto não é bivolt. Escolha a voltagem (127V ou 220V) de acordo com a tomada da sua casa antes de finalizar a compra.",
+      "highlights": [
+        "Passa a vapor e a seco",
+        "Base antiaderente que desliza com facilidade",
+        "Reservatório de água de 300 ml",
+        "Sistema antigotejamento",
+        "Vapor vertical, spray e autolimpeza",
+        "Disponível em 127V ou 220V (não é bivolt)"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            { "name": "Marca", "value": "Black+Decker" },
+            { "name": "Modelo", "value": "Speed Steam FX3060" },
+            { "name": "Tipo", "value": "Ferro de passar a vapor e a seco" },
+            { "name": "Cor", "value": "Branco e azul" },
+            { "name": "Código EAN", "value": "" }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            { "name": "Potência (127V)", "value": "1200 W" },
+            { "name": "Reservatório de água", "value": "300 ml" },
+            { "name": "Vapor contínuo", "value": "23 g/min" },
+            { "name": "Vapor vertical", "value": "Sim" },
+            { "name": "Spray", "value": "Sim" }
+          ]
+        },
+        {
+          "group": "Recursos",
+          "items": [
+            { "name": "Base", "value": "Antiaderente" },
+            { "name": "Antigotejamento", "value": "Sim" },
+            { "name": "Autolimpeza", "value": "Sim" },
+            { "name": "Seletor de temperatura por tecido", "value": "Sim" }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            { "name": "Voltagem", "value": "127V ou 220V (não é bivolt)" },
+            { "name": "Comprimento do cabo", "value": "1,75 m" }
+          ]
+        }
+      ],
+      "includedItems": ["1 Ferro de passar a vapor Black+Decker Speed Steam FX3060"],
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia do fabricante de 1 ano contra defeitos de fabricação. Consulte o certificado que acompanha o produto.",
+      "seoTitle": "Ferro a Vapor Black+Decker Speed Steam FX3060 | Mercatto",
+      "seoDescription": "Ferro a vapor e a seco Black+Decker FX3060 com base antiaderente, 300 ml, antigotejamento, vapor vertical e autolimpeza. 127V ou 220V. Compre na Mercatto.",
+      "tags": [
+        "ferro de passar",
+        "ferro a vapor",
+        "ferro de passar roupa",
+        "ferro black decker",
+        "black+decker",
+        "fx3060",
+        "speed steam",
+        "ferro antiaderente",
+        "ferro a seco",
+        "ferro vapor vertical",
+        "ferro antigotejamento",
+        "ferro autolimpeza",
+        "ferro 127v",
+        "ferro 220v",
+        "passar roupa",
+        "cuidados com roupas"
+      ],
+      "images": [
+        { "src": "/products/ferro-black-decker-fx3060/1.webp", "alt": "Ferro de passar a vapor Black+Decker Speed Steam FX3060 branco e azul soltando vapor", "width": 1254, "height": 1254 },
+        { "src": "/products/ferro-black-decker-fx3060/2.webp", "alt": "Ferro Black+Decker FX3060 em uso passando camisa branca com vapor", "width": 1254, "height": 1254 },
+        { "src": "/products/ferro-black-decker-fx3060/3.webp", "alt": "Detalhe do ferro Black+Decker FX3060 com destaque para a base antiaderente", "width": 1254, "height": 1254 }
+      ],
+      "faq": [
+        { "q": "O ferro Black+Decker FX3060 é bivolt?", "a": "Não. Ele é vendido em 127V ou em 220V. Escolha a voltagem igual à da sua tomada antes de finalizar a compra." },
+        { "q": "Qual a capacidade do reservatório de água?", "a": "O reservatório comporta 300 ml de água." },
+        { "q": "Ele passa a seco também?", "a": "Sim. O FX3060 passa a vapor e a seco; basta não acionar o vapor." },
+        { "q": "Dá para usar o vapor com a roupa no cabide?", "a": "Sim, ele tem vapor vertical para dar acabamento em peças no cabide e cortinas." },
+        { "q": "Como evitar que o ferro pingue?", "a": "Espere o ferro atingir a temperatura escolhida antes de usar o vapor e, nas temperaturas baixas, passe a seco. O sistema antigotejamento ajuda a evitar gotas nas roupas." }
+      ]
+    },
+    {
+      "key": "panela-eletrica-de-arroz-britania-pa5-prime-5-xicaras",
+      "skuCode": "ELE-PA5PRIME",
+      "categorySlug": "eletrodomesticos",
+      "brand": { "slug": "britania", "name": "Britânia" },
+      "priceCents": 18990,
+      "minStock": 2,
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "variantSkus": ["MCT-ELE-PA5PRIME-127", "MCT-ELE-PA5PRIME-220"],
+      "name": "Panela Elétrica de Arroz Britânia PA5 Prime 5 Xícaras Antiaderente Preta",
+      "shortDescription": "Panela elétrica de arroz Britânia PA5 Prime para até 5 xícaras, com tigela antiaderente, tampa com saída de vapor e coletor de água. Acompanha copo dosador e espátula. Arroz soltinho sem precisar vigiar o fogão.",
+      "description": "Arroz soltinho todos os dias, sem ficar de olho no fogão. A Panela Elétrica de Arroz Britânia PA5 Prime faz o trabalho por você: coloque o arroz e a água, ligue e siga com a sua rotina. Prática, compacta e fácil de limpar, é a parceira ideal para quem quer economizar tempo na cozinha.\n\n## Por que escolher a PA5 Prime\n- Prepara até 5 xícaras de arroz — ideal para o dia a dia da família.\n- Tigela antiaderente: o arroz não gruda e a limpeza fica muito mais fácil.\n- Tampa com saída de vapor, que ajuda a manter o cozimento uniforme.\n- Coletor de água, que evita sujeira na bancada.\n- Copo dosador e espátula inclusos para medir e servir na medida certa.\n\n## Funcionalidades\n- Cozimento automático: é só colocar os ingredientes e ligar.\n- Luzes indicadoras de funcionamento no painel frontal.\n- Design compacto em preto, que combina com qualquer cozinha.\n\n## Dicas de uso\n- Use o copo dosador que acompanha a panela para medir o arroz e a água.\n- Sirva com a espátula inclusa para não riscar o revestimento antiaderente.\n- Lave a tigela com esponja macia e detergente neutro.\n\n## Voltagem\nEste produto não é bivolt. Escolha a voltagem (127V ou 220V) de acordo com a tomada da sua casa antes de finalizar a compra.",
+      "highlights": [
+        "Capacidade para até 5 xícaras de arroz",
+        "Tigela antiaderente fácil de limpar",
+        "Tampa com saída de vapor",
+        "Coletor de água",
+        "Acompanha copo dosador e espátula",
+        "Disponível em 127V ou 220V"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            { "name": "Marca", "value": "Britânia" },
+            { "name": "Modelo", "value": "PA5 Prime" },
+            { "name": "Tipo", "value": "Panela elétrica de arroz" },
+            { "name": "Cor", "value": "Preta" },
+            { "name": "Código EAN", "value": "" }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            { "name": "Capacidade", "value": "Até 5 xícaras de arroz" },
+            { "name": "Potência", "value": "300 W" }
+          ]
+        },
+        {
+          "group": "Recursos",
+          "items": [
+            { "name": "Tigela", "value": "Antiaderente" },
+            { "name": "Tampa com saída de vapor", "value": "Sim" },
+            { "name": "Coletor de água", "value": "Sim" },
+            { "name": "Luzes indicadoras", "value": "Sim" }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [{ "name": "Voltagem", "value": "127V ou 220V (não é bivolt)" }]
+        }
+      ],
+      "includedItems": ["1 Panela elétrica de arroz Britânia PA5 Prime", "1 Tigela antiaderente", "1 Copo dosador", "1 Espátula"],
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia do fabricante contra defeitos de fabricação. Consulte o certificado que acompanha o produto.",
+      "packaging": { "weightGrams": 1900, "heightCm": 26, "widthCm": 24, "lengthCm": 24 },
+      "seoTitle": "Panela de Arroz Elétrica Britânia PA5 Prime 5 Xícaras | Mercatto",
+      "seoDescription": "Panela elétrica de arroz Britânia PA5 Prime para 5 xícaras, tigela antiaderente, saída de vapor, copo dosador e espátula. 127V ou 220V. Compre na Mercatto.",
+      "tags": [
+        "panela de arroz",
+        "panela elétrica de arroz",
+        "panela de arroz elétrica",
+        "arrozeira elétrica",
+        "britânia",
+        "britania pa5",
+        "pa5 prime",
+        "panela arroz 5 xícaras",
+        "panela antiaderente",
+        "panela arroz britânia",
+        "panela de arroz 127v",
+        "panela de arroz 220v",
+        "eletroportátil cozinha",
+        "cozinha prática"
+      ],
+      "images": [
+        { "src": "/products/panela-arroz-britania-pa5-prime/1.webp", "alt": "Panela elétrica de arroz Britânia PA5 Prime preta aberta com arroz soltinho", "width": 1254, "height": 1254 },
+        { "src": "/products/panela-arroz-britania-pa5-prime/2.webp", "alt": "Panela de arroz Britânia PA5 Prime na bancada da cozinha ao lado de prato com arroz", "width": 1254, "height": 1254 },
+        { "src": "/products/panela-arroz-britania-pa5-prime/3.webp", "alt": "Panela Britânia PA5 Prime servindo arroz com feijão e legumes na mesa", "width": 1254, "height": 1254 }
+      ],
+      "faq": [
+        { "q": "Quantas xícaras de arroz a PA5 Prime faz?", "a": "Ela prepara até 5 xícaras de arroz." },
+        { "q": "A panela é bivolt?", "a": "Não. Ela é vendida em 127V ou em 220V. Escolha a voltagem igual à da sua tomada antes de finalizar a compra." },
+        { "q": "O arroz gruda no fundo?", "a": "A tigela é antiaderente, o que evita que o arroz grude e facilita a limpeza." },
+        { "q": "O que vem na caixa?", "a": "A panela com a tigela antiaderente, um copo dosador e uma espátula." },
+        { "q": "Qual a potência?", "a": "A panela tem 300 W de potência." }
+      ]
+    },
+    {
+      "key": "mixer-3-em-1-elgin-turbo-chef-mix20-200w",
+      "skuCode": "ELE-MIX20",
+      "categorySlug": "eletrodomesticos",
+      "brand": { "slug": "elgin", "name": "Elgin" },
+      "priceCents": 11990,
+      "minStock": 2,
+      "options": [{ "name": "Voltagem", "values": ["127V", "220V"] }],
+      "variantSkus": ["MCT-ELE-MIX20-127", "MCT-ELE-MIX20-220"],
+      "name": "Mixer 3 em 1 Elgin Turbo Chef MIX20 200W com Copo 700 ml, Miniprocessador e Fouet Preto",
+      "shortDescription": "Mixer de mão 3 em 1 Elgin Turbo Chef MIX20 com 200 W: mixa, tritura e bate. Acompanha copo de 700 ml, miniprocessador de 0,3 L e fouet. Vitaminas, sopas, molhos, temperos picados e claras em neve em poucos minutos.",
+      "description": "Um só aparelho para mixar, triturar e bater. O Mixer Elgin Turbo Chef 3 em 1 deixa o preparo de vitaminas, sopas, papinhas, molhos e temperos muito mais rápido — e ocupa pouco espaço na cozinha.\n\n## Por que escolher o Turbo Chef 3 em 1\n- Mixer: prepare vitaminas, sopas cremosas, molhos e papinhas no copo de 700 ml.\n- Miniprocessador de 0,3 L: pique cebola, alho, ervas, castanhas e legumes em segundos.\n- Fouet: bata claras em neve, chantilly e massas leves.\n- Copo de 700 ml para misturas, com bico para servir.\n- Lâminas de aço afiadas para resultados uniformes.\n\n## Funcionalidades\n- 200 W de potência.\n- Haste removível, que facilita a troca de acessórios e a limpeza.\n\n## Dicas de uso\n- Encaixe o acessório desejado antes de ligar o mixer na tomada.\n- Use o copo de 700 ml para vitaminas e bebidas; para picar, use o miniprocessador.\n- Desconecte da tomada antes de trocar acessórios e lavar as peças.\n\n## Voltagem\nEste produto não é bivolt. Escolha a voltagem (127V ou 220V) de acordo com a tomada da sua casa antes de finalizar a compra.",
+      "highlights": [
+        "3 em 1: mixa, tritura e bate",
+        "200 W de potência",
+        "Copo para misturas de 700 ml",
+        "Miniprocessador de 0,3 L",
+        "Fouet para claras e massas leves",
+        "Haste removível, fácil de limpar"
+      ],
+      "specifications": [
+        {
+          "group": "Informações gerais",
+          "items": [
+            { "name": "Marca", "value": "Elgin" },
+            { "name": "Modelo", "value": "Turbo Chef 3 em 1 (MIX20)" },
+            { "name": "Tipo", "value": "Mixer de mão multifuncional" },
+            { "name": "Cor", "value": "Preto" },
+            { "name": "Código EAN", "value": "" }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            { "name": "Potência", "value": "200 W" },
+            { "name": "Funções", "value": "Mixer, miniprocessador (triturador) e fouet (batedor)" }
+          ]
+        },
+        {
+          "group": "Acessórios",
+          "items": [
+            { "name": "Copo para misturas", "value": "700 ml" },
+            { "name": "Miniprocessador", "value": "0,3 L" },
+            { "name": "Fouet", "value": "Sim" },
+            { "name": "Lâminas", "value": "Aço" },
+            { "name": "Haste removível", "value": "Sim" }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [{ "name": "Voltagem", "value": "127V ou 220V (não é bivolt)" }]
+        }
+      ],
+      "includedItems": ["1 Corpo do mixer com haste removível", "1 Copo para misturas de 700 ml", "1 Miniprocessador de 0,3 L", "1 Fouet"],
+      "seoTitle": "Mixer 3 em 1 Elgin Turbo Chef MIX20 200W | Mercatto",
+      "seoDescription": "Mixer 3 em 1 Elgin Turbo Chef MIX20 200W: mixa, tritura e bate. Copo 700 ml, miniprocessador 0,3 L e fouet. 127V ou 220V. Compre na Mercatto.",
+      "tags": [
+        "mixer",
+        "mixer 3 em 1",
+        "mixer de mão",
+        "mixer elgin",
+        "elgin",
+        "turbo chef",
+        "mix20",
+        "mixer com processador",
+        "mixer com fouet",
+        "mixer vertical",
+        "mixer 200w",
+        "triturador de alimentos",
+        "batedor de claras",
+        "mixer 127v",
+        "mixer 220v",
+        "eletroportátil cozinha"
+      ],
+      "images": [
+        { "src": "/products/mixer-elgin-turbo-chef-mix20/1.webp", "alt": "Mixer 3 em 1 Elgin Turbo Chef preto com fouet, miniprocessador e copo de 700 ml", "width": 1254, "height": 1254 },
+        { "src": "/products/mixer-elgin-turbo-chef-mix20/2.webp", "alt": "Mixer Elgin Turbo Chef em uso preparando vitamina de morango no copo", "width": 1254, "height": 1254 },
+        { "src": "/products/mixer-elgin-turbo-chef-mix20/3.webp", "alt": "Acessórios do mixer Elgin Turbo Chef 3 em 1: fouet, miniprocessador com legumes e copo com suco", "width": 1254, "height": 1254 }
+      ],
+      "faq": [
+        { "q": "O que significa 3 em 1?", "a": "São três funções: mixer (com o copo de 700 ml), triturador (com o miniprocessador de 0,3 L) e batedor (com o fouet)." },
+        { "q": "O mixer é bivolt?", "a": "Não. Ele é vendido em 127V ou em 220V. Escolha a voltagem igual à da sua tomada antes de finalizar a compra." },
+        { "q": "Qual a potência?", "a": "O Turbo Chef 3 em 1 tem 200 W de potência." },
+        { "q": "O que vem na caixa?", "a": "O corpo do mixer com haste removível, o copo para misturas de 700 ml, o miniprocessador de 0,3 L e o fouet." },
+        { "q": "A haste sai para lavar?", "a": "Sim, a haste é removível, o que facilita a limpeza." }
+      ]
+    }
+  ]
+}

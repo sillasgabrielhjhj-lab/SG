@@ -60,7 +60,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
-    localPatterns: [{ pathname: "/uploads/**" }, { pathname: "/demo/**" }, { pathname: "/brand/**" }, { pathname: "/banners/**" }],
+    localPatterns: [{ pathname: "/uploads/**" }, { pathname: "/demo/**" }, { pathname: "/brand/**" }, { pathname: "/banners/**" }, { pathname: "/products/**" }],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
