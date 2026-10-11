@@ -1,0 +1,738 @@
+{
+  "products": [
+    {
+      "key": "colormaq-tanquinho-lcs10-10kg",
+      "skuCode": "ELE-CMLCS10",
+      "categorySlug": "lavadoras",
+      "brand": {
+        "slug": "colormaq",
+        "name": "Colormaq"
+      },
+      "name": "Tanquinho Lavadora Semiautomática Colormaq LCS10 10kg com 5 Programas",
+      "shortDescription": "Tanquinho semiautomático Colormaq LCS10 com capacidade de 10 kg, controle eletromecânico com timer, 5 programas de lavagem, filtro para fiapos e Selo Procel A.",
+      "description": "O tanquinho Colormaq LCS10 é uma solução simples e econômica para quem quer lavar roupas com praticidade sem investir em uma lavadora automática. Com capacidade de 10 kg, ele dá conta da roupa do dia a dia de uma família e ainda ocupa pouco espaço na área de serviço.\n\nO controle é eletromecânico, com timer, o que torna o uso intuitivo: basta escolher o programa, ajustar o tempo e deixar o equipamento trabalhar. São 5 programas de lavagem para adaptar o ciclo ao tipo de roupa e ao nível de sujeira.\n\n## Destaques\n\n- Capacidade de lavagem de 10 kg\n- Controle eletromecânico com timer\n- 5 programas de lavagem\n- Filtro para fiapos, que ajuda a manter as roupas mais limpas\n- Selo Procel A de eficiência energética\n- Cesto e gabinete em plástico, leves e resistentes à umidade\n\n## Para quem é\n\nIndicado para quem busca um equipamento de lavagem com baixo consumo de energia e custo acessível, para casas, apartamentos ou como apoio a uma lavadora principal. Por ser semiautomático, o enxágue e a centrifugação são feitos fora do tanquinho, o que dá mais controle sobre o processo.\n\n## Como usar\n\nAbasteça com água, adicione o sabão, coloque as roupas respeitando o limite de 10 kg, selecione o programa e ajuste o timer. Ao final, escoe a água e faça o enxágue.\n\n## Cuidados\n\n- Confira a voltagem antes de ligar: o modelo é vendido em 127V ou 220V\n- Limpe o filtro de fiapos após cada uso\n- Não exceda a capacidade indicada para preservar o motor\n- Instale em local nivelado e protegido da chuva",
+      "highlights": [
+        "Capacidade de lavagem de 10 kg",
+        "Controle eletromecânico com timer",
+        "5 programas de lavagem",
+        "Filtro para fiapos",
+        "Selo Procel A de eficiência energética"
+      ],
+      "specifications": [
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Colormaq"
+            },
+            {
+              "name": "Modelo",
+              "value": "LCS10"
+            },
+            {
+              "name": "Tipo",
+              "value": "Lavadora semiautomática (tanquinho)"
+            },
+            {
+              "name": "Capacidade de lavagem",
+              "value": "10 kg"
+            }
+          ]
+        },
+        {
+          "group": "Funções",
+          "items": [
+            {
+              "name": "Controle",
+              "value": "Eletromecânico com timer"
+            },
+            {
+              "name": "Programas de lavagem",
+              "value": "5"
+            },
+            {
+              "name": "Filtro de fiapos",
+              "value": "Sim"
+            }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (conforme versão)"
+            },
+            {
+              "name": "Consumo de energia",
+              "value": "0,11 kWh"
+            },
+            {
+              "name": "Selo Procel",
+              "value": "A"
+            }
+          ]
+        },
+        {
+          "group": "Construção e dimensões",
+          "items": [
+            {
+              "name": "Material do cesto",
+              "value": "Plástico"
+            },
+            {
+              "name": "Material do gabinete",
+              "value": "Plástico"
+            },
+            {
+              "name": "Dimensões (A x L x P)",
+              "value": "96 x 48,5 x 55,5 cm"
+            },
+            {
+              "name": "Peso",
+              "value": "10,75 kg"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Tanquinho Colormaq LCS10 10kg Semiautomático | Mercatto",
+      "seoDescription": "Tanquinho Colormaq LCS10 de 10 kg com 5 programas, timer, filtro de fiapos e Selo Procel A. Versões 127V e 220V.",
+      "tags": [
+        "tanquinho",
+        "tanquinho colormaq",
+        "colormaq lcs10",
+        "lavadora semiautomática",
+        "tanquinho 10kg",
+        "máquina de lavar",
+        "lavanderia",
+        "procel a",
+        "lavadora colormaq",
+        "tanquinho barato"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 42990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Qual a capacidade do tanquinho?",
+          "answer": "O Colormaq LCS10 lava até 10 kg de roupa por ciclo."
+        },
+        {
+          "question": "Ele é bivolt?",
+          "answer": "Não. É vendido em versões 127V e 220V; escolha a voltagem correta da sua tomada."
+        },
+        {
+          "question": "Quantos programas de lavagem ele tem?",
+          "answer": "São 5 programas, com controle eletromecânico e timer."
+        },
+        {
+          "question": "Ele é econômico?",
+          "answer": "Possui Selo Procel A, com consumo informado de 0,11 kWh."
+        },
+        {
+          "question": "Quais as dimensões?",
+          "answer": "Aproximadamente 96 cm de altura, 48,5 cm de largura e 55,5 cm de profundidade, com 10,75 kg."
+        }
+      ],
+      "aliases": [
+        "LCS10",
+        "LCS 10"
+      ]
+    },
+    {
+      "key": "britania-cafeteira-cp28-28-xicaras",
+      "skuCode": "ELE-BRCP28",
+      "categorySlug": "cafeteiras",
+      "brand": {
+        "slug": "britania",
+        "name": "Britânia"
+      },
+      "name": "Cafeteira Elétrica Britânia CP28 28 Xícaras com Jarra de Vidro Preta",
+      "shortDescription": "Cafeteira elétrica Britânia CP28 para até 28 xícaras de cafezinho, com jarra de vidro, filtro permanente removível, placa aquecedora e sistema corta-pingo.",
+      "description": "A cafeteira elétrica Britânia CP28 foi pensada para quem gosta de café coado fresquinho todos os dias, sem complicação. Com capacidade para até 28 xícaras de cafezinho, ela atende bem famílias, pequenos escritórios e quem recebe visitas com frequência.\n\nO filtro permanente e removível dispensa a compra de filtros de papel e facilita a limpeza. A placa aquecedora mantém o café quente na jarra de vidro depois do preparo, e o sistema corta-pingo permite servir uma xícara no meio do processo sem sujar a base.\n\n## Destaques\n\n- Capacidade para até 28 xícaras de cafezinho\n- Jarra de vidro\n- Filtro permanente e removível\n- Placa aquecedora para manter o café quente\n- Sistema corta-pingo\n- Acabamento na cor preta\n\n## Como usar\n\nAbasteça o reservatório com água fria, coloque o pó de café no filtro permanente, posicione a jarra sobre a placa e ligue a cafeteira. Ao final do preparo, o café fica aquecido pela placa. Para servir antes de terminar, basta retirar a jarra: o corta-pingo segura o fluxo.\n\n## Para quem é\n\nPara quem quer uma cafeteira simples, de manuseio fácil e preço acessível, sem abrir mão de praticidade na rotina.\n\n## Cuidados\n\n- Confira a voltagem antes de ligar: há versões 110V e 220V\n- Lave o filtro e a jarra após cada uso\n- Não ligue a cafeteira sem água no reservatório\n- Evite choques térmicos na jarra de vidro",
+      "highlights": [
+        "Prepara até 28 xícaras de cafezinho",
+        "Jarra de vidro",
+        "Filtro permanente e removível",
+        "Placa aquecedora",
+        "Sistema corta-pingo"
+      ],
+      "specifications": [
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Britânia"
+            },
+            {
+              "name": "Modelo",
+              "value": "CP28"
+            },
+            {
+              "name": "Tipo",
+              "value": "Cafeteira elétrica de café coado"
+            },
+            {
+              "name": "Cor",
+              "value": "Preta"
+            }
+          ]
+        },
+        {
+          "group": "Capacidade e recursos",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "28 xícaras de cafezinho"
+            },
+            {
+              "name": "Jarra",
+              "value": "Vidro"
+            },
+            {
+              "name": "Filtro",
+              "value": "Permanente e removível"
+            },
+            {
+              "name": "Placa aquecedora",
+              "value": "Sim"
+            },
+            {
+              "name": "Corta-pingo",
+              "value": "Sim"
+            }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            {
+              "name": "Voltagem",
+              "value": "110V ou 220V (conforme versão)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Cafeteira",
+        "Jarra de vidro",
+        "Filtro permanente"
+      ],
+      "seoTitle": "Cafeteira Elétrica Britânia CP28 28 Xícaras | Mercatto",
+      "seoDescription": "Cafeteira Britânia CP28 para 28 xícaras com jarra de vidro, filtro permanente, placa aquecedora e corta-pingo. Versões 110V e 220V.",
+      "tags": [
+        "cafeteira",
+        "cafeteira elétrica",
+        "britânia cp28",
+        "cafeteira britânia",
+        "cafeteira 28 xícaras",
+        "café coado",
+        "filtro permanente",
+        "corta-pingo",
+        "cafeteira barata"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "110V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 8690,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Quantas xícaras a CP28 prepara?",
+          "answer": "Até 28 xícaras de cafezinho por preparo."
+        },
+        {
+          "question": "Preciso de filtro de papel?",
+          "answer": "Não. Ela vem com filtro permanente e removível."
+        },
+        {
+          "question": "Ela é bivolt?",
+          "answer": "Não. Há versões 110V e 220V; escolha conforme sua tomada."
+        },
+        {
+          "question": "Posso servir antes de terminar o preparo?",
+          "answer": "Sim. O sistema corta-pingo segura o café ao retirar a jarra."
+        },
+        {
+          "question": "O café fica quente depois de pronto?",
+          "answer": "Sim, a placa aquecedora mantém o café aquecido na jarra."
+        }
+      ],
+      "aliases": [
+        "CP28"
+      ]
+    },
+    {
+      "key": "brastemp-geladeira-brm45hk-frost-free-375l-inox",
+      "skuCode": "ELE-BRM45HK",
+      "categorySlug": "geladeiras",
+      "brand": {
+        "slug": "brastemp",
+        "name": "Brastemp"
+      },
+      "name": "Geladeira Brastemp BRM45HK Frost Free Duplex 375 Litros Inox",
+      "shortDescription": "Geladeira Brastemp BRM45HK Frost Free duplex de 375 litros em inox, com compartimento extra-frio, iluminação em LED, controle de umidade, prateleiras de vidro e Selo Procel A.",
+      "description": "A geladeira Brastemp BRM45HK combina capacidade generosa e acabamento em inox para quem quer organizar bem os alimentos da família. São 375 litros no total, sendo 288,5 litros no refrigerador e 86,5 litros no congelador, em configuração duplex com portas separadas.\n\nO sistema Frost Free evita a formação de gelo, então você não precisa fazer degelo manual. As prateleiras de vidro temperado são fáceis de limpar, e a iluminação interna em LED ajuda a encontrar tudo rapidamente.\n\n## Destaques\n\n- Capacidade total de 375 litros (288,5 L refrigerador + 86,5 L congelador)\n- Frost Free: sem acúmulo de gelo\n- Compartimento extra-frio para bebidas e frios\n- Controle de umidade para frutas e verduras\n- Iluminação interna em LED\n- Acabamento externo em inox e Selo Procel A\n\n## Para quem é\n\nIdeal para famílias que fazem compras para a semana ou o mês e precisam de espaço tanto no refrigerador quanto no congelador, com um visual moderno na cozinha.\n\n## Instalação e cuidados\n\n- Verifique a voltagem: o modelo é vendido em 127V e 220V\n- Confira o espaço disponível: a geladeira mede 176 x 62,1 x 75,5 cm\n- Após a instalação, aguarde o tempo indicado no manual antes de ligar\n- Deixe espaço para ventilação nas laterais e no fundo\n- Limpe o inox com pano macio e produtos neutros",
+      "highlights": [
+        "375 litros totais em configuração duplex",
+        "Frost Free, sem necessidade de degelo",
+        "Compartimento extra-frio",
+        "Iluminação interna em LED",
+        "Selo Procel A"
+      ],
+      "specifications": [
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Brastemp"
+            },
+            {
+              "name": "Modelo",
+              "value": "BRM45HK"
+            },
+            {
+              "name": "Tipo",
+              "value": "Duplex Frost Free"
+            },
+            {
+              "name": "Acabamento externo",
+              "value": "Inox"
+            }
+          ]
+        },
+        {
+          "group": "Capacidade",
+          "items": [
+            {
+              "name": "Capacidade total",
+              "value": "375 litros"
+            },
+            {
+              "name": "Refrigerador",
+              "value": "288,5 litros"
+            },
+            {
+              "name": "Congelador",
+              "value": "86,5 litros"
+            }
+          ]
+        },
+        {
+          "group": "Recursos",
+          "items": [
+            {
+              "name": "Compartimento extra-frio",
+              "value": "Sim"
+            },
+            {
+              "name": "Controle de umidade",
+              "value": "Sim"
+            },
+            {
+              "name": "Iluminação interna",
+              "value": "LED"
+            },
+            {
+              "name": "Prateleiras",
+              "value": "Vidro temperado"
+            }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (conforme versão)"
+            },
+            {
+              "name": "Consumo de energia",
+              "value": "54 kWh/mês"
+            },
+            {
+              "name": "Selo Procel",
+              "value": "A"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões",
+          "items": [
+            {
+              "name": "Dimensões (A x L x P)",
+              "value": "176 x 62,1 x 75,5 cm"
+            },
+            {
+              "name": "Peso",
+              "value": "58 kg"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Geladeira Brastemp BRM45HK Frost Free 375L Inox | Mercatto",
+      "seoDescription": "Geladeira Brastemp BRM45HK Frost Free duplex 375 litros em inox, com extra-frio, LED e Selo Procel A. Versões 127V e 220V.",
+      "tags": [
+        "geladeira",
+        "geladeira brastemp",
+        "brm45hk",
+        "geladeira frost free",
+        "geladeira duplex",
+        "geladeira 375 litros",
+        "geladeira inox",
+        "refrigerador",
+        "procel a",
+        "brastemp inox"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 274990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Qual a capacidade da geladeira?",
+          "answer": "375 litros no total: 288,5 L no refrigerador e 86,5 L no congelador."
+        },
+        {
+          "question": "Ela precisa de degelo?",
+          "answer": "Não. O sistema Frost Free evita o acúmulo de gelo."
+        },
+        {
+          "question": "Ela é bivolt?",
+          "answer": "Não. É vendida em versões 127V e 220V."
+        },
+        {
+          "question": "Quais as medidas?",
+          "answer": "176 cm de altura, 62,1 cm de largura e 75,5 cm de profundidade, com 58 kg."
+        },
+        {
+          "question": "Qual o consumo de energia?",
+          "answer": "Consumo informado de 54 kWh/mês, com Selo Procel A."
+        }
+      ],
+      "aliases": [
+        "BRM45HK"
+      ]
+    },
+    {
+      "key": "consul-lavadora-cwh12bb-12kg",
+      "skuCode": "ELE-CWH12BB",
+      "categorySlug": "lavadoras",
+      "brand": {
+        "slug": "consul",
+        "name": "Consul"
+      },
+      "name": "Máquina de Lavar Consul CWH12BB 12kg Ciclo Edredom Cesto Inox Branca",
+      "shortDescription": "Lavadora automática Consul CWH12BB de 12 kg com abertura superior, 16 programas, ciclo edredom, cesto inox, 4 níveis de água, centrifugação de 750 rpm e Selo Procel A.",
+      "description": "A máquina de lavar Consul CWH12BB oferece 12 kg de capacidade em um corpo de apenas 58 cm de largura, pensado para áreas de serviço compactas e apartamentos. É uma lavadora automática de abertura superior que simplifica a rotina de lavar roupas da família.\n\nCom 16 programas de lavagem, incluindo ciclo para edredom, ela se adapta desde peças do dia a dia até itens de cama mais volumosos. O cesto é em inox, e os 4 níveis de água permitem ajustar o consumo à quantidade de roupa.\n\n## Destaques\n\n- Capacidade de 12 kg\n- 16 programas de lavagem, com ciclo edredom\n- Cesto em inox\n- 4 níveis de água\n- Centrifugação de 750 rpm\n- Selo Procel A\n\n## Para quem é\n\nIndicada para famílias que lavam roupa com frequência e querem lavar peças grandes, como edredons, em casa. A largura de 58 cm facilita a instalação em espaços estreitos.\n\n## Como usar\n\nSelecione o programa adequado ao tipo de tecido, ajuste o nível de água de acordo com a carga, adicione sabão e amaciante nos compartimentos e inicie o ciclo. Ciclos mais pesados levam mais tempo para concluir.\n\n## Cuidados\n\n- Confira a voltagem antes da instalação: há versões 127V e 220V\n- Instale em piso nivelado, com ponto de água e escoamento adequados\n- Não ultrapasse a capacidade de 12 kg\n- Limpe periodicamente o filtro e os dispensers",
+      "highlights": [
+        "Capacidade de lavagem de 12 kg",
+        "16 programas, incluindo ciclo edredom",
+        "Cesto em inox",
+        "4 níveis de água",
+        "Centrifugação de 750 rpm"
+      ],
+      "specifications": [
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Consul"
+            },
+            {
+              "name": "Modelo",
+              "value": "CWH12BB"
+            },
+            {
+              "name": "Tipo",
+              "value": "Lavadora automática"
+            },
+            {
+              "name": "Abertura",
+              "value": "Superior"
+            },
+            {
+              "name": "Cor",
+              "value": "Branca"
+            }
+          ]
+        },
+        {
+          "group": "Lavagem",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "12 kg"
+            },
+            {
+              "name": "Programas de lavagem",
+              "value": "16"
+            },
+            {
+              "name": "Ciclo edredom",
+              "value": "Sim"
+            },
+            {
+              "name": "Níveis de água",
+              "value": "4"
+            },
+            {
+              "name": "Centrifugação",
+              "value": "750 rpm"
+            },
+            {
+              "name": "Cesto",
+              "value": "Inox"
+            },
+            {
+              "name": "Controle",
+              "value": "Eletromecânico"
+            }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (conforme versão)"
+            },
+            {
+              "name": "Consumo de energia",
+              "value": "0,37 kWh"
+            },
+            {
+              "name": "Selo Procel",
+              "value": "A"
+            }
+          ]
+        },
+        {
+          "group": "Dimensões",
+          "items": [
+            {
+              "name": "Dimensões (A x L x P)",
+              "value": "101 x 58 x 60 cm"
+            },
+            {
+              "name": "Peso",
+              "value": "32 kg"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Máquina de Lavar Consul CWH12BB 12kg Cesto Inox | Mercatto",
+      "seoDescription": "Lavadora Consul CWH12BB 12 kg com 16 programas, ciclo edredom, cesto inox, 4 níveis de água e Selo Procel A. Versões 127V e 220V.",
+      "tags": [
+        "máquina de lavar",
+        "lavadora consul",
+        "consul 12kg",
+        "cwh12bb",
+        "lavadora 12kg",
+        "ciclo edredom",
+        "cesto inox",
+        "lavadora automática",
+        "máquina de lavar roupa",
+        "procel a"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 156990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Qual a capacidade da lavadora?",
+          "answer": "12 kg de roupa seca por ciclo."
+        },
+        {
+          "question": "Ela lava edredom?",
+          "answer": "Sim, possui ciclo específico para edredom."
+        },
+        {
+          "question": "Ela é bivolt?",
+          "answer": "Não. É vendida em versões 127V e 220V."
+        },
+        {
+          "question": "Cabe em área de serviço pequena?",
+          "answer": "Ela mede 101 x 58 x 60 cm (A x L x P); confira o espaço antes da compra."
+        },
+        {
+          "question": "Quantos programas de lavagem tem?",
+          "answer": "São 16 programas, com 4 níveis de água e centrifugação de 750 rpm."
+        }
+      ],
+      "aliases": [
+        "CWH12BB"
+      ]
+    },
+    {
+      "key": "mondial-batedeira-pratica-b-44-w-branca",
+      "skuCode": "ELE-MDB44W",
+      "categorySlug": "eletrodomesticos",
+      "brand": {
+        "slug": "mondial",
+        "name": "Mondial"
+      },
+      "name": "Batedeira Mondial Prática B-44-W 400W 3 Velocidades Tigela 3,6L Branca",
+      "shortDescription": "Batedeira Mondial Prática B-44-W branca, com 400 W de potência, 3 velocidades mais turbo, tigela de 3,6 litros e 2 batedores para massas leves.",
+      "description": "A batedeira Mondial Prática B-44-W é uma aliada para quem gosta de preparar bolos, cremes e massas leves em casa. Com 400 W de potência e tigela de 3,6 litros, ela atende bem receitas do dia a dia e preparos para a família.\n\nSão 3 velocidades, além da função turbo, para ajustar a intensidade conforme a etapa da receita: velocidades baixas para incorporar ingredientes secos e mais altas para bater claras e cremes. O acabamento branco combina com cozinhas de estilo clássico.\n\n## Destaques\n\n- Potência de 400 W\n- 3 velocidades e função turbo\n- Tigela com capacidade de 3,6 litros\n- 2 batedores para massas leves\n- Cor branca\n\n## Para quem é\n\nPara quem quer uma batedeira simples e acessível para bolos, glacês, chantilly, purês e massas leves. Não é indicada para massas pesadas, como pão.\n\n## Como usar\n\nEncaixe os batedores, coloque os ingredientes na tigela e comece pela velocidade mais baixa, aumentando aos poucos. Use o turbo em momentos curtos, quando precisar de mais força.\n\n## Cuidados\n\n- Confira a voltagem: há versões 127V e 220V\n- Desligue da tomada antes de encaixar ou retirar os batedores\n- Lave os batedores e a tigela após o uso; não mergulhe o corpo do motor em água\n- Respeite a capacidade da tigela para evitar respingos",
+      "highlights": [
+        "Potência de 400 W",
+        "3 velocidades e função turbo",
+        "Tigela de 3,6 litros",
+        "2 batedores inclusos",
+        "Cor branca"
+      ],
+      "specifications": [
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Marca",
+              "value": "Mondial"
+            },
+            {
+              "name": "Linha",
+              "value": "Prática"
+            },
+            {
+              "name": "Modelo",
+              "value": "B-44-W"
+            },
+            {
+              "name": "Cor",
+              "value": "Branca"
+            }
+          ]
+        },
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Potência",
+              "value": "400 W"
+            },
+            {
+              "name": "Velocidades",
+              "value": "3 + turbo"
+            },
+            {
+              "name": "Capacidade da tigela",
+              "value": "3,6 litros"
+            },
+            {
+              "name": "Batedores",
+              "value": "2, para massas leves"
+            }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (conforme versão)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [
+        "Batedeira",
+        "Tigela de 3,6 litros",
+        "2 batedores"
+      ],
+      "seoTitle": "Batedeira Mondial Prática B-44-W 400W Branca | Mercatto",
+      "seoDescription": "Batedeira Mondial Prática B-44-W branca com 400 W, 3 velocidades e turbo, tigela de 3,6 L e 2 batedores. Versões 127V e 220V.",
+      "tags": [
+        "batedeira",
+        "batedeira mondial",
+        "mondial b-44",
+        "b-44-w",
+        "batedeira prática",
+        "batedeira branca",
+        "batedeira 400w",
+        "bolo",
+        "confeitaria",
+        "eletroportátil"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 10490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Qual a potência da batedeira?",
+          "answer": "400 W."
+        },
+        {
+          "question": "Quantas velocidades ela tem?",
+          "answer": "3 velocidades, além da função turbo."
+        },
+        {
+          "question": "Ela bate massa de pão?",
+          "answer": "Os batedores são do tipo comum, indicados para massas leves."
+        },
+        {
+          "question": "Ela é bivolt?",
+          "answer": "Não. Há versões 127V e 220V."
+        },
+        {
+          "question": "Qual a capacidade da tigela?",
+          "answer": "3,6 litros."
+        }
+      ],
+      "aliases": [
+        "B-44"
+      ]
+    }
+  ]
+}

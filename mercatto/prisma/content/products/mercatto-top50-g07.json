@@ -1,0 +1,445 @@
+{
+  "products": [
+    {
+      "key": "wap-high-speed-plus-aspirador-vertical-1350w",
+      "skuCode": "CAS-WAPHSP-1350",
+      "categorySlug": "aspiradores",
+      "brand": {
+        "slug": "wap",
+        "name": "WAP"
+      },
+      "name": "Aspirador de Pó Vertical e Portátil WAP High Speed Plus 3 em 1 1350W",
+      "shortDescription": "Aspirador vertical 3 em 1 da WAP com 1350 W, sistema ciclônico e filtro HEPA lavável. Vira aspirador portátil para sofás, carro e cantos. Versões 127V e 220V.",
+      "description": "O WAP High Speed Plus foi pensado para a limpeza do dia a dia sem complicação. Com motor de 1350 W e sistema ciclônico, ele dispensa saco coletor: a sujeira fica em um reservatório que você esvazia rapidamente, e o filtro HEPA lavável ajuda a reter as partículas finas de poeira.\n\nO formato 3 em 1 permite usar o aparelho como aspirador vertical para pisos e, ao destacar a parte de mão, como aspirador portátil para sofás, colchões, bancos de carro e cantos de difícil acesso. Por ser leve, é fácil de carregar entre os cômodos e de guardar em espaços pequenos.\n\n## Destaques\n\n- Motor de 1350 W para a limpeza cotidiana de pisos e superfícies\n- Sistema ciclônico sem saco coletor: menos gasto com acessórios\n- Filtro HEPA lavável, que pode ser reutilizado após a limpeza\n- Uso vertical ou portátil, conforme a necessidade\n- Funciona ligado à tomada, sem preocupação com bateria\n\n## Para quem é\n\nIdeal para apartamentos e casas que precisam de uma limpeza rápida e frequente, para quem tem pets e quer remover pelos de sofás e tapetes baixos, e para quem busca um aspirador prático para manter o carro em ordem.\n\n## Como usar\n\nEncaixe o bocal adequado ao tipo de superfície, ligue o aparelho e passe com movimentos lentos para melhor aproveitamento da sucção. Ao terminar, esvazie o reservatório e lave o filtro periodicamente, deixando-o secar completamente antes de recolocá-lo.\n\n## Cuidados\n\nO aparelho não aspira água nem líquidos. Confira a voltagem antes de ligar à tomada e siga as orientações do manual do fabricante para limpeza e armazenamento.",
+      "highlights": [
+        "Potência de 1350 W",
+        "Sistema ciclônico, sem saco coletor",
+        "Filtro HEPA lavável",
+        "3 em 1: uso vertical ou portátil",
+        "Não aspira líquidos"
+      ],
+      "specifications": [
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Potência",
+              "value": "1350 W"
+            },
+            {
+              "name": "Tecnologia",
+              "value": "Ciclônica"
+            },
+            {
+              "name": "Filtro",
+              "value": "HEPA lavável"
+            },
+            {
+              "name": "Aspira água",
+              "value": "Não"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Tipo",
+              "value": "Vertical e portátil (3 em 1)"
+            },
+            {
+              "name": "Alimentação",
+              "value": "Com fio"
+            },
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (conforme a versão)"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Aspirador Vertical WAP High Speed Plus 1350W | Mercatto",
+      "seoDescription": "Aspirador vertical e portátil WAP High Speed Plus 3 em 1, 1350 W, sistema ciclônico e filtro HEPA lavável. Versões 127V e 220V.",
+      "tags": [
+        "aspirador vertical",
+        "aspirador wap",
+        "high speed plus",
+        "aspirador 3 em 1",
+        "aspirador portatil",
+        "aspirador ciclonico",
+        "filtro hepa",
+        "aspirador 1350w",
+        "aspirador de po",
+        "limpeza casa"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 12490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Qual a voltagem do aspirador?",
+          "answer": "Há versões 127V e 220V. Escolha a voltagem correta da sua tomada na compra."
+        },
+        {
+          "question": "Ele precisa de saco coletor?",
+          "answer": "Não. O sistema é ciclônico e a sujeira fica em um reservatório que pode ser esvaziado."
+        },
+        {
+          "question": "O filtro pode ser lavado?",
+          "answer": "Sim, o filtro HEPA é lavável. Deixe-o secar completamente antes de recolocar."
+        },
+        {
+          "question": "Posso aspirar água ou líquidos?",
+          "answer": "Não. O aparelho é indicado apenas para pó e sujeira seca."
+        },
+        {
+          "question": "Funciona a bateria?",
+          "answer": "Não, é um aspirador com fio, ligado diretamente à tomada."
+        }
+      ],
+      "aliases": [
+        "High Speed Plus"
+      ]
+    },
+    {
+      "key": "elgin-quad-fry-afg42-air-fryer-4-2l",
+      "skuCode": "CAS-ELGAFG42",
+      "categorySlug": "air-fryers",
+      "brand": {
+        "slug": "elgin",
+        "name": "Elgin"
+      },
+      "name": "Fritadeira Air Fryer Elgin Quad Fry AFG42 4,2L 1400W Preta",
+      "shortDescription": "Air fryer Elgin Quad Fry de 4,2 litros e 1400 W, com circulação de ar Air Circuit 360°, temperatura de 80°C a 200°C e timer de 60 minutos com desligamento automático.",
+      "description": "A Elgin Quad Fry AFG42 é uma air fryer de 4,2 litros para preparar o dia a dia da família com pouco ou nenhum óleo. Com 1400 W de potência e o sistema de circulação de ar Air Circuit 360°, o ar quente envolve os alimentos para deixá-los dourados por fora e macios por dentro.\n\nO controle de temperatura vai de 80°C a 200°C, permitindo desde aquecer sobras até preparar batatas, carnes, legumes e salgados. O timer de até 60 minutos emite aviso sonoro e desliga o aparelho automaticamente ao final do tempo, o que traz mais tranquilidade durante o preparo.\n\n## Destaques\n\n- Capacidade de 4,2 litros, boa para refeições do dia a dia\n- Potência de 1400 W\n- Circulação de ar Air Circuit 360°\n- Temperatura ajustável de 80°C a 200°C\n- Timer de 60 minutos com aviso sonoro e desligamento automático\n- Grelha removível com revestimento antiaderente Black Resist\n\n## Como usar\n\nPreaqueça por alguns minutos, coloque os alimentos no cesto sem sobrepor demais, ajuste temperatura e tempo e, na metade do preparo, agite o cesto para dourar por igual. Ao final, o aparelho desliga sozinho.\n\n## Cuidados\n\nUse utensílios de silicone ou madeira para preservar o antiaderente. Espere esfriar antes de lavar o cesto e a grelha com esponja macia. Não cubra as saídas de ar e confira a voltagem antes de ligar.",
+      "highlights": [
+        "Capacidade de 4,2 litros",
+        "Potência de 1400 W",
+        "Air Circuit 360°",
+        "Temperatura de 80°C a 200°C",
+        "Timer de 60 min com desligamento automático",
+        "Antiaderente Black Resist"
+      ],
+      "specifications": [
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "4,2 litros"
+            },
+            {
+              "name": "Potência",
+              "value": "1400 W"
+            },
+            {
+              "name": "Temperatura",
+              "value": "80°C a 200°C"
+            },
+            {
+              "name": "Timer",
+              "value": "Até 60 minutos, com aviso sonoro e desligamento automático"
+            },
+            {
+              "name": "Circulação de ar",
+              "value": "Air Circuit 360°"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "AFG42"
+            },
+            {
+              "name": "Cor",
+              "value": "Preta"
+            },
+            {
+              "name": "Revestimento",
+              "value": "Antiaderente Black Resist"
+            },
+            {
+              "name": "Dimensões do produto (A x L x P)",
+              "value": "29,6 x 35,8 x 23,8 cm"
+            },
+            {
+              "name": "Peso do produto",
+              "value": "3,3 kg"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Air Fryer Elgin Quad Fry 4,2L 1400W | Mercatto",
+      "seoDescription": "Air fryer Elgin Quad Fry AFG42 de 4,2 L e 1400 W, Air Circuit 360°, 80°C a 200°C e timer de 60 min. Versões 127V e 220V.",
+      "tags": [
+        "air fryer",
+        "fritadeira eletrica",
+        "elgin quad fry",
+        "afg42",
+        "air fryer 4,2l",
+        "fritadeira sem oleo",
+        "air fryer elgin",
+        "air fryer 1400w",
+        "air fryer preta",
+        "cozinha"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 17490,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "question": "Qual a capacidade?",
+          "answer": "O cesto comporta 4,2 litros."
+        },
+        {
+          "question": "Qual a voltagem?",
+          "answer": "Há versões 127V e 220V. Selecione a voltagem da sua tomada na compra."
+        },
+        {
+          "question": "Qual a faixa de temperatura?",
+          "answer": "De 80°C a 200°C, com timer de até 60 minutos."
+        },
+        {
+          "question": "Ela desliga sozinha?",
+          "answer": "Sim. Ao fim do tempo programado ela emite aviso sonoro e desliga automaticamente."
+        },
+        {
+          "question": "Qual a garantia?",
+          "answer": "12 meses, segundo as informações do produto nas lojas."
+        }
+      ],
+      "aliases": [
+        "Quad Fry"
+      ]
+    },
+    {
+      "key": "mondial-afon-12l-bg-air-fryer-oven-12l",
+      "skuCode": "CAS-MONAFON12BG",
+      "categorySlug": "air-fryers",
+      "brand": {
+        "slug": "mondial",
+        "name": "Mondial"
+      },
+      "name": "Fritadeira Air Fryer Oven Mondial AFON-12L-BG 12 Litros",
+      "shortDescription": "Air fryer e forno em um só aparelho: Mondial Air Fryer Oven de 12 litros com porta frontal, painel digital com funções predefinidas, timer de 90 minutos e até 200°C.",
+      "description": "A Mondial Air Fryer Oven AFON-12L-BG une a praticidade da air fryer ao formato de um forno compacto. Com porta frontal e espaço interno de 12 litros, permite acompanhar o preparo e trabalhar com mais de um nível ao mesmo tempo, o que ajuda em receitas maiores ou em refeições para a família.\n\nO painel digital traz funções predefinidas para diferentes tipos de alimento, temperatura de até 200°C e timer de até 90 minutos. Assim, dá para assar, dourar e reaquecer com pouco ou nenhum óleo, sem precisar ligar o forno convencional.\n\n## Destaques\n\n- Formato de forno com porta frontal e 12 litros de capacidade\n- Painel digital com funções predefinidas\n- Temperatura de até 200°C\n- Timer de até 90 minutos\n- Acessórios antiaderentes para o preparo\n\n## Para quem é\n\nPara famílias e para quem cozinha porções maiores, quer um aparelho versátil para assar e fritar sem óleo e prefere visualizar o alimento durante o preparo.\n\n## Como usar\n\nPosicione o acessório adequado, selecione uma função predefinida ou ajuste manualmente temperatura e tempo. Para melhores resultados, distribua os alimentos em camada única e vire-os na metade do preparo.\n\n## Cuidados\n\nInstale o aparelho em superfície firme, longe de paredes e de materiais inflamáveis, mantendo as saídas de ar livres. Use luvas térmicas ao retirar acessórios e espere esfriar antes da limpeza. Confira a voltagem antes de ligar.",
+      "highlights": [
+        "Air fryer e forno em um só aparelho",
+        "Capacidade de 12 litros",
+        "Porta frontal",
+        "Painel digital com funções predefinidas",
+        "Até 200°C e timer de 90 minutos"
+      ],
+      "specifications": [
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Capacidade",
+              "value": "12 litros"
+            },
+            {
+              "name": "Temperatura máxima",
+              "value": "200°C"
+            },
+            {
+              "name": "Timer",
+              "value": "Até 90 minutos"
+            },
+            {
+              "name": "Painel",
+              "value": "Digital com funções predefinidas"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "AFON-12L-BG"
+            },
+            {
+              "name": "Formato",
+              "value": "Forno com porta frontal"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Air Fryer Oven Mondial 12L AFON-12L-BG | Mercatto",
+      "seoDescription": "Air fryer e forno Mondial AFON-12L-BG de 12 litros, porta frontal, painel digital com funções predefinidas, até 200°C e timer de 90 minutos.",
+      "tags": [
+        "air fryer oven",
+        "air fryer forno",
+        "mondial",
+        "afon-12l",
+        "air fryer 12 litros",
+        "fritadeira sem oleo",
+        "forno eletrico",
+        "air fryer mondial",
+        "air fryer grande",
+        "cozinha"
+      ],
+      "priceCents": 46990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "question": "Qual a capacidade?",
+          "answer": "O espaço interno é de 12 litros, em formato de forno com porta frontal."
+        },
+        {
+          "question": "Qual a temperatura máxima?",
+          "answer": "Até 200°C, com timer de até 90 minutos."
+        },
+        {
+          "question": "Tem funções automáticas?",
+          "answer": "Sim, o painel digital traz funções predefinidas para diferentes alimentos."
+        },
+        {
+          "question": "Qual a voltagem?",
+          "answer": "Confira a voltagem informada no anúncio antes da compra; o aparelho não é bivolt."
+        }
+      ],
+      "aliases": [
+        "AFON-12L",
+        "AFON 12L"
+      ]
+    },
+    {
+      "key": "cadence-san400-sanduicheira-click-750w",
+      "skuCode": "ELE-CADSAN400",
+      "categorySlug": "eletrodomesticos",
+      "brand": {
+        "slug": "cadence",
+        "name": "Cadence"
+      },
+      "name": "Sanduicheira Elétrica Cadence Click SAN400 750W Antiaderente Preta",
+      "shortDescription": "Sanduicheira Cadence Click SAN400 com 750 W, chapas antiaderentes mais profundas, trava de fechamento, LEDs indicadores e pés antiderrapantes. Versões 127V e 220V.",
+      "description": "A Cadence Click SAN400 é a sanduicheira para lanches rápidos no café da manhã ou no fim do dia. Com 750 W de potência e chapas antiaderentes mais profundas, ela aquece e doura o pão por igual e facilita a retirada do lanche sem grudar.\n\nA trava de fechamento mantém as chapas unidas durante o preparo, e os LEDs indicadores mostram quando o aparelho está ligado e pronto para uso. Os pés antiderrapantes dão mais firmeza na bancada, e o tamanho compacto facilita guardar em qualquer armário.\n\n## Destaques\n\n- Potência de 750 W\n- Chapas antiaderentes mais profundas\n- Trava de fechamento\n- LEDs indicadores de funcionamento\n- Botão liga/desliga\n- Pés antiderrapantes\n\n## Como usar\n\nLigue o aparelho e aguarde o aquecimento indicado pelo LED. Monte o sanduíche, coloque sobre a chapa inferior, feche e trave. Em poucos minutos, abra com cuidado e retire o lanche com utensílio de silicone ou madeira.\n\n## Para quem é\n\nPara quem quer preparar misto-quente, sanduíches recheados e lanches práticos em pouco tempo, ocupando pouco espaço na cozinha.\n\n## Cuidados\n\nNão use utensílios metálicos nas chapas para preservar o antiaderente. Desligue da tomada e espere esfriar antes de limpar com pano úmido. Não mergulhe o aparelho em água e confira a voltagem antes de ligar.",
+      "highlights": [
+        "Potência de 750 W",
+        "Chapas antiaderentes mais profundas",
+        "Trava de fechamento",
+        "LEDs indicadores",
+        "Pés antiderrapantes"
+      ],
+      "specifications": [
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Potência",
+              "value": "750 W"
+            },
+            {
+              "name": "Chapas",
+              "value": "Antiaderentes"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "SAN400 (Click)"
+            },
+            {
+              "name": "Cor",
+              "value": "Preta"
+            },
+            {
+              "name": "Recursos",
+              "value": "Botão liga/desliga, LEDs indicadores, trava de fechamento e pés antiderrapantes"
+            },
+            {
+              "name": "Dimensões do produto (A x L x P)",
+              "value": "7,8 x 21,5 x 22,3 cm"
+            },
+            {
+              "name": "Peso do produto",
+              "value": "1,31 kg"
+            }
+          ]
+        }
+      ],
+      "seoTitle": "Sanduicheira Cadence Click SAN400 750W | Mercatto",
+      "seoDescription": "Sanduicheira Cadence Click SAN400 de 750 W com chapas antiaderentes, trava de fechamento e LEDs indicadores. Versões 127V e 220V.",
+      "tags": [
+        "sanduicheira",
+        "sanduicheira cadence",
+        "san400",
+        "cadence click",
+        "sanduicheira eletrica",
+        "sanduicheira 750w",
+        "misto quente",
+        "sanduicheira antiaderente",
+        "lanche",
+        "cozinha"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 8290,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "question": "Qual a potência?",
+          "answer": "750 W."
+        },
+        {
+          "question": "Qual a voltagem?",
+          "answer": "Há versões 127V e 220V. Escolha a voltagem da sua tomada na compra."
+        },
+        {
+          "question": "As chapas grudam?",
+          "answer": "As chapas são antiaderentes. Use utensílios de silicone ou madeira para preservá-las."
+        },
+        {
+          "question": "Tem trava?",
+          "answer": "Sim, possui trava de fechamento, além de LEDs indicadores e pés antiderrapantes."
+        },
+        {
+          "question": "Qual a garantia?",
+          "answer": "12 meses, conforme informado nas lojas."
+        }
+      ],
+      "aliases": [
+        "SAN400"
+      ]
+    }
+  ]
+}

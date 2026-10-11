@@ -1,0 +1,635 @@
+{
+  "products": [
+    {
+      "key": "samsung-smart-tv-55-crystal-uhd-4k-u8600f",
+      "skuCode": "TVA-SGU8600F-55",
+      "categorySlug": "smart-tvs",
+      "brand": {
+        "slug": "samsung",
+        "name": "Samsung"
+      },
+      "name": "Smart TV 55\" Samsung Crystal UHD 4K U8600F UN55U8600FGXZD HDR10+",
+      "shortDescription": "Smart TV Samsung de 55 polegadas da linha Crystal UHD 4K U8600F (2025), com Processador Crystal 4K, HDR10+, upscaling 4K e sistema Tizen.",
+      "description": "A Smart TV Samsung UN55U8600FGXZD faz parte da linha Crystal UHD U8600F de 2025 e reúne resolução 4K em uma tela de 55 polegadas, tamanho que equilibra bem imersão e espaço na sala ou no quarto. É uma opção para quem quer trocar uma TV Full HD antiga por imagem mais nítida em filmes, séries, esportes e jogos casuais.\n\nO Processador Crystal 4K trabalha a imagem para entregar cores e detalhes consistentes, e o recurso de upscaling 4K ajusta conteúdos de resolução menor para aproveitar melhor a tela. Com suporte a HDR10+, cenas com áreas muito claras e muito escuras ganham mais equilíbrio de brilho e contraste quando o conteúdo é compatível.\n\n## Destaques\n\n- Tela de 55 polegadas com resolução 4K UHD\n- Processador Crystal 4K com upscaling 4K\n- Compatibilidade com HDR10+\n- Sistema operacional Tizen, da própria Samsung\n- Três entradas HDMI para console, receptor e outros aparelhos\n\n## Para quem é\n\nIndicada para quem assiste streaming com frequência e quer acessar os aplicativos diretamente pela TV, sem depender de aparelhos extras. As três entradas HDMI permitem deixar videogame, receptor de TV por assinatura e soundbar conectados ao mesmo tempo. O tamanho de 55 polegadas funciona bem em salas de estar de porte médio.\n\n## Cuidados\n\nInstale a TV em suporte de parede ou base adequados e mantenha as aberturas de ventilação livres. Para limpar a tela, use pano macio e seco, sem produtos abrasivos. Confira o espaço disponível no móvel e a distância do sofá antes da compra.",
+      "highlights": [
+        "Tela de 55 polegadas com resolução 4K UHD",
+        "Processador Crystal 4K com upscaling 4K",
+        "Compatível com HDR10+",
+        "Sistema operacional Tizen",
+        "Três entradas HDMI",
+        "Linha Crystal UHD U8600F 2025"
+      ],
+      "specifications": [
+        {
+          "group": "Tela",
+          "items": [
+            {
+              "name": "Tamanho",
+              "value": "55 polegadas"
+            },
+            {
+              "name": "Resolução",
+              "value": "4K UHD"
+            },
+            {
+              "name": "HDR",
+              "value": "HDR10+"
+            }
+          ]
+        },
+        {
+          "group": "Processamento",
+          "items": [
+            {
+              "name": "Processador",
+              "value": "Crystal 4K"
+            },
+            {
+              "name": "Upscaling",
+              "value": "4K Upscaling"
+            }
+          ]
+        },
+        {
+          "group": "Smart TV",
+          "items": [
+            {
+              "name": "Sistema operacional",
+              "value": "Tizen"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Entradas HDMI",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "group": "Geral",
+          "items": [
+            {
+              "name": "Modelo",
+              "value": "UN55U8600FGXZD"
+            },
+            {
+              "name": "Linha",
+              "value": "Crystal UHD U8600F (2025)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [],
+      "seoTitle": "Smart TV Samsung 55\" Crystal UHD 4K U8600F | Mercatto",
+      "seoDescription": "Smart TV Samsung 55 polegadas Crystal UHD 4K UN55U8600FGXZD com HDR10+, Processador Crystal 4K, Tizen e 3 HDMI.",
+      "tags": [
+        "smart tv 55",
+        "tv samsung 55",
+        "tv 4k",
+        "crystal uhd",
+        "u8600f",
+        "un55u8600fgxzd",
+        "hdr10+",
+        "tizen",
+        "tv 55 polegadas",
+        "smart tv samsung"
+      ],
+      "priceCents": 279990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "attributes": {
+        "tamanho_tela": "55\"",
+        "resolucao": "4K"
+      },
+      "faq": [
+        {
+          "q": "Qual é a resolução da TV?",
+          "a": "É uma TV 4K UHD de 55 polegadas, da linha Crystal UHD U8600F."
+        },
+        {
+          "q": "Ela tem suporte a HDR?",
+          "a": "Sim, a TV é compatível com HDR10+ quando o conteúdo oferece esse formato."
+        },
+        {
+          "q": "Qual é o sistema operacional?",
+          "a": "A TV usa o Tizen, sistema da Samsung para acesso a aplicativos de streaming."
+        },
+        {
+          "q": "Quantas entradas HDMI ela possui?",
+          "a": "São três entradas HDMI."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia legal de 90 dias pelo CDC. A garantia contratual do fabricante não foi confirmada para este anúncio."
+        }
+      ],
+      "aliases": [
+        "U8600F",
+        "UN55U8600"
+      ]
+    },
+    {
+      "key": "jbl-flip-7-caixa-de-som-bluetooth",
+      "skuCode": "ELE-JBLFLIP7",
+      "categorySlug": "caixas-de-som",
+      "brand": {
+        "slug": "jbl",
+        "name": "JBL"
+      },
+      "name": "Caixa de Som Bluetooth JBL Flip 7 35W IP68 Bateria até 14h",
+      "shortDescription": "Caixa de som portátil JBL Flip 7 com 35 W RMS (woofer 25 W + tweeter 10 W), Bluetooth 5.4, proteção IP68, até 14 horas de bateria e carregamento por USB-C.",
+      "description": "A JBL Flip 7 é a nova geração de uma das caixas portáteis mais conhecidas da marca. Ela mantém o formato cilíndrico fácil de levar na mochila e combina woofer de 25 W RMS com tweeter de 10 W RMS, para um som encorpado em ambientes internos e ao ar livre.\n\nA proteção IP68 contra poeira e água permite usar a caixa perto da piscina, na praia ou em trilhas com mais tranquilidade: segundo as informações divulgadas, ela resiste à submersão em até 1,5 metro por 30 minutos. A bateria oferece até 14 horas de reprodução, com até 2 horas extras pelo recurso Playtime Boost, e a recarga leva cerca de 2 horas e meia via USB-C.\n\n## Destaques\n\n- 35 W RMS no total: woofer de 25 W e tweeter de 10 W\n- Resposta de frequência de 60 Hz a 20 kHz\n- Bluetooth 5.4\n- Proteção IP68 contra água e poeira\n- Até 14 horas de bateria, mais até 2 horas com Playtime Boost\n- Possibilidade de parear duas caixas em modo estéreo\n\n## Para quem é\n\nPara quem quer uma caixa compacta para levar a passeios, churrascos, viagens e atividades ao ar livre, sem abrir mão de volume e graves. Quem já tem outra Flip 7 pode montar um par estéreo para ampliar o som.\n\n## Cuidados\n\nAntes de carregar, certifique-se de que a entrada USB-C esteja seca. Após contato com água salgada ou de piscina, enxágue com água doce e deixe secar naturalmente. Evite deixar a caixa exposta ao sol forte por longos períodos.",
+      "highlights": [
+        "35 W RMS: woofer de 25 W e tweeter de 10 W",
+        "Proteção IP68 contra água e poeira",
+        "Até 14 horas de bateria",
+        "Playtime Boost: até 2 horas extras",
+        "Bluetooth 5.4 e carregamento USB-C",
+        "Pareamento de duas caixas em estéreo"
+      ],
+      "specifications": [
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Potência",
+              "value": "25 W RMS (woofer) + 10 W RMS (tweeter)"
+            },
+            {
+              "name": "Resposta de frequência",
+              "value": "60 Hz a 20 kHz"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.4"
+            },
+            {
+              "name": "Modo estéreo",
+              "value": "Pareamento de duas caixas"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Autonomia",
+              "value": "Até 14 horas (até 2 horas extras com Playtime Boost)"
+            },
+            {
+              "name": "Tempo de recarga",
+              "value": "Cerca de 2 horas e 30 minutos"
+            },
+            {
+              "name": "Conector de carga",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Resistência",
+          "items": [
+            {
+              "name": "Certificação",
+              "value": "IP68 (poeira e água, até 1,5 m por 30 minutos)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [],
+      "seoTitle": "Caixa de Som JBL Flip 7 Bluetooth IP68 | Mercatto",
+      "seoDescription": "JBL Flip 7: caixa Bluetooth 5.4 com 35 W RMS, proteção IP68, até 14h de bateria e carregamento USB-C. Leve para qualquer lugar.",
+      "tags": [
+        "jbl flip 7",
+        "caixa de som jbl",
+        "caixa bluetooth",
+        "caixa portátil",
+        "caixa à prova d'água",
+        "ip68",
+        "jbl flip",
+        "som portátil",
+        "caixa de som bluetooth",
+        "bluetooth 5.4"
+      ],
+      "priceCents": 73990,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "q": "A JBL Flip 7 pode molhar?",
+          "a": "Sim. Ela tem proteção IP68 contra poeira e água, resistindo à submersão em até 1,5 metro por 30 minutos."
+        },
+        {
+          "q": "Quanto tempo dura a bateria?",
+          "a": "Até 14 horas de reprodução, com até 2 horas extras usando o Playtime Boost. A duração varia conforme o volume e o uso."
+        },
+        {
+          "q": "Como ela é carregada?",
+          "a": "Pela entrada USB-C; a recarga completa leva cerca de 2 horas e meia."
+        },
+        {
+          "q": "Posso usar duas caixas juntas?",
+          "a": "Sim, é possível parear duas caixas Flip 7 em modo estéreo."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia legal de 90 dias pelo CDC. A garantia contratual do fabricante não foi confirmada para este anúncio."
+        }
+      ],
+      "aliases": [
+        "Flip 7"
+      ]
+    },
+    {
+      "key": "jbl-tune-520bt-headphone-bluetooth",
+      "skuCode": "ELE-JBLT520BT",
+      "categorySlug": "headphones",
+      "brand": {
+        "slug": "jbl",
+        "name": "JBL"
+      },
+      "name": "Headphone Bluetooth JBL Tune 520BT Pure Bass Bateria até 57h",
+      "shortDescription": "Headphone on-ear JBL Tune 520BT com som JBL Pure Bass, Bluetooth 5.3, multiponto, até 57 horas de bateria, carga rápida e design dobrável.",
+      "description": "O JBL Tune 520BT é um headphone sem fio pensado para o dia a dia: leve, dobrável e com bateria que acompanha a semana inteira de uso. Os drivers dinâmicos de 33 mm entregam a assinatura sonora JBL Pure Bass, com graves presentes em músicas, podcasts e vídeos.\n\nA autonomia chega a até 57 horas sem fio, e quando a carga acaba, 5 minutos na tomada garantem mais 3 horas de música. A recarga completa leva cerca de 2 horas, pelo cabo USB-C. Com a conexão multiponto, é possível manter o fone conectado a dois aparelhos, como celular e notebook, e alternar entre eles com facilidade.\n\n## Destaques\n\n- Até 57 horas de reprodução sem fio\n- Carga rápida: 5 minutos rendem 3 horas de uso\n- Bluetooth 5.3 com conexão multiponto\n- Drivers dinâmicos de 33 mm com som JBL Pure Bass\n- Chamadas em viva-voz com Voice Aware\n- Design dobrável com almofadas macias e tiara acolchoada\n\n## Para quem é\n\nPara estudantes, quem trabalha em casa ou se desloca de transporte público e quer um fone confortável, com bateria longa e preço acessível. Também funciona com os assistentes de voz Google Assistente e Siri.\n\n## Cuidados\n\nO modelo não tem certificação de resistência à água, então evite usá-lo na chuva ou durante exercícios intensos com muito suor. Guarde o fone dobrado para proteger a tiara e limpe as almofadas com pano levemente úmido.",
+      "highlights": [
+        "Até 57 horas de bateria sem fio",
+        "5 minutos de carga rendem 3 horas",
+        "Bluetooth 5.3 com multiponto",
+        "Drivers de 33 mm com JBL Pure Bass",
+        "Design dobrável e almofadas macias",
+        "Recarga via USB-C em cerca de 2 horas"
+      ],
+      "specifications": [
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Driver",
+              "value": "Dinâmico de 33 mm"
+            },
+            {
+              "name": "Resposta de frequência",
+              "value": "20 Hz a 20 kHz"
+            },
+            {
+              "name": "Impedância",
+              "value": "30 ohms"
+            },
+            {
+              "name": "Sensibilidade",
+              "value": "102 dB SPL a 1 kHz"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.3"
+            },
+            {
+              "name": "Multiponto",
+              "value": "Sim"
+            },
+            {
+              "name": "Assistentes de voz",
+              "value": "Google Assistente e Siri"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Autonomia",
+              "value": "Até 57 horas"
+            },
+            {
+              "name": "Carga rápida",
+              "value": "5 minutos para 3 horas de reprodução"
+            },
+            {
+              "name": "Tempo de recarga",
+              "value": "Cerca de 2 horas"
+            },
+            {
+              "name": "Conector de carga",
+              "value": "USB-C"
+            }
+          ]
+        },
+        {
+          "group": "Design",
+          "items": [
+            {
+              "name": "Formato",
+              "value": "On-ear, dobrável"
+            }
+          ]
+        }
+      ],
+      "includedItems": [],
+      "seoTitle": "Headphone JBL Tune 520BT Bluetooth 57h | Mercatto",
+      "seoDescription": "JBL Tune 520BT: headphone Bluetooth 5.3 com JBL Pure Bass, multiponto, até 57h de bateria, carga rápida e design dobrável.",
+      "tags": [
+        "jbl tune 520bt",
+        "headphone jbl",
+        "fone bluetooth",
+        "fone de ouvido jbl",
+        "headphone bluetooth",
+        "pure bass",
+        "fone sem fio",
+        "fone dobrável",
+        "multiponto",
+        "tune 520"
+      ],
+      "priceCents": 17490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "q": "Quanto dura a bateria?",
+          "a": "Até 57 horas sem fio. Com 5 minutos de carga rápida, você ganha 3 horas de reprodução."
+        },
+        {
+          "q": "Posso conectar a dois aparelhos ao mesmo tempo?",
+          "a": "Sim, o Tune 520BT tem conexão multiponto."
+        },
+        {
+          "q": "Ele tem microfone para chamadas?",
+          "a": "Sim, permite chamadas em viva-voz com o recurso Voice Aware."
+        },
+        {
+          "q": "O fone é resistente à água?",
+          "a": "Não há certificação de resistência à água para este modelo; evite chuva e suor excessivo."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia legal de 90 dias pelo CDC. A garantia contratual do fabricante não foi confirmada para este anúncio."
+        }
+      ],
+      "aliases": [
+        "Tune 520BT",
+        "Tune 520"
+      ]
+    },
+    {
+      "key": "jbl-wave-buds-2-fone-bluetooth-anc",
+      "skuCode": "ELE-JBLWAVEBUDS2",
+      "categorySlug": "fones-de-ouvido",
+      "brand": {
+        "slug": "jbl",
+        "name": "JBL"
+      },
+      "name": "Fone Bluetooth JBL Wave Buds 2 com Cancelamento de Ruído Bateria até 40h",
+      "shortDescription": "Fones in-ear JBL Wave Buds 2 com cancelamento de ruído ativo, modo Smart Ambient, JBL Pure Bass, Bluetooth 5.3, multiponto, IP54 e até 40 horas com o estojo.",
+      "description": "Os JBL Wave Buds 2 trazem cancelamento de ruído ativo (ANC) para a linha de entrada da JBL. Com drivers dinâmicos de 8 mm e assinatura JBL Pure Bass, eles entregam graves marcantes em um formato in-ear leve e prático para o dia a dia.\n\nO ANC reduz ruídos de ônibus, metrô e ambientes movimentados, enquanto o modo Smart Ambient faz o caminho inverso e permite ouvir o que acontece ao redor sem tirar os fones. O equalizador e outros ajustes ficam disponíveis no aplicativo JBL Headphones.\n\n## Destaques\n\n- Cancelamento de ruído ativo e modo Smart Ambient\n- Drivers de 8 mm com som JBL Pure Bass\n- Até 40 horas com ANC desligado: 10 h nos fones + 30 h no estojo\n- Bluetooth 5.3 com conexão a até 2 aparelhos\n- Fones com proteção IP54 e estojo IPX2\n- Personalização pelo app JBL Headphones\n\n## Para quem é\n\nPara quem procura o primeiro fone com cancelamento de ruído sem gastar muito, para estudar, trabalhar ou se deslocar pela cidade. A proteção IP54 dos fones contra respingos e poeira ajuda em caminhadas e treinos leves.\n\n## Cuidados\n\nO estojo tem proteção apenas IPX2, por isso mantenha-o longe de água. Seque os fones antes de guardá-los e limpe as ponteiras periodicamente. A autonomia varia conforme o volume e o uso do ANC.",
+      "highlights": [
+        "Cancelamento de ruído ativo (ANC)",
+        "Modo Smart Ambient",
+        "Até 40 horas com o estojo (ANC desligado)",
+        "Bluetooth 5.3 e conexão a 2 aparelhos",
+        "Fones IP54 e estojo IPX2",
+        "Drivers de 8 mm com JBL Pure Bass"
+      ],
+      "specifications": [
+        {
+          "group": "Áudio",
+          "items": [
+            {
+              "name": "Driver",
+              "value": "Dinâmico de 8 mm"
+            },
+            {
+              "name": "Assinatura sonora",
+              "value": "JBL Pure Bass"
+            },
+            {
+              "name": "Cancelamento de ruído",
+              "value": "ANC (ativo) e modo Smart Ambient"
+            }
+          ]
+        },
+        {
+          "group": "Conectividade",
+          "items": [
+            {
+              "name": "Bluetooth",
+              "value": "5.3"
+            },
+            {
+              "name": "Multiponto",
+              "value": "Até 2 dispositivos simultâneos"
+            },
+            {
+              "name": "Aplicativo",
+              "value": "JBL Headphones"
+            }
+          ]
+        },
+        {
+          "group": "Bateria",
+          "items": [
+            {
+              "name": "Autonomia total",
+              "value": "Até 40 horas com ANC desligado (10 h nos fones + 30 h no estojo)"
+            }
+          ]
+        },
+        {
+          "group": "Resistência",
+          "items": [
+            {
+              "name": "Fones",
+              "value": "IP54"
+            },
+            {
+              "name": "Estojo",
+              "value": "IPX2"
+            }
+          ]
+        }
+      ],
+      "includedItems": [],
+      "seoTitle": "Fone JBL Wave Buds 2 com ANC Bluetooth | Mercatto",
+      "seoDescription": "JBL Wave Buds 2: fones Bluetooth 5.3 com cancelamento de ruído, Smart Ambient, JBL Pure Bass, IP54 e até 40h de bateria.",
+      "tags": [
+        "jbl wave buds 2",
+        "fone jbl",
+        "fone bluetooth",
+        "fone com anc",
+        "cancelamento de ruído",
+        "fone sem fio",
+        "earbuds",
+        "tws",
+        "fone in-ear",
+        "jbl wave"
+      ],
+      "options": [
+        {
+          "name": "Cor",
+          "values": [
+            "Preto",
+            "Azul",
+            "Branco"
+          ]
+        }
+      ],
+      "priceCents": 22490,
+      "minStock": 1,
+      "warrantyMonths": 3,
+      "warrantyText": "Garantia legal de 90 dias (Código de Defesa do Consumidor). Garantia contratual do fabricante não confirmada.",
+      "faq": [
+        {
+          "q": "O Wave Buds 2 tem cancelamento de ruído?",
+          "a": "Sim, conta com cancelamento de ruído ativo (ANC) e também com o modo Smart Ambient."
+        },
+        {
+          "q": "Quanto dura a bateria?",
+          "a": "Até 40 horas com ANC desligado: cerca de 10 horas nos fones e mais 30 horas com o estojo."
+        },
+        {
+          "q": "Posso usar para treinar?",
+          "a": "Os fones têm proteção IP54 contra poeira e respingos; o estojo é IPX2 e deve ficar longe da água."
+        },
+        {
+          "q": "Conecta em dois aparelhos?",
+          "a": "Sim, com Bluetooth 5.3 ele se conecta a até 2 dispositivos simultaneamente."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "Garantia legal de 90 dias pelo CDC. A garantia contratual do fabricante não foi confirmada para este anúncio."
+        }
+      ],
+      "aliases": [
+        "Wave Buds 2"
+      ]
+    },
+    {
+      "key": "wap-gtw-10-aspirador-po-e-agua-10l-1400w",
+      "skuCode": "CAS-WAPGTW10",
+      "categorySlug": "aspiradores",
+      "brand": {
+        "slug": "wap",
+        "name": "WAP"
+      },
+      "name": "Aspirador de Pó e Água WAP GTW 10 1400W 10 Litros",
+      "shortDescription": "Aspirador de pó e água WAP GTW 10 com 1400 W e reservatório de 10 litros, para sujeira seca e líquidos, com bocal de sopro e filtros laváveis.",
+      "description": "O WAP GTW 10 é um aspirador de pó e água para quem precisa de uma limpeza mais pesada do que a de um aspirador doméstico comum. Com 1400 W de potência e reservatório de 10 litros, ele recolhe poeira, resíduos sólidos e também líquidos derramados, em casa, na garagem ou em pequenas obras.\n\nAlém de aspirar, o aparelho conta com função de sopro, útil para tirar folhas e poeira de cantos, áreas externas e frestas. Os filtros são laváveis, o que facilita a manutenção e reduz gastos com peças de reposição. A garantia de 12 meses do fabricante traz mais segurança para o uso frequente.\n\n## Destaques\n\n- Potência de 1400 W\n- Reservatório de 10 litros\n- Aspira pó, sujeira sólida e líquidos\n- Bocal de sopro\n- Filtros laváveis\n- Disponível em 127V ou 220V (não é bivolt)\n\n## Como usar\n\nPara aspirar pó, use o aparelho com o filtro limpo e seco. Para recolher líquidos, siga as orientações do manual sobre a configuração do filtro e esvazie o reservatório sempre que ele encher. Ao terminar, lave os filtros e deixe-os secar completamente antes de guardar.\n\n## Cuidados\n\nConfira a voltagem da tomada antes de ligar o aparelho, pois o modelo não é bivolt. Não aspire materiais inflamáveis, brasas ou cinzas quentes. Desligue da tomada antes de esvaziar ou limpar.",
+      "highlights": [
+        "Potência de 1400 W",
+        "Reservatório de 10 litros",
+        "Aspira pó e líquidos",
+        "Função sopro",
+        "Filtros laváveis",
+        "Versões 127V ou 220V (não bivolt)"
+      ],
+      "specifications": [
+        {
+          "group": "Desempenho",
+          "items": [
+            {
+              "name": "Potência",
+              "value": "1400 W"
+            },
+            {
+              "name": "Capacidade do reservatório",
+              "value": "10 litros"
+            },
+            {
+              "name": "Tipo de limpeza",
+              "value": "Pó, sujeira sólida e líquidos"
+            }
+          ]
+        },
+        {
+          "group": "Recursos",
+          "items": [
+            {
+              "name": "Função sopro",
+              "value": "Sim"
+            },
+            {
+              "name": "Filtros",
+              "value": "Laváveis"
+            }
+          ]
+        },
+        {
+          "group": "Elétrica",
+          "items": [
+            {
+              "name": "Voltagem",
+              "value": "127V ou 220V (não é bivolt)"
+            }
+          ]
+        }
+      ],
+      "includedItems": [],
+      "seoTitle": "Aspirador de Pó e Água WAP GTW 10 1400W 10L | Mercatto",
+      "seoDescription": "Aspirador de pó e água WAP GTW 10 com 1400 W, reservatório de 10 litros, função sopro e filtros laváveis. Versões 127V e 220V.",
+      "tags": [
+        "wap gtw 10",
+        "aspirador wap",
+        "aspirador de pó e água",
+        "aspirador 1400w",
+        "aspirador 10 litros",
+        "aspirador de líquidos",
+        "gtw 10",
+        "aspirador com sopro",
+        "aspirador para garagem"
+      ],
+      "options": [
+        {
+          "name": "Voltagem",
+          "values": [
+            "127V",
+            "220V"
+          ]
+        }
+      ],
+      "priceCents": 21490,
+      "minStock": 1,
+      "warrantyMonths": 12,
+      "warrantyText": "Garantia de 12 meses do fabricante (inclui a garantia legal de 90 dias do CDC).",
+      "faq": [
+        {
+          "q": "O WAP GTW 10 é bivolt?",
+          "a": "Não. Ele é vendido em versões 127V ou 220V; escolha a voltagem correta da sua tomada."
+        },
+        {
+          "q": "Ele aspira água?",
+          "a": "Sim, é um aspirador de pó e água, que recolhe sujeira seca, sólida e líquidos."
+        },
+        {
+          "q": "Qual a capacidade do reservatório?",
+          "a": "10 litros."
+        },
+        {
+          "q": "Os filtros precisam ser trocados?",
+          "a": "Os filtros são laváveis; lave e deixe secar completamente antes de reutilizar."
+        },
+        {
+          "q": "Qual é a garantia?",
+          "a": "12 meses de garantia do fabricante, já incluindo a garantia legal de 90 dias."
+        }
+      ],
+      "aliases": [
+        "GTW 10",
+        "GTW10"
+      ]
+    }
+  ]
+}
