@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { resolveAppUrl } from "@/lib/app-url";
 import { RegisterServiceWorker } from "@/components/pwa/register-sw";
+import { MarketingTags } from "@/components/providers/marketing-tags";
 
 const jakarta = localFont({
   src: [
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh antialiased">
         {children}
         <RegisterServiceWorker />
+        <MarketingTags />
       </body>
     </html>
   );

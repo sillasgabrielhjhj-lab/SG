@@ -22,14 +22,14 @@ const stripeFrame = stripe ? " https://js.stripe.com https://*.js.stripe.com htt
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${mpScript}${stripeScript}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${mpScript}${stripeScript} https://connect.facebook.net https://www.googletagmanager.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   // Vídeos das avaliações (Vercel Blob da loja).
   "media-src 'self' blob: https://*.public.blob.vercel-storage.com",
   // vercel.com/api/blob: envio direto do vídeo da avaliação ao Blob da loja.
-  "connect-src 'self' https://viacep.com.br https://vercel.com https://*.blob.vercel-storage.com" + mpConnect + stripeConnect + (isDev ? " ws: wss:" : ""),
+  "connect-src 'self' https://viacep.com.br https://vercel.com https://*.blob.vercel-storage.com https://www.facebook.com https://connect.facebook.net https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com" + mpConnect + stripeConnect + (isDev ? " ws: wss:" : ""),
   `frame-src 'self'${mpFrame}${stripeFrame}`,
   "worker-src 'self'",
   "manifest-src 'self'",

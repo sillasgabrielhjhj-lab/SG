@@ -168,7 +168,6 @@ export function CheckoutFlow({
       } catch {
         /* ignora */
       }
-      trackEvent("purchase", { transaction_id: res.data.checkoutId, value: (review?.totals.totalCents ?? estimatedTotal) / 100 });
       router.push(`/checkout/pagamento/${res.data.checkoutId}`);
     });
 

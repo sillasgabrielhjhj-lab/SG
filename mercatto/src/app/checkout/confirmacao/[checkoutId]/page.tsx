@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { ProgressSteps } from "@/components/ui/progress-steps";
 import { ProductImage } from "@/components/commerce/product-image";
 import { formatBRL } from "@/lib/money";
+import { PurchaseTracker } from "@/features/checkout/components/purchase-tracker";
 
 export const metadata: Metadata = privateMetadata("Compra confirmada");
 
@@ -21,6 +22,7 @@ export default async function ConfirmationPage({ params }: Props) {
   const address = checkout.shippingAddress as { street: string; number: string; city: string; state: string };
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-5">
+      <PurchaseTracker checkoutId={checkoutId} value={checkout.totalCents / 100} numItems={checkout.orders.reduce((n, o) => n + o.items.reduce((m, it) => m + it.quantity, 0), 0)} />
       <div className="rounded-card border border-line bg-surface px-4 py-4">
         <ProgressSteps steps={["Identificação", "Endereço", "Entrega", "Pagamento", "Revisão", "Confirmação"]} current={6} />
       </div>
