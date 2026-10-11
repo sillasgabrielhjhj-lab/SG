@@ -293,6 +293,10 @@ type GenericEntry = {
   faq?: { q: string; a: string }[];
   /** Fotos enviadas pelo dono da loja (public/products/...), na ordem da galeria — a primeira é a capa. */
   images?: { src: string; alt: string; width: number; height: number }[];
+  /** Filtros da categoria (chave do CategoryAttribute → valor), ex.: { voltagem: "220V" }. */
+  attributes?: Record<string, string>;
+  /** EAN/GTIN — só quando confirmado. */
+  gtin?: string;
 };
 
 const optionCode = (v: string) => normalizeText(v).replace(/[^a-z0-9]+/g, "").toUpperCase().slice(0, 10);
@@ -349,6 +353,7 @@ async function applyGenericProducts(touched: string[]) {
             seoDescription: e.seoDescription,
             catalogKey: e.key,
             catalogVersion: 1,
+            gtin: e.gtin ?? null,
             condition: "NEW",
             status: "DRAFT",
             warrantyMonths: e.warrantyMonths ?? null,
@@ -374,6 +379,13 @@ async function applyGenericProducts(touched: string[]) {
           },
           select: { id: true },
         });
+        if (e.attributes) {
+          const attrIds = await attributeIds(category.id);
+          for (const [key, value] of Object.entries(e.attributes)) {
+            const attributeId = attrIds.get(key);
+            if (attributeId) await db.productAttributeValue.create({ data: { productId: product.id, attributeId, value } });
+          }
+        }
         // Perguntas frequentes respondidas pela loja (criadas de trás para frente: a página lista as recentes primeiro).
         for (const { q, a } of [...(e.faq ?? [])].reverse()) {
           await db.question.create({ data: { productId: product.id, userId: store.ownerId, body: q, status: "PUBLISHED", isFaq: true, answer: { create: { storeId: store.id, userId: store.ownerId, body: a } } } });
