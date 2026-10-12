@@ -1,16 +1,19 @@
 import "server-only";
 import { cache } from "react";
 import { db } from "@/server/db";
+import { memoize } from "@/server/memo";
 import type { CategoryNode } from "@/features/catalog/types";
 
-/** Todas as categorias ativas (tabela pequena) — memoizado por requisição. */
-export const getAllCategories = cache(async () => {
-  return db.category.findMany({
+/** Todas as categorias ativas (tabela pequena) — 2 min em memória e memoizado por requisição. */
+export const categoriesMemo = memoize(120_000, () =>
+  db.category.findMany({
     where: { isActive: true },
     orderBy: [{ position: "asc" }, { name: "asc" }],
     select: { id: true, name: true, slug: true, icon: true, imageUrl: true, parentId: true, position: true, isFeatured: true },
-  });
-});
+  }),
+);
+
+export const getAllCategories = cache(() => categoriesMemo.get());
 
 export const getCategoryTree = cache(async (): Promise<CategoryNode[]> => {
   const all = await getAllCategories();

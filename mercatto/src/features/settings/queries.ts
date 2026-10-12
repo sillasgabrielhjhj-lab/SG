@@ -1,12 +1,15 @@
 import "server-only";
 import { cache } from "react";
 import { db } from "@/server/db";
+import { memoize } from "@/server/memo";
 import type { InstallmentConfig } from "@/lib/money";
 
-/** Configurações globais da loja (linha única "default", criada sob demanda). */
-export const getStoreSettings = cache(async () => {
-  return db.storeSettings.upsert({ where: { id: "default" }, update: {}, create: { id: "default" } });
+/** Configurações globais da loja (linha única "default", criada sob demanda) — 60 s em memória. */
+export const storeSettingsMemo = memoize(60_000, async () => {
+  return (await db.storeSettings.findUnique({ where: { id: "default" } })) ?? db.storeSettings.upsert({ where: { id: "default" }, update: {}, create: { id: "default" } });
 });
+
+export const getStoreSettings = cache(() => storeSettingsMemo.get());
 
 export type StoreSettingsData = Awaited<ReturnType<typeof getStoreSettings>>;
 

@@ -1,4 +1,6 @@
 import "server-only";
+import { storeSettingsMemo } from "@/features/settings/queries";
+import { categoriesMemo } from "@/features/catalog/categories.server";
 import { Prisma } from "@/generated/prisma/client";
 import type { z } from "zod";
 import { db } from "@/server/db";
@@ -51,6 +53,7 @@ export async function saveCategory(actorId: string, id: string | null, input: z.
     dup(error, "Já existe uma categoria com este slug.");
   }
   await audit({ actorId, action: "category.changed", entityType: "Category", entityId: id, after: { name: input.name, slug, isActive: input.isActive } });
+  categoriesMemo.clear();
   return { id };
 }
 
@@ -129,6 +132,7 @@ export async function updateSettings(actorId: string, input: z.infer<typeof sett
   };
   await db.storeSettings.upsert({ where: { id: "default" }, update: data, create: { id: "default", ...data } });
   await audit({ actorId, action: "settings.updated", entityType: "StoreSettings", entityId: "default", before: before ? JSON.parse(JSON.stringify(before)) : undefined, after: JSON.parse(JSON.stringify(data)) });
+  storeSettingsMemo.clear();
 }
 
 // ---------------------------------------------------------------- Usuários e lojas
