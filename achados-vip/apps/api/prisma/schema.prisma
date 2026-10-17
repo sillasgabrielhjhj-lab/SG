@@ -1,0 +1,388 @@
+// Achados VIP Automation — schema do banco (PostgreSQL)
+// Valores monetários SEMPRE em centavos (Int) para evitar erro de ponto flutuante.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  VIEWER
+}
+
+enum OfferStatus {
+  DISCOVERED // encontrada e pontuada, aguardando decisão
+  APPROVED // aprovada (auto ou manual), elegível a publicar
+  REJECTED // descartada (manual ou regra)
+  QUEUED // já há Publication pendente/agendada
+  PUBLISHED // publicada com confirmação
+  EXPIRED // perdeu validade (preço mudou/indisponível)
+  SUSPENDED // dados inconsistentes, suspensa temporariamente
+}
+
+enum OfferTier {
+  EXCEPTIONAL // 90–100 (limites configuráveis)
+  EXCELLENT // 75–89
+  GOOD // 60–74
+  BELOW // abaixo do mínimo
+}
+
+enum OfferKind {
+  FLASH
+  TOP_DISCOUNT_OF_DAY
+  COMMON
+  EXCEPTIONAL_PRICE
+  POPULAR
+  COUPON
+}
+
+enum AffiliateLinkKind {
+  MANUAL
+  IMPORTED
+  GENERATED // somente por método oficial/autorizado (hoje: nenhum)
+}
+
+enum AffiliateLinkStatus {
+  PENDING
+  VALIDATED
+  INVALID
+}
+
+enum ChannelType {
+  WHATSAPP_CLOUD_GROUP // Modo A: WhatsApp Business Platform Groups API
+  WHATSAPP_MANUAL_QUEUE // Modo B: fila para o admin publicar manualmente
+  TELEGRAM // Modo C
+  WEBHOOK // Modo C: webhook autorizado
+}
+
+enum ChannelStatus {
+  UNKNOWN
+  CONNECTED
+  ERROR
+  AUTH_REQUIRED
+  DISABLED
+}
+
+enum PublicationStatus {
+  PENDING // criada, aguardando janela/limites
+  SCHEDULED // com horário definido
+  SENDING // em envio (lock)
+  SENT // confirmado pela integração
+  FAILED // falha com retentativas restantes
+  DEAD // esgotou tentativas (dead-letter)
+  MANUAL_READY // pronta para publicação manual (Modo B)
+  CANCELLED
+}
+
+enum LogLevel {
+  DEBUG
+  INFO
+  WARN
+  ERROR
+}
+
+enum JobStatus {
+  IDLE
+  RUNNING
+  SUCCEEDED
+  FAILED
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  passwordHash   String
+  role           UserRole  @default(ADMIN)
+  failedLogins   Int       @default(0)
+  lockedUntil    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  sessions       Session[]
+  auditLogs      AuditLog[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique // sha256 do token do cookie; o token em si nunca é armazenado
+  csrfToken String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  lastUsedAt DateTime @default(now())
+  ip        String?
+  userAgent String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Category {
+  id           String    @id @default(cuid())
+  key          String    @unique // ex.: "smartphones"
+  name         String
+  mlCategoryIds String[] // IDs de categoria do Mercado Livre (ex.: MLB1055). Configurável.
+  searchTerms  String[] // termos extras de busca
+  enabled      Boolean   @default(false)
+  relevance    Int       @default(50) // 0–100, entra no score
+  dailyLimit   Int? // limite diário por categoria (opcional)
+  minScore     Int? // sobrescreve a pontuação mínima global (opcional)
+  sortOrder    Int       @default(0)
+  products     Product[]
+}
+
+model Product {
+  id               String    @id @default(cuid())
+  source           String    @default("mercadolivre")
+  externalId       String // MLB123... (anúncio)
+  catalogProductId String? // MLB catalog product id (une variações/anúncios do mesmo produto)
+  familyKey        String // chave de deduplicação: catalogProductId ou hash normalizado do título
+  title            String
+  permalink        String
+  thumbnail        String?
+  imageUrl         String?
+  categoryId       String?
+  sellerId         String?
+  sellerName       String?
+  sellerReputation Json? // dados reais da API; nulo se não disponível
+  condition        String?
+  status           String    @default("ACTIVE") // ACTIVE | SUSPENDED | UNAVAILABLE
+  suspendedUntil   DateTime?
+  suspendReason    String?
+  lastSeenAt       DateTime  @default(now())
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  category         Category? @relation(fields: [categoryId], references: [id])
+  variants         ProductVariant[]
+  prices           PriceHistory[]
+  offers           Offer[]
+  affiliateLinks   AffiliateLink[]
+
+  @@unique([source, externalId])
+  @@index([familyKey])
+  @@index([categoryId])
+}
+
+model ProductVariant {
+  id           String   @id @default(cuid())
+  productId    String
+  externalId   String // id da variação no anúncio
+  attributes   Json?
+  createdAt    DateTime @default(now())
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  prices       PriceHistory[]
+
+  @@unique([productId, externalId])
+}
+
+model PriceHistory {
+  id                    String    @id @default(cuid())
+  productId             String
+  variantId             String?
+  listingId             String // id do anúncio observado
+  source                String // origem do dado: "ml_api", "fixture", "manual"
+  priceCents            Int
+  originalPriceCents    Int? // somente se informado pela fonte
+  originalPriceVerified Boolean   @default(false) // true = confirmado (ex.: histórico próprio/fonte oficial)
+  currency              String    @default("BRL")
+  availableQuantity     Int?
+  soldQuantity          Int?
+  couponCode            String?
+  couponDiscountCents   Int?
+  installments          Json? // { quantity, amountCents, rate } apenas se vier da fonte
+  observedAt            DateTime  @default(now())
+  product               Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant               ProductVariant? @relation(fields: [variantId], references: [id])
+
+  @@index([productId, observedAt])
+}
+
+model Offer {
+  id               String      @id @default(cuid())
+  productId        String
+  priceHistoryId   String?
+  status           OfferStatus @default(DISCOVERED)
+  tier             OfferTier   @default(BELOW)
+  kind             OfferKind   @default(COMMON)
+  score            Int         @default(0)
+  scoreBreakdown   Json? // pontuação por critério
+  priceCents       Int
+  originalPriceCents Int? // preço de referência exibido (só se verificado)
+  discountPct      Int? // só quando há referência confiável
+  savingsCents     Int?
+  discountVerified Boolean     @default(false) // economia verificada vs. apenas anunciada
+  couponCode       String?
+  couponDiscountCents Int?
+  installments     Json?
+  flash            Boolean     @default(false)
+  popular          Boolean     @default(false)
+  decidedBy        String? // "auto" | userId
+  decisionNote     String?
+  discoveredAt     DateTime    @default(now())
+  decidedAt        DateTime?
+  expiresAt        DateTime?
+  product          Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  publications     Publication[]
+
+  @@index([status, score])
+  @@index([productId, discoveredAt])
+  @@index([discoveredAt])
+}
+
+model AffiliateLink {
+  id             String              @id @default(cuid())
+  productId      String
+  url            String
+  kind           AffiliateLinkKind   @default(MANUAL)
+  status         AffiliateLinkStatus @default(PENDING)
+  resolvedItemId String? // item resolvido na validação
+  validatedAt    DateTime?
+  validationNote String?
+  lastError      String?
+  createdBy      String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  product        Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, status])
+}
+
+model PublishingChannel {
+  id            String        @id @default(cuid())
+  type          ChannelType
+  name          String
+  enabled       Boolean       @default(false)
+  config        Json // apenas dados NÃO sensíveis (ex.: nome do grupo, chat_id)
+  credentialId  String?
+  status        ChannelStatus @default(UNKNOWN)
+  statusDetail  String?
+  lastCheckedAt DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  publications  Publication[]
+  credential    IntegrationCredential? @relation(fields: [credentialId], references: [id])
+}
+
+model Publication {
+  id                String            @id @default(cuid())
+  offerId           String
+  channelId         String
+  status            PublicationStatus @default(PENDING)
+  template          OfferKind
+  messageText       String
+  imageUrl          String?
+  affiliateLinkId   String
+  idempotencyKey    String            @unique // offerId:channelId — impede duplicidade, inclusive após restart
+  scheduledFor      DateTime?
+  sentAt            DateTime?
+  externalMessageId String?
+  attemptsCount     Int               @default(0)
+  lastError         String?
+  lockedAt          DateTime? // lock de envio; detectar travamento
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  offer             Offer             @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  channel           PublishingChannel @relation(fields: [channelId], references: [id])
+  attempts          PublicationAttempt[]
+
+  @@index([status, scheduledFor])
+  @@index([channelId, sentAt])
+}
+
+model PublicationAttempt {
+  id            String      @id @default(cuid())
+  publicationId String
+  startedAt     DateTime    @default(now())
+  finishedAt    DateTime?
+  success       Boolean     @default(false)
+  httpStatus    Int?
+  error         String?
+  response      Json? // resposta sanitizada (sem tokens)
+  publication   Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+
+  @@index([publicationId])
+}
+
+model AutomationSettings {
+  id        Int      @id @default(1) // singleton
+  data      Json // validado por zod (ver src/domain/settings.ts)
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+}
+
+model IntegrationCredential {
+  id         String   @id @default(cuid())
+  provider   String // "mercadolivre" | "whatsapp_cloud" | "telegram" | "webhook" | "affiliate"
+  name       String
+  encrypted  String // AES-256-GCM: base64(iv|tag|ciphertext) — nunca devolvido ao frontend
+  hint       String? // últimos caracteres, p/ identificar sem expor
+  status     String   @default("UNKNOWN")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  channels   PublishingChannel[]
+
+  @@unique([provider, name])
+}
+
+model SystemLog {
+  id        String   @id @default(cuid())
+  level     LogLevel @default(INFO)
+  scope     String // "discovery" | "publishing" | "auth" | ...
+  message   String
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([scope, level])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  before    Json?
+  after     Json?
+  ip        String?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  level     LogLevel @default(WARN)
+  type      String // "integration_auth_required" | "job_stuck" | ...
+  title     String
+  body      String?
+  dedupeKey String?  @unique // evita alertas repetidos
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([readAt, createdAt])
+}
+
+model ScheduledJob {
+  id             String    @id @default(cuid())
+  name           String    @unique // "discovery" | "publish-tick" | "maintenance" | ...
+  queue          String
+  everyMs        Int?
+  status         JobStatus @default(IDLE)
+  enabled        Boolean   @default(true)
+  lastRunAt      DateTime?
+  lastSuccessAt  DateTime?
+  lastError      String?
+  lastDurationMs Int?
+  nextRunAt      DateTime?
+  runCount       Int       @default(0)
+  failCount      Int       @default(0)
+  heartbeatAt    DateTime? // atualizado durante execução; usado p/ detectar job travado
+  lastStats      Json? // ex.: { found, scored, approved }
+}

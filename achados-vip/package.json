@@ -1,0 +1,15 @@
+{
+  "name": "achados-vip-automation",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev:api": "npm -w apps/api run dev",
+    "dev:worker": "npm -w apps/api run dev:worker",
+    "dev:web": "npm -w apps/web run dev",
+    "build": "npm -w apps/api run build && npm -w apps/web run build",
+    "test": "npm -w apps/api test",
+    "typecheck": "npm -w apps/api run typecheck && npm -w apps/web run typecheck"
+  },
+  "engines": { "node": ">=20" }
+}
