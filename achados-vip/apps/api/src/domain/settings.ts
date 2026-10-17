@@ -24,23 +24,23 @@ export const SettingsSchema = z.object({
       /** Quedas menores que isso (vs. última observação) não geram nova Offer. */
       minPriceDropPct: z.number().min(0).max(100).default(3),
     })
-    .default({}),
+    .prefault({}),
   scoring: z
     .object({
-      weights: ScoringWeightsSchema.default({}),
+      weights: ScoringWeightsSchema.prefault({}),
       thresholds: z
         .object({
           exceptional: z.number().int().min(1).max(100).default(90),
           excellent: z.number().int().min(1).max(100).default(75),
           good: z.number().int().min(1).max(100).default(60),
         })
-        .default({}),
+        .prefault({}),
       /** Abaixo disso a oferta nunca é publicada automaticamente. */
       minScoreToPublish: z.number().int().min(0).max(100).default(75),
       /** Mínimo de observações no histórico para considerar o critério "histórico". */
       minHistoryObservations: z.number().int().min(1).default(3),
     })
-    .default({}),
+    .prefault({}),
   publishing: z
     .object({
       autoPublish: z.boolean().default(false),
@@ -59,9 +59,9 @@ export const SettingsSchema = z.object({
           end: hhmm.default('07:00'),
           timezone: z.string().default('America/Sao_Paulo'),
         })
-        .default({}),
+        .prefault({}),
     })
-    .default({}),
+    .prefault({}),
   affiliate: z
     .object({
       /** Não editável na prática: a publicação sempre exige link validado. */
@@ -72,7 +72,7 @@ export const SettingsSchema = z.object({
       /** Segue redirecionamentos (com proteção SSRF) para confirmar o produto de destino. */
       resolveRedirects: z.boolean().default(true),
     })
-    .default({}),
+    .prefault({}),
   messages: z
     .object({
       disclosure: z
@@ -81,19 +81,19 @@ export const SettingsSchema = z.object({
       showInstallments: z.boolean().default(true),
       groupName: z.string().default('ACHADOS VIP'),
     })
-    .default({}),
+    .prefault({}),
   alerts: z
     .object({
       stuckJobMinutes: z.number().int().min(1).default(15),
       stuckPublicationMinutes: z.number().int().min(1).default(10),
     })
-    .default({}),
+    .prefault({}),
   retention: z
     .object({
       logDays: z.number().int().min(1).default(30),
       priceHistoryDays: z.number().int().min(30).default(365),
     })
-    .default({}),
+    .prefault({}),
 });
 
 export type Settings = z.infer<typeof SettingsSchema>;
