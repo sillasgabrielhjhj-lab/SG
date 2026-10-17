@@ -21,7 +21,7 @@ const HEADERS: Record<OfferKindName, { emoji: string; text: string }> = {
 // ---------- título ----------
 
 const LOWER_WORDS = new Set(['de', 'da', 'do', 'das', 'dos', 'e', 'com', 'para', 'em', 'no', 'na', 'a', 'o', 'ou', 'por']);
-const KEEP_UPPER = new Set(['HDMI', 'NVME', 'OLED', 'QLED', 'AMOLED', 'LCD', 'GPS', 'USB', 'RGB', 'WIFI', 'FULL', 'ULTRA']);
+const KEEP_UPPER = new Set(['HDMI', 'NVME', 'OLED', 'QLED', 'AMOLED', 'LCD', 'GPS', 'USB', 'RGB', 'WIFI']);
 
 /** Título em CAIXA ALTA (>70% das letras) vira "Caixa Normal", preservando siglas curtas e palavras com número. */
 function softenCaps(t: string): string {
@@ -59,6 +59,8 @@ export function shortenTitle(raw: string, max = TITLE_MAX): string {
 
 interface Style {
   text(s: string): string;
+  /** URL: nunca remove marcadores (underscores/til são válidos em links); só escapa HTML no Telegram. */
+  url(s: string): string;
   bold(s: string): string;
   strike(s: string): string;
   italic(s: string): string;
@@ -74,6 +76,7 @@ function styleFor(format: MessageFormat): Style {
     case 'whatsapp':
       return {
         text: stripWaMarkup,
+        url: (s) => s,
         bold: (s) => `*${stripWaMarkup(s)}*`,
         strike: (s) => `~${stripWaMarkup(s)}~`,
         italic: (s) => `_${stripWaMarkup(s)}_`,
@@ -82,13 +85,14 @@ function styleFor(format: MessageFormat): Style {
     case 'telegram_html':
       return {
         text: escapeHtml,
+        url: escapeHtml,
         bold: (s) => `<b>${escapeHtml(s)}</b>`,
         strike: (s) => `<s>${escapeHtml(s)}</s>`,
         italic: (s) => `<i>${escapeHtml(s)}</i>`,
         code: (s) => `<code>${escapeHtml(s)}</code>`,
       };
     default:
-      return { text: (s) => s, bold: (s) => s, strike: (s) => s, italic: (s) => s, code: (s) => s };
+      return { text: (s) => s, url: (s) => s, bold: (s) => s, strike: (s) => s, italic: (s) => s, code: (s) => s };
   }
 }
 
@@ -153,7 +157,7 @@ function render(i: MessageInput, format: MessageFormat, url: string, titleMax: n
   if (isPositive(i.couponDiscountCents)) lines.push(`💸 Cupom de ${formatBRL(i.couponDiscountCents)} de desconto`);
   if (kind === 'POPULAR' && isPositive(i.soldQuantity)) lines.push(`📦 ${groupThousands(i.soldQuantity)} vendidos`);
 
-  lines.push('', pair ? '🛒 Comprar com desconto:' : '🛒 Ver a oferta:', st.text(url));
+  lines.push('', pair ? '🛒 Comprar com desconto:' : '🛒 Ver a oferta:', st.url(url));
   if (disclosure) lines.push('', st.italic(disclosure));
   return lines.join('\n');
 }
