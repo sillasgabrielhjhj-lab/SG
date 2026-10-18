@@ -1,0 +1,297 @@
+# Achados VIP — stack de produção (VPS Ubuntu + Docker Compose v2).
+#
+#   cp .env.example .env && ./scripts/generate-secrets.sh --write   (a partir de infra/)
+#   ./scripts/deploy.sh                                              (valida, constrói, migra e sobe)
+#
+# Redes:
+#   edge     — caddy, web e api (única rede com portas publicadas: só o caddy, 80/443)
+#   data     — INTERNA (sem acesso à internet): postgres, redis, api, worker, migrate, backup
+#   outbound — saída para a internet (somente worker e backup; ninguém conecta nela)
+# postgres e redis NÃO publicam portas e só existem na rede interna "data".
+#
+# Observação: o Docker publica portas direto no iptables e ignora regras do ufw para elas.
+# Por isso só o caddy tem "ports:". Veja docs/DEPLOY.md.
+
+name: achados-vip
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+x-api-build: &api-build
+  context: ..
+  dockerfile: apps/api/Dockerfile
+  target: runtime
+
+# Variáveis da aplicação (api, worker e migrate). Segredos vêm do arquivo infra/.env.
+x-app-env: &app-env
+  NODE_ENV: production
+  HOST: 0.0.0.0
+  PORT: "3001"
+  # Atrás do Caddy (único cliente da API na rede): usa X-Forwarded-For para o IP real (rate limit/auditoria).
+  TRUST_PROXY: "true"
+  COOKIE_SECURE: "true"
+  WEB_ORIGIN: https://${DOMAIN:?defina DOMAIN em infra/.env}
+  DATABASE_URL: postgresql://${POSTGRES_USER:-achados}:${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD em infra/.env}@postgres:5432/${POSTGRES_DB:-achados}
+  REDIS_URL: redis://:${REDIS_PASSWORD:?defina REDIS_PASSWORD em infra/.env}@redis:6379
+  APP_ENCRYPTION_KEY: ${APP_ENCRYPTION_KEY:?defina APP_ENCRYPTION_KEY em infra/.env (openssl rand -base64 32)}
+  SESSION_SECRET: ${SESSION_SECRET:?defina SESSION_SECRET em infra/.env (openssl rand -base64 48)}
+  ML_CLIENT_ID: ${ML_CLIENT_ID:-}
+  ML_CLIENT_SECRET: ${ML_CLIENT_SECRET:-}
+  ML_REFRESH_TOKEN: ${ML_REFRESH_TOKEN:-}
+  LOG_LEVEL: ${LOG_LEVEL:-info}
+
+services:
+  # ------------------------------------------------------------------ banco
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-achados}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD em infra/.env}
+      POSTGRES_DB: ${POSTGRES_DB:-achados}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+    mem_limit: 768m
+    shm_size: 128mb
+    stop_grace_period: 30s
+    security_opt: ["no-new-privileges:true"]
+    logging: *logging
+
+  # ------------------------------------------------------------------ fila (BullMQ)
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    user: redis
+    # appendonly: persistência das filas; noeviction: o BullMQ exige que o Redis nunca descarte chaves.
+    command:
+      - sh
+      - -c
+      - exec redis-server --appendonly yes --appendfsync everysec --maxmemory 256mb --maxmemory-policy noeviction --requirepass "$$REDISCLI_AUTH"
+    environment:
+      # REDISCLI_AUTH: o redis-cli (healthcheck) autentica sem expor a senha na linha de comando.
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?defina REDIS_PASSWORD em infra/.env}
+    volumes:
+      - redisdata:/data
+    networks: [data]
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    mem_limit: 384m
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: *logging
+
+  # ------------------------------------------------------------------ migrations (one-shot)
+  # Roda "prisma migrate deploy" + seed idempotente e termina. api e worker só sobem se ele terminar com sucesso.
+  migrate:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+      target: tools
+    image: achados-vip/api-tools:${APP_VERSION:-latest}
+    restart: "no"
+    environment: *app-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [data]
+    mem_limit: 512m
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: *logging
+
+  # ------------------------------------------------------------------ API (Fastify)
+  api:
+    build: *api-build
+    image: achados-vip/api:${APP_VERSION:-latest}
+    restart: unless-stopped
+    init: true
+    environment: *app-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    expose: ["3001"]
+    networks: [edge, data]
+    read_only: true
+    tmpfs: ["/tmp"]
+    healthcheck:
+      # /ready: confere PostgreSQL + Redis (sem expor detalhes)
+      test: ["CMD", "node", "/app/healthcheck.cjs", "http", "http://127.0.0.1:3001/ready"]
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 40s
+    mem_limit: 512m
+    pids_limit: 256
+    stop_grace_period: 20s
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: *logging
+
+  # ------------------------------------------------------------------ worker (BullMQ) — mesma imagem da API
+  worker:
+    build: *api-build
+    image: achados-vip/api:${APP_VERSION:-latest}
+    restart: unless-stopped
+    init: true
+    # Equivale a "npm run start:worker" (node dist/worker.js), sem o wrapper do npm, para receber SIGTERM e encerrar limpo.
+    command: ["node", "dist/worker.js"]
+    environment: *app-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    # data: banco/redis (interna). outbound: saída para Mercado Livre, Telegram e Meta.
+    networks: [data, outbound]
+    read_only: true
+    tmpfs: ["/tmp"]
+    healthcheck:
+      # O worker não tem HTTP: verifica a conexão autenticada com o Redis. O estado dos jobs fica no painel (Dashboard/Automação).
+      test: ["CMD", "node", "/app/healthcheck.cjs", "redis"]
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 40s
+    mem_limit: 512m
+    pids_limit: 256
+    stop_grace_period: 60s
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: *logging
+
+  # ------------------------------------------------------------------ painel (Next.js)
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      args:
+        API_INTERNAL_URL: http://api:3001
+    image: achados-vip/web:${APP_VERSION:-latest}
+    restart: unless-stopped
+    init: true
+    environment:
+      NODE_ENV: production
+    expose: ["3000"]
+    networks: [edge]
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/apps/web/.next/cache
+    # healthcheck: definido no HEALTHCHECK da imagem (apps/web/Dockerfile: GET /login em 127.0.0.1:3000)
+    mem_limit: 384m
+    pids_limit: 256
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: *logging
+
+  # ------------------------------------------------------------------ proxy reverso (HTTPS automático)
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN:?defina DOMAIN em infra/.env}
+      ACME_EMAIL: ${ACME_EMAIL:?defina ACME_EMAIL em infra/.env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data # certificados — não apague (limite de emissões do Let's Encrypt)
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    networks: [edge]
+    healthcheck:
+      # Admin API do Caddy escuta só em 127.0.0.1 dentro do contêiner (não é exposta).
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:2019/config/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    mem_limit: 256m
+    pids_limit: 256
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    logging: *logging
+
+  # ------------------------------------------------------------------ backup diário do PostgreSQL
+  backup:
+    build:
+      context: ./backup
+    image: achados-vip/backup:${APP_VERSION:-latest}
+    restart: unless-stopped
+    init: true
+    command: ["sh", "/scripts/backup.sh", "--loop"]
+    environment:
+      IN_BACKUP_CONTAINER: "1"
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: ${POSTGRES_USER:-achados}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD em infra/.env}
+      PGDATABASE: ${POSTGRES_DB:-achados}
+      BACKUP_DIR: /backups
+      BACKUP_TIME: ${BACKUP_TIME:-03:30}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+      BACKUP_PASSPHRASE: ${BACKUP_PASSPHRASE:-}
+      BACKUP_AGE_RECIPIENT: ${BACKUP_AGE_RECIPIENT:-}
+      BACKUP_PING_URL: ${BACKUP_PING_URL:-}
+      TZ: ${TZ:-America/Sao_Paulo}
+    volumes:
+      - ./scripts:/scripts:ro
+      # BACKUP_PATH vazio = volume nomeado "backups". Para gravar numa pasta do servidor, use um caminho absoluto
+      # (a pasta precisa pertencer ao UID 70: chown 70:70 /caminho).
+      - ${BACKUP_PATH:-backups}:/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [data, outbound]
+    healthcheck:
+      # Saudável se houve backup bem-sucedido nas últimas 26 h.
+      test: ["CMD-SHELL", "test -n \"$$(find /backups -maxdepth 1 -name .last_success -mmin -1560)\""]
+      interval: 1h
+      timeout: 10s
+      retries: 1
+      start_period: 15m
+    mem_limit: 256m
+    pids_limit: 128
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: *logging
+
+networks:
+  edge: {}
+  data:
+    internal: true
+  outbound: {}
+
+volumes:
+  pgdata:
+  redisdata:
+  caddy_data:
+  caddy_config:
+  backups:

@@ -1,0 +1,59 @@
+# Achados VIP — Caddy (HTTPS automático via Let's Encrypt).
+# DOMAIN e ACME_EMAIL vêm do infra/.env (repassados pelo docker-compose).
+# Com DOMAIN=localhost o Caddy usa uma CA interna (certificado não confiável — só para testes locais).
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	encode zstd gzip
+
+	# Cabeçalhos de segurança comuns. A CSP fica por conta de cada aplicação (API/helmet e Next.js),
+	# para não conflitar com o Swagger UI (/docs) nem com os scripts de hidratação do Next.
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "no-referrer"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		X-Robots-Tag "noindex, nofollow"
+		-Server
+	}
+
+	# API: /api/*, documentação (/docs, exige login em produção) e liveness (/health).
+	# /ready NÃO é exposto (só o healthcheck interno usa).
+	@api path /api/* /docs /docs/* /health
+	handle @api {
+		request_body {
+			max_size 2MB
+		}
+		reverse_proxy api:3001 {
+			health_uri /health
+			health_interval 15s
+			health_timeout 5s
+		}
+	}
+
+	# Todo o resto: painel Next.js.
+	handle {
+		reverse_proxy web:3000 {
+			health_uri /robots.txt
+			health_interval 15s
+			health_timeout 5s
+		}
+	}
+
+	# Log de acesso em JSON no stdout (docker compose logs caddy), SEM cookies, tokens ou cabeçalhos de autenticação.
+	log {
+		output stdout
+		format filter {
+			wrap json
+			fields {
+				request>headers>Authorization delete
+				request>headers>Cookie delete
+				request>headers>X-Csrf-Token delete
+				resp_headers>Set-Cookie delete
+			}
+		}
+	}
+}

@@ -1,0 +1,15 @@
+# Contexto = raiz do monorepo (achados-vip/). Só o necessário para o painel web.
+**/node_modules
+**/.next
+**/dist
+**/coverage
+.git
+.env
+.env.*
+**/*.tsbuildinfo
+apps/api/*
+!apps/api/package.json
+apps/web/tests
+infra
+docs
+backups

@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tokens de cor (RGB em canais) — claro por padrão, escuro via prefers-color-scheme. */
+:root {
+  --bg: 248 250 252;
+  --surface: 255 255 255;
+  --surface-2: 241 245 249;
+  --line: 226 232 240;
+  --fg: 15 23 42;
+  --muted: 100 116 139;
+  --ring: 79 70 229;
+
+  --primary: 79 70 229;
+  --primary-fg: 255 255 255;
+  --primary-ink: 67 56 202;
+  --primary-soft: 238 242 255;
+
+  --success: 22 163 74;
+  --success-soft: 220 252 231;
+  --success-ink: 21 101 52;
+  --warning: 217 119 6;
+  --warning-soft: 254 243 199;
+  --warning-ink: 146 64 14;
+  --danger: 220 38 38;
+  --danger-soft: 254 226 226;
+  --danger-ink: 153 27 27;
+  --info: 2 132 199;
+  --info-soft: 224 242 254;
+  --info-ink: 7 89 133;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 9 13 22;
+    --surface: 17 24 39;
+    --surface-2: 30 41 59;
+    --line: 51 65 85;
+    --fg: 241 245 249;
+    --muted: 148 163 184;
+    --ring: 165 180 252;
+
+    --primary: 79 70 229;
+    --primary-fg: 255 255 255;
+    --primary-ink: 165 180 252;
+    --primary-soft: 30 27 75;
+
+    --success: 34 197 94;
+    --success-soft: 5 46 22;
+    --success-ink: 134 239 172;
+    --warning: 245 158 11;
+    --warning-soft: 69 26 3;
+    --warning-ink: 252 211 77;
+    --danger: 248 113 113;
+    --danger-soft: 69 10 10;
+    --danger-ink: 252 165 165;
+    --info: 56 189 248;
+    --info-soft: 8 47 73;
+    --info-ink: 125 211 252;
+
+    color-scheme: dark;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco visível para teclado em todos os controles. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: rgb(var(--primary) / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  .input {
+    @apply block w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-fg shadow-sm placeholder:text-muted/70
+      disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted;
+  }
+  .input[aria-invalid='true'] {
+    @apply border-danger;
+  }
+  .link {
+    @apply text-primary-ink underline-offset-2 hover:underline;
+  }
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    @apply sr-only;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse-soft {
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

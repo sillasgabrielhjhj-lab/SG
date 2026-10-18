@@ -1,0 +1,14 @@
+# Usado quando o contexto de build é apps/web. Com contexto na raiz, vale Dockerfile.dockerignore (mesmo conteúdo).
+node_modules
+**/node_modules
+.next
+**/.next
+tests
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+.env
+.env.*
+Dockerfile
+.dockerignore
+Dockerfile.dockerignore
+npm-debug.log*

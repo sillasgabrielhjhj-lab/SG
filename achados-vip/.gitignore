@@ -6,3 +6,7 @@ dist/
 *.log
 coverage/
 backups/
+# cópias do .env (ex.: .env.bak.*, .env.production) nunca entram no git; só os exemplos
+.env.*
+!.env.example
+infra/backups/

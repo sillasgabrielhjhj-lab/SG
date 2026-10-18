@@ -1,0 +1,23 @@
+# Contexto de build = raiz do monorepo (achados-vip/). Mantém a imagem pequena e NUNCA envia segredos.
+**/node_modules
+**/.next
+**/dist
+**/coverage
+**/*.tsbuildinfo
+**/*.log
+.git
+.gitignore
+
+# segredos e dados locais
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+infra/backups
+**/backups
+
+# não necessários para construir as imagens
+docs
+apps/api/tests
+**/*.md

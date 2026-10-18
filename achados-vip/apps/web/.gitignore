@@ -1,0 +1,4 @@
+tsconfig.tsbuildinfo
+.next/
+node_modules/
+tests/sim/out/

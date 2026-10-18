@@ -43,7 +43,8 @@ function softenCaps(t: string): string {
 export function shortenTitle(raw: string, max = TITLE_MAX): string {
   const clean = softenCaps(
     (raw ?? '')
-      .replace(/[\u0000-\u001f\u007f​-‏ -‮﻿]/g, ' ')
+      .replace(/\p{Cf}/gu, '') // invisíveis (zero-width etc.)
+      .replace(/[\p{Cc}\p{Zl}\p{Zp}]/gu, ' ')
       .replace(/\s+/g, ' ')
       .trim(),
   );
