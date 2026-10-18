@@ -1,0 +1,43 @@
+# syntax=docker/dockerfile:1.7
+# Achados VIP — imagem ÚNICA (painel + API + worker) para o Render. Contexto de build: esta pasta (achados-vip/).
+# O supervisor (infra/render/supervisor.mjs) roda migrations/seed, cria o 1º admin e sobe os 3 processos.
+# Para a arquitetura com serviços separados (produção maior), use o docker-compose em infra/.
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}-bookworm-slim AS build
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+ENV NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_FUND=false NPM_CONFIG_AUDIT=false NEXT_TELEMETRY_DISABLED=1
+COPY package.json package-lock.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/web/package.json apps/web/package.json
+RUN npm ci
+COPY apps ./apps
+# "prisma generate" não conecta ao banco; valor fictício só para o build
+ENV DATABASE_URL="postgresql://build:build@localhost:5432/build"
+RUN npm -w apps/api run build \
+ && for f in dist/server.js dist/worker.js dist/scripts/create-admin.js; do test -f "apps/api/$f" || { echo "ERRO: $f ausente" >&2; exit 1; }; done
+# o painel fala com a API pelo próprio container (rewrite /api/* gravado no build)
+ENV API_INTERNAL_URL=http://127.0.0.1:3001
+RUN npm -w apps/web run build
+
+FROM node:${NODE_VERSION}-bookworm-slim AS runtime
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+ENV NODE_ENV=production CHECKPOINT_DISABLE=1 PRISMA_HIDE_UPDATE_MESSAGE=1
+# node_modules completo: o Prisma CLI (migrate) e o tsx (seed) rodam no start do container
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/apps/api ./apps/api
+COPY --from=build /app/apps/web/.next/standalone ./web
+COPY --from=build /app/apps/web/.next/static ./web/apps/web/.next/static
+COPY --from=build /app/apps/web/public ./web/apps/web/public
+COPY infra/render/supervisor.mjs ./supervisor.mjs
+RUN chown -R node:node /app
+USER node
+EXPOSE 10000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
+  CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||10000)+'/login').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+CMD ["node", "supervisor.mjs"]
