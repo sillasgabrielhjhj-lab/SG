@@ -143,7 +143,8 @@ export async function listOffers(q: OfferListQuery): Promise<Page<OfferDTO>> {
     ...(q.minScore !== undefined ? { score: { gte: q.minScore } } : {}),
     product: {
       ...(q.categoryId ? { categoryId: q.categoryId } : {}),
-      ...(q.q ? { title: { contains: q.q, mode: 'insensitive' } } : {}),
+      // % e _ são curingas do LIKE (o Prisma não os escapa): a busca é por texto literal
+      ...(q.q ? { title: { contains: q.q.replace(/[\\%_]/g, '\\$&'), mode: 'insensitive' } } : {}),
     },
   };
   const [rows, total] = await Promise.all([

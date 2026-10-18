@@ -374,7 +374,8 @@ export async function safeFetch(input: string | URL, opts: SafeFetchOptions = {}
           continue; // revalida o próximo salto no topo do laço
         }
         const contentLength = Number(res.headers['content-length']);
-        if (Number.isFinite(contentLength) && contentLength > maxBytes) {
+        // HEAD não tem corpo: o Content-Length descreve o corpo do GET equivalente e nada será lido
+        if (method !== 'HEAD' && Number.isFinite(contentLength) && contentLength > maxBytes) {
           discard(res.body);
           throw new ResponseTooLargeError(maxBytes);
         }

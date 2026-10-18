@@ -37,7 +37,8 @@ export interface TelegramOptions {
 /** Erros 400 de foto (URL inacessível, formato/dimensões) => vale cair para texto. */
 const PHOTO_PROBLEM_RE = /(failed to get http url content|wrong type of the web page content|wrong file identifier|photo_invalid_dimensions|image_process_failed|wrong remote file)/i;
 
-const firstUrl = (text: string): string | null => /https?:\/\/[^\s<>"']+/.exec(text)?.[0] ?? null;
+/** Primeiro link do texto. O texto está em HTML (& vira &amp;): a URL da pré-visualização precisa voltar ao original. */
+const firstUrl = (text: string): string | null => /https?:\/\/[^\s<>"']+/.exec(text)?.[0]?.replace(/&amp;/g, '&') ?? null;
 
 export class TelegramPublisher implements PublisherAdapter {
   readonly type = 'TELEGRAM' as const;

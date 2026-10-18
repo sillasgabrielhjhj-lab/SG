@@ -33,6 +33,23 @@ export function cleanError(value: unknown, max = 300): string {
   return s.length > max ? `${s.slice(0, max)}…` : s;
 }
 
+/**
+ * Troca por "[REDACTED]" os VALORES secretos conhecidos da credencial (token cru, segredo de webhook) em qualquer
+ * texto/objeto — scrubString só reconhece formatos conhecidos; um provedor/receptor que ecoe o segredo "pelado"
+ * escaparia dele. Valores curtos (< 8 caracteres) são ignorados para não mutilar mensagens.
+ */
+export function redactKnownSecrets<T>(value: T, secrets: Iterable<string | undefined | null>): T {
+  const list = [...secrets].filter((s): s is string => typeof s === 'string' && s.length >= 8);
+  if (list.length === 0) return value;
+  const walk = (v: unknown): unknown => {
+    if (typeof v === 'string') return list.reduce((acc, sec) => acc.split(sec).join('[REDACTED]'), v);
+    if (Array.isArray(v)) return v.map(walk);
+    if (typeof v === 'object' && v !== null) return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, walk(x)]));
+    return v;
+  };
+  return walk(value) as T;
+}
+
 export function asRecord(v: unknown): Record<string, unknown> | null {
   return typeof v === 'object' && v !== null && !Array.isArray(v) ? (v as Record<string, unknown>) : null;
 }

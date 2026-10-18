@@ -10,7 +10,10 @@ import { requireAuth } from '../services/auth.js';
 const emptyToUndefined = (v: unknown) => (typeof v === 'string' && v.trim() === '' ? undefined : v);
 const IdParams = z.object({ id: z.string().min(1).max(64) });
 const LinksQuery = PageQuerySchema.extend({
-  status: z.preprocess((v) => (typeof v === 'string' ? v.toUpperCase() : emptyToUndefined(v)), z.enum(['PENDING', 'VALIDATED', 'INVALID']).optional()),
+  status: z.preprocess((v) => {
+    const s = emptyToUndefined(v); // "?status=" (vazio) = sem filtro
+    return typeof s === 'string' ? s.toUpperCase() : s;
+  }, z.enum(['PENDING', 'VALIDATED', 'INVALID']).optional()),
   productId: z.preprocess(emptyToUndefined, z.string().max(64).optional()),
 });
 const AddBody = z.strictObject({ productId: z.string().min(1).max(64), url: z.string().trim().min(1).max(4096) });

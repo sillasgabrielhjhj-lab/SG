@@ -22,7 +22,7 @@
  */
 import type { Prisma, Publication, PublicationStatus, PublishingChannel } from '@prisma/client';
 import { AdapterConfigError, channelFormat, createPublisher, isAutomaticChannel, type CredentialValues } from '../adapters/index.js';
-import { cleanError, transportFailure } from '../adapters/publishers/common.js';
+import { cleanError, redactKnownSecrets, transportFailure } from '../adapters/publishers/common.js';
 import { CHANNEL_CREDENTIAL_PROVIDER } from '../adapters/publishers/config.js';
 import { calcSavingsCents, calcDiscountPct } from '../domain/pricing.js';
 import type { Settings } from '../domain/settings.js';
@@ -424,9 +424,11 @@ async function executeLocked(id: string, prev: PublicationStatus, now: Date, dep
 
   // 4) adaptador
   let adapter: PublisherAdapter;
+  let secretValues: string[] = [];
   try {
     const provider = CHANNEL_CREDENTIAL_PROVIDER[channel.type];
     const credentials = provider ? await loadCredentialValues(channel.credentialId) : null;
+    secretValues = Object.values(credentials ?? {});
     adapter = (deps.createAdapter ?? createPublisher)(channel, credentials);
   } catch (err) {
     if (!(err instanceof AdapterConfigError)) throw err;
@@ -454,6 +456,7 @@ async function executeLocked(id: string, prev: PublicationStatus, now: Date, dep
   } catch (err) {
     result = transportFailure(err);
   }
+  result = redactKnownSecrets(result, secretValues); // provedor/receptor que ecoe o segredo "pelado" não o grava em lugar nenhum
   const finishedAt = new Date();
   const attemptData = {
     finishedAt,
@@ -678,6 +681,15 @@ export async function retryPublication(id: string, by?: string, ip?: string | nu
   }
   const manual = !isAutomaticChannel(pub.channel.type);
   const now = new Date();
+  if (manual) {
+    // Canal manual vai direto a MANUAL_READY (não passa por sendPublication): as travas duras valem aqui também —
+    // sem link VALIDADO, oferta aprovada, produto ativo e canal habilitado o item não volta para a fila.
+    const offer = await prisma.offer.findUnique({ where: { id: pub.offerId }, include: OFFER_INCLUDE });
+    if (!offer) throw new NotFoundError('Oferta não encontrada.');
+    const block = checkChannel(pub.channel) ?? checkOffer(offer, now) ?? checkProduct(offer.product, now);
+    if (block) throw toBlockedError(block);
+    if (!(await findValidatedLink(offer.productId))) throw new PublishBlockedError('NO_VALIDATED_LINK');
+  }
   const res = await prisma.publication.updateMany({
     where: { id, status: { in: retryable } },
     data: { status: manual ? 'MANUAL_READY' : 'PENDING', scheduledFor: manual ? now : null, attemptsCount: 0, lastError: null, lockedAt: null, sentAt: null },

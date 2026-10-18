@@ -7,7 +7,7 @@
 import type { ChannelStatus, ChannelType, IntegrationCredential, Prisma, PublishingChannel } from '@prisma/client';
 import { createPublisher, isAutomaticChannel, AdapterConfigError, type CredentialValues } from '../adapters/index.js';
 import { hasMlCredentials } from '../adapters/sources/credentials.js';
-import { cleanError } from '../adapters/publishers/common.js';
+import { cleanError, redactKnownSecrets } from '../adapters/publishers/common.js';
 import {
   CHANNEL_CREDENTIAL_PROVIDER,
   CREDENTIAL_HINT_FIELD,
@@ -233,12 +233,13 @@ export async function runHealth(type: ChannelType, config: unknown, credentialId
   const provider = CHANNEL_CREDENTIAL_PROVIDER[type];
   const values = provider ? await loadCredentialValues(credentialId) : null;
   if (provider && !values) return { ok: false, status: 'AUTH_REQUIRED', detail: 'Credencial não configurada (ou ilegível) para este canal' };
+  const secrets = Object.values(values ?? {});
   try {
     const adapter = createPublisher({ type, config }, values);
-    return await withTimeout(adapter.healthCheck(), HEALTH_DEADLINE_MS, 'teste de conexão');
+    return redactKnownSecrets(await withTimeout(adapter.healthCheck(), HEALTH_DEADLINE_MS, 'teste de conexão'), secrets);
   } catch (err) {
     if (err instanceof AdapterConfigError) return { ok: false, status: err.kind === 'credentials' ? 'AUTH_REQUIRED' : 'ERROR', detail: err.message };
-    return { ok: false, status: 'ERROR', detail: cleanError(err) };
+    return { ok: false, status: 'ERROR', detail: redactKnownSecrets(cleanError(err), secrets) };
   }
 }
 

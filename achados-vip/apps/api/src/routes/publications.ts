@@ -2,7 +2,6 @@ import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { parseInput } from '../lib/errors.js';
 import { PageQuerySchema } from '../lib/pagination.js';
-import { recordAudit } from '../services/audit.js';
 import { requireAuth } from '../services/auth.js';
 import {
   cancelPublication,
@@ -18,7 +17,7 @@ const emptyToUndefined = (v: unknown) => (typeof v === 'string' && v.trim() === 
 const IdParams = z.object({ id: z.string().min(1).max(64) });
 const ListQuery = PageQuerySchema.extend({
   status: z.preprocess(
-    (v) => (typeof v === 'string' ? v.toUpperCase() : emptyToUndefined(v)),
+    (v) => (typeof v === 'string' ? emptyToUndefined(v.trim().toUpperCase()) : v),
     z.enum(['PENDING', 'SCHEDULED', 'SENDING', 'SENT', 'FAILED', 'DEAD', 'MANUAL_READY', 'CANCELLED']).optional(),
   ),
   channelId: z.preprocess(emptyToUndefined, z.string().max(64).optional()),
@@ -55,8 +54,7 @@ export default async function (app: FastifyInstance) {
   app.post('/api/publications/:id/mark-sent', { schema: { tags: ['publications'], summary: 'Marca como publicada manualmente (Modo B)', docs: { params: IdParams } } }, async (request) => {
     const auth = requireAuth(request);
     const { id } = parseInput(IdParams, request.params);
-    await markManualSent(id, auth.user.id, request.ip);
-    await recordAudit({ userId: auth.user.id, action: 'publication.mark-sent', entity: 'Publication', entityId: id, ip: request.ip });
+    await markManualSent(id, auth.user.id, request.ip); // o serviço já audita (uma única vez e só na transição real)
     return getPublicationDTO(id);
   });
 }
