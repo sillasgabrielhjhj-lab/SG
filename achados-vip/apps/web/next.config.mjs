@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 // Destino do proxy para a API (same-origin: o navegador só fala com /api/*).
 // Atenção: em `next build` o valor é gravado nas rotas; no Docker passe como build-arg.
-const apiBase = (process.env.API_INTERNAL_URL || 'http://localhost:4000').replace(/\/+$/, '');
+const apiBase = (process.env.API_INTERNAL_URL || 'http://localhost:3001').replace(/\/+$/, '');
 const dev = process.env.NODE_ENV !== 'production';
 
 const csp = [

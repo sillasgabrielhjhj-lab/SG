@@ -121,34 +121,34 @@ Faça **depois** do deploy, nesta ordem. Registre a evidência (captura de tela,
 - [ ] Nenhum preço/desconto/cupom exibido sem origem real; oferta da fonte `fixture` marcada como teste e **não** publicada em canal real
 - [ ] **Configurações → Logs/Auditoria** sem tokens, senhas ou segredos em texto claro
 
-## 4. Resultados (a preencher)
+## 4. Resultados
 
-> Preencher **depois** de rodar os comandos acima no ambiente final. Não preencher com valores presumidos.
+> Resultados de 18/10/2026 no ambiente de desenvolvimento (Postgres 16 e Redis 7 locais reais; **nenhuma** chamada à rede externa). Os testes marcados como `sim` usam servidores HTTP locais que imitam Mercado Livre, Telegram e WhatsApp: **provam a lógica de tratamento (401, 429, 5xx, timeout, resposta sem id), não o comportamento das APIs reais**.
 
 ### 4.1 Testes automatizados
 
 | Suíte | Comando | Passando / Total | Data | Observações |
 |---|---|---|---|---|
-| Unitários | `npm -w apps/api exec -- vitest run tests/unit` | a preencher pelo agente final | a preencher | |
-| Integração (Postgres/Redis reais de teste) | `npm -w apps/api exec -- vitest run tests/integration` | a preencher pelo agente final | a preencher | |
-| Simulados (servidores locais) | `npm -w apps/api exec -- vitest run tests/sim` | a preencher pelo agente final | a preencher | |
-| Total | `npm test` | a preencher pelo agente final | a preencher | |
-| Typecheck API | `npx tsc --noEmit` (em `apps/api`) | a preencher pelo agente final | a preencher | |
-| Typecheck painel | `npm -w apps/web run typecheck` | a preencher pelo agente final | a preencher | |
-| Build | `npm run build` | a preencher pelo agente final | a preencher | |
+| Unitários | `npm -w apps/api exec -- vitest run tests/unit` | 354 / 354 | 18/10/2026 | 13 arquivos |
+| Integração (Postgres/Redis reais de teste) | `npm -w apps/api exec -- vitest run tests/integration` | 545 / 545 | 18/10/2026 | 21 arquivos; banco e Redis reais |
+| Simulados (servidores locais) | `npm -w apps/api exec -- vitest run tests/sim` | 231 / 231 | 18/10/2026 | 9 arquivos; **simulado**, não é teste real |
+| Total | `npm test` | 1130 / 1130 | 18/10/2026 | 43 arquivos; rodar sem outra suíte em paralelo no mesmo banco |
+| Typecheck API | `npx tsc --noEmit` (em `apps/api`) | OK | 18/10/2026 | |
+| Typecheck painel | `npm -w apps/web run typecheck` | OK | 18/10/2026 | |
+| Build | `npm run build` | OK (API `dist/server.js` e `dist/worker.js`; painel Next 15) | 18/10/2026 | imagens Docker **não** construídas (sem daemon no sandbox) |
 
 ### 4.2 Validação real (produção)
 
 | Item | Status (Aprovado / Reprovado / Não testado) | Evidência | Data | Responsável |
 |---|---|---|---|---|
-| Infra e segurança (3.1) | a preencher pelo agente final | | | |
-| Mercado Livre — fonte (3.2) | a preencher pelo agente final | | | |
-| Afiliados — importação e validação (3.3) | a preencher pelo agente final | | | |
-| Fila manual (3.4) | a preencher pelo agente final | | | |
-| Telegram (3.5) | a preencher pelo agente final | | | |
-| Webhook (3.6) | a preencher pelo agente final | | | |
-| WhatsApp Groups API (3.7) | a preencher pelo agente final | | | |
-| Honestidade do produto (3.8) | a preencher pelo agente final | | | |
+| Infra e segurança (3.1) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| Mercado Livre — fonte (3.2) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| Afiliados — importação e validação (3.3) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| Fila manual (3.4) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| Telegram (3.5) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| Webhook (3.6) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| WhatsApp Groups API (3.7) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
+| Honestidade do produto (3.8) | Não testado | Aguarda credenciais e execução no servidor de produção | | |
 
 ## 5. Verificações já executadas na infraestrutura (módulo "infra e documentação")
 
