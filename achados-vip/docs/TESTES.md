@@ -130,9 +130,9 @@ Faça **depois** do deploy, nesta ordem. Registre a evidência (captura de tela,
 | Suíte | Comando | Passando / Total | Data | Observações |
 |---|---|---|---|---|
 | Unitários | `npm -w apps/api exec -- vitest run tests/unit` | 354 / 354 | 18/10/2026 | 13 arquivos |
-| Integração (Postgres/Redis reais de teste) | `npm -w apps/api exec -- vitest run tests/integration` | 545 / 545 | 18/10/2026 | 21 arquivos; banco e Redis reais |
+| Integração (Postgres/Redis reais de teste) | `npm -w apps/api exec -- vitest run tests/integration` | 550 / 550 | 18/10/2026 | 22 arquivos; banco e Redis reais |
 | Simulados (servidores locais) | `npm -w apps/api exec -- vitest run tests/sim` | 231 / 231 | 18/10/2026 | 9 arquivos; **simulado**, não é teste real |
-| Total | `npm test` | 1130 / 1130 | 18/10/2026 | 43 arquivos; rodar sem outra suíte em paralelo no mesmo banco |
+| Total | `npm test` | 1135 / 1135 | 18/10/2026 | 44 arquivos; rodar sem outra suíte em paralelo no mesmo banco |
 | Typecheck API | `npx tsc --noEmit` (em `apps/api`) | OK | 18/10/2026 | |
 | Typecheck painel | `npm -w apps/web run typecheck` | OK | 18/10/2026 | |
 | Build | `npm run build` | OK (API `dist/server.js` e `dist/worker.js`; painel Next 15) | 18/10/2026 | imagens Docker **não** construídas (sem daemon no sandbox) |

@@ -243,6 +243,26 @@ export async function runHealth(type: ChannelType, config: unknown, credentialId
   }
 }
 
+/**
+ * O teste de conexão (ex.: Telegram getMe) pode dar OK mesmo com o envio sendo recusado (bot removido do canal, 403).
+ * Se a tentativa de envio MAIS RECENTE do canal foi recusada (401/403) e nenhum envio posterior deu certo,
+ * o canal não é considerado conectado.
+ */
+export async function applySendHistory(channelId: string, r: HealthResult): Promise<HealthResult> {
+  if (r.status !== 'CONNECTED') return r;
+  const last = await prisma.publicationAttempt.findFirst({
+    where: { publication: { channelId } },
+    orderBy: { startedAt: 'desc' },
+    select: { success: true, httpStatus: true, startedAt: true },
+  });
+  if (!last || last.success || (last.httpStatus !== 401 && last.httpStatus !== 403)) return r;
+  return {
+    ok: false,
+    status: 'AUTH_REQUIRED',
+    detail: `A conexão responde, mas o último envio foi recusado (HTTP ${last.httpStatus}) em ${last.startedAt.toISOString()}. Verifique permissões do bot/token e envie uma publicação de teste.`,
+  };
+}
+
 /** Grava o resultado de um teste/health e emite (ou resolve) alertas deduplicados. */
 export async function applyChannelHealth(channel: PublishingChannel, r: HealthResult, now = new Date()): Promise<void> {
   await prisma.publishingChannel.update({
@@ -273,7 +293,7 @@ export async function testChannel(id: string): Promise<TestResultDTO> {
   } else {
     try {
       await assertWebhookUrlSafe(channel.type, (channel.config ?? {}) as Record<string, unknown>);
-      result = await runHealth(channel.type, channel.config, channel.credentialId);
+      result = await applySendHistory(channel.id, await runHealth(channel.type, channel.config, channel.credentialId));
     } catch (err) {
       result = { ok: false, status: 'ERROR', detail: err instanceof ValidationError ? 'URL do webhook recusada pela proteção SSRF' : cleanError(err) };
     }

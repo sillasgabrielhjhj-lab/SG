@@ -14,7 +14,7 @@ import { PublishBlockedError } from '../lib/errors.js';
 import { logger } from '../lib/logger.js';
 import { createRedisConnection } from '../lib/redis.js';
 import { HOUR_MS, MINUTE_MS } from '../lib/time.js';
-import { applyChannelHealth, runHealth, syncManualChannelStatus, testSource } from '../services/channels.js';
+import { applyChannelHealth, applySendHistory, runHealth, syncManualChannelStatus, testSource } from '../services/channels.js';
 import { runDiscovery } from '../services/discovery.js';
 import { purgeExpiredSessions } from '../services/auth.js';
 import { logEvent, purgeOldLogs } from '../services/logs.js';
@@ -134,7 +134,7 @@ export async function runHealthChecks(now = new Date()): Promise<HealthJobResult
   let problems = 0;
   for (const channel of channels) {
     try {
-      const result = await runHealth(channel.type, channel.config, channel.credentialId);
+      const result = await applySendHistory(channel.id, await runHealth(channel.type, channel.config, channel.credentialId));
       await applyChannelHealth(channel, result, now);
       if (result.status === 'CONNECTED') connected++;
       else problems++;

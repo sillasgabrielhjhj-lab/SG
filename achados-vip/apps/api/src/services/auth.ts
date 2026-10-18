@@ -96,10 +96,10 @@ const EmailSchema = z.string().max(254).pipe(z.email());
 
 // ---- Bloqueio progressivo ---------------------------------------------------------
 
-/** 5 falhas => 1 min; depois dobra a cada nova falha (2, 4, 8, 16 min) até o teto de 30 min. */
+/** 5 falhas => 1 min; depois dobra a cada nova falha (2, 4, 8, 16 min) até o teto de 10 min (limita o estrago de bloqueio provocado por terceiros). */
 export function lockDurationMs(failures: number): number {
   if (failures < LOCK_THRESHOLD) return 0;
-  return Math.min(MINUTE_MS * 2 ** (failures - LOCK_THRESHOLD), 30 * MINUTE_MS);
+  return Math.min(MINUTE_MS * 2 ** (failures - LOCK_THRESHOLD), 10 * MINUTE_MS);
 }
 
 async function registerFailure(userId: string, now: Date): Promise<number> {

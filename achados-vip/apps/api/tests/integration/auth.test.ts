@@ -99,12 +99,14 @@ describe('login', () => {
 });
 
 describe('bloqueio progressivo', () => {
-  it('política de duração: 5 falhas => 1 min e dobra até 30 min', () => {
+  it('política de duração: 5 falhas => 1 min e dobra até o teto de 10 min', () => {
     expect(lockDurationMs(LOCK_THRESHOLD - 1)).toBe(0);
     expect(lockDurationMs(5)).toBe(60_000);
     expect(lockDurationMs(6)).toBe(120_000);
     expect(lockDurationMs(7)).toBe(240_000);
-    expect(lockDurationMs(30)).toBe(30 * 60_000);
+    expect(lockDurationMs(8)).toBe(480_000);
+    expect(lockDurationMs(9)).toBe(10 * 60_000);
+    expect(lockDurationMs(30)).toBe(10 * 60_000);
   });
 
   it('após 5 falhas a conta é bloqueada: até a senha correta é recusada (429) e nenhuma sessão é criada', async () => {
