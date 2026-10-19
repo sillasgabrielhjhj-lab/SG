@@ -11,6 +11,7 @@ import { cn } from '@/lib/cn';
 import { useFetch } from '@/lib/use-fetch';
 
 const NAV: { href: string; label: string; icon: IconName }[] = [
+  { href: '/rapido', label: 'Gerar post', icon: 'send' },
   { href: '/', label: 'Dashboard', icon: 'dashboard' },
   { href: '/ofertas', label: 'Ofertas', icon: 'tag' },
   { href: '/afiliados', label: 'Afiliados', icon: 'link' },

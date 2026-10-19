@@ -21,6 +21,7 @@ import type {
   Settings,
   SystemLogDTO,
   TestResult,
+  QuickPreview,
 } from './types';
 
 /** Cliente da API (same-origin via rewrite do Next). Tratamento único de erro `{error:{code,message}}`. */
@@ -217,7 +218,18 @@ export interface OfferQuery {
   pageSize?: number;
 }
 
+export interface QuickInput {
+  url: string;
+  title?: string;
+  price?: string;
+  originalPrice?: string;
+  couponCode?: string;
+}
+
 export const api = {
+  // ---- Gerar post (link de afiliado -> texto + imagem)
+  quickPreview: (input: QuickInput) => post<QuickPreview>('/quick/preview', input),
+
   // ---- Autenticação
   async login(email: string, password: string): Promise<SessionInfo> {
     const s = await post<SessionInfo>('/auth/login', { email, password }, { noAuthRedirect: true });

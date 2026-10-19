@@ -324,3 +324,18 @@ export type WeightKey = (typeof WEIGHT_KEYS)[number];
 
 /** Patch parcial recursivo (PUT /api/settings é strict: só enviar campos conhecidos). */
 export type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? (T[K] extends unknown[] ? T[K] : DeepPartial<T[K]>) : T[K] };
+
+/** Resposta de POST /api/quick/preview ("Gerar post"). */
+export interface QuickPreview {
+  ok: boolean;
+  needsInput: ('title' | 'price')[];
+  found: { title: boolean; price: boolean; image: boolean };
+  title: string | null;
+  priceCents: number | null;
+  originalPriceCents?: number | null;
+  imageUrl: string | null;
+  whatsapp: string | null;
+  telegram: string | null;
+  discountPct: number | null;
+  warnings: string[];
+}
