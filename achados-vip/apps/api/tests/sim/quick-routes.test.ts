@@ -4,7 +4,7 @@
  */
 import type { FastifyInstance } from 'fastify';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { quickDeps } from '../../src/routes/quick.js';
+import { quickDeps } from '../../src/services/quick-fetch.js';
 import { fakePublicResolver } from '../helpers/affiliate-fixtures.js';
 import { buildTestApp, loginAgent, type TestAgent } from '../helpers/app.js';
 import { closeTestResources, createTestAdmin, resetDb } from '../helpers/db.js';

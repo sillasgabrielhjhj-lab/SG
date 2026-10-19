@@ -11,3 +11,4 @@ backups/
 !.env.example
 infra/backups/
 dump.rdb
+dist-quick/

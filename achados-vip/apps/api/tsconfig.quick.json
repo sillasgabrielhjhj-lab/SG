@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "rootDir": "src", "outDir": "dist-quick", "noEmit": false },
+  "include": [],
+  "files": ["src/quick-server.ts"]
+}
