@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://achadosvip.com.br/sitemap.xml
