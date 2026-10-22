@@ -1,7 +1,9 @@
 # Copia os dados do banco Neon para o Supabase (e confere), sem instalar nada no computador.
 # Os endereços dos bancos ficam em Settings > Secrets and variables > Actions:
 #   NEON_DATABASE_URL       (origem: conexão SEM pooling do Neon)
-#   SUPABASE_DATABASE_URL   (destino: conexão direta ou "session pooler" do Supabase, porta 5432)
+#   SUPABASE_DATABASE_URL   (destino: "Session pooler" do Supabase, host *.pooler.supabase.com, porta 5432;
+#                            a conexão direta do Supabase é só IPv6 e não funciona no GitHub Actions)
+# Depois de migrar, APAGUE os dois segredos (eles só servem para esta tarefa).
 # Como rodar: altere a palavra em mercatto/scripts/db-migrate/run.txt (testar | copiar | conferir)
 # e faça o commit nesta branch, ou use "Run workflow" quando o arquivo estiver na branch padrão.
 name: Migrar banco (Neon para Supabase)
@@ -34,6 +36,8 @@ jobs:
         working-directory: mercatto
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Definir o modo
         env:
@@ -82,10 +86,9 @@ jobs:
         env:
           SOURCE_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
           TARGET_DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
-          CONFIRM_REPLACE_TARGET: "yes"
         run: |
           case "$MODO" in
             testar) node scripts/db-migrate/migrate.mjs --check ;;
             conferir) node scripts/db-migrate/migrate.mjs --verify-only ;;
-            copiar) node scripts/db-migrate/migrate.mjs ;;
+            copiar) CONFIRM_REPLACE_TARGET=yes node scripts/db-migrate/migrate.mjs ;;
           esac
