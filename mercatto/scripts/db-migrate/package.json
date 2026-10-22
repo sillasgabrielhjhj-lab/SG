@@ -1,0 +1,10 @@
+{
+  "name": "mercatto-db-migrate",
+  "private": true,
+  "type": "module",
+  "description": "Copia e confere os dados entre dois bancos PostgreSQL com o mesmo schema (Neon -> Supabase).",
+  "dependencies": {
+    "pg": "8.23.1",
+    "pg-copy-streams": "7.0.0"
+  }
+}

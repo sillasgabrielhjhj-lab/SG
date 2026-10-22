@@ -1,0 +1,91 @@
+# Copia os dados do banco Neon para o Supabase (e confere), sem instalar nada no computador.
+# Os endereços dos bancos ficam em Settings > Secrets and variables > Actions:
+#   NEON_DATABASE_URL       (origem: conexão SEM pooling do Neon)
+#   SUPABASE_DATABASE_URL   (destino: conexão direta ou "session pooler" do Supabase, porta 5432)
+# Como rodar: altere a palavra em mercatto/scripts/db-migrate/run.txt (testar | copiar | conferir)
+# e faça o commit nesta branch, ou use "Run workflow" quando o arquivo estiver na branch padrão.
+name: Migrar banco (Neon para Supabase)
+
+on:
+  push:
+    branches: [claude/cool-hamilton-kcm4xc]
+    paths: ["mercatto/scripts/db-migrate/run.txt"]
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "testar (só conexões) | copiar (cria o schema, copia e confere) | conferir (só compara)"
+        type: choice
+        options: [testar, copiar, conferir]
+        default: testar
+
+permissions:
+  contents: read
+
+concurrency:
+  group: migrar-banco
+  cancel-in-progress: false
+
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: mercatto
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Definir o modo
+        env:
+          INPUT_MODO: ${{ inputs.modo }}
+        run: |
+          MODO="${INPUT_MODO:-$(tr -d '[:space:]' < scripts/db-migrate/run.txt)}"
+          case "$MODO" in
+            testar|copiar|conferir) ;;
+            *) echo "::error::Modo inválido: '$MODO' (use testar, copiar ou conferir)"; exit 1 ;;
+          esac
+          echo "MODO=$MODO" >> "$GITHUB_ENV"
+          echo "Modo: $MODO"
+
+      - name: Conferir segredos
+        env:
+          NEON: ${{ secrets.NEON_DATABASE_URL }}
+          SUPA: ${{ secrets.SUPABASE_DATABASE_URL }}
+        run: |
+          [ -n "$NEON" ] || { echo "::error::Falta o segredo NEON_DATABASE_URL"; exit 1; }
+          [ -n "$SUPA" ] || { echo "::error::Falta o segredo SUPABASE_DATABASE_URL"; exit 1; }
+          echo "Segredos presentes."
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mercatto/package-lock.json
+
+      - name: Instalar dependências do projeto (para o Prisma)
+        if: env.MODO == 'copiar'
+        env:
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+        run: npm ci
+
+      - name: Instalar dependências do script de cópia
+        working-directory: mercatto/scripts/db-migrate
+        run: npm ci
+
+      - name: Criar o schema no Supabase (prisma migrate deploy)
+        if: env.MODO == 'copiar'
+        env:
+          DIRECT_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+        run: npx prisma migrate deploy
+
+      - name: Rodar o script
+        env:
+          SOURCE_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+          TARGET_DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+          CONFIRM_REPLACE_TARGET: "yes"
+        run: |
+          case "$MODO" in
+            testar) node scripts/db-migrate/migrate.mjs --check ;;
+            conferir) node scripts/db-migrate/migrate.mjs --verify-only ;;
+            copiar) node scripts/db-migrate/migrate.mjs ;;
+          esac
