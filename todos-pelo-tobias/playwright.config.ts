@@ -2,10 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 3100;
 
-// Dados FICTÍCIOS usados só nos testes (nunca vão para o site publicado).
+// Os testes rodam no modo "só chave Pix" (sem nome/cidade do recebedor), o padrão do site.
 const testEnv = {
-  NEXT_PUBLIC_PIX_RECEIVER_NAME: "NOME TESTE",
-  NEXT_PUBLIC_PIX_RECEIVER_CITY: "CIDADE TESTE",
   NEXT_PUBLIC_SITE_URL: `http://localhost:${PORT}`,
 };
 

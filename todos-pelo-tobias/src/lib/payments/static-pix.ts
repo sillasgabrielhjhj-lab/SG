@@ -5,15 +5,12 @@ import type { PixPayment } from "./types";
 export type PaymentResult = { ok: true; payment: PixPayment } | { ok: false; message: string };
 
 /** Provedor atual: Pix estático gerado localmente (sem gateway, sem custo). */
-export function createStaticPixPayment(
-  amountCents: number,
-  setup: Extract<PixSetup, { status: "ready" }>,
-): PaymentResult {
+export function createStaticPixPayment(amountCents: number, setup: PixSetup): PaymentResult {
   try {
     const payload = buildStaticPix({
       key: setup.key,
-      receiverName: setup.receiverName,
-      receiverCity: setup.receiverCity,
+      receiverName: setup.payloadName,
+      receiverCity: setup.payloadCity,
       description: setup.description,
       amountCents,
     });

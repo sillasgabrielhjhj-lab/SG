@@ -22,7 +22,7 @@ function contactChannels() {
 
 export function Trust() {
   const channels = contactChannels();
-  const receiver = pixSetup.status === "ready" && !pixSetup.isPlaceholder ? pixSetup : null;
+  const receiver = pixSetup.receiver;
 
   const points = [
     {
@@ -38,7 +38,7 @@ export function Trust() {
     {
       icon: ScanSearch,
       title: "Confira o beneficiário antes de pagar",
-      text: `Na tela de confirmação do seu banco, confira o nome do recebedor${receiver ? ` (${receiver.receiverName})` : ""} e o valor. Se algo estiver diferente, não conclua o pagamento.`,
+      text: `Na tela de confirmação do seu banco, confira o nome do recebedor${receiver ? ` (${receiver.name})` : ""} e o valor. Se algo estiver diferente, não conclua o pagamento.`,
     },
     {
       icon: ShieldCheck,
@@ -91,7 +91,8 @@ export function Trust() {
                 <p className="mt-3 text-lg font-bold break-all">{campaign.pix.key}</p>
                 {receiver ? (
                   <p className="mt-2 text-sm text-brand-200">
-                    Recebedor: {receiver.receiverName} · {receiver.receiverCity}
+                    Recebedor: {receiver.name}
+                    {receiver.city ? ` · ${receiver.city}` : ""}
                   </p>
                 ) : null}
                 <div className="mt-5">

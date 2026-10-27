@@ -7,8 +7,9 @@ import { buildStaticPix } from "../../src/lib/pix/brcode";
 
 const PIX = {
   key: "tobiasvaquinha87@gmail.com",
-  receiverName: "NOME TESTE",
-  receiverCity: "CIDADE TESTE",
+  // sem nome/cidade informados, o código usa o nome da campanha e "BRASIL"
+  receiverName: "Todos pelo Tobias",
+  receiverCity: "Brasil",
   description: "Todos pelo Tobias",
 };
 const expectedPix = (amountCents: number) => buildStaticPix({ ...PIX, amountCents });
@@ -134,12 +135,76 @@ test.describe("Pix", () => {
       // um parser independente confirma CRC, chave, recebedor e valor
       expect(parsePix(text)).toMatchObject({
         pixKey: PIX.key,
-        merchantName: PIX.receiverName,
-        merchantCity: PIX.receiverCity,
+        merchantName: "TODOS PELO TOBIAS",
+        merchantCity: "BRASIL",
         transactionAmount: cents / 100,
       });
     });
   }
+
+  test("o campo 'Outro valor' já está visível ao abrir a página: digitar gera o QR na hora", async ({
+    page,
+  }) => {
+    await page.goto("/doar");
+    const input = page.getByLabel("Outro valor, em reais");
+    await expect(input).toBeVisible();
+    await expect(input).toBeEnabled();
+    await expect(input).toHaveAttribute("inputmode", "decimal"); // teclado numérico no celular
+    await expect(page.getByTestId("pix-qrcode")).toHaveCount(0);
+
+    await input.fill("75");
+    await expect(page.getByRole("heading", { level: 2, name: /Você escolheu doar/ })).toContainText(
+      "R$ 75,00",
+      {
+        useInnerText: true,
+      },
+    );
+    const text = await code(page).inputValue();
+    expect(text).toBe(expectedPix(7500));
+    expect(await decodeQr(qrSvg(page))).toBe(text);
+    expect(parsePix(text)).toMatchObject({ pixKey: PIX.key, transactionAmount: 75 });
+  });
+
+  test("valor sugerido e 'Outro valor' não se misturam: um só escolhido por vez", async ({
+    page,
+  }) => {
+    await page.goto("/doar");
+    const input = page.getByLabel("Outro valor, em reais");
+    const heading = page.getByRole("heading", { level: 2, name: /Você escolheu doar/ });
+
+    await chip(page, /^R\$\s*50,00$/).click();
+    await expect(heading).toContainText("R$ 50,00", { useInnerText: true });
+
+    await input.fill("37,5");
+    await expect(heading).toContainText("R$ 37,50", { useInnerText: true });
+    await expect(page.getByRole("radio", { name: /R\$\s*50,00/ })).not.toBeChecked();
+
+    await chip(page, /^R\$\s*10,00$/).click();
+    await expect(heading).toContainText("R$ 10,00", { useInnerText: true });
+    await expect(input).toHaveValue(""); // ao escolher um valor sugerido, o campo livre é limpo
+
+    await input.fill("5");
+    await expect(heading).toContainText("R$ 5,00", { useInnerText: true });
+    await input.fill("");
+    await expect(page.getByTestId("pix-qrcode")).toHaveCount(0); // campo apagado = nenhum valor escolhido
+  });
+
+  test("só com a chave Pix: sem nome de recebedor, sem avisos de configuração", async ({
+    page,
+  }) => {
+    await page.goto("/doar");
+    const initial = nbsp(await page.locator("main").innerText());
+    expect(initial).not.toMatch(
+      /Doações por Pix em breve|provisório|Modo de desenvolvimento|configuração/i,
+    );
+    await chip(page, /^R\$\s*20,00$/).click();
+    await expect(page.getByTestId("pix-qrcode")).toBeVisible();
+    const body = nbsp(await page.locator("main").innerText());
+    expect(body).toContain("Chave Pix");
+    expect(body).toContain(PIX.key);
+    expect(body).not.toContain("Recebedor");
+    expect(body).not.toMatch(/NOME DO RECEBEDOR|NOME TESTE/);
+  });
 
   test("trocar o valor atualiza o QR Code na hora", async ({ page }) => {
     await page.goto("/doar");
@@ -154,9 +219,7 @@ test.describe("Pix", () => {
 
   test("valores personalizados com duas casas decimais", async ({ page }) => {
     await page.goto("/doar");
-    await chip(page, /^Outro valor$/).click();
-    const input = page.getByLabel("Digite o valor que deseja doar");
-    await expect(input).toBeFocused();
+    const input = page.getByLabel("Outro valor, em reais");
 
     for (const [typed, cents, shown] of [
       ["37,5", 3750, "R$ 37,50"],
@@ -180,8 +243,7 @@ test.describe("Pix", () => {
     page,
   }) => {
     await page.goto("/doar");
-    await chip(page, /^Outro valor$/).click();
-    const input = page.getByLabel("Digite o valor que deseja doar");
+    const input = page.getByLabel("Outro valor, em reais");
     const hint = page.locator("[id$='-dica']");
 
     for (const [typed, message] of [
@@ -500,8 +562,7 @@ test.describe("SEO e acessibilidade", () => {
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(path);
       if (path === "/doar") {
-        await chip(page, /^Outro valor$/).click();
-        await page.getByLabel("Digite o valor que deseja doar").fill("25,50");
+        await page.getByLabel("Outro valor, em reais").fill("25,50");
         await expect(page.getByTestId("pix-qrcode")).toBeVisible();
       }
       const results = await new AxeBuilder({ page })

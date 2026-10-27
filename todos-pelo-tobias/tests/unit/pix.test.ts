@@ -159,37 +159,61 @@ describe("detectPixKeyType", () => {
 });
 
 describe("resolvePixSetup", () => {
-  const cfg = { key: BASE.key, receiverName: "", receiverCity: "", description: "x" };
+  const cfg = {
+    key: BASE.key,
+    receiverName: "",
+    receiverCity: "",
+    description: "Todos pelo Tobias",
+  };
 
-  it("em produção sem nome/cidade, NÃO gera Pix (não inventa dados do beneficiário)", () => {
-    expect(resolvePixSetup(cfg, "production")).toEqual({
-      status: "missing",
-      missing: ["receiverName", "receiverCity"],
-    });
-    expect(resolvePixSetup({ ...cfg, receiverName: "Fulano" }, "production")).toEqual({
-      status: "missing",
-      missing: ["receiverCity"],
-    });
-  });
-
-  it("em desenvolvimento usa texto provisório sinalizado", () => {
-    expect(resolvePixSetup(cfg, "development")).toMatchObject({
-      status: "ready",
-      isPlaceholder: true,
+  it("só com a chave Pix já funciona: usa valores neutros e não exibe recebedor", () => {
+    expect(resolvePixSetup(cfg, "Todos pelo Tobias")).toEqual({
+      key: BASE.key,
+      description: "Todos pelo Tobias",
+      payloadName: "Todos pelo Tobias",
+      payloadCity: "BRASIL",
     });
   });
 
-  it("com dados reais fica pronto, sem marcação de provisório", () => {
+  it("o código gerado só com a chave é um BR Code válido (lido pelo parser independente)", () => {
+    const setup = resolvePixSetup(cfg, "Todos pelo Tobias");
+    const code = buildStaticPix({
+      key: setup.key,
+      receiverName: setup.payloadName,
+      receiverCity: setup.payloadCity,
+      description: setup.description,
+      amountCents: 5000,
+    });
+    expect(parsePix(code)).toMatchObject({
+      type: "STATIC",
+      pixKey: BASE.key,
+      merchantName: "TODOS PELO TOBIAS",
+      merchantCity: "BRASIL",
+      transactionAmount: 50,
+    });
+    expect(code.slice(-4)).toBe(crc16(code.slice(0, -4)));
+  });
+
+  it("se nome e cidade forem informados, são usados no código e exibidos", () => {
     const setup = resolvePixSetup(
       { ...cfg, receiverName: " Fulano ", receiverCity: "Recife" },
-      "production",
+      "Todos pelo Tobias",
     );
     expect(setup).toMatchObject({
-      status: "ready",
-      receiverName: "Fulano",
-      receiverCity: "Recife",
-      isPlaceholder: false,
+      payloadName: "Fulano",
+      payloadCity: "Recife",
+      receiver: { name: "Fulano", city: "Recife" },
     });
+  });
+
+  it("só o nome informado: cidade neutra no código e só o nome é exibido", () => {
+    const setup = resolvePixSetup({ ...cfg, receiverName: "Fulano" }, "Todos pelo Tobias");
+    expect(setup).toMatchObject({
+      payloadName: "Fulano",
+      payloadCity: "BRASIL",
+      receiver: { name: "Fulano" },
+    });
+    expect(setup.receiver).not.toHaveProperty("city");
   });
 });
 

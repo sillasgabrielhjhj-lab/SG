@@ -16,9 +16,9 @@ export const campaign = {
   pix: {
     /** Chave Pix oficial da campanha (e-mail). */
     key: "tobiasvaquinha87@gmail.com",
-    /** ✏️ Nome do recebedor, exatamente como no cadastro da chave Pix (máx. 25 letras, sem acento). */
+    /** OPCIONAL. Nome do recebedor, como no cadastro da chave Pix. Se informado, o site o exibe para conferência. */
     receiverName: process.env.NEXT_PUBLIC_PIX_RECEIVER_NAME || "",
-    /** ✏️ Cidade do recebedor (máx. 15 letras, sem acento). */
+    /** OPCIONAL. Cidade do recebedor (usada no código Pix). */
     receiverCity: process.env.NEXT_PUBLIC_PIX_RECEIVER_CITY || "",
     /** Mensagem que aparece para quem paga e no extrato de quem recebe. */
     description: "Todos pelo Tobias",
@@ -39,5 +39,5 @@ export const campaign = {
   },
 };
 
-/** Estado do Pix: pronto para gerar QR Code ou pendente de nome/cidade do recebedor. */
-export const pixSetup = resolvePixSetup(campaign.pix, process.env.NODE_ENV);
+/** Pix pronto para uso só com a chave. Nome e cidade são opcionais (veja src/lib/pix/setup.ts). */
+export const pixSetup = resolvePixSetup(campaign.pix, campaign.name);

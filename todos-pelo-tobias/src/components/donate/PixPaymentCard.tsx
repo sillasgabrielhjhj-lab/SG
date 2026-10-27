@@ -9,12 +9,12 @@ import { HowToPay } from "./HowToPay";
 
 interface PixPaymentCardProps {
   payment: PixPayment;
-  receiver: Extract<PixSetup, { status: "ready" }>;
+  setup: PixSetup;
   siteUrl: string;
 }
 
 /** QR Code e "Copia e Cola" saem do MESMO texto (`payment.payload`): representam o mesmo pagamento. */
-export function PixPaymentCard({ payment, receiver, siteUrl }: PixPaymentCardProps) {
+export function PixPaymentCard({ payment, setup, siteUrl }: PixPaymentCardProps) {
   const amount = formatBRL(payment.amountCents);
 
   return (
@@ -78,12 +78,17 @@ export function PixPaymentCard({ payment, receiver, siteUrl }: PixPaymentCardPro
       </p>
 
       <dl className="mt-4 grid gap-x-4 gap-y-0.5 rounded-2xl bg-white p-4 text-sm ring-1 ring-brand-100 sm:grid-cols-[auto_1fr]">
-        <dt className="font-bold text-brand-900">Recebedor</dt>
-        <dd className="mb-2 text-muted sm:mb-0">
-          {receiver.receiverName} · {receiver.receiverCity}
-        </dd>
+        {setup.receiver ? (
+          <>
+            <dt className="font-bold text-brand-900">Recebedor</dt>
+            <dd className="mb-2 text-muted sm:mb-0">
+              {setup.receiver.name}
+              {setup.receiver.city ? ` · ${setup.receiver.city}` : ""}
+            </dd>
+          </>
+        ) : null}
         <dt className="font-bold text-brand-900">Chave Pix</dt>
-        <dd className="[overflow-wrap:anywhere] text-muted">{receiver.key}</dd>
+        <dd className="[overflow-wrap:anywhere] text-muted">{setup.key}</dd>
       </dl>
 
       <HowToPay />

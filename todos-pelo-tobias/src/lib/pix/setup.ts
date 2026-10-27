@@ -1,46 +1,39 @@
 export interface PixConfig {
   key: string;
-  receiverName: string;
-  receiverCity: string;
   description: string;
+  /** Opcional. Se vazio, o site não exibe "Recebedor" e o código Pix usa um valor neutro. */
+  receiverName: string;
+  /** Opcional. Se vazia, o código Pix usa "BRASIL". */
+  receiverCity: string;
 }
 
-export type PixSetup =
-  | {
-      status: "ready";
-      key: string;
-      receiverName: string;
-      receiverCity: string;
-      description: string;
-      /** true = nome/cidade fictícios, só no `npm run dev`. Nunca acontece em produção. */
-      isPlaceholder: boolean;
-    }
-  | { status: "missing"; missing: ("receiverName" | "receiverCity")[] };
+export interface PixSetup {
+  key: string;
+  description: string;
+  /** Conteúdo dos campos "nome" e "cidade" do BR Code (o padrão do Banco Central os exige). */
+  payloadName: string;
+  payloadCity: string;
+  /** Só existe se o nome do recebedor foi informado; nesse caso o site o exibe para conferência. */
+  receiver?: { name: string; city?: string };
+}
+
+/** Cidade usada no código Pix quando você não informa uma. */
+export const DEFAULT_PAYLOAD_CITY = "BRASIL";
 
 /**
- * Decide se o Pix pode ser gerado. Em produção, sem nome e cidade reais do recebedor o QR Code
- * NÃO é exibido (nunca inventamos dados do beneficiário). Em desenvolvimento usamos um texto
- * provisório visível, só para você ver o fluxo funcionando.
+ * Funciona só com a chave Pix. O padrão do Banco Central exige nome e cidade dentro do código, mas
+ * o app do banco identifica o recebedor pela chave; por isso, sem nome/cidade informados, usamos o
+ * nome da campanha e "BRASIL" (valores neutros, que não afirmam nada sobre o beneficiário) e a tela
+ * não exibe "Recebedor".
  */
-export function resolvePixSetup(config: PixConfig, nodeEnv: string | undefined): PixSetup {
-  const receiverName = config.receiverName.trim();
-  const receiverCity = config.receiverCity.trim();
-  const base = { key: config.key, description: config.description };
-
-  if (receiverName && receiverCity) {
-    return { status: "ready", ...base, receiverName, receiverCity, isPlaceholder: false };
-  }
-  if (nodeEnv === "development") {
-    return {
-      status: "ready",
-      ...base,
-      receiverName: receiverName || "NOME DO RECEBEDOR",
-      receiverCity: receiverCity || "CIDADE",
-      isPlaceholder: true,
-    };
-  }
-  const missing: ("receiverName" | "receiverCity")[] = [];
-  if (!receiverName) missing.push("receiverName");
-  if (!receiverCity) missing.push("receiverCity");
-  return { status: "missing", missing };
+export function resolvePixSetup(config: PixConfig, fallbackName: string): PixSetup {
+  const name = config.receiverName.trim();
+  const city = config.receiverCity.trim();
+  return {
+    key: config.key,
+    description: config.description,
+    payloadName: name || fallbackName,
+    payloadCity: city || DEFAULT_PAYLOAD_CITY,
+    ...(name ? { receiver: { name, ...(city ? { city } : {}) } } : {}),
+  };
 }

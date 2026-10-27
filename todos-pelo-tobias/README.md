@@ -19,19 +19,20 @@ Outros comandos: `npm run build` (versão de produção), `npm run check` (tipos
 
 ## Antes de publicar (checklist)
 
-| #   | O quê                                                                                          | Onde                                                                                                                                                          | Obrigatório            |
-| --- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| 1   | **Nome e cidade do recebedor** (como no cadastro da chave Pix; sem acento, até 25 e 15 letras) | `src/config/campaign.ts` (`receiverName`, `receiverCity`) **ou** variáveis `NEXT_PUBLIC_PIX_RECEIVER_NAME` / `NEXT_PUBLIC_PIX_RECEIVER_CITY` (`.env.example`) | **Sim**                |
-| 2   | Contato da organização (e-mail, WhatsApp, Instagram)                                           | `src/config/campaign.ts` (`contact`) ou variáveis do `.env.example`                                                                                           | Recomendado            |
-| 3   | Fotos do Tobias                                                                                | `public/fotos/` + `src/content/photos.ts`                                                                                                                     | Recomendado            |
-| 4   | História verdadeira do Tobias                                                                  | `src/content/story.ts`                                                                                                                                        | Recomendado            |
-| 5   | Meta e valor arrecadado                                                                        | `src/config/fundraising.ts`                                                                                                                                   | Já preenchido          |
-| 6   | Endereço do site, se usar domínio próprio                                                      | `NEXT_PUBLIC_SITE_URL`                                                                                                                                        | Só com domínio próprio |
-| 7   | **Teste real com um app de banco** (veja "Validação do Pix")                                   | —                                                                                                                                                             | **Sim**                |
+| #   | O quê                                                                | Onde                                                                                                                                     | Obrigatório            |
+| --- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| 1   | _(Opcional)_ Nome e cidade do recebedor, se quiser exibi-los no site | `src/config/campaign.ts` (`receiverName`, `receiverCity`) ou variáveis `NEXT_PUBLIC_PIX_RECEIVER_NAME` / `NEXT_PUBLIC_PIX_RECEIVER_CITY` | Não                    |
+| 2   | Contato da organização (e-mail, WhatsApp, Instagram)                 | `src/config/campaign.ts` (`contact`) ou variáveis do `.env.example`                                                                      | Recomendado            |
+| 3   | Fotos do Tobias                                                      | `public/fotos/` + `src/content/photos.ts`                                                                                                | Recomendado            |
+| 4   | História verdadeira do Tobias                                        | `src/content/story.ts`                                                                                                                   | Recomendado            |
+| 5   | Meta e valor arrecadado                                              | `src/config/fundraising.ts`                                                                                                              | Já preenchido          |
+| 6   | Endereço do site, se usar domínio próprio                            | `NEXT_PUBLIC_SITE_URL`                                                                                                                   | Só com domínio próprio |
+| 7   | **Teste real com um app de banco** (veja "Validação do Pix")         | —                                                                                                                                        | **Sim**                |
 
-> **Segurança:** em produção, enquanto o nome e a cidade do recebedor não forem preenchidos, o site **não exibe o QR
-> Code** e mostra "Doações por Pix em breve". Nenhum dado do beneficiário é inventado. No `npm run dev` aparece um aviso
-> amarelo com valores provisórios, apenas para você ver o fluxo funcionando.
+> **Só a chave Pix basta.** O site funciona sem nome nem cidade do recebedor: ele não exibe "Recebedor" em lugar
+> nenhum e o QR Code é gerado normalmente. Como o padrão do Banco Central exige os campos de nome e cidade dentro do
+> próprio código, o site preenche esses dois campos com valores neutros (o nome da campanha e `BRASIL`); o app do banco
+> identifica o recebedor pela chave. Se um dia quiser exibir o nome, informe-o na configuração.
 
 ## Meta de arrecadação
 
@@ -101,8 +102,8 @@ neutro. Escreva apenas fatos reais.
 - O site gera um **BR Code estático** padrão do Banco Central (EMV) no próprio navegador, com a chave
   `tobiasvaquinha87@gmail.com`, o valor escolhido e o CRC16 correto (`src/lib/pix/`). O **QR Code e o Copia e Cola
   saem exatamente do mesmo texto**.
-- Valores sugeridos: R$ 5, 10, 20, 50 e 100 (`src/config/campaign.ts`), mais "Outro valor" com até duas casas
-  decimais. Valores vazios, negativos, zerados, com texto, com mais de 2 decimais ou acima de R$ 99.999,99 são recusados
+- Valores sugeridos: R$ 5, 10, 20, 50 e 100 (`src/config/campaign.ts`) **e** um campo "Outro valor" sempre
+  visível, onde a pessoa digita qualquer valor com até duas casas decimais; o QR Code é gerado na hora. Valores vazios, negativos, zerados, com texto, com mais de 2 decimais ou acima de R$ 99.999,99 são recusados
   com mensagem amigável.
 - **O pagamento acontece no app do banco.** O site não pede dados bancários nem senhas e **não confirma pagamentos**:
   copiar o código não significa "doação concluída", e a página diz isso.
@@ -125,8 +126,8 @@ aparecem corretos. Faça o mesmo em Android e iPhone.
 2. Em [vercel.com](https://vercel.com), entre com o GitHub › **Add New… › Project** › importe o repositório.
 3. Em **Root Directory**, clique em _Edit_ e escolha **`todos-pelo-tobias`**. O framework **Next.js** é detectado
    sozinho.
-4. Em **Environment Variables**, cadastre `NEXT_PUBLIC_PIX_RECEIVER_NAME` e `NEXT_PUBLIC_PIX_RECEIVER_CITY` (e, se
-   quiser, as de contato). Alternativa: preencher direto em `src/config/campaign.ts`.
+4. Nenhuma variável de ambiente é obrigatória. Se quiser, cadastre em **Environment Variables** as de contato (veja
+   `.env.example`) ou preencha direto em `src/config/campaign.ts`.
 5. Clique em **Deploy**. Em cerca de um minuto o site estará em `https://seu-projeto.vercel.app`.
 6. Domínio próprio (opcional): _Settings › Domains_; depois defina `NEXT_PUBLIC_SITE_URL` com o endereço final e faça
    um novo deploy.
@@ -139,7 +140,7 @@ similares, inclua o domínio deles na `Content-Security-Policy` desse arquivo.
 ## Testes
 
 ```bash
-npm test             # 81 testes unitários (Pix, valores, meta de arrecadação)
+npm test             # 82 testes unitários (Pix, valores, meta de arrecadação)
 npm run test:e2e     # testes no navegador: desktop, Android e iPhone (emulação); sobe o site sozinho
 ```
 
