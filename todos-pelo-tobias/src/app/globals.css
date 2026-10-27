@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+
+  --color-brand-50: #f2faf5;
+  --color-brand-100: #def3e6;
+  --color-brand-200: #bde6cd;
+  --color-brand-300: #8fd3ac;
+  --color-brand-400: #5bb987;
+  --color-brand-500: #35a06b;
+  --color-brand-600: #258454;
+  --color-brand-700: #1b6a43;
+  --color-brand-800: #17543a;
+  --color-brand-900: #134430;
+  --color-brand-950: #082a1c;
+  --color-cream: #fbf8f1;
+  --color-blush: #fdeeee;
+  --color-heart: #e5484d;
+  --color-ink: #11271c;
+  --color-muted: #4a5f54;
+
+  --shadow-soft: 0 10px 40px -12px rgb(19 68 48 / 0.18);
+  --shadow-lift: 0 28px 70px -24px rgb(19 68 48 / 0.35);
+
+  --animate-goal-fill: goal-fill 1.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+  --animate-goal-badge: goal-badge 1.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+  --animate-fade-in: fade-in 0.45s ease both;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-beat: beat 2.6s ease-in-out infinite;
+  --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-shine: shine 4.5s ease-in-out infinite;
+
+  @keyframes goal-fill {
+    from {
+      width: 0;
+    }
+  }
+  @keyframes goal-badge {
+    from {
+      left: 1.4rem;
+    }
+  }
+  @keyframes goal-sheen {
+    0% {
+      transform: translateX(-100%);
+    }
+    35%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--r, 0deg));
+    }
+    50% {
+      transform: translateY(-14px) rotate(var(--r, 0deg));
+    }
+  }
+  @keyframes beat {
+    0%,
+    48%,
+    100% {
+      transform: scale(1);
+    }
+    12% {
+      transform: scale(1.18);
+    }
+    36% {
+      transform: scale(1.1);
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes shine {
+    0%,
+    55% {
+      transform: translateX(-130%);
+    }
+    100% {
+      transform: translateX(230%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: white;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--color-brand-200);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 3px;
+  }
+  /* trava a rolagem da página enquanto a ampliação de fotos estiver aberta */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/* Brilho que passa de tempos em tempos pelo botão principal */
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgb(255 255 255 / 0.28) 50%,
+      transparent 65%
+    );
+    transform: translateX(-130%);
+    animation: var(--animate-shine);
+    pointer-events: none;
+  }
+}
+
+/* Selo "44%" que acompanha a ponta da barra (nunca sai da barra, mesmo com porcentagens baixas ou altas) */
+@utility goal-badge-pos {
+  left: clamp(1.4rem, var(--goal-progress), calc(100% - 1.4rem));
+}
+
+/* Brilho suave e raro passando pelo preenchimento da barra */
+@utility goal-sheen {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(255 255 255 / 0.45) 50%,
+      transparent 80%
+    );
+    transform: translateX(-100%);
+    animation: goal-sheen 6s ease-in-out 2.4s infinite;
+    pointer-events: none;
+  }
+}
+
+/* Aparição suave ao rolar a página (veja components/ui/Reveal.tsx).
+   Sem JavaScript, ou com movimento reduzido, o conteúdo fica sempre visível. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    /* rede de segurança: se o script falhar, o conteúdo aparece sozinho após 3 s */
+    animation: reveal-fallback 0s linear 3s forwards;
+  }
+  .reveal[data-in="true"] {
+    opacity: 1;
+    transform: none;
+  }
+  @keyframes reveal-fallback {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
