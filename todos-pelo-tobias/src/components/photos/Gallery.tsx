@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { Photo } from "@/content/photos";
 import { cn } from "@/lib/cn";
@@ -38,7 +38,11 @@ export function Gallery({ photos }: { photos: Photo[] }) {
         <button
           type="button"
           onClick={() => setZoomed(true)}
-          aria-label={`Ampliar foto ${index + 1} de ${total}${current.src ? `: ${current.alt}` : ""}`}
+          aria-label={
+            current.video
+              ? `Assistir ao vídeo: ${current.alt}`
+              : `Ampliar foto ${index + 1} de ${total}${current.src ? `: ${current.alt}` : ""}`
+          }
           className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] bg-brand-50 shadow-lift ring-1 ring-brand-100 sm:aspect-[16/10]"
         >
           <PhotoFrame
@@ -54,8 +58,12 @@ export function Gallery({ photos }: { photos: Photo[] }) {
             aria-hidden
             className="absolute right-4 bottom-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-xs font-bold text-brand-900 shadow-soft backdrop-blur transition group-hover:bg-white sm:text-sm"
           >
-            <Expand className="size-4" />
-            Ampliar
+            {current.video ? (
+              <Play className="size-4 fill-current" />
+            ) : (
+              <Expand className="size-4" />
+            )}
+            {current.video ? "Assistir" : "Ampliar"}
           </span>
         </button>
         <p className="pointer-events-none absolute top-4 left-4 rounded-full bg-black/45 px-3 py-1 text-xs font-bold text-white backdrop-blur">
@@ -100,7 +108,9 @@ export function Gallery({ photos }: { photos: Photo[] }) {
               key={`${photo.src ?? "reservado"}-${i}`}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={`Ver foto ${i + 1}${photo.src ? `: ${photo.alt}` : ""}`}
+              aria-label={
+                photo.video ? "Ver vídeo" : `Ver foto ${i + 1}${photo.src ? `: ${photo.alt}` : ""}`
+              }
               aria-current={i === index}
               className={cn(
                 "relative h-16 w-[5.5rem] shrink-0 snap-center overflow-hidden rounded-xl transition duration-300 sm:h-20 sm:w-28",

@@ -43,6 +43,7 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
       aria-label="Fotos do Tobias"
       onClose={onClose}
       onKeyDown={(e) => {
+        if ((e.target as HTMLElement).tagName === "VIDEO") return;
         if (e.key === "ArrowLeft") go(index - 1);
         if (e.key === "ArrowRight") go(index + 1);
       }}
@@ -52,6 +53,7 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
         className="flex h-full flex-col"
         onClick={closeOnBackdrop}
         onTouchStart={(e) => {
+          if ((e.target as HTMLElement).closest("video")) return;
           touchStart.current = e.touches[0]?.clientX ?? null;
         }}
         onTouchEnd={(e) => {
@@ -63,9 +65,13 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
         }}
       >
         <div className="flex items-center justify-between p-4" onClick={closeOnBackdrop}>
-          <p className="rounded-full bg-white/15 px-3 py-1 text-sm font-bold backdrop-blur">
-            {index + 1} / {total}
-          </p>
+          {total > 1 ? (
+            <p className="rounded-full bg-white/15 px-3 py-1 text-sm font-bold backdrop-blur">
+              {index + 1} / {total}
+            </p>
+          ) : (
+            <span />
+          )}
           <button
             type="button"
             onClick={onClose}
@@ -81,14 +87,28 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
           onClick={closeOnBackdrop}
         >
           <div className="relative h-full max-h-[74dvh] w-full max-w-5xl overflow-hidden rounded-2xl">
-            <PhotoFrame
-              key={index}
-              photo={photo}
-              index={index}
-              fit="contain"
-              sizes="(min-width: 1024px) 1024px, 100vw"
-              className="animate-pop"
-            />
+            {photo.video ? (
+              <video
+                key={index}
+                src={photo.video}
+                poster={photo.src}
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                aria-label={photo.alt}
+                className="absolute inset-0 h-full w-full bg-black object-contain"
+              />
+            ) : (
+              <PhotoFrame
+                key={index}
+                photo={photo}
+                index={index}
+                fit="contain"
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="animate-pop"
+              />
+            )}
           </div>
           {total > 1 ? (
             <>

@@ -23,8 +23,8 @@ Outros comandos: `npm run build` (versão de produção), `npm run check` (tipos
 | --- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
 | 1   | _(Opcional)_ Nome e cidade do recebedor, se quiser exibi-los no site | `src/config/campaign.ts` (`receiverName`, `receiverCity`) ou variáveis `NEXT_PUBLIC_PIX_RECEIVER_NAME` / `NEXT_PUBLIC_PIX_RECEIVER_CITY` | Não                    |
 | 2   | Contato da organização (e-mail, WhatsApp, Instagram)                 | `src/config/campaign.ts` (`contact`) ou variáveis do `.env.example`                                                                      | Recomendado            |
-| 3   | Fotos do Tobias                                                      | `public/fotos/` + `src/content/photos.ts`                                                                                                | Recomendado            |
-| 4   | História verdadeira do Tobias                                        | `src/content/story.ts`                                                                                                                   | Recomendado            |
+| 3   | Fotos do Tobias                                                      | `public/fotos/` + `src/content/photos.ts`                                                                                                | Já preenchido          |
+| 4   | História verdadeira do Tobias                                        | `src/content/story.ts`                                                                                                                   | Já preenchida          |
 | 5   | Meta e valor arrecadado                                              | `src/config/fundraising.ts`                                                                                                              | Já preenchido          |
 | 6   | Endereço do site, se usar domínio próprio                            | `NEXT_PUBLIC_SITE_URL`                                                                                                                   | Só com domínio próprio |
 | 7   | **Teste real com um app de banco** (veja "Validação do Pix")         | —                                                                                                                                        | **Sim**                |
@@ -88,14 +88,17 @@ export const photos: Photo[] = [
 para não cortar o rosto). Enquanto a lista estiver vazia, o site mostra espaços reservados elegantes, **nunca fotos de
 terceiros**. As imagens são otimizadas automaticamente (AVIF/WebP, tamanhos responsivos).
 
-**Imagem de compartilhamento (WhatsApp/Facebook):** por padrão é um cartão verde com o nome da campanha
-(`src/app/opengraph-image.tsx`). Para usar uma foto real, salve uma imagem 1200×630 como
-`src/app/opengraph-image.jpg` e apague o arquivo `.tsx`.
+**Vídeo:** o MP4 fica em `public/video/tobias.mp4` e a imagem de capa dele em `public/fotos/tobias-video.jpg`; ele aparece
+na galeria e no botão "Assista ao vídeo" da capa. Para trocar, substitua os arquivos mantendo os nomes (ou edite
+`src/content/photos.ts`). Prefira vídeos de até ~15 MB (a Vercel e o GitHub aceitam mais, mas o site carrega mais rápido).
+
+**Imagem de compartilhamento (WhatsApp/Facebook):** é a foto do Tobias, em `src/app/opengraph-image.jpg` (JPEG; para trocar,
+substitua o arquivo, de preferência com 1200×630) e o texto alternativo em `opengraph-image.alt.txt`.
 
 ## Escrever a história
 
-Em `src/content/story.ts`, escreva um parágrafo por item de `paragraphs`. Enquanto estiver vazio, o site mostra um texto
-neutro. Escreva apenas fatos reais.
+Em `src/content/story.ts`: `paragraphs` é o texto da história (um item por parágrafo) e `facts` é o quadro "Em resumo".
+Escreva apenas fatos reais. Enquanto `paragraphs` estiver vazio, o site mostra um texto neutro.
 
 ## Como o Pix funciona (e o que ele não faz)
 

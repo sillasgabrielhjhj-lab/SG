@@ -1,4 +1,4 @@
-import { Camera, Heart } from "lucide-react";
+import { Camera, Heart, Play } from "lucide-react";
 import Image from "next/image";
 import type { Photo } from "@/content/photos";
 import { cn } from "@/lib/cn";
@@ -46,15 +46,27 @@ export function PhotoFrame({
 }: PhotoFrameProps) {
   if (photo.src) {
     return (
-      <Image
-        src={photo.src}
-        alt={decorative ? "" : photo.alt}
-        fill
-        sizes={sizes}
-        priority={priority}
-        className={cn(fit === "cover" ? "object-cover" : "object-contain", className)}
-        style={photo.position ? { objectPosition: photo.position } : undefined}
-      />
+      <>
+        <Image
+          src={photo.src}
+          alt={decorative ? "" : photo.alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className={cn(fit === "cover" ? "object-cover" : "object-contain", className)}
+          style={photo.position ? { objectPosition: photo.position } : undefined}
+        />
+        {photo.video && compact ? (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 grid place-items-center"
+          >
+            <span className="grid size-8 place-items-center rounded-full bg-brand-950/70 text-white shadow-lg backdrop-blur-sm">
+              <Play className="size-3.5 translate-x-px fill-current" />
+            </span>
+          </span>
+        ) : null}
+      </>
     );
   }
 

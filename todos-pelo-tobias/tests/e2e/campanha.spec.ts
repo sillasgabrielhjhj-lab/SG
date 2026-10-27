@@ -445,30 +445,75 @@ test.describe("experiência", () => {
   });
 });
 
-test.describe("galeria", () => {
-  test("foto principal, miniaturas, ampliação e navegação", async ({ page, isMobile }) => {
-    await page.goto("/#fotos");
-    const open = page.getByRole("button", { name: /Ampliar foto 1 de 6/ });
-    await expect(open).toBeVisible();
-    await page.getByRole("button", { name: "Ver foto 4" }).click();
-    await expect(page.getByRole("button", { name: /Ampliar foto 4 de 6/ })).toBeVisible();
-
-    await page.getByRole("button", { name: /Ampliar foto 4 de 6/ }).click();
-    const dialog = page.getByRole("dialog", { name: "Fotos do Tobias" });
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByText("4 / 6")).toBeVisible();
-    await dialog.getByRole("button", { name: "Próxima foto" }).click();
-    await expect(dialog.getByText("5 / 6")).toBeVisible();
-    await dialog.getByRole("button", { name: "Foto anterior" }).click();
-    await dialog.getByRole("button", { name: "Foto anterior" }).click();
-    await expect(dialog.getByText("3 / 6")).toBeVisible();
-    if (!isMobile) {
-      await page.keyboard.press("ArrowRight");
-      await expect(dialog.getByText("4 / 6")).toBeVisible();
-    }
+test.describe("foto, vídeo e história", () => {
+  test("capa: foto real do Tobias e botão para assistir ao vídeo", async ({ page }) => {
+    await page.goto("/");
+    const hero = page.locator("#inicio");
+    const img = hero.locator("img").first();
+    await expect(img).toBeVisible();
+    await expect
+      .poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+      .toBe(true);
+    await hero.getByRole("button", { name: "Assista ao vídeo" }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.locator("video")).toHaveAttribute("src", "/video/tobias.mp4");
+    await expect(dialog.locator("video")).toHaveAttribute("controls", "");
+    await expect(dialog.getByText(/\d \/ \d/)).toHaveCount(0); // vídeo único: sem contador
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
-    await expect(page.getByRole("button", { name: /Ampliar foto \d de 6/ })).toBeFocused();
+    await expect(hero.getByRole("button", { name: "Assista ao vídeo" })).toBeFocused();
+  });
+
+  test("a galeria tem só a foto e o vídeo, com ampliação e navegação", async ({ page }) => {
+    await page.goto("/#fotos");
+    await expect(page.getByRole("button", { name: /Ampliar foto 1 de 2/ })).toBeVisible();
+    await page.getByRole("button", { name: "Ver vídeo" }).click();
+    const play = page.getByRole("button", { name: /Assistir ao vídeo/ });
+    await expect(play).toBeVisible();
+    await play.click();
+    const dialog = page.getByRole("dialog", { name: "Fotos do Tobias" });
+    await expect(dialog.getByText("2 / 2")).toBeVisible();
+    await expect(dialog.locator("video")).toHaveAttribute("src", "/video/tobias.mp4");
+    await dialog.getByRole("button", { name: "Foto anterior" }).click();
+    await expect(dialog.getByText("1 / 2")).toBeVisible();
+    await expect(dialog.locator("video")).toHaveCount(0);
+    await expect(dialog.locator("img")).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(
+      page.getByRole("button", { name: /Ampliar foto|Assistir ao vídeo/ }),
+    ).toBeFocused();
+  });
+
+  test("foto e vídeo são servidos pelo site (o vídeo com suporte a 'range')", async ({
+    request,
+  }) => {
+    const photo = await request.get("/fotos/tobias-1.webp");
+    expect(photo.status()).toBe(200);
+    expect(photo.headers()["content-type"]).toContain("image/webp");
+    const video = await request.get("/video/tobias.mp4", { headers: { range: "bytes=0-99" } });
+    expect(video.status()).toBe(206);
+    expect(video.headers()["content-type"]).toContain("video/mp4");
+  });
+
+  test("a história completa do Tobias aparece, sem texto provisório", async ({ page }) => {
+    await page.goto("/#conheca-tobias");
+    const story = page.locator("#conheca-tobias");
+    const text = nbsp(await story.innerText());
+    for (const part of [
+      "tem apenas 9 meses",
+      "duas hérnias, água nos rins e um sopro no coração",
+      "acompanhamento e tratamento médico",
+      "Parintins, no Amazonas",
+      "Manaus",
+      "pedaço de terra",
+      "com as próprias mãos",
+      "sem energia elétrica e sem estrutura adequada",
+    ]) {
+      expect(text).toContain(part);
+    }
+    expect(text).not.toContain("serão contados aqui");
+    await expect(story.getByRole("heading", { name: "Em resumo" })).toBeVisible();
   });
 });
 
@@ -545,7 +590,7 @@ test.describe("SEO e acessibilidade", () => {
 
     const og = await request.get(image);
     expect(og.status()).toBe(200);
-    expect(og.headers()["content-type"]).toContain("image/png");
+    expect(og.headers()["content-type"]).toContain("image/jpeg");
     expect((await request.get("/robots.txt")).status()).toBe(200);
     const sitemap = await (await request.get("/sitemap.xml")).text();
     expect(sitemap).toContain("/doar");
