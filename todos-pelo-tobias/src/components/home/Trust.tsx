@@ -11,7 +11,11 @@ function contactChannels() {
   const phone = whatsapp.replace(/\D/g, "");
   return [
     email && { href: `mailto:${email}`, label: email, icon: Mail },
-    phone && { href: `https://wa.me/${phone}`, label: "WhatsApp da organização", icon: WhatsAppIcon },
+    phone && {
+      href: `https://wa.me/${phone}`,
+      label: "WhatsApp da organização",
+      icon: WhatsAppIcon,
+    },
     handle && { href: `https://instagram.com/${handle}`, label: `@${handle}`, icon: InstagramIcon },
   ].filter((channel) => Boolean(channel)) as { href: string; label: string; icon: typeof Mail }[];
 }
@@ -43,13 +47,17 @@ export function Trust() {
     },
     {
       icon: BadgeCheck,
-      title: "Sem números inventados",
-      text: "Este site não exibe valores arrecadados porque o Pix vai direto do seu banco ao recebedor. Só mostraremos totais que possam ser comprovados.",
+      title: "Sobre o valor arrecadado",
+      text: "O total exibido na barra de meta é informado pela organização da campanha e atualizado manualmente. Este site não consulta o banco nem confirma pagamentos: escolher um valor ou copiar o código Pix não altera o total.",
     },
   ];
 
   return (
-    <section id="transparencia" aria-labelledby="confianca-titulo" className="scroll-mt-20 py-16 lg:py-24">
+    <section
+      id="transparencia"
+      aria-labelledby="confianca-titulo"
+      className="scroll-mt-20 py-16 lg:py-24"
+    >
       <div className="mx-auto max-w-6xl px-4">
         <SectionHeading eyebrow="Transparência" title="Doe com tranquilidade" id="confianca-titulo">
           Veja como a campanha funciona e como conferir tudo antes de confirmar o seu Pix.

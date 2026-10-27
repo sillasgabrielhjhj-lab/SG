@@ -92,10 +92,20 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
           </div>
           {total > 1 ? (
             <>
-              <button type="button" onClick={() => go(index - 1)} aria-label="Foto anterior" className={`${arrow} left-2 sm:left-5`}>
+              <button
+                type="button"
+                onClick={() => go(index - 1)}
+                aria-label="Foto anterior"
+                className={`${arrow} left-2 sm:left-5`}
+              >
                 <ChevronLeft aria-hidden className="size-6" />
               </button>
-              <button type="button" onClick={() => go(index + 1)} aria-label="Próxima foto" className={`${arrow} right-2 sm:right-5`}>
+              <button
+                type="button"
+                onClick={() => go(index + 1)}
+                aria-label="Próxima foto"
+                className={`${arrow} right-2 sm:right-5`}
+              >
                 <ChevronRight aria-hidden className="size-6" />
               </button>
             </>

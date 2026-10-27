@@ -31,14 +31,20 @@ export function SiteHeader({ variant = "home" }: { variant?: "home" | "donate" }
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative text-[0.95rem] font-semibold text-brand-900/80 transition hover:text-brand-700 after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition after:duration-300 hover:after:scale-x-100"
+                  className="relative text-[0.95rem] font-semibold text-brand-900/80 transition after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition after:duration-300 hover:text-brand-700 hover:after:scale-x-100"
                 >
                   {item.label}
                 </Link>
               ))}
             </nav>
             <div className="flex items-center gap-1.5">
-              <Link href="/doar" className={btn({ size: "sm", className: "shine max-sm:h-9 max-sm:px-3.5 max-sm:text-xs" })}>
+              <Link
+                href="/doar"
+                className={btn({
+                  size: "sm",
+                  className: "shine max-sm:h-9 max-sm:px-3.5 max-sm:text-xs",
+                })}
+              >
                 DOAR AGORA
               </Link>
               <button
@@ -49,20 +55,33 @@ export function SiteHeader({ variant = "home" }: { variant?: "home" | "donate" }
                 aria-label={open ? "Fechar menu" : "Abrir menu"}
                 className="grid size-10 place-items-center rounded-full text-brand-900 transition hover:bg-brand-100/70 md:hidden"
               >
-                {open ? <X aria-hidden className="size-6" /> : <Menu aria-hidden className="size-6" />}
+                {open ? (
+                  <X aria-hidden className="size-6" />
+                ) : (
+                  <Menu aria-hidden className="size-6" />
+                )}
               </button>
             </div>
           </>
         ) : (
-          <Link href="/" className={btn({ variant: "secondary", size: "sm" })}>
+          <Link
+            href="/"
+            aria-label="Voltar à campanha"
+            className={btn({ variant: "secondary", size: "sm", className: "whitespace-nowrap" })}
+          >
             <ArrowLeft aria-hidden className="size-4" />
-            Voltar à campanha
+            <span className="sm:hidden">Voltar</span>
+            <span className="hidden sm:inline">Voltar à campanha</span>
           </Link>
         )}
       </div>
 
       {variant === "home" && open ? (
-        <nav id="menu-mobile" aria-label="Menu" className="animate-pop border-t border-brand-100 bg-white px-4 pt-2 pb-4 md:hidden">
+        <nav
+          id="menu-mobile"
+          aria-label="Menu"
+          className="animate-pop border-t border-brand-100 bg-white px-4 pt-2 pb-4 md:hidden"
+        >
           {NAV.map((item) => (
             <Link
               key={item.href}

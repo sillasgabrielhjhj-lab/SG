@@ -1,7 +1,11 @@
 import { BadgeCheck, ClipboardPaste, Smartphone } from "lucide-react";
 
 const STEPS = [
-  { icon: Smartphone, title: "Abra o app do seu banco", text: "Entre na área Pix do aplicativo que você já usa." },
+  {
+    icon: Smartphone,
+    title: "Abra o app do seu banco",
+    text: "Entre na área Pix do aplicativo que você já usa.",
+  },
   {
     icon: ClipboardPaste,
     title: "Escaneie ou cole o código",
@@ -34,8 +38,9 @@ export function HowToPay() {
         ))}
       </ol>
       <p className="mt-4 rounded-2xl bg-cream p-4 text-sm leading-relaxed text-ink/90 ring-1 ring-brand-100">
-        <strong>Está no celular?</strong> Toque em “Copiar código Pix”, abra o app do seu banco e cole em Pix › Pix
-        Copia e Cola. Não dá para escanear um QR Code que está na tela do próprio aparelho.
+        <strong>Está no celular?</strong> Toque em “Copiar código Pix”, abra o app do seu banco e
+        cole em Pix › Pix Copia e Cola. Não dá para escanear um QR Code que está na tela do próprio
+        aparelho.
       </p>
     </div>
   );

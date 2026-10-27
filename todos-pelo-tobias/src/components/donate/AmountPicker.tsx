@@ -39,7 +39,9 @@ export function AmountPicker({
   return (
     <fieldset>
       <legend className="text-lg font-extrabold text-brand-950">
-        <span className="mr-2 inline-grid size-7 place-items-center rounded-full bg-brand-600 text-sm text-white">1</span>
+        <span className="mr-2 inline-grid size-7 place-items-center rounded-full bg-brand-600 text-sm text-white">
+          1
+        </span>
         Escolha o valor da doação
       </legend>
 
@@ -59,8 +61,14 @@ export function AmountPicker({
             </span>
           </label>
         ))}
-        <label className="relative col-span-2 sm:col-span-1">
-          <input type="radio" name="valor" className="peer sr-only" checked={custom} onChange={() => onChoice({ kind: "custom" })} />
+        <label className="relative">
+          <input
+            type="radio"
+            name="valor"
+            className="peer sr-only"
+            checked={custom}
+            onChange={() => onChoice({ kind: "custom" })}
+          />
           <span className={chip}>Outro valor</span>
           <span aria-hidden className={badge}>
             <Check className="size-3.5" strokeWidth={3} />
@@ -74,7 +82,10 @@ export function AmountPicker({
             Digite o valor que deseja doar
           </label>
           <div className="relative mt-2">
-            <span aria-hidden className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-xl font-extrabold text-brand-700">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-xl font-extrabold text-brand-700"
+            >
               R$
             </span>
             <input
@@ -99,7 +110,10 @@ export function AmountPicker({
           <p
             id={hintId}
             aria-live="polite"
-            className={cn("mt-2 flex min-h-6 items-start gap-1.5 text-sm", invalid ? "font-semibold text-red-700" : "text-muted")}
+            className={cn(
+              "mt-2 flex min-h-6 items-start gap-1.5 text-sm",
+              invalid ? "font-semibold text-red-700" : "text-muted",
+            )}
           >
             {invalid && customResult && !customResult.ok ? (
               <>

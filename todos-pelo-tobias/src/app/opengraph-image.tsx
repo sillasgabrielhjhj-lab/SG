@@ -18,59 +18,74 @@ export default async function OpenGraphImage() {
   ]);
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 90px",
-          background: "linear-gradient(135deg, #1b6a43 0%, #134430 60%, #082a1c 100%)",
-          color: "#ffffff",
-          fontFamily: "Jakarta",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", maxWidth: 680 }}>
-          <div
-            style={{
-              display: "flex",
-              alignSelf: "flex-start",
-              padding: "10px 24px",
-              borderRadius: 999,
-              background: "rgba(255,255,255,0.14)",
-              fontSize: 26,
-              letterSpacing: 4,
-            }}
-          >
-            CAMPANHA SOLIDÁRIA
-          </div>
-          <div style={{ display: "flex", marginTop: 34, fontFamily: "Fraunces", fontWeight: 700, fontSize: 104, lineHeight: 1.02 }}>
-            TODOS PELO TOBIAS
-          </div>
-          <div style={{ display: "flex", marginTop: 30, fontSize: 38, lineHeight: 1.3, color: "#bde6cd" }}>
-            Doe qualquer valor por Pix ou compartilhe a campanha.
-          </div>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 90px",
+        background: "linear-gradient(135deg, #1b6a43 0%, #134430 60%, #082a1c 100%)",
+        color: "#ffffff",
+        fontFamily: "Jakarta",
+      }}
+    >
+      <div style={{ display: "flex", flexDirection: "column", maxWidth: 680 }}>
+        <div
+          style={{
+            display: "flex",
+            alignSelf: "flex-start",
+            padding: "10px 24px",
+            borderRadius: 999,
+            background: "rgba(255,255,255,0.14)",
+            fontSize: 26,
+            letterSpacing: 4,
+          }}
+        >
+          CAMPANHA SOLIDÁRIA
         </div>
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 330,
-            height: 330,
-            borderRadius: 999,
-            background: "rgba(255,255,255,0.1)",
-            border: "2px solid rgba(255,255,255,0.18)",
+            marginTop: 34,
+            fontFamily: "Fraunces",
+            fontWeight: 700,
+            fontSize: 104,
+            lineHeight: 1.02,
           }}
         >
-          <svg width="200" height="200" viewBox="0 0 24 24" fill="#e5484d">
-            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-          </svg>
+          TODOS PELO TOBIAS
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 30,
+            fontSize: 38,
+            lineHeight: 1.3,
+            color: "#bde6cd",
+          }}
+        >
+          Doe qualquer valor por Pix ou compartilhe a campanha.
         </div>
       </div>
-    ),
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 330,
+          height: 330,
+          borderRadius: 999,
+          background: "rgba(255,255,255,0.1)",
+          border: "2px solid rgba(255,255,255,0.18)",
+        }}
+      >
+        <svg width="200" height="200" viewBox="0 0 24 24" fill="#e5484d">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        </svg>
+      </div>
+    </div>,
     {
       ...size,
       fonts: [

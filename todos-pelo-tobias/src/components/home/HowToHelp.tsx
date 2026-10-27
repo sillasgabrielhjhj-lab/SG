@@ -25,9 +25,17 @@ const STEPS = [
 
 export function HowToHelp({ siteUrl }: { siteUrl: string }) {
   return (
-    <section id="como-ajudar" aria-labelledby="ajudar-titulo" className="scroll-mt-20 bg-gradient-to-b from-white to-brand-50 py-16 lg:py-24">
+    <section
+      id="como-ajudar"
+      aria-labelledby="ajudar-titulo"
+      className="scroll-mt-20 bg-gradient-to-b from-white to-brand-50 py-16 lg:py-24"
+    >
       <div className="mx-auto max-w-6xl px-4">
-        <SectionHeading eyebrow="Como ajudar" title="Ajudar é simples e leva poucos minutos" id="ajudar-titulo">
+        <SectionHeading
+          eyebrow="Como ajudar"
+          title="Ajudar é simples e leva poucos minutos"
+          id="ajudar-titulo"
+        >
           Você escolhe quanto doar e paga por Pix no aplicativo do seu banco.
         </SectionHeading>
 
@@ -36,7 +44,10 @@ export function HowToHelp({ siteUrl }: { siteUrl: string }) {
             <li key={title}>
               <Reveal delay={i * 120} className="h-full">
                 <div className="relative h-full rounded-3xl bg-white p-7 shadow-soft ring-1 ring-brand-100">
-                  <span aria-hidden className="absolute top-5 right-6 font-display text-5xl font-black text-brand-100">
+                  <span
+                    aria-hidden
+                    className="absolute top-5 right-6 font-display text-5xl font-black text-brand-100"
+                  >
                     {i + 1}
                   </span>
                   <span className="grid size-14 place-items-center rounded-2xl bg-brand-600 text-white shadow-[0_10px_24px_-10px_rgb(27_106_67/0.8)]">
@@ -58,12 +69,13 @@ export function HowToHelp({ siteUrl }: { siteUrl: string }) {
         </div>
 
         <Reveal className="mt-16">
-          <div className="rounded-[2rem] bg-white p-8 text-center shadow-soft ring-1 ring-brand-100 md:p-12">
+          <div className="rounded-[2rem] bg-white p-6 text-center shadow-soft ring-1 ring-brand-100 sm:p-8 md:p-12">
             <h3 className="mx-auto max-w-2xl text-2xl font-extrabold text-brand-950 sm:text-3xl">
               Se não puder doar, compartilhar também é uma forma de ajudar.
             </h3>
             <p className="mx-auto mt-3 max-w-xl text-muted">
-              Mande a campanha para amigos e familiares. Uma mensagem sua pode chegar a quem queira ajudar.
+              Mande a campanha para amigos e familiares. Uma mensagem sua pode chegar a quem queira
+              ajudar.
             </p>
             <ShareButtons url={siteUrl} className="mt-8" />
           </div>

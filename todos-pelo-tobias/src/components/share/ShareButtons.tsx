@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 import { buildShareMessage, facebookShareUrl, whatsappShareUrl } from "@/lib/share";
 
 const item =
-  "inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-white px-5 text-[0.95rem] font-bold text-brand-900 ring-1 ring-brand-200 transition duration-200 hover:-translate-y-0.5 hover:bg-brand-50 hover:shadow-soft active:scale-[0.98]";
+  "inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-full bg-white px-3 sm:w-auto sm:px-5 text-[0.95rem] font-bold text-brand-900 ring-1 ring-brand-200 transition duration-200 hover:-translate-y-0.5 hover:bg-brand-50 hover:shadow-soft active:scale-[0.98]";
 
 /** WhatsApp, Facebook, Instagram (compartilhamento nativo do celular) e copiar link. */
 export function ShareButtons({ url, className }: { url: string; className?: string }) {
@@ -21,7 +21,11 @@ export function ShareButtons({ url, className }: { url: string; className?: stri
   };
 
   async function copyLink() {
-    flash((await copyToClipboard(url)) ? "Link copiado! Agora é só colar onde quiser." : "Não foi possível copiar. Copie o endereço na barra do navegador.");
+    flash(
+      (await copyToClipboard(url))
+        ? "Link copiado! Agora é só colar onde quiser."
+        : "Não foi possível copiar. Copie o endereço na barra do navegador.",
+    );
   }
 
   // O Instagram não tem link de compartilhamento para a web. No celular usamos a folha de
@@ -44,8 +48,13 @@ export function ShareButtons({ url, className }: { url: string; className?: stri
 
   return (
     <div className={className}>
-      <div className="flex flex-wrap justify-center gap-3">
-        <a href={whatsappShareUrl(message)} target="_blank" rel="noopener noreferrer" className={item}>
+      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center">
+        <a
+          href={whatsappShareUrl(message)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={item}
+        >
           <WhatsAppIcon className="size-5 text-[#128c7e]" />
           WhatsApp
           <span className="sr-only"> (abre em nova aba)</span>
@@ -64,7 +73,11 @@ export function ShareButtons({ url, className }: { url: string; className?: stri
           Copiar link
         </button>
       </div>
-      <p role="status" aria-live="polite" className={cn("mt-3 min-h-6 text-center text-sm font-medium text-brand-800")}>
+      <p
+        role="status"
+        aria-live="polite"
+        className={cn("mt-3 min-h-6 text-center text-sm font-medium text-brand-800")}
+      >
         {feedback}
       </p>
     </div>

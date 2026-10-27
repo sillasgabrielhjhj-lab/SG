@@ -4,7 +4,12 @@ import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { btn } from "@/components/ui/button";
 
-export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function ErrorPage({
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   return (
     <main className="mx-auto grid min-h-svh max-w-xl place-items-center px-4 py-16 text-center">
       <div>

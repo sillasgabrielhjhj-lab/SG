@@ -6,14 +6,17 @@ import { Story } from "@/components/home/Story";
 import { Trust } from "@/components/home/Trust";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { getFundraising } from "@/lib/fundraising";
 import { getSiteUrl } from "@/lib/site-url";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const goal = await getFundraising();
+
   return (
     <>
       <SiteHeader />
       <main id="conteudo">
-        <Hero />
+        <Hero goal={goal} />
         <CampaignCard />
         <Story />
         <PhotosSection />

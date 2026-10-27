@@ -25,12 +25,42 @@
   --shadow-soft: 0 10px 40px -12px rgb(19 68 48 / 0.18);
   --shadow-lift: 0 28px 70px -24px rgb(19 68 48 / 0.35);
 
+  --animate-goal-fill: goal-fill 1.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+  --animate-goal-badge: goal-badge 1.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+  --animate-fade-in: fade-in 0.45s ease both;
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-float: float 7s ease-in-out infinite;
   --animate-beat: beat 2.6s ease-in-out infinite;
   --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   --animate-shine: shine 4.5s ease-in-out infinite;
 
+  @keyframes goal-fill {
+    from {
+      width: 0;
+    }
+  }
+  @keyframes goal-badge {
+    from {
+      left: 1.4rem;
+    }
+  }
+  @keyframes goal-sheen {
+    0% {
+      transform: translateX(-100%);
+    }
+    35%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   @keyframes fade-up {
     from {
       opacity: 0;
@@ -96,6 +126,9 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+  p {
+    text-wrap: pretty;
+  }
   h1,
   h2,
   h3 {
@@ -125,9 +158,39 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.28) 50%, transparent 65%);
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgb(255 255 255 / 0.28) 50%,
+      transparent 65%
+    );
     transform: translateX(-130%);
     animation: var(--animate-shine);
+    pointer-events: none;
+  }
+}
+
+/* Selo "44%" que acompanha a ponta da barra (nunca sai da barra, mesmo com porcentagens baixas ou altas) */
+@utility goal-badge-pos {
+  left: clamp(1.4rem, var(--goal-progress), calc(100% - 1.4rem));
+}
+
+/* Brilho suave e raro passando pelo preenchimento da barra */
+@utility goal-sheen {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(255 255 255 / 0.45) 50%,
+      transparent 80%
+    );
+    transform: translateX(-100%);
+    animation: goal-sheen 6s ease-in-out 2.4s infinite;
     pointer-events: none;
   }
 }
@@ -166,6 +229,7 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }

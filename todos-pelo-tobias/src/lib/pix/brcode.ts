@@ -58,7 +58,9 @@ const KEY_PATTERNS: Record<PixKeyType, RegExp> = {
 /** E-mails e chaves aleatórias são case-insensitive no DICT; usamos minúsculas. */
 export function normalizePixKey(key: string): string {
   const trimmed = key.trim();
-  return trimmed.includes("@") || /^[0-9a-f-]{36}$/i.test(trimmed) ? trimmed.toLowerCase() : trimmed;
+  return trimmed.includes("@") || /^[0-9a-f-]{36}$/i.test(trimmed)
+    ? trimmed.toLowerCase()
+    : trimmed;
 }
 
 export function detectPixKeyType(key: string): PixKeyType | null {
@@ -118,7 +120,9 @@ export function buildStaticPix(input: StaticPixInput): string {
   const description = input.description ? sanitizeText(input.description, MAX_DESCRIPTION) : "";
 
   const merchantAccount =
-    field("00", "br.gov.bcb.pix") + field("01", key) + (description ? field("02", description) : "");
+    field("00", "br.gov.bcb.pix") +
+    field("01", key) +
+    (description ? field("02", description) : "");
 
   const payload =
     field("00", "01") + // versão do payload

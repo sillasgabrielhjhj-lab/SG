@@ -9,7 +9,7 @@ export function Logo({ className, light = false }: { className?: string; light?:
       href="/"
       aria-label={`${campaign.name} — página inicial`}
       className={cn(
-        "inline-flex items-center gap-1.5 font-display text-[1.35rem] leading-none font-extrabold tracking-tight",
+        "inline-flex items-center gap-1.5 font-display text-[1.35rem] leading-none font-extrabold tracking-tight whitespace-nowrap",
         light ? "text-white" : "text-brand-900",
         className,
       )}

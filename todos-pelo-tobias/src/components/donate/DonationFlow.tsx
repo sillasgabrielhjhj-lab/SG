@@ -16,9 +16,30 @@ interface DonationFlowProps {
   siteUrl: string;
 }
 
-export function DonationFlow({ setup, presetsCents, minCents, maxCents, siteUrl }: DonationFlowProps) {
+export function DonationFlow({
+  setup,
+  presetsCents,
+  minCents,
+  maxCents,
+  siteUrl,
+}: DonationFlowProps) {
   const [choice, setChoice] = useState<Choice>(null);
   const [customText, setCustomText] = useState("");
+
+  function pick(next: NonNullable<Choice>) {
+    setChoice(next);
+    if (next.kind !== "preset") return; // ao digitar outro valor, não mexemos na rolagem
+    // No celular o QR Code nasce abaixo da dobra: se não estiver todo visível, leva a pessoa até ele.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        const heading = document.getElementById("pix-titulo");
+        const qr = document.getElementById("pix-qr");
+        if (!heading || !qr || qr.getBoundingClientRect().bottom <= window.innerHeight - 16) return;
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        heading.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }),
+    );
+  }
 
   // Valor escolhido -> centavos validados. Recalculado a cada mudança, então o QR Code é instantâneo.
   const amount = useMemo<AmountResult | null>(() => {
@@ -28,25 +49,31 @@ export function DonationFlow({ setup, presetsCents, minCents, maxCents, siteUrl 
   }, [choice, customText, minCents, maxCents]);
 
   const payment = useMemo(
-    () => (setup.status === "ready" && amount?.ok ? createStaticPixPayment(amount.cents, setup) : null),
+    () =>
+      setup.status === "ready" && amount?.ok ? createStaticPixPayment(amount.cents, setup) : null,
     [setup, amount],
   );
 
   if (setup.status === "missing") {
     return (
-      <div role="status" className="rounded-3xl bg-white p-7 text-center shadow-soft ring-1 ring-brand-100">
+      <div
+        role="status"
+        className="rounded-3xl bg-white p-7 text-center shadow-soft ring-1 ring-brand-100"
+      >
         <TriangleAlert aria-hidden className="mx-auto size-10 text-amber-600" />
         <h2 className="mt-4 text-2xl font-extrabold text-brand-950">Doações por Pix em breve</h2>
         <p className="mt-2 leading-relaxed text-muted">
-          Estamos concluindo a configuração do recebimento. Volte em instantes ou fale com a organização da
-          campanha.
+          Estamos concluindo a configuração do recebimento. Volte em instantes ou fale com a
+          organização da campanha.
         </p>
         <p className="mt-5 rounded-2xl bg-cream p-4 text-left text-sm leading-relaxed text-ink/80">
           <strong>Para quem administra o site:</strong> preencha{" "}
-          {setup.missing.map((field) => (field === "receiverName" ? "o nome" : "a cidade")).join(" e ")} do
-          recebedor em <code>src/config/campaign.ts</code> (ou nas variáveis{" "}
-          <code>NEXT_PUBLIC_PIX_RECEIVER_NAME</code> e <code>NEXT_PUBLIC_PIX_RECEIVER_CITY</code>) e publique
-          novamente.
+          {setup.missing
+            .map((field) => (field === "receiverName" ? "o nome" : "a cidade"))
+            .join(" e ")}{" "}
+          do recebedor em <code>src/config/campaign.ts</code> (ou nas variáveis{" "}
+          <code>NEXT_PUBLIC_PIX_RECEIVER_NAME</code> e <code>NEXT_PUBLIC_PIX_RECEIVER_CITY</code>) e
+          publique novamente.
         </p>
       </div>
     );
@@ -58,9 +85,9 @@ export function DonationFlow({ setup, presetsCents, minCents, maxCents, siteUrl 
         <p className="mb-6 flex gap-3 rounded-2xl bg-amber-50 p-4 text-sm leading-relaxed text-amber-900 ring-1 ring-amber-200">
           <TriangleAlert aria-hidden className="mt-0.5 size-5 shrink-0" />
           <span>
-            <strong>Modo de desenvolvimento:</strong> o nome e a cidade do recebedor são provisórios. Preencha-os
-            em <code>src/config/campaign.ts</code> antes de publicar. Em produção, sem esses dados, o QR Code não
-            é exibido.
+            <strong>Modo de desenvolvimento:</strong> o nome e a cidade do recebedor são
+            provisórios. Preencha-os em <code>src/config/campaign.ts</code> antes de publicar. Em
+            produção, sem esses dados, o QR Code não é exibido.
           </span>
         </p>
       ) : null}
@@ -68,7 +95,7 @@ export function DonationFlow({ setup, presetsCents, minCents, maxCents, siteUrl 
       <AmountPicker
         presetsCents={presetsCents}
         choice={choice}
-        onChoice={setChoice}
+        onChoice={pick}
         customText={customText}
         onCustomText={setCustomText}
         customResult={choice?.kind === "custom" ? amount : null}
@@ -78,7 +105,10 @@ export function DonationFlow({ setup, presetsCents, minCents, maxCents, siteUrl 
         {payment?.ok ? (
           <PixPaymentCard payment={payment.payment} receiver={setup} siteUrl={siteUrl} />
         ) : payment ? (
-          <p role="alert" className="flex gap-3 rounded-2xl bg-red-50 p-4 text-sm font-semibold text-red-800 ring-1 ring-red-200">
+          <p
+            role="alert"
+            className="flex gap-3 rounded-2xl bg-red-50 p-4 text-sm font-semibold text-red-800 ring-1 ring-red-200"
+          >
             <CircleAlert aria-hidden className="mt-0.5 size-5 shrink-0" />
             {payment.message} Tente escolher outro valor ou recarregue a página.
           </p>

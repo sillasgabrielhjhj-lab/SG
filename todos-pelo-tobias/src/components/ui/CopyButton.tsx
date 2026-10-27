@@ -32,7 +32,11 @@ export function CopyButton({
         data-state={status}
         className={btn({ variant: copied ? "success" : variant, size, className })}
       >
-        {copied ? <Check aria-hidden className="size-5 animate-pop" /> : <Copy aria-hidden className="size-5" />}
+        {copied ? (
+          <Check aria-hidden className="size-5 animate-pop" />
+        ) : (
+          <Copy aria-hidden className="size-5" />
+        )}
         <span>{copied ? copiedLabel : label}</span>
       </button>
       <span role="status" aria-live="polite" className="sr-only">

@@ -22,7 +22,10 @@ export function Gallery({ photos }: { photos: Photo[] }) {
     const el = strip.current;
     const thumb = el?.children[index] as HTMLElement | undefined;
     if (el && thumb) {
-      el.scrollTo({ left: thumb.offsetLeft - (el.clientWidth - thumb.clientWidth) / 2, behavior: "smooth" });
+      el.scrollTo({
+        left: thumb.offsetLeft - (el.clientWidth - thumb.clientWidth) / 2,
+        behavior: "smooth",
+      });
     }
   }, [index]);
 
@@ -43,11 +46,14 @@ export function Gallery({ photos }: { photos: Photo[] }) {
             photo={current}
             index={index}
             decorative
-            compact
+            hideLabel
             sizes="(min-width: 1152px) 1100px, 100vw"
             className="animate-pop transition duration-700 group-hover:scale-[1.03]"
           />
-          <span aria-hidden className="absolute right-4 bottom-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-xs font-bold text-brand-900 shadow-soft backdrop-blur transition group-hover:bg-white sm:text-sm">
+          <span
+            aria-hidden
+            className="absolute right-4 bottom-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-xs font-bold text-brand-900 shadow-soft backdrop-blur transition group-hover:bg-white sm:text-sm"
+          >
             <Expand className="size-4" />
             Ampliar
           </span>
@@ -57,10 +63,20 @@ export function Gallery({ photos }: { photos: Photo[] }) {
         </p>
         {total > 1 ? (
           <>
-            <button type="button" onClick={() => go(index - 1)} aria-label="Foto anterior" className={cn(navButton, "left-3")}>
+            <button
+              type="button"
+              onClick={() => go(index - 1)}
+              aria-label="Foto anterior"
+              className={cn(navButton, "left-3")}
+            >
               <ChevronLeft aria-hidden className="size-6" />
             </button>
-            <button type="button" onClick={() => go(index + 1)} aria-label="Próxima foto" className={cn(navButton, "right-3")}>
+            <button
+              type="button"
+              onClick={() => go(index + 1)}
+              aria-label="Próxima foto"
+              className={cn(navButton, "right-3")}
+            >
               <ChevronRight aria-hidden className="size-6" />
             </button>
           </>
@@ -77,7 +93,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
         <div
           ref={strip}
           aria-label="Miniaturas das fotos"
-          className="mt-4 flex snap-x gap-3 overflow-x-auto px-1 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-4 flex snap-x [scrollbar-width:none] gap-3 overflow-x-auto px-1 py-2 [&::-webkit-scrollbar]:hidden"
         >
           {photos.map((photo, i) => (
             <button
@@ -100,7 +116,12 @@ export function Gallery({ photos }: { photos: Photo[] }) {
       ) : null}
 
       {zoomed ? (
-        <Lightbox photos={photos} index={index} onIndex={setIndex} onClose={() => setZoomed(false)} />
+        <Lightbox
+          photos={photos}
+          index={index}
+          onIndex={setIndex}
+          onClose={() => setZoomed(false)}
+        />
       ) : null}
     </div>
   );

@@ -25,7 +25,10 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2.5 text-sm">
             {LINKS.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-brand-100 transition hover:text-white hover:underline">
+                <Link
+                  href={link.href}
+                  className="text-brand-100 transition hover:text-white hover:underline"
+                >
                   {link.label}
                 </Link>
               </li>
@@ -35,8 +38,8 @@ export function SiteFooter() {
         <div>
           <p className="text-sm font-bold tracking-[0.16em] text-brand-300 uppercase">Segurança</p>
           <p className="mt-4 text-sm leading-relaxed text-brand-200">
-            Nunca pedimos senhas, códigos de verificação ou dados do seu cartão. Antes de confirmar o
-            Pix, confira no app do seu banco o nome do recebedor e o valor.
+            Nunca pedimos senhas, códigos de verificação ou dados do seu cartão. Antes de confirmar
+            o Pix, confira no app do seu banco o nome do recebedor e o valor.
           </p>
         </div>
       </div>

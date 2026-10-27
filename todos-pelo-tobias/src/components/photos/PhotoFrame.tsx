@@ -22,6 +22,8 @@ interface PhotoFrameProps {
   fit?: "cover" | "contain";
   /** Miniaturas: mostra só o coração, sem o rótulo "Foto do Tobias em breve". */
   compact?: boolean;
+  /** Esconde só o rótulo "Foto do Tobias em breve" (mantém o coração grande). */
+  hideLabel?: boolean;
   /** Use dentro de links/botões que já têm nome acessível (evita nome duplicado ou conflitante). */
   decorative?: boolean;
   className?: string;
@@ -38,6 +40,7 @@ export function PhotoFrame({
   priority,
   fit = "cover",
   compact = false,
+  hideLabel = false,
   decorative = false,
   className,
 }: PhotoFrameProps) {
@@ -64,10 +67,22 @@ export function PhotoFrame({
       )}
       style={{ backgroundImage: PLACEHOLDER_GRADIENTS[index % PLACEHOLDER_GRADIENTS.length] }}
     >
-      <span aria-hidden className="absolute -top-1/4 -right-1/4 size-3/4 rounded-full bg-white/60 blur-2xl" />
-      <span aria-hidden className="absolute -bottom-1/4 -left-1/5 size-2/3 rounded-full bg-brand-300/30 blur-2xl" />
-      <Heart aria-hidden className={cn("relative fill-heart/80 text-heart/80", compact ? "size-6" : "size-[16%] min-w-9 max-w-20")} />
-      {compact ? null : (
+      <span
+        aria-hidden
+        className="absolute -top-1/4 -right-1/4 size-3/4 rounded-full bg-white/60 blur-2xl"
+      />
+      <span
+        aria-hidden
+        className="absolute -bottom-1/4 -left-1/5 size-2/3 rounded-full bg-brand-300/30 blur-2xl"
+      />
+      <Heart
+        aria-hidden
+        className={cn(
+          "relative fill-heart/80 text-heart/80",
+          compact ? "size-6" : "size-[16%] max-w-20 min-w-9",
+        )}
+      />
+      {compact || hideLabel ? null : (
         <span
           aria-hidden
           className="relative inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-bold text-brand-800 shadow-sm backdrop-blur sm:text-sm"

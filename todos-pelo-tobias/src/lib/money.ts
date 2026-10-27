@@ -12,7 +12,8 @@ export interface AmountLimits {
 
 export type AmountError = "empty" | "negative" | "invalid" | "decimals" | "zero" | "min" | "max";
 
-export type AmountResult = { ok: true; cents: number } | { ok: false; error: AmountError; message: string };
+export type AmountResult =
+  { ok: true; cents: number } | { ok: false; error: AmountError; message: string };
 
 const fail = (error: AmountError, message: string): AmountResult => ({ ok: false, error, message });
 
@@ -55,4 +56,39 @@ export function parseAmountInput(raw: string, limits: AmountLimits): AmountResul
     return fail("max", `O valor máximo por QR Code é ${formatBRL(limits.maxCents)}.`);
   }
   return { ok: true, cents };
+}
+
+/** 22000 (reais) -> 2200000 centavos. Aceita centavos ("22350.5"); devolve null se for negativo ou inválido. */
+export function reaisToCents(reais: number): number | null {
+  if (!Number.isFinite(reais) || reais < 0) return null;
+  const cents = Math.round(Number((reais * 100).toFixed(3)));
+  return Number.isSafeInteger(cents) ? cents : null;
+}
+
+const COMPACT_UNITS = [
+  { divisor: 100_000_000, one: "milhão", many: "milhões" }, // R$ 1.000.000 em centavos
+  { divisor: 100_000, one: "mil", many: "mil" }, // R$ 1.000 em centavos
+] as const;
+
+/**
+ * Forma curta e EXATA para textos corridos: 2200000 -> "R$ 22 mil", 2250000 -> "R$ 22,5 mil",
+ * 250000000 -> "R$ 2,5 milhões". Se o valor não couber exatamente (ex.: R$ 22.350,50), usa o
+ * formato completo, para nunca arredondar o número da campanha.
+ */
+export function formatBRLCompact(cents: number): string {
+  for (const { divisor, one, many } of COMPACT_UNITS) {
+    if (cents < divisor) continue;
+    const hundredths = (cents * 100) / divisor; // centésimos da unidade (22,5 mil = 2250)
+    if (!Number.isInteger(hundredths)) break;
+    const whole = Math.floor(hundredths / 100);
+    const fraction = hundredths % 100;
+    const number =
+      fraction === 0
+        ? `${whole}`
+        : fraction % 10 === 0
+          ? `${whole},${fraction / 10}`
+          : `${whole},${String(fraction).padStart(2, "0")}`;
+    return `R$\u00a0${number}\u00a0${hundredths < 200 ? one : many}`;
+  }
+  return formatBRL(cents);
 }

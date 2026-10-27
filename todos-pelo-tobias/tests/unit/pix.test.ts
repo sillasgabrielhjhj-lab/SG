@@ -1,7 +1,13 @@
 import { parsePix } from "pix-utils";
 import { describe, expect, it } from "vitest";
 import { buildShareMessage, facebookShareUrl, whatsappShareUrl } from "@/lib/share";
-import { buildStaticPix, detectPixKeyType, formatPixAmount, PixError, sanitizeText } from "@/lib/pix/brcode";
+import {
+  buildStaticPix,
+  detectPixKeyType,
+  formatPixAmount,
+  PixError,
+  sanitizeText,
+} from "@/lib/pix/brcode";
 import { crc16 } from "@/lib/pix/crc16";
 import { resolvePixSetup } from "@/lib/pix/setup";
 
@@ -32,36 +38,53 @@ describe("crc16 (CCITT-FALSE)", () => {
     expect(crc16("123456789")).toBe("29B1"); // vetor padrão da especificação do algoritmo
     expect(crc16("")).toBe("FFFF");
     expect(
-      crc16("00020126330014br.gov.bcb.pix0111teste@x.com5204000053039865802BR5904Nome6004Cida62070503***6304"),
+      crc16(
+        "00020126330014br.gov.bcb.pix0111teste@x.com5204000053039865802BR5904Nome6004Cida62070503***6304",
+      ),
     ).toBe("1566");
   });
 });
 
 describe("buildStaticPix", () => {
-  it.each([500, 1000, 2000, 5000, 10000, 1, 1005, 123456])("monta um BR Code válido para %i centavos", (cents) => {
-    const code = buildStaticPix({ ...BASE, amountCents: cents });
+  it.each([500, 1000, 2000, 5000, 10000, 1, 1005, 123456])(
+    "monta um BR Code válido para %i centavos",
+    (cents) => {
+      const code = buildStaticPix({ ...BASE, amountCents: cents });
 
-    // CRC: últimos 4 dígitos = CRC16 de tudo que vem antes (incluindo "6304")
-    expect(code.slice(-8, -4)).toBe("6304");
-    expect(code.slice(-4)).toBe(crc16(code.slice(0, -4)));
+      // CRC: últimos 4 dígitos = CRC16 de tudo que vem antes (incluindo "6304")
+      expect(code.slice(-8, -4)).toBe("6304");
+      expect(code.slice(-4)).toBe(crc16(code.slice(0, -4)));
 
-    // estrutura EMV: IDs em ordem crescente e tamanhos coerentes
-    const fields = parseTlv(code);
-    expect(fields.map(([id]) => id)).toEqual(["00", "01", "26", "52", "53", "54", "58", "59", "60", "62", "63"]);
-    const get = (id: string) => fields.find(([f]) => f === id)?.[1];
-    expect(get("00")).toBe("01");
-    expect(get("53")).toBe("986");
-    expect(get("58")).toBe("BR");
-    expect(get("59")).toBe("NOME TESTE");
-    expect(get("60")).toBe("CIDADE TESTE");
-    expect(get("54")).toBe(formatPixAmount(cents));
-    expect(get("54")).toMatch(/^\d+\.\d{2}$/);
+      // estrutura EMV: IDs em ordem crescente e tamanhos coerentes
+      const fields = parseTlv(code);
+      expect(fields.map(([id]) => id)).toEqual([
+        "00",
+        "01",
+        "26",
+        "52",
+        "53",
+        "54",
+        "58",
+        "59",
+        "60",
+        "62",
+        "63",
+      ]);
+      const get = (id: string) => fields.find(([f]) => f === id)?.[1];
+      expect(get("00")).toBe("01");
+      expect(get("53")).toBe("986");
+      expect(get("58")).toBe("BR");
+      expect(get("59")).toBe("NOME TESTE");
+      expect(get("60")).toBe("CIDADE TESTE");
+      expect(get("54")).toBe(formatPixAmount(cents));
+      expect(get("54")).toMatch(/^\d+\.\d{2}$/);
 
-    // conta do recebedor (campo 26): GUI do Pix + chave de e-mail
-    const account = parseTlv(get("26") ?? "");
-    expect(account[0]).toEqual(["00", "br.gov.bcb.pix"]);
-    expect(account[1]).toEqual(["01", BASE.key]);
-  });
+      // conta do recebedor (campo 26): GUI do Pix + chave de e-mail
+      const account = parseTlv(get("26") ?? "");
+      expect(account[0]).toEqual(["00", "br.gov.bcb.pix"]);
+      expect(account[1]).toEqual(["01", BASE.key]);
+    },
+  );
 
   it("o valor do QR Code é exatamente o escolhido (R$ 50,00 -> 50.00)", () => {
     expect(buildStaticPix({ ...BASE, amountCents: 5000 })).toContain("540550.00");
@@ -94,13 +117,20 @@ describe("buildStaticPix", () => {
   });
 
   it("normaliza a chave de e-mail para minúsculas", () => {
-    const code = buildStaticPix({ ...BASE, key: "  TobiasVaquinha87@Gmail.com ", amountCents: 100 });
+    const code = buildStaticPix({
+      ...BASE,
+      key: "  TobiasVaquinha87@Gmail.com ",
+      amountCents: 100,
+    });
     expect(code).toContain("tobiasvaquinha87@gmail.com");
   });
 
-  it.each([0, -5, 1.5, Number.NaN, Number.POSITIVE_INFINITY])("recusa o valor inválido %s", (cents) => {
-    expect(() => buildStaticPix({ ...BASE, amountCents: cents })).toThrow(PixError);
-  });
+  it.each([0, -5, 1.5, Number.NaN, Number.POSITIVE_INFINITY])(
+    "recusa o valor inválido %s",
+    (cents) => {
+      expect(() => buildStaticPix({ ...BASE, amountCents: cents })).toThrow(PixError);
+    },
+  );
 
   it("recusa chave, nome e cidade inválidos ou vazios", () => {
     expect(() => buildStaticPix({ ...BASE, key: "nao-e-uma-chave" })).toThrow(/chave/i);
@@ -132,7 +162,10 @@ describe("resolvePixSetup", () => {
   const cfg = { key: BASE.key, receiverName: "", receiverCity: "", description: "x" };
 
   it("em produção sem nome/cidade, NÃO gera Pix (não inventa dados do beneficiário)", () => {
-    expect(resolvePixSetup(cfg, "production")).toEqual({ status: "missing", missing: ["receiverName", "receiverCity"] });
+    expect(resolvePixSetup(cfg, "production")).toEqual({
+      status: "missing",
+      missing: ["receiverName", "receiverCity"],
+    });
     expect(resolvePixSetup({ ...cfg, receiverName: "Fulano" }, "production")).toEqual({
       status: "missing",
       missing: ["receiverCity"],
@@ -140,12 +173,23 @@ describe("resolvePixSetup", () => {
   });
 
   it("em desenvolvimento usa texto provisório sinalizado", () => {
-    expect(resolvePixSetup(cfg, "development")).toMatchObject({ status: "ready", isPlaceholder: true });
+    expect(resolvePixSetup(cfg, "development")).toMatchObject({
+      status: "ready",
+      isPlaceholder: true,
+    });
   });
 
   it("com dados reais fica pronto, sem marcação de provisório", () => {
-    const setup = resolvePixSetup({ ...cfg, receiverName: " Fulano ", receiverCity: "Recife" }, "production");
-    expect(setup).toMatchObject({ status: "ready", receiverName: "Fulano", receiverCity: "Recife", isPlaceholder: false });
+    const setup = resolvePixSetup(
+      { ...cfg, receiverName: " Fulano ", receiverCity: "Recife" },
+      "production",
+    );
+    expect(setup).toMatchObject({
+      status: "ready",
+      receiverName: "Fulano",
+      receiverCity: "Recife",
+      isPlaceholder: false,
+    });
   });
 });
 

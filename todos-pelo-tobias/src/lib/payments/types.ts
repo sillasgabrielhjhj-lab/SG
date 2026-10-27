@@ -12,9 +12,3 @@ export interface PixPayment {
   payload: string;
   status: PaymentStatus;
 }
-
-/** Valores efetivamente recebidos, vindos de uma API Pix/banco. Nunca preencha com números fictícios. */
-export interface CampaignTotals {
-  raisedCents: number;
-  updatedAt: string;
-}

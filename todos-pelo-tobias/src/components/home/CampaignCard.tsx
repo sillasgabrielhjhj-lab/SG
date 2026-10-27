@@ -5,13 +5,9 @@ import { btn } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/Reveal";
 import { campaign } from "@/config/campaign";
 import { coverPhoto } from "@/content/photos";
-import { formatBRL } from "@/lib/money";
-import { getCampaignTotals } from "@/lib/payments/totals";
 
 /** Card principal da vaquinha: o card inteiro (foto incluída) leva à página de doação. */
-export async function CampaignCard() {
-  const totals = await getCampaignTotals(); // null enquanto não houver integração com uma API Pix
-
+export function CampaignCard() {
   return (
     <section aria-labelledby="campanha-titulo" className="mx-auto max-w-6xl px-4 py-12 lg:py-20">
       <Reveal>
@@ -33,11 +29,6 @@ export async function CampaignCard() {
                 {campaign.name.toUpperCase()}
               </h2>
               <p className="text-lg leading-relaxed text-muted">{campaign.description}</p>
-              {totals ? (
-                <p className="text-sm font-semibold text-brand-800">
-                  Arrecadado até agora: <strong>{formatBRL(totals.raisedCents)}</strong>
-                </p>
-              ) : null}
               <ul className="flex flex-wrap gap-2 text-xs font-bold text-brand-800">
                 <li className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 ring-1 ring-brand-100">
                   <QrCode aria-hidden className="size-3.5" /> QR Code Pix
@@ -49,8 +40,16 @@ export async function CampaignCard() {
               {/* Link "esticado": o ::after cobre o card inteiro. O <a> não pode ter transform/scale
                   (nem :active), senão ele vira o bloco de referência do overlay e a área clicável encolhe;
                   por isso o visual de botão fica no <span> interno. */}
-              <Link href="/doar" className="mt-1 block w-full after:absolute after:inset-0 after:content-[''] sm:w-fit">
-                <span className={btn({ size: "lg", className: "w-full transition group-hover:to-brand-800" })}>
+              <Link
+                href="/doar"
+                className="mt-1 block w-full after:absolute after:inset-0 after:content-[''] sm:w-fit"
+              >
+                <span
+                  className={btn({
+                    size: "lg",
+                    className: "w-full transition group-hover:to-brand-800",
+                  })}
+                >
                   Fazer uma doação
                   <ArrowRight aria-hidden className="size-5 transition group-hover:translate-x-1" />
                 </span>
