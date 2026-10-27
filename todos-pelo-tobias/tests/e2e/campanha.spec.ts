@@ -1,0 +1,329 @@
+import AxeBuilder from "@axe-core/playwright";
+import { expect, test, type Locator, type Page } from "@playwright/test";
+import jsQR from "jsqr";
+import { PNG } from "pngjs";
+import { parsePix } from "pix-utils";
+import { buildStaticPix } from "../../src/lib/pix/brcode";
+
+const PIX = {
+  key: "tobiasvaquinha87@gmail.com",
+  receiverName: "NOME TESTE",
+  receiverCity: "CIDADE TESTE",
+  description: "Todos pelo Tobias",
+};
+const expectedPix = (amountCents: number) => buildStaticPix({ ...PIX, amountCents });
+const nbsp = (text: string) => text.replace(/\s/g, " ");
+
+/** Lê o QR Code exibido na tela (captura da imagem + decodificação), como um leitor faria. */
+async function decodeQr(qr: Locator): Promise<string> {
+  const png = PNG.sync.read(await qr.screenshot());
+  const result = jsQR(new Uint8ClampedArray(png.data), png.width, png.height);
+  if (!result) throw new Error("Não foi possível ler o QR Code exibido");
+  return result.data;
+}
+
+const chip = (page: Page, label: RegExp) => page.locator("label").filter({ hasText: label }).first();
+const code = (page: Page) => page.locator("#pix-codigo");
+const qrSvg = (page: Page) => page.getByTestId("pix-qrcode").locator("svg");
+
+// Qualquer erro de JavaScript, de console ou violação de CSP em qualquer teste reprova o teste.
+const problemsByPage = new WeakMap<Page, string[]>();
+
+test.beforeEach(async ({ page }) => {
+  const problems: string[] = [];
+  problemsByPage.set(page, problems);
+  page.on("pageerror", (error) => problems.push(`pageerror: ${error.message}`));
+  page.on("console", (msg) => {
+    if (msg.type() === "error") problems.push(`console: ${msg.text()}`);
+  });
+});
+
+test.afterEach(async ({ page }) => {
+  expect(problemsByPage.get(page) ?? []).toEqual([]);
+});
+
+test.describe("navegação", () => {
+  test("o card da campanha (clicando na foto) abre a página de doação", async ({ page }) => {
+    await page.goto("/");
+    const card = page.locator("article").first();
+    await card.evaluate((el) => el.scrollIntoView({ block: "center" })); // longe do cabeçalho fixo
+    await card.click({ position: { x: 40, y: 120 } }); // dentro da foto, longe do botão
+    await expect(page).toHaveURL(/\/doar$/);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Ajude o Tobias com qualquer valor");
+  });
+
+  test("botão do card, foto do banner, 'QUERO AJUDAR' e 'DOAR AGORA' levam a /doar", async ({ page }) => {
+    const targets = [
+      page.getByRole("link", { name: "Fazer uma doação", exact: true }),
+      page.getByRole("link", { name: /Toque aqui para doar por Pix/ }),
+      page.getByRole("link", { name: "QUERO AJUDAR O TOBIAS" }),
+      page.getByRole("link", { name: "DOAR AGORA" }),
+    ];
+    for (const index of targets.keys()) {
+      await page.goto("/");
+      await targets[index]!.first().click();
+      await expect(page).toHaveURL(/\/doar$/);
+    }
+  });
+
+  test("a página de doação tem o botão para voltar à campanha", async ({ page }) => {
+    await page.goto("/doar");
+    await page.getByRole("link", { name: "Voltar à campanha" }).last().click();
+    await expect(page).toHaveURL(/\/$/);
+  });
+
+  test("o menu leva às seções (desktop: links; celular: menu sanduíche)", async ({ page, isMobile }) => {
+    await page.goto("/");
+    if (isMobile) await page.getByRole("button", { name: "Abrir menu" }).click();
+    const nav = page.getByRole("navigation", { name: isMobile ? "Menu" : "Principal" });
+    for (const [label, id] of [["Conheça Tobias", "conheca-tobias"], ["Fotos", "fotos"], ["Como Ajudar", "como-ajudar"]] as const) {
+      await nav.getByRole("link", { name: label }).click();
+      await expect(page).toHaveURL(new RegExp(`#${id}$`));
+      if (isMobile) await page.getByRole("button", { name: "Abrir menu" }).click();
+    }
+  });
+
+  test("não há rolagem horizontal em / nem em /doar", async ({ page }) => {
+    for (const path of ["/", "/doar"]) {
+      await page.goto(path);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow, `rolagem horizontal em ${path}`).toBeLessThanOrEqual(0);
+    }
+  });
+});
+
+test.describe("Pix", () => {
+  for (const cents of [500, 1000, 2000, 5000, 10000]) {
+    const label = new RegExp(`^R\\$\\s*${Math.floor(cents / 100)},00$`);
+
+    test(`R$ ${cents / 100},00: QR Code e Copia e Cola são o mesmo Pix, com o valor exato`, async ({ page }) => {
+      await page.goto("/doar");
+      await expect(page.getByTestId("pix-qrcode")).toHaveCount(0); // nada antes de escolher
+      await chip(page, label).click();
+
+      await expect(page.getByRole("heading", { level: 2, name: /Você escolheu doar/ })).toContainText(
+        `Você escolheu doar R$ ${Math.floor(cents / 100)},00 para ajudar o Tobias ❤️`.replace(/ /g, " "),
+        { useInnerText: true },
+      );
+      const text = await code(page).inputValue();
+      expect(text).toBe(expectedPix(cents));
+      expect(await decodeQr(qrSvg(page))).toBe(text); // o QR Code contém exatamente o Copia e Cola
+
+      // um parser independente confirma CRC, chave, recebedor e valor
+      expect(parsePix(text)).toMatchObject({
+        pixKey: PIX.key,
+        merchantName: PIX.receiverName,
+        merchantCity: PIX.receiverCity,
+        transactionAmount: cents / 100,
+      });
+    });
+  }
+
+  test("trocar o valor atualiza o QR Code na hora", async ({ page }) => {
+    await page.goto("/doar");
+    await chip(page, /^R\$\s*10,00$/).click();
+    const first = await decodeQr(qrSvg(page));
+    await chip(page, /^R\$\s*50,00$/).click();
+    const second = await decodeQr(qrSvg(page));
+    expect(first).toBe(expectedPix(1000));
+    expect(second).toBe(expectedPix(5000));
+    expect(first).not.toBe(second);
+  });
+
+  test("valores personalizados com duas casas decimais", async ({ page }) => {
+    await page.goto("/doar");
+    await chip(page, /^Outro valor$/).click();
+    const input = page.getByLabel("Digite o valor que deseja doar");
+    await expect(input).toBeFocused();
+
+    for (const [typed, cents, shown] of [
+      ["37,5", 3750, "R$ 37,50"],
+      ["12.90", 1290, "R$ 12,90"],
+      ["0,01", 1, "R$ 0,01"],
+      ["1.234,56", 123456, "R$ 1.234,56"],
+    ] as const) {
+      await input.fill(typed);
+      await expect(page.getByRole("heading", { level: 2, name: /Você escolheu doar/ })).toContainText(shown, {
+        useInnerText: true,
+      });
+      const text = await code(page).inputValue();
+      expect(text).toBe(expectedPix(cents));
+      expect(await decodeQr(qrSvg(page))).toBe(text);
+    }
+  });
+
+  test("valores inválidos, negativos ou zerados são recusados e não geram QR Code", async ({ page }) => {
+    await page.goto("/doar");
+    await chip(page, /^Outro valor$/).click();
+    const input = page.getByLabel("Digite o valor que deseja doar");
+    const hint = page.locator("[id$='-dica']");
+
+    for (const [typed, message] of [
+      ["0", "Informe um valor maior que zero."],
+      ["0,00", "Informe um valor maior que zero."],
+      ["-5", "O valor não pode ser negativo."],
+      ["abc", "Digite apenas números"],
+      ["10,555", "no máximo duas casas decimais"],
+      ["100000", "O valor máximo por QR Code"],
+    ] as const) {
+      await input.fill(typed);
+      await expect(hint).toContainText(message);
+      await expect(input).toHaveAttribute("aria-invalid", "true");
+      await expect(page.getByTestId("pix-qrcode")).toHaveCount(0);
+    }
+
+    await input.fill("");
+    await expect(input).toHaveAttribute("aria-invalid", "false");
+    await expect(page.getByTestId("pix-qrcode")).toHaveCount(0);
+
+    await input.fill("12");
+    await expect(page.getByTestId("pix-qrcode")).toBeVisible();
+  });
+
+  test("copiar o código Pix: confirmação visual, conteúdo correto e sem dizer que a doação foi concluída", async ({ page }) => {
+    await page.goto("/doar");
+    await chip(page, /^R\$\s*20,00$/).click();
+    const button = page.getByRole("button", { name: "Copiar código Pix" });
+    await button.click();
+    await expect(page.getByRole("button", { name: "Código copiado!" })).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(expectedPix(2000));
+
+    const body = nbsp(await page.locator("main").innerText());
+    expect(body).not.toMatch(/doação (foi )?(concluída|realizada|confirmada|recebida)|pagamento (foi )?(confirmado|realizado|recebido)|obrigado pela doação/i);
+    expect(body).toContain("Este site não processa nem confirma");
+
+    await expect(page.getByRole("button", { name: "Copiar código Pix" })).toBeVisible({ timeout: 6000 }); // volta ao normal
+  });
+
+  test("se a Clipboard API falhar, usa o plano B e, em último caso, avisa para copiar manualmente", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "clipboard", { value: undefined, configurable: true });
+      document.execCommand = () => false;
+    });
+    await page.goto("/doar");
+    await chip(page, /^R\$\s*5,00$/).click();
+    await page.getByRole("button", { name: "Copiar código Pix" }).click();
+    await expect(page.getByRole("alert").filter({ hasText: "Não foi possível copiar" })).toBeVisible();
+  });
+});
+
+test.describe("galeria", () => {
+  test("foto principal, miniaturas, ampliação e navegação", async ({ page, isMobile }) => {
+    await page.goto("/#fotos");
+    const open = page.getByRole("button", { name: /Ampliar foto 1 de 6/ });
+    await expect(open).toBeVisible();
+    await page.getByRole("button", { name: "Ver foto 4" }).click();
+    await expect(page.getByRole("button", { name: /Ampliar foto 4 de 6/ })).toBeVisible();
+
+    await page.getByRole("button", { name: /Ampliar foto 4 de 6/ }).click();
+    const dialog = page.getByRole("dialog", { name: "Fotos do Tobias" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText("4 / 6")).toBeVisible();
+    await dialog.getByRole("button", { name: "Próxima foto" }).click();
+    await expect(dialog.getByText("5 / 6")).toBeVisible();
+    await dialog.getByRole("button", { name: "Foto anterior" }).click();
+    await dialog.getByRole("button", { name: "Foto anterior" }).click();
+    await expect(dialog.getByText("3 / 6")).toBeVisible();
+    if (!isMobile) {
+      await page.keyboard.press("ArrowRight");
+      await expect(dialog.getByText("4 / 6")).toBeVisible();
+    }
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(page.getByRole("button", { name: /Ampliar foto \d de 6/ })).toBeFocused();
+  });
+});
+
+test.describe("compartilhamento", () => {
+  test("WhatsApp, Facebook, Instagram e copiar link", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "share", { value: undefined, configurable: true });
+    });
+    await page.goto("/#como-ajudar");
+    const siteUrl = "http://localhost:3100";
+
+    const wa = page.getByRole("link", { name: /WhatsApp/ }).first();
+    const waUrl = new URL((await wa.getAttribute("href"))!);
+    expect(waUrl.origin + waUrl.pathname).toBe("https://wa.me/");
+    expect(waUrl.searchParams.get("text")).toBe(
+      [
+        "❤️ TODOS PELO TOBIAS ❤️",
+        "Estamos unidos em uma campanha solidária para ajudar o Tobias. Qualquer contribuição faz a diferença!",
+        "💚 Doe qualquer valor por Pix ou compartilhe esta campanha.",
+        `🔗 ${siteUrl}`,
+      ].join("\n"),
+    );
+
+    const fb = page.getByRole("link", { name: /Facebook/ }).first();
+    expect(await fb.getAttribute("href")).toBe(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}`,
+    );
+    expect(await wa.getAttribute("target")).toBe("_blank");
+    expect(await wa.getAttribute("rel")).toContain("noopener");
+
+    await page.getByRole("button", { name: "Copiar link" }).first().click();
+    await expect(page.getByText("Link copiado! Agora é só colar onde quiser.").first()).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(siteUrl);
+
+    await page.getByRole("button", { name: "Instagram" }).first().click(); // sem compartilhamento nativo: copia o link
+    await expect(page.getByText(/Cole no Instagram/).first()).toBeVisible();
+  });
+
+  test("com compartilhamento nativo (celular), o Instagram abre a folha do sistema", async ({ page }) => {
+    await page.addInitScript(() => {
+      (window as unknown as { __shared: unknown }).__shared = null;
+      Object.defineProperty(navigator, "share", {
+        value: async (data: unknown) => {
+          (window as unknown as { __shared: unknown }).__shared = data;
+        },
+        configurable: true,
+      });
+    });
+    await page.goto("/#como-ajudar");
+    await page.getByRole("button", { name: "Instagram" }).first().click();
+    const shared = (await page.evaluate(() => (window as unknown as { __shared: unknown }).__shared)) as { url: string; text: string };
+    expect(shared.url).toBe("http://localhost:3100");
+    expect(shared.text).toContain("TODOS PELO TOBIAS");
+  });
+});
+
+test.describe("SEO e acessibilidade", () => {
+  test("metadados, Open Graph, robots e sitemap", async ({ page, request }) => {
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
+    await expect(page).toHaveTitle(/Todos pelo Tobias/);
+    const meta = (selector: string) => page.locator(selector).getAttribute("content");
+    expect(await meta('meta[property="og:title"]')).toContain("Todos pelo Tobias");
+    expect(await meta('meta[property="og:locale"]')).toBe("pt_BR");
+    const image = (await meta('meta[property="og:image"]'))!;
+    expect(image).toMatch(/^http:\/\/localhost:3100\/opengraph-image/);
+    expect(await meta('meta[name="twitter:card"]')).toBe("summary_large_image");
+
+    const og = await request.get(image);
+    expect(og.status()).toBe(200);
+    expect(og.headers()["content-type"]).toContain("image/png");
+    expect((await request.get("/robots.txt")).status()).toBe(200);
+    const sitemap = await (await request.get("/sitemap.xml")).text();
+    expect(sitemap).toContain("/doar");
+  });
+
+  test("cabeçalhos de segurança", async ({ request }) => {
+    const headers = (await request.get("/doar")).headers();
+    expect(headers["x-content-type-options"]).toBe("nosniff");
+    expect(headers["content-security-policy"]).toContain("frame-ancestors 'none'");
+  });
+
+  for (const path of ["/", "/doar"]) {
+    test(`sem violações de acessibilidade (axe, WCAG A/AA) em ${path}`, async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto(path);
+      if (path === "/doar") {
+        await chip(page, /^Outro valor$/).click();
+        await page.getByLabel("Digite o valor que deseja doar").fill("25,50");
+        await expect(page.getByTestId("pix-qrcode")).toBeVisible();
+      }
+      const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+      expect(results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`)).toEqual([]);
+    });
+  }
+});
