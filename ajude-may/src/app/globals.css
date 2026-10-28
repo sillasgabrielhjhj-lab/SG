@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Playfair Display Variable", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* Rosa suave: identidade da campanha */
+  --color-petal-50: #fff6f8;
+  --color-petal-100: #ffe9ef;
+  --color-petal-200: #fdd2de;
+  --color-petal-300: #f8adc3;
+  --color-petal-400: #ef7f9f;
+  --color-petal-500: #de567f;
+  --color-petal-600: #c23a66;
+  --color-petal-700: #a12d54;
+  --color-petal-800: #852849;
+  --color-petal-900: #6f2541;
+  --color-petal-950: #3e0f21;
+
+  /* Lilás delicado */
+  --color-lilac-50: #faf7fd;
+  --color-lilac-100: #f3edfb;
+  --color-lilac-200: #e7dcf6;
+  --color-lilac-300: #d4c0ee;
+  --color-lilac-400: #b99ae2;
+  --color-lilac-500: #9d75d3;
+  --color-lilac-600: #8459bf;
+  --color-lilac-700: #6f47a3;
+  --color-lilac-800: #5c3d85;
+  --color-lilac-900: #4c336c;
+  --color-lilac-950: #2f1b4a;
+
+  /* Verde: reservado às ações de doação */
+  --color-sage-50: #f0faf4;
+  --color-sage-100: #dbf2e3;
+  --color-sage-200: #b9e4ca;
+  --color-sage-300: #8ad0a8;
+  --color-sage-400: #56b480;
+  --color-sage-500: #339963;
+  --color-sage-600: #237b4e;
+  --color-sage-700: #1d6241;
+  --color-sage-800: #1a4f36;
+  --color-sage-900: #16412e;
+
+  /* Neutros */
+  --color-ivory: #fffbf8;
+  --color-sand: #f8f1ee;
+  --color-ink: #2b1d2e;
+  --color-muted: #6b5c6e;
+  --color-heart: #e0456f;
+
+  --shadow-soft: 0 12px 40px -14px rgb(111 37 65 / 0.16);
+  --shadow-lift: 0 30px 70px -28px rgb(76 51 108 / 0.38);
+
+  --animate-fade-in: fade-in 0.45s ease both;
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-beat: beat 2.8s ease-in-out infinite;
+  --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-shine: shine 5s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--r, 0deg));
+    }
+    50% {
+      transform: translateY(-12px) rotate(var(--r, 0deg));
+    }
+  }
+  @keyframes beat {
+    0%,
+    48%,
+    100% {
+      transform: scale(1);
+    }
+    12% {
+      transform: scale(1.16);
+    }
+    36% {
+      transform: scale(1.08);
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes shine {
+    0%,
+    55% {
+      transform: translateX(-130%);
+    }
+    100% {
+      transform: translateX(230%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--color-petal-200);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-lilac-500);
+    outline-offset: 3px;
+  }
+  /* trava a rolagem da página enquanto a ampliação de fotos estiver aberta */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/* Brilho que passa de tempos em tempos pelo botão principal */
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgb(255 255 255 / 0.3) 50%,
+      transparent 65%
+    );
+    transform: translateX(-130%);
+    animation: var(--animate-shine);
+    pointer-events: none;
+  }
+}
+
+/* Selo da porcentagem que acompanha a ponta da barra (nunca sai da barra) */
+@utility goal-badge-pos {
+  left: clamp(1.5rem, var(--goal-progress), calc(100% - 1.5rem));
+}
+
+/* Arco elegante das fotos principais */
+@utility arch {
+  border-radius: 999px 999px 2rem 2rem;
+}
+
+/* Aparição suave ao rolar a página (veja components/ui/Reveal.tsx).
+   Sem JavaScript, ou com movimento reduzido, o conteúdo fica sempre visível. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    /* rede de segurança: se o script falhar, o conteúdo aparece sozinho após 3 s */
+    animation: reveal-fallback 0s linear 3s forwards;
+  }
+  .reveal[data-in="true"] {
+    opacity: 1;
+    transform: none;
+  }
+  /* A barra da meta se preenche quando entra na tela (de 0 até a porcentagem real) */
+  .reveal[data-in="true"] .goal-fill {
+    animation: goal-fill 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  .reveal[data-in="true"] .goal-badge {
+    animation: goal-badge 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  @keyframes reveal-fallback {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes goal-fill {
+    from {
+      width: 0;
+    }
+  }
+  @keyframes goal-badge {
+    from {
+      left: 1.5rem;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
