@@ -1,0 +1,176 @@
+"use client";
+
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useRef } from "react";
+import type { Photo } from "@/content/photos";
+import { cn } from "@/lib/cn";
+import { PhotoFrame } from "./PhotoFrame";
+
+interface LightboxProps {
+  photos: Photo[];
+  index: number;
+  onIndex: (index: number) => void;
+  onClose: () => void;
+}
+
+const arrow =
+  "absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:size-12";
+
+/** Ampliação em tela cheia com <dialog> nativo: foco preso, Esc fecha, setas, gesto e miniaturas. */
+export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const strip = useRef<HTMLDivElement>(null);
+  const touchStart = useRef<number | null>(null);
+  const total = photos.length;
+  const photo = photos[index];
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (!dialog.open) dialog.showModal();
+    return () => {
+      if (dialog.open) dialog.close(); // devolve o foco ao botão que abriu a ampliação
+    };
+  }, []);
+
+  // mantém a miniatura ativa à vista
+  useEffect(() => {
+    const thumb = strip.current?.children[index] as HTMLElement | undefined;
+    thumb?.scrollIntoView({ block: "nearest", inline: "center" });
+  }, [index]);
+
+  if (!photo) return null;
+  const go = (next: number) => onIndex((next + total) % total);
+  const closeOnBackdrop = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) onClose();
+  };
+
+  return (
+    <dialog
+      ref={dialogRef}
+      aria-label="Fotos da May"
+      onClose={onClose}
+      onKeyDown={(e) => {
+        if ((e.target as HTMLElement).tagName === "VIDEO") return;
+        if (e.key === "ArrowLeft") go(index - 1);
+        if (e.key === "ArrowRight") go(index + 1);
+      }}
+      className="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 text-white backdrop:bg-lilac-950/90 backdrop:backdrop-blur-sm open:animate-fade-in"
+    >
+      <div
+        className="flex h-full flex-col"
+        onClick={closeOnBackdrop}
+        onTouchStart={(e) => {
+          if ((e.target as HTMLElement).closest("video")) return;
+          touchStart.current = e.touches[0]?.clientX ?? null;
+        }}
+        onTouchEnd={(e) => {
+          const start = touchStart.current;
+          const end = e.changedTouches[0]?.clientX;
+          touchStart.current = null;
+          if (start === null || end === undefined || total < 2) return;
+          if (Math.abs(end - start) > 48) go(index + (end < start ? 1 : -1));
+        }}
+      >
+        <div className="flex items-center justify-between p-4" onClick={closeOnBackdrop}>
+          {total > 1 ? (
+            <p className="rounded-full bg-white/15 px-3 py-1 text-sm font-bold backdrop-blur">
+              {index + 1} / {total}
+            </p>
+          ) : (
+            <span />
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Fechar ampliação"
+            className="grid size-11 place-items-center rounded-full bg-white/15 backdrop-blur transition hover:bg-white/30"
+          >
+            <X aria-hidden className="size-6" />
+          </button>
+        </div>
+
+        <div
+          className="relative flex min-h-0 flex-1 items-center justify-center px-3 sm:px-20"
+          onClick={closeOnBackdrop}
+        >
+          <div className="relative h-full max-h-[68dvh] w-full max-w-5xl overflow-hidden rounded-2xl">
+            {photo.video ? (
+              <video
+                key={index}
+                src={photo.video}
+                poster={photo.src}
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                aria-label={photo.alt}
+                className="absolute inset-0 h-full w-full bg-black/40 object-contain"
+              />
+            ) : (
+              <PhotoFrame
+                key={index}
+                photo={photo}
+                index={index}
+                fit="contain"
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="animate-pop"
+              />
+            )}
+          </div>
+          {total > 1 ? (
+            <>
+              <button
+                type="button"
+                onClick={() => go(index - 1)}
+                aria-label="Foto anterior"
+                className={`${arrow} left-2 sm:left-5`}
+              >
+                <ChevronLeft aria-hidden className="size-6" />
+              </button>
+              <button
+                type="button"
+                onClick={() => go(index + 1)}
+                aria-label="Próxima foto"
+                className={`${arrow} right-2 sm:right-5`}
+              >
+                <ChevronRight aria-hidden className="size-6" />
+              </button>
+            </>
+          ) : null}
+        </div>
+
+        <p
+          className="min-h-12 px-4 pt-3 text-center text-sm text-white/90"
+          onClick={closeOnBackdrop}
+        >
+          {photo.caption ?? ""}
+        </p>
+
+        {total > 1 ? (
+          <div
+            ref={strip}
+            aria-label="Miniaturas"
+            className="flex [scrollbar-width:none] gap-2.5 overflow-x-auto px-4 pt-1 pb-5 sm:justify-center [&::-webkit-scrollbar]:hidden"
+          >
+            {photos.map((thumb, i) => (
+              <button
+                key={`${thumb.src ?? "reservado"}-${i}`}
+                type="button"
+                onClick={() => onIndex(i)}
+                aria-label={thumb.video ? "Ver vídeo" : `Ver foto ${i + 1}`}
+                aria-current={i === index}
+                className={cn(
+                  "relative h-14 w-20 shrink-0 overflow-hidden rounded-xl transition duration-300",
+                  i === index ? "ring-[3px] ring-white" : "opacity-55 hover:opacity-100",
+                )}
+              >
+                <PhotoFrame photo={thumb} index={i} sizes="80px" compact decorative />
+              </button>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </dialog>
+  );
+}
