@@ -1,6 +1,16 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
+import jsQR from "jsqr";
+import { PNG } from "pngjs";
+import { parsePix } from "pix-utils";
 
-// Site no estado padrão (como o projeto está hoje): sem chave Pix, sem meta e sem fotos.
+async function decodeQr(qr: Locator): Promise<string> {
+  const png = PNG.sync.read(await qr.screenshot());
+  const result = jsQR(new Uint8ClampedArray(png.data), png.width, png.height);
+  if (!result) throw new Error("Não foi possível ler o QR Code exibido");
+  return result.data;
+}
+
+// Site no estado padrão, exatamente como será publicado: chave Pix oficial, meta oficial, foto e vídeo.
 const nbsp = (text: string) => text.replace(/\s/g, " ");
 
 test("dados oficiais: R$ 16.000 de R$ 30.000 (53,3%), faltam R$ 14.000, na capa e em /doar", async ({
@@ -46,30 +56,45 @@ test("dados oficiais: R$ 16.000 de R$ 30.000 (53,3%), faltam R$ 14.000, na capa 
   }
 });
 
-test("sem chave Pix: nenhum QR Code de exemplo, aviso de 'em breve' e compartilhamento", async ({
+test("chave Pix oficial: valores sugeridos e QR Code idêntico ao Copia e Cola", async ({
   page,
 }) => {
   await page.goto("/doar");
-  await expect(
-    page.getByRole("heading", { name: "As doações por Pix serão liberadas em breve" }),
-  ).toBeVisible();
-  await expect(page.getByTestId("pix-qrcode")).toHaveCount(0);
-  await expect(page.locator("#pix-codigo")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /WhatsApp/ })).toBeVisible();
-  const html = await page.content();
-  expect(html).not.toContain("tobiasvaquinha");
-  expect(html).not.toContain("br.gov.bcb.pix");
+  for (const value of ["5,00", "10,00", "20,00", "50,00", "100,00"]) {
+    await expect(
+      page.locator("label").filter({ hasText: new RegExp(`^R\\$\\s*${value}$`) }),
+    ).toBeVisible();
+  }
+  await expect(page.getByLabel("Outro valor, em reais")).toBeVisible();
+
+  await page
+    .locator("label")
+    .filter({ hasText: /^R\$\s*20,00$/ })
+    .first()
+    .click();
+  const code = await page.locator("#pix-codigo").inputValue();
+  expect(parsePix(code)).toMatchObject({
+    pixKey: "ajudemaya00@gmail.com",
+    merchantName: "AJUDE MAY",
+    merchantCity: "BRASIL",
+    transactionAmount: 20,
+  });
+  expect(await decodeQr(page.getByTestId("pix-qrcode").locator("svg"))).toBe(code);
+  await expect(page.locator("main")).toContainText("ajudemaya00@gmail.com");
+  expect(await page.content()).not.toContain("tobiasvaquinha");
 });
 
-test("sem fotos: espaços reservados, nenhuma imagem de terceiros; transparência com 'em breve'", async ({
-  page,
-}) => {
+test("foto real na capa e transparência sem dados inventados", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("main img")).toHaveCount(0);
+  const img = page.locator("#inicio img").first();
+  await expect
+    .poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+    .toBe(true);
   await expect(
-    page.getByText("As fotos da May serão publicadas aqui, com a autorização da família."),
+    page.locator("#fotos").getByRole("button", { name: /Assistir ao vídeo/ }),
   ).toBeVisible();
   const transparency = nbsp(await page.locator("#transparencia").innerText());
+  expect(transparency).toContain("ajudemaya00@gmail.com");
   expect(transparency).toContain(
     "As informações sobre os responsáveis pela arrecadação serão publicadas aqui.",
   );

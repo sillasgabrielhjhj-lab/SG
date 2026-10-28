@@ -51,6 +51,7 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
       aria-label="Fotos da May"
       onClose={onClose}
       onKeyDown={(e) => {
+        if ((e.target as HTMLElement).tagName === "VIDEO") return;
         if (e.key === "ArrowLeft") go(index - 1);
         if (e.key === "ArrowRight") go(index + 1);
       }}
@@ -59,7 +60,10 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
       <div
         className="flex h-full flex-col"
         onClick={closeOnBackdrop}
-        onTouchStart={(e) => (touchStart.current = e.touches[0]?.clientX ?? null)}
+        onTouchStart={(e) => {
+          if ((e.target as HTMLElement).closest("video")) return;
+          touchStart.current = e.touches[0]?.clientX ?? null;
+        }}
         onTouchEnd={(e) => {
           const start = touchStart.current;
           const end = e.changedTouches[0]?.clientX;
@@ -69,9 +73,13 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
         }}
       >
         <div className="flex items-center justify-between p-4" onClick={closeOnBackdrop}>
-          <p className="rounded-full bg-white/15 px-3 py-1 text-sm font-bold backdrop-blur">
-            {index + 1} / {total}
-          </p>
+          {total > 1 ? (
+            <p className="rounded-full bg-white/15 px-3 py-1 text-sm font-bold backdrop-blur">
+              {index + 1} / {total}
+            </p>
+          ) : (
+            <span />
+          )}
           <button
             type="button"
             onClick={onClose}
@@ -87,14 +95,28 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
           onClick={closeOnBackdrop}
         >
           <div className="relative h-full max-h-[68dvh] w-full max-w-5xl overflow-hidden rounded-2xl">
-            <PhotoFrame
-              key={index}
-              photo={photo}
-              index={index}
-              fit="contain"
-              sizes="(min-width: 1024px) 1024px, 100vw"
-              className="animate-pop"
-            />
+            {photo.video ? (
+              <video
+                key={index}
+                src={photo.video}
+                poster={photo.src}
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                aria-label={photo.alt}
+                className="absolute inset-0 h-full w-full bg-black/40 object-contain"
+              />
+            ) : (
+              <PhotoFrame
+                key={index}
+                photo={photo}
+                index={index}
+                fit="contain"
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="animate-pop"
+              />
+            )}
           </div>
           {total > 1 ? (
             <>
@@ -136,7 +158,7 @@ export function Lightbox({ photos, index, onIndex, onClose }: LightboxProps) {
                 key={`${thumb.src ?? "reservado"}-${i}`}
                 type="button"
                 onClick={() => onIndex(i)}
-                aria-label={`Ver foto ${i + 1}`}
+                aria-label={thumb.video ? "Ver vídeo" : `Ver foto ${i + 1}`}
                 aria-current={i === index}
                 className={cn(
                   "relative h-14 w-20 shrink-0 overflow-hidden rounded-xl transition duration-300",

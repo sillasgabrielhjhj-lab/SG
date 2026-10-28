@@ -329,21 +329,43 @@ test.describe("meta de arrecadação (R$ 7.500 de R$ 20.000 neste teste)", () =>
 });
 
 test.describe("galeria, história e compartilhamento", () => {
-  test("galeria: miniaturas clicáveis, ampliação, navegação e fechar com Esc", async ({ page }) => {
+  test("galeria: foto e vídeo, ampliação, setas, miniaturas e Esc", async ({ page }) => {
     await page.goto("/#fotos");
-    await page.getByRole("button", { name: /Ampliar foto 3 de 5/ }).click();
+    await page.getByRole("button", { name: /Ampliar foto 1 de 2/ }).click();
     const dialog = page.getByRole("dialog", { name: "Fotos da May" });
-    await expect(dialog.getByText("3 / 5")).toBeVisible();
+    await expect(dialog.getByText("1 / 2")).toBeVisible();
+    await expect(dialog.locator("img").first()).toBeVisible();
     await dialog.getByRole("button", { name: "Próxima foto" }).click();
-    await expect(dialog.getByText("4 / 5")).toBeVisible();
-    await page.keyboard.press("ArrowLeft");
-    await expect(dialog.getByText("3 / 5")).toBeVisible();
+    await expect(dialog.getByText("2 / 2")).toBeVisible();
+    await expect(dialog.locator("video")).toHaveAttribute("src", "/video/may.mp4");
+    await expect(dialog.locator("video")).toHaveAttribute("controls", "");
     await dialog.getByRole("button", { name: "Ver foto 1" }).click();
-    await expect(dialog.getByText("1 / 5")).toBeVisible();
+    await expect(dialog.getByText("1 / 2")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
-    // sem fotos reais ainda: só espaços reservados, nenhuma imagem de terceiros
-    await expect(page.locator("#fotos img")).toHaveCount(0);
+  });
+
+  test("capa: foto real e botão 'Assista ao vídeo'", async ({ page }) => {
+    await page.goto("/");
+    const hero = page.locator("#inicio");
+    const img = hero.locator("img").first();
+    await expect
+      .poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+      .toBe(true);
+    await hero.getByRole("button", { name: "Assista ao vídeo" }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.locator("video")).toHaveAttribute("src", "/video/may.mp4");
+    await expect(dialog.getByText(/\d \/ \d/)).toHaveCount(0); // vídeo único: sem contador
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(hero.getByRole("button", { name: "Assista ao vídeo" })).toBeFocused();
+  });
+
+  test("foto e vídeo são servidos pelo site (vídeo com suporte a 'range')", async ({ request }) => {
+    expect((await request.get("/fotos/may-1.jpg")).status()).toBe(200);
+    const video = await request.get("/video/may.mp4", { headers: { range: "bytes=0-99" } });
+    expect(video.status()).toBe(206);
+    expect(video.headers()["content-type"]).toContain("video/mp4");
   });
 
   test("história e seção emocional com o texto oficial", async ({ page }) => {
@@ -415,7 +437,7 @@ test.describe("SEO e acessibilidade", () => {
     expect(image).toMatch(/^http:\/\/localhost:3200\/opengraph-image/);
     const og = await request.get(image);
     expect(og.status()).toBe(200);
-    expect(og.headers()["content-type"]).toContain("image/png");
+    expect(og.headers()["content-type"]).toContain("image/jpeg");
     expect((await request.get("/robots.txt")).status()).toBe(200);
     expect(await (await request.get("/sitemap.xml")).text()).toContain("/doar");
     expect((await request.get("/doar")).headers()["content-security-policy"]).toContain(

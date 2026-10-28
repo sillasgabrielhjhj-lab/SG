@@ -20,14 +20,14 @@ Outros comandos: `npm run build` (versão de produção), `npm run check` (tipos
 
 ## Antes de divulgar (checklist)
 
-| #   | O quê                                       | Onde                                                                   | Situação hoje                      |
-| --- | ------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------- |
-| 1   | **Chave Pix oficial** (`PIX_KEY`)           | `src/config/pix.ts` ou variável na Vercel                              | **Falta** (obrigatório)            |
-| 2   | Nome e cidade do titular da chave           | `PIX_RECEIVER_NAME` / `PIX_RECEIVER_CITY` (mesmo arquivo ou na Vercel) | Falta (recomendado)                |
-| 3   | Fotos reais e autorizadas da May            | `public/fotos/` + `src/content/photos.ts`                              | Falta (espaços reservados)         |
-| 4   | Meta e valor arrecadado                     | `src/config/fundraising.ts`                                            | Preenchido: R$ 16.000 de R$ 30.000 |
-| 5   | Responsáveis, dados, contato e atualizações | `src/content/transparency.ts`                                          | Falta (mostra "em breve")          |
-| 6   | **Teste real com um app de banco**          | veja "Validação do Pix"                                                | **Obrigatório**                    |
+| #   | O quê                                       | Onde                                                                   | Situação hoje                       |
+| --- | ------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------- |
+| 1   | **Chave Pix oficial** (`PIX_KEY`)           | `src/config/pix.ts` ou variável na Vercel                              | Preenchida: `ajudemaya00@gmail.com` |
+| 2   | Nome e cidade do titular da chave           | `PIX_RECEIVER_NAME` / `PIX_RECEIVER_CITY` (mesmo arquivo ou na Vercel) | Falta (recomendado)                 |
+| 3   | Fotos e vídeo reais e autorizados da May    | `public/fotos/`, `public/video/` + `src/content/photos.ts`             | 1 foto e 1 vídeo                    |
+| 4   | Meta e valor arrecadado                     | `src/config/fundraising.ts`                                            | Preenchido: R$ 16.000 de R$ 30.000  |
+| 5   | Responsáveis, dados, contato e atualizações | `src/content/transparency.ts`                                          | Falta (mostra "em breve")           |
+| 6   | **Teste real com um app de banco**          | veja "Validação do Pix"                                                | **Obrigatório**                     |
 
 Tudo que ainda não foi informado aparece de forma discreta e honesta no site: **nenhum número, foto, chave ou
 depoimento é inventado**.
@@ -68,8 +68,7 @@ Testado automaticamente: CRC16 contra vetores de referência; estrutura EMV camp
 independente (`pix-utils`), que confere CRC, chave, recebedor e valor; e **decodificação do QR Code exibido na tela**,
 que precisa ser idêntico ao Copia e Cola, para cada valor.
 
-**Não foi possível testar em um aplicativo bancário real** (a chave oficial ainda não foi informada). Depois de
-configurar a chave, gere o QR Code de R$ 1,00 (campo "Outro valor"), pague com um app de banco (pelo QR e pelo Copia e
+**Não foi possível testar em um aplicativo bancário real.** Antes de divulgar, gere o QR Code de R$ 1,00 (campo "Outro valor"), pague com um app de banco (pelo QR e pelo Copia e
 Cola) e confirme que o valor e o nome do beneficiário aparecem corretos. Faça o mesmo em Android e iPhone.
 
 ## Meta de arrecadação

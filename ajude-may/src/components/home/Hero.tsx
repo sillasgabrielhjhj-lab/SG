@@ -3,10 +3,11 @@ import Link from "next/link";
 import { PhotoFrame } from "@/components/photos/PhotoFrame";
 import { btn } from "@/components/ui/button";
 import { campaign } from "@/config/campaign";
-import { coverPhoto } from "@/content/photos";
+import { coverPhoto, featuredVideo } from "@/content/photos";
 import type { FundraisingSnapshot } from "@/lib/fundraising";
 import type { GoalProgress } from "@/lib/fundraising/progress";
 import { GoalHighlight } from "./GoalHighlight";
+import { HeroVideoButton } from "./HeroVideoButton";
 
 const ASSURANCES = [
   { icon: QrCode, text: "Pix com QR Code ou Copia e Cola" },
@@ -125,6 +126,7 @@ export function Hero({
               Toque para doar<span className="sr-only"> e ajudar a May</span>
             </span>
           </Link>
+          {featuredVideo ? <HeroVideoButton video={featuredVideo} /> : null}
           <Heart
             aria-hidden
             className="absolute -top-3 right-2 size-9 animate-float fill-petal-300 text-petal-300 [--r:12deg]"

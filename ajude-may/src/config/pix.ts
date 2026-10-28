@@ -15,7 +15,7 @@ import { campaign } from "./campaign";
  *
  * Este arquivo só roda no servidor (as variáveis não têm o prefixo NEXT_PUBLIC_).
  */
-export const PIX_KEY = process.env.PIX_KEY || "";
+export const PIX_KEY = process.env.PIX_KEY || "ajudemaya00@gmail.com";
 export const PIX_RECEIVER_NAME = process.env.PIX_RECEIVER_NAME || "";
 export const PIX_RECEIVER_CITY = process.env.PIX_RECEIVER_CITY || "";
 

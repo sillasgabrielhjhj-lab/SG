@@ -10,18 +10,27 @@ import { PhotoFrame } from "./PhotoFrame";
 /** Quantas fotos aparecem na grade (as demais ficam na ampliação, com o selo "+N"). */
 const VISIBLE = 5;
 
-/** Foto principal em destaque + grade de fotos; qualquer uma abre a ampliação com navegação. */
+/**
+ * Foto principal em destaque + grade de fotos (com 5 ou mais) ou lado a lado (com poucas); qualquer
+ * uma abre a ampliação com navegação. Vídeos aparecem com a capa e o ícone de play.
+ */
 export function Gallery({ photos }: { photos: Photo[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const total = photos.length;
   const visible = photos.slice(0, VISIBLE);
   const hidden = total - visible.length;
+  const bento = total >= VISIBLE;
 
   return (
     <div>
-      <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:grid-rows-2">
+      <ul
+        className={cn(
+          "grid grid-cols-2 gap-3 sm:gap-4",
+          bento ? "md:grid-cols-4 md:grid-rows-2" : "mx-auto max-w-3xl",
+        )}
+      >
         {visible.map((photo, i) => {
-          const featured = i === 0;
+          const featured = bento && i === 0;
           const more = i === visible.length - 1 && hidden > 0;
           return (
             <li
@@ -31,19 +40,25 @@ export function Gallery({ photos }: { photos: Photo[] }) {
               <button
                 type="button"
                 onClick={() => setOpen(i)}
-                aria-label={`Ampliar foto ${i + 1} de ${total}${photo.src ? `: ${photo.alt}` : ": Foto da May em breve"}`}
+                aria-label={
+                  photo.video
+                    ? `Assistir ao vídeo: ${photo.alt}`
+                    : `Ampliar foto ${i + 1} de ${total}${photo.src ? `: ${photo.alt}` : ": Foto da May em breve"}`
+                }
                 className={cn(
                   "group relative block w-full overflow-hidden bg-petal-50 shadow-soft ring-1 ring-petal-100",
                   featured
                     ? "aspect-[4/3] rounded-[2rem] md:aspect-auto md:h-full md:min-h-[26rem]"
-                    : "aspect-square rounded-3xl",
+                    : bento
+                      ? "aspect-square rounded-3xl"
+                      : "aspect-[4/5] rounded-[2rem]",
                 )}
               >
                 <PhotoFrame
                   photo={photo}
                   index={i}
                   decorative
-                  compact={!featured}
+                  compact={bento && !featured}
                   sizes={
                     featured ? "(min-width: 768px) 560px, 100vw" : "(min-width: 768px) 270px, 50vw"
                   }
