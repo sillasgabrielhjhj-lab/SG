@@ -13,13 +13,14 @@ import { getSiteUrl } from "@/lib/site-url";
 export default async function HomePage() {
   const snapshot = await getFundraising();
   const siteUrl = getSiteUrl();
+  const view = fundraisingView(snapshot);
 
   return (
     <>
       <SiteHeader />
       <main id="conteudo">
-        <Hero />
-        <StorySection view={fundraisingView(snapshot)} siteUrl={siteUrl} />
+        <Hero progress={view.kind === "progress" ? view.progress : null} snapshot={snapshot} />
+        <StorySection view={view} siteUrl={siteUrl} />
         <PhotosSection />
         <JourneySection />
         <GoalSection snapshot={snapshot} />

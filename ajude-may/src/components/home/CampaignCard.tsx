@@ -17,7 +17,7 @@ function CardGoal({ view }: { view: FundraisingView }) {
       return (
         <div>
           <p className="flex flex-wrap items-baseline gap-x-2">
-            <strong className="font-display text-3xl font-semibold text-ink">
+            <strong className="font-display text-3xl font-semibold text-ink lining-nums">
               {formatBRL(view.progress.raisedCents)}
             </strong>
             <span className="text-sm text-muted">

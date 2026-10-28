@@ -7,21 +7,34 @@ import { reaisToCents } from "@/lib/money";
 import { buildShareMessage, facebookShareUrl, whatsappShareUrl } from "@/lib/share";
 
 const plain = (text: string) => text.replace(/\s/g, " ");
-const empty = { goal: null as number | null, raised: null as number | null, updatedAt: "" };
+const empty = {
+  valorArrecadado: null as number | null,
+  metaArrecadacao: null as number | null,
+  atualizadoEm: "",
+};
 const view = (config: Partial<typeof empty>, env = {}) =>
   fundraisingView(resolveFundraising({ ...empty, ...config }, env));
 
 describe("configuração da meta", () => {
-  it("o arquivo vem SEM valores: nenhum número inventado", () => {
-    expect(fundraising.goal).toBeNull();
-    expect(fundraising.raised).toBeNull();
-    expect(view(fundraising)).toEqual({ kind: "objective" });
+  it("dados oficiais: R$ 16.000 de R$ 30.000 = 53,3% (barra 53,33%), faltam R$ 14.000", () => {
+    expect(fundraising.valorArrecadado).toBe(16000);
+    expect(fundraising.metaArrecadacao).toBe(30000);
+    const official = view(fundraising);
+    expect(official.kind).toBe("progress");
+    if (official.kind !== "progress") return;
+    expect(formatPercent(official.progress.percentTenths)).toBe("53,3");
+    expect(barWidthPercent(official.progress)).toBe(53.33);
+    expect(official.progress.remainingCents).toBe(1_400_000);
+    expect(plain(supportMessage(official.progress))).toBe(
+      "❤️ Já percorremos mais da metade dessa caminhada! Graças à solidariedade de tantas pessoas, alcançamos R$ 16 mil. Mas ainda precisamos da sua ajuda. Cada contribuição representa mais apoio, cuidado e esperança para a May.",
+    );
   });
 
-  it("só a meta, só o arrecadado ou os dois", () => {
-    expect(view({ goal: 15000 })).toEqual({ kind: "goal-only", goalCents: 1_500_000 });
-    expect(view({ raised: 320.5 })).toEqual({ kind: "raised-only", raisedCents: 32_050 });
-    const both = view({ goal: 15000, raised: 6000 });
+  it("sem valores: só o objetivo; só a meta; só o arrecadado; os dois", () => {
+    expect(view({})).toEqual({ kind: "objective" });
+    expect(view({ metaArrecadacao: 15000 })).toEqual({ kind: "goal-only", goalCents: 1_500_000 });
+    expect(view({ valorArrecadado: 320.5 })).toEqual({ kind: "raised-only", raisedCents: 32_050 });
+    const both = view({ metaArrecadacao: 15000, valorArrecadado: 6000 });
     expect(both.kind).toBe("progress");
     if (both.kind === "progress") expect(formatPercent(both.progress.percentTenths)).toBe("40");
   });
@@ -44,9 +57,13 @@ describe("configuração da meta", () => {
     expect(() => resolveFundraising(empty, { FUNDRAISING_GOAL: "abc" })).toThrow(
       /FUNDRAISING_GOAL/,
     );
-    expect(() => resolveFundraising({ ...empty, goal: 0 })).toThrow(/maior que zero/);
-    expect(() => resolveFundraising({ ...empty, raised: -1 })).toThrow(/maior ou igual a 0/);
-    expect(() => resolveFundraising({ ...empty, updatedAt: "05/11/2026" })).toThrow(/AAAA-MM-DD/);
+    expect(() => resolveFundraising({ ...empty, metaArrecadacao: 0 })).toThrow(/maior que zero/);
+    expect(() => resolveFundraising({ ...empty, valorArrecadado: -1 })).toThrow(
+      /maior ou igual a 0/,
+    );
+    expect(() => resolveFundraising({ ...empty, atualizadoEm: "05/11/2026" })).toThrow(
+      /AAAA-MM-DD/,
+    );
   });
 });
 
@@ -68,12 +85,15 @@ describe("cálculo do progresso", () => {
     expect(barWidthPercent(over)).toBe(100);
   });
 
-  it("mensagens sem número de doadores e com os valores configurados", () => {
+  it("mensagem acompanha os valores: abaixo da metade, metade, meta atingida, zero", () => {
     expect(plain(supportMessage(progress(7500, 20000)))).toBe(
-      "💗 Graças à solidariedade de quem já contribuiu, chegamos a R$ 7,5 mil. Cada contribuição nos aproxima da meta de R$ 20 mil.",
+      "❤️ Graças à solidariedade de tantas pessoas, alcançamos R$ 7,5 mil. Mas ainda precisamos da sua ajuda. Cada contribuição representa mais apoio, cuidado e esperança para a May.",
     );
-    expect(plain(supportMessage(progress(0, 20000)))).not.toContain("chegamos");
-    expect(plain(supportMessage(progress(20000, 20000)))).toContain("foi alcançada");
+    expect(supportMessage(progress(10000, 20000))).toContain("Já percorremos metade");
+    expect(plain(supportMessage(progress(20000, 20000)))).toContain(
+      "alcançamos a meta de R$ 20 mil",
+    );
+    expect(supportMessage(progress(0, 20000))).not.toContain("alcançamos");
   });
 
   it("legenda de transparência", () => {

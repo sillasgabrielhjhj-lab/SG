@@ -216,15 +216,25 @@
       transform: none;
     }
   }
-  @keyframes goal-fill {
-    from {
-      width: 0;
-    }
+}
+
+@keyframes goal-fill {
+  from {
+    width: 0;
   }
-  @keyframes goal-badge {
-    from {
-      left: 1.5rem;
-    }
+}
+@keyframes goal-badge {
+  from {
+    left: 1.5rem;
+  }
+}
+/* Barras no topo da página (meta em destaque e página de doação) se preenchem ao carregar */
+@media (prefers-reduced-motion: no-preference) {
+  .goal-load .goal-fill {
+    animation: goal-fill 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+  }
+  .goal-load .goal-badge {
+    animation: goal-badge 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
   }
 }
 

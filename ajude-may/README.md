@@ -20,14 +20,14 @@ Outros comandos: `npm run build` (versão de produção), `npm run check` (tipos
 
 ## Antes de divulgar (checklist)
 
-| #   | O quê                                       | Onde                                                                   | Situação hoje                |
-| --- | ------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------- |
-| 1   | **Chave Pix oficial** (`PIX_KEY`)           | `src/config/pix.ts` ou variável na Vercel                              | **Falta** (obrigatório)      |
-| 2   | Nome e cidade do titular da chave           | `PIX_RECEIVER_NAME` / `PIX_RECEIVER_CITY` (mesmo arquivo ou na Vercel) | Falta (recomendado)          |
-| 3   | Fotos reais e autorizadas da May            | `public/fotos/` + `src/content/photos.ts`                              | Falta (espaços reservados)   |
-| 4   | Meta e valor arrecadado                     | `src/config/fundraising.ts`                                            | Falta (mostra só o objetivo) |
-| 5   | Responsáveis, dados, contato e atualizações | `src/content/transparency.ts`                                          | Falta (mostra "em breve")    |
-| 6   | **Teste real com um app de banco**          | veja "Validação do Pix"                                                | **Obrigatório**              |
+| #   | O quê                                       | Onde                                                                   | Situação hoje                      |
+| --- | ------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------- |
+| 1   | **Chave Pix oficial** (`PIX_KEY`)           | `src/config/pix.ts` ou variável na Vercel                              | **Falta** (obrigatório)            |
+| 2   | Nome e cidade do titular da chave           | `PIX_RECEIVER_NAME` / `PIX_RECEIVER_CITY` (mesmo arquivo ou na Vercel) | Falta (recomendado)                |
+| 3   | Fotos reais e autorizadas da May            | `public/fotos/` + `src/content/photos.ts`                              | Falta (espaços reservados)         |
+| 4   | Meta e valor arrecadado                     | `src/config/fundraising.ts`                                            | Preenchido: R$ 16.000 de R$ 30.000 |
+| 5   | Responsáveis, dados, contato e atualizações | `src/content/transparency.ts`                                          | Falta (mostra "em breve")          |
+| 6   | **Teste real com um app de banco**          | veja "Validação do Pix"                                                | **Obrigatório**                    |
 
 Tudo que ainda não foi informado aparece de forma discreta e honesta no site: **nenhum número, foto, chave ou
 depoimento é inventado**.
@@ -74,25 +74,33 @@ Cola) e confirme que o valor e o nome do beneficiário aparecem corretos. Faça 
 
 ## Meta de arrecadação
 
-Edite **`src/config/fundraising.ts`** (valores em reais, sem ponto de milhar):
+Edite **`src/config/fundraising.ts`** (valores em reais, sem ponto de milhar) e publique de novo:
 
 ```ts
 export const fundraising = {
-  goal: 15000, // meta total (R$ 15.000,00)
-  raised: 3200.5, // valor efetivamente arrecadado (R$ 3.200,50)
-  updatedAt: "2026-11-05", // opcional: data da última conferência
+  valorArrecadado: 16000, // valor efetivamente arrecadado (R$ 16.000,00)
+  metaArrecadacao: 30000, // meta total (R$ 30.000,00)
+  atualizadoEm: "", // opcional: data da última conferência, ex.: "2026-11-05"
 };
 ```
 
-- Enquanto `goal` e `raised` forem `null`, o site mostra **apenas o objetivo da campanha e o botão de doação**, sem
-  números. Só a meta preenchida: mostra a meta. Os dois: barra animada, porcentagem, valor restante e mensagem de
-  agradecimento, todos recalculados sozinhos.
-- Alternativa: variáveis `FUNDRAISING_GOAL`, `FUNDRAISING_RAISED` e `FUNDRAISING_UPDATED_AT` na Vercel.
-- **Regra de ouro:** `raised` só muda com doações **conferidas no extrato ou no app do banco**. O site apresenta os
-  números como "informados pelos responsáveis" e avisa que não consulta o banco.
-- A porcentagem é arredondada para baixo (nunca mostra 100% antes da hora). Valores inválidos interrompem o build com
-  mensagem clara.
-- Integração bancária no futuro: `getFundraising()` em `src/lib/fundraising/index.ts` é o único ponto de leitura.
+A porcentagem (53,3%), o valor restante (R$ 14.000,00), a barra (53,33% de preenchimento) e a mensagem ("Já
+percorremos mais da metade…") são calculados sozinhos e aparecem, sempre iguais, em quatro lugares: no **card em
+destaque logo abaixo do banner** (com contador animado e botão "FAZER MINHA DOAÇÃO"), na **versão compacta da página
+`/doar`** (acima da escolha de valores), no card da vaquinha e na seção "Nossa meta".
+
+- **Regra de ouro:** `valorArrecadado` só muda com doações **conferidas no extrato ou no app do banco**. Escolher um
+  valor, gerar o QR Code ou copiar o Pix nunca altera o total (há teste automatizado garantindo isso). O site apresenta
+  os números como "informados pelos responsáveis" e avisa que não consulta o banco.
+- O contador de R$ 0 até o valor é só efeito visual: o valor real já vem na página e é o que leitores de tela leem; com
+  "reduzir movimento" ativado no aparelho, não há animação.
+- A porcentagem exibida é arredondada para baixo (nunca mostra 100% antes da hora). Valores inválidos interrompem o
+  build com mensagem clara. `null` em um dos campos esconde os números e mostra só o objetivo da campanha.
+- Alternativa sem editar código: variáveis `FUNDRAISING_RAISED`, `FUNDRAISING_GOAL` e `FUNDRAISING_UPDATED_AT` na
+  Vercel (exigem novo deploy).
+- **Integração bancária no futuro:** `getFundraising()` em `src/lib/fundraising/index.ts` é o único ponto de leitura do
+  total. Basta trocá-lo por uma consulta à sua API Pix (somente pagamentos confirmados) e devolver `source: "bank"`; os
+  textos de transparência já mudam conforme a origem.
 
 ## Adicionar as fotos da May
 
@@ -144,12 +152,12 @@ Cabeçalhos de segurança (CSP, nosniff, frame-ancestors) já vêm configurados 
 
 ```bash
 npm test             # 68 testes unitários (Pix, chaves, valores, meta, compartilhamento)
-npm run test:e2e     # 50 testes no navegador; constrói e sobe dois sites sozinho
+npm run test:e2e     # 54 testes no navegador; constrói e sobe dois sites sozinho
 ```
 
 Os testes no navegador usam dois sites: um **configurado** com uma chave **fictícia** de teste
-(`chave-teste@example.com`) e meta de teste (R$ 7.500 de R$ 20.000), e outro no **estado padrão** (sem chave, meta ou
-fotos). Cobrem: card clicável, todos os botões de doação, menu, QR Code decodificado para R$ 5/10/20/50/100 e valores
+(`chave-teste@example.com`) e meta de teste (R$ 7.500 de R$ 20.000), e outro no **estado padrão** (meta oficial, sem chave Pix
+e sem fotos). Cobrem: card clicável, todos os botões de doação, menu, QR Code decodificado para R$ 5/10/20/50/100 e valores
 personalizados, valores inválidos, COPIAR PIX, aviso do beneficiário, barra animada, galeria e ampliação,
 compartilhamento (WhatsApp, Facebook, copiar link, nativo), Open Graph, erros de console e acessibilidade (axe, WCAG
 A/AA), em desktop e celular (emulação no Chromium; não substitui aparelhos reais, principalmente o Safari do iPhone).

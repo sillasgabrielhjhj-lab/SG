@@ -2,6 +2,7 @@ import { ArrowLeft, Lock, QrCode, Smartphone } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DonationFlow } from "@/components/donate/DonationFlow";
+import { GoalCompact } from "@/components/donate/GoalCompact";
 import { PixUnavailable } from "@/components/donate/PixUnavailable";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -10,6 +11,7 @@ import { btn } from "@/components/ui/button";
 import { campaign } from "@/config/campaign";
 import { pixSetup } from "@/config/pix";
 import { coverPhoto } from "@/content/photos";
+import { fundraisingView, getFundraising } from "@/lib/fundraising";
 import { getSiteUrl } from "@/lib/site-url";
 
 const description =
@@ -29,7 +31,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DonatePage() {
+export default async function DonatePage() {
+  const snapshot = await getFundraising();
+  const view = fundraisingView(snapshot);
+
   return (
     <>
       <SiteHeader variant="donate" />
@@ -69,6 +74,9 @@ export default function DonatePage() {
           </div>
 
           <div>
+            {view.kind === "progress" ? (
+              <GoalCompact progress={view.progress} snapshot={snapshot} />
+            ) : null}
             {pixSetup ? (
               <DonationFlow
                 setup={pixSetup}

@@ -46,18 +46,21 @@ function toCents(name: string, value: Amount): number | null {
 
 /** Junta arquivo + variáveis de ambiente e valida (erros interrompem o build com mensagem clara). */
 export function resolveFundraising(
-  config: { goal: Amount; raised: Amount; updatedAt: string },
+  config: { valorArrecadado: Amount; metaArrecadacao: Amount; atualizadoEm: string },
   env: Record<string, string | undefined> = {},
 ): FundraisingSnapshot {
-  const goalCents = toCents("goal / FUNDRAISING_GOAL", env.FUNDRAISING_GOAL || config.goal);
-  const raisedCents = toCents(
-    "raised / FUNDRAISING_RAISED",
-    env.FUNDRAISING_RAISED || config.raised,
+  const goalCents = toCents(
+    "metaArrecadacao / FUNDRAISING_GOAL",
+    env.FUNDRAISING_GOAL || config.metaArrecadacao,
   );
-  const updatedAt = env.FUNDRAISING_UPDATED_AT || config.updatedAt;
-  if (goalCents === 0) fail("a meta (goal) deve ser maior que zero.");
+  const raisedCents = toCents(
+    "valorArrecadado / FUNDRAISING_RAISED",
+    env.FUNDRAISING_RAISED || config.valorArrecadado,
+  );
+  const updatedAt = env.FUNDRAISING_UPDATED_AT || config.atualizadoEm;
+  if (goalCents === 0) fail("a meta (metaArrecadacao) deve ser maior que zero.");
   if (updatedAt && !/^\d{4}-\d{2}-\d{2}$/.test(updatedAt)) {
-    fail(`updatedAt deve estar no formato AAAA-MM-DD, ex.: "2026-11-05".`);
+    fail(`atualizadoEm deve estar no formato AAAA-MM-DD, ex.: "2026-11-05".`);
   }
   return { goalCents, raisedCents, source: "manual", updatedAt: updatedAt || undefined };
 }

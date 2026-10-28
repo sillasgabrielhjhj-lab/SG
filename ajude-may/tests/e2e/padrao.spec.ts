@@ -3,19 +3,47 @@ import { expect, test } from "@playwright/test";
 // Site no estado padrão (como o projeto está hoje): sem chave Pix, sem meta e sem fotos.
 const nbsp = (text: string) => text.replace(/\s/g, " ");
 
-test("sem meta configurada: só o objetivo e o botão de doação, nenhum número", async ({ page }) => {
+test("dados oficiais: R$ 16.000 de R$ 30.000 (53,3%), faltam R$ 14.000, na capa e em /doar", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  const main = nbsp(await page.locator("main").innerText());
-  expect(main).not.toMatch(/R\$\s?\d/); // nenhum valor em reais na página inicial
-  expect(main).not.toMatch(/\d+% da meta|arrecadados/);
-  await expect(page.getByRole("progressbar")).toHaveCount(0);
-  await expect(page.locator("#meta")).toContainText("Nosso objetivo");
-  await expect(
-    page.locator("#meta").getByRole("link", { name: "AJUDAR A MAY AGORA" }),
-  ).toBeVisible();
-  await expect(page.locator("article")).toContainText(
-    "Objetivo: apoiar os cuidados e o acompanhamento da May",
-  );
+  const card = page.locator("#arrecadacao");
+  await expect(card).toBeInViewport();
+  const text = nbsp(await card.innerText());
+  for (const part of [
+    "AJUDE MAY NESSA CAMINHADA",
+    "R$ 16.000,00",
+    "já arrecadados",
+    "Meta: R$ 30.000,00",
+    "53,3% da nossa meta alcançada!",
+    "Faltam R$ 14.000,00 para alcançarmos nosso objetivo.",
+    "❤️ Já percorremos mais da metade dessa caminhada! Graças à solidariedade de tantas pessoas, alcançamos R$ 16 mil. Mas ainda precisamos da sua ajuda. Cada contribuição representa mais apoio, cuidado e esperança para a May.",
+    "Valores informados pelos responsáveis pela campanha",
+    "não consulta o banco nem confirma pagamentos",
+  ]) {
+    expect(text).toContain(part);
+  }
+  expect(text).not.toMatch(/verificad|doador/i);
+  const bar = card.getByRole("progressbar");
+  await expect(bar).toHaveAttribute("aria-valuenow", "53.33");
+  const ratio = await bar.evaluate((track) => {
+    const fill = track.firstElementChild as HTMLElement;
+    return fill.getBoundingClientRect().width / track.getBoundingClientRect().width;
+  });
+  expect(ratio).toBeCloseTo(0.5333, 3);
+
+  await card.getByRole("link", { name: "FAZER MINHA DOAÇÃO" }).click();
+  await expect(page).toHaveURL(/\/doar$/);
+  const compact = nbsp(await page.getByRole("region", { name: "Nossa meta" }).innerText());
+  for (const part of [
+    "R$ 16.000,00",
+    "arrecadados de R$ 30.000,00",
+    "53,3% alcançado",
+    "Faltam R$ 14.000,00",
+  ]) {
+    expect(compact).toContain(part);
+  }
 });
 
 test("sem chave Pix: nenhum QR Code de exemplo, aviso de 'em breve' e compartilhamento", async ({

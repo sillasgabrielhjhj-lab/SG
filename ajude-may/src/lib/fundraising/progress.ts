@@ -32,7 +32,7 @@ export function formatPercent(tenths: number): string {
   return decimal === 0 ? `${whole}` : `${whole},${decimal}`;
 }
 
-/** Largura da barra (0 a 100): fiel à porcentagem real, sem passar de 100%. */
+/** Largura da barra (0 a 100), proporcional ao valor real com 2 casas (53,33%), sem passar de 100%. */
 export function barWidthPercent(progress: GoalProgress): number {
-  return Math.min(progress.percentTenths, 1000) / 10;
+  return Math.min(Math.floor((progress.raisedCents * 10000) / progress.goalCents), 10000) / 100;
 }

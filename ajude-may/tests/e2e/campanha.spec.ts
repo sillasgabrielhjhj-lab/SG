@@ -68,6 +68,7 @@ test.describe("navegação", () => {
       (p: Page) => p.getByRole("link", { name: "FAZER UMA DOAÇÃO" }).first(),
       (p: Page) => p.getByRole("link", { name: "DOAR AGORA" }),
       (p: Page) => p.getByRole("link", { name: "AJUDAR A MAY AGORA" }),
+      (p: Page) => p.getByRole("link", { name: "FAZER MINHA DOAÇÃO" }),
     ];
     for (const target of targets) {
       await page.goto("/");
@@ -215,6 +216,67 @@ test.describe("Pix", () => {
 });
 
 test.describe("meta de arrecadação (R$ 7.500 de R$ 20.000 neste teste)", () => {
+  test("meta em destaque logo abaixo do banner e versão compacta em /doar, com os mesmos valores", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const card = page.locator("#arrecadacao");
+    await expect(card).toBeInViewport(); // visível sem rolar
+    for (const part of [
+      "R$ 7.500,00",
+      "já arrecadados",
+      "Meta: R$ 20.000,00",
+      "37,5% da nossa meta alcançada!",
+      "Faltam R$ 12.500,00 para alcançarmos nosso objetivo.",
+      "Valores informados pelos responsáveis pela campanha",
+    ]) {
+      await expect(card).toContainText(part);
+    }
+    await expect(card.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "37.5");
+    await card.getByRole("link", { name: "FAZER MINHA DOAÇÃO" }).click();
+    await expect(page).toHaveURL(/\/doar$/);
+
+    const compact = page.getByRole("region", { name: "Nossa meta" });
+    for (const part of [
+      "R$ 7.500,00",
+      "arrecadados de R$ 20.000,00",
+      "37,5% alcançado",
+      "Faltam R$ 12.500,00",
+    ]) {
+      await expect(compact).toContainText(part);
+    }
+    await expect(compact.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "37.5");
+    const compactBox = (await compact.boundingBox())!;
+    const pickerBox = (await page.getByText("Escolha ou digite o valor da doação").boundingBox())!;
+    expect(compactBox.y).toBeLessThan(pickerBox.y); // acima da seleção de valores
+  });
+
+  test("contador animado de R$ 0 até o valor (só efeito; leitores de tela recebem o valor final)", async ({
+    page,
+  }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const counter = "#arrecadacao p > span > span";
+    await page.waitForSelector(counter);
+    const samples = await page.evaluate(
+      (selector) =>
+        new Promise<string[]>((resolve) => {
+          const shown = document.querySelectorAll(selector)[1]!;
+          const out: string[] = [];
+          const t0 = performance.now();
+          const tick = () => {
+            out.push((shown.textContent ?? "").replace(/\s/g, " "));
+            if (performance.now() - t0 < 2600) requestAnimationFrame(tick);
+            else resolve(out);
+          };
+          tick();
+        }),
+      counter,
+    );
+    expect(new Set(samples).size).toBeGreaterThan(1); // houve animação
+    expect(samples.at(-1)).toBe("R$ 7.500,00"); // termina exatamente no valor configurado
+    await expect(page.locator(counter).first()).toHaveText("R$ 7.500,00"); // texto para leitores de tela
+  });
+
   const section = (page: Page) => page.locator("#meta");
   const bar = (page: Page) => section(page).getByRole("progressbar");
 

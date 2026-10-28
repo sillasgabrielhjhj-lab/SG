@@ -1,22 +1,20 @@
 /**
- * ✏️ META DE ARRECADAÇÃO
+ * ✏️ META DE ARRECADAÇÃO — único lugar para atualizar os valores.
  *
- * Único lugar para atualizar a meta. A porcentagem, o valor restante e a barra são calculados
- * automaticamente. Valores em reais, sem aspas, sem "R$" e sem ponto de milhar: 15000 = R$ 15.000,00
- * (centavos com ponto: 15000.5 = R$ 15.000,50).
+ * A porcentagem, o valor restante, a barra de progresso e as mensagens são calculados sozinhos, na
+ * página inicial e na página de doação. Valores em reais, sem aspas, sem "R$" e sem ponto de milhar:
+ * 16000 = R$ 16.000,00 (centavos com ponto: 16000.5 = R$ 16.000,50). `null` = ainda não informado.
+ * Alternativa: variáveis FUNDRAISING_RAISED, FUNDRAISING_GOAL e FUNDRAISING_UPDATED_AT na Vercel.
  *
- * Enquanto `goal` e `raised` forem `null`, o site mostra apenas o objetivo da campanha e o botão de
- * doação, SEM nenhum número. Também é possível usar as variáveis de ambiente FUNDRAISING_GOAL,
- * FUNDRAISING_RAISED e FUNDRAISING_UPDATED_AT (têm prioridade sobre este arquivo).
- *
- * REGRA DE OURO: `raised` só deve mudar com base em doações EFETIVAMENTE CONFIRMADAS no extrato ou
- * no app do banco. Gerar o QR Code ou copiar o código Pix NUNCA altera o total.
+ * REGRA DE OURO: `valorArrecadado` só muda com doações EFETIVAMENTE CONFIRMADAS no extrato ou no
+ * app do banco. Gerar o QR Code ou copiar o código Pix NUNCA altera o total. Para uma integração
+ * bancária futura, veja getFundraising() em src/lib/fundraising/index.ts.
  */
 export const fundraising = {
-  /** Meta total, em reais. `null` = ainda não definida. */
-  goal: null as number | null,
-  /** Valor efetivamente arrecadado, em reais. `null` = ainda não informado. */
-  raised: null as number | null,
+  /** Valor efetivamente arrecadado, em reais. */
+  valorArrecadado: 16000 as number | null,
+  /** Meta total, em reais. */
+  metaArrecadacao: 30000 as number | null,
   /** Opcional: data da última conferência, no formato AAAA-MM-DD (ex.: "2026-11-05"). */
-  updatedAt: "",
+  atualizadoEm: "",
 };

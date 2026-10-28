@@ -4,6 +4,9 @@ import { PhotoFrame } from "@/components/photos/PhotoFrame";
 import { btn } from "@/components/ui/button";
 import { campaign } from "@/config/campaign";
 import { coverPhoto } from "@/content/photos";
+import type { FundraisingSnapshot } from "@/lib/fundraising";
+import type { GoalProgress } from "@/lib/fundraising/progress";
+import { GoalHighlight } from "./GoalHighlight";
 
 const ASSURANCES = [
   { icon: QrCode, text: "Pix com QR Code ou Copia e Cola" },
@@ -13,7 +16,17 @@ const ASSURANCES = [
 
 const delay = (ms: number) => ({ animationDelay: `${ms}ms` });
 
-export function Hero() {
+/**
+ * Celular: texto, meta em destaque e foto (a meta aparece logo no começo). Desktop: texto e foto
+ * lado a lado e a meta logo abaixo do banner.
+ */
+export function Hero({
+  progress,
+  snapshot,
+}: {
+  progress: GoalProgress | null;
+  snapshot: FundraisingSnapshot;
+}) {
   return (
     <section
       id="inicio"
@@ -29,8 +42,8 @@ export function Hero() {
         className="absolute top-24 -right-40 -z-10 size-[30rem] rounded-full bg-lilac-100 blur-3xl"
       />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-10 pb-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pt-16 lg:pb-24">
-        <div className="text-center lg:text-left">
+      <div className="mx-auto grid max-w-6xl items-center gap-x-16 gap-y-10 px-4 pt-10 pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-y-8 lg:pt-8 lg:pb-20">
+        <div className="order-1 text-center lg:text-left">
           <p
             className="inline-flex animate-fade-up items-center gap-2 rounded-full bg-white/80 px-4 py-1.5 text-sm font-bold text-petal-800 shadow-sm ring-1 ring-petal-200"
             style={delay(40)}
@@ -40,7 +53,7 @@ export function Hero() {
           </p>
           <h1
             id="titulo"
-            className="mt-6 animate-fade-up text-[2.55rem] leading-[1.05] font-semibold tracking-tight text-ink sm:text-6xl lg:text-[4.1rem]"
+            className="mt-5 animate-fade-up text-[2.55rem] leading-[1.05] font-semibold tracking-tight text-ink sm:text-6xl lg:text-[3.2rem]"
             style={delay(120)}
           >
             AJUDE <em className="font-medium text-petal-600">MAY</em>
@@ -51,13 +64,13 @@ export function Hero() {
             </span>
           </h1>
           <p
-            className="mx-auto mt-6 max-w-xl animate-fade-up text-lg leading-relaxed text-muted sm:text-xl lg:mx-0"
+            className="mx-auto mt-5 max-w-xl animate-fade-up text-lg leading-relaxed text-muted sm:text-xl lg:mx-0 lg:text-lg"
             style={delay(220)}
           >
             {campaign.subtitle}
           </p>
           <div
-            className="mt-8 flex animate-fade-up flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
+            className="mt-7 flex animate-fade-up flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
             style={delay(320)}
           >
             <Link href="/doar" className={btn({ size: "lg", className: "shine w-full sm:w-auto" })}>
@@ -72,7 +85,7 @@ export function Hero() {
             </Link>
           </div>
           <ul
-            className="mt-9 flex animate-fade-up flex-col items-center gap-2.5 text-sm font-semibold text-ink/80 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 lg:justify-start"
+            className="mt-7 hidden animate-fade-up flex-col items-center gap-2.5 text-sm font-semibold text-ink/80 sm:flex sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 lg:hidden lg:justify-start"
             style={delay(420)}
           >
             {ASSURANCES.map(({ icon: Icon, text }) => (
@@ -85,7 +98,7 @@ export function Hero() {
         </div>
 
         <div
-          className="relative mx-auto w-full max-w-sm animate-fade-up sm:max-w-md lg:max-w-none"
+          className="relative order-3 mx-auto w-full max-w-sm animate-fade-up sm:max-w-md lg:order-2 lg:max-w-[21rem]"
           style={delay(80)}
         >
           <div
@@ -121,6 +134,12 @@ export function Hero() {
             className="absolute bottom-24 -left-4 size-6 animate-float fill-lilac-300 text-lilac-300 [--r:-14deg] [animation-delay:1.5s]"
           />
         </div>
+
+        {progress ? (
+          <div className="order-2 animate-fade-up lg:order-3 lg:col-span-2" style={delay(260)}>
+            <GoalHighlight progress={progress} snapshot={snapshot} />
+          </div>
+        ) : null}
       </div>
     </section>
   );

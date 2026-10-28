@@ -22,7 +22,7 @@ function Stat({
     <div className="rounded-3xl bg-ivory p-5 ring-1 ring-petal-100">
       <dt className="text-xs font-bold tracking-[0.14em] text-muted uppercase">{label}</dt>
       <dd
-        className={`mt-2 font-display text-2xl font-semibold sm:text-[1.7rem] ${accent ? "text-petal-700" : "text-ink"}`}
+        className={`mt-2 font-display text-2xl font-semibold lining-nums sm:text-[1.7rem] ${accent ? "text-petal-700" : "text-ink"}`}
       >
         {value}
       </dd>
